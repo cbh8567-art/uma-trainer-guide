@@ -17,6 +17,7 @@ on:
 
 permissions:
   contents: write
+  statuses: read
 
 concurrency:
   group: jp-data-sync
@@ -63,18 +64,21 @@ jobs:
         if: steps.impact.outputs.deploy_smoke == 'true'
         continue-on-error: true
         shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          url="https://uma-trainer-guide-b3st.vercel.app/"
-          for i in $(seq 1 20); do
-            body="$(curl -fsSL --max-time 20 "$url" || true)"
-            if printf '%s' "$body" | grep -Fq '<meta name="app-build" content="V6.1">'; then
-              echo "Vercel production has V6.1 build marker."
-              exit 0
-            fi
-            echo "Waiting for Vercel deployment... attempt $i/20"
-            sleep 15
+          api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/status"
+          for i in $(seq 1 30); do
+            json="$(curl -fsSL               -H "Authorization: Bearer ${GH_TOKEN}"               -H "Accept: application/vnd.github+json"               "$api" || true)"
+            state="$(printf '%s' "$json" | jq -r '
+              [.statuses[]? | select(.context | contains("uma-trainer-guide-b3st"))][0].state // "pending"
+            ')"
+            echo "Vercel commit status: $state · attempt $i/30"
+            if [ "$state" = "success" ]; then exit 0; fi
+            if [ "$state" = "failure" ] || [ "$state" = "error" ]; then exit 1; fi
+            sleep 10
           done
-          echo "Vercel production did not expose the V6.1 build marker in time."
+          echo "Timed out waiting for the Vercel status of this exact commit."
           exit 1
 
       - name: Write automation report
