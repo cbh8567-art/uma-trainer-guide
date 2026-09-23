@@ -42,6 +42,13 @@ jobs:
               title = d.title
               print("TITLE:", title)
 
+              logs = d.get_log("browser")
+              severe = [x for x in logs if x.get("level") == "SEVERE"]
+              for x in logs:
+                  print("BROWSER:", x.get("level"), x.get("message"))
+              if severe:
+                  raise RuntimeError("Browser console has SEVERE errors: " + " | ".join(x.get("message","") for x in severe[:10]))
+
               tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
               print("TAB COUNT:", len(tabs))
               if len(tabs) < 2:
@@ -54,13 +61,6 @@ jobs:
               print("ACTIVE PAGE:", before, "->", after)
               if before == after:
                   raise RuntimeError("Navigation tab click did not change active page")
-
-              logs = d.get_log("browser")
-              severe = [x for x in logs if x.get("level") == "SEVERE"]
-              for x in logs:
-                  print("BROWSER:", x.get("level"), x.get("message"))
-              if severe:
-                  raise RuntimeError("Browser console has SEVERE errors: " + " | ".join(x.get("message","") for x in severe[:10]))
 
               status = d.find_element(By.ID, "jpSyncStatus").text
               print("JP STATUS:", status)
