@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<title>우마무스메 트레이너 가이드 V5.22 WEB</title>
+<title>우마무스메 트레이너 가이드 V5.23 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -132,7 +132,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V5.22 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V5.23 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -364,7 +364,7 @@ const FRIEND_SUPPORT_EVENTS={"version":1,"updated":"2026-09-23","note":"U-tools 
 
 </script>
 <script>
-const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v522_db_cache', LEGACY_CACHE_KEY='uma_trainer_v521_db_cache';
+const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v523_db_cache', LEGACY_CACHE_KEY='uma_trainer_v522_db_cache';
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
@@ -1626,6 +1626,12 @@ function evolutionMatchText(sk,cond,score){
 }
 
 const SUPPORT_OVERRIDES={
+ 30170:{title:'我が舞、巡りて',jpName:'[我が舞、巡りて]キングヘイロー',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30170/event',rareEvents:[{id:'verified_30170_final',label:'キングの流儀／相伝編',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'ifu',label:'ああ、すごい出来だ！',skills:[{skillId:202541,hintLevel:1}]},{id:'kikotsu',label:'……なんで君が自慢げなんだ？',skills:[{skillId:202751,hintLevel:1}]}]}]},
+ 30173:{title:'大地と我らのアンサンブル',jpName:'[大地と我らのアンサンブル]サウンズオブアース',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30173/event',rareEvents:[{id:'verified_30173_path',label:'いずれグランディオーソなセッションへ',selection:'single',note:'첫 연속 이벤트 선택에 따라 최종 획득 레어스킬이 결정됨',choices:[{id:'violin',label:'첫 이벤트에서 「ふ、俺は気まぐれなヴァイオリン……さ」 선택',skills:[{skillId:200361,hintLevel:2}]},{id:'recovery',label:'첫 이벤트에서 「え、ええっと？」 선택',skills:[{skillId:200381,hintLevel:2}]}]}]},
+ 30177:{title:'会心のウイニングスマイル',jpName:'[会心のウイニングスマイル]ヴィブロス',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30177/event',rareEvents:[{id:'verified_30177_final',label:'絶対！ときめきパワー！',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'swift',label:'君はやっぱりすごい！',skills:[{skillId:200591,hintLevel:2}]},{id:'hidden',label:'かっこよかったよ！！',skills:[{skillId:201691,hintLevel:2}]}]}]},
+ 30179:{title:'百花の願いをこの胸に',jpName:'[百花の願いをこの胸に]サトノダイヤモンド',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30179/event',rareEvents:[{id:'verified_30179_final',label:'カルセドニーが輝く',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'advance',label:'妥協しない心が響いたかな？',skills:[{skillId:202151,hintLevel:2}]},{id:'flame',label:'みんな、いい顔をしているな',skills:[{skillId:202091,hintLevel:2}]}]}]},
+ 30184:{title:'感謝感謝！サクラ吹雪！！',jpName:'[感謝感謝！サクラ吹雪！！]サクラバクシンオー',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30184/event',rareEvents:[{id:'verified_30184_final',label:'飛び越えたい、隣の貴方',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'rocket',label:'いいライバル関係だな',skills:[{skillId:202861,hintLevel:2}]},{id:'purple',label:'イベントレースが楽しみだ！',skills:[{skillId:200973,hintLevel:2}]}]}]},
+
  30152:{title:"All'alba vincerò!",jpName:"[All'alba vincerò!]テイエムオペラオー",eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30152/event',rareEvents:[{id:'verified_30152_final',label:'輝きの影で',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'monster',label:'この3人だから、より気合いが入ったのかも',skills:[{skillId:202481,hintLevel:1}]},{id:'hayate',label:'どんな舞台も盛り上げてしまうんだな',skills:[{skillId:200361,hintLevel:1}]}]}]},
  30153:{title:'優しい月',jpName:'[優しい月]ゴールドシチー',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30153/event',rareEvents:[{id:'verified_30153_final',label:'伝えるべき言葉は',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'seiran',label:'色んな形の友情があっていいと思うよ',skills:[{skillId:200184,hintLevel:1}]},{id:'voltage',label:'もっと友情が深まるといいな',skills:[{skillId:202671,hintLevel:1}]}]}]},
  30157:{title:'君と見る泡沫',jpName:'[君と見る泡沫]マンハッタンカフェ',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30157/event',rareEvents:[{id:'verified_30157_final',label:'水面の向こうに',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'muga',label:'前より楽しそうだな！',skills:[{skillId:202421,hintLevel:2}]},{id:'cooldown',label:'せっかくだし、トレーニング見ようか？',skills:[{skillId:200741,hintLevel:2}]}]}]},
