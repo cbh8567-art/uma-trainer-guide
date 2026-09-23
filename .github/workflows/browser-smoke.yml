@@ -1,0 +1,35 @@
+name: GitHub Pages browser smoke
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Browser smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://cbh8567-art.github.io/uma-trainer-guide/?smoke=\${GITHUB_RUN_ID}"
+          CHROME="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$CHROME" ]; then
+            echo "::error::Chrome/Chromium not found on runner"
+            exit 1
+          fi
+          echo "Using $CHROME"
+          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=12000 --dump-dom "$URL" > /tmp/dom.html 2>/tmp/chrome.err || {
+            cat /tmp/chrome.err
+            exit 1
+          }
+          grep -q 'V7.0 실전 육성 플래너' /tmp/dom.html
+          if grep -q 'JP 자동 동기화 상태 확인 중' /tmp/dom.html; then
+            echo "::error::App bootstrap did not update JP sync status"
+            tail -100 /tmp/chrome.err || true
+            exit 1
+          fi
+          grep -Eo 'JP 자동 동기화[^<]+' /tmp/dom.html | head -1 || true
+          echo "Browser bootstrap smoke PASS"
