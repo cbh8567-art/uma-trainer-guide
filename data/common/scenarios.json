@@ -1,0 +1,859 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-23",
+  "scenarios": {
+    "tresenken": {
+      "name": "らっしゃい！トレセン軒！",
+      "kr": "트레센켄(라면)",
+      "maxEvolution": 2,
+      "source": "Game8 2026-09-22",
+      "sourceUrl": "https://game8.jp/umamusume/794793",
+      "ultimateRamenSourceUrl": "https://game8.jp/umamusume/794070",
+      "ultimateRamenChoices": [
+        {
+          "id": "special",
+          "jp": "スペシャルトレセンラーメン",
+          "kr": "스페셜 트레센 라멘",
+          "skill": "火事場のバ鹿力",
+          "hintLevel": 2
+        },
+        {
+          "id": "greedy",
+          "jp": "よくばりトレセンラーメン",
+          "kr": "욕심쟁이 트레센 라멘",
+          "skill": "いいとこ入った！",
+          "hintLevel": 2
+        },
+        {
+          "id": "jewel",
+          "jp": "珠玉のトレセンラーメン",
+          "kr": "주옥의 트레센 라멘",
+          "skill": "好奇心",
+          "hintLevel": 2
+        }
+      ],
+      "scenarioAcquiredRareSkills": [
+        {
+          "name": "時中の妙",
+          "source": "GameWith / VIP Wiki 2026-09",
+          "acquisition": "클래식급 12월 후반 제2회 RMJ · 대성황 이상",
+          "verified": true,
+          "milestone": "classicRmjBig"
+        },
+        {
+          "name": "極上の感謝を！",
+          "source": "GameWith / VIP Wiki 2026-09",
+          "acquisition": "육성 종료 엔딩 · 모든 RMJ 대성황 이상",
+          "verified": true,
+          "milestone": "allRmjBig"
+        },
+        {
+          "name": "勇迅一閃",
+          "source": "Game8 2026-09-22",
+          "acquisition": "시니어급 9월 전반 「貴方と私とラーメンと」 · 파인 모션 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "烈風一閃",
+          "source": "Game8 2026-09-22",
+          "acquisition": "시니어급 9월 전반 「貴方と私とラーメンと」 · 나리타 탑로드 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "閃く雷光",
+          "source": "Game8 2026-09-22",
+          "acquisition": "시니어급 9월 전반 「貴方と私とラーメンと」 · 칼스톤 라이트 오 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "ネバーギブアップ",
+          "source": "Game8 2026-09-22",
+          "acquisition": "시니어급 9월 전반 「貴方と私とラーメンと」 · 메이쇼 도토 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "光芒一閃",
+          "source": "Game8 2026-09-22",
+          "acquisition": "시니어급 9월 전반 「貴方と私とラーメンと」 · 나이스 네이처 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "英俊豪傑",
+          "source": "Game8 2026-09-22",
+          "acquisition": "시니어급 9월 전반 「貴方と私とラーメンと」 · 타즈나/라이트 헬로 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "火事場のバ鹿力",
+          "source": "Game8 2026-09-22",
+          "acquisition": "시니어급 12월 후반 궁극 라멘 선택 · スペシャルトレセンラーメン · 힌트 Lv+2",
+          "verified": true,
+          "choiceGroup": "ultimateRamen",
+          "choiceId": "special"
+        },
+        {
+          "name": "いいとこ入った！",
+          "source": "Game8 2026-09-22",
+          "acquisition": "시니어급 12월 후반 궁극 라멘 선택 · よくばりトレセンラーメン · 힌트 Lv+2",
+          "verified": true,
+          "choiceGroup": "ultimateRamen",
+          "choiceId": "greedy"
+        },
+        {
+          "name": "好奇心",
+          "source": "Game8 2026-09-22",
+          "acquisition": "시니어급 12월 후반 궁극 라멘 선택 · 珠玉のトレセンラーメン · 힌트 Lv+2",
+          "verified": true,
+          "choiceGroup": "ultimateRamen",
+          "choiceId": "jewel"
+        }
+      ],
+      "evolutions": [
+        {
+          "from": "ギアチェンジ",
+          "to": "秘伝の味変アレンジ！",
+          "distances": [
+            "mile"
+          ],
+          "scenarioRequirement": "seniorRmjBig",
+          "requirementText": "초RMJ극 대성황 이상 + 마일 스킬 2개 이상",
+          "guideBoost": -0.5,
+          "note": "Game8 현행 가이드에서 우선도 낮음"
+        },
+        {
+          "from": "お先に失礼っ！",
+          "to": "バリカタ、一丁上がり！",
+          "scenarioRequirement": "allRmjBig",
+          "requirementText": "모든 RMJ 대성황 이상",
+          "guideBoost": 0
+        },
+        {
+          "from": "時中の妙",
+          "to": "湯切りの妙技",
+          "scenarioRequirement": "allRmjBig",
+          "requirementText": "모든 RMJ 대성황 이상",
+          "guideBoost": 0.9,
+          "note": "현행 가이드 최우선 후보"
+        },
+        {
+          "from": "パスファインダー",
+          "to": "麺の極意、見つけたり",
+          "distances": [
+            "mid",
+            "long"
+          ],
+          "scenarioRequirement": "seniorRmjBig",
+          "requirementText": "초RMJ극 대성황 이상 + 중거리 또는 장거리 스킬 2개 이상",
+          "guideBoost": 0.65,
+          "note": "중/장거리 우선 후보"
+        },
+        {
+          "from": "元気溌剌",
+          "to": "元気特盛りのおもてなし",
+          "distances": [
+            "mile"
+          ],
+          "scenarioRequirement": "seniorRmjBig",
+          "requirementText": "초RMJ극 대성황 이상 + 마일 스킬 2개 이상",
+          "guideBoost": 0.55,
+          "note": "마일에서 우선도 상승"
+        },
+        {
+          "from": "悠々自適",
+          "to": "じっくり仕込みの一杯",
+          "distances": [
+            "mid",
+            "long"
+          ],
+          "scenarioRequirement": "allRmjBig",
+          "requirementText": "모든 RMJ 대성황 이상",
+          "guideBoost": -0.35,
+          "note": "회복이 특별히 필요할 때 검토"
+        }
+      ]
+    },
+    "dreams": {
+      "name": "Dreams",
+      "kr": "드림즈",
+      "maxEvolution": 2,
+      "source": "Game8",
+      "sourceUrl": "https://game8.jp/umamusume/763918",
+      "scenarioAcquiredRareSkills": [
+        {
+          "name": "砂の開拓者",
+          "source": "Game8",
+          "acquisition": "시니어급 9월 후반 「決意表明・BC遠征を前に」 · 에스푸아르 시티 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "行雲流水",
+          "source": "Game8",
+          "acquisition": "시니어급 9월 후반 「決意表明・BC遠征を前に」 · 러브즈 온리 유 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "気炎万丈",
+          "source": "Game8",
+          "acquisition": "시니어급 9월 후반 「決意表明・BC遠征を前に」 · 레드 디자이어 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "英俊豪傑",
+          "source": "Game8",
+          "acquisition": "시니어급 9월 후반 「決意表明・BC遠征を前に」 · 포에버 영 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "お先に失礼っ！",
+          "source": "Game8",
+          "acquisition": "시니어급 9월 후반 「決意表明・BC遠征を前に」 · 카지노 드라이브 대응 편성 시",
+          "verified": true
+        }
+      ],
+      "evolutions": [
+        {
+          "from": "イノベーション",
+          "to": "Turn the tables！",
+          "grounds": [
+            "dirt"
+          ]
+        },
+        {
+          "from": "前人未到",
+          "to": "新しい夢の旅路"
+        },
+        {
+          "from": "パスファインダー",
+          "to": "激アツ☆ロードマップ",
+          "distances": [
+            "mid",
+            "long"
+          ]
+        },
+        {
+          "from": "いいとこ入った！",
+          "to": "スターダムを目指して！"
+        },
+        {
+          "from": "全身全霊",
+          "to": "世界を魅せる輝き"
+        }
+      ]
+    },
+    "onsen": {
+      "name": "温泉郷",
+      "kr": "온천향",
+      "maxEvolution": 2,
+      "source": "Game8",
+      "sourceUrl": "https://game8.jp/umamusume/734327",
+      "scenarioAcquiredRareSkills": [
+        {
+          "name": "機先の勝負",
+          "source": "Game8",
+          "acquisition": "제2회 「湯浴み会」 종료 후",
+          "verified": true
+        },
+        {
+          "name": "時中の妙",
+          "source": "Game8",
+          "acquisition": "제3회 「湯浴み会」 종료 후",
+          "verified": true
+        },
+        {
+          "name": "本気で休んで、もう一度",
+          "source": "Game8",
+          "acquisition": "제3회 「湯浴み会」 종료 후",
+          "verified": true
+        },
+        {
+          "name": "猛追",
+          "source": "Game8",
+          "acquisition": "URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 원더 어큐트 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "見事な砂蹴り",
+          "source": "Game8",
+          "acquisition": "URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 홋코 타루마에 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "コンセントレーション",
+          "source": "Game8",
+          "acquisition": "URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 트랜센드 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "踏ませぬ影",
+          "source": "Game8",
+          "acquisition": "URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 미호노 부르봉 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "アンストッパブル",
+          "source": "Game8",
+          "acquisition": "URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 토카이 테이오 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "全身全霊",
+          "source": "Game8",
+          "acquisition": "URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 호시나 켄코 대응 편성 시",
+          "verified": true
+        }
+      ],
+      "evolutions": [
+        {
+          "from": "先手必勝",
+          "to": "一番風呂いただきます！",
+          "styles": [
+            "nige"
+          ]
+        },
+        {
+          "from": "お先に失礼っ！",
+          "to": "走り湯ダッシュ"
+        },
+        {
+          "from": "時中の妙",
+          "to": "湯に入りて湯に入らざれ"
+        },
+        {
+          "from": "真骨頂",
+          "to": "秘湯より湧くチカラ",
+          "styles": [
+            "sashi",
+            "oikomi"
+          ]
+        },
+        {
+          "from": "迸る気迫",
+          "to": "噴泉スピリット",
+          "styles": [
+            "senko"
+          ]
+        }
+      ]
+    },
+    "island": {
+      "name": "無人島",
+      "kr": "무인도",
+      "maxEvolution": 2,
+      "source": "Game8",
+      "sourceUrl": "https://game8.jp/umamusume/701249",
+      "scenarioAcquiredRareSkills": [
+        {
+          "name": "王道一途",
+          "source": "Game8",
+          "acquisition": "시니어급 9월 전반 「トレセン島のススメ」 · 아이네스 후진 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "昂る鼓動",
+          "source": "Game8",
+          "acquisition": "시니어급 9월 전반 「トレセン島のススメ」 · 골드 시티 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "トップギア",
+          "source": "Game8",
+          "acquisition": "시니어급 9월 전반 「トレセン島のススメ」 · 메지로 라이언 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "影従打破",
+          "source": "Game8",
+          "acquisition": "시니어급 9월 전반 「トレセン島のススメ」 · 사쿠라 치요노 오 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "尻尾の滝登り",
+          "source": "Game8",
+          "acquisition": "시니어급 9월 전반 「トレセン島のススメ」 · 타마모 크로스 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "アガッてきた！",
+          "source": "Game8",
+          "acquisition": "시니어급 9월 전반 「トレセン島のススメ」 · 터커 브라인 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "本能の懸け橋",
+          "source": "Game8",
+          "acquisition": "시나리오 클리어 후 육성 완료 시",
+          "verified": true
+        }
+      ],
+      "evolutions": [
+        {
+          "from": "全身全霊",
+          "to": "大地を揺るがす疾走",
+          "distances": [
+            "mid",
+            "long"
+          ]
+        },
+        {
+          "from": "キラーチューン",
+          "to": "大自然の鼓動",
+          "distances": [
+            "mid"
+          ]
+        },
+        {
+          "from": "高揚感",
+          "to": "ワイルドアットハート",
+          "distances": [
+            "mid"
+          ]
+        },
+        {
+          "from": "ネバーギブアップ",
+          "to": "不屈のサバイバル魂",
+          "distances": [
+            "mid",
+            "long"
+          ],
+          "guideBoost": 0.45
+        },
+        {
+          "from": "パスファインダー",
+          "to": "開拓者の軌跡",
+          "distances": [
+            "mid",
+            "long"
+          ],
+          "guideBoost": 0.5
+        },
+        {
+          "from": "悠久走破",
+          "to": "未知へのトライアル",
+          "distances": [
+            "mid",
+            "long"
+          ],
+          "guideBoost": 0.8,
+          "note": "Game8 가이드 최우선 후보"
+        }
+      ]
+    },
+    "legends": {
+      "name": "The Twinkle Legends",
+      "kr": "레전즈",
+      "maxEvolution": 2,
+      "source": "Game8",
+      "sourceUrl": "https://game8.jp/umamusume/670791",
+      "krSource": "우마무스메 인벤 스킬 DB",
+      "krSourceUrl": "https://uma.inven.co.kr/db/skill",
+      "normalCompletionAssumed": true,
+      "scenarioAcquiredRareSkills": [
+        {
+          "name": "飛翔脚",
+          "source": "Game8",
+          "acquisition": "「\"私の\"レースのこと」 · 오르페브르 대응 편성 시",
+          "verified": true,
+          "requiredCharacter": "オルフェーヴル"
+        },
+        {
+          "name": "遮二無二",
+          "source": "Game8",
+          "acquisition": "「\"私の\"レースのこと」 · 메지로 라모누 대응 편성 시",
+          "verified": true,
+          "requiredCharacter": "メジロラモーヌ"
+        },
+        {
+          "name": "光芒一閃",
+          "source": "Game8",
+          "acquisition": "「\"私の\"レースのこと」 · 젠틸돈나 대응 편성 시",
+          "verified": true,
+          "requiredCharacter": "ジェンティルドンナ"
+        },
+        {
+          "name": "猛追",
+          "source": "Game8",
+          "acquisition": "「\"私の\"レースのこと」 · 시리우스 심볼리 대응 편성 시",
+          "verified": true,
+          "requiredCharacter": "シリウスシンボリ"
+        },
+        {
+          "name": "砂塵円刃",
+          "source": "Game8",
+          "acquisition": "「\"私の\"レースのこと」 · 스마트 팔콘 대응 편성 시",
+          "verified": true,
+          "requiredCharacter": "スマートファルコン"
+        },
+        {
+          "name": "時中の妙",
+          "source": "Game8",
+          "acquisition": "Dream Fest 진행 보상 · 정상 완주 기준 자동 인정",
+          "verified": true
+        },
+        {
+          "name": "新たな伝説を築くもの",
+          "source": "Game8/Inven",
+          "acquisition": "Dream Fest 전승 · 정상 완주 기준 자동 인정",
+          "verified": true
+        }
+      ],
+      "evolutions": [
+        {
+          "from": "ハヤテ一文字",
+          "to": "疾風より先へ",
+          "scenarioRequirement": "legendsNormal",
+          "requirementText": "팬 수 15만 이상"
+        },
+        {
+          "from": "先手必勝",
+          "to": "夢の先駆者",
+          "styles": [
+            "nige"
+          ],
+          "scenarioRequirement": "legendsNormal",
+          "requirementText": "도주 스킬 2개 이상 + 팬 수 10만 이상"
+        },
+        {
+          "from": "王手",
+          "to": "幾星霜が導く一手",
+          "styles": [
+            "senko",
+            "sashi"
+          ],
+          "scenarioRequirement": "legendsNormal",
+          "requirementText": "선행 또는 선입 스킬 2개 이상 + 팬 수 10만 이상"
+        },
+        {
+          "from": "時中の妙",
+          "to": "革命の岐路",
+          "scenarioRequirement": "legendsNormal",
+          "requirementText": "팬 수 15만 이상"
+        },
+        {
+          "from": "飛翔脚",
+          "to": "雲上飛翔",
+          "styles": [
+            "oikomi"
+          ],
+          "scenarioRequirement": "legendsNormal",
+          "requirementText": "추입 스킬 2개 이상 + 팬 수 10만 이상"
+        },
+        {
+          "from": "英俊豪傑",
+          "to": "伝説降臨",
+          "scenarioRequirement": "legendsNormal",
+          "requirementText": "팬 수 15만 이상"
+        }
+      ]
+    },
+    "mecha": {
+      "name": "走れ！メカウマ娘",
+      "kr": "메카 우마무스메",
+      "maxEvolution": 2,
+      "source": "Game8",
+      "sourceUrl": "https://game8.jp/umamusume/650520",
+      "scenarioAcquiredRareSkills": [
+        {
+          "name": "熾烈の極み",
+          "source": "Game8",
+          "acquisition": "「4.1研究レポートの配布」 · 비와 하야히데 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "月影一閃",
+          "source": "Game8",
+          "acquisition": "「4.1研究レポートの配布」 · 나리타 타이신 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "弧線のプロフェッサー",
+          "source": "Game8",
+          "acquisition": "「4.1研究レポートの配布」 · 에어 샤커 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "迅速果断",
+          "source": "Game8",
+          "acquisition": "「4.1研究レポートの配布」 · 심볼리 크리스 에스 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "閃光",
+          "source": "Game8",
+          "acquisition": "「4.1研究レポートの配布」 · 타니노 김렛 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "キラーチューン",
+          "source": "Game8",
+          "acquisition": "「4.1研究レポートの配布」 · 슈가 라이츠 선택",
+          "verified": true
+        },
+        {
+          "name": "全身全霊",
+          "source": "Game8",
+          "acquisition": "시니어급 12월 후반 종료 시",
+          "verified": true
+        },
+        {
+          "name": "もう少しだけ、いい景色",
+          "source": "Game8",
+          "acquisition": "시나리오 클리어 후 육성 완료 시",
+          "verified": true
+        }
+      ],
+      "evolutions": [
+        {
+          "from": "弧線のプロフェッサー",
+          "to": "弧線のトップスカラー",
+          "distances": [
+            "mid",
+            "long"
+          ]
+        },
+        {
+          "from": "全身全霊",
+          "to": "リミッター解除",
+          "distances": [
+            "mid",
+            "long"
+          ]
+        },
+        {
+          "from": "トップランナー",
+          "to": "先頭維持アルゴリズム",
+          "distances": [
+            "mid",
+            "long"
+          ],
+          "styles": [
+            "nige"
+          ]
+        },
+        {
+          "from": "怪物",
+          "to": "モンスターマシン",
+          "distances": [
+            "long"
+          ],
+          "styles": [
+            "senko"
+          ]
+        },
+        {
+          "from": "怜悧清澄",
+          "to": "システムオールグリーン",
+          "distances": [
+            "mid"
+          ]
+        },
+        {
+          "from": "連鎖反応",
+          "to": "リカバリーシーケンス",
+          "distances": [
+            "mid",
+            "long"
+          ]
+        }
+      ]
+    },
+    "harvest": {
+      "name": "収穫ッ！満腹ッ！大豊食祭",
+      "kr": "대풍식제",
+      "maxEvolution": 2,
+      "source": "Game8",
+      "sourceUrl": "https://game8.jp/umamusume/621051",
+      "scenarioAcquiredRareSkills": [
+        {
+          "name": "時中の妙",
+          "source": "Game8",
+          "acquisition": "「成就ッ！食の大祝祭ッ！」 대만족/초만족 달성 시",
+          "verified": true
+        },
+        {
+          "name": "シックスセンス",
+          "source": "Game8",
+          "acquisition": "시니어급 10월 전반 「それぞれの食」 · 카츠라기 에이스 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "食いしん坊",
+          "source": "Game8",
+          "acquisition": "시니어급 10월 전반 「それぞれの食」 · 스페셜 위크 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "ハヤテ一文字",
+          "source": "Game8",
+          "acquisition": "시니어급 10월 전반 「それぞれの食」 · 니시노 플라워 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "電迅速攻",
+          "source": "Game8",
+          "acquisition": "시니어급 10월 전반 「それぞれの食」 · 히시 아케보노 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "決意の直滑降",
+          "source": "Game8",
+          "acquisition": "시니어급 10월 전반 「それぞれの食」 · 라이스 샤워 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "風翔",
+          "source": "Game8",
+          "acquisition": "시니어급 10월 전반 「それぞれの食」 · 아키카와 이사장 대응 편성 시",
+          "verified": true
+        },
+        {
+          "name": "私たちの走る道程",
+          "source": "Game8",
+          "acquisition": "초만족 상태로 시나리오 종료 「夢は今」",
+          "verified": true
+        }
+      ],
+      "evolutions": [
+        {
+          "from": "時中の妙",
+          "to": "ここらで味変！",
+          "distances": [
+            "short",
+            "mile"
+          ]
+        },
+        {
+          "from": "ウママニア",
+          "to": "敬愛ッ！ウママニア",
+          "distances": [
+            "short",
+            "mile"
+          ]
+        },
+        {
+          "from": "曲線のソムリエ",
+          "to": "曲線のグランシェフ",
+          "distances": [
+            "short",
+            "mile"
+          ]
+        },
+        {
+          "from": "スプリントターボ",
+          "to": "耕せ！開墾スプリント",
+          "distances": [
+            "short"
+          ]
+        },
+        {
+          "from": "紫電円刃",
+          "to": "即席三ツ星コーナリング",
+          "distances": [
+            "short"
+          ]
+        },
+        {
+          "from": "電光石火",
+          "to": "お待ちどおさま！",
+          "distances": [
+            "short",
+            "mile"
+          ]
+        }
+      ]
+    },
+    "uaf": {
+      "name": "U.A.F. Ready GO!",
+      "kr": "UAF",
+      "maxEvolution": 2,
+      "source": "Game8",
+      "sourceUrl": "https://game8.jp/umamusume/595640",
+      "scenarioAcquiredRareSkills": [
+        {
+          "name": "決死の覚悟",
+          "source": "Game8",
+          "acquisition": "시니어급 9월 후반",
+          "verified": true
+        },
+        {
+          "name": "全身全霊",
+          "source": "Game8",
+          "acquisition": "SHOW DOWN 우승 후",
+          "verified": true
+        },
+        {
+          "name": "爆熱のキラメキ！",
+          "source": "Game8",
+          "acquisition": "SHOW DOWN 우승 후 엔딩",
+          "verified": true
+        },
+        {
+          "name": "アスリート魂",
+          "source": "Game8",
+          "acquisition": "UAF 시나리오 인자 3종 모두 계승 시",
+          "verified": true
+        }
+      ],
+      "evolutions": [
+        {
+          "from": "アガッてきた！",
+          "to": "燃えてきたッ！！",
+          "distances": [
+            "mile",
+            "mid"
+          ]
+        },
+        {
+          "from": "全身全霊",
+          "to": "ベストを尽くして！",
+          "distances": [
+            "mile",
+            "mid"
+          ]
+        },
+        {
+          "from": "キラーチューン",
+          "to": "ステイチューン！",
+          "distances": [
+            "mid"
+          ]
+        },
+        {
+          "from": "高揚感",
+          "to": "繋がる高揚感",
+          "distances": [
+            "mid"
+          ]
+        },
+        {
+          "from": "破竹の勢い",
+          "to": "破竹の筋肉",
+          "distances": [
+            "mile"
+          ]
+        },
+        {
+          "from": "遮二無二",
+          "to": "無二の情熱",
+          "distances": [
+            "mile"
+          ]
+        },
+        {
+          "from": "機先の勝負",
+          "to": "キラメキの勝負",
+          "distances": [
+            "mile",
+            "mid"
+          ]
+        }
+      ]
+    },
+    "none": {
+      "name": "その他",
+      "kr": "기타",
+      "maxEvolution": 0,
+      "scenarioAcquiredRareSkills": [],
+      "evolutions": []
+    }
+  }
+}
