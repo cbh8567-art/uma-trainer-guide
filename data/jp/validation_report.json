@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "updated": "2026-09-23",
   "status": "pass",
-  "checkedAt": "2026-09-23T12:00:56.518Z",
+  "checkedAt": "2026-09-23T12:12:24.607Z",
   "fatal": [],
   "warnings": [],
   "collections": {
@@ -12,9 +12,10 @@
       "contentSha256": "c296804112161cbac691e32e70aa3aa493d40cd25727556fe7920d79db9fd9bf",
       "duplicateIds": [],
       "status": "pass",
-      "previousCount": null,
+      "previousCount": 559,
       "removedCount": 0,
-      "removedRatio": 0
+      "removedRatio": 0,
+      "changed": false
     },
     "supports": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
@@ -22,9 +23,10 @@
       "contentSha256": "9f3c215963b5aa48e33cd4c4e35ae4066edae831778275f0f07260e4452440ee",
       "duplicateIds": [],
       "status": "pass",
-      "previousCount": null,
+      "previousCount": 43,
       "removedCount": 0,
-      "removedRatio": 0
+      "removedRatio": 0,
+      "changed": false
     },
     "events": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/events.json",
@@ -32,9 +34,10 @@
       "contentSha256": "3f9fa5b115f4335b36acc0a223d7a00267e6e90244d27ce0ca3588fe72a5570c",
       "duplicateIds": [],
       "status": "pass",
-      "previousCount": null,
+      "previousCount": 120,
       "removedCount": 0,
-      "removedRatio": 0
+      "removedRatio": 0,
+      "changed": false
     },
     "skills": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/skills.json",
@@ -42,9 +45,10 @@
       "contentSha256": "d0d0688b70e3557ba4ce107f00fb210b24203daac1bc319b2b7816f7a6789605",
       "duplicateIds": [],
       "status": "pass",
-      "previousCount": null,
+      "previousCount": 2181,
       "removedCount": 0,
-      "removedRatio": 0
+      "removedRatio": 0,
+      "changed": false
     },
     "characters": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/characters.json",
@@ -52,9 +56,10 @@
       "contentSha256": "a2f6e36691702ad485e787930eeb39917a721f83a2e7f420353575c422481050",
       "duplicateIds": [],
       "status": "pass",
-      "previousCount": null,
+      "previousCount": 268,
       "removedCount": 0,
-      "removedRatio": 0
+      "removedRatio": 0,
+      "changed": false
     },
     "courses": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/courses.json",
@@ -62,9 +67,10 @@
       "contentSha256": "0029b65134d7d92f4ca435767eff2931dbc706cd15941845fe5046151ac86c6d",
       "duplicateIds": [],
       "status": "pass",
-      "previousCount": null,
+      "previousCount": 140,
       "removedCount": 0,
-      "removedRatio": 0
+      "removedRatio": 0,
+      "changed": false
     }
   }
 }
