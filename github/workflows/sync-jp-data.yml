@@ -1,0 +1,54 @@
+name: JP validated data sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 18 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: jp-data-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Sync and validate JP data
+        id: sync
+        shell: bash
+        run: |
+          set +e
+          node scripts/sync-jp-data.mjs
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Commit sync result
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No data changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/jp
+          git commit -m "V5.5-1: sync validated JP data snapshots"
+          git push
+
+      - name: Fail workflow when validation failed
+        if: steps.sync.outputs.exit_code != '0'
+        run: |
+          echo "JP data validation failed. Existing snapshots were preserved."
+          exit 1
