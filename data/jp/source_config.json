@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-23",
+  "sources": {
+    "catalog": "https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json",
+    "supports": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
+    "events": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/events.json",
+    "skills": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/skills.json",
+    "characters": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/characters.json",
+    "courses": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/courses.json"
+  },
+  "assetBases": {
+    "support": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/assets/supports/",
+    "character": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/assets/characters/",
+    "skillIcon": "https://raw.githubusercontent.com/daftuyda/Stitcher/master/img/skill_icons/"
+  }
+}
