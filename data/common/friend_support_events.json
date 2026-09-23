@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "version": 1,
+  "updated": "2026-09-23",
+  "note": "U-tools 이벤트 페이지에서 검증한 친구 SSR의 레어 스킬 획득 체크포인트. Lv3/Lv1처럼 같은 레어 스킬의 힌트 레벨만 달라지는 결과는 앱 카운터 목적상 1개의 자동 획득 이벤트로 합침. 30021은 레어/하위 스킬 결과가 갈려 결과 기록형으로 유지.",
+  "cards": {
+    "30021": {
+      "name": "[ようこそ、トレセン学園へ！] 駿川たづな",
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30021/event",
+      "events": [
+        {
+          "id": "ut_30021_hitoyasumi",
+          "label": "ひと休みサプライズ",
+          "selection": "result",
+          "note": "이벤트 결과에 따라 コンセントレーション 또는 하위 스킬 集中力 획득",
+          "choices": [
+            {
+              "id": "rare",
+              "label": "コンセントレーション 획득",
+              "skills": [
+                {
+                  "skillId": 200431,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "normal",
+              "label": "集中力만 획득",
+              "skills": []
+            }
+          ]
+        }
+      ]
+    },
+    "30036": {
+      "name": "[徹底管理主義] 樫本理子",
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30036/event",
+      "events": [
+        {
+          "id": "ut_30036_munenouchi",
+          "label": "胸の内を少しだけ",
+          "selection": "auto",
+          "note": "一陣の風은 결과에 따라 힌트 Lv3/Lv1",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 200371,
+                  "hintLevel": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30052": {
+      "name": "[from the GROUND UP] ライトハロー",
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30052/event",
+      "events": [
+        {
+          "id": "ut_30052_nijinoirie",
+          "label": "虹の入り江にて",
+          "selection": "auto",
+          "note": "お先に失礼っ！는 결과에 따라 힌트 Lv3/Lv1",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 201662,
+                  "hintLevel": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30160": {
+      "name": "[L'aubeは迫りて] 佐岳メイ",
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30160/event",
+      "events": [
+        {
+          "id": "ut_30160_musubu",
+          "label": "結ぶは、星空の誓い",
+          "selection": "auto",
+          "note": "ネバーギブアップ은 결과에 따라 힌트 Lv3/Lv1",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 202721,
+                  "hintLevel": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30188": {
+      "name": "[共に描くキラメキ] 都留岐涼花",
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30188/event",
+      "events": [
+        {
+          "id": "ut_30188_sonohataraki",
+          "label": "その働きに敬意を",
+          "selection": "auto",
+          "note": "機先の勝負는 결과에 따라 힌트 Lv3/Lv1",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 202801,
+                  "hintLevel": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30207": {
+      "name": "[謹製ッ！特大夢にんじん！] 秋川理事長",
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30207/event",
+      "events": [
+        {
+          "id": "ut_30207_tenbou",
+          "label": "展望ッ！これからのわたしと君と",
+          "selection": "auto",
+          "note": "ウママニア는 결과에 따라 힌트 Lv3/Lv1",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 201592,
+                  "hintLevel": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30257": {
+      "name": "[本能は吼えているか！？] タッカーブライン",
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30257/event",
+      "events": [
+        {
+          "id": "ut_30257_sakebe",
+          "label": "叫べ！響け！",
+          "selection": "auto",
+          "note": "パスファインダー 힌트 Lv3",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 203651,
+                  "hintLevel": 3
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30276": {
+      "name": "[ゆるり、ゆこま旅館] 保科健子",
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30276/event",
+      "events": [
+        {
+          "id": "ut_30276_junjou",
+          "label": "純情すぎる若人に",
+          "selection": "auto",
+          "note": "お先に失礼っ！ 힌트 Lv3",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 201662,
+                  "hintLevel": 3
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30290": {
+      "name": "[American Dream] カジノドライヴ",
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30290/event",
+      "events": [
+        {
+          "id": "ut_30290_teachme",
+          "label": "Teach Me About Yourself",
+          "selection": "auto",
+          "note": "いいとこ入った！ 힌트 Lv3",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 201652,
+                  "hintLevel": 3
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30305": {
+      "name": "[一杯のノスタルジア] 駿川たづな",
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30305/event",
+      "events": [
+        {
+          "id": "ut_30305_itsudemo",
+          "label": "いつでも、毎秒、その時だ",
+          "selection": "auto",
+          "note": "お先に失礼っ！ 획득. 트레센켄 시나리오 링크에서는 힌트 Lv3, 통상은 Lv1.",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 201662,
+                  "hintLevel": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
