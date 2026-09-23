@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-23",
+  "status": "not_run",
+  "snapshotReady": false,
+  "lastSuccessfulSync": null,
+  "lastAttempt": null,
+  "activeMode": "remote",
+  "message": "First successful GitHub Actions sync will create data/jp/current snapshots."
+}
