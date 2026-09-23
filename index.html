@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<title>우마무스메 트레이너 가이드 V5.13 WEB</title>
+<title>우마무스메 트레이너 가이드 V5.14 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
-button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}.top{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.title{font-size:23px;font-weight:950}.sub,.note{font-size:11px;color:var(--muted);line-height:1.55}.toolbar{display:flex;gap:6px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;padding:8px 10px;cursor:pointer}.btn.primary{background:linear-gradient(#ff94b8,#ff72a0);color:#2b101a;border:0;font-weight:900}.btn:disabled{opacity:.45;cursor:default}.tabs{display:flex;gap:6px;margin:12px 0;position:sticky;top:0;z-index:15;background:#11141d;padding:7px 0}.tab{border:1px solid var(--line);background:#171b26;color:#cbd1df;border-radius:9px;padding:9px 13px;cursor:pointer}.tab.active{background:#f1f2f6;color:#171922;font-weight:900}.page{display:none}.page.active{display:block}.layout{display:grid;grid-template-columns:1.08fr .92fr;gap:12px}.panel{background:rgba(26,30,41,.98);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 12px 30px rgba(0,0,0,.18)}.panel h2{font-size:16px;margin:0 0 9px}.settings,.guide-settings{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.field label{display:block;font-size:10px;color:var(--muted);margin-bottom:4px}.field input,.field select{width:100%;background:#121620;border:1px solid var(--line);color:#fff;border-radius:8px;padding:8px}.filters{display:flex;gap:5px;flex-wrap:wrap;margin:7px 0}.filter{border:1px solid var(--line);background:#161a25;color:#c8cfdd;border-radius:999px;padding:6px 9px;font-size:10px;cursor:pointer}.filter.active{background:#eef0f4;color:#171922;font-weight:900}.search{display:grid;grid-template-columns:1fr auto;gap:6px}.search input{background:#121620;border:1px solid var(--line);color:#fff;border-radius:8px;padding:9px}
+button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}.top{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.title{font-size:23px;font-weight:950}.sub,.note{font-size:11px;color:var(--muted);line-height:1.55}.toolbar{display:flex;gap:6px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;padding:8px 10px;cursor:pointer}.btn.primary{background:linear-gradient(#ff94b8,#ff72a0);color:#2b101a;border:0;font-weight:900}.btn:disabled{opacity:.45;cursor:default}.serverMode{margin:12px 0 4px;padding:10px 12px;border:1px solid #394158;border-radius:14px;background:linear-gradient(180deg,#1b2030,#151923)}.serverModeHead{display:flex;align-items:center;justify-content:space-between;gap:10px}.serverModeButtons{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:9px 0 7px}.serverTab{border:1px solid #47516a;background:#171c28;color:#d9dfeb;border-radius:11px;padding:10px 12px;font-weight:900;cursor:pointer}.serverTab.active{background:#eef1f6;color:#151822;border-color:#eef1f6}.tabs{display:flex;gap:6px;margin:8px 0 12px;position:sticky;top:0;z-index:15;background:#11141d;padding:7px 0}.tab{border:1px solid var(--line);background:#171b26;color:#cbd1df;border-radius:9px;padding:9px 13px;cursor:pointer}.tab.active{background:#f1f2f6;color:#171922;font-weight:900}.page{display:none}.page.active{display:block}.layout{display:grid;grid-template-columns:1.08fr .92fr;gap:12px}.panel{background:rgba(26,30,41,.98);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 12px 30px rgba(0,0,0,.18)}.panel h2{font-size:16px;margin:0 0 9px}.settings,.guide-settings{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.field label{display:block;font-size:10px;color:var(--muted);margin-bottom:4px}.field input,.field select{width:100%;background:#121620;border:1px solid var(--line);color:#fff;border-radius:8px;padding:8px}.filters{display:flex;gap:5px;flex-wrap:wrap;margin:7px 0}.filter{border:1px solid var(--line);background:#161a25;color:#c8cfdd;border-radius:999px;padding:6px 9px;font-size:10px;cursor:pointer}.filter.active{background:#eef0f4;color:#171922;font-weight:900}.search{display:grid;grid-template-columns:1fr auto;gap:6px}.search input{background:#121620;border:1px solid var(--line);color:#fff;border-radius:8px;padding:9px}
 .deck{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.slot{min-width:0;border:1px dashed #4a5268;background:#141823;border-radius:11px;padding:5px;min-height:220px;position:relative}.slot.empty{display:flex;align-items:center;justify-content:center;color:#778097;font-size:11px;text-align:center;cursor:pointer}
 .slot.empty:hover{border-color:var(--pink);background:#211b29;color:#f5c8d8}
 .slot.empty::after{content:'＋ 클릭해서 추가';display:block;margin-top:5px;font-weight:850;color:#d5a2b7}
@@ -132,13 +132,25 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V5.13 WEB</div><div class="sub">육성 우마별 핑크 진화 · 시나리오 전용 진화 · SSR/스킬 추천 · 이벤트 카운터 DEBUG 반영</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V5.14 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
    <label class="btn">DB JSON 불러오기<input id="importDb" type="file" accept=".json" hidden></label>
    <button class="btn" id="exportStateBtn">내 설정 백업</button>
   </div>
+ </div>
+
+ <div class="serverMode">
+  <div class="serverModeHead">
+   <div><b>서버 모드</b><div class="sub">덱 · 보유 SSR · 스킬 체크 · 육성 조건을 서버별로 따로 저장합니다.</div></div>
+   <span class="status" id="appServerStatus"></span>
+  </div>
+  <div class="serverModeButtons">
+   <button class="serverTab" data-app-server="kr">🇰🇷 한국 서버</button>
+   <button class="serverTab" data-app-server="jp">🇯🇵 일본 서버</button>
+  </div>
+  <div class="note" id="appServerNote"></div>
  </div>
 
  <div class="tabs">
@@ -162,7 +174,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
     <div class="scenarioBox"><div class="sub">트레이너 가이드를 바꾸면 해당 레이스의 바장/거리가 자동 적용됩니다. 각질은 육성 우마에 맞게 직접 선택할 수 있습니다.</div><div class="sub" style="margin-top:5px">현재 육성 우마무스메 적합도</div><div class="rating" id="conditionUmaScore" style="font-size:20px">—</div><div class="note" id="conditionUmaScoreReason">DB 동기화 후 육성 우마무스메를 선택하면 표시됩니다.</div></div>
     <div class="sectionHead"><h2 style="margin:0">현재 덱</h2><span class="status">모바일: 「슬롯 선택」 권장 · PC: 드래그 가능</span></div>
     <div class="deck" id="deck"></div><div class="typeSummary" id="typeSummary"></div>
-    <div class="counts"><div class="countbox"><div class="sub">레어 스킬 획득</div><div class="big"><span id="acqCount">0</span> / <span id="rareCount">0</span></div></div><div class="countbox"><div class="sub">획득 완료 · 현재 조건 적합 레어 스킬</div><div class="big"><span id="recCount">0</span> ★</div><div class="sub" id="conditionText"></div></div></div>
+    <div class="counts"><div class="countbox"><div class="sub">레어 스킬 이벤트 획득</div><div class="big"><span id="acqCount">0</span> / <span id="rareCount">0</span></div><div class="sub" id="rareUniqueText">고유 레어스킬 0 / 0</div></div><div class="countbox"><div class="sub">획득 완료 · 현재 조건 적합 레어 스킬</div><div class="big"><span id="recCount">0</span> ★</div><div class="sub" id="conditionText"></div></div></div>
     <h2>덱 전체 레어 스킬</h2><div class="skillList" id="globalSkills"></div>
     <div class="panel" style="margin-top:10px;border-color:#7f4663;background:linear-gradient(180deg,#221923,#171a24)">
      <div class="sectionHead" style="margin-top:0">
@@ -195,17 +207,6 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 
  <section class="page" id="page-guide">
   <div class="panel">
-   <div class="sectionHead" style="margin-top:0">
-    <h2 style="margin:0">트레이너 가이드 서버</h2>
-    <span class="status" id="guideServerStatus"></span>
-   </div>
-   <div class="filters" id="guideServerTabs">
-    <button class="filter" data-guide-server="jp">🇯🇵 일본 서버</button>
-    <button class="filter" data-guide-server="kr">🇰🇷 한국 서버</button>
-   </div>
-   <div class="note" id="guideServerNote" style="margin-top:7px"></div>
-  </div>
-  <div class="panel" style="margin-top:10px">
    <h2>현재 육성 우마무스메</h2>
    <div class="search"><input id="umaSearch" placeholder="한국어/일본어로 검색 (예: 아그네스 디지털, ライスシャワー)"><button class="btn" id="umaClear">초기화</button></div>
    <div class="umaResults" id="umaResults"></div><div id="selectedUma"></div>
@@ -350,7 +351,7 @@ const FRIEND_SUPPORT_EVENTS={"version":1,"updated":"2026-09-23","note":"U-tools 
 
 </script>
 <script>
-const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v513_db_cache', LEGACY_CACHE_KEY='uma_trainer_v512_db_cache';
+const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v514_db_cache', LEGACY_CACHE_KEY='uma_trainer_v513_db_cache';
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
@@ -387,12 +388,77 @@ const KR_SKILL_ALIASES={
  '晴れの日○':'맑은 날○','良バ場○':'양호한 경기장○','根幹距離○':'근간거리○'
 };
 const LB_MAX=[30,35,40,45,50], LB_INDEX=[6,7,8,9,10];
-let state=JSON.parse(localStorage.getItem(STATE_KEY)||'null')||{owned:[],deck:[null,null,null,null,null,null],acquired:{},eventChoice:{},lb:{},scenario:'tresenken',ground:'turf',distance:'mid',style:'senko',currentUmaId:null,guideRaceId:'cm_2026_10_classic'};
-state.deck=[...(state.deck||[]).slice(0,6),...Array(6).fill(null)].slice(0,6);state.lb=state.lb||{};state.owned=state.owned||[];state.acquired=state.acquired||{};state.eventChoice=state.eventChoice||{};state.eventDone=state.eventDone||{};state.scenario=state.scenario||'tresenken';state.tresenkenUltimateRamen=state.tresenkenUltimateRamen||null;state.tresenkenRmj={juniorBig:true,classicBig:true,seniorBig:true,...(state.tresenkenRmj||{})};state.guideServer=state.guideServer==='kr'?'kr':'jp';state.guideRaceIds=state.guideRaceIds||{};state.guideRaceIds.jp=state.guideRaceIds.jp||((UPCOMING.races||[]).some(r=>r.id===state.guideRaceId)?state.guideRaceId:(UPCOMING.races?.[0]?.id||null));state.guideRaceIds.kr=state.guideRaceIds.kr||(KOREA_UPCOMING.races?.[0]?.id||null);state.guideRaceId=state.guideRaceIds[state.guideServer]||((state.guideServer==='kr'?KOREA_UPCOMING:UPCOMING).races?.[0]?.id||null);state.evolutionPlan=state.evolutionPlan||null;
+const KOREA_SCENARIO_IDS=new Set(['uaf','harvest','mecha','legends','none']);
+const SERVER_PROFILE_FIELDS=['owned','deck','acquired','eventChoice','eventDone','lb','scenario','tresenkenUltimateRamen','tresenkenRmj','ground','distance','style','currentUmaId','guideRaceId','evolutionPlan'];
+function cloneStateValue(v){return v===undefined?undefined:JSON.parse(JSON.stringify(v))}
+function serverDefaultProfile(server){
+ const set=server==='kr'?KOREA_UPCOMING:UPCOMING,r=set.races?.[0]||null;
+ return {
+   owned:[],deck:[null,null,null,null,null,null],acquired:{},eventChoice:{},eventDone:{},lb:{},
+   scenario:server==='kr'?'legends':'tresenken',tresenkenUltimateRamen:null,
+   tresenkenRmj:{juniorBig:true,classicBig:true,seniorBig:true},
+   ground:r?.ground||'turf',distance:r?.distance||'mid',style:'senko',currentUmaId:null,
+   guideRaceId:r?.id||null,evolutionPlan:null
+ }
+}
+function normalizeServerProfile(profile,server){
+ const d=serverDefaultProfile(server),p={...d,...(profile||{})};
+ p.deck=[...(p.deck||[]).slice(0,6),...Array(6).fill(null)].slice(0,6);
+ p.owned=p.owned||[];p.acquired=p.acquired||{};p.eventChoice=p.eventChoice||{};p.eventDone=p.eventDone||{};p.lb=p.lb||{};
+ p.tresenkenUltimateRamen=p.tresenkenUltimateRamen||null;
+ p.tresenkenRmj={juniorBig:true,classicBig:true,seniorBig:true,...(p.tresenkenRmj||{})};
+ const set=server==='kr'?KOREA_UPCOMING:UPCOMING;
+ if(!(set.races||[]).some(r=>r.id===p.guideRaceId))p.guideRaceId=set.races?.[0]?.id||null;
+ if(server==='kr'&&!KOREA_SCENARIO_IDS.has(p.scenario))p.scenario='legends';
+ if(!p.scenario)p.scenario=server==='kr'?'legends':'tresenken';
+ p.evolutionPlan=p.evolutionPlan||null;
+ return p
+}
+function profileFromFlat(src,server){
+ const d=serverDefaultProfile(server),out={};
+ for(const k of SERVER_PROFILE_FIELDS)out[k]=cloneStateValue(src?.[k]!==undefined?src[k]:d[k]);
+ return normalizeServerProfile(out,server)
+}
+function applyServerProfileToFlat(target,server){
+ const p=normalizeServerProfile(target.serverProfiles?.[server],server);
+ target.serverProfiles=target.serverProfiles||{};target.serverProfiles[server]=p;
+ for(const k of SERVER_PROFILE_FIELDS)target[k]=cloneStateValue(p[k]);
+ target.activeServer=server;target.guideServer=server;
+ target.guideRaceIds={...(target.guideRaceIds||{}),[server]:p.guideRaceId};
+ return target
+}
+function initializeServerState(raw){
+ const s=raw||{},legacyServer=(s.activeServer||s.guideServer)==='kr'?'kr':'jp';
+ if(!s.serverProfiles){
+   // V5.13 이하 데이터는 양쪽에 복제해 유실을 막고, 이후부터 독립 저장한다.
+   const legacy=profileFromFlat(s,legacyServer);
+   s.serverProfiles={
+     jp:normalizeServerProfile(cloneStateValue(legacy),'jp'),
+     kr:normalizeServerProfile(cloneStateValue(legacy),'kr')
+   }
+ }
+ s.serverProfiles.jp=normalizeServerProfile(s.serverProfiles.jp,'jp');
+ s.serverProfiles.kr=normalizeServerProfile(s.serverProfiles.kr,'kr');
+ s.activeServer=legacyServer;s.guideServer=legacyServer;
+ s.guideRaceIds={
+   jp:s.serverProfiles.jp.guideRaceId,
+   kr:s.serverProfiles.kr.guideRaceId
+ };
+ return applyServerProfileToFlat(s,legacyServer)
+}
+let state=initializeServerState(JSON.parse(localStorage.getItem(STATE_KEY)||'null')||{});
+function syncActiveServerProfile(){
+ const server=state.activeServer==='kr'?'kr':'jp';
+ state.guideServer=server;state.serverProfiles=state.serverProfiles||{};
+ const p={};
+ for(const k of SERVER_PROFILE_FIELDS)p[k]=cloneStateValue(state[k]);
+ state.serverProfiles[server]=normalizeServerProfile(p,server);
+ state.guideRaceIds={...(state.guideRaceIds||{}),[server]:state.guideRaceId};
+}
 let runtime={catalog:[],byId:new Map(),skills:new Map(),characters:[],courses:[],ready:false};let catType='전체',ownedType='전체',emptySlotType='전체',emptySlotTarget=0,catalogRecommendSort=false;
 
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-const save=()=>localStorage.setItem(STATE_KEY,JSON.stringify(state));
+const save=()=>{syncActiveServerProfile();localStorage.setItem(STATE_KEY,JSON.stringify(state))};
 const norm=s=>String(s||'').toLowerCase().normalize('NFKC').replace(/[\s\[\]\(\)・･\-_.★☆♪]/g,'');
 function toast(t){const x=$('#toast');x.textContent=t;x.style.display='block';clearTimeout(toast._t);toast._t=setTimeout(()=>x.style.display='none',1800)}
 function downloadJson(name,obj){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
@@ -423,16 +489,22 @@ function skillIcon(s){if(!s?.iconId)return '<span class="skillFallback">金</spa
 function cardById(id){return runtime.byId.get(Number(id))||runtime.byId.get(String(id))}
 function skillConditionScore(s,cond=state){const t=s?.tags||{grounds:[],distances:[],styles:[]};if((t.grounds||[]).length&&!t.grounds.includes(cond.ground))return 0;if((t.distances||[]).length&&!t.distances.includes(cond.distance))return 0;if((t.styles||[]).length&&!t.styles.includes(cond.style))return 0;const explicit=(t.grounds?.length?1:0)+(t.distances?.length?1:0)+(t.styles?.length?1:0);return explicit?3:2}
 function scoreStars(n){return n>=4.5?'★★★★★':n>=3.5?'★★★★☆':n>=2.5?'★★★☆☆':n>=1.5?'★★☆☆☆':'★☆☆☆☆'}
-function uniqueRare(card){const m=new Map();for(const e of card?.rareEvents||[])for(const c of e.choices||[])for(const sk of c.skills||[]){const x=canonicalSkill(sk);m.set(String(x.id),x)}return [...m.values()]}
-function eventSkills(e){const m=new Map();for(const c of e?.choices||[])for(const sk of c.skills||[]){const x=canonicalSkill(sk);m.set(String(x.id),x)}return [...m.values()]}
+function rareSkillMapFromList(list){
+ const m=new Map();
+ for(const sk of list||[]){const x=canonicalSkill(sk);if(x&&Number(x.rarity)===2)m.set(String(x.id),x)}
+ return m
+}
+function uniqueRare(card){const m=new Map();for(const e of card?.rareEvents||[])for(const ch of e.choices||[])for(const [id,sk] of rareSkillMapFromList(ch.skills))m.set(id,sk);return [...m.values()]}
+function eventSkills(e){const m=new Map();for(const ch of e?.choices||[])for(const [id,sk] of rareSkillMapFromList(ch.skills))m.set(id,sk);return [...m.values()]}
 function isBranchEvent(e){return e?.selection==='single'||e?.selection==='result'}
-function eventMaxCount(e){if(!e)return 0;if(isBranchEvent(e))return Math.max(0,...(e.choices||[]).map(c=>new Set((c.skills||[]).map(sk=>String(sk.id))).size));return new Set(eventSkills(e).map(sk=>String(sk.id))).size}
+function choiceRareCount(ch){return rareSkillMapFromList(ch?.skills).size}
+function eventMaxCount(e){if(!e)return 0;if(isBranchEvent(e))return Math.max(0,...(e.choices||[]).map(choiceRareCount));return eventSkills(e).length}
 function eventStateKey(card,e){return `${card.id}:${e.id}`}
 function selectedChoiceId(card,e){const k=eventStateKey(card,e);return state.eventChoice[k]??state.eventChoice[e.id]??null}
 function autoEventDone(card,e){const k=eventStateKey(card,e);return !!(state.eventDone[k]??state.eventDone[e.id]??false)}
-function eventAcquiredCount(card,e){if(!card||!e)return 0;if(isBranchEvent(e)){const chosen=(e.choices||[]).find(c=>c.id===selectedChoiceId(card,e));return chosen?new Set((chosen.skills||[]).map(sk=>String(sk.id))).size:0}return autoEventDone(card,e)?eventMaxCount(e):0}
-function cardRareStats(card){let total=0,got=0;for(const e of card?.rareEvents||[]){total+=eventMaxCount(e);got+=eventAcquiredCount(card,e)}return {total,got}}
-function acquiredSkillIdsForCard(card){const out=new Set();for(const e of card?.rareEvents||[]){if(isBranchEvent(e)){const ch=(e.choices||[]).find(c=>c.id===selectedChoiceId(card,e));for(const sk of ch?.skills||[])out.add(String(sk.id))}else if(autoEventDone(card,e)){for(const sk of eventSkills(e))out.add(String(sk.id))}}return out}
+function eventAcquiredCount(card,e){if(!card||!e)return 0;if(isBranchEvent(e)){const chosen=(e.choices||[]).find(c=>c.id===selectedChoiceId(card,e));return chosen?choiceRareCount(chosen):0}return autoEventDone(card,e)?eventMaxCount(e):0}
+function cardRareStats(card){let total=0,got=0,events=0;for(const e of card?.rareEvents||[]){const max=eventMaxCount(e);if(max<=0)continue;events++;total+=max;got+=Math.min(max,eventAcquiredCount(card,e))}return {total,got,events}}
+function acquiredSkillIdsForCard(card){const out=new Set();for(const e of card?.rareEvents||[]){if(isBranchEvent(e)){const ch=(e.choices||[]).find(c=>c.id===selectedChoiceId(card,e));for(const [id] of rareSkillMapFromList(ch?.skills))out.add(id)}else if(autoEventDone(card,e)){for(const sk of eventSkills(e))out.add(String(sk.id))}}return out}
 function isSkillAcquiredAnywhere(skillId){const sid=String(skillId);for(const c of activeDeckCards())if(acquiredSkillIdsForCard(c).has(sid))return true;return false}
 function allCardSkills(card){const m=new Map();for(const sk of card?.hints||[]){const x=canonicalSkill(sk);m.set(String(x.id),x)}for(const sk of card?.eventSkillsAll||[]){const x=canonicalSkill(sk);m.set(String(x.id),x)}for(const sk of uniqueRare(card)){const x=canonicalSkill(sk);m.set(String(x.id),x)}return [...m.values()]}
 function effectValue(effect,lb){const vals=effect?.values||[];const idx=LB_INDEX[Math.max(0,Math.min(4,lb))];return vals[idx]??vals[vals.length-1]??0}
@@ -532,12 +604,12 @@ function renderEmptySlotCards(){
 
 function placeAt(id,i){const old=state.deck.findIndex(x=>String(x)===String(id));if(old>=0&&old!==i){[state.deck[old],state.deck[i]]=[state.deck[i],state.deck[old]]}else state.deck[i]=id;save();renderDeck();renderGlobalSkills();renderGuide()}
 function openSlotPicker(id){const c=cardById(id);if(!c||!isSupportVisibleForServer(c))return toast('현재 서버에서는 사용할 수 없는 서포트 카드입니다.');$('#slotCardName').textContent=`${c?.krName||''} / ${c?.jpName||''}`;const b=$('#slotPicker');b.innerHTML='';state.deck.forEach((x,i)=>{const old=x?cardById(x):null;const z=document.createElement('button');z.className='pickSlot';z.innerHTML=`<b>${i+1}번 슬롯</b><br>${old?`${old.image?`<img src="${esc(old.image)}">`:''}${esc(old.krName)}`:'빈칸'}`;z.onclick=()=>{placeAt(id,i);$('#slotModal').classList.remove('open')};b.appendChild(z)});$('#slotModal').classList.add('open')}
-function renderDeck(){const box=$('#deck');box.innerHTML='';state.deck.forEach((id,i)=>{const raw=id?cardById(id):null,c=raw&&isSupportVisibleForServer(raw)?raw:null,hiddenByServer=!!(raw&&!c);const s=document.createElement('div');s.className='slot'+(c?'':' empty');s.ondragover=e=>{e.preventDefault();s.classList.add('dragover')};s.ondragleave=()=>s.classList.remove('dragover');s.ondrop=e=>{e.preventDefault();s.classList.remove('dragover');try{const d=JSON.parse(e.dataTransfer.getData('application/json'));if(d.kind==='owned'||d.kind==='catalog')placeAt(d.id,i);if(d.kind==='deck'){[state.deck[d.index],state.deck[i]]=[state.deck[i],state.deck[d.index]];save();renderDeck();renderGlobalSkills()}}catch(_){}};if(!c){s.innerHTML=`<div><b>${i+1}번</b><br>${hiddenByServer?'한국 서버 미구현 · 숨김':'빈 슬롯'}</div>`;s.onclick=()=>openEmptySlotPicker(i);box.appendChild(s);return}const stats=cardRareStats(c),lb=Number(state.lb[String(c.id)]??0),fit=cardSuitability(c),isOwned=state.owned.map(String).includes(String(c.id));s.draggable=true;s.ondragstart=e=>e.dataTransfer.setData('application/json',JSON.stringify({kind:'deck',index:i,id:c.id}));s.innerHTML=`<div class="thumb"><img src="${esc(c.image||'')}" onerror="this.style.opacity=.16"><span class="typeBadge">${esc(c.type)}${isOwned?'':' · 임시'}</span><span class="lbBadge">${lb===4?'풀돌':lb+'돌'}</span></div><div class="deckname">${esc(c.krName)}</div><div class="deckjp">${esc(c.title||c.jpName)}</div><div class="stars" style="font-size:10px">${scoreStars(fit)}</div><select class="deckLbSelect" data-lb><option value="0">0돌 · Lv30</option><option value="1">1돌 · Lv35</option><option value="2">2돌 · Lv40</option><option value="3">3돌 · Lv45</option><option value="4">풀돌 · Lv50</option></select><div class="deckactions"><button class="mini" data-info>정보</button><button class="mini gold" data-skill>${stats.total?`스킬 ${stats.got}/${stats.total}`:'스킬 -'}</button><button class="mini red" data-remove>×</button></div>`;const lbSel=s.querySelector('[data-lb]');lbSel.value=String(lb);lbSel.onchange=e=>{e.stopPropagation();state.lb[String(c.id)]=Number(e.target.value);save();renderDeck();renderOwned();renderCatalog();renderGuide();renderDbGuideRecommendations()};s.querySelector('.thumb').onclick=()=>openCardInfo(c.id);s.querySelector('.deckname').onclick=()=>openCardInfo(c.id);s.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);s.querySelector('[data-skill]').disabled=!stats.total;s.querySelector('[data-skill]').onclick=()=>openSkillModal(c.id);s.querySelector('[data-remove]').onclick=()=>{state.deck[i]=null;save();renderDeck();renderGlobalSkills();renderGuide()};box.appendChild(s)});renderTypeSummary();renderMobileDock()}
+function renderDeck(){const box=$('#deck');box.innerHTML='';state.deck.forEach((id,i)=>{const raw=id?cardById(id):null,c=raw&&isSupportVisibleForServer(raw)?raw:null,hiddenByServer=!!(raw&&!c);const s=document.createElement('div');s.className='slot'+(c?'':' empty');s.ondragover=e=>{e.preventDefault();s.classList.add('dragover')};s.ondragleave=()=>s.classList.remove('dragover');s.ondrop=e=>{e.preventDefault();s.classList.remove('dragover');try{const d=JSON.parse(e.dataTransfer.getData('application/json'));if(d.kind==='owned'||d.kind==='catalog')placeAt(d.id,i);if(d.kind==='deck'){[state.deck[d.index],state.deck[i]]=[state.deck[i],state.deck[d.index]];save();renderDeck();renderGlobalSkills()}}catch(_){}};if(!c){s.innerHTML=`<div><b>${i+1}번</b><br>빈 슬롯</div>`;s.onclick=()=>openEmptySlotPicker(i);box.appendChild(s);return}const stats=cardRareStats(c),lb=Number(state.lb[String(c.id)]??0),fit=cardSuitability(c),isOwned=state.owned.map(String).includes(String(c.id));s.draggable=true;s.ondragstart=e=>e.dataTransfer.setData('application/json',JSON.stringify({kind:'deck',index:i,id:c.id}));s.innerHTML=`<div class="thumb"><img src="${esc(c.image||'')}" onerror="this.style.opacity=.16"><span class="typeBadge">${esc(c.type)}${isOwned?'':' · 임시'}</span><span class="lbBadge">${lb===4?'풀돌':lb+'돌'}</span></div><div class="deckname">${esc(c.krName)}</div><div class="deckjp">${esc(c.title||c.jpName)}</div><div class="stars" style="font-size:10px">${scoreStars(fit)}</div><select class="deckLbSelect" data-lb><option value="0">0돌 · Lv30</option><option value="1">1돌 · Lv35</option><option value="2">2돌 · Lv40</option><option value="3">3돌 · Lv45</option><option value="4">풀돌 · Lv50</option></select><div class="deckactions"><button class="mini" data-info>정보</button><button class="mini gold" data-skill>${stats.total?`스킬 ${stats.got}/${stats.total}`:'스킬 -'}</button><button class="mini red" data-remove>×</button></div>`;const lbSel=s.querySelector('[data-lb]');lbSel.value=String(lb);lbSel.onchange=e=>{e.stopPropagation();state.lb[String(c.id)]=Number(e.target.value);save();renderDeck();renderOwned();renderCatalog();renderGuide();renderDbGuideRecommendations()};s.querySelector('.thumb').onclick=()=>openCardInfo(c.id);s.querySelector('.deckname').onclick=()=>openCardInfo(c.id);s.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);s.querySelector('[data-skill]').disabled=!stats.total;s.querySelector('[data-skill]').onclick=()=>openSkillModal(c.id);s.querySelector('[data-remove]').onclick=()=>{state.deck[i]=null;save();renderDeck();renderGlobalSkills();renderGuide()};box.appendChild(s)});renderTypeSummary();renderMobileDock()}
 function renderMobileDock(){const b=$('#mobileDock');b.innerHTML='';state.deck.forEach((id,i)=>{const raw=id?cardById(id):null,c=raw&&isSupportVisibleForServer(raw)?raw:null;const x=document.createElement('button');x.className='dockSlot';x.innerHTML=c?`${c.image?`<img src="${esc(c.image)}">`:''}<span>${i+1}</span>`:`${i+1}<span>빈칸</span>`;x.onclick=()=>c?openCardInfo(c.id):openEmptySlotPicker(i);b.appendChild(x)})}
 function renderTypeSummary(){const b=$('#typeSummary');b.innerHTML='';const counts={};for(const c of activeDeckCards()){if(c)counts[c.type]=(counts[c.type]||0)+1}for(const [t,n] of Object.entries(counts)){const x=document.createElement('div');x.className='typeChip';x.innerHTML=`<span class="dot ${typeClass(t)}"></span>${esc(t)} ×${n}`;b.appendChild(x)}}
 function deckSkills(){const m=new Map();for(const c of activeDeckCards())for(const s of uniqueRare(c))m.set(String(s.id),s);return [...m.values()]}
 function skillRowHtml(s,checkbox=true,cond=state,checkedOverride=null,disabled=false){s=canonicalSkill(s);const sc=skillConditionScore(s,cond);const checked=checkedOverride===null?false:!!checkedOverride;return `${checkbox?`<input type="checkbox" ${checked?'checked':''} ${disabled?'disabled':''}>`:''}${skillIcon(s)}<div><div class="jp">${esc(s.jp)} <span class="tag">원문</span></div><div class="kr">${esc(s.kr||koSkill(s.jp))}</div><div class="tags">${(s.tags?.grounds||[]).map(x=>`<span class="tag">${groundLabel[x]||x}</span>`).join('')}${(s.tags?.distances||[]).map(x=>`<span class="tag">${distLabel[x]||x}</span>`).join('')}${(s.tags?.styles||[]).map(x=>`<span class="tag">${styleLabel[x]||x}</span>`).join('')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`}
-function renderGlobalSkills(){const list=deckSkills().sort((a,b)=>skillConditionScore(b)-skillConditionScore(a));const ds=activeDeckCards().reduce((a,c)=>{const x=cardRareStats(c);a.got+=x.got;a.total+=x.total;return a},{got:0,total:0});const acquired=list.filter(s=>isSkillAcquiredAnywhere(s.id));$('#acqCount').textContent=ds.got;$('#rareCount').textContent=ds.total;$('#recCount').textContent=acquired.filter(s=>skillConditionScore(s)>0).length;$('#conditionText').textContent=`${groundLabel[state.ground]} · ${distLabel[state.distance]} · ${styleLabel[state.style]}`;const b=$('#globalSkills');b.innerHTML='';for(const sk of list){const r=document.createElement('label');r.className='skillRow';r.innerHTML=skillRowHtml(sk,true,state,isSkillAcquiredAnywhere(sk.id),true);r.title='획득 상태는 각 카드의 스킬 취득 버튼에서 변경합니다.';b.appendChild(r)}if(!list.length)b.innerHTML='<div class="note">현재 덱에 연결된 레어 스킬이 없습니다.</div>'}
+function renderGlobalSkills(){const list=deckSkills().sort((a,b)=>skillConditionScore(b)-skillConditionScore(a));const ds=activeDeckCards().reduce((a,c)=>{const x=cardRareStats(c);a.got+=x.got;a.total+=x.total;return a},{got:0,total:0});const acquired=list.filter(s=>isSkillAcquiredAnywhere(s.id));$('#acqCount').textContent=ds.got;$('#rareCount').textContent=ds.total;$('#rareUniqueText').textContent=`고유 레어스킬 ${acquired.length} / ${list.length}`;$('#recCount').textContent=acquired.filter(s=>skillConditionScore(s)>0).length;$('#conditionText').textContent=`${state.guideServer==='kr'?'한국':'일본'} · ${groundLabel[state.ground]} · ${distLabel[state.distance]} · ${styleLabel[state.style]}`;const b=$('#globalSkills');b.innerHTML='';for(const sk of list){const r=document.createElement('label');r.className='skillRow';r.innerHTML=skillRowHtml(sk,true,state,isSkillAcquiredAnywhere(sk.id),true);r.title='획득 상태는 각 카드의 스킬 취득 버튼에서 변경합니다.';b.appendChild(r)}if(!list.length)b.innerHTML='<div class="note">현재 덱에 연결된 레어 스킬이 없습니다.</div>'}
 function recommendedAxesForCard(card){const gs={turf:0,dirt:0},ds={short:0,mile:0,mid:0,long:0},ss={nige:0,senko:0,sashi:0,oikomi:0};for(const sk of allCardSkills(card)){for(const x of sk.tags?.grounds||[])if(gs[x]!==undefined)gs[x]++;for(const x of sk.tags?.distances||[])if(ds[x]!==undefined)ds[x]++;for(const x of sk.tags?.styles||[])if(ss[x]!==undefined)ss[x]++}const tops=(o,m)=>{const mx=Math.max(...Object.values(o));return mx<=0?'범용':Object.entries(o).filter(([,v])=>v===mx&&v>0).map(([k])=>m[k]||k).join(' / ')};return {ground:tops(gs,groundLabel),distance:tops(ds,distLabel),style:tops(ss,styleLabel)}}
 function openCardInfo(id){const c=cardById(id);if(!c)return;const lb=Number(state.lb[String(id)]??0),fit=cardSuitability(c),axes=recommendedAxesForCard(c);$('#cardModalTitle').textContent=c.krName;$('#cardModalJp').textContent=c.jpName;const effects=(c.supportEffects||[]).map(e=>`<tr><td>${esc(CONFIG.effectAliases[e.name]||e.name||e.symbol||'효과')}</td><td>${esc(effectValue(e,lb))}</td></tr>`).join('');const skillBlocks=allCardSkills(c).slice(0,30).map(raw=>{const s=canonicalSkill(raw);return `<div class="skillRow" style="grid-template-columns:auto 1fr auto">${skillIcon(s)}<div><div class="jp">${esc(s.jp)} <span class="tag">원문</span></div><div class="kr">${esc(s.kr||koSkill(s.jp))}</div><div class="tags">${(s.tags?.grounds||[]).map(x=>`<span class="tag">${groundLabel[x]||x}</span>`).join('')}${(s.tags?.distances||[]).map(x=>`<span class="tag">${distLabel[x]||x}</span>`).join('')}${(s.tags?.styles||[]).map(x=>`<span class="tag">${styleLabel[x]||x}</span>`).join('')}${!(s.tags?.grounds||[]).length&&!(s.tags?.distances||[]).length&&!(s.tags?.styles||[]).length?'<span class="tag">범용/코스조건</span>':''}</div></div><span class="${skillConditionScore(s)?'stars':'dim'}">${skillConditionScore(s)===3?'★★★':skillConditionScore(s)===2?'★★':'—'}</span></div>`}).join('');$('#cardInfo').innerHTML=`<div class="cardHero">${c.image?`<img src="${esc(c.image)}">`:''}<div><div class="tags"><span class="tag">${esc(c.type)}</span><span class="tag">ID ${c.id}</span></div><div style="margin-top:8px"><b>현재 육성 적합도</b><div class="rating">${scoreStars(fit)}</div><div class="sub">${fit.toFixed(1)} / 5 · 현재 ${groundLabel[state.ground]} / ${distLabel[state.distance]} / ${styleLabel[state.style]} 기준의 앱 휴리스틱</div></div><div class="scenarioBox"><div class="sub">추천 육성 조건 · 카드 스킬 태그 기준</div><div class="tags" style="margin-top:6px"><span class="tag">바장: ${esc(axes.ground)}</span><span class="tag">거리: ${esc(axes.distance)}</span><span class="tag">각질: ${esc(axes.style)}</span></div></div><div class="dataDiag ${(c.rareEvents?.length||c.eventSkillsAll?.length)?'good':'warn'}"><b>데이터 연결 상태</b><br>
 카드 데이터: ${esc(c.catalogSource||'저장 DB')}<br>
@@ -1197,6 +1269,15 @@ function confirmTrainingFinish(){
 }
 function raceCond(r){return {ground:r.ground,distance:r.distance,style:state.style}}
 
+function applyScenarioServerOptions(){
+ const sel=$('#scenario');if(!sel)return;
+ for(const o of sel.options){
+   const allowed=state.guideServer!=='kr'||KOREA_SCENARIO_IDS.has(o.value);
+   o.hidden=!allowed;o.disabled=!allowed
+ }
+ if(state.guideServer==='kr'&&!KOREA_SCENARIO_IDS.has(state.scenario))state.scenario='legends';
+ sel.value=state.scenario
+}
 function guideRaceLabel(r){
  const meter=r.meters?` ${r.meters}m`:'',server=state.guideServer==='kr'?'한국':'일본';
  return `[${server}] ${r.date} · ${r.eventKr} · ${r.placeKr||'장소 미정'} · ${groundLabel[r.ground]} ${distLabel[r.distance]}${meter}`;
@@ -1204,32 +1285,38 @@ function guideRaceLabel(r){
 function guideRaceSet(server=state.guideServer){
  return server==='kr'?KOREA_UPCOMING:UPCOMING
 }
-function renderGuideServerTabs(){
- const server=state.guideServer==='kr'?'kr':'jp',set=guideRaceSet(server);
- document.querySelectorAll('[data-guide-server]').forEach(b=>b.classList.toggle('active',b.dataset.guideServer===server));
- const st=$('#guideServerStatus');if(st)st.textContent=server==='kr'?'한국 서버':'일본 서버';
- const note=$('#guideServerNote');
+function renderAppServerTabs(){
+ const server=state.activeServer==='kr'?'kr':'jp';
+ document.querySelectorAll('[data-app-server]').forEach(b=>b.classList.toggle('active',b.dataset.appServer===server));
+ const st=$('#appServerStatus');if(st)st.textContent=server==='kr'?'한국 서버 모드':'일본 서버 모드';
+ const note=$('#appServerNote');
  if(note){
    if(server==='kr'){
-     const count=runtime.ready?guideSupportCatalog().length:0;
-     note.innerHTML=`한국 서버 · Inven DB 등록 범위를 기준으로 서포트 카드 ID ${KOREA_SERVER_DATA.supportMaxId}까지 구현 카드로 취급합니다.${runtime.ready?` 현재 동기화 DB에서 한국 구현 SSR ${count}장 확인.`:''} 레전즈 전용 그룹 카드 30241도 포함됩니다. <a href="${KOREA_SERVER_DATA.supportSourceUrl}" target="_blank" rel="noopener" style="color:#70c5f4">Inven 서포트 DB ↗</a> · <a href="https://uma.inven.co.kr/db/skill" target="_blank" rel="noopener" style="color:#70c5f4">Inven 스킬 DB ↗</a>`;
-   }else note.innerHTML=`일본 서버 · Game8/GameWith 최신 스냅샷 기준입니다. ${set.source?esc(set.source):''}`;
+     const count=runtime.ready?supportCatalogForServer().length:0;
+     note.innerHTML=`한국 서버 프로필 · 덱/보유/스킬 체크가 일본 서버와 독립 저장됩니다. Inven 등록 범위 기준 SSR ID ${KOREA_SERVER_DATA.supportMaxId}까지 표시.${runtime.ready?` 현재 ${count}장 확인.`:''}`;
+   }else note.textContent='일본 서버 프로필 · 일본 최신 DB 전체를 사용하며 한국 서버 프로필의 덱/스킬 체크에는 영향을 주지 않습니다.';
  }
 }
-function setGuideServer(server){
- state.guideServer=server==='kr'?'kr':'jp';
- const set=guideRaceSet(),saved=state.guideRaceIds?.[state.guideServer];
- const race=(set.races||[]).find(r=>r.id===saved)||set.races?.[0]||null;
- state.guideRaceId=race?.id||null;
- state.guideRaceIds={...(state.guideRaceIds||{}),[state.guideServer]:state.guideRaceId};
- save();
- populateConditionGuideRace();
- renderGuideServerTabs();
- if(race)applyGuideRaceFromCondition(race.id);
- else{renderRaceCards();renderGuide()}
- renderCatalog();renderOwned();renderDeck();renderGlobalSkills();
- if($('#emptySlotModal')?.classList.contains('open'))renderEmptySlotCards();
+function renderGuideServerTabs(){renderAppServerTabs()}
+function syncControlsFromServerState(){
+ applyScenarioServerOptions();
+ $('#ground').value=state.ground;$('#distance').value=state.distance;$('#style').value=state.style;
+ populateConditionGuideRace();$('#conditionGuideRace').value=getGuideRace()?.id||'';
+ $('#tierGround').value=state.ground;$('#tierDistance').value=state.distance;
 }
+function setAppServer(server){
+ server=server==='kr'?'kr':'jp';
+ if(server===state.activeServer){renderAppServerTabs();return}
+ syncActiveServerProfile();
+ state.activeServer=server;state.guideServer=server;
+ applyServerProfileToFlat(state,server);
+ syncControlsFromServerState();
+ save();
+ document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open'));
+ renderAll();
+ toast(`${server==='kr'?'한국':'일본'} 서버 프로필로 전환했습니다.`)
+}
+function setGuideServer(server){setAppServer(server)}
 function populateConditionGuideRace(){
  const sel=$('#conditionGuideRace');if(!sel)return;
  const set=guideRaceSet(),wanted=state.guideRaceIds?.[state.guideServer]||state.guideRaceId||set.races?.[0]?.id||'';
@@ -1374,7 +1461,7 @@ function renderGuideUmaTier(){
 }
 
 function renderGuide(){renderGuideServerTabs();const race=getGuideRace();if(!race){$('#guideCondition').textContent='등록된 레이스 없음';return}const cond=raceCond(race);renderGuideUmaTier();renderTrainingFinishSummary();$('#guideCondition').textContent=`${state.guideServer==='kr'?'한국':'일본'} · ${race.eventKr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;const gs=$('#guideSkills');gs.innerHTML='';const u=selectedUma();let items=[];if(u)items=awakeningSkills(u).filter(sk=>Number(sk.rarity)===2).map(sk=>({...sk,source:`${u.krName} 각성 Lv${sk.awakening}`}));for(const n of race.greenSkills||[]){items.push({id:'green_'+n,jp:n,kr:koSkill(n),iconId:null,tags:{grounds:[],distances:[],styles:[]},source:'코스 대응 녹색 스킬',force:3})}items.sort((a,b)=>(b.force||skillConditionScore(b,cond))-(a.force||skillConditionScore(a,cond)));for(const s of items.slice(0,14)){const sc=s.force||skillConditionScore(s,cond),x=document.createElement('div');x.className='guideSkill';x.innerHTML=`${skillIcon(s)}<div><div class="jp">${esc(s.jp)} <span class="tag">원문</span></div><div class="kr">${esc(s.kr||koSkill(s.jp))}</div><div class="sub">${esc(s.source||'')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`;gs.appendChild(x)}if(!items.length)gs.innerHTML='<div class="note">육성 우마무스메를 선택하면 각성 스킬과 레이스 조건을 비교합니다.</div>';const ss=$('#guideSupports');ss.innerHTML='';if(!runtime.ready){ss.innerHTML='<div class="note">SSR DB 동기화가 필요합니다.</div>';return}const supportRows=supportRecommend(cond);if(state.guideServer==='kr'&&!supportRows.length){ss.innerHTML='<div class="note">현재 동기화 DB에 Inven 기준 한국 서버 구현 SSR이 없습니다. 온라인 DB를 다시 동기화해 주세요.</div>';return}for(const {c,score} of supportRows){const owned=state.owned.map(String).includes(String(c.id)),x=document.createElement('div');x.className='card';x.innerHTML=`${c.image?`<img src="${esc(c.image)}">`:''}<div><div class="cardName">${esc(c.krName)}</div><div class="cardJp">${esc(c.jpName)}</div><div class="stars">${scoreStars(score)} <span class="status">${state.guideServer==='kr'?'한국 구현 · ':''}${owned?'보유 '+(Number(state.lb[String(c.id)]??0)===4?'풀돌':(Number(state.lb[String(c.id)]??0)+'돌')):'미보유 · 풀돌 기준'}</span></div><div class="actions"><button class="mini" data-info>상세</button>${owned?'<button class="mini" data-slot>덱 슬롯</button>':''}</div></div>`;x.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);if(owned)x.querySelector('[data-slot]').onclick=()=>openSlotPicker(c.id);ss.appendChild(x)}}
-function renderTier(){const g=$('#tierGround').value,d=$('#tierDistance').value,s=$('#tierStyle').value,q=norm($('#tierSearch').value),u=selectedUma(),b=$('#tierGrid');b.innerHTML='';for(const tier of ['SS+','SS','S']){let arr=TIER_DATA.rows.filter(x=>x.ground===g&&x.distance===d&&x.tier===tier&&(s==='all'||(x.styles||[]).includes(s)));if(q)arr=arr.filter(x=>norm(`${x.jp} ${x.kr} ${katakanaToHangul(x.jp)}`).includes(q));const row=document.createElement('div');row.className='tierRow';row.innerHTML=`<div class="tierLabel ${tier==='SS+'?'ssp':tier.toLowerCase()}">${tier}</div><div class="tierChars"></div>`;const rb=row.querySelector('.tierChars');if(!arr.length)rb.innerHTML='<span class="note">해당 조건의 스냅샷 항목 없음</span>';for(const x of arr){const z=document.createElement('div');z.className='tierChar'+(u&&(x.jp.includes(u.character)||u.character.includes(x.jp.replace(/\(.+?\)/g,'')))?' highlight':'');z.innerHTML=`<div class="jp">${esc(x.jp)}</div><div class="kr">${esc(x.kr)} · ${(x.styles||[]).map(y=>styleLabel[y]).join('/')}</div>`;rb.appendChild(z)}b.appendChild(row)}const key=g==='dirt'?'dirt':d;$('#tierSource').textContent=`스냅샷 ${TIER_DATA.snapshotDate} · 출처: Game8 · 현재 선택 육성 우마무스메는 금색 테두리로 표시`}
+function renderTier(){const g=$('#tierGround').value,d=$('#tierDistance').value,s=$('#tierStyle').value,q=norm($('#tierSearch').value),u=selectedUma(),b=$('#tierGrid');b.innerHTML='';if(state.guideServer==='kr'){b.innerHTML='<div class="note">한국 서버 티어 데이터는 일본 미래 티어와 분리 중입니다. 검증된 한국 서버 티어 스냅샷이 추가되기 전까지 일본 티어를 표시하지 않습니다.</div>';$('#tierSource').textContent='한국 서버 모드 · 일본 미래 티어 숨김';return}for(const tier of ['SS+','SS','S']){let arr=TIER_DATA.rows.filter(x=>x.ground===g&&x.distance===d&&x.tier===tier&&(s==='all'||(x.styles||[]).includes(s)));if(q)arr=arr.filter(x=>norm(`${x.jp} ${x.kr} ${katakanaToHangul(x.jp)}`).includes(q));const row=document.createElement('div');row.className='tierRow';row.innerHTML=`<div class="tierLabel ${tier==='SS+'?'ssp':tier.toLowerCase()}">${tier}</div><div class="tierChars"></div>`;const rb=row.querySelector('.tierChars');if(!arr.length)rb.innerHTML='<span class="note">해당 조건의 스냅샷 항목 없음</span>';for(const x of arr){const z=document.createElement('div');z.className='tierChar'+(u&&(x.jp.includes(u.character)||u.character.includes(x.jp.replace(/\(.+?\)/g,'')))?' highlight':'');z.innerHTML=`<div class="jp">${esc(x.jp)}</div><div class="kr">${esc(x.kr)} · ${(x.styles||[]).map(y=>styleLabel[y]).join('/')}</div>`;rb.appendChild(z)}b.appendChild(row)}const key=g==='dirt'?'dirt':d;$('#tierSource').textContent=`스냅샷 ${TIER_DATA.snapshotDate} · 출처: Game8 · 현재 선택 육성 우마무스메는 금색 테두리로 표시`}
 async function fetchJson(url){const candidates=[url];if(url.includes('raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/'))candidates.push('https://cdn.jsdelivr.net/gh/Tsuyuchan-jp/umamusume-data@main/'+url.split('/main/')[1]);if(url.includes('raw.githubusercontent.com/daftuyda/UmaTools/main/'))candidates.push('https://cdn.jsdelivr.net/gh/daftuyda/UmaTools@main/'+url.split('/main/')[1]);let last;for(const u of candidates){try{const r=await fetch(u,{cache:'no-store',mode:'cors'});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json()}catch(e){last=e}}throw last||new Error('download failed')}
 function makeSkill(meta,name=null,hintLevel=0){
   if(!meta)return null;
@@ -1579,15 +1666,15 @@ function loadCache(o){
  $('#dbStatus').textContent=`저장 DB ${runtime.catalog.length}장 · 일본어 원문 보정 · ${cacheResult.saved?'경량 캐시':'메모리 모드'}`;
  renderAll()
 }
-function renderAll(){renderGuideServerTabs();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderTier()}
-$('#scenario').value=state.scenario;$('#scenario').onchange=e=>{state.scenario=e.target.value;save();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary()};
+function renderAll(){renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderTier()}
+applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;save();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary()};
 populateConditionGuideRace();
 $('#conditionGuideRace').value=getGuideRace()?.id||'';
 $('#conditionGuideRace').onchange=e=>{
  applyGuideRaceFromCondition(e.target.value);
  toast(`${state.guideServer==='kr'?'한국':'일본'} 서버 가이드의 바장/거리를 현재 육성 조건에 적용했습니다.`)
 };
-document.querySelectorAll('[data-guide-server]').forEach(b=>b.onclick=()=>setGuideServer(b.dataset.guideServer));
+document.querySelectorAll('[data-app-server]').forEach(b=>b.onclick=()=>setAppServer(b.dataset.appServer));
 for(const id of ['ground','distance','style']){$('#'+id).value=state[id];$('#'+id).onchange=e=>{state[id]=e.target.value;save();renderDeck();renderGlobalSkills();renderConditionUmaSuitability();renderGuide();renderSelectedUma();renderDbGuideRecommendations();renderCatalog();renderTrainingFinishSummary();renderTier()}}
 $('#conditionUmaButton').onclick=openUmaPicker;
 $('#umaPickerSearch').oninput=renderUmaPicker;
@@ -1606,7 +1693,7 @@ $('#exportStateBtn').onclick=()=>downloadJson('umamusume_tracker_mydata_v4.json'
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$('#'+b.dataset.close).classList.remove('open'));document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+t.dataset.page));if(t.dataset.page==='guide')renderGuide()});
 for(const id of ['tierGround','tierDistance','tierStyle'])$('#'+id).onchange=renderTier;$('#tierSearch').oninput=renderTier;$('#tierClear').onclick=()=>{$('#tierSearch').value='';renderTier()};
-$('#tierGround').value=state.ground;$('#tierDistance').value=state.distance;$('#tierStyle').value='all';
+$('#tierGround').value=state.ground;$('#tierDistance').value=state.distance;$('#tierStyle').value='all';renderAppServerTabs();
 function setCatalogFilter(t){catType=t;renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);renderCatalog()}
 function setOwnedFilter(t){ownedType=t;renderTypeFilters($('#ownedFilters'),ownedType,setOwnedFilter);renderOwned()}
 renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);
