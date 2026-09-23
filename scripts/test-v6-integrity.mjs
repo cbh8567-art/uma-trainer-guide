@@ -12,7 +12,7 @@ ok(index.includes("gametora.com/images/umamusume/skill_icons/utx_ico_skill_"),"G
 ok(index.includes("30305")&&index.includes("いつでも、毎秒、その時だ"),"Tazuna invariant missing");
 ok(index.includes("./data/jp/system_status.json"),"system_status loader missing");
 ok(index.includes("./data/jp/scenario_watch.json"),"scenario_watch loader missing");
-ok(index.includes('<meta name="app-build" content="V6.1">'),"V6.1 app build marker missing");
+ok(index.includes('<meta name="app-build" content="V7.0">'),"V7.0 app build marker missing");
 const meta=await read("data/kr/server_meta.json");
 ok(Number(meta.supportMaxId)===30260,"KR supportMaxId must stay 30260");
 ok(Number(meta.implementedUmaCards)===212,"KR implementedUmaCards must stay 212");
@@ -38,5 +38,11 @@ await read("data/jp/source_health.json");
 await read("data/jp/entity_summary.json");
 await read("data/jp/change_impact.json");
 await read("data/jp/automation_report.json");
-if(errors.length){console.error("V6 integrity test FAILED");for(const e of errors)console.error("-",e);process.exit(1)}
-console.log("V6 integrity test PASS");
+ok(index.includes('id="v7Planner"'),"V7 planner UI missing");
+ok(index.includes("function renderV7Planner"),"V7 planner renderer missing");
+ok(index.includes("function v7RecommendedOwnedDeck"),"V7 owned deck recommender missing");
+ok(index.includes("function applyV7RecommendedDeck"),"V7 apply deck action missing");
+ok(index.includes("function v7DeckDeficits"),"V7 deficit analysis missing");
+ok(index.includes("function v7SkillPlan"),"V7 skill priority engine missing");
+if(errors.length){console.error("V7 integrity test FAILED");for(const e of errors)console.error("-",e);process.exit(1)}
+console.log("V7 integrity test PASS");
