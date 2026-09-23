@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<title>우마무스메 트레이너 가이드 V5.15 WEB</title>
+<title>우마무스메 트레이너 가이드 V5.16 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -132,7 +132,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V5.15 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V5.16 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -341,8 +341,17 @@ const KOREA_SERVER_DATA={
   supportSource:'우마무스메 인벤 서포트 카드 DB',
   supportSourceUrl:'https://uma.inven.co.kr/db/scard/',
   latestVerifiedSupport:{id:30260,name:'[그레이시 PARTY☆] 메지로 맥퀸'},
-  legendsGroupSupport:{id:30241,name:'[이끄는 빛] 전설을 구현한 자'}
+  legendsGroupSupport:{id:30241,name:'[이끄는 빛] 전설을 구현한 자'},
+  umaSource:'우마무스메 인벤 캐릭터 DB',
+  umaSourceUrl:'https://uma.inven.co.kr/db/chara',
+  implementedUmaCards:215,
+  latestVerifiedUma:{id:103103,name:'[Hello Hello Island] 아이네스 후진'}
 };
+// 한국 서버 구현 육성 카드(의상별 카드 ID) 고정 스냅샷.
+// 런타임의 일본 전체 characters DB는 유지하고, KR 화면에서만 이 목록으로 필터링한다.
+const KOREA_UMA_IDS=new Set([
+ 100101,100102,100103,100201,100202,100301,100302,100303,100401,100402,100403,100501,100502,100601,100602,100701,100702,100703,100801,100802,100901,100902,101001,101002,101101,101102,101103,101201,101202,101301,101302,101303,101401,101402,101501,101502,101601,101602,101701,101702,101801,101802,101901,101902,102001,102002,102101,102102,102201,102202,102301,102302,102303,102401,102402,102403,102501,102502,102601,102602,102701,102702,102801,102901,102902,103001,103002,103003,103101,103102,103103,103201,103202,103203,103301,103302,103401,103402,103501,103502,103503,103601,103602,103701,103702,103703,103801,103802,103901,103902,104001,104002,104003,104101,104102,104201,104202,104301,104401,104402,104501,104502,104503,104601,104602,104603,104701,104702,104801,104802,104901,105001,105002,105003,105101,105102,105201,105202,105301,105302,105401,105501,105601,105602,105701,105702,105801,105802,105901,105902,106001,106002,106003,106101,106102,106103,106201,106202,106301,106401,106402,106501,106502,106601,106701,106702,106703,106801,106802,106803,106901,106902,107001,107002,107101,107102,107201,107202,107301,107401,107402,107601,107701,107702,107801,107802,107901,108001,108201,108301,108302,108401,108402,108501,108502,108601,108602,108701,108702,108801,108901,109001,109101,109301,109401,109601,109801,109802,109901,109902,110001,110201,110401,110402,110501,110502,110601,110701,110702,110801,110901,111001,111002,111101,111501,111601,111701,111901,112001,112101,112401,112701,113101,113201,113301
+]);
 const TIER_DATA={"version":1,"snapshotDate":"2026-09-23","sourceNote":"Game8 거리별/더트 최강 캐릭터 랭킹 스냅샷. 각질 필터는 출처 본문에서 각질이 확인된 항목 위주.","sources":{"short":"https://game8.jp/umamusume/793845","mile":"https://game8.jp/umamusume/794084","mid":"https://game8.jp/umamusume/794085","long":"https://game8.jp/umamusume/794086","dirt":"https://game8.jp/umamusume/794087"},"rows":[{"ground":"turf","distance":"short","tier":"SS+","jp":"サクラバクシンオー(ダンス)","kr":"사쿠라 바쿠신 오(댄스)","styles":["nige","senko"]},{"ground":"turf","distance":"short","tier":"SS+","jp":"アストンマーチャン(バレンタイン)","kr":"아스톤 마짱(발렌타인)","styles":["nige"]},{"ground":"turf","distance":"short","tier":"SS+","jp":"バンブーメモリー(夏)","kr":"뱀부 메모리(여름)","styles":["sashi"]},{"ground":"turf","distance":"short","tier":"SS","jp":"デュランダル","kr":"듀란달","styles":["oikomi"]},{"ground":"turf","distance":"short","tier":"SS","jp":"ケイエスミラクル","kr":"케이에스 미라클","styles":["senko"]},{"ground":"turf","distance":"short","tier":"S","jp":"ダイイチルビー","kr":"다이이치 루비","styles":["sashi"]},{"ground":"turf","distance":"short","tier":"S","jp":"アストンマーチャン","kr":"아스톤 마짱","styles":["nige"]},{"ground":"turf","distance":"short","tier":"S","jp":"シーキングザパール","kr":"시킹 더 펄","styles":["nige","senko","sashi","oikomi"]},{"ground":"turf","distance":"mile","tier":"SS+","jp":"タイキシャトル(バレンタイン)","kr":"타이키 셔틀(발렌타인)","styles":["senko"]},{"ground":"turf","distance":"mile","tier":"SS+","jp":"グランアレグリア","kr":"그란 알레그리아","styles":["sashi"]},{"ground":"turf","distance":"mile","tier":"SS+","jp":"タイキシャトル","kr":"타이키 셔틀","styles":["senko"]},{"ground":"turf","distance":"mile","tier":"SS","jp":"バブルガムフェロー(正月)","kr":"버블검 펠로(신년)","styles":["senko"]},{"ground":"turf","distance":"mile","tier":"SS","jp":"オグリキャップ(シングレ)","kr":"오구리 캡(신데렐라 그레이)","styles":["senko"]},{"ground":"turf","distance":"mile","tier":"SS","jp":"ダイイチルビー(青)","kr":"다이이치 루비(신의상)","styles":["sashi"]},{"ground":"turf","distance":"mile","tier":"SS","jp":"メジロラモーヌ","kr":"메지로 라모누","styles":["senko"]},{"ground":"turf","distance":"mile","tier":"SS","jp":"アイネスフウジン(チョコ)","kr":"아이네스 후진(초코)","styles":["nige"]},{"ground":"turf","distance":"mile","tier":"S","jp":"ラインクラフト","kr":"라인 크라프트","styles":["senko"]},{"ground":"turf","distance":"mile","tier":"S","jp":"デュランダル","kr":"듀란달","styles":["oikomi"]},{"ground":"turf","distance":"mile","tier":"S","jp":"ニシノフラワー","kr":"니시노 플라워","styles":["senko"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"エピファネイア","kr":"에피파네이아","styles":["senko"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"アドマイヤグルーヴ","kr":"어드마이어 그루브","styles":["sashi"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"アーモンドアイ","kr":"아몬드 아이","styles":["senko"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"スティルインラブ","kr":"스틸 인 러브","styles":["sashi"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"クロノジェネシス","kr":"크로노 제네시스","styles":["senko"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"ラヴズオンリーユー","kr":"러브즈 온리 유","styles":["sashi"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"オルフェーヴル","kr":"오르페브르","styles":["oikomi"]},{"ground":"turf","distance":"mid","tier":"SS","jp":"セイウンスカイ(水着)","kr":"세이운 스카이(수영복)","styles":["nige"]},{"ground":"turf","distance":"mid","tier":"SS","jp":"キセキ","kr":"키세키","styles":["nige","sashi"]},{"ground":"turf","distance":"mid","tier":"SS","jp":"ステイゴールド","kr":"스테이 골드","styles":["sashi","oikomi"]},{"ground":"turf","distance":"mid","tier":"SS","jp":"ブエナビスタ","kr":"부에나 비스타","styles":["sashi"]},{"ground":"turf","distance":"mid","tier":"SS","jp":"ジェンティルドンナ","kr":"젠틸돈나","styles":["senko"]},{"ground":"turf","distance":"long","tier":"SS+","jp":"エピファネイア","kr":"에피파네이아","styles":["senko"]},{"ground":"turf","distance":"long","tier":"SS+","jp":"シュヴァルグラン(水着)","kr":"슈발 그랑(수영복)","styles":["senko"]},{"ground":"turf","distance":"long","tier":"SS+","jp":"オルフェーヴル","kr":"오르페브르","styles":["oikomi"]},{"ground":"turf","distance":"long","tier":"SS+","jp":"マヤノトップガン(ハロウィン)","kr":"마야노 탑건(할로윈)","styles":["nige"]},{"ground":"turf","distance":"long","tier":"SS+","jp":"キタサンブラック(新衣装)","kr":"키타산 블랙(신의상)","styles":["nige"]},{"ground":"turf","distance":"long","tier":"SS","jp":"キセキ","kr":"키세키","styles":["nige","sashi"]},{"ground":"turf","distance":"long","tier":"SS","jp":"ステイゴールド","kr":"스테이 골드","styles":["sashi","oikomi"]},{"ground":"turf","distance":"long","tier":"SS","jp":"オグリキャップ(シングレ)","kr":"오구리 캡(신데렐라 그레이)","styles":["senko"]},{"ground":"turf","distance":"long","tier":"SS","jp":"ビワハヤヒデ(メカ)","kr":"비와 하야히데(메카)","styles":["senko"]},{"ground":"turf","distance":"long","tier":"SS","jp":"ナリタブライアン(新衣装)","kr":"나리타 브라이언(신의상)","styles":["senko"]},{"ground":"dirt","distance":"mile","tier":"SS+","jp":"トランセンド(温泉)","kr":"트랜센드(온천)","styles":["nige"]},{"ground":"dirt","distance":"mile","tier":"SS+","jp":"エスポワールシチー","kr":"에스포와르 시티","styles":["senko"]},{"ground":"dirt","distance":"mile","tier":"SS+","jp":"スマートファルコン(バトン)","kr":"스마트 팔콘(바통)","styles":["nige"]},{"ground":"dirt","distance":"mile","tier":"SS+","jp":"ホッコータルマエ(水着)","kr":"홋코 타루마에(수영복)","styles":["senko"]},{"ground":"dirt","distance":"mid","tier":"SS+","jp":"ホッコータルマエ(水着)","kr":"홋코 타루마에(수영복)","styles":["senko"]},{"ground":"dirt","distance":"mid","tier":"SS","jp":"ヴィクトワールピサ","kr":"빅투아르 피사","styles":["sashi"]},{"ground":"dirt","distance":"mile","tier":"S","jp":"ワンダーアキュート(温泉)","kr":"원더 어큐트(온천)","styles":["senko","sashi"]},{"ground":"dirt","distance":"mile","tier":"S","jp":"コパノリッキー","kr":"코파노 리키","styles":["nige","senko"]},{"ground":"dirt","distance":"mid","tier":"S","jp":"ホッコータルマエ","kr":"홋코 타루마에","styles":["senko"]},{"ground":"dirt","distance":"mile","tier":"S","jp":"ハルウララ(正月)","kr":"하루 우라라(신년)","styles":["sashi"]}]};
 
 const SUPPORT_EVENT_RARE_SKILLS={"30001":[200511],"30002":[200551],"30003":[200371],"30004":[200341],"30005":[200381],"30006":[200701],"30007":[200721],"30008":[200541],"30009":[200591],"30010":[200581],"30011":[201281],"30012":[200601],"30013":[200731],"30014":[200691],"30015":[200651],"30016":[200351],"30017":[200451],"30018":[200361],"30019":[200481],"30020":[200991],"30021":[200431],"30022":[200741],"30023":[200761],"30024":[200701],"30025":[201351],"30026":[200531],"30027":[201191],"30028":[200331],"30029":[200441],"30030":[200481],"30031":[200491],"30032":[200461],"30033":[200511],"30034":[200351],"30036":[200371],"30037":[200351],"30038":[200581],"30039":[200451],"30040":[201261],"30041":[201431],"30042":[200611],"30043":[201701],"30044":[201361],"30045":[201501],"30046":[201401],"30047":[200571],"30048":[200731],"30052":[201662],"30053":[200681],"30054":[200601],"30055":[201191],"30056":[200671],"30057":[200751],"30058":[200761],"30059":[200551],"30060":[200721],"30061":[200741],"30062":[200431],"30063":[201431],"30064":[201411],"30065":[201691],"30066":[200531],"30067":[201113],"30068":[201001],"30069":[200361],"30070":[200341],"30071":[200541],"30072":[201281],"30073":[200621],"30074":[200591],"30075":[201221],"30076":[200711],"30077":[202021],"30078":[201561],"30079":[200721],"30080":[202031],"30081":[202061],"30082":[201341],"30083":[202041],"30084":[200381],"30085":[201681],"30086":[200154],"30087":[201211],"30088":[201691],"30089":[200761],"30090":[202091],"30091":[202081],"30092":[201491],"30093":[201901],"30094":[202111],"30095":[202121],"30096":[200731],"30097":[202021],"30098":[201401],"30099":[202151],"30100":[201361],"30101":[202371],"30102":[200581],"30103":[200461],"30104":[201121],"30105":[201211],"30106":[201691],"30107":[201271],"30108":[202031],"30109":[201061],"30110":[202071],"30111":[200331],"30112":[202391],"30113":[201201],"30114":[202401],"30115":[200531],"30116":[201652],"30117":[202341],"30118":[202421],"30119":[200571],"30120":[200721],"30121":[200711],"30122":[201383],"30123":[202471],"30124":[200591],"30125":[202121],"30126":[202411],"30127":[200491],"30128":[202491],"30129":[200741],"30130":[201901],"30131":[200471],"30132":[201393],"30133":[200991],"30134":[202531],"30135":[200731],"30136":[202091],"30137":[202551],"30138":[201652],"30139":[202581],"30140":[201131],"30141":[201602],"30142":[200601],"30143":[201401],"30145":[200631],"30146":[202431],"30147":[202661],"30148":[202461],"30149":[200431],"30150":[201411],"30151":[200491],"30152":[200361,202481],"30153":[200184,202671],"30154":[202681],"30155":[200981],"30156":[202301],"30157":[200741,202421],"30158":[202621],"30159":[200581],"30160":[202721],"30161":[200331,202711],"30162":[201491],"30163":[200014],"30164":[200641,201463],"30165":[202101],"30166":[200541,200551],"30167":[200561],"30168":[201592],"30169":[201103],"30170":[202541,202751],"30171":[200441],"30172":[202761],"30173":[200361,200381],"30174":[202111],"30175":[200204],"30176":[201401],"30177":[200591,201691],"30178":[202721],"30179":[202091,202151],"30180":[200511],"30181":[201271],"30182":[202831],"30183":[202451],"30184":[200973,202861],"30185":[201051],"30186":[200461],"30187":[202551],"30188":[202801],"30189":[200711],"30190":[200371],"30191":[200481],"30192":[201421],"30193":[202011],"30194":[202371],"30195":[200651],"30196":[202501],"30197":[201453],"30198":[202081],"30199":[202561],"30200":[202121],"30201":[200641,202901],"30202":[202401],"30203":[202101],"30204":[202691],"30205":[201033],"30206":[201612],"30207":[201592],"30208":[203031,203041],"30209":[203051],"30210":[200531],"30211":[202841,202951],"30212":[202281],"30213":[201141],"30214":[203111],"30215":[203141,203151],"30216":[200341],"30217":[201113],"30218":[203161],"30219":[202981],"30220":[200751],"30222":[202331,203181],"30223":[202021],"30224":[202481,203221],"30225":[201393],"30226":[203241,203251],"30227":[201271,202821],"30228":[202421,202641],"30229":[203351],"30230":[202621],"30231":[200581],"30232":[203411,203421],"30233":[201652,202711],"30234":[202741,203131],"30235":[202461],"30236":[202751],"30237":[200431,203491],"30238":[201071],"30239":[201421],"30241":[203501],"30242":[200331,200361,202701,203431],"30243":[201033],"30244":[202591],"30245":[201383,203571],"30246":[202881,202931],"30247":[201183],"30248":[200591,203591],"30249":[203091,203601],"30250":[202101,202871],"30251":[201671],"30252":[200541,203381],"30253":[201051,202671],"30254":[202501],"30255":[201411],"30256":[202551,203361,203661],"30257":[203651],"30258":[203681],"30259":[201323],"30260":[203301],"30261":[200751,203731],"30262":[202901,203751],"30263":[202111],"30264":[202721,203851,203861],"30265":[203831,203841],"30266":[200721],"30267":[202041,203881],"30268":[201453,202401,203761],"30269":[201701],"30270":[203911],"30271":[203961],"30272":[202641,203671],"30273":[202121],"30274":[200351,203991],"30275":[203421,203441,204001],"30276":[201662],"30277":[200531,203461],"30278":[200641,202891],"30279":[202011,202771],"30280":[201481],"30281":[202421,203331],"30282":[202711,204031,204041],"30283":[202761,204071],"30284":[201313],"30285":[202621,204131],"30286":[203701],"30287":[202601,203141],"30288":[201243],"30289":[201612,202831,204181,204191],"30290":[201652],"30291":[203651],"30292":[202301,203611],"30293":[203791,204051],"30294":[202531,202741],"30295":[201323],"30296":[204271,204311],"30297":[202151,204351],"30298":[200431,201271,203401],"30299":[200581],"30300":[203121,204331],"30301":[203541,204171],"30302":[203241,203561,204381],"30303":[202471],"30304":[200331,203641,203651,204391],"30305":[201662],"30306":[203571,203681],"30307":[202681,202821,204481],"30308":[200024,203631,204501],"30309":[201341],"30310":[202101],"30311":[203711,204531,204571,204701],"30312":[202021,202851,202871,204521],"30313":[201701],"30314":[201671,204661],"30315":[200194,202751,204671],"30316":[201253],"30317":[202621,204711]};
@@ -355,7 +364,7 @@ const FRIEND_SUPPORT_EVENTS={"version":1,"updated":"2026-09-23","note":"U-tools 
 
 </script>
 <script>
-const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v515_db_cache', LEGACY_CACHE_KEY='uma_trainer_v514_db_cache';
+const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v516_db_cache', LEGACY_CACHE_KEY='uma_trainer_v515_db_cache';
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
@@ -633,11 +642,29 @@ function openSkillModal(id){const c=cardById(id);$('#skillModalTitle').textConte
 }
 $('#skillModal').classList.add('open')}
 function parseCharacter(c){const p=parseName(c.name);return {...c,title:p.title,character:p.character,krName:koChar(p.character),image:`${CONFIG.assetBases.character}${c.id}.webp`}}
-function renderUmaResults(){const q=norm($('#umaSearch').value),b=$('#umaResults');b.innerHTML='';if(!runtime.characters.length){b.innerHTML='<div class="note">온라인 DB 동기화 후 육성 우마무스메 검색을 사용할 수 있습니다.</div>';return}if(!q){b.innerHTML='<div class="note">육성 우마무스메 이름을 검색해 선택하세요.</div>';return}const arr=runtime.characters.filter(c=>norm(`${c.name} ${c.character} ${c.krName} ${katakanaToHangul(c.character)}`).includes(q)).slice(0,20);for(const c of arr){const d=document.createElement('div');d.className='card';d.innerHTML=`<img src="${esc(c.image)}" onerror="this.style.opacity=.16"><div><div class="cardName">${esc(c.krName)}</div><div class="cardJp">${esc(c.name)}</div><div class="actions"><button class="mini" data-select>이 우마무스메로 육성</button></div></div>`;d.querySelector('[data-select]').onclick=()=>{$('#umaSearch').value='';setCurrentUma(c);renderUmaResults()};b.appendChild(d)}}
-function selectedUma(){return runtime.characters.find(c=>Number(c.id)===Number(state.currentUmaId))}
+function isUmaVisibleForServer(uma,server=state.activeServer){
+ if(!uma)return false;
+ return server!=='kr'||KOREA_UMA_IDS.has(Number(uma.id))
+}
+function umaCharactersForServer(server=state.activeServer){
+ return runtime.characters.filter(c=>isUmaVisibleForServer(c,server))
+}
+function renderUmaResults(){
+ const q=norm($('#umaSearch').value),b=$('#umaResults');b.innerHTML='';
+ if(!runtime.characters.length){b.innerHTML='<div class="note">온라인 DB 동기화 후 육성 우마무스메 검색을 사용할 수 있습니다.</div>';return}
+ if(!q){b.innerHTML=`<div class="note">${state.activeServer==='kr'?'한국 서버 구현 육성 우마무스메만 표시합니다. ':''}육성 우마무스메 이름을 검색해 선택하세요.</div>`;return}
+ const arr=umaCharactersForServer().filter(c=>norm(`${c.name} ${c.character} ${c.krName} ${katakanaToHangul(c.character)}`).includes(q)).slice(0,20);
+ for(const c of arr){const d=document.createElement('div');d.className='card';d.innerHTML=`<img src="${esc(c.image)}" onerror="this.style.opacity=.16"><div><div class="cardName">${esc(c.krName)}</div><div class="cardJp">${esc(c.name)}</div><div class="actions"><button class="mini" data-select>이 우마무스메로 육성</button></div></div>`;d.querySelector('[data-select]').onclick=()=>{$('#umaSearch').value='';setCurrentUma(c);renderUmaResults()};b.appendChild(d)}
+ if(!arr.length)b.innerHTML=`<div class="note">${state.activeServer==='kr'?'한국 서버 구현 범위에서 ':''}검색 결과가 없습니다.</div>`
+}
+function selectedUma(){
+ const c=runtime.characters.find(c=>Number(c.id)===Number(state.currentUmaId));
+ return isUmaVisibleForServer(c)?c:null
+}
 function umaSuitability(uma,cond=state){if(!uma)return {score:0,reason:'육성 우마무스메를 선택해 주세요.'};const row=matchingTierForUma(uma,cond);if(row){const m={'SS+':5,'SS':4.5,'S':4};return {score:m[row.tier]||3.8,reason:`티어 스냅샷 ${row.tier} · ${(row.styles||[]).map(x=>styleLabel[x]).join('/')}`}}const skills=awakeningSkills(uma).filter(x=>Number(x.awakening)<=5);if(!skills.length)return {score:2.5,reason:'티어/각성 데이터 부족'};const vals=skills.map(sk=>skillConditionScore(sk,cond)===3?1:skillConditionScore(sk,cond)===2?.62:0),ratio=vals.reduce((a,b)=>a+b,0)/vals.length;return {score:Math.max(1,Math.min(5,1+4*ratio)),reason:'각성 스킬 거리·각질 태그 기반 보조 적합도'}}
 function fillConditionUmaList(){renderConditionUmaSelector()}
 function setCurrentUma(c){
+ if(c&&!isUmaVisibleForServer(c))return toast('현재 서버에는 아직 구현되지 않은 육성 우마무스메입니다.');
  state.currentUmaId=c?c.id:null;save();
  renderConditionUmaSelector();renderConditionUmaSuitability();renderSelectedUma();renderGuide();renderTier();renderDbGuideRecommendations()
 }
@@ -658,7 +685,7 @@ function renderUmaPicker(){
  const b=$('#umaPickerGrid');if(!b)return;b.innerHTML='';
  if(!runtime.characters.length){b.innerHTML='<div class="note">온라인 DB 동기화 후 선택할 수 있습니다.</div>';return}
  const q=norm($('#umaPickerSearch')?.value||''),current=selectedUma();
- let arr=runtime.characters.slice();
+ let arr=umaCharactersForServer();
  if(q)arr=arr.filter(c=>norm(`${c.krName} ${c.name} ${c.character} ${katakanaToHangul(c.character)}`).includes(q));
  arr.sort((a,b)=>String(a.krName).localeCompare(String(b.krName),'ko'));
  for(const c of arr.slice(0,240)){
@@ -667,7 +694,7 @@ function renderUmaPicker(){
    x.onclick=()=>{setCurrentUma(c);$('#umaPickerModal').classList.remove('open')};
    b.appendChild(x)
  }
- if(!arr.length)b.innerHTML='<div class="note">검색 결과가 없습니다.</div>'
+ if(!arr.length)b.innerHTML=`<div class="note">${state.activeServer==='kr'?'한국 서버 구현 범위에서 ':''}검색 결과가 없습니다.</div>`
 }
 function renderConditionUmaSuitability(){
  const b=$('#conditionUmaScore'),r=$('#conditionUmaScoreReason'),u=selectedUma();if(!b||!r)return;
@@ -1296,8 +1323,9 @@ function renderAppServerTabs(){
  const note=$('#appServerNote');
  if(note){
    if(server==='kr'){
-     const count=runtime.ready?supportCatalogForServer().length:0;
-     note.innerHTML=`한국 서버 프로필 · 덱/보유/스킬 체크가 일본 서버와 독립 저장됩니다. Inven 등록 범위 기준 SSR ID ${KOREA_SERVER_DATA.supportMaxId}까지 표시.${runtime.ready?` 현재 ${count}장 확인.`:''}`;
+     const supportCount=runtime.ready?supportCatalogForServer().length:0;
+     const umaCount=runtime.ready?umaCharactersForServer(server).length:KOREA_SERVER_DATA.implementedUmaCards;
+     note.innerHTML=`한국 서버 프로필 · 덱/보유/스킬 체크가 일본 서버와 독립 저장됩니다. Inven 기준 SSR ID ${KOREA_SERVER_DATA.supportMaxId}까지 · 육성 우마 카드 ${umaCount}종만 표시.${runtime.ready?` 현재 SSR ${supportCount}장 확인.`:''}`;
    }else note.textContent='일본 서버 프로필 · 일본 최신 DB 전체를 사용하며 한국 서버 프로필의 덱/스킬 체크에는 영향을 주지 않습니다.';
  }
 }
