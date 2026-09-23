@@ -273,6 +273,11 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
      <h2>부족 요소 분석</h2>
      <div id="v7Deficit"></div>
     </div>
+    <div class="guideBox" style="grid-column:1/-1">
+     <h2>고유기 계승 추천</h2>
+     <div class="note" id="v7InheritanceReason">일본 서버 최신 추천 스냅샷을 거리·각질 조건과 대조합니다.</div>
+     <div id="v7InheritanceRecommend"></div>
+    </div>
    </div>
    <div class="dataDiag" style="margin-top:8px">
     <b>추천 근거 / 신뢰도</b><br>
@@ -398,6 +403,7 @@ let JP_ENTITY_SUMMARY=null;
 let KR_IMPORT_CANDIDATES=null;
 let JP_SCENARIO_WATCH=null;
 let JP_SYSTEM_STATUS=null;
+let JP_INHERITANCE_RECOMMENDATIONS=null;
 let UPCOMING={"version":1,"updated":"2026-09-23","source":"Game8/GameWith 2026-09-23 snapshot","sourceUrl":"https://game8.jp/umamusume/811062","races":[{"id":"cm_2026_09_mile","status":"현재","date":"2026-09-18~","event":"チャンピオンズミーティング MILE","eventKr":"챔피언스 미팅 MILE","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mile","meters":1800,"turn":"left","season":"autumn","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","秋ウマ娘○","晴れの日○","良バ場○","非根幹距離○"]},{"id":"cm_2026_09_longchamp_classic","status":"예정","date":"2026-09-29~","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"ロンシャン","placeKr":"롱샹","ground":"turf","distance":"mid","meters":2400,"turn":"right","season":"autumn","weather":"sunny","condition":"heavy","time":"day","greenSkills":["ロンシャンレース場○","右回り○","秋ウマ娘○","晴れの日○","道悪○","根幹距離○"]},{"id":"cm_2026_10_classic","status":"예정","date":"2026-10 중순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"京都","placeKr":"교토","ground":"turf","distance":"mid","meters":2200,"turn":"right","season":"autumn","weather":"cloudy","condition":"good","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","曇りの日○","良バ場○","非根幹距離○"]},{"id":"loh_2026_11_long","status":"예정","date":"2026-11 하순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"京都","placeKr":"교토","ground":"turf","distance":"long","meters":3000,"turn":"right","season":"autumn","weather":"random","condition":"random","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","非根幹距離○"]},{"id":"cm_2026_12_long","status":"예정","date":"2026-12 하순","event":"チャンピオンズミーティング LONG","eventKr":"챔피언스 미팅 LONG","place":"","placeKr":"미정","ground":"turf","distance":"long","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"cm_2027_01_classic","status":"예정","date":"2027-01 하순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"","placeKr":"미정","ground":"turf","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"loh_2027_02_dirt","status":"예정","date":"2027-02 중순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"","placeKr":"미정","ground":"dirt","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]}]};
 let KOREA_UPCOMING={"version":1,"updated":"2026-09-23","source":"한국 서버 5회차 CLASSIC 일정 스냅샷","sourceUrl":"https://namu.moe/w/%EC%9A%B0%EB%A7%88%EB%AC%B4%EC%8A%A4%EB%A9%94%20%ED%94%84%EB%A6%AC%ED%8B%B0%20%EB%8D%94%EB%B9%84/%EC%9D%B4%EB%B2%A4%ED%8A%B8/%EC%B1%94%ED%94%BC%EC%96%B8%EC%8A%A4%20%EB%AF%B8%ED%8C%85/5%ED%9A%8C%EC%B0%A8","races":[{"id":"kr_cm_2026_10_classic","status":"예정(미래시)","date":"2026-10-10~10-16 예상","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mid","meters":2400,"turn":"left","season":"spring","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","春ウマ娘○","晴れの日○","良バ場○","根幹距離○"]}]};
 let KOREA_SERVER_DATA={
@@ -2127,6 +2133,46 @@ function v7DeckDeficits(cond,deckCards){
  if(deckCards.length&&fitRare===0)out.push('현재 조건에 직접 맞는 서포트 금스킬이 확인되지 않음');
  return out
 }
+function v7InheritancePlan(cond,race){
+ const data=JP_INHERITANCE_RECOMMENDATIONS;
+ if(state.guideServer!=='jp'||!data||!cond)return [];
+ const distanceKey=cond.ground==='dirt'?'dirt':cond.distance;
+ const d=data.distance?.[distanceKey]||[],s=data.style?.[cond.style]||[];
+ const map=new Map();
+ const add=(x,kind)=>{
+   const key=String(x.skillId);
+   if(!map.has(key))map.set(key,{...x,kinds:[]});
+   const row=map.get(key);if(!row.kinds.includes(kind))row.kinds.push(kind)
+ };
+ d.forEach(x=>add(x,'거리'));s.forEach(x=>add(x,'각질'));
+ let rows=[...map.values()];
+ rows.sort((a,b)=>b.kinds.length-a.kinds.length);
+ if(race?.meters){
+   rows=rows.filter(x=>{
+     if((x.skillId===101411||x.skillId===101351)&&Number(race.meters)<2000)return false;
+     return true
+   })
+ }
+ return rows.slice(0,10)
+}
+function renderV7Inheritance(cond,race){
+ const box=$('#v7InheritanceRecommend'),reason=$('#v7InheritanceReason');if(!box||!reason)return;
+ if(state.guideServer!=='jp'){
+   reason.textContent='한국 서버에는 일섭 미래 우마가 섞이지 않도록 계승 추천 스냅샷을 표시하지 않습니다.';
+   box.innerHTML='<div class="note">한국 서버용 계승 추천 데이터는 별도 검증 후 추가 예정입니다.</div>';
+   return
+ }
+ if(!cond||!race){reason.textContent='가이드 레이스를 선택해 주세요.';box.innerHTML='';return}
+ const rows=v7InheritancePlan(cond,race),src=JP_INHERITANCE_RECOMMENDATIONS;
+ reason.textContent=src?`${src.source} · 현재 ${distLabel[cond.distance]||cond.distance}/${styleLabel[cond.style]||cond.style} 조건 대조`:'계승 추천 데이터를 불러오지 못했습니다.';
+ if(!rows.length){box.innerHTML='<div class="note">현재 조건에서 표시할 계승 추천 후보가 없습니다.</div>';return}
+ box.innerHTML=rows.map(x=>{
+   const owner=x.ownerJp?koChar(x.ownerJp):'소유 우마 확인 필요';
+   const why=x.kinds.length===2?'거리+각질 양쪽 추천':x.kinds[0]+' 추천';
+   const special=JP_INHERITANCE_RECOMMENDATIONS?.specialNotes?.[String(x.skillId)];
+   return `<div class="skillRow" style="grid-template-columns:auto 1fr auto;margin-top:5px">${skillIcon({iconId:x.iconId})}<div><div class="jp">${esc(x.name)}</div><div class="kr">${esc(owner)} <span class="tag">${esc(why)}</span></div>${special?`<div class="sub">${esc(special)}</div>`:''}</div><span class="tag">계승</span></div>`
+ }).join('')+'<div class="note" style="margin-top:7px">※ 공략 사이트 추천 스냅샷이며, 특정 챔미 코스의 유효 가속 타이밍까지 자동 판정한 결과는 아닙니다.</div>'
+}
 function v7Trust(){
  const st=JP_SYSTEM_STATUS;
  if(runtime.ready&&getGuideRace()&&selectedUma()&&(!st||st.status==='pass'))return {label:'신뢰도 높음',cls:'good'};
@@ -2151,9 +2197,11 @@ function renderV7Planner(){
  if(!race){
    if(raceEl)raceEl.textContent='가이드 레이스를 선택해 주세요.';
    if(deckEl)deckEl.innerHTML='';if(skillEl)skillEl.innerHTML='';if(defEl)defEl.innerHTML='';
+   renderV7Inheritance(null,null);
    return
  }
  const cond=raceCond(race),plan=v7TypePlan(cond.distance);
+ renderV7Inheritance(cond,race);
  if(raceEl)raceEl.innerHTML=`<b>${esc(state.guideServer==='kr'?'한국':'일본')} · ${esc(race.eventKr)}</b><br>${esc(race.placeKr||'미정')} · ${groundLabel[cond.ground]} · ${distLabel[cond.distance]}${race.meters?' '+race.meters+'m':''} · ${styleLabel[cond.style]}<br>${(race.greenSkills||[]).length?'코스 조건 스킬: '+race.greenSkills.map(esc).join(' · '):'세부 코스 조건 데이터 확인 필요'}`;
  if(statEl)statEl.innerHTML=`<b>${esc(plan.stat)}</b><br>거리별 카드 타입 요구와 현재 앱 스킬 적합도를 합친 상대 우선도입니다. 시나리오/인자에 따라 달라질 수 있습니다.`;
  if(!runtime.ready){
@@ -2226,7 +2274,7 @@ function setOwnedFilter(t){ownedType=t;renderTypeFilters($('#ownedFilters'),owne
 renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);
 renderTypeFilters($('#ownedFilters'),ownedType,setOwnedFilter);
 async function loadLocalAppData(){
- const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krSkillNames:false,krTier:false,jpUpcoming:false,jpTier:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false,jpSyncState:false,jpValidationReport:false,jpSyncHistory:false,jpChangeReport:false,jpManifest:false,jpSourceHealth:false,jpReviewQueue:false,jpEntitySummary:false,krImportCandidates:false,jpScenarioWatch:false,jpSystemStatus:false};
+ const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krSkillNames:false,krTier:false,jpUpcoming:false,jpTier:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false,jpSyncState:false,jpValidationReport:false,jpSyncHistory:false,jpChangeReport:false,jpManifest:false,jpSourceHealth:false,jpReviewQueue:false,jpEntitySummary:false,krImportCandidates:false,jpScenarioWatch:false,jpSystemStatus:false,jpInheritanceRecommendations:false};
 
  try{
    const meta=await fetchJson('./data/kr/server_meta.json');
@@ -2828,6 +2876,13 @@ async function loadLocalAppData(){
    if(data&&typeof data.status==='string'){ JP_SYSTEM_STATUS=data; result.jpSystemStatus=true; }
    else throw new Error('JP system_status validation failed');
  }catch(e){ console.warn('[V6.0] JP system_status.json load failed.',e); }
+ try{
+   const data=await fetchJson('./data/jp/inheritance_recommendations.json');
+   if(data&&data.scope==='jp'&&data.distance&&data.style){
+     JP_INHERITANCE_RECOMMENDATIONS=data;
+     result.jpInheritanceRecommendations=true;
+   }else throw new Error('JP inheritance recommendations validation failed');
+ }catch(e){ console.warn('[V7.0] JP inheritance_recommendations.json load failed.',e); }
 
  return result;
 }

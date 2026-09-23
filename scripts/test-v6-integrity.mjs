@@ -37,7 +37,13 @@ ok(Array.isArray(candidates.characters)&&Array.isArray(candidates.supports),"KR 
 const watch=await read("data/jp/scenario_watch.json");
 ok(watch.machineReadableSourceConfigured===false,"scenario source must not be falsely claimed configured");
 ok(watch.status==="verification_required","scenario watch must remain verification_required");
+const inheritance=await read("data/jp/inheritance_recommendations.json");
+const iconOverrides=await read("data/jp/skill_icon_overrides.json");
 await read("data/jp/system_status.json");
+ok(inheritance?.scope==="jp","JP inheritance recommendation scope invalid");
+ok(Array.isArray(inheritance?.distance?.mid)&&inheritance.distance.mid.length>=8,"JP mid inheritance recommendations missing");
+ok(Array.isArray(inheritance?.style?.senko)&&inheritance.style.senko.length>=5,"JP style inheritance recommendations missing");
+for(const [skillId,iconId] of Object.entries({"204572":20011,"204702":20011,"204532":20011,"204701":20012,"204531":20012,"204571":20012,"204372":20011}))ok(Number(iconOverrides?.overrides?.[skillId]?.iconId)===Number(iconId),`E F Fouria icon override missing: ${skillId}`);
 await read("data/jp/change_report.json");
 await read("data/jp/manifest.json");
 await read("data/jp/source_health.json");
@@ -53,6 +59,8 @@ for(let i=0;i<inlineScripts.length;i++){
   catch(error){ errors.push(`Inline script ${i+1} syntax error: ${error.message}`); }
 }
 
+ok(index.includes('id="v7InheritanceRecommend"'),"V7 inheritance recommendation UI missing");
+ok(index.includes("function v7InheritancePlan"),"V7 inheritance recommendation logic missing");
 ok(index.includes('id="v7Planner"'),"V7 planner UI missing");
 ok(index.includes("function renderV7Planner"),"V7 planner renderer missing");
 ok(index.includes("function v7RecommendedOwnedDeck"),"V7 owned deck recommender missing");
