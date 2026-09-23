@@ -1,20 +1,17 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-23T13:02:40.474Z",
+  "generatedAt": "2026-09-23T13:04:21.735Z",
   "event": "push",
-  "sha": "c727491dfac38efaac8ae6218127ca34a0611c1e",
+  "sha": "4bd28886b87313b638f76c979a7894cc5abc86ba",
   "changedFiles": [
     ".github/workflows/sync-jp-data.yml",
-    "index.html",
-    "scripts/test-v6-integrity.mjs"
+    "scripts/write-automation-report.mjs"
   ],
   "categories": {
-    "app": [
-      "index.html"
-    ],
+    "app": [],
     "pipeline": [
       ".github/workflows/sync-jp-data.yml",
-      "scripts/test-v6-integrity.mjs"
+      "scripts/write-automation-report.mjs"
     ],
     "jpData": [],
     "krData": [],
@@ -23,5 +20,5 @@
   },
   "impactLevel": "high",
   "fullTest": true,
-  "deploySmoke": true
+  "deploySmoke": false
 }
