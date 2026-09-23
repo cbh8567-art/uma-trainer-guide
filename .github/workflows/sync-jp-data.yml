@@ -73,11 +73,26 @@ jobs:
             state="$(printf '%s' "$json" | jq -r '
               [.statuses[]? | select(.context | contains("uma-trainer-guide-b3st"))][0].state // "pending"
             ')"
-            echo "Vercel commit status: $state · attempt $i/30"
-            if [ "$state" = "success" ]; then exit 0; fi
-            if [ "$state" = "failure" ] || [ "$state" = "error" ]; then exit 1; fi
+            description="$(printf '%s' "$json" | jq -r '
+              [.statuses[]? | select(.context | contains("uma-trainer-guide-b3st"))][0].description // ""
+            ')"
+            echo "Vercel commit status: $state · $description · attempt $i/30"
+            if [ "$state" = "success" ]; then
+              echo "status=success" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            if [ "$state" = "failure" ] || [ "$state" = "error" ]; then
+              if printf '%s' "$description" | grep -qi "rate limited"; then
+                echo "status=rate_limited" >> "$GITHUB_OUTPUT"
+                echo "::warning::Vercel deployment is rate limited; treating this as an external deployment-capacity warning, not an app validation failure."
+                exit 0
+              fi
+              echo "status=failure" >> "$GITHUB_OUTPUT"
+              exit 1
+            fi
             sleep 10
           done
+          echo "status=timeout" >> "$GITHUB_OUTPUT"
           echo "Timed out waiting for the Vercel status of this exact commit."
           exit 1
 
@@ -88,6 +103,7 @@ jobs:
           SYNC_EXIT_CODE: ${{ steps.sync.outputs.exit_code }}
           INTEGRITY_OUTCOME: ${{ steps.integrity.outcome }}
           DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
+          DEPLOY_STATUS: ${{ steps.deploy.outputs.status }}
         run: node scripts/write-automation-report.mjs
 
       - name: Write Actions summary

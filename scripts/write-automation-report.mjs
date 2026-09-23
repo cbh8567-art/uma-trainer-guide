@@ -9,6 +9,7 @@ const impact = await read("data/jp/change_impact.json", {});
 const syncExitCode = Number(process.env.SYNC_EXIT_CODE || 0);
 const integrityOutcome = process.env.INTEGRITY_OUTCOME || "skipped";
 const deployOutcome = process.env.DEPLOY_OUTCOME || "skipped";
+const deployStatus = process.env.DEPLOY_STATUS || deployOutcome;
 const failedSources = Object.entries(health.sources || {})
   .filter(([,v]) => !v?.ok)
   .map(([name,v]) => ({ name, error: v?.error || `HTTP ${v?.httpStatus || "unknown"}` }));
@@ -17,6 +18,8 @@ const failures = [];
 if (syncExitCode !== 0) failures.push(`JP sync exit code ${syncExitCode}`);
 if (integrityOutcome === "failure") failures.push("Integrity test failed");
 if (deployOutcome === "failure") failures.push("Production deployment smoke test failed");
+const automationWarnings = [];
+if (deployStatus === "rate_limited") automationWarnings.push("Vercel deployment rate limited; GitHub integrity validation passed but production deployment was not refreshed.");
 for (const item of validation.fatal || []) failures.push(String(item));
 for (const s of failedSources) failures.push(`Source ${s.name}: ${s.error}`);
 
@@ -27,7 +30,7 @@ const report = {
   gitSha: process.env.GITHUB_SHA || "",
   event: process.env.GITHUB_EVENT_NAME || "local",
   sync: { exitCode: syncExitCode, status: state.status || "unknown" },
-  tests: { integrity: integrityOutcome, deploySmoke: deployOutcome },
+  tests: { integrity: integrityOutcome, deploySmoke: deployStatus },
   impact: {
     level: impact.impactLevel || "unknown",
     changedCount: Array.isArray(impact.changedFiles) ? impact.changedFiles.length : 0,
@@ -36,7 +39,7 @@ const report = {
   },
   sourceHealth: health.status || "unknown",
   failures,
-  warnings: validation.warnings || [],
+  warnings: [...(validation.warnings || []), ...automationWarnings],
   failedSources
 };
 await fs.mkdir("data/jp", { recursive: true });
