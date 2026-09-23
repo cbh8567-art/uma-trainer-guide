@@ -360,7 +360,7 @@ let KOREA_NEXT_CHAMPIONS_MEETING={
  jpReference:'2025-06 CLASSIC',jpDate:'2025-06-21 ~ 2025-06-27',
  jpSource:'GameWith 2025년 6월 챔미 중거리 추천',jpUrl:'https://gamewith.jp/uma-musume/article/show/496404'
 };
-const KOREA_TIER_DATA={
+let KOREA_TIER_DATA={
  version:1,snapshotDate:'JP 2025-06',mappedFor:'KR 2026-10 CLASSIC',
  sourceNote:'한국 공식 차기 챔미와 동일 조건의 일본 2025년 6월 CLASSIC GameWith 추천도 스냅샷. ★★★★★→SS+, ★★★★→SS, ★★★→S.',
  rows:[
@@ -1919,7 +1919,7 @@ function setOwnedFilter(t){ownedType=t;renderTypeFilters($('#ownedFilters'),owne
 renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);
 renderTypeFilters($('#ownedFilters'),ownedType,setOwnedFilter);
 async function loadLocalAppData(){
- const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krSkillNames:false};
+ const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krSkillNames:false,krTier:false};
 
  try{
    const meta=await fetchJson('./data/kr/server_meta.json');
@@ -2043,6 +2043,36 @@ async function loadLocalAppData(){
    }
  }catch(e){
    console.warn('[V5.4] KR skill_names.json load failed. Using embedded fallback.',e);
+ }
+
+ try{
+   const tier=await fetchJson('./data/kr/tier.json');
+   const rows=Array.isArray(tier?.rows)?tier.rows:[];
+
+   const validRows=
+     rows.length>0 &&
+     rows.every(r=>
+       r &&
+       typeof r.ground==='string' &&
+       typeof r.distance==='string' &&
+       ['SS+','SS','S'].includes(r.tier) &&
+       typeof r.jp==='string' &&
+       typeof r.kr==='string' &&
+       Array.isArray(r.styles)
+     );
+
+   if(validRows){
+     KOREA_TIER_DATA={
+       ...KOREA_TIER_DATA,
+       ...tier,
+       rows
+     };
+     result.krTier=true;
+   }else{
+     throw new Error('KR tier validation failed');
+   }
+ }catch(e){
+   console.warn('[V5.4] KR tier.json load failed. Using embedded fallback.',e);
  }
 
  return result;
