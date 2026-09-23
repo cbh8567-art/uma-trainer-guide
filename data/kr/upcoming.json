@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "version": 1,
+  "updated": "2026-09-23",
+  "source": "한국 서버 5회차 CLASSIC 일정 스냅샷",
+  "sourceUrl": "https://namu.moe/w/우마무스메%20프리티%20더비/이벤트/챔피언스%20미팅/5회차",
+  "races": [
+    {
+      "id": "kr_cm_2026_10_classic",
+      "status": "예정(미래시)",
+      "date": "2026-10-10~10-16 예상",
+      "event": "チャンピオンズミーティング CLASSIC",
+      "eventKr": "챔피언스 미팅 CLASSIC",
+      "place": "東京",
+      "placeKr": "도쿄",
+      "ground": "turf",
+      "distance": "mid",
+      "meters": 2400,
+      "turn": "left",
+      "season": "spring",
+      "weather": "sunny",
+      "condition": "good",
+      "time": "day",
+      "greenSkills": [
+        "東京レース場○",
+        "左回り○",
+        "春ウマ娘○",
+        "晴れの日○",
+        "良バ場○",
+        "根幹距離○"
+      ]
+    }
+  ],
+  "nextChampionsMeeting": {
+    "id": "kr_cm_classic_202610",
+    "name": "챔피언스 미팅 CLASSIC",
+    "date": "2026-10-10 ~ 2026-10-16",
+    "ground": "turf",
+    "distance": "mid",
+    "placeKr": "도쿄",
+    "meters": 2400,
+    "direction": "좌",
+    "season": "봄",
+    "weather": "맑음",
+    "condition": "양호",
+    "time": "낮",
+    "officialSource": "카카오게임즈 개최 정보",
+    "officialUrl": "https://kakaogames.oqupie.com/portals/1576/articles/57861",
+    "jpReference": "2025-06 CLASSIC",
+    "jpDate": "2025-06-21 ~ 2025-06-27",
+    "jpSource": "GameWith 2025년 6월 챔미 중거리 추천",
+    "jpUrl": "https://gamewith.jp/uma-musume/article/show/496404"
+  }
+}
