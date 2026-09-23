@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<title>우마무스메 트레이너 가이드 V5.9 WEB</title>
+<title>우마무스메 트레이너 가이드 V5.10 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -132,7 +132,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V5.9 WEB</div><div class="sub">육성 우마별 핑크 진화 · 시나리오 전용 진화 · SSR/스킬 추천 · 이벤트 카운터 DEBUG 반영</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V5.10 WEB</div><div class="sub">육성 우마별 핑크 진화 · 시나리오 전용 진화 · SSR/스킬 추천 · 이벤트 카운터 DEBUG 반영</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -342,7 +342,7 @@ const FRIEND_SUPPORT_EVENTS={"version":1,"updated":"2026-09-23","note":"U-tools 
 
 </script>
 <script>
-const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v59_db_cache', LEGACY_CACHE_KEY='uma_trainer_v58_db_cache';
+const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v510_db_cache', LEGACY_CACHE_KEY='uma_trainer_v59_db_cache';
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
@@ -1418,7 +1418,80 @@ const SUPPORT_OVERRIDES={
 function materializeOverrideSkill(skillMap,x){const meta=skillMap.get(Number(x.skillId));if(meta)return makeSkill(meta,meta.name,x.hintLevel||0);return {id:Number(x.skillId),jp:x.skillName||`Skill ${x.skillId}`,kr:koSkill(x.skillName||''),rarity:2,iconId:null,hintLevel:x.hintLevel||0,tags:{grounds:[],distances:[],styles:[]}}}
 function applySupportOverrides(cards,skillMap){for(const c of cards){const o=SUPPORT_OVERRIDES[Number(c.id)];if(o){c.title=o.title||c.title;c.jpName=o.jpName||c.jpName;c.eventSource=o.eventSource||'override';c.rareEvents=(o.rareEvents||[]).map(e=>({...e,choices:(e.choices||[]).map(ch=>({...ch,skills:(ch.skills||[]).map(x=>materializeOverrideSkill(skillMap,x))}))}))}c.catalogSource=c.catalogSource||'unknown';if(!c.eventSource)c.eventSource=c.rareEvents?.length?'events.json':'미연결'}return cards}
 
-async function syncDb(){const st=$('#dbStatus'),btn=$('#syncBtn');btn.disabled=true;st.textContent='동기화 중…';try{const u=CONFIG.sources;const [catRaw,supports,events,skills,characters,courses]=await Promise.all([fetchJson(u.catalog),fetchJson(u.supports),fetchJson(u.events),fetchJson(u.skills),fetchJson(u.characters),fetchJson(u.courses)]);const skillMap=new Map(skills.map(s=>[Number(s.id),s]));const priMap=new Map(supports.map(s=>[Number(s.id),s]));const evByTitle=new Map(),evBySupportId=new Map();for(const e of events.events||[]){if(!evByTitle.has(e.supportNameMatch))evByTitle.set(e.supportNameMatch,[]);evByTitle.get(e.supportNameMatch).push(e);const mm=String(e.id||'').match(/^evt_(\d+)_/);if(mm){const sid=Number(mm[1]);if(!evBySupportId.has(sid))evBySupportId.set(sid,[]);evBySupportId.get(sid).push(e)}}function allEventSkills(supportId,title){const source=evBySupportId.get(Number(supportId))||evByTitle.get(title)||[],m=new Map();for(const e of source){const groups=e.choices?e.choices.map(ch=>ch.skills||[]):[e.skills||[]];for(const group of groups)for(const x of group){const meta=skillMap.get(Number(x.skillId));if(!meta)continue;const sk=makeSkill(meta,x.skillName,x.hintLevel);if(sk)m.set(String(sk.id),sk)}}return [...m.values()]};function rareEvents(supportId,title){const source=evBySupportId.get(Number(supportId))||evByTitle.get(title)||[];const out=[];for(const e of source){let choices=[];if(e.choices)choices=e.choices.map(ch=>({id:ch.id,label:ch.label,skills:(ch.skills||[]).map(x=>{const m=skillMap.get(Number(x.skillId));if(!m||Number(m.rarity)!==2)return null;return makeSkill(m,x.skillName,x.hintLevel)}).filter(Boolean)}));else if(e.skills)choices=[{id:e.id+'_auto',label:'자동/단일 획득',skills:(e.skills||[]).map(x=>{const m=skillMap.get(Number(x.skillId));if(!m||Number(m.rarity)!==2)return null;return makeSkill(m,x.skillName,x.hintLevel)}).filter(Boolean)}];if(choices.some(x=>x.skills.length))out.push({id:e.id,label:e.label,selection:e.selection||'auto',choices})}return out}const raw=Array.isArray(catRaw)?catRaw:(catRaw.supports||catRaw.data||[]),best=new Map();for(const r of raw){if(r.SupportRarity&&r.SupportRarity!=='SSR')continue;const id=Number(r.SupportId||r.id);if(!id)continue;const prev=best.get(id);if(!prev||r.SupportServer==='jp')best.set(id,r)}const cards=[];for(const [id,r] of best){const p=priMap.get(id),parsed=parseName(r.SupportNameJP||r.SupportName||p?.name||''),title=p?.title||parsed.title,character=p?.characterName||parsed.character;cards.push({id,title,character,jpName:p?.name||(r.SupportNameJP||r.SupportName||''),englishName:r.SupportName||'',krName:koChar(character),type:normalizeType(p?.type||r.SupportType),image:p?`${CONFIG.assetBases.support}${id}.webp`:(r.SupportImage?`https://daftuyda.moe${r.SupportImage}`:''),supportEffects:r.SupportEffects||[],supportUnique:r.SupportUnique||null,hints:(r.SupportHints||[]).map(h=>makeSkill(skillMap.get(Number(h.SkillId)),h.Name,h.HintLevel)).filter(Boolean),eventSkillsAll:allEventSkills(id,title),rareEvents:rareEvents(id,title),catalogSource:p?'Tsuyuchan+UmaTools':'UmaTools fallback'})}for(const p of supports){if(!cards.some(c=>Number(c.id)===Number(p.id))){const character=p.characterName;cards.push({id:p.id,title:p.title,character,jpName:p.name,englishName:'',krName:koChar(character),type:normalizeType(p.type),image:`${CONFIG.assetBases.support}${p.id}.webp`,supportEffects:[],supportUnique:null,hints:(p.hintSkillIds||[]).map(i=>makeSkill(skillMap.get(Number(i)))).filter(Boolean),eventSkillsAll:allEventSkills(p.id,p.title),rareEvents:rareEvents(p.id,p.title),catalogSource:'Tsuyuchan'})}}applyFriendEventSupplements(applyFriendSkillSupplements(applySupportOverrides(cards,skillMap),skillMap),skillMap);cards.sort((a,b)=>b.id-a.id);runtime={catalog:cards,byId:new Map(cards.map(c=>[Number(c.id),c])),skills:skillMap,characters:characters.map(parseCharacter),courses,ready:true};const cache={version:4,generatedAt:new Date().toISOString(),catalog:cards,skills,characters,courses};localStorage.setItem(CACHE_KEY,JSON.stringify(cache));st.textContent=`SSR ${cards.length}장 · 육성 우마 ${characters.length}장 · 금스킬 연결 ${cards.filter(c=>c.rareEvents.length).length}장`;renderAll()}catch(e){st.textContent='동기화 실패';alert('온라인 DB 동기화 실패: '+e.message+'\\n이미 저장한 통합 DB JSON이 있으면 불러와 사용할 수 있습니다.')}finally{btn.disabled=false}}
+function isDbCacheKey(key){return /^uma_trainer_v\d+_db_cache$/.test(String(key||''))}
+function clearObsoleteDbCaches(){
+ const remove=[];
+ for(let i=0;i<localStorage.length;i++){
+   const key=localStorage.key(i);
+   if(isDbCacheKey(key)&&key!==CACHE_KEY)remove.push(key)
+ }
+ for(const key of remove){try{localStorage.removeItem(key)}catch(_){}}
+ return remove.length
+}
+function compactSkillMeta(s){
+ if(!s)return null;
+ const tags=s.activation?.tags||s.tags||{grounds:[],distances:[],styles:[]};
+ return {id:Number(s.id),name:s.name||s.jp||'',rarity:s.rarity,iconId:s.iconId,activation:{tags}}
+}
+function compactSkillRef(s){
+ if(!s)return null;
+ return {id:Number(s.id),hintLevel:Number(s.hintLevel||0)}
+}
+function compactCharacterMeta(ch){
+ return {id:Number(ch.id),name:ch.name||'',skillsByAwakening:ch.skillsByAwakening||{}}
+}
+function compactCardMeta(card){
+ return {
+   id:Number(card.id),title:card.title||'',character:card.character||'',jpName:card.jpName||'',
+   englishName:card.englishName||'',krName:card.krName||'',type:card.type||'',image:card.image||'',
+   supportEffects:(card.supportEffects||[]).map(e=>({name:e.name||'',symbol:e.symbol||'',values:e.values||[]})),
+   hints:(card.hints||[]).map(compactSkillRef).filter(Boolean),
+   eventSkillsAll:(card.eventSkillsAll||[]).map(compactSkillRef).filter(Boolean),
+   rareEvents:(card.rareEvents||[]).map(e=>({
+     id:e.id,label:e.label,selection:e.selection,note:e.note||'',
+     choices:(e.choices||[]).map(ch=>({id:ch.id,label:ch.label,skills:(ch.skills||[]).map(compactSkillRef).filter(Boolean)}))
+   })),
+   catalogSource:card.catalogSource||'',eventSource:card.eventSource||'',eventSourceUrl:card.eventSourceUrl||'',
+   eventSkillSource:card.eventSkillSource||'',eventSkillSourceUrl:card.eventSkillSourceUrl||''
+ }
+}
+function buildCompactDbCache(cache){
+ return {
+   version:5,cacheMode:'compact',generatedAt:cache.generatedAt||new Date().toISOString(),
+   catalog:(cache.catalog||[]).map(compactCardMeta),
+   skills:(cache.skills||[]).map(compactSkillMeta).filter(Boolean),
+   characters:(cache.characters||[]).map(compactCharacterMeta),
+   courses:[]
+ }
+}
+function storeDbCacheSafely(cache){
+ const removed=clearObsoleteDbCaches();
+ const compact=buildCompactDbCache(cache);
+ try{
+   localStorage.setItem(CACHE_KEY,JSON.stringify(compact));
+   return {saved:true,mode:'compact',removed}
+ }catch(error){
+   try{localStorage.removeItem(CACHE_KEY)}catch(_){}
+   return {saved:false,mode:'memory',removed,error}
+ }
+}
+function newestLegacyDbCache(){
+ const candidates=[];
+ for(let i=0;i<localStorage.length;i++){
+   const key=localStorage.key(i),m=String(key||'').match(/^uma_trainer_v(\d+)_db_cache$/);
+   if(key!==CACHE_KEY&&m)candidates.push({key,version:Number(m[1])})
+ }
+ candidates.sort((a,b)=>b.version-a.version);
+ for(const x of candidates){
+   try{
+     const parsed=JSON.parse(localStorage.getItem(x.key)||'null');
+     if(parsed?.catalog&&(parsed.skills||[]).length)return {key:x.key,data:parsed}
+   }catch(_){}
+ }
+ return null
+}
+
+async function syncDb(){const st=$('#dbStatus'),btn=$('#syncBtn');btn.disabled=true;st.textContent='동기화 중…';try{const u=CONFIG.sources;const [catRaw,supports,events,skills,characters,courses]=await Promise.all([fetchJson(u.catalog),fetchJson(u.supports),fetchJson(u.events),fetchJson(u.skills),fetchJson(u.characters),fetchJson(u.courses)]);const skillMap=new Map(skills.map(s=>[Number(s.id),s]));const priMap=new Map(supports.map(s=>[Number(s.id),s]));const evByTitle=new Map(),evBySupportId=new Map();for(const e of events.events||[]){if(!evByTitle.has(e.supportNameMatch))evByTitle.set(e.supportNameMatch,[]);evByTitle.get(e.supportNameMatch).push(e);const mm=String(e.id||'').match(/^evt_(\d+)_/);if(mm){const sid=Number(mm[1]);if(!evBySupportId.has(sid))evBySupportId.set(sid,[]);evBySupportId.get(sid).push(e)}}function allEventSkills(supportId,title){const source=evBySupportId.get(Number(supportId))||evByTitle.get(title)||[],m=new Map();for(const e of source){const groups=e.choices?e.choices.map(ch=>ch.skills||[]):[e.skills||[]];for(const group of groups)for(const x of group){const meta=skillMap.get(Number(x.skillId));if(!meta)continue;const sk=makeSkill(meta,x.skillName,x.hintLevel);if(sk)m.set(String(sk.id),sk)}}return [...m.values()]};function rareEvents(supportId,title){const source=evBySupportId.get(Number(supportId))||evByTitle.get(title)||[];const out=[];for(const e of source){let choices=[];if(e.choices)choices=e.choices.map(ch=>({id:ch.id,label:ch.label,skills:(ch.skills||[]).map(x=>{const m=skillMap.get(Number(x.skillId));if(!m||Number(m.rarity)!==2)return null;return makeSkill(m,x.skillName,x.hintLevel)}).filter(Boolean)}));else if(e.skills)choices=[{id:e.id+'_auto',label:'자동/단일 획득',skills:(e.skills||[]).map(x=>{const m=skillMap.get(Number(x.skillId));if(!m||Number(m.rarity)!==2)return null;return makeSkill(m,x.skillName,x.hintLevel)}).filter(Boolean)}];if(choices.some(x=>x.skills.length))out.push({id:e.id,label:e.label,selection:e.selection||'auto',choices})}return out}const raw=Array.isArray(catRaw)?catRaw:(catRaw.supports||catRaw.data||[]),best=new Map();for(const r of raw){if(r.SupportRarity&&r.SupportRarity!=='SSR')continue;const id=Number(r.SupportId||r.id);if(!id)continue;const prev=best.get(id);if(!prev||r.SupportServer==='jp')best.set(id,r)}const cards=[];for(const [id,r] of best){const p=priMap.get(id),parsed=parseName(r.SupportNameJP||r.SupportName||p?.name||''),title=p?.title||parsed.title,character=p?.characterName||parsed.character;cards.push({id,title,character,jpName:p?.name||(r.SupportNameJP||r.SupportName||''),englishName:r.SupportName||'',krName:koChar(character),type:normalizeType(p?.type||r.SupportType),image:p?`${CONFIG.assetBases.support}${id}.webp`:(r.SupportImage?`https://daftuyda.moe${r.SupportImage}`:''),supportEffects:r.SupportEffects||[],supportUnique:r.SupportUnique||null,hints:(r.SupportHints||[]).map(h=>makeSkill(skillMap.get(Number(h.SkillId)),h.Name,h.HintLevel)).filter(Boolean),eventSkillsAll:allEventSkills(id,title),rareEvents:rareEvents(id,title),catalogSource:p?'Tsuyuchan+UmaTools':'UmaTools fallback'})}for(const p of supports){if(!cards.some(c=>Number(c.id)===Number(p.id))){const character=p.characterName;cards.push({id:p.id,title:p.title,character,jpName:p.name,englishName:'',krName:koChar(character),type:normalizeType(p.type),image:`${CONFIG.assetBases.support}${p.id}.webp`,supportEffects:[],supportUnique:null,hints:(p.hintSkillIds||[]).map(i=>makeSkill(skillMap.get(Number(i)))).filter(Boolean),eventSkillsAll:allEventSkills(p.id,p.title),rareEvents:rareEvents(p.id,p.title),catalogSource:'Tsuyuchan'})}}applyFriendEventSupplements(applyFriendSkillSupplements(applySupportOverrides(cards,skillMap),skillMap),skillMap);cards.sort((a,b)=>b.id-a.id);runtime={catalog:cards,byId:new Map(cards.map(c=>[Number(c.id),c])),skills:skillMap,characters:characters.map(parseCharacter),courses,ready:true};const cache={version:5,generatedAt:new Date().toISOString(),catalog:cards,skills,characters,courses};const cacheResult=storeDbCacheSafely(cache);st.textContent=`SSR ${cards.length}장 · 육성 우마 ${characters.length}장 · 금스킬 연결 ${cards.filter(c=>c.rareEvents.length).length}장 · ${cacheResult.saved?'경량 캐시 저장':'캐시 저장 생략'}`;renderAll();if(!cacheResult.saved)toast('DB 동기화 성공 · 브라우저 저장공간 부족으로 캐시는 저장하지 않았습니다.')}catch(e){st.textContent='동기화 실패';alert('온라인 DB 동기화 실패: '+e.message+'\\n이미 저장한 통합 DB JSON이 있으면 불러와 사용할 수 있습니다.')}finally{btn.disabled=false}}
 function normalizeCachedCatalog(catalog,skillMap){
  for(const card of catalog||[]){
    card.hints=(card.hints||[]).map(s=>{
@@ -1440,8 +1513,8 @@ function loadCache(o){
  const skills=o.skills||[],skillMap=new Map(skills.map(s=>[Number(s.id),s]));
  const catalog=applyFriendEventSupplements(applyFriendSkillSupplements(applySupportOverrides(normalizeCachedCatalog(o.catalog,skillMap),skillMap),skillMap),skillMap);
  runtime={catalog,byId:new Map(catalog.map(c=>[Number(c.id),c])),skills:skillMap,characters:(o.characters||[]).map(c=>c.character?c:parseCharacter(c)),courses:o.courses||[],ready:true};
- localStorage.setItem(CACHE_KEY,JSON.stringify({...o,catalog}));
- $('#dbStatus').textContent=`저장 DB ${runtime.catalog.length}장 · 일본어 원문 보정`;
+ const cacheResult=storeDbCacheSafely({...o,catalog,skills,characters:o.characters||[],courses:o.courses||[]});
+ $('#dbStatus').textContent=`저장 DB ${runtime.catalog.length}장 · 일본어 원문 보정 · ${cacheResult.saved?'경량 캐시':'메모리 모드'}`;
  renderAll()
 }
 function renderAll(){renderGuideServerTabs();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderTier()}
@@ -1479,8 +1552,13 @@ renderTypeFilters($('#ownedFilters'),ownedType,setOwnedFilter);
 try{
  let cache=JSON.parse(localStorage.getItem(CACHE_KEY)||'null');
  if(!cache?.catalog){
-   const legacy=JSON.parse(localStorage.getItem(LEGACY_CACHE_KEY)||'null');
+   let legacy=null;
+   try{legacy=JSON.parse(localStorage.getItem(LEGACY_CACHE_KEY)||'null')}catch(_){}
    if(legacy?.catalog&&(legacy.skills||[]).length)cache=legacy;
+   else{
+     const found=newestLegacyDbCache();
+     if(found?.data)cache=found.data
+   }
  }
  if(cache?.catalog)loadCache(cache);else renderAll()
 }catch(_){renderAll()}
