@@ -101,16 +101,100 @@ function diffRecords(name, previousRecords, nextRecords) {
   };
 }
 
+
+function recordLabel(name, record, id = "") {
+  if (name === "courses" && Array.isArray(record) && record.length === 2) {
+    const value = record[1] || {};
+    return String(value.name || value.label || value.raceName || id);
+  }
+  const candidates = [
+    record?.name,
+    record?.Name,
+    record?.SupportNameJP,
+    record?.SupportName,
+    record?.title,
+    record?.characterName,
+    record?.skillName,
+    record?.label,
+    record?.supportNameMatch,
+    record?.jpName
+  ];
+  const label = candidates.find(v => typeof v === "string" && v.trim());
+  return label ? label.trim() : String(id);
+}
+
+function detailChanges(name, previousRecords, nextRecords, diff) {
+  const mapRecords = (records) => new Map(
+    records.map((record, index) => [canonicalId(name, record, index), record])
+  );
+  const before = mapRecords(previousRecords);
+  const after = mapRecords(nextRecords);
+  const limit = 30;
+  return {
+    added: diff.addedIds.slice(0, limit).map(id => ({
+      id,
+      name: recordLabel(name, after.get(id), id)
+    })),
+    removed: diff.removedIds.slice(0, limit).map(id => ({
+      id,
+      name: recordLabel(name, before.get(id), id)
+    })),
+    modified: diff.modifiedIds.slice(0, limit).map(id => ({
+      id,
+      name: recordLabel(name, after.get(id) || before.get(id), id)
+    }))
+  };
+}
+
+function collectSkillReferencesFromEvents(eventsData) {
+  const ids = [];
+  for (const event of eventsData?.events || []) {
+    const groups = Array.isArray(event?.choices)
+      ? event.choices.map(choice => choice?.skills || [])
+      : [event?.skills || []];
+    for (const group of groups) {
+      for (const skill of group) {
+        const id = Number(skill?.skillId);
+        if (Number.isFinite(id)) ids.push(id);
+      }
+    }
+  }
+  return ids;
+}
+
+function collectSupportHintSkillReferences(supportsData) {
+  const ids = [];
+  for (const support of Array.isArray(supportsData) ? supportsData : []) {
+    for (const id of support?.hintSkillIds || []) {
+      const n = Number(id);
+      if (Number.isFinite(n)) ids.push(n);
+    }
+  }
+  return ids;
+}
+
 function snapshotFilename(name) {
   return name === "catalog" ? "support_hints.json" : `${name}.json`;
 }
 
 async function fetchText(url) {
+  const started = Date.now();
   const res = await fetch(url, {
     headers: { "user-agent": "uma-trainer-guide-sync/1.0" }
   });
-  if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
-  return await res.text();
+  const durationMs = Date.now() - started;
+  if (!res.ok) {
+    const error = new Error(`${url}: HTTP ${res.status}`);
+    error.httpStatus = res.status;
+    error.durationMs = durationMs;
+    throw error;
+  }
+  return {
+    text: await res.text(),
+    httpStatus: res.status,
+    durationMs,
+    contentType: res.headers.get("content-type") || ""
+  };
 }
 
 const sourceConfigPath = path.join(JP, "source_config.json");
@@ -119,6 +203,9 @@ const statePath = path.join(JP, "sync_state.json");
 const reportPath = path.join(JP, "validation_report.json");
 const updateMetaPath = path.join(JP, "update_meta.json");
 const historyPath = path.join(JP, "sync_history.json");
+const changeReportPath = path.join(JP, "change_report.json");
+const manifestPath = path.join(JP, "manifest.json");
+const sourceHealthPath = path.join(JP, "source_health.json");
 
 const sourceConfig = await readJson(sourceConfigPath);
 const policy = await readJson(policyPath);
@@ -142,6 +229,30 @@ const state = {
   lastAttempt: report.checkedAt,
   activeMode: sourceConfig.snapshotReady ? "snapshot" : "remote",
   message: ""
+};
+
+const sourceHealth = {
+  schemaVersion: 1,
+  updated: report.updated,
+  checkedAt: report.checkedAt,
+  status: "running",
+  sources: {}
+};
+
+const changeReport = {
+  schemaVersion: 1,
+  updated: report.updated,
+  checkedAt: report.checkedAt,
+  status: "running",
+  summary: { added: 0, removed: 0, modified: 0 },
+  collections: {}
+};
+
+const manifest = {
+  schemaVersion: 1,
+  updated: report.updated,
+  generatedAt: report.checkedAt,
+  collections: {}
 };
 
 async function appendHistory(status, message) {
@@ -198,9 +309,24 @@ try {
 
     let raw, data;
     try {
-      raw = await fetchText(url);
+      const fetched = await fetchText(url);
+      raw = fetched.text;
       data = JSON.parse(raw);
+      sourceHealth.sources[name] = {
+        url,
+        ok: true,
+        httpStatus: fetched.httpStatus,
+        durationMs: fetched.durationMs,
+        contentType: fetched.contentType
+      };
     } catch (e) {
+      sourceHealth.sources[name] = {
+        url,
+        ok: false,
+        httpStatus: Number(e?.httpStatus || 0) || null,
+        durationMs: Number(e?.durationMs || 0) || null,
+        error: e?.message || String(e)
+      };
       report.fatal.push(`${name}: ${e.message}`);
       continue;
     }
@@ -238,6 +364,7 @@ try {
       entry.removedCount = removed;
       entry.removedRatio = ratio;
       entry.changes = diffRecords(name, previousRecords, records);
+      entry.changeDetails = detailChanges(name, previousRecords, records, entry.changes);
       entry.changed =
         entry.changes.addedCount > 0 ||
         entry.changes.removedCount > 0 ||
@@ -263,12 +390,81 @@ try {
         removedIds: [],
         modifiedIds: []
       };
+      entry.changeDetails = {
+        added: records.slice(0, 30).map((r, i) => {
+          const id = canonicalId(name, r, i);
+          return { id, name: recordLabel(name, r, id) };
+        }),
+        removed: [],
+        modified: []
+      };
       entry.changed = true;
     }
 
     report.collections[name] = entry;
+    manifest.collections[name] = {
+      source: url,
+      count: entry.count,
+      contentSha256: entry.contentSha256,
+      status: entry.status
+    };
+    changeReport.collections[name] = {
+      count: entry.count,
+      previousCount: entry.previousCount ?? null,
+      changed: Boolean(entry.changed),
+      status: entry.status,
+      changes: entry.changes || {
+        addedCount: 0,
+        removedCount: 0,
+        modifiedCount: 0,
+        addedIds: [],
+        removedIds: [],
+        modifiedIds: []
+      },
+      details: entry.changeDetails || { added: [], removed: [], modified: [] }
+    };
     staged.set(name, { raw, data });
   }
+
+  const stagedSkills = staged.get("skills")?.data;
+  if (Array.isArray(stagedSkills)) {
+    const skillIds = new Set(stagedSkills.map(s => Number(s?.id)).filter(Number.isFinite));
+    const missingEventSkills = [...new Set(
+      collectSkillReferencesFromEvents(staged.get("events")?.data)
+        .filter(id => !skillIds.has(id))
+    )];
+    const missingSupportHints = [...new Set(
+      collectSupportHintSkillReferences(staged.get("supports")?.data)
+        .filter(id => !skillIds.has(id))
+    )];
+
+    if (missingEventSkills.length) {
+      report.warnings.push(
+        `events: missing skill references (${missingEventSkills.slice(0, 20).join(", ")})`
+      );
+    }
+    if (missingSupportHints.length) {
+      report.warnings.push(
+        `supports: missing hint skill references (${missingSupportHints.slice(0, 20).join(", ")})`
+      );
+    }
+    report.referenceAudit = {
+      missingEventSkillCount: missingEventSkills.length,
+      missingEventSkillIds: missingEventSkills.slice(0, 50),
+      missingSupportHintSkillCount: missingSupportHints.length,
+      missingSupportHintSkillIds: missingSupportHints.slice(0, 50)
+    };
+  }
+
+  changeReport.summary = Object.values(changeReport.collections).reduce((acc, entry) => {
+    const c = entry.changes || {};
+    acc.added += Number(c.addedCount || 0);
+    acc.removed += Number(c.removedCount || 0);
+    acc.modified += Number(c.modifiedCount || 0);
+    return acc;
+  }, { added: 0, removed: 0, modified: 0 });
+
+  sourceHealth.status = Object.values(sourceHealth.sources).every(s => s.ok) ? "pass" : "fatal";
 
   if (report.fatal.length) {
     report.status = "fatal";
@@ -276,8 +472,12 @@ try {
     state.snapshotReady = Boolean(sourceConfig.snapshotReady);
     state.activeMode = sourceConfig.snapshotReady ? "snapshot" : "remote";
     state.message = "Validation failed. Existing current snapshots were kept.";
+    changeReport.status = "fatal";
     await writeJson(reportPath, report);
     await writeJson(statePath, state);
+    await writeJson(changeReportPath, changeReport);
+    await writeJson(manifestPath, manifest);
+    await writeJson(sourceHealthPath, sourceHealth);
     await appendHistory("fatal", state.message);
     process.exitCode = 2;
   } else {
@@ -327,8 +527,12 @@ try {
     state.activeMode = "snapshot";
     state.changeTotals = report.changeTotals;
     state.message = "Validated snapshots promoted atomically.";
+    changeReport.status = "pass";
     await writeJson(reportPath, report);
     await writeJson(statePath, state);
+    await writeJson(changeReportPath, changeReport);
+    await writeJson(manifestPath, manifest);
+    await writeJson(sourceHealthPath, sourceHealth);
     await appendHistory("pass", state.message);
   }
 } catch (e) {
@@ -336,8 +540,13 @@ try {
   report.fatal.push(`sync runtime: ${e?.stack || e}`);
   state.status = "fatal";
   state.message = "Sync runtime failed. Existing snapshots were kept.";
+  changeReport.status = "fatal";
+  sourceHealth.status = "fatal";
   await writeJson(reportPath, report).catch(() => {});
   await writeJson(statePath, state).catch(() => {});
+  await writeJson(changeReportPath, changeReport).catch(() => {});
+  await writeJson(manifestPath, manifest).catch(() => {});
+  await writeJson(sourceHealthPath, sourceHealth).catch(() => {});
   await appendHistory("fatal", state.message).catch(() => {});
   process.exitCode = 2;
 }
