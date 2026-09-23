@@ -1,11 +1,46 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-23",
+  "updated": "2026-09-24",
   "overrides": {
     "202711": {
       "iconId": 20042,
       "status": "verified",
       "note": "王手 explicit verified override; do not derive iconId from skillId"
+    },
+    "204372": {
+      "iconId": 20011,
+      "status": "verified",
+      "note": "流れに任せて explicit verified override from UmaTools skills_all.json; upstream Tsuyuchan iconId is 0"
+    },
+    "204531": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "清麗高雅 explicit verified override from UmaTools skills_all.json; upstream Tsuyuchan iconId is 0"
+    },
+    "204532": {
+      "iconId": 20011,
+      "status": "verified",
+      "note": "華麗な踏み込み explicit verified override from UmaTools skills_all.json; upstream Tsuyuchan iconId is 0"
+    },
+    "204571": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "純真無垢 explicit verified override from UmaTools skills_all.json; upstream Tsuyuchan iconId is 0"
+    },
+    "204572": {
+      "iconId": 20011,
+      "status": "verified",
+      "note": "ただその先へ explicit verified override from UmaTools skills_all.json; upstream Tsuyuchan iconId is 0"
+    },
+    "204701": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "素質の証明 explicit verified override from UmaTools skills_all.json; upstream Tsuyuchan iconId is 0"
+    },
+    "204702": {
+      "iconId": 20011,
+      "status": "verified",
+      "note": "突き抜ける走り explicit verified override from UmaTools skills_all.json; upstream Tsuyuchan iconId is 0"
     }
   }
 }

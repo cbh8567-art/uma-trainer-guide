@@ -1,0 +1,573 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-24",
+  "source": "GameWith 추천 계승 고유 스킬 (2026-09-23 11:45 업데이트)",
+  "sourceUrl": "https://gamewith.jp/uma-musume/article/show/574331",
+  "scope": "jp",
+  "note": "거리/각질별 추천 목록을 합쳐 보여주는 참고용 스냅샷. 코스별 유효 가속 판정은 별도 검증이 필요함.",
+  "distance": {
+    "short": [
+      {
+        "skillId": 110871,
+        "inheritedSkillId": 910871,
+        "name": "ふわもこアワー",
+        "ownerUmaId": 108702,
+        "ownerJp": "アストンマーチャン",
+        "iconId": 20011
+      },
+      {
+        "skillId": 101311,
+        "inheritedSkillId": 901311,
+        "name": "¡Qué alegría!",
+        "ownerUmaId": 113101,
+        "ownerJp": "グランアレグリア",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100061,
+        "inheritedSkillId": 900061,
+        "name": "勝利の鼓動",
+        "ownerUmaId": 100601,
+        "ownerJp": "オグリキャップ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100421,
+        "inheritedSkillId": 900421,
+        "name": "『I'm possible』",
+        "ownerUmaId": 104201,
+        "ownerJp": "シーキングザパール",
+        "iconId": 20011
+      },
+      {
+        "skillId": 110531,
+        "inheritedSkillId": 910531,
+        "name": "奥義・常夏バーニング！！",
+        "ownerUmaId": 105302,
+        "ownerJp": "バンブーメモリー",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100051,
+        "inheritedSkillId": 900051,
+        "name": "煌星のヴォードヴィル",
+        "ownerUmaId": 100501,
+        "ownerJp": "フジキセキ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100971,
+        "inheritedSkillId": 900971,
+        "name": "スカーレットリリィの高揚",
+        "ownerUmaId": 109701,
+        "ownerJp": "スティルインラブ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100511,
+        "inheritedSkillId": 900511,
+        "name": "つぼみ、ほころぶ時",
+        "ownerUmaId": 105101,
+        "ownerJp": "ニシノフラワー",
+        "iconId": 20041
+      },
+      {
+        "skillId": 100101,
+        "inheritedSkillId": 900101,
+        "name": "ヴィクトリーショット！",
+        "ownerUmaId": 101001,
+        "ownerJp": "タイキシャトル",
+        "iconId": 20041
+      }
+    ],
+    "mile": [
+      {
+        "skillId": 110651,
+        "inheritedSkillId": 910651,
+        "name": "ノッてけ、マッシュアップ！",
+        "ownerUmaId": 106502,
+        "ownerJp": "ダイタクヘリオス",
+        "iconId": 20011
+      },
+      {
+        "skillId": 120041,
+        "inheritedSkillId": 920041,
+        "name": "霊験灼然チョベリグ神託",
+        "ownerUmaId": 100403,
+        "ownerJp": "マルゼンスキー",
+        "iconId": 20011
+      },
+      {
+        "skillId": 101311,
+        "inheritedSkillId": 901311,
+        "name": "¡Qué alegría!",
+        "ownerUmaId": 113101,
+        "ownerJp": "グランアレグリア",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100061,
+        "inheritedSkillId": 900061,
+        "name": "勝利の鼓動",
+        "ownerUmaId": 100601,
+        "ownerJp": "オグリキャップ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100421,
+        "inheritedSkillId": 900421,
+        "name": "『I'm possible』",
+        "ownerUmaId": 104201,
+        "ownerJp": "シーキングザパール",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100051,
+        "inheritedSkillId": 900051,
+        "name": "煌星のヴォードヴィル",
+        "ownerUmaId": 100501,
+        "ownerJp": "フジキセキ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 110781,
+        "inheritedSkillId": 910781,
+        "name": "Breezy Treat",
+        "ownerUmaId": 107802,
+        "ownerJp": "ヤマニンゼファー",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100971,
+        "inheritedSkillId": 900971,
+        "name": "スカーレットリリィの高揚",
+        "ownerUmaId": 109701,
+        "ownerJp": "スティルインラブ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100511,
+        "inheritedSkillId": 900511,
+        "name": "つぼみ、ほころぶ時",
+        "ownerUmaId": 105101,
+        "ownerJp": "ニシノフラワー",
+        "iconId": 20041
+      }
+    ],
+    "mid": [
+      {
+        "skillId": 110771,
+        "inheritedSkillId": 910771,
+        "name": "Joy to the World",
+        "ownerUmaId": 107702,
+        "ownerJp": "ナリタトップロード",
+        "iconId": 20011
+      },
+      {
+        "skillId": 110261,
+        "inheritedSkillId": 910261,
+        "name": "オペレーション・Cacao",
+        "ownerUmaId": 102602,
+        "ownerJp": "ミホノブルボン",
+        "iconId": 20011
+      },
+      {
+        "skillId": 101051,
+        "inheritedSkillId": 901051,
+        "name": "アド・アストラ",
+        "ownerUmaId": 110501,
+        "ownerJp": "ネオユニヴァース",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100941,
+        "inheritedSkillId": 900941,
+        "name": "Faith in the Feral",
+        "ownerUmaId": 109401,
+        "ownerJp": "ジャングルポケット",
+        "iconId": 20011
+      },
+      {
+        "skillId": 101181,
+        "inheritedSkillId": 901181,
+        "name": "悠遠のファーノース",
+        "ownerUmaId": 111801,
+        "ownerJp": "アドマイヤグルーヴ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 110151,
+        "inheritedSkillId": 910151,
+        "name": "恵福バルカローレ",
+        "ownerUmaId": 101502,
+        "ownerJp": "テイエムオペラオー",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100771,
+        "inheritedSkillId": 900771,
+        "name": "Road to Glory",
+        "ownerUmaId": 107701,
+        "ownerJp": "ナリタトップロード",
+        "iconId": 20011
+      },
+      {
+        "skillId": 111161,
+        "inheritedSkillId": 911161,
+        "name": "不凋なるCattleya",
+        "ownerUmaId": 111602,
+        "ownerJp": "ジェンティルドンナ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100061,
+        "inheritedSkillId": 900061,
+        "name": "勝利の鼓動",
+        "ownerUmaId": 100601,
+        "ownerJp": "オグリキャップ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 110681,
+        "inheritedSkillId": 910681,
+        "name": "あっぱれ大盤振る舞い！",
+        "ownerUmaId": 106802,
+        "ownerJp": "キタサンブラック",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100591,
+        "inheritedSkillId": 900591,
+        "name": "彼方、その先へ…",
+        "ownerUmaId": 105901,
+        "ownerJp": "メジロドーベル",
+        "iconId": 20041
+      },
+      {
+        "skillId": 100701,
+        "inheritedSkillId": 900701,
+        "name": "セイリオス",
+        "ownerUmaId": 107001,
+        "ownerJp": "シリウスシンボリ",
+        "iconId": 20041
+      }
+    ],
+    "long": [
+      {
+        "skillId": 110771,
+        "inheritedSkillId": 910771,
+        "name": "Joy to the World",
+        "ownerUmaId": 107702,
+        "ownerJp": "ナリタトップロード",
+        "iconId": 20011
+      },
+      {
+        "skillId": 110151,
+        "inheritedSkillId": 910151,
+        "name": "恵福バルカローレ",
+        "ownerUmaId": 101502,
+        "ownerJp": "テイエムオペラオー",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100131,
+        "inheritedSkillId": 900131,
+        "name": "貴顕の使命を果たすべく",
+        "ownerUmaId": 101301,
+        "ownerJp": "メジロマックイーン",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100231,
+        "inheritedSkillId": 900231,
+        "name": "∴win Q.E.D.",
+        "ownerUmaId": 102301,
+        "ownerJp": "ビワハヤヒデ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 120011,
+        "inheritedSkillId": 920011,
+        "name": "威風堂々、夢錦！",
+        "ownerUmaId": 100103,
+        "ownerJp": "スペシャルウィーク",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100681,
+        "inheritedSkillId": 900681,
+        "name": "勝ち鬨ワッショイ！",
+        "ownerUmaId": 106801,
+        "ownerJp": "キタサンブラック",
+        "iconId": 20011
+      },
+      {
+        "skillId": 110201,
+        "inheritedSkillId": 910201,
+        "name": "Do Ya Breakin!",
+        "ownerUmaId": 102002,
+        "ownerJp": "セイウンスカイ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 120241,
+        "inheritedSkillId": 920241,
+        "name": "HOP STEP♪LOCK ON!",
+        "ownerUmaId": 102403,
+        "ownerJp": "マヤノトップガン",
+        "iconId": 20021
+      },
+      {
+        "skillId": 100761,
+        "inheritedSkillId": 900761,
+        "name": "花開き、世界",
+        "ownerUmaId": 107601,
+        "ownerJp": "サクラローレル",
+        "iconId": 20011
+      }
+    ],
+    "dirt": [
+      {
+        "skillId": 110801,
+        "inheritedSkillId": 910801,
+        "name": "地熱解放オーヴァードライブ",
+        "ownerUmaId": 108002,
+        "ownerJp": "トランセンド",
+        "iconId": 20011
+      },
+      {
+        "skillId": 110981,
+        "inheritedSkillId": 910981,
+        "name": "五獣挙りて彩光奏づ",
+        "ownerUmaId": 109802,
+        "ownerJp": "コパノリッキー",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100061,
+        "inheritedSkillId": 900061,
+        "name": "勝利の鼓動",
+        "ownerUmaId": 100601,
+        "ownerJp": "オグリキャップ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100051,
+        "inheritedSkillId": 900051,
+        "name": "煌星のヴォードヴィル",
+        "ownerUmaId": 100501,
+        "ownerJp": "フジキセキ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100971,
+        "inheritedSkillId": 900971,
+        "name": "スカーレットリリィの高揚",
+        "ownerUmaId": 109701,
+        "ownerJp": "スティルインラブ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 110151,
+        "inheritedSkillId": 910151,
+        "name": "恵福バルカローレ",
+        "ownerUmaId": 101502,
+        "ownerJp": "テイエムオペラオー",
+        "iconId": 20011
+      }
+    ]
+  },
+  "style": {
+    "nige": [
+      {
+        "skillId": 101411,
+        "inheritedSkillId": 91101411,
+        "name": "光れ！弾けろ！超新星爆発！",
+        "ownerUmaId": 114101,
+        "ownerJp": "エピファネイア",
+        "iconId": 20016
+      },
+      {
+        "skillId": 100201,
+        "inheritedSkillId": 900201,
+        "name": "アングリング×スキーミング",
+        "ownerUmaId": 102001,
+        "ownerJp": "セイウンスカイ",
+        "iconId": 20041
+      },
+      {
+        "skillId": 120681,
+        "inheritedSkillId": 920681,
+        "name": "ミンナノアタシへ！",
+        "ownerUmaId": 106803,
+        "ownerJp": "キタサンブラック",
+        "iconId": 20011
+      },
+      {
+        "skillId": 120241,
+        "inheritedSkillId": 920241,
+        "name": "HOP STEP♪LOCK ON!",
+        "ownerUmaId": 102403,
+        "ownerJp": "マヤノトップガン",
+        "iconId": 20021
+      },
+      {
+        "skillId": 110261,
+        "inheritedSkillId": 910261,
+        "name": "オペレーション・Cacao",
+        "ownerUmaId": 102602,
+        "ownerJp": "ミホノブルボン",
+        "iconId": 20011
+      },
+      {
+        "skillId": 120231,
+        "inheritedSkillId": 920231,
+        "name": "勝利ヘ至ル累積",
+        "ownerUmaId": 102303,
+        "ownerJp": "ビワハヤヒデ",
+        "iconId": 20011
+      }
+    ],
+    "senko": [
+      {
+        "skillId": 101411,
+        "inheritedSkillId": 91101411,
+        "name": "光れ！弾けろ！超新星爆発！",
+        "ownerUmaId": 114101,
+        "ownerJp": "エピファネイア",
+        "iconId": 20016
+      },
+      {
+        "skillId": 110321,
+        "inheritedSkillId": 910321,
+        "name": "夏空ハレーション",
+        "ownerUmaId": 103202,
+        "ownerJp": "アグネスタキオン",
+        "iconId": 20011
+      },
+      {
+        "skillId": 110291,
+        "inheritedSkillId": 910291,
+        "name": "いっぱいおあげんしぇ！",
+        "ownerUmaId": 102902,
+        "ownerJp": "ユキノビジン",
+        "iconId": 20011
+      },
+      {
+        "skillId": 120231,
+        "inheritedSkillId": 920231,
+        "name": "勝利ヘ至ル累積",
+        "ownerUmaId": 102303,
+        "ownerJp": "ビワハヤヒデ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 110861,
+        "inheritedSkillId": 910861,
+        "name": "解けぬ結い目",
+        "ownerUmaId": 108602,
+        "ownerJp": "メジロラモーヌ",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100971,
+        "inheritedSkillId": 900971,
+        "name": "スカーレットリリィの高揚",
+        "ownerUmaId": 109701,
+        "ownerJp": "スティルインラブ",
+        "iconId": 20011
+      }
+    ],
+    "sashi": [
+      {
+        "skillId": 101351,
+        "inheritedSkillId": 91101351,
+        "name": "黄金を訪ねて",
+        "ownerUmaId": 113501,
+        "ownerJp": "ステイゴールド",
+        "iconId": 20016
+      },
+      {
+        "skillId": 110881,
+        "inheritedSkillId": 910881,
+        "name": "夏雷カスケード！",
+        "ownerUmaId": 108802,
+        "ownerJp": "サトノクラウン",
+        "iconId": 20011
+      },
+      {
+        "skillId": 101021,
+        "inheritedSkillId": 901021,
+        "name": "ヴィヴァーチェ・ヴォラーレ",
+        "ownerUmaId": 110201,
+        "ownerJp": "サウンズオブアース",
+        "iconId": 20021
+      },
+      {
+        "skillId": 100551,
+        "inheritedSkillId": 900551,
+        "name": "万彩☆マーベラス★世界",
+        "ownerUmaId": 105501,
+        "ownerJp": "マーベラスサンデー",
+        "iconId": 20011
+      },
+      {
+        "skillId": 100971,
+        "inheritedSkillId": 900971,
+        "name": "スカーレットリリィの高揚",
+        "ownerUmaId": 109701,
+        "ownerJp": "スティルインラブ",
+        "iconId": 20011
+      }
+    ],
+    "oikomi": [
+      {
+        "skillId": 101351,
+        "inheritedSkillId": 91101351,
+        "name": "黄金を訪ねて",
+        "ownerUmaId": 113501,
+        "ownerJp": "ステイゴールド",
+        "iconId": 20016
+      },
+      {
+        "skillId": 100551,
+        "inheritedSkillId": 900551,
+        "name": "万彩☆マーベラス★世界",
+        "ownerUmaId": 105501,
+        "ownerJp": "マーベラスサンデー",
+        "iconId": 20011
+      },
+      {
+        "skillId": 101021,
+        "inheritedSkillId": 901021,
+        "name": "ヴィヴァーチェ・ヴォラーレ",
+        "ownerUmaId": 110201,
+        "ownerJp": "サウンズオブアース",
+        "iconId": 20021
+      },
+      {
+        "skillId": 101171,
+        "inheritedSkillId": 901171,
+        "name": "鋭気のアレグロ",
+        "ownerUmaId": 111701,
+        "ownerJp": "ウインバリアシオン",
+        "iconId": 20011
+      },
+      {
+        "skillId": 110331,
+        "inheritedSkillId": 910331,
+        "name": "Crystal Mist",
+        "ownerUmaId": 103302,
+        "ownerJp": "アドマイヤベガ",
+        "iconId": 20041
+      }
+    ]
+  },
+  "specialNotes": {
+    "100701": "GameWith 중거리 표에서 2400m 주석이 붙는 후보",
+    "101351": "2000m 이상에서 추가 가속 효과가 있는 계승진화 후보",
+    "101411": "2000m 이상에서 추가 가속 효과가 있는 계승진화 후보",
+    "110331": "GameWith 각질 표에서 특히 2400m 추천",
+    "120011": "GameWith 장거리 표에서 중산 코스 한정 주석"
+  }
+}
