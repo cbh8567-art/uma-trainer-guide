@@ -9,6 +9,9 @@ on:
       - "index.html"
       - "scripts/**"
       - ".github/workflows/sync-jp-data.yml"
+      - "data/common/**"
+      - "data/kr/server_meta.json"
+      - "data/kr/uma_ids.json"
   schedule:
     - cron: "30 18 * * *"
 
@@ -25,11 +28,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+
+      - name: Classify change impact
+        id: impact
+        shell: bash
+        run: node scripts/test-change-impact.mjs
 
       - name: Sync and validate JP data
         id: sync
@@ -42,8 +52,39 @@ jobs:
           exit 0
 
       - name: Run V6 integrity tests
+        id: integrity
+        if: steps.impact.outputs.full_test == 'true' || github.event_name == 'workflow_dispatch'
+        continue-on-error: true
         shell: bash
         run: node scripts/test-v6-integrity.mjs
+
+      - name: Verify Vercel production deployment
+        id: deploy
+        if: steps.impact.outputs.deploy_smoke == 'true'
+        continue-on-error: true
+        shell: bash
+        run: |
+          url="https://uma-trainer-guide-b3st.vercel.app/"
+          for i in $(seq 1 20); do
+            body="$(curl -fsSL --max-time 20 "$url" || true)"
+            if printf '%s' "$body" | grep -Fq '<meta name="app-build" content="V6.1">'; then
+              echo "Vercel production has V6.1 build marker."
+              exit 0
+            fi
+            echo "Waiting for Vercel deployment... attempt $i/20"
+            sleep 15
+          done
+          echo "Vercel production did not expose the V6.1 build marker in time."
+          exit 1
+
+      - name: Write automation report
+        if: always()
+        shell: bash
+        env:
+          SYNC_EXIT_CODE: ${{ steps.sync.outputs.exit_code }}
+          INTEGRITY_OUTCOME: ${{ steps.integrity.outcome }}
+          DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
+        run: node scripts/write-automation-report.mjs
 
       - name: Write Actions summary
         if: always()
@@ -59,18 +100,21 @@ jobs:
           const kr = read('data/kr/import_candidates.json');
           const system = read('data/jp/system_status.json');
           const scenario = read('data/jp/scenario_watch.json');
+          const impact = read('data/jp/change_impact.json');
+          const auto = read('data/jp/automation_report.json');
           const lines = [
-            '# JP Data Sync',
+            '# JP Data Sync V6.1',
             '',
-            `- Status: **${state.status}**`,
-            `- Mode: **${state.activeMode}**`,
-            `- Last success: ${state.lastSuccessfulSync || 'none'}`,
+            `- Automation: **${auto.status}**`,
+            `- Impact: **${impact.impactLevel}** · changed files ${impact.changedFiles?.length || 0}`,
+            `- Status: **${state.status}** · mode **${state.activeMode}**`,
             `- Changes: +${changes.summary?.added || 0} / -${changes.summary?.removed || 0} / modified ${changes.summary?.modified || 0}`,
             `- Source health: **${health.status}**`,
             `- Open review items: **${review.openCount || 0}**`,
             `- KR candidates: characters **${kr.characters?.length || 0}**, supports **${kr.supports?.length || 0}**`,
             `- Scenario watch: **${scenario.status}**`,
             `- Integrated status: **${system.status}**`,
+            `- Integrity: **${auto.tests?.integrity || 'unknown'}** · deploy smoke: **${auto.tests?.deploySmoke || 'unknown'}**`,
             '',
             '## Collections'
           ];
@@ -78,24 +122,34 @@ jobs:
             const c = entry.changes || {};
             lines.push(`- ${name}: ${entry.count} records · +${c.addedCount || 0} -${c.removedCount || 0} modified ${c.modifiedCount || 0}`);
           }
+          if (auto.failures?.length) lines.push('', '## Failures', ...auto.failures.map(x => `- ${x}`));
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
           NODE
 
-      - name: Commit sync result
+      - name: Commit generated reports and snapshots
+        if: always()
         shell: bash
         run: |
           if git diff --quiet; then
-            echo "No data changes."
+            echo "No generated changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/jp data/kr/import_candidates.json
-          git commit -m "V6.0: sync integrated data pipeline"
+          git commit -m "V6.1: update automated validation reports"
           git push
 
-      - name: Fail workflow when validation failed
-        if: steps.sync.outputs.exit_code != '0'
+      - name: Final validation gate
+        if: always()
+        shell: bash
+        env:
+          SYNC_EXIT_CODE: ${{ steps.sync.outputs.exit_code }}
+          INTEGRITY_OUTCOME: ${{ steps.integrity.outcome }}
+          DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
         run: |
-          echo "JP data validation failed. Existing snapshots were preserved."
-          exit 1
+          failed=0
+          if [ "${SYNC_EXIT_CODE:-0}" != "0" ]; then echo "JP sync validation failed."; failed=1; fi
+          if [ "${INTEGRITY_OUTCOME:-skipped}" = "failure" ]; then echo "Integrity tests failed."; failed=1; fi
+          if [ "${DEPLOY_OUTCOME:-skipped}" = "failure" ]; then echo "Vercel deployment verification failed."; failed=1; fi
+          exit "$failed"

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": null,
+  "status": "not_run",
+  "gitSha": "d9c5165979c6f3f7105261c1d89f2001b467c90c",
+  "event": "initial",
+  "sync": {
+    "exitCode": 0,
+    "status": "unknown"
+  },
+  "tests": {
+    "integrity": "unknown",
+    "deploySmoke": "unknown"
+  },
+  "impact": {
+    "level": "low",
+    "changedCount": 0,
+    "fullTest": false,
+    "deploySmoke": false
+  },
+  "sourceHealth": "unknown",
+  "failures": [],
+  "warnings": [],
+  "failedSources": []
+}
