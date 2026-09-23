@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<title>우마무스메 트레이너 가이드 V5.29 WEB</title>
+<title>우마무스메 트레이너 가이드 V5.30 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -132,7 +132,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V5.29 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V5.30 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -364,7 +364,7 @@ const FRIEND_SUPPORT_EVENTS={"version":1,"updated":"2026-09-23","note":"U-tools 
 
 </script>
 <script>
-const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v529_db_cache', LEGACY_CACHE_KEY='uma_trainer_v528_db_cache';
+const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v530_db_cache', LEGACY_CACHE_KEY='uma_trainer_v529_db_cache';
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
@@ -1626,6 +1626,16 @@ function evolutionMatchText(sk,cond,score){
 }
 
 const SUPPORT_OVERRIDES={
+ 30304:{title:'その執念は怒濤が如く',jpName:'[その執念は怒濤が如く]メイショウドトウ',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30304/event',rareEvents:[{id:'verified_30304_final',label:'覇王と共に歩む道',selection:'single',note:'세 선택지 모두 パスファインダー + 추가 레어스킬 1개, 총 2개 획득',choices:[{id:'professor',label:'俺からも礼を言うよ、ドトウ',skills:[{skillId:200331,hintLevel:2},{skillId:203651,hintLevel:1}]},{id:'dawn',label:'もうはぐれないよう、気をつけようか',skills:[{skillId:203651,hintLevel:1},{skillId:203641,hintLevel:2}]},{id:'easy',label:'何かいいことがあったのか？',skills:[{skillId:203651,hintLevel:1},{skillId:204391,hintLevel:2}]}]}]},
+ 30306:{title:'両手いっぱい、小倉愛',jpName:'[両手いっぱい、小倉愛]ナイスネイチャ',eventSource:'Game8 / Playershi 금스킬 동시 획득 검증',eventSourceUrl:'https://game8.jp/umamusume/796336',rareEvents:[{id:'verified_30306_result',label:'레어스킬 동시 획득',selection:'auto',note:'공개 공략 데이터 기준 突破口・秘めた闘魂 2개 동시 획득',choices:[{id:'done',label:'획득',skills:[{skillId:203571,hintLevel:1},{skillId:203681,hintLevel:1}]}]}]},
+ 30307:{title:'巻頭カラーの夏',jpName:'[巻頭カラーの夏]キセキ',eventSource:'Game8 / VIP Wiki 획득 구조 검증',eventSourceUrl:'https://game8.jp/umamusume/372451',rareEvents:[{id:'verified_30307_result',label:'금스킬 결과 선택',selection:'single',note:'レースメイカー 고정 + ブチ☆アゲ↑バイブス 또는 万里一空 선택. 선택지 원문은 미검증.',choices:[{id:'vibes',label:'ブチ☆アゲ↑バイブス 선택',skills:[{skillId:204481,hintLevel:1},{skillId:202681,hintLevel:1}]},{id:'banri',label:'万里一空 선택',skills:[{skillId:204481,hintLevel:1},{skillId:202821,hintLevel:1}]}]}]},
+ 30308:{title:'夏空チルタイム',jpName:'[夏空チルタイム]アーモンドアイ',eventSource:'우마무스메 라보 획득 구조 검증',eventSourceUrl:'https://umamusumelabo.com/chara_support/ssr-almondeye-guts',rareEvents:[{id:'verified_30308_result',label:'금스킬 결과 선택',selection:'single',note:'唯一無二 고정 + 一石二鳥 또는 左回りの鬼 선택. 선택지 원문은 미검증.',choices:[{id:'two_birds',label:'一石二鳥 선택',skills:[{skillId:203631,hintLevel:1},{skillId:204501,hintLevel:1}]},{id:'left',label:'左回りの鬼 선택',skills:[{skillId:203631,hintLevel:1},{skillId:200024,hintLevel:1}]}]}]},
+ 30311:{title:'As if Guided',jpName:'[As if Guided]エフフォーリア',eventSource:'Game8 / Kamigame 획득 구조 검증',eventSourceUrl:'https://game8.jp/umamusume/811059',rareEvents:[{id:'verified_30311_result',label:'금스킬 결과 선택',selection:'single',note:'素質の証明 고정 + ショーダウン/清麗高雅/純真無垢 중 1개 선택. 선택지 원문은 미검증.',choices:[{id:'showdown',label:'ショーダウン 선택',skills:[{skillId:204701,hintLevel:1},{skillId:203711,hintLevel:1}]},{id:'seirei',label:'清麗高雅 선택',skills:[{skillId:204701,hintLevel:1},{skillId:204531,hintLevel:1}]},{id:'pure',label:'純真無垢 선택',skills:[{skillId:204701,hintLevel:1},{skillId:204571,hintLevel:1}]}]}]},
+ 30312:{title:'時に交わる海と空',jpName:'[時に交わる海と空]ミスターシービー',eventSource:'Game8 / Kamigame 획득 구조 검증',eventSourceUrl:'https://game8.jp/umamusume/811060',rareEvents:[{id:'verified_30312_result',label:'금스킬 결과 선택',selection:'single',note:'強攻策 고정 + 一網打尽/君臨/当機立断 중 1개 선택. 선택지 원문은 미검증.',choices:[{id:'net',label:'一網打尽 선택',skills:[{skillId:202021,hintLevel:1},{skillId:202851,hintLevel:1}]},{id:'regnant',label:'君臨 선택',skills:[{skillId:202021,hintLevel:1},{skillId:202871,hintLevel:1}]},{id:'decision',label:'当機立断 선택',skills:[{skillId:202021,hintLevel:1},{skillId:204521,hintLevel:1}]}]}]},
+ 30314:{title:'わたしときみの交換こ♪',jpName:'[わたしときみの交換こ♪]ハルウララ',eventSource:'Game8 / VIP Wiki 금스킬 2종 확정 검증',eventSourceUrl:'https://game8.jp/umamusume/372354',rareEvents:[{id:'verified_30314_result',label:'레어스킬 2종 획득',selection:'auto',note:'공개 공략 데이터 기준 チャート急上昇！・開けろ風穴！ 2종 확정',choices:[{id:'done',label:'획득',skills:[{skillId:201671,hintLevel:1},{skillId:204661,hintLevel:1}]}]}]},
+ 30315:{title:'ちょいワルヒーロー、見参！',jpName:'[ちょいワルヒーロー、見参！]ビコーペガサス',eventSource:'우마무스메 라보 이벤트 분기 검증',eventSourceUrl:'https://umamusumelabo.com/chara_support/ssr-bikopegasus-konjou',rareEvents:[{id:'verified_30315_final',label:'心に愛と使命を、街には平和を',selection:'single',note:'堅忍果決 고정 + 気骨稜稜 또는 初嵐 선택',choices:[{id:'kikotsu',label:'さすが警察官の子どもたちだな',skills:[{skillId:204671,hintLevel:1},{skillId:202751,hintLevel:1}]},{id:'hatsuarashi',label:'住民の平和を守ったんだ。大したものだよ',skills:[{skillId:204671,hintLevel:1},{skillId:200194,hintLevel:1}]}]}]},
+ 30317:{title:'行き先はあたたかな場所',jpName:'[行き先はあたたかな場所]マチカネタンホイザ',eventSource:'Game8 / Kamigame 금스킬 동시 획득 검증',eventSourceUrl:'https://game8.jp/umamusume/815144',rareEvents:[{id:'verified_30317_result',label:'레어스킬 동시 획득',selection:'auto',note:'공개 공략 데이터 기준 突撃魂・励声一番 2개 동시 획득',choices:[{id:'done',label:'획득',skills:[{skillId:202621,hintLevel:1},{skillId:204711,hintLevel:1}]}]}]},
+
  30292:{title:'響け、二人の凱歌',jpName:'[響け、二人の凱歌]マルシュロレーヌ',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30292/event',rareEvents:[{id:'verified_30292_final',label:'重なる『愛』',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:203611,hintLevel:1},{skillId:202301,hintLevel:1}]}]}]},
  30293:{title:'白に至る純真',jpName:'[白に至る純真]デアリングタクト',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30293/event',rareEvents:[{id:'verified_30293_final',label:'シンデレラの行く末',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:203791,hintLevel:1},{skillId:204051,hintLevel:1}]}]}]},
  30294:{title:'白に至る覚悟',jpName:'[白に至る覚悟]デアリングハート',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30294/event',rareEvents:[{id:'verified_30294_final',label:'積み重ねられた『今』',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:202531,hintLevel:1},{skillId:202741,hintLevel:1}]}]}]},
