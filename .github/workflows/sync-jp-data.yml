@@ -2,6 +2,13 @@ name: JP validated data sync
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "scripts/**"
+      - ".github/workflows/sync-jp-data.yml"
   schedule:
     - cron: "30 18 * * *"
 
