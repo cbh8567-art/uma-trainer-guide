@@ -1436,7 +1436,7 @@ function applyFriendEventSupplements(cards,skillMap){
     });
     if(!rares.length)continue;
     c.rareEvents=rares.map(sk=>({
-      id:`manual_rare_${c.id}_${sk.id}`,
+      id:c.type==='친구'?`friend_manual_${c.id}_${sk.id}`:`manual_rare_${c.id}_${sk.id}`,
       label:`${sk.jp||skillMap.get(Number(sk.id))?.name||'레어 스킬'} 획득 여부`,
       selection:'auto',
       note:'정확한 이벤트 분기 미연결 · 실제 획득했을 때 직접 체크',
