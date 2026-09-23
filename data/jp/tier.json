@@ -1,0 +1,535 @@
+{
+  "schemaVersion": 1,
+  "version": 1,
+  "snapshotDate": "2026-09-23",
+  "sourceNote": "Game8 거리별/더트 최강 캐릭터 랭킹 스냅샷. 각질 필터는 출처 본문에서 각질이 확인된 항목 위주.",
+  "sources": {
+    "short": "https://game8.jp/umamusume/793845",
+    "mile": "https://game8.jp/umamusume/794084",
+    "mid": "https://game8.jp/umamusume/794085",
+    "long": "https://game8.jp/umamusume/794086",
+    "dirt": "https://game8.jp/umamusume/794087"
+  },
+  "rows": [
+    {
+      "ground": "turf",
+      "distance": "short",
+      "tier": "SS+",
+      "jp": "サクラバクシンオー(ダンス)",
+      "kr": "사쿠라 바쿠신 오(댄스)",
+      "styles": [
+        "nige",
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "short",
+      "tier": "SS+",
+      "jp": "アストンマーチャン(バレンタイン)",
+      "kr": "아스톤 마짱(발렌타인)",
+      "styles": [
+        "nige"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "short",
+      "tier": "SS+",
+      "jp": "バンブーメモリー(夏)",
+      "kr": "뱀부 메모리(여름)",
+      "styles": [
+        "sashi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "short",
+      "tier": "SS",
+      "jp": "デュランダル",
+      "kr": "듀란달",
+      "styles": [
+        "oikomi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "short",
+      "tier": "SS",
+      "jp": "ケイエスミラクル",
+      "kr": "케이에스 미라클",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "short",
+      "tier": "S",
+      "jp": "ダイイチルビー",
+      "kr": "다이이치 루비",
+      "styles": [
+        "sashi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "short",
+      "tier": "S",
+      "jp": "アストンマーチャン",
+      "kr": "아스톤 마짱",
+      "styles": [
+        "nige"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "short",
+      "tier": "S",
+      "jp": "シーキングザパール",
+      "kr": "시킹 더 펄",
+      "styles": [
+        "nige",
+        "senko",
+        "sashi",
+        "oikomi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mile",
+      "tier": "SS+",
+      "jp": "タイキシャトル(バレンタイン)",
+      "kr": "타이키 셔틀(발렌타인)",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mile",
+      "tier": "SS+",
+      "jp": "グランアレグリア",
+      "kr": "그란 알레그리아",
+      "styles": [
+        "sashi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mile",
+      "tier": "SS+",
+      "jp": "タイキシャトル",
+      "kr": "타이키 셔틀",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mile",
+      "tier": "SS",
+      "jp": "バブルガムフェロー(正月)",
+      "kr": "버블검 펠로(신년)",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mile",
+      "tier": "SS",
+      "jp": "オグリキャップ(シングレ)",
+      "kr": "오구리 캡(신데렐라 그레이)",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mile",
+      "tier": "SS",
+      "jp": "ダイイチルビー(青)",
+      "kr": "다이이치 루비(신의상)",
+      "styles": [
+        "sashi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mile",
+      "tier": "SS",
+      "jp": "メジロラモーヌ",
+      "kr": "메지로 라모누",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mile",
+      "tier": "SS",
+      "jp": "アイネスフウジン(チョコ)",
+      "kr": "아이네스 후진(초코)",
+      "styles": [
+        "nige"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mile",
+      "tier": "S",
+      "jp": "ラインクラフト",
+      "kr": "라인 크라프트",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mile",
+      "tier": "S",
+      "jp": "デュランダル",
+      "kr": "듀란달",
+      "styles": [
+        "oikomi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mile",
+      "tier": "S",
+      "jp": "ニシノフラワー",
+      "kr": "니시노 플라워",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mid",
+      "tier": "SS+",
+      "jp": "エピファネイア",
+      "kr": "에피파네이아",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mid",
+      "tier": "SS+",
+      "jp": "アドマイヤグルーヴ",
+      "kr": "어드마이어 그루브",
+      "styles": [
+        "sashi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mid",
+      "tier": "SS+",
+      "jp": "アーモンドアイ",
+      "kr": "아몬드 아이",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mid",
+      "tier": "SS+",
+      "jp": "スティルインラブ",
+      "kr": "스틸 인 러브",
+      "styles": [
+        "sashi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mid",
+      "tier": "SS+",
+      "jp": "クロノジェネシス",
+      "kr": "크로노 제네시스",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mid",
+      "tier": "SS+",
+      "jp": "ラヴズオンリーユー",
+      "kr": "러브즈 온리 유",
+      "styles": [
+        "sashi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mid",
+      "tier": "SS+",
+      "jp": "オルフェーヴル",
+      "kr": "오르페브르",
+      "styles": [
+        "oikomi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mid",
+      "tier": "SS",
+      "jp": "セイウンスカイ(水着)",
+      "kr": "세이운 스카이(수영복)",
+      "styles": [
+        "nige"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mid",
+      "tier": "SS",
+      "jp": "キセキ",
+      "kr": "키세키",
+      "styles": [
+        "nige",
+        "sashi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mid",
+      "tier": "SS",
+      "jp": "ステイゴールド",
+      "kr": "스테이 골드",
+      "styles": [
+        "sashi",
+        "oikomi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mid",
+      "tier": "SS",
+      "jp": "ブエナビスタ",
+      "kr": "부에나 비스타",
+      "styles": [
+        "sashi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "mid",
+      "tier": "SS",
+      "jp": "ジェンティルドンナ",
+      "kr": "젠틸돈나",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "long",
+      "tier": "SS+",
+      "jp": "エピファネイア",
+      "kr": "에피파네이아",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "long",
+      "tier": "SS+",
+      "jp": "シュヴァルグラン(水着)",
+      "kr": "슈발 그랑(수영복)",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "long",
+      "tier": "SS+",
+      "jp": "オルフェーヴル",
+      "kr": "오르페브르",
+      "styles": [
+        "oikomi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "long",
+      "tier": "SS+",
+      "jp": "マヤノトップガン(ハロウィン)",
+      "kr": "마야노 탑건(할로윈)",
+      "styles": [
+        "nige"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "long",
+      "tier": "SS+",
+      "jp": "キタサンブラック(新衣装)",
+      "kr": "키타산 블랙(신의상)",
+      "styles": [
+        "nige"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "long",
+      "tier": "SS",
+      "jp": "キセキ",
+      "kr": "키세키",
+      "styles": [
+        "nige",
+        "sashi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "long",
+      "tier": "SS",
+      "jp": "ステイゴールド",
+      "kr": "스테이 골드",
+      "styles": [
+        "sashi",
+        "oikomi"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "long",
+      "tier": "SS",
+      "jp": "オグリキャップ(シングレ)",
+      "kr": "오구리 캡(신데렐라 그레이)",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "long",
+      "tier": "SS",
+      "jp": "ビワハヤヒデ(メカ)",
+      "kr": "비와 하야히데(메카)",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "turf",
+      "distance": "long",
+      "tier": "SS",
+      "jp": "ナリタブライアン(新衣装)",
+      "kr": "나리타 브라이언(신의상)",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "dirt",
+      "distance": "mile",
+      "tier": "SS+",
+      "jp": "トランセンド(温泉)",
+      "kr": "트랜센드(온천)",
+      "styles": [
+        "nige"
+      ]
+    },
+    {
+      "ground": "dirt",
+      "distance": "mile",
+      "tier": "SS+",
+      "jp": "エスポワールシチー",
+      "kr": "에스포와르 시티",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "dirt",
+      "distance": "mile",
+      "tier": "SS+",
+      "jp": "スマートファルコン(バトン)",
+      "kr": "스마트 팔콘(바통)",
+      "styles": [
+        "nige"
+      ]
+    },
+    {
+      "ground": "dirt",
+      "distance": "mile",
+      "tier": "SS+",
+      "jp": "ホッコータルマエ(水着)",
+      "kr": "홋코 타루마에(수영복)",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "dirt",
+      "distance": "mid",
+      "tier": "SS+",
+      "jp": "ホッコータルマエ(水着)",
+      "kr": "홋코 타루마에(수영복)",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "dirt",
+      "distance": "mid",
+      "tier": "SS",
+      "jp": "ヴィクトワールピサ",
+      "kr": "빅투아르 피사",
+      "styles": [
+        "sashi"
+      ]
+    },
+    {
+      "ground": "dirt",
+      "distance": "mile",
+      "tier": "S",
+      "jp": "ワンダーアキュート(温泉)",
+      "kr": "원더 어큐트(온천)",
+      "styles": [
+        "senko",
+        "sashi"
+      ]
+    },
+    {
+      "ground": "dirt",
+      "distance": "mile",
+      "tier": "S",
+      "jp": "コパノリッキー",
+      "kr": "코파노 리키",
+      "styles": [
+        "nige",
+        "senko"
+      ]
+    },
+    {
+      "ground": "dirt",
+      "distance": "mid",
+      "tier": "S",
+      "jp": "ホッコータルマエ",
+      "kr": "홋코 타루마에",
+      "styles": [
+        "senko"
+      ]
+    },
+    {
+      "ground": "dirt",
+      "distance": "mile",
+      "tier": "S",
+      "jp": "ハルウララ(正月)",
+      "kr": "하루 우라라(신년)",
+      "styles": [
+        "sashi"
+      ]
+    }
+  ]
+}
