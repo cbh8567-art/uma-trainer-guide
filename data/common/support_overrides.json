@@ -1,0 +1,2526 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-23",
+  "overrides": {
+    "30152": {
+      "title": "All'alba vincerò!",
+      "jpName": "[All'alba vincerò!]テイエムオペラオー",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30152/event",
+      "rareEvents": [
+        {
+          "id": "verified_30152_final",
+          "label": "輝きの影で",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "monster",
+              "label": "この3人だから、より気合いが入ったのかも",
+              "skills": [
+                {
+                  "skillId": 202481,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "hayate",
+              "label": "どんな舞台も盛り上げてしまうんだな",
+              "skills": [
+                {
+                  "skillId": 200361,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30153": {
+      "title": "優しい月",
+      "jpName": "[優しい月]ゴールドシチー",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30153/event",
+      "rareEvents": [
+        {
+          "id": "verified_30153_final",
+          "label": "伝えるべき言葉は",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "seiran",
+              "label": "色んな形の友情があっていいと思うよ",
+              "skills": [
+                {
+                  "skillId": 200184,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "voltage",
+              "label": "もっと友情が深まるといいな",
+              "skills": [
+                {
+                  "skillId": 202671,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30157": {
+      "title": "君と見る泡沫",
+      "jpName": "[君と見る泡沫]マンハッタンカフェ",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30157/event",
+      "rareEvents": [
+        {
+          "id": "verified_30157_final",
+          "label": "水面の向こうに",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "muga",
+              "label": "前より楽しそうだな！",
+              "skills": [
+                {
+                  "skillId": 202421,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "cooldown",
+              "label": "せっかくだし、トレーニング見ようか？",
+              "skills": [
+                {
+                  "skillId": 200741,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30161": {
+      "title": "大望は飛んでいく",
+      "jpName": "[大望は飛んでいく]エルコンドルパサー",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30161/event",
+      "rareEvents": [
+        {
+          "id": "verified_30161_final",
+          "label": "世界への飛翔",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "oushu",
+              "label": "「凱旋門賞」の先を見てるなんて……",
+              "skills": [
+                {
+                  "skillId": 202711,
+                  "hintLevel": 0
+                }
+              ]
+            },
+            {
+              "id": "arc",
+              "label": "徹底した準備の大切さを実感した",
+              "skills": [
+                {
+                  "skillId": 200331,
+                  "hintLevel": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30164": {
+      "title": "炎々、闘志を抱き",
+      "jpName": "[炎々、闘志を抱き]ヒシアマゾン",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30164/event",
+      "rareEvents": [
+        {
+          "id": "verified_30164_final",
+          "label": "戦友と書いて『マブダチ』と読む",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "moon",
+              "label": "……2人はいいライバルだな！",
+              "skills": [
+                {
+                  "skillId": 201463,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "shadow",
+              "label": "今、もうひと勝負してみたらどうかな？",
+              "skills": [
+                {
+                  "skillId": 200641,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30166": {
+      "title": "高らかにYO-HO!",
+      "jpName": "[高らかにYO-HO!]タップダンスシチー",
+      "eventSource": "U-tools / GameWith 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30166/event",
+      "rareEvents": [
+        {
+          "id": "verified_30166_final",
+          "label": "See Ya！夢追う友人",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "runaway",
+              "label": "とびっきり派手にいこう！",
+              "skills": [
+                {
+                  "skillId": 200551,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "escape",
+              "label": "慣れ親しんだ宴にしよう！",
+              "skills": [
+                {
+                  "skillId": 200541,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30170": {
+      "title": "我が舞、巡りて",
+      "jpName": "[我が舞、巡りて]キングヘイロー",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30170/event",
+      "rareEvents": [
+        {
+          "id": "verified_30170_final",
+          "label": "キングの流儀／相伝編",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "ifu",
+              "label": "ああ、すごい出来だ！",
+              "skills": [
+                {
+                  "skillId": 202541,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "kikotsu",
+              "label": "……なんで君が自慢げなんだ？",
+              "skills": [
+                {
+                  "skillId": 202751,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30173": {
+      "title": "大地と我らのアンサンブル",
+      "jpName": "[大地と我らのアンサンブル]サウンズオブアース",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30173/event",
+      "rareEvents": [
+        {
+          "id": "verified_30173_path",
+          "label": "いずれグランディオーソなセッションへ",
+          "selection": "single",
+          "note": "첫 연속 이벤트 선택에 따라 최종 획득 레어스킬이 결정됨",
+          "choices": [
+            {
+              "id": "violin",
+              "label": "첫 이벤트에서 「ふ、俺は気まぐれなヴァイオリン……さ」 선택",
+              "skills": [
+                {
+                  "skillId": 200361,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "recovery",
+              "label": "첫 이벤트에서 「え、ええっと？」 선택",
+              "skills": [
+                {
+                  "skillId": 200381,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30177": {
+      "title": "会心のウイニングスマイル",
+      "jpName": "[会心のウイニングスマイル]ヴィブロス",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30177/event",
+      "rareEvents": [
+        {
+          "id": "verified_30177_final",
+          "label": "絶対！ときめきパワー！",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "swift",
+              "label": "君はやっぱりすごい！",
+              "skills": [
+                {
+                  "skillId": 200591,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "hidden",
+              "label": "かっこよかったよ！！",
+              "skills": [
+                {
+                  "skillId": 201691,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30179": {
+      "title": "百花の願いをこの胸に",
+      "jpName": "[百花の願いをこの胸に]サトノダイヤモンド",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30179/event",
+      "rareEvents": [
+        {
+          "id": "verified_30179_final",
+          "label": "カルセドニーが輝く",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "advance",
+              "label": "妥協しない心が響いたかな？",
+              "skills": [
+                {
+                  "skillId": 202151,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "flame",
+              "label": "みんな、いい顔をしているな",
+              "skills": [
+                {
+                  "skillId": 202091,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30184": {
+      "title": "感謝感謝！サクラ吹雪！！",
+      "jpName": "[感謝感謝！サクラ吹雪！！]サクラバクシンオー",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30184/event",
+      "rareEvents": [
+        {
+          "id": "verified_30184_final",
+          "label": "飛び越えたい、隣の貴方",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "rocket",
+              "label": "いいライバル関係だな",
+              "skills": [
+                {
+                  "skillId": 202861,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "purple",
+              "label": "イベントレースが楽しみだ！",
+              "skills": [
+                {
+                  "skillId": 200973,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30201": {
+      "title": "Take Them Down!",
+      "jpName": "[Take Them Down!]ナリタタイシン",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30201/event",
+      "rareEvents": [
+        {
+          "id": "verified_30201_final",
+          "label": "助ける番",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "soar",
+              "label": "爽快だったよ！",
+              "skills": [
+                {
+                  "skillId": 202901,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "shadow",
+              "label": "トラブルがあったなら、俺も手伝ったのに",
+              "skills": [
+                {
+                  "skillId": 200641,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30208": {
+      "title": "朝焼け苺の畑にて",
+      "jpName": "[朝焼け苺の畑にて]ニシノフラワー",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30208/event",
+      "rareEvents": [
+        {
+          "id": "verified_30208_final",
+          "label": "憧れに手をのべて",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "heart",
+              "label": "にんじん、食べてもらわないとな！",
+              "skills": [
+                {
+                  "skillId": 203041,
+                  "hintLevel": 0
+                }
+              ]
+            },
+            {
+              "id": "orthodox",
+              "label": "これからも畑は続けるのか？",
+              "skills": [
+                {
+                  "skillId": 203031,
+                  "hintLevel": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30211": {
+      "title": "Lucky☆Summertime",
+      "jpName": "[Lucky☆Summertime]コパノリッキー",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30211/event",
+      "rareEvents": [
+        {
+          "id": "verified_30211_final",
+          "label": "五行相剋・大ピンチ？",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "frontier",
+              "label": "頑張れ、大事なのは強気で進む心だよ",
+              "skills": [
+                {
+                  "skillId": 202951,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "expert",
+              "label": "頑張れ、大事なのは手間を惜しまない心だよ",
+              "skills": [
+                {
+                  "skillId": 202841,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30215": {
+      "title": "Devilish Whispers",
+      "jpName": "[Devilish Whispers]スティルインラブ",
+      "eventSource": "Inven 이벤트 분기 검증",
+      "eventSourceUrl": "https://uma.inven.co.kr/db/scard/30215",
+      "rareEvents": [
+        {
+          "id": "inven_30215_final",
+          "label": "③ 마녀와 뱀파이어",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "instinct",
+              "label": "토마토 주스가 참 신선해 보이네",
+              "skills": [
+                {
+                  "skillId": 203151,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "clear",
+              "label": "크랜베리 향이 좋네",
+              "skills": [
+                {
+                  "skillId": 203141,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30222": {
+      "title": "KNOCK 'EM DOWN!",
+      "jpName": "[KNOCK 'EM DOWN!]エスポワールシチー",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30222/event",
+      "rareEvents": [
+        {
+          "id": "verified_30222_final",
+          "label": "メンツの問題",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "step",
+              "label": "えーっと……抜群にかっこよかったよ！",
+              "skills": [
+                {
+                  "skillId": 202331,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "clear",
+              "label": "先日の番組見ました！さすがの度胸でした！",
+              "skills": [
+                {
+                  "skillId": 203181,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30224": {
+      "title": "咆哮のアポヤンド",
+      "jpName": "[咆哮のアポヤンド]ナリタブライアン",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30224/event",
+      "rareEvents": [
+        {
+          "id": "verified_30224_final",
+          "label": "「共鳴」",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "monster",
+              "label": "次のライブも楽しみだな",
+              "skills": [
+                {
+                  "skillId": 202481,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "break",
+              "label": "次は自分たちのバンドで参加、とか？",
+              "skills": [
+                {
+                  "skillId": 203221,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30226": {
+      "title": "Cocoon",
+      "jpName": "[Cocoon]エアシャカール",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30226/event",
+      "rareEvents": [
+        {
+          "id": "verified_30226_final",
+          "label": "Release:“Me”",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "chain",
+              "label": "答えは見つかった？",
+              "skills": [
+                {
+                  "skillId": 203241,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "blaze",
+              "label": "今日はよく眠れそう？",
+              "skills": [
+                {
+                  "skillId": 203251,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30227": {
+      "title": "緋色の君へ風が吹く",
+      "jpName": "[緋色の君へ風が吹く]ダイワスカーレット",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30227/event",
+      "rareEvents": [
+        {
+          "id": "verified_30227_final",
+          "label": "バブリー水泳競技会！",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "banri",
+              "label": "圧巻の泳ぎだった",
+              "skills": [
+                {
+                  "skillId": 202821,
+                  "hintLevel": 0
+                }
+              ]
+            },
+            {
+              "id": "top",
+              "label": "想いはイチバンだった",
+              "skills": [
+                {
+                  "skillId": 201271,
+                  "hintLevel": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30228": {
+      "title": "COOL⇔CRAZY/Buddy",
+      "jpName": "[COOL⇔CRAZY/Buddy]シンボリクリスエス",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30228/event",
+      "rareEvents": [
+        {
+          "id": "verified_30228_final",
+          "label": "WOTAGEI",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "muga",
+              "label": "あの応援、受けたら元気出そう！",
+              "skills": [
+                {
+                  "skillId": 202421,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "senri",
+              "label": "俺も極めたいな、応援芸",
+              "skills": [
+                {
+                  "skillId": 202641,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30232": {
+      "title": "Blast Off!",
+      "jpName": "[Blast Off!]ブラストワンピース",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30232/event",
+      "rareEvents": [
+        {
+          "id": "verified_30232_final",
+          "label": "違いがあるのは、すっごく楽しい！",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "effort",
+              "label": "俺もウマ娘のファッションを学んでみるよ",
+              "skills": [
+                {
+                  "skillId": 203411,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "fair",
+              "label": "人間あるあるも教えてあげようか",
+              "skills": [
+                {
+                  "skillId": 203421,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30233": {
+      "title": "気韻生動",
+      "jpName": "[気韻生動]シンボリルドルフ",
+      "eventSource": "Inven 이벤트 분기 검증",
+      "eventSourceUrl": "https://uma.inven.co.kr/db/scard/30233",
+      "rareEvents": [
+        {
+          "id": "inven_30233_final",
+          "label": "③ 고결한 대망을 가슴에 품고",
+          "selection": "single",
+          "note": "성공/실패는 힌트 Lv만 달라지며 선택한 레어스킬 자체는 획득",
+          "choices": [
+            {
+              "id": "oushu",
+              "label": "변치 않는 신념을 지녔구나",
+              "skills": [
+                {
+                  "skillId": 202711,
+                  "hintLevel": 0
+                }
+              ]
+            },
+            {
+              "id": "iikotoko",
+              "label": "넌 트레센 학원의 자랑이야!",
+              "skills": [
+                {
+                  "skillId": 201652,
+                  "hintLevel": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30234": {
+      "title": "深窓の少女へ",
+      "jpName": "[深窓の少女へ]メジロアルダン",
+      "eventSource": "U-tools 검증 보강",
+      "rareEvents": [
+        {
+          "id": "ut_30234_final",
+          "label": "夜空、刹那に輝き",
+          "selection": "single",
+          "choices": [
+            {
+              "id": "watch",
+              "label": "（静かに見守ろう）",
+              "skills": [
+                {
+                  "skillId": 202741,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "gift",
+              "label": "いい贈り物だったね",
+              "skills": [
+                {
+                  "skillId": 203131,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "fireworks",
+              "label": "たまやー、かぎやー！",
+              "skills": []
+            }
+          ]
+        }
+      ]
+    },
+    "30237": {
+      "title": "Cutest in Ur ♡",
+      "jpName": "[Cutest in Ur ♡]カレンチャン",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30237/event",
+      "rareEvents": [
+        {
+          "id": "verified_30237_final",
+          "label": "#Curren for U♡",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "clash",
+              "label": "『最高にカワイかったです』と書く",
+              "skills": [
+                {
+                  "skillId": 203491,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "concentration",
+              "label": "『またピアノ演奏聞かせてください』と書く",
+              "skills": [
+                {
+                  "skillId": 200431,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30242": {
+      "title": "世界を変える眼差し",
+      "jpName": "[世界を変える眼差し]アーモンドアイ",
+      "eventSource": "Inven / U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://uma.inven.co.kr/db/scard/30242",
+      "rareEvents": [
+        {
+          "id": "verified_30242_final",
+          "label": "果てしなきアーモンドアイ",
+          "selection": "single",
+          "note": "선택한 결과에 따라 레어스킬 2개를 동시에 획득",
+          "choices": [
+            {
+              "id": "rudolf",
+              "label": "シンボリルドルフらの反応を見る",
+              "skills": [
+                {
+                  "skillId": 202701,
+                  "hintLevel": 0
+                },
+                {
+                  "skillId": 203431,
+                  "hintLevel": 0
+                }
+              ]
+            },
+            {
+              "id": "around",
+              "label": "周囲の反応を見る",
+              "skills": [
+                {
+                  "skillId": 200361,
+                  "hintLevel": 0
+                },
+                {
+                  "skillId": 200331,
+                  "hintLevel": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30245": {
+      "title": "Ballroom Tempest",
+      "jpName": "[Ballroom Tempest]ウオッカ",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30245/event",
+      "rareEvents": [
+        {
+          "id": "verified_30245_final",
+          "label": "見せつけよ暗き眩き閃光を",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 201383,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203571,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30246": {
+      "title": "誘うは夢心地",
+      "jpName": "[誘うは夢心地]ドリームジャーニー",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30246/event",
+      "rareEvents": [
+        {
+          "id": "verified_30246_final",
+          "label": "そして今日も花が咲く",
+          "selection": "single",
+          "note": "첫 선택지는 레어스킬 2개, 두 번째 선택지는 레어스킬 없음",
+          "choices": [
+            {
+              "id": "no_need",
+              "label": "そんなものいらないよ",
+              "skills": [
+                {
+                  "skillId": 202881,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 202931,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "trip",
+              "label": "それなら、また今度遠征の相談に……",
+              "skills": []
+            }
+          ]
+        }
+      ]
+    },
+    "30248": {
+      "title": "無垢の白妙",
+      "jpName": "[無垢の白妙]デアリングタクト",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30248/event",
+      "rareEvents": [
+        {
+          "id": "verified_30248_final",
+          "label": "Innocent Wildflower",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 200591,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203591,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30249": {
+      "title": "繋がれパレード・ノーツ♪",
+      "jpName": "[繋がれパレード・ノーツ♪]トランセンド",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30249/event",
+      "rareEvents": [
+        {
+          "id": "verified_30249_final",
+          "label": "感謝困惑雨あられ",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 203091,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203601,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30250": {
+      "title": "Luz de ensueño",
+      "jpName": "[Luz de ensueño]ブエナビスタ",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30250/event",
+      "rareEvents": [
+        {
+          "id": "verified_30250_final",
+          "label": "優しさのおすそ分け",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "regnant",
+              "label": "……本当に優しいんだなぁ",
+              "skills": [
+                {
+                  "skillId": 202871,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "uplift",
+              "label": "ご、後光がぁ……！",
+              "skills": [
+                {
+                  "skillId": 202101,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30252": {
+      "title": "My Beloved Scenery",
+      "jpName": "[My Beloved Scenery]サイレンススズカ",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30252/event",
+      "rareEvents": [
+        {
+          "id": "verified_30252_final",
+          "label": "走って、私と、走って",
+          "selection": "single",
+          "note": "최종 선택지에 따라 레어스킬 1개 획득",
+          "choices": [
+            {
+              "id": "fight",
+              "label": "思いっきりどうぞ！",
+              "skills": [
+                {
+                  "skillId": 203381,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "escape",
+              "label": "頑張って追いつくからご心配なく！",
+              "skills": [
+                {
+                  "skillId": 200541,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30253": {
+      "title": "Unveiled Dream",
+      "jpName": "[Unveiled Dream]ラインクラフト",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30253/event",
+      "rareEvents": [
+        {
+          "id": "verified_30253_final",
+          "label": "拝啓、お父さん",
+          "selection": "auto",
+          "note": "두 번째 연속 이벤트 선택과 무관하게 레어스킬 2개를 동시에 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 201051,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 202671,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30256": {
+      "title": "白き稲妻の如く",
+      "jpName": "[白き稲妻の如く]タマモクロス",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30256/event",
+      "rareEvents": [
+        {
+          "id": "verified_30256_final",
+          "label": "遠くで光るその走り",
+          "selection": "single",
+          "note": "어느 선택지든 神速 + 추가 레어스킬 1개, 총 2개 획득",
+          "choices": [
+            {
+              "id": "future",
+              "label": "将来が楽しみだ！",
+              "skills": [
+                {
+                  "skillId": 202551,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 203361,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "legacy",
+              "label": "君の想いは、継がれたみたいだな",
+              "skills": [
+                {
+                  "skillId": 202551,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 203661,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30261": {
+      "title": "水面のプリンシパル",
+      "jpName": "[水面のプリンシパル]ウインバリアシオン",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30261/event",
+      "rareEvents": [
+        {
+          "id": "verified_30261_final",
+          "label": "大衆的チアフレンド",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 203731,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 200751,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30262": {
+      "title": "Tranquillo",
+      "jpName": "[Tranquillo]ドゥラメンテ",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30262/event",
+      "rareEvents": [
+        {
+          "id": "verified_30262_final",
+          "label": "可愛いの真の力！",
+          "selection": "single",
+          "note": "첫 선택지에서 레어스킬 2개, 두 번째 선택지는 레어스킬 없음",
+          "choices": [
+            {
+              "id": "parfait",
+              "label": "ふたりとも、パフェのおかわりする？",
+              "skills": [
+                {
+                  "skillId": 202901,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203751,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "smile",
+              "label": "それでいうと、笑顔は――",
+              "skills": []
+            }
+          ]
+        }
+      ]
+    },
+    "30264": {
+      "title": "気まぐれ渡り星",
+      "jpName": "[気まぐれ渡り星]ステイゴールド",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30264/event",
+      "rareEvents": [
+        {
+          "id": "verified_30264_final",
+          "label": "新しい旅へ",
+          "selection": "single",
+          "note": "어느 선택지든 ネバーギブアップ + 추가 레어스킬 1개, 총 2개 획득",
+          "choices": [
+            {
+              "id": "unknown",
+              "label": "まったく未知の旅を",
+              "skills": [
+                {
+                  "skillId": 202721,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 203851,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "past",
+              "label": "かつての旅をもう一度",
+              "skills": [
+                {
+                  "skillId": 202721,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 203861,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30265": {
+      "title": "氷結晶の静域",
+      "jpName": "[氷結晶の静域]アドマイヤグルーヴ",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30265/event",
+      "rareEvents": [
+        {
+          "id": "verified_30265_final",
+          "label": "孤高の証明",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 203831,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203841,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30267": {
+      "title": "カルストンライトオ、猫です",
+      "jpName": "[カルストンライトオ、猫です]カルストンライトオ",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30267/event",
+      "rareEvents": [
+        {
+          "id": "verified_30267_final",
+          "label": "速い＆真っ直ぐは世界を救う！",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 202041,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203881,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30268": {
+      "title": "今宵、我が君のために",
+      "jpName": "[今宵、我が君のために]デュランダル",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30268/event",
+      "rareEvents": [
+        {
+          "id": "verified_30268_final",
+          "label": "忠誠は己が道に",
+          "selection": "single",
+          "note": "어느 선택지든 月影一閃 + 추가 레어스킬 1개, 총 2개 획득",
+          "choices": [
+            {
+              "id": "lightning",
+              "label": "ご立派です、デュランダル卿！",
+              "skills": [
+                {
+                  "skillId": 201453,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 202401,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "decision",
+              "label": "この活躍、広まっちゃうな！",
+              "skills": [
+                {
+                  "skillId": 201453,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203761,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30272": {
+      "title": "Zirkus der Träume",
+      "jpName": "[Zirkus der Träume]エイシンフラッシュ",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30272/event",
+      "rareEvents": [
+        {
+          "id": "verified_30272_final",
+          "label": "美しき結実",
+          "selection": "single",
+          "note": "첫 선택지에서 레어스킬 2개, 두 번째 선택지는 레어스킬 없음",
+          "choices": [
+            {
+              "id": "race",
+              "label": "レースが楽しみだ！",
+              "skills": [
+                {
+                  "skillId": 202641,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203671,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "can",
+              "label": "君ならできる！",
+              "skills": []
+            }
+          ]
+        }
+      ]
+    },
+    "30274": {
+      "title": "決意のフローラ",
+      "jpName": "[決意のフローラ]カレンブーケドール",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30274/event",
+      "rareEvents": [
+        {
+          "id": "verified_30274_final",
+          "label": "奏で合う幸福",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 200351,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203991,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30275": {
+      "title": "天才的ユートピア",
+      "jpName": "[天才的ユートピア]トウカイテイオー",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30275/event",
+      "rareEvents": [
+        {
+          "id": "verified_30275_final",
+          "label": "まったり孝行日和",
+          "selection": "single",
+          "note": "어느 선택지든 迸る気迫 + 추가 레어스킬 1개, 총 2개 획득",
+          "choices": [
+            {
+              "id": "fair",
+              "label": "じいやさんは喜んでた？",
+              "skills": [
+                {
+                  "skillId": 204001,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 203421,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "dream",
+              "label": "君自身は楽しめたかな",
+              "skills": [
+                {
+                  "skillId": 204001,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 203441,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30277": {
+      "title": "無機の闘志",
+      "jpName": "[無機の闘志]ミホノブルボン",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30277/event",
+      "rareEvents": [
+        {
+          "id": "verified_30277_final",
+          "label": "火炎：夢焦がれ",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 200531,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203461,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30278": {
+      "title": "激録！爆走トナカイ事件",
+      "jpName": "[激録！爆走トナカイ事件]ゴールドシップ",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30278/event",
+      "rareEvents": [
+        {
+          "id": "verified_30278_final",
+          "label": "黄金二人旅",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 200641,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 202891,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30279": {
+      "title": "ぬくもりのノエル",
+      "jpName": "[ぬくもりのノエル]フェノーメノ",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30279/event",
+      "rareEvents": [
+        {
+          "id": "verified_30279_final",
+          "label": "いかなる時も、矜持は揺るがず",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 202011,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 202771,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30281": {
+      "title": "故郷に錦を飾るんでい！",
+      "jpName": "[故郷に錦を飾るんでい！]イナリワン",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30281/event",
+      "rareEvents": [
+        {
+          "id": "verified_30281_final",
+          "label": "熱き涙の理由",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 202421,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203331,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30282": {
+      "title": "心覚えし、京の華",
+      "jpName": "[心覚えし、京の華]エアグルーヴ",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30282/event",
+      "rareEvents": [
+        {
+          "id": "verified_30282_final",
+          "label": "そのメイクは誰がために",
+          "selection": "single",
+          "note": "어느 선택지든 千鍛万錬 + 추가 레어스킬 1개, 총 2개 획득",
+          "choices": [
+            {
+              "id": "oushu",
+              "label": "彼女のこと、気にかけてるんだな",
+              "skills": [
+                {
+                  "skillId": 202711,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 204031,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "flower",
+              "label": "君も交流会に相応しい立派な姿だったぞ",
+              "skills": [
+                {
+                  "skillId": 204031,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 204041,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30283": {
+      "title": "ゆかし、きらめきの旅路",
+      "jpName": "[ゆかし、きらめきの旅路]ファインモーション",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30283/event",
+      "rareEvents": [
+        {
+          "id": "verified_30283_final",
+          "label": "Look at me",
+          "selection": "single",
+          "note": "첫 선택지에서 레어스킬 2개, 두 번째 선택지는 레어스킬 없음",
+          "choices": [
+            {
+              "id": "smile",
+              "label": "『素敵な笑顔ですね！』",
+              "skills": [
+                {
+                  "skillId": 202761,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204071,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "『過酷な内容で、最初は驚きました』",
+              "skills": []
+            }
+          ]
+        }
+      ]
+    },
+    "30285": {
+      "title": "私のためのショッピング",
+      "jpName": "[私のためのショッピング]キングヘイロー",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30285/event",
+      "rareEvents": [
+        {
+          "id": "verified_30285_final",
+          "label": "学びを繋げて",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 202621,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204131,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30287": {
+      "title": "星跨ぐメッセージ",
+      "jpName": "[星跨ぐメッセージ]ネオユニヴァース",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30287/event",
+      "rareEvents": [
+        {
+          "id": "verified_30287_final",
+          "label": "You Are “クルーメイト”",
+          "selection": "auto",
+          "note": "첫 연속 이벤트에서 종료 선택지를 피하면 최종적으로 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 202601,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203141,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30289": {
+      "title": "Innovator",
+      "jpName": "[Innovator]フォーエバーヤング",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30289/event",
+      "rareEvents": [
+        {
+          "id": "verified_30289_final",
+          "label": "Dreams are Forever",
+          "selection": "single",
+          "note": "선택한 결과에 따라 레어스킬 2개 세트를 획득",
+          "choices": [
+            {
+              "id": "innovation",
+              "label": "彼女なら、イノベーションを巻き起こせる！",
+              "skills": [
+                {
+                  "skillId": 202831,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 204191,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "roadmap",
+              "label": "（優勝へのロードマップは引いてあるはず）",
+              "skills": [
+                {
+                  "skillId": 201612,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 204181,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30292": {
+      "title": "響け、二人の凱歌",
+      "jpName": "[響け、二人の凱歌]マルシュロレーヌ",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30292/event",
+      "rareEvents": [
+        {
+          "id": "verified_30292_final",
+          "label": "重なる『愛』",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 203611,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 202301,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30293": {
+      "title": "白に至る純真",
+      "jpName": "[白に至る純真]デアリングタクト",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30293/event",
+      "rareEvents": [
+        {
+          "id": "verified_30293_final",
+          "label": "シンデレラの行く末",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 203791,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204051,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30294": {
+      "title": "白に至る覚悟",
+      "jpName": "[白に至る覚悟]デアリングハート",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30294/event",
+      "rareEvents": [
+        {
+          "id": "verified_30294_final",
+          "label": "積み重ねられた『今』",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 202531,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 202741,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30296": {
+      "title": "単焦点でつかまえて",
+      "jpName": "[単焦点でつかまえて]アストンマーチャン",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30296/event",
+      "rareEvents": [
+        {
+          "id": "verified_30296_final",
+          "label": "この香りが残りますように",
+          "selection": "single",
+          "note": "첫 선택지에서 레어스킬 2개, 두 번째 선택지는 레어스킬 없음",
+          "choices": [
+            {
+              "id": "doll",
+              "label": "あの人形って……",
+              "skills": [
+                {
+                  "skillId": 204271,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 204311,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "marchan",
+              "label": "あ、アストンマーチャン？",
+              "skills": []
+            }
+          ]
+        }
+      ]
+    },
+    "30297": {
+      "title": "全てに挑む勇ましき者",
+      "jpName": "[全てに挑む勇ましき者]アグネスデジタル",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30297/event",
+      "rareEvents": [
+        {
+          "id": "verified_30297_final",
+          "label": "逃げぬ者、戦う者。すなわち汝。",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 202151,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204351,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30298": {
+      "title": "刀光散らしてClash！",
+      "jpName": "[刀光散らしてClash！]タップダンスシチー",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30298/event",
+      "rareEvents": [
+        {
+          "id": "verified_30298_final",
+          "label": "仲間というロマン",
+          "selection": "single",
+          "note": "세 선택지 모두 레어스킬 2개 세트 획득",
+          "choices": [
+            {
+              "id": "true",
+              "label": "本当の意味で\"仲間\"になったな",
+              "skills": [
+                {
+                  "skillId": 200431,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 201271,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "selfish",
+              "label": "ワガママを通してみせたな",
+              "skills": [
+                {
+                  "skillId": 200431,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203401,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "special",
+              "label": "シャカールも特別な仲間……ってこと？",
+              "skills": [
+                {
+                  "skillId": 201271,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 203401,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30300": {
+      "title": "賑やかな未来を乗せて走れ！",
+      "jpName": "[賑やかな未来を乗せて走れ！]サクラチヨノオー",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30300/event",
+      "rareEvents": [
+        {
+          "id": "verified_30300_final",
+          "label": "どすこいカード列伝！",
+          "selection": "auto",
+          "note": "연속 이벤트에서 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 203121,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 204331,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30301": {
+      "title": "スマイル・エバーアフター",
+      "jpName": "[スマイル・エバーアフター]グランアレグリア",
+      "eventSource": "U-tools 이벤트 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30301/event",
+      "rareEvents": [
+        {
+          "id": "verified_30301_final",
+          "label": "最強のミューズへ",
+          "selection": "auto",
+          "note": "연속 이벤트 완료 시 레어스킬 2개 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 203541,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204171,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30302": {
+      "title": "永久の誓い、永久の輝き",
+      "jpName": "[永久の誓い、永久の輝き]サトノダイヤモンド",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30302/event",
+      "rareEvents": [
+        {
+          "id": "verified_30302_final",
+          "label": "そして、未来を誓う",
+          "selection": "single",
+          "note": "어느 선택지든 一所懸命 + 추가 레어스킬 1개, 총 2개 획득",
+          "choices": [
+            {
+              "id": "effort",
+              "label": "届いたのは、君の頑張りのおかげだよ",
+              "skills": [
+                {
+                  "skillId": 203241,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203561,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "future",
+              "label": "でも、大切なのはこれからだな",
+              "skills": [
+                {
+                  "skillId": 203561,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204381,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30304": {
+      "title": "その執念は怒濤が如く",
+      "jpName": "[その執念は怒濤が如く]メイショウドトウ",
+      "eventSource": "U-tools 이벤트 분기 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30304/event",
+      "rareEvents": [
+        {
+          "id": "verified_30304_final",
+          "label": "覇王と共に歩む道",
+          "selection": "single",
+          "note": "세 선택지 모두 パスファインダー + 추가 레어스킬 1개, 총 2개 획득",
+          "choices": [
+            {
+              "id": "professor",
+              "label": "俺からも礼を言うよ、ドトウ",
+              "skills": [
+                {
+                  "skillId": 200331,
+                  "hintLevel": 2
+                },
+                {
+                  "skillId": 203651,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "dawn",
+              "label": "もうはぐれないよう、気をつけようか",
+              "skills": [
+                {
+                  "skillId": 203651,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203641,
+                  "hintLevel": 2
+                }
+              ]
+            },
+            {
+              "id": "easy",
+              "label": "何かいいことがあったのか？",
+              "skills": [
+                {
+                  "skillId": 203651,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204391,
+                  "hintLevel": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30306": {
+      "title": "両手いっぱい、小倉愛",
+      "jpName": "[両手いっぱい、小倉愛]ナイスネイチャ",
+      "eventSource": "Game8 / Playershi 금스킬 동시 획득 검증",
+      "eventSourceUrl": "https://game8.jp/umamusume/796336",
+      "rareEvents": [
+        {
+          "id": "verified_30306_result",
+          "label": "레어스킬 동시 획득",
+          "selection": "auto",
+          "note": "공개 공략 데이터 기준 突破口・秘めた闘魂 2개 동시 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 203571,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203681,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30307": {
+      "title": "巻頭カラーの夏",
+      "jpName": "[巻頭カラーの夏]キセキ",
+      "eventSource": "Game8 / VIP Wiki 획득 구조 검증",
+      "eventSourceUrl": "https://game8.jp/umamusume/372451",
+      "rareEvents": [
+        {
+          "id": "verified_30307_result",
+          "label": "금스킬 결과 선택",
+          "selection": "single",
+          "note": "レースメイカー 고정 + ブチ☆アゲ↑バイブス 또는 万里一空 선택. 선택지 원문은 미검증.",
+          "choices": [
+            {
+              "id": "vibes",
+              "label": "ブチ☆アゲ↑バイブス 선택",
+              "skills": [
+                {
+                  "skillId": 204481,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 202681,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "banri",
+              "label": "万里一空 선택",
+              "skills": [
+                {
+                  "skillId": 204481,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 202821,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30308": {
+      "title": "夏空チルタイム",
+      "jpName": "[夏空チルタイム]アーモンドアイ",
+      "eventSource": "우마무스메 라보 획득 구조 검증",
+      "eventSourceUrl": "https://umamusumelabo.com/chara_support/ssr-almondeye-guts",
+      "rareEvents": [
+        {
+          "id": "verified_30308_result",
+          "label": "금스킬 결과 선택",
+          "selection": "single",
+          "note": "唯一無二 고정 + 一石二鳥 또는 左回りの鬼 선택. 선택지 원문은 미검증.",
+          "choices": [
+            {
+              "id": "two_birds",
+              "label": "一石二鳥 선택",
+              "skills": [
+                {
+                  "skillId": 203631,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204501,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "left",
+              "label": "左回りの鬼 선택",
+              "skills": [
+                {
+                  "skillId": 203631,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 200024,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30311": {
+      "title": "As if Guided",
+      "jpName": "[As if Guided]エフフォーリア",
+      "eventSource": "Game8 / Kamigame 획득 구조 검증",
+      "eventSourceUrl": "https://game8.jp/umamusume/811059",
+      "rareEvents": [
+        {
+          "id": "verified_30311_result",
+          "label": "금스킬 결과 선택",
+          "selection": "single",
+          "note": "素質の証明 고정 + ショーダウン/清麗高雅/純真無垢 중 1개 선택. 선택지 원문은 미검증.",
+          "choices": [
+            {
+              "id": "showdown",
+              "label": "ショーダウン 선택",
+              "skills": [
+                {
+                  "skillId": 204701,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 203711,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "seirei",
+              "label": "清麗高雅 선택",
+              "skills": [
+                {
+                  "skillId": 204701,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204531,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "pure",
+              "label": "純真無垢 선택",
+              "skills": [
+                {
+                  "skillId": 204701,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204571,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30312": {
+      "title": "時に交わる海と空",
+      "jpName": "[時に交わる海と空]ミスターシービー",
+      "eventSource": "Game8 / Kamigame 획득 구조 검증",
+      "eventSourceUrl": "https://game8.jp/umamusume/811060",
+      "rareEvents": [
+        {
+          "id": "verified_30312_result",
+          "label": "금스킬 결과 선택",
+          "selection": "single",
+          "note": "強攻策 고정 + 一網打尽/君臨/当機立断 중 1개 선택. 선택지 원문은 미검증.",
+          "choices": [
+            {
+              "id": "net",
+              "label": "一網打尽 선택",
+              "skills": [
+                {
+                  "skillId": 202021,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 202851,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "regnant",
+              "label": "君臨 선택",
+              "skills": [
+                {
+                  "skillId": 202021,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 202871,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "decision",
+              "label": "当機立断 선택",
+              "skills": [
+                {
+                  "skillId": 202021,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204521,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30314": {
+      "title": "わたしときみの交換こ♪",
+      "jpName": "[わたしときみの交換こ♪]ハルウララ",
+      "eventSource": "Game8 / VIP Wiki 금스킬 2종 확정 검증",
+      "eventSourceUrl": "https://game8.jp/umamusume/372354",
+      "rareEvents": [
+        {
+          "id": "verified_30314_result",
+          "label": "레어스킬 2종 획득",
+          "selection": "auto",
+          "note": "공개 공략 데이터 기준 チャート急上昇！・開けろ風穴！ 2종 확정",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 201671,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204661,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30315": {
+      "title": "ちょいワルヒーロー、見参！",
+      "jpName": "[ちょいワルヒーロー、見参！]ビコーペガサス",
+      "eventSource": "우마무스메 라보 이벤트 분기 검증",
+      "eventSourceUrl": "https://umamusumelabo.com/chara_support/ssr-bikopegasus-konjou",
+      "rareEvents": [
+        {
+          "id": "verified_30315_final",
+          "label": "心に愛と使命を、街には平和を",
+          "selection": "single",
+          "note": "堅忍果決 고정 + 気骨稜稜 또는 初嵐 선택",
+          "choices": [
+            {
+              "id": "kikotsu",
+              "label": "さすが警察官の子どもたちだな",
+              "skills": [
+                {
+                  "skillId": 204671,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 202751,
+                  "hintLevel": 1
+                }
+              ]
+            },
+            {
+              "id": "hatsuarashi",
+              "label": "住民の平和を守ったんだ。大したものだよ",
+              "skills": [
+                {
+                  "skillId": 204671,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 200194,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30317": {
+      "title": "行き先はあたたかな場所",
+      "jpName": "[行き先はあたたかな場所]マチカネタンホイザ",
+      "eventSource": "Game8 / Kamigame 금스킬 동시 획득 검증",
+      "eventSourceUrl": "https://game8.jp/umamusume/815144",
+      "rareEvents": [
+        {
+          "id": "verified_30317_result",
+          "label": "레어스킬 동시 획득",
+          "selection": "auto",
+          "note": "공개 공략 데이터 기준 突撃魂・励声一番 2개 동시 획득",
+          "choices": [
+            {
+              "id": "done",
+              "label": "획득",
+              "skills": [
+                {
+                  "skillId": 202621,
+                  "hintLevel": 1
+                },
+                {
+                  "skillId": 204711,
+                  "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
