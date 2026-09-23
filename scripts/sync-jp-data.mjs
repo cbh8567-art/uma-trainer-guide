@@ -49,6 +49,58 @@ function duplicateIds(name, records) {
   return [...dup];
 }
 
+function canonicalId(name, record, index) {
+  if (name === "courses" && Array.isArray(record) && record.length === 2) {
+    return String(record[0]);
+  }
+  const raw =
+    record?.id ?? record?.SupportId ?? record?.supportId ?? record?.skillId ??
+    record?.cardId ?? record?.characterId ?? record?.eventId;
+  return raw == null || raw === "" ? `@index:${index}` : String(raw);
+}
+
+function stableStringify(value) {
+  if (value == null || typeof value !== "object") return JSON.stringify(value);
+  if (Array.isArray(value)) return `[${value.map(stableStringify).join(",")}]`;
+  return `{${Object.keys(value).sort().map(
+    k => `${JSON.stringify(k)}:${stableStringify(value[k])}`
+  ).join(",")}}`;
+}
+
+function diffRecords(name, previousRecords, nextRecords) {
+  const toMap = (records) => new Map(
+    records.map((record, index) => [canonicalId(name, record, index), record])
+  );
+  const before = toMap(previousRecords);
+  const after = toMap(nextRecords);
+  const added = [];
+  const removed = [];
+  const modified = [];
+
+  for (const [id, record] of after) {
+    if (!before.has(id)) {
+      added.push(id);
+      continue;
+    }
+    if (stableStringify(before.get(id)) !== stableStringify(record)) {
+      modified.push(id);
+    }
+  }
+  for (const id of before.keys()) {
+    if (!after.has(id)) removed.push(id);
+  }
+
+  const limit = 30;
+  return {
+    addedCount: added.length,
+    removedCount: removed.length,
+    modifiedCount: modified.length,
+    addedIds: added.slice(0, limit),
+    removedIds: removed.slice(0, limit),
+    modifiedIds: modified.slice(0, limit)
+  };
+}
+
 function snapshotFilename(name) {
   return name === "catalog" ? "support_hints.json" : `${name}.json`;
 }
@@ -107,7 +159,15 @@ async function appendHistory(status, message) {
       previousCount: entry.previousCount ?? null,
       removedCount: Number(entry.removedCount || 0),
       changed: Boolean(entry.changed),
-      status: entry.status || "unknown"
+      status: entry.status || "unknown",
+      changes: entry.changes || {
+        addedCount: 0,
+        removedCount: 0,
+        modifiedCount: 0,
+        addedIds: [],
+        removedIds: [],
+        modifiedIds: []
+      }
     };
   }
   history.schemaVersion = 1;
@@ -170,13 +230,18 @@ try {
     try {
       const previousRaw = await fs.readFile(currentPath, "utf8");
       const previousData = JSON.parse(previousRaw);
-      const previousCount = extractRecords(name, previousData).length;
+      const previousRecords = extractRecords(name, previousData);
+      const previousCount = previousRecords.length;
       const removed = Math.max(0, previousCount - records.length);
       const ratio = previousCount ? removed / previousCount : 0;
       entry.previousCount = previousCount;
       entry.removedCount = removed;
       entry.removedRatio = ratio;
-      entry.changed = JSON.stringify(previousData) !== JSON.stringify(data);
+      entry.changes = diffRecords(name, previousRecords, records);
+      entry.changed =
+        entry.changes.addedCount > 0 ||
+        entry.changes.removedCount > 0 ||
+        entry.changes.modifiedCount > 0;
 
       const limitCount = Number(policy.massDeletion?.removedCountGte ?? 10);
       const limitRatio = Number(policy.massDeletion?.removedRatioGte ?? 0.02);
@@ -190,6 +255,14 @@ try {
       entry.previousCount = null;
       entry.removedCount = 0;
       entry.removedRatio = 0;
+      entry.changes = {
+        addedCount: records.length,
+        removedCount: 0,
+        modifiedCount: 0,
+        addedIds: records.slice(0, 30).map((r, i) => canonicalId(name, r, i)),
+        removedIds: [],
+        modifiedIds: []
+      };
       entry.changed = true;
     }
 
@@ -241,10 +314,18 @@ try {
     await writeJson(updateMetaPath, updateMeta);
 
     report.status = "pass";
+    report.changeTotals = Object.values(report.collections).reduce((acc, entry) => {
+      const c = entry.changes || {};
+      acc.added += Number(c.addedCount || 0);
+      acc.removed += Number(c.removedCount || 0);
+      acc.modified += Number(c.modifiedCount || 0);
+      return acc;
+    }, { added: 0, removed: 0, modified: 0 });
     state.status = "pass";
     state.snapshotReady = true;
     state.lastSuccessfulSync = report.checkedAt;
     state.activeMode = "snapshot";
+    state.changeTotals = report.changeTotals;
     state.message = "Validated snapshots promoted atomically.";
     await writeJson(reportPath, report);
     await writeJson(statePath, state);

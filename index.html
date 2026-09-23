@@ -190,7 +190,8 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 
    <div class="panel">
     <div class="sectionHead" style="margin-top:0"><h2 style="margin:0">SSR 카드 DB</h2><span class="status" id="dbStatus">DB 미동기화</span></div>
-    <div class="note" id="jpSyncStatus" style="margin-bottom:8px">JP 자동 동기화 상태 확인 중…</div>
+    <div class="note" id="jpSyncStatus" style="margin-bottom:5px">JP 자동 동기화 상태 확인 중…</div>
+    <div class="note" id="jpSyncChanges" style="margin-bottom:8px">최근 데이터 변경 내역 확인 중…</div>
     <div class="note">PC: 카드 자체를 덱 슬롯으로 드래그 · 모바일: 「덱 슬롯」으로 보유 등록 없이 바로 편성할 수 있습니다.</div>
     <div class="dbGuideRecommend">
       <div class="dbGuideRecommendHead">
@@ -1906,10 +1907,12 @@ function loadCache(o){
 }
 function renderJpSyncStatus(){
  const el=$('#jpSyncStatus');
+ const changeEl=$('#jpSyncChanges');
  if(!el)return;
  const st=JP_SYNC_STATE,rep=JP_VALIDATION_REPORT;
  if(!st){
    el.textContent='JP 자동 동기화 상태를 불러오지 못했습니다. 기존 데이터 fallback은 유지됩니다.';
+   if(changeEl)changeEl.textContent='최근 변경 내역을 불러오지 못했습니다.';
    return
  }
  const ok=st.status==='pass'&&st.snapshotReady===true;
@@ -1920,8 +1923,33 @@ function renderJpSyncStatus(){
  const counts=rep?.collections
    ?Object.entries(rep.collections).map(([k,v])=>`${k} ${Number(v?.count||0).toLocaleString()}건`).join(' · ')
    :'검증 상세 없음';
- const historyCount=Array.isArray(JP_SYNC_HISTORY?.runs)?JP_SYNC_HISTORY.runs.length:0;
- el.textContent=`JP 자동 동기화 ${ok?'정상':'점검 필요'} · 모드 ${st.activeMode||'unknown'} · 마지막 성공 ${whenText} · 검증 ${rep?.status||'unknown'} · 기록 ${historyCount}회 · ${counts}`;
+ const runs=Array.isArray(JP_SYNC_HISTORY?.runs)?JP_SYNC_HISTORY.runs:[];
+ el.textContent=`JP 자동 동기화 ${ok?'정상':'점검 필요'} · 모드 ${st.activeMode||'unknown'} · 마지막 성공 ${whenText} · 검증 ${rep?.status||'unknown'} · 기록 ${runs.length}회 · ${counts}`;
+
+ if(!changeEl)return;
+ const latest=runs[0];
+ if(!latest?.collections){
+   changeEl.textContent='최근 변경 상세 기록이 아직 없습니다.';
+   return
+ }
+ const labels={catalog:'서포트 카탈로그',supports:'서포트',events:'이벤트',skills:'스킬',characters:'우마무스메',courses:'코스'};
+ const changed=[];
+ for(const [name,entry] of Object.entries(latest.collections)){
+   const c=entry?.changes;
+   if(!c)continue;
+   const a=Number(c.addedCount||0),r=Number(c.removedCount||0),m=Number(c.modifiedCount||0);
+   if(a||r||m){
+     const samples=[
+       a&&c.addedIds?.length?`추가 ${c.addedIds.slice(0,5).join(', ')}`:'',
+       r&&c.removedIds?.length?`삭제 ${c.removedIds.slice(0,5).join(', ')}`:'',
+       m&&c.modifiedIds?.length?`수정 ${c.modifiedIds.slice(0,5).join(', ')}`:''
+     ].filter(Boolean).join(' / ');
+     changed.push(`${labels[name]||name}: +${a} -${r} 수정 ${m}${samples?` (${samples})`:''}`);
+   }
+ }
+ changeEl.textContent=changed.length
+   ?`최근 변경 · ${changed.join(' · ')}`
+   :'최근 동기화에서 데이터 변경 없음';
 }
 
 function renderAll(){renderJpSyncStatus();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderTier()}
