@@ -1,16 +1,19 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-23T15:09:18.136Z",
+  "generatedAt": "2026-09-23T15:25:50.926Z",
   "event": "push",
-  "sha": "87e601d1fc5432abd4fdac66db78c881dc10e4ac",
+  "sha": "aeb028342911fdc42068a562f332525f31904c88",
   "changedFiles": [
-    "index.html"
+    "index.html",
+    "scripts/test-v6-integrity.mjs"
   ],
   "categories": {
     "app": [
       "index.html"
     ],
-    "pipeline": [],
+    "pipeline": [
+      "scripts/test-v6-integrity.mjs"
+    ],
     "jpData": [],
     "krData": [],
     "commonData": [],
