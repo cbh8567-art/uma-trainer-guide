@@ -5,6 +5,12 @@ const ok=(cond,msg)=>{if(!cond)errors.push(msg)};
 const read=async p=>JSON.parse(await fs.readFile(path.join(ROOT,p),"utf8"));
 const text=async p=>await fs.readFile(path.join(ROOT,p),"utf8");
 const index=await text("index.html");
+const inlineMatch=index.match(/<script>([\s\S]*?)<\/script>/);
+ok(Boolean(inlineMatch?.[1]),"inline app script missing");
+if(inlineMatch?.[1]){
+  try{ new Function(inlineMatch[1]); }
+  catch(e){ errors.push("index inline JavaScript syntax error: "+e.message); }
+}
 ok((index.match(/const STATE_KEY='uma_tracker_v4_state'/g)||[]).length===1,"STATE_KEY must exist exactly once");
 ok(index.includes("friend_manual_"),"friend_manual_ fallback missing");
 ok(!index.includes("scenarioBase"),"obsolete scenarioBase must remain absent");
