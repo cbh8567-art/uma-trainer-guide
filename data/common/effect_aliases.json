@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-23",
+  "aliases": {
+    "Friendship Bonus": "우정 보너스",
+    "Mood Effect": "컨디션 효과 증가",
+    "Speed Bonus": "스피드 보너스",
+    "Stamina Bonus": "스태미나 보너스",
+    "Power Bonus": "파워 보너스",
+    "Guts Bonus": "근성 보너스",
+    "Wit Bonus": "지능 보너스",
+    "Training Effectiveness": "트레이닝 효과 증가",
+    "Initial Speed": "초기 스피드",
+    "Initial Stamina": "초기 스태미나",
+    "Initial Power": "초기 파워",
+    "Initial Guts": "초기 근성",
+    "Initial Wit": "초기 지능",
+    "Initial Friendship Gauge": "초기 우정 게이지",
+    "Race Bonus": "레이스 보너스",
+    "Fan Bonus": "팬 수 보너스",
+    "Hint Levels": "힌트 Lv 증가",
+    "Hint Frequency": "힌트 발생률 증가",
+    "Specialty Priority": "특기율 증가",
+    "Event Recovery": "이벤트 회복량 증가",
+    "Event Effectiveness": "이벤트 효과 증가",
+    "Failure Rate Reduction": "실패율 감소",
+    "Energy Cost Reduction": "체력 소비량 감소",
+    "Skill Point Bonus": "스킬 Pt 보너스",
+    "Wit Friendship Recovery": "지능 우정 회복량"
+  }
+}
