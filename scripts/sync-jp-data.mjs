@@ -66,6 +66,7 @@ const policyPath = path.join(JP, "sync_policy.json");
 const statePath = path.join(JP, "sync_state.json");
 const reportPath = path.join(JP, "validation_report.json");
 const updateMetaPath = path.join(JP, "update_meta.json");
+const historyPath = path.join(JP, "sync_history.json");
 
 const sourceConfig = await readJson(sourceConfigPath);
 const policy = await readJson(policyPath);
@@ -90,6 +91,37 @@ const state = {
   activeMode: sourceConfig.snapshotReady ? "snapshot" : "remote",
   message: ""
 };
+
+async function appendHistory(status, message) {
+  const history = await readJson(historyPath).catch(() => ({
+    schemaVersion: 1,
+    updated: report.updated,
+    limit: 20,
+    runs: []
+  }));
+  const limit = Math.max(1, Number(history.limit || 20));
+  const collections = {};
+  for (const [name, entry] of Object.entries(report.collections || {})) {
+    collections[name] = {
+      count: Number(entry.count || 0),
+      previousCount: entry.previousCount ?? null,
+      removedCount: Number(entry.removedCount || 0),
+      changed: Boolean(entry.changed),
+      status: entry.status || "unknown"
+    };
+  }
+  history.schemaVersion = 1;
+  history.updated = report.updated;
+  history.limit = limit;
+  history.runs = [{
+    checkedAt: report.checkedAt,
+    status,
+    activeMode: status === "pass" ? "snapshot" : (sourceConfig.snapshotReady ? "snapshot" : "remote"),
+    message,
+    collections
+  }, ...(Array.isArray(history.runs) ? history.runs : [])].slice(0, limit);
+  await writeJson(historyPath, history);
+}
 
 try {
   const oldState = await readJson(statePath).catch(() => null);
@@ -144,6 +176,7 @@ try {
       entry.previousCount = previousCount;
       entry.removedCount = removed;
       entry.removedRatio = ratio;
+      entry.changed = JSON.stringify(previousData) !== JSON.stringify(data);
 
       const limitCount = Number(policy.massDeletion?.removedCountGte ?? 10);
       const limitRatio = Number(policy.massDeletion?.removedRatioGte ?? 0.02);
@@ -157,6 +190,7 @@ try {
       entry.previousCount = null;
       entry.removedCount = 0;
       entry.removedRatio = 0;
+      entry.changed = true;
     }
 
     report.collections[name] = entry;
@@ -171,6 +205,7 @@ try {
     state.message = "Validation failed. Existing current snapshots were kept.";
     await writeJson(reportPath, report);
     await writeJson(statePath, state);
+    await appendHistory("fatal", state.message);
     process.exitCode = 2;
   } else {
     await fs.mkdir(CURRENT, { recursive: true });
@@ -213,6 +248,7 @@ try {
     state.message = "Validated snapshots promoted atomically.";
     await writeJson(reportPath, report);
     await writeJson(statePath, state);
+    await appendHistory("pass", state.message);
   }
 } catch (e) {
   report.status = "fatal";
@@ -221,5 +257,6 @@ try {
   state.message = "Sync runtime failed. Existing snapshots were kept.";
   await writeJson(reportPath, report).catch(() => {});
   await writeJson(statePath, state).catch(() => {});
+  await appendHistory("fatal", state.message).catch(() => {});
   process.exitCode = 2;
 }

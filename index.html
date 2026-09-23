@@ -189,7 +189,9 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
    </div>
 
    <div class="panel">
-    <div class="sectionHead" style="margin-top:0"><h2 style="margin:0">SSR 카드 DB</h2><span class="status" id="dbStatus">DB 미동기화</span></div><div class="note">PC: 카드 자체를 덱 슬롯으로 드래그 · 모바일: 「덱 슬롯」으로 보유 등록 없이 바로 편성할 수 있습니다.</div>
+    <div class="sectionHead" style="margin-top:0"><h2 style="margin:0">SSR 카드 DB</h2><span class="status" id="dbStatus">DB 미동기화</span></div>
+    <div class="note" id="jpSyncStatus" style="margin-bottom:8px">JP 자동 동기화 상태 확인 중…</div>
+    <div class="note">PC: 카드 자체를 덱 슬롯으로 드래그 · 모바일: 「덱 슬롯」으로 보유 등록 없이 바로 편성할 수 있습니다.</div>
     <div class="dbGuideRecommend">
       <div class="dbGuideRecommendHead">
         <div><b style="font-size:12px">트레이너 가이드 추천 SSR</b><div class="sub" id="dbGuideRecCondition">육성 우마무스메와 가이드 레이스를 선택하면 추천 카드가 표시됩니다.</div></div>
@@ -336,6 +338,9 @@ const CONFIG={"version":4,"updated":"2026-09-23","sources":{"catalog":"https://r
 let JP_UPDATE_META=null;
 let JP_DATA_CONTRACT=null;
 let JP_SKILL_ICON_OVERRIDES={};
+let JP_SYNC_STATE=null;
+let JP_VALIDATION_REPORT=null;
+let JP_SYNC_HISTORY=null;
 let UPCOMING={"version":1,"updated":"2026-09-23","source":"Game8/GameWith 2026-09-23 snapshot","sourceUrl":"https://game8.jp/umamusume/811062","races":[{"id":"cm_2026_09_mile","status":"현재","date":"2026-09-18~","event":"チャンピオンズミーティング MILE","eventKr":"챔피언스 미팅 MILE","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mile","meters":1800,"turn":"left","season":"autumn","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","秋ウマ娘○","晴れの日○","良バ場○","非根幹距離○"]},{"id":"cm_2026_09_longchamp_classic","status":"예정","date":"2026-09-29~","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"ロンシャン","placeKr":"롱샹","ground":"turf","distance":"mid","meters":2400,"turn":"right","season":"autumn","weather":"sunny","condition":"heavy","time":"day","greenSkills":["ロンシャンレース場○","右回り○","秋ウマ娘○","晴れの日○","道悪○","根幹距離○"]},{"id":"cm_2026_10_classic","status":"예정","date":"2026-10 중순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"京都","placeKr":"교토","ground":"turf","distance":"mid","meters":2200,"turn":"right","season":"autumn","weather":"cloudy","condition":"good","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","曇りの日○","良バ場○","非根幹距離○"]},{"id":"loh_2026_11_long","status":"예정","date":"2026-11 하순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"京都","placeKr":"교토","ground":"turf","distance":"long","meters":3000,"turn":"right","season":"autumn","weather":"random","condition":"random","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","非根幹距離○"]},{"id":"cm_2026_12_long","status":"예정","date":"2026-12 하순","event":"チャンピオンズミーティング LONG","eventKr":"챔피언스 미팅 LONG","place":"","placeKr":"미정","ground":"turf","distance":"long","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"cm_2027_01_classic","status":"예정","date":"2027-01 하순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"","placeKr":"미정","ground":"turf","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"loh_2027_02_dirt","status":"예정","date":"2027-02 중순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"","placeKr":"미정","ground":"dirt","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]}]};
 let KOREA_UPCOMING={"version":1,"updated":"2026-09-23","source":"한국 서버 5회차 CLASSIC 일정 스냅샷","sourceUrl":"https://namu.moe/w/%EC%9A%B0%EB%A7%88%EB%AC%B4%EC%8A%A4%EB%A9%94%20%ED%94%84%EB%A6%AC%ED%8B%B0%20%EB%8D%94%EB%B9%84/%EC%9D%B4%EB%B2%A4%ED%8A%B8/%EC%B1%94%ED%94%BC%EC%96%B8%EC%8A%A4%20%EB%AF%B8%ED%8C%85/5%ED%9A%8C%EC%B0%A8","races":[{"id":"kr_cm_2026_10_classic","status":"예정(미래시)","date":"2026-10-10~10-16 예상","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mid","meters":2400,"turn":"left","season":"spring","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","春ウマ娘○","晴れの日○","良バ場○","根幹距離○"]}]};
 let KOREA_SERVER_DATA={
@@ -1899,7 +1904,27 @@ function loadCache(o){
  $('#dbStatus').textContent=`저장 DB ${runtime.catalog.length}장 · 이벤트 레어스킬 ${rareAudit.coveredCards}/${rareAudit.expectedCards}장 · 카운터 누락 ${rareAudit.missingCards.length}장 · ${cacheResult.saved?'경량 캐시':'메모리 모드'}`;
  renderAll()
 }
-function renderAll(){renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderTier()}
+function renderJpSyncStatus(){
+ const el=$('#jpSyncStatus');
+ if(!el)return;
+ const st=JP_SYNC_STATE,rep=JP_VALIDATION_REPORT;
+ if(!st){
+   el.textContent='JP 자동 동기화 상태를 불러오지 못했습니다. 기존 데이터 fallback은 유지됩니다.';
+   return
+ }
+ const ok=st.status==='pass'&&st.snapshotReady===true;
+ const when=st.lastSuccessfulSync?new Date(st.lastSuccessfulSync):null;
+ const whenText=when&&!Number.isNaN(when.getTime())
+   ?when.toLocaleString('ko-KR',{timeZone:'Asia/Seoul'})
+   :'기록 없음';
+ const counts=rep?.collections
+   ?Object.entries(rep.collections).map(([k,v])=>`${k} ${Number(v?.count||0).toLocaleString()}건`).join(' · ')
+   :'검증 상세 없음';
+ const historyCount=Array.isArray(JP_SYNC_HISTORY?.runs)?JP_SYNC_HISTORY.runs.length:0;
+ el.textContent=`JP 자동 동기화 ${ok?'정상':'점검 필요'} · 모드 ${st.activeMode||'unknown'} · 마지막 성공 ${whenText} · 검증 ${rep?.status||'unknown'} · 기록 ${historyCount}회 · ${counts}`;
+}
+
+function renderAll(){renderJpSyncStatus();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderTier()}
 applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;save();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary()};
 populateConditionGuideRace();
 $('#conditionGuideRace').value=getGuideRace()?.id||'';
@@ -1932,7 +1957,7 @@ function setOwnedFilter(t){ownedType=t;renderTypeFilters($('#ownedFilters'),owne
 renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);
 renderTypeFilters($('#ownedFilters'),ownedType,setOwnedFilter);
 async function loadLocalAppData(){
- const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krSkillNames:false,krTier:false,jpUpcoming:false,jpTier:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false};
+ const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krSkillNames:false,krTier:false,jpUpcoming:false,jpTier:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false,jpSyncState:false,jpValidationReport:false,jpSyncHistory:false};
 
  try{
    const meta=await fetchJson('./data/kr/server_meta.json');
@@ -2443,6 +2468,36 @@ async function loadLocalAppData(){
    }
  }catch(e){
    console.warn('[V5.4] common effect_aliases.json load failed. Using embedded fallback.',e);
+ }
+
+ try{
+   const data=await fetchJson('./data/jp/sync_state.json');
+   if(data&&typeof data.status==='string'){
+     JP_SYNC_STATE=data;
+     result.jpSyncState=true;
+   }else throw new Error('JP sync_state validation failed');
+ }catch(e){
+   console.warn('[V5.5] JP sync_state.json load failed.',e);
+ }
+
+ try{
+   const data=await fetchJson('./data/jp/validation_report.json');
+   if(data&&typeof data.status==='string'&&data.collections&&typeof data.collections==='object'){
+     JP_VALIDATION_REPORT=data;
+     result.jpValidationReport=true;
+   }else throw new Error('JP validation_report validation failed');
+ }catch(e){
+   console.warn('[V5.5] JP validation_report.json load failed.',e);
+ }
+
+ try{
+   const data=await fetchJson('./data/jp/sync_history.json');
+   if(data&&Array.isArray(data.runs)){
+     JP_SYNC_HISTORY=data;
+     result.jpSyncHistory=true;
+   }else throw new Error('JP sync_history validation failed');
+ }catch(e){
+   console.warn('[V5.5] JP sync_history.json load failed.',e);
  }
 
  return result;
