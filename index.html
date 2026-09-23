@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<title>우마무스메 트레이너 가이드 V5.6 WEB</title>
+<title>우마무스메 트레이너 가이드 V5.7 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -132,7 +132,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V5.6 WEB</div><div class="sub">육성 우마별 핑크 진화 · 시나리오 전용 진화 · SSR/스킬 추천 · 이벤트 카운터 DEBUG 반영</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V5.7 WEB</div><div class="sub">육성 우마별 핑크 진화 · 시나리오 전용 진화 · SSR/스킬 추천 · 이벤트 카운터 DEBUG 반영</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -266,6 +266,15 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
     <button class="btn" data-close="trainingFinishModal">닫기</button>
   </div>
 
+  <div class="finishSection" id="finishRamenSection" style="display:none">
+    <div class="sectionHead" style="margin-top:0">
+      <div><b>⓪ URA 입장 전 · 궁극 트레센 라멘 선택</b><div class="sub">시니어급 12월 후반 3개 중 실제로 선택한 라멘 1개만 기록합니다.</div></div>
+      <span class="status">1개 필수 선택</span>
+    </div>
+    <div id="finishRamenChoices" class="finishOptions"></div>
+    <div class="note" style="margin-top:7px">선택한 라멘에서 받는 금스킬 힌트 Lv+2만 해당 시나리오 획득 가능 스킬로 반영합니다.</div>
+  </div>
+
   <div class="finishSection">
     <div class="sectionHead" style="margin-top:0">
       <div><b>① 육성 우마무스메 전용 핑크스킬</b><div class="sub">같은 금스킬에서 여러 진화처가 있으면 하나만 선택합니다.</div></div>
@@ -312,13 +321,13 @@ const FRIEND_SUPPORT_EVENTS={"version":1,"updated":"2026-09-23","note":"U-tools 
 
 </script>
 <script>
-const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v56_db_cache', LEGACY_CACHE_KEY='uma_trainer_v55_db_cache';
+const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v57_db_cache', LEGACY_CACHE_KEY='uma_trainer_v56_db_cache';
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
 const LB_MAX=[30,35,40,45,50], LB_INDEX=[6,7,8,9,10];
 let state=JSON.parse(localStorage.getItem(STATE_KEY)||'null')||{owned:[],deck:[null,null,null,null,null,null],acquired:{},eventChoice:{},lb:{},scenario:'tresenken',ground:'turf',distance:'mid',style:'senko',currentUmaId:null,guideRaceId:'cm_2026_10_classic'};
-state.deck=[...(state.deck||[]).slice(0,6),...Array(6).fill(null)].slice(0,6);state.lb=state.lb||{};state.owned=state.owned||[];state.acquired=state.acquired||{};state.eventChoice=state.eventChoice||{};state.eventDone=state.eventDone||{};state.scenario=state.scenario||'tresenken';state.evolutionPlan=state.evolutionPlan||null;
+state.deck=[...(state.deck||[]).slice(0,6),...Array(6).fill(null)].slice(0,6);state.lb=state.lb||{};state.owned=state.owned||[];state.acquired=state.acquired||{};state.eventChoice=state.eventChoice||{};state.eventDone=state.eventDone||{};state.scenario=state.scenario||'tresenken';state.tresenkenUltimateRamen=state.tresenkenUltimateRamen||null;state.evolutionPlan=state.evolutionPlan||null;
 let runtime={catalog:[],byId:new Map(),skills:new Map(),characters:[],courses:[],ready:false};let catType='전체',ownedType='전체',emptySlotType='전체',emptySlotTarget=0,catalogRecommendSort=false;
 
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -538,6 +547,12 @@ const SCENARIOS={
   tresenken:{
     name:'らっしゃい！トレセン軒！',kr:'트레센켄(라면)',maxEvolution:2,
     source:'Game8 2026-09-22',sourceUrl:'https://game8.jp/umamusume/794793',
+    ultimateRamenSourceUrl:'https://game8.jp/umamusume/794070',
+    ultimateRamenChoices:[
+      {id:'special',jp:'スペシャルトレセンラーメン',kr:'스페셜 트레센 라멘',skill:'火事場のバ鹿力',hintLevel:2},
+      {id:'greedy',jp:'よくばりトレセンラーメン',kr:'욕심쟁이 트레센 라멘',skill:'いいとこ入った！',hintLevel:2},
+      {id:'jewel',jp:'珠玉のトレセンラーメン',kr:'주옥의 트레센 라멘',skill:'好奇心',hintLevel:2}
+    ],
     scenarioAcquiredRareSkills:[
       {name:'勇迅一閃',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 파인 모션 대응 편성 시',verified:true},
       {name:'烈風一閃',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 나리타 탑로드 대응 편성 시',verified:true},
@@ -545,9 +560,9 @@ const SCENARIOS={
       {name:'ネバーギブアップ',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 메이쇼 도토 대응 편성 시',verified:true},
       {name:'光芒一閃',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 나이스 네이처 대응 편성 시',verified:true},
       {name:'英俊豪傑',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 타즈나/라이트 헬로 대응 편성 시',verified:true},
-      {name:'火事場のバ鹿力',source:'Game8 2026-09-22',acquisition:'시니어급 12월 후반 궁극 라멘 선택 · 스페셜 트레센 라멘',verified:true},
-      {name:'いいとこ入った！',source:'Game8 2026-09-22',acquisition:'시니어급 12월 후반 궁극 라멘 선택 · 욕심쟁이 트레센 라멘',verified:true},
-      {name:'好奇心',source:'Game8 2026-09-22',acquisition:'시니어급 12월 후반 궁극 라멘 선택 · 주옥의 트레센 라멘',verified:true}
+      {name:'火事場のバ鹿力',source:'Game8 2026-09-22',acquisition:'시니어급 12월 후반 궁극 라멘 선택 · スペシャルトレセンラーメン · 힌트 Lv+2',verified:true,choiceGroup:'ultimateRamen',choiceId:'special'},
+      {name:'いいとこ入った！',source:'Game8 2026-09-22',acquisition:'시니어급 12월 후반 궁극 라멘 선택 · よくばりトレセンラーメン · 힌트 Lv+2',verified:true,choiceGroup:'ultimateRamen',choiceId:'greedy'},
+      {name:'好奇心',source:'Game8 2026-09-22',acquisition:'시니어급 12월 후반 궁극 라멘 선택 · 珠玉のトレセンラーメン · 힌트 Lv+2',verified:true,choiceGroup:'ultimateRamen',choiceId:'jewel'}
     ],
     evolutions:[
       {from:'ギアチェンジ',to:'秘伝の味変アレンジ！',distances:['mile'],guideBoost:-0.5,note:'Game8 현행 가이드에서 우선도 낮음'},
@@ -727,10 +742,16 @@ function umaRareSkillNames(){
  for(const sk of awakeningSkills(u))if(Number(sk.rarity)===2&&sk.jp)out.add(sk.jp);
  return out
 }
+function scenarioChoiceValue(group){
+ if(group==='ultimateRamen'&&state.scenario==='tresenken')return state.tresenkenUltimateRamen||null;
+ return null
+}
 function scenarioRareSkillNames(){
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none,out=new Set();
  for(const x of sc.scenarioAcquiredRareSkills||[]){
-   if(x&&x.verified===true&&x.name)out.add(x.name)
+   if(!x||x.verified!==true||!x.name)continue;
+   if(x.choiceGroup&&scenarioChoiceValue(x.choiceGroup)!==x.choiceId)continue;
+   out.add(x.name)
  }
  return out
 }
@@ -879,9 +900,40 @@ function renderScenarioEvolution(cond){
 
 let finishDraft={character:{},scenario:[]};
 
+function selectedUltimateRamen(){
+ const sc=SCENARIOS.tresenken;
+ return (sc.ultimateRamenChoices||[]).find(x=>x.id===state.tresenkenUltimateRamen)||null
+}
+function renderUltimateRamenSection(){
+ const section=$('#finishRamenSection'),box=$('#finishRamenChoices');
+ if(!section||!box)return;
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none,choices=sc.ultimateRamenChoices||[];
+ if(state.scenario!=='tresenken'||!choices.length){
+   section.style.display='none';box.innerHTML='';return
+ }
+ section.style.display='block';box.innerHTML='';
+ for(const x of choices){
+   const selected=state.tresenkenUltimateRamen===x.id,row=document.createElement('label');
+   row.className='finishOption'+(selected?' selected':'');
+   const skill=findSkillByJp(x.skill);
+   row.innerHTML=`<input type="radio" name="ultimateRamen" ${selected?'checked':''}>${skill?skillIcon(skill):'<span class="skillFallback">麺</span>'}<div><div class="finishName">${esc(x.jp)}${selected?' <span class="scenarioRec">선택됨</span>':''}</div><div class="kr">${esc(x.kr)}</div><div class="finishSub">${esc(x.skill)} · 힌트 Lv+${x.hintLevel}</div></div><div class="finishRight">${selected?'URA 적용':'선택'}</div>`;
+   row.onclick=e=>{
+     e.preventDefault();
+     state.tresenkenUltimateRamen=x.id;
+     state.evolutionPlan=null;
+     save();
+     sanitizeFinishDraft();
+     renderTrainingFinishModal();
+     renderTrainingFinishSummary();
+     renderGuide();
+     toast(`${x.kr} 선택 · ${x.skill} 힌트 Lv+${x.hintLevel}`)
+   };
+   box.appendChild(row)
+ }
+}
 function evolutionContextKey(){
- const u=selectedUma(),r=getGuideRace();
- return `${u?.id||'none'}|${state.scenario}|${r?.id||'none'}|${state.ground}|${state.distance}|${state.style}`
+ const u=selectedUma(),r=getGuideRace(),scenarioChoice=state.scenario==='tresenken'?(state.tresenkenUltimateRamen||'ramen-none'):'no-scenario-choice';
+ return `${u?.id||'none'}|${state.scenario}|${scenarioChoice}|${r?.id||'none'}|${state.ground}|${state.distance}|${state.style}`
 }
 function scenarioEvolutionCandidates(cond){
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none;
@@ -921,8 +973,8 @@ function renderTrainingFinishSummary(){
    b.textContent='이전에 저장한 육성 완료 결과가 현재 육성 조건과 다릅니다. 다시 선택해 주세요.';
    b.classList.remove('finishDone');return
  }
- const names=[...(p.characterNames||[]),...(p.scenarioSkills||[])];
- b.innerHTML=`<b>${u?esc(u.krName):'육성 우마'}</b> · 진화 ${names.length}개 선택 완료${names.length?`<div class="evoTags" style="margin-top:5px">${names.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>`:''}`;
+ const names=[...(p.characterNames||[]),...(p.scenarioSkills||[])],ramen=p.scenario==='tresenken'?selectedUltimateRamen():null;
+ b.innerHTML=`<b>${u?esc(u.krName):'육성 우마'}</b> · 진화 ${names.length}개 선택 완료${ramen?`<div class="sub" style="margin-top:5px">URA 궁극 라멘: ${esc(ramen.jp)} → ${esc(ramen.skill)} 힌트 Lv+${ramen.hintLevel}</div>`:''}${names.length?`<div class="evoTags" style="margin-top:5px">${names.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>`:''}`;
  b.classList.add('finishDone')
 }
 function openTrainingFinishModal(){
@@ -944,6 +996,7 @@ function sanitizeFinishDraft(){
 function renderTrainingFinishModal(){
  const u=selectedUma(),race=getGuideRace(),cond=race?raceCond(race):state;if(!u)return;
  $('#finishContext').textContent=`${u.krName} · ${(SCENARIOS[state.scenario]||SCENARIOS.none).kr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;
+ renderUltimateRamenSection();
 
  const cb=$('#finishCharacterEvos');cb.innerHTML='';
  const arr=characterEvolutionCandidates(u,cond),groups=new Map();
@@ -998,11 +1051,12 @@ function renderFinishChoiceSummary(){
  for(const n of names){const x=document.createElement('span');x.className='finishChip';x.textContent=n;b.appendChild(x)}
 }
 function confirmTrainingFinish(){
+ if(state.scenario==='tresenken'&&!selectedUltimateRamen())return toast('URA 입장 전 궁극 트레센 라멘 3개 중 하나를 먼저 선택해 주세요.');
  sanitizeFinishDraft();
  const u=selectedUma(),race=getGuideRace(),cond=race?raceCond(race):state;if(!u)return;
  const arr=characterEvolutionCandidates(u,cond),byId=new Map(arr.map(x=>[String(x.evo.id),x]));
  const characterNames=Object.values(finishDraft.character||{}).map(id=>byId.get(String(id))?.evo.jp).filter(Boolean);
- state.evolutionPlan={contextKey:evolutionContextKey(),umaId:u.id,scenario:state.scenario,raceId:race?.id||null,ground:cond.ground,distance:cond.distance,style:cond.style,character:{...finishDraft.character},characterNames,scenarioSkills:[...(finishDraft.scenario||[])],completedAt:new Date().toISOString()};
+ state.evolutionPlan={contextKey:evolutionContextKey(),umaId:u.id,scenario:state.scenario,ultimateRamen:state.scenario==='tresenken'?(state.tresenkenUltimateRamen||null):null,raceId:race?.id||null,ground:cond.ground,distance:cond.distance,style:cond.style,character:{...finishDraft.character},characterNames,scenarioSkills:[...(finishDraft.scenario||[])],completedAt:new Date().toISOString()};
  save();$('#trainingFinishModal').classList.remove('open');renderTrainingFinishSummary();
  toast(`육성 완료 · 진화 ${characterNames.length+finishDraft.scenario.length}개 선택 저장`)
 }
@@ -1244,7 +1298,7 @@ function loadCache(o){
  renderAll()
 }
 function renderAll(){populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderTier()}
-$('#scenario').value=state.scenario;$('#scenario').onchange=e=>{state.scenario=e.target.value;save();renderGuide();renderConditionUmaSuitability()};
+$('#scenario').value=state.scenario;$('#scenario').onchange=e=>{state.scenario=e.target.value;save();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary()};
 populateConditionGuideRace();
 $('#conditionGuideRace').value=state.guideRaceId||UPCOMING.races?.[0]?.id||'';
 $('#conditionGuideRace').onchange=e=>{
