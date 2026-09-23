@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<title>우마무스메 트레이너 가이드 V5.26 WEB</title>
+<title>우마무스메 트레이너 가이드 V5.27 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -132,7 +132,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V5.26 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V5.27 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -364,7 +364,7 @@ const FRIEND_SUPPORT_EVENTS={"version":1,"updated":"2026-09-23","note":"U-tools 
 
 </script>
 <script>
-const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v526_db_cache', LEGACY_CACHE_KEY='uma_trainer_v525_db_cache';
+const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v527_db_cache', LEGACY_CACHE_KEY='uma_trainer_v526_db_cache';
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
@@ -1626,6 +1626,16 @@ function evolutionMatchText(sk,cond,score){
 }
 
 const SUPPORT_OVERRIDES={
+ 30261:{title:'水面のプリンシパル',jpName:'[水面のプリンシパル]ウインバリアシオン',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30261/event',rareEvents:[{id:'verified_30261_final',label:'大衆的チアフレンド',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:203731,hintLevel:1},{skillId:200751,hintLevel:1}]}]}]},
+ 30262:{title:'Tranquillo',jpName:'[Tranquillo]ドゥラメンテ',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30262/event',rareEvents:[{id:'verified_30262_final',label:'可愛いの真の力！',selection:'single',note:'첫 선택지에서 레어스킬 2개, 두 번째 선택지는 레어스킬 없음',choices:[{id:'parfait',label:'ふたりとも、パフェのおかわりする？',skills:[{skillId:202901,hintLevel:1},{skillId:203751,hintLevel:1}]},{id:'smile',label:'それでいうと、笑顔は――',skills:[]}]}]},
+ 30264:{title:'気まぐれ渡り星',jpName:'[気まぐれ渡り星]ステイゴールド',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30264/event',rareEvents:[{id:'verified_30264_final',label:'新しい旅へ',selection:'single',note:'어느 선택지든 ネバーギブアップ + 추가 레어스킬 1개, 총 2개 획득',choices:[{id:'unknown',label:'まったく未知の旅を',skills:[{skillId:202721,hintLevel:2},{skillId:203851,hintLevel:2}]},{id:'past',label:'かつての旅をもう一度',skills:[{skillId:202721,hintLevel:2},{skillId:203861,hintLevel:2}]}]}]},
+ 30265:{title:'氷結晶の静域',jpName:'[氷結晶の静域]アドマイヤグルーヴ',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30265/event',rareEvents:[{id:'verified_30265_final',label:'孤高の証明',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:203831,hintLevel:1},{skillId:203841,hintLevel:1}]}]}]},
+ 30267:{title:'カルストンライトオ、猫です',jpName:'[カルストンライトオ、猫です]カルストンライトオ',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30267/event',rareEvents:[{id:'verified_30267_final',label:'速い＆真っ直ぐは世界を救う！',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:202041,hintLevel:1},{skillId:203881,hintLevel:1}]}]}]},
+ 30268:{title:'今宵、我が君のために',jpName:'[今宵、我が君のために]デュランダル',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30268/event',rareEvents:[{id:'verified_30268_final',label:'忠誠は己が道に',selection:'single',note:'어느 선택지든 月影一閃 + 추가 레어스킬 1개, 총 2개 획득',choices:[{id:'lightning',label:'ご立派です、デュランダル卿！',skills:[{skillId:201453,hintLevel:1},{skillId:202401,hintLevel:1}]},{id:'decision',label:'この活躍、広まっちゃうな！',skills:[{skillId:201453,hintLevel:1},{skillId:203761,hintLevel:1}]}]}]},
+ 30272:{title:'Zirkus der Träume',jpName:'[Zirkus der Träume]エイシンフラッシュ',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30272/event',rareEvents:[{id:'verified_30272_final',label:'美しき結実',selection:'single',note:'첫 선택지에서 레어스킬 2개, 두 번째 선택지는 레어스킬 없음',choices:[{id:'race',label:'レースが楽しみだ！',skills:[{skillId:202641,hintLevel:1},{skillId:203671,hintLevel:1}]},{id:'can',label:'君ならできる！',skills:[]}]}]},
+ 30274:{title:'決意のフローラ',jpName:'[決意のフローラ]カレンブーケドール',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30274/event',rareEvents:[{id:'verified_30274_final',label:'奏で合う幸福',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:200351,hintLevel:1},{skillId:203991,hintLevel:1}]}]}]},
+ 30275:{title:'天才的ユートピア',jpName:'[天才的ユートピア]トウカイテイオー',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30275/event',rareEvents:[{id:'verified_30275_final',label:'まったり孝行日和',selection:'single',note:'어느 선택지든 迸る気迫 + 추가 레어스킬 1개, 총 2개 획득',choices:[{id:'fair',label:'じいやさんは喜んでた？',skills:[{skillId:204001,hintLevel:2},{skillId:203421,hintLevel:1}]},{id:'dream',label:'君自身は楽しめたかな',skills:[{skillId:204001,hintLevel:2},{skillId:203441,hintLevel:1}]}]}]},
+
  30166:{title:'高らかにYO-HO!',jpName:'[高らかにYO-HO!]タップダンスシチー',eventSource:'U-tools / GameWith 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30166/event',rareEvents:[{id:'verified_30166_final',label:'See Ya！夢追う友人',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'runaway',label:'とびっきり派手にいこう！',skills:[{skillId:200551,hintLevel:1}]},{id:'escape',label:'慣れ親しんだ宴にしよう！',skills:[{skillId:200541,hintLevel:1}]}]}]},
 
  30227:{title:'緋色の君へ風が吹く',jpName:'[緋色の君へ風が吹く]ダイワスカーレット',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30227/event',rareEvents:[{id:'verified_30227_final',label:'バブリー水泳競技会！',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'banri',label:'圧巻の泳ぎだった',skills:[{skillId:202821,hintLevel:0}]},{id:'top',label:'想いはイチバンだった',skills:[{skillId:201271,hintLevel:0}]}]}]},
