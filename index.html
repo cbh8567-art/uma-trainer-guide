@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<title>우마무스메 트레이너 가이드 V5.11 WEB</title>
+<title>우마무스메 트레이너 가이드 V5.12 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -132,7 +132,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V5.11 WEB</div><div class="sub">육성 우마별 핑크 진화 · 시나리오 전용 진화 · SSR/스킬 추천 · 이벤트 카운터 DEBUG 반영</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V5.12 WEB</div><div class="sub">육성 우마별 핑크 진화 · 시나리오 전용 진화 · SSR/스킬 추천 · 이벤트 카운터 DEBUG 반영</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -162,7 +162,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
     <div class="scenarioBox"><div class="sub">트레이너 가이드를 바꾸면 해당 레이스의 바장/거리가 자동 적용됩니다. 각질은 육성 우마에 맞게 직접 선택할 수 있습니다.</div><div class="sub" style="margin-top:5px">현재 육성 우마무스메 적합도</div><div class="rating" id="conditionUmaScore" style="font-size:20px">—</div><div class="note" id="conditionUmaScoreReason">DB 동기화 후 육성 우마무스메를 선택하면 표시됩니다.</div></div>
     <div class="sectionHead"><h2 style="margin:0">현재 덱</h2><span class="status">모바일: 「슬롯 선택」 권장 · PC: 드래그 가능</span></div>
     <div class="deck" id="deck"></div><div class="typeSummary" id="typeSummary"></div>
-    <div class="counts"><div class="countbox"><div class="sub">레어 스킬 획득</div><div class="big"><span id="acqCount">0</span> / <span id="rareCount">0</span></div></div><div class="countbox"><div class="sub">현재 조건 적합 레어 스킬</div><div class="big"><span id="recCount">0</span> ★</div><div class="sub" id="conditionText"></div></div></div>
+    <div class="counts"><div class="countbox"><div class="sub">레어 스킬 획득</div><div class="big"><span id="acqCount">0</span> / <span id="rareCount">0</span></div></div><div class="countbox"><div class="sub">획득 완료 · 현재 조건 적합 레어 스킬</div><div class="big"><span id="recCount">0</span> ★</div><div class="sub" id="conditionText"></div></div></div>
     <h2>덱 전체 레어 스킬</h2><div class="skillList" id="globalSkills"></div>
     <div class="panel" style="margin-top:10px;border-color:#7f4663;background:linear-gradient(180deg,#221923,#171a24)">
      <div class="sectionHead" style="margin-top:0">
@@ -350,7 +350,7 @@ const FRIEND_SUPPORT_EVENTS={"version":1,"updated":"2026-09-23","note":"U-tools 
 
 </script>
 <script>
-const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v511_db_cache', LEGACY_CACHE_KEY='uma_trainer_v510_db_cache';
+const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v512_db_cache', LEGACY_CACHE_KEY='uma_trainer_v511_db_cache';
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
@@ -413,7 +413,7 @@ function autoEventDone(card,e){const k=eventStateKey(card,e);return !!(state.eve
 function eventAcquiredCount(card,e){if(!card||!e)return 0;if(isBranchEvent(e)){const chosen=(e.choices||[]).find(c=>c.id===selectedChoiceId(card,e));return chosen?new Set((chosen.skills||[]).map(sk=>String(sk.id))).size:0}return autoEventDone(card,e)?eventMaxCount(e):0}
 function cardRareStats(card){let total=0,got=0;for(const e of card?.rareEvents||[]){total+=eventMaxCount(e);got+=eventAcquiredCount(card,e)}return {total,got}}
 function acquiredSkillIdsForCard(card){const out=new Set();for(const e of card?.rareEvents||[]){if(isBranchEvent(e)){const ch=(e.choices||[]).find(c=>c.id===selectedChoiceId(card,e));for(const sk of ch?.skills||[])out.add(String(sk.id))}else if(autoEventDone(card,e)){for(const sk of eventSkills(e))out.add(String(sk.id))}}return out}
-function isSkillAcquiredAnywhere(skillId){const sid=String(skillId);for(const id of state.deck.filter(Boolean)){const c=cardById(id);if(c&&acquiredSkillIdsForCard(c).has(sid))return true}return false}
+function isSkillAcquiredAnywhere(skillId){const sid=String(skillId);for(const c of activeDeckCards())if(acquiredSkillIdsForCard(c).has(sid))return true;return false}
 function allCardSkills(card){const m=new Map();for(const sk of card?.hints||[]){const x=canonicalSkill(sk);m.set(String(x.id),x)}for(const sk of card?.eventSkillsAll||[]){const x=canonicalSkill(sk);m.set(String(x.id),x)}for(const sk of uniqueRare(card)){const x=canonicalSkill(sk);m.set(String(x.id),x)}return [...m.values()]}
 function effectValue(effect,lb){const vals=effect?.values||[];const idx=LB_INDEX[Math.max(0,Math.min(4,lb))];return vals[idx]??vals[vals.length-1]??0}
 function effectByName(card,needle,lb){const e=(card.supportEffects||[]).find(x=>String(x.name||'').toLowerCase().includes(needle.toLowerCase()));return Number(effectValue(e,lb)||0)}
@@ -441,9 +441,9 @@ function renderCatalog(){
  const q=norm($('#catalogSearch').value),box=$('#catalog');box.innerHTML='';
  const sortBtn=$('#catalogRecommendSort'),sortCond=$('#catalogRecommendCond');
  if(sortBtn){sortBtn.classList.toggle('active',catalogRecommendSort);sortBtn.textContent=catalogRecommendSort?'추천순 적용 중':'추천순 정렬'}
- if(sortCond)sortCond.textContent=`현재 기준: ${groundLabel[state.ground]} · ${distLabel[state.distance]} · ${styleLabel[state.style]}`;
+ if(sortCond)sortCond.textContent=`${state.guideServer==='kr'?'한국':'일본'} 서버 · 현재 기준: ${groundLabel[state.ground]} · ${distLabel[state.distance]} · ${styleLabel[state.style]}`;
  if(!runtime.ready){box.innerHTML='<div class="note">온라인 DB 동기화 또는 저장해 둔 통합 DB JSON을 불러와 주세요.</div>';return}
- let arr=runtime.catalog.filter(c=>catType==='전체'||c.type===catType);
+ let arr=supportCatalogForServer().filter(c=>catType==='전체'||c.type===catType);
  if(q)arr=arr.filter(c=>searchHay(c).includes(q));
  if(catalogRecommendSort)arr.sort((a,b)=>cardSuitability(b,state,Number(state.lb[String(b.id)]??0))-cardSuitability(a,state,Number(state.lb[String(a.id)]??0))||Number(b.id)-Number(a.id));
  arr=arr.slice(0,180);
@@ -457,7 +457,7 @@ function renderCatalog(){
  if(!arr.length)box.innerHTML='<div class="note">검색 결과가 없습니다.</div>';
  renderDbGuideRecommendations()
 }
-function renderOwned(){const box=$('#owned');box.innerHTML='';const ids=state.owned.map(String);const arr=runtime.catalog.filter(c=>ids.includes(String(c.id))&&(ownedType==='전체'||c.type===ownedType));$('#ownedCount').textContent=`${arr.length}장`;for(const c of arr){const d=document.createElement('div');d.className='card';d.draggable=true;d.innerHTML=cardBlock(c,true);d.ondragstart=e=>e.dataTransfer.setData('application/json',JSON.stringify({kind:'owned',id:c.id}));d.querySelector('[data-slot]').onclick=()=>openSlotPicker(c.id);d.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);d.querySelector('[data-unown]').onclick=()=>{if(state.deck.map(String).includes(String(c.id)))return toast('현재 덱에서 먼저 빼주세요.');state.owned=state.owned.filter(x=>String(x)!==String(c.id));delete state.lb[String(c.id)];save();renderOwned();renderCatalog()};box.appendChild(d)}if(!arr.length)box.innerHTML='<div class="note">보유 SSR이 없습니다. 위 카드 DB에서 「보유 등록」하세요.</div>'}
+function renderOwned(){const box=$('#owned');box.innerHTML='';const ids=state.owned.map(String);const arr=supportCatalogForServer().filter(c=>ids.includes(String(c.id))&&(ownedType==='전체'||c.type===ownedType));$('#ownedCount').textContent=`${arr.length}장`;for(const c of arr){const d=document.createElement('div');d.className='card';d.draggable=true;d.innerHTML=cardBlock(c,true);d.ondragstart=e=>e.dataTransfer.setData('application/json',JSON.stringify({kind:'owned',id:c.id}));d.querySelector('[data-slot]').onclick=()=>openSlotPicker(c.id);d.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);d.querySelector('[data-unown]').onclick=()=>{if(state.deck.map(String).includes(String(c.id)))return toast('현재 덱에서 먼저 빼주세요.');state.owned=state.owned.filter(x=>String(x)!==String(c.id));delete state.lb[String(c.id)];save();renderOwned();renderCatalog()};box.appendChild(d)}if(!arr.length)box.innerHTML='<div class="note">보유 SSR이 없습니다. 위 카드 DB에서 「보유 등록」하세요.</div>'}
 
 function setEmptySlotFilter(t){
   emptySlotType=t;
@@ -483,7 +483,7 @@ function renderEmptySlotCards(){
   }
   const q=norm($('#emptySlotSearch')?.value||'');
   const ownedIds=new Set(state.owned.map(String));
-  let arr=runtime.catalog.filter(c=>ownedIds.has(String(c.id)));
+  let arr=supportCatalogForServer().filter(c=>ownedIds.has(String(c.id)));
   if(emptySlotType!=='전체') arr=arr.filter(c=>c.type===emptySlotType);
   if(q) arr=arr.filter(c=>searchHay(c).includes(q));
   arr.sort((a,b)=>{
@@ -511,13 +511,13 @@ function renderEmptySlotCards(){
 }
 
 function placeAt(id,i){const old=state.deck.findIndex(x=>String(x)===String(id));if(old>=0&&old!==i){[state.deck[old],state.deck[i]]=[state.deck[i],state.deck[old]]}else state.deck[i]=id;save();renderDeck();renderGlobalSkills();renderGuide()}
-function openSlotPicker(id){const c=cardById(id);$('#slotCardName').textContent=`${c?.krName||''} / ${c?.jpName||''}`;const b=$('#slotPicker');b.innerHTML='';state.deck.forEach((x,i)=>{const old=x?cardById(x):null;const z=document.createElement('button');z.className='pickSlot';z.innerHTML=`<b>${i+1}번 슬롯</b><br>${old?`${old.image?`<img src="${esc(old.image)}">`:''}${esc(old.krName)}`:'빈칸'}`;z.onclick=()=>{placeAt(id,i);$('#slotModal').classList.remove('open')};b.appendChild(z)});$('#slotModal').classList.add('open')}
-function renderDeck(){const box=$('#deck');box.innerHTML='';state.deck.forEach((id,i)=>{const c=id?cardById(id):null;const s=document.createElement('div');s.className='slot'+(c?'':' empty');s.ondragover=e=>{e.preventDefault();s.classList.add('dragover')};s.ondragleave=()=>s.classList.remove('dragover');s.ondrop=e=>{e.preventDefault();s.classList.remove('dragover');try{const d=JSON.parse(e.dataTransfer.getData('application/json'));if(d.kind==='owned'||d.kind==='catalog')placeAt(d.id,i);if(d.kind==='deck'){[state.deck[d.index],state.deck[i]]=[state.deck[i],state.deck[d.index]];save();renderDeck();renderGlobalSkills()}}catch(_){}};if(!c){s.innerHTML=`<div><b>${i+1}번</b><br>빈 슬롯</div>`;s.onclick=()=>openEmptySlotPicker(i);box.appendChild(s);return}const stats=cardRareStats(c),lb=Number(state.lb[String(c.id)]??0),fit=cardSuitability(c),isOwned=state.owned.map(String).includes(String(c.id));s.draggable=true;s.ondragstart=e=>e.dataTransfer.setData('application/json',JSON.stringify({kind:'deck',index:i,id:c.id}));s.innerHTML=`<div class="thumb"><img src="${esc(c.image||'')}" onerror="this.style.opacity=.16"><span class="typeBadge">${esc(c.type)}${isOwned?'':' · 임시'}</span><span class="lbBadge">${lb===4?'풀돌':lb+'돌'}</span></div><div class="deckname">${esc(c.krName)}</div><div class="deckjp">${esc(c.title||c.jpName)}</div><div class="stars" style="font-size:10px">${scoreStars(fit)}</div><select class="deckLbSelect" data-lb><option value="0">0돌 · Lv30</option><option value="1">1돌 · Lv35</option><option value="2">2돌 · Lv40</option><option value="3">3돌 · Lv45</option><option value="4">풀돌 · Lv50</option></select><div class="deckactions"><button class="mini" data-info>정보</button><button class="mini gold" data-skill>${stats.total?`스킬 ${stats.got}/${stats.total}`:'스킬 -'}</button><button class="mini red" data-remove>×</button></div>`;const lbSel=s.querySelector('[data-lb]');lbSel.value=String(lb);lbSel.onchange=e=>{e.stopPropagation();state.lb[String(c.id)]=Number(e.target.value);save();renderDeck();renderOwned();renderCatalog();renderGuide();renderDbGuideRecommendations()};s.querySelector('.thumb').onclick=()=>openCardInfo(c.id);s.querySelector('.deckname').onclick=()=>openCardInfo(c.id);s.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);s.querySelector('[data-skill]').disabled=!stats.total;s.querySelector('[data-skill]').onclick=()=>openSkillModal(c.id);s.querySelector('[data-remove]').onclick=()=>{state.deck[i]=null;save();renderDeck();renderGlobalSkills();renderGuide()};box.appendChild(s)});renderTypeSummary();renderMobileDock()}
-function renderMobileDock(){const b=$('#mobileDock');b.innerHTML='';state.deck.forEach((id,i)=>{const c=id?cardById(id):null;const x=document.createElement('button');x.className='dockSlot';x.innerHTML=c?`${c.image?`<img src="${esc(c.image)}">`:''}<span>${i+1}</span>`:`${i+1}<span>빈칸</span>`;x.onclick=()=>c?openCardInfo(c.id):openEmptySlotPicker(i);b.appendChild(x)})}
-function renderTypeSummary(){const b=$('#typeSummary');b.innerHTML='';const counts={};for(const id of state.deck.filter(Boolean)){const c=cardById(id);if(c)counts[c.type]=(counts[c.type]||0)+1}for(const [t,n] of Object.entries(counts)){const x=document.createElement('div');x.className='typeChip';x.innerHTML=`<span class="dot ${typeClass(t)}"></span>${esc(t)} ×${n}`;b.appendChild(x)}}
-function deckSkills(){const m=new Map();for(const id of state.deck.filter(Boolean)){const c=cardById(id);for(const s of uniqueRare(c))m.set(String(s.id),s)}return [...m.values()]}
+function openSlotPicker(id){const c=cardById(id);if(!c||!isSupportVisibleForServer(c))return toast('현재 서버에서는 사용할 수 없는 서포트 카드입니다.');$('#slotCardName').textContent=`${c?.krName||''} / ${c?.jpName||''}`;const b=$('#slotPicker');b.innerHTML='';state.deck.forEach((x,i)=>{const old=x?cardById(x):null;const z=document.createElement('button');z.className='pickSlot';z.innerHTML=`<b>${i+1}번 슬롯</b><br>${old?`${old.image?`<img src="${esc(old.image)}">`:''}${esc(old.krName)}`:'빈칸'}`;z.onclick=()=>{placeAt(id,i);$('#slotModal').classList.remove('open')};b.appendChild(z)});$('#slotModal').classList.add('open')}
+function renderDeck(){const box=$('#deck');box.innerHTML='';state.deck.forEach((id,i)=>{const raw=id?cardById(id):null,c=raw&&isSupportVisibleForServer(raw)?raw:null,hiddenByServer=!!(raw&&!c);const s=document.createElement('div');s.className='slot'+(c?'':' empty');s.ondragover=e=>{e.preventDefault();s.classList.add('dragover')};s.ondragleave=()=>s.classList.remove('dragover');s.ondrop=e=>{e.preventDefault();s.classList.remove('dragover');try{const d=JSON.parse(e.dataTransfer.getData('application/json'));if(d.kind==='owned'||d.kind==='catalog')placeAt(d.id,i);if(d.kind==='deck'){[state.deck[d.index],state.deck[i]]=[state.deck[i],state.deck[d.index]];save();renderDeck();renderGlobalSkills()}}catch(_){}};if(!c){s.innerHTML=`<div><b>${i+1}번</b><br>${hiddenByServer?'한국 서버 미구현 · 숨김':'빈 슬롯'}</div>`;s.onclick=()=>openEmptySlotPicker(i);box.appendChild(s);return}const stats=cardRareStats(c),lb=Number(state.lb[String(c.id)]??0),fit=cardSuitability(c),isOwned=state.owned.map(String).includes(String(c.id));s.draggable=true;s.ondragstart=e=>e.dataTransfer.setData('application/json',JSON.stringify({kind:'deck',index:i,id:c.id}));s.innerHTML=`<div class="thumb"><img src="${esc(c.image||'')}" onerror="this.style.opacity=.16"><span class="typeBadge">${esc(c.type)}${isOwned?'':' · 임시'}</span><span class="lbBadge">${lb===4?'풀돌':lb+'돌'}</span></div><div class="deckname">${esc(c.krName)}</div><div class="deckjp">${esc(c.title||c.jpName)}</div><div class="stars" style="font-size:10px">${scoreStars(fit)}</div><select class="deckLbSelect" data-lb><option value="0">0돌 · Lv30</option><option value="1">1돌 · Lv35</option><option value="2">2돌 · Lv40</option><option value="3">3돌 · Lv45</option><option value="4">풀돌 · Lv50</option></select><div class="deckactions"><button class="mini" data-info>정보</button><button class="mini gold" data-skill>${stats.total?`스킬 ${stats.got}/${stats.total}`:'스킬 -'}</button><button class="mini red" data-remove>×</button></div>`;const lbSel=s.querySelector('[data-lb]');lbSel.value=String(lb);lbSel.onchange=e=>{e.stopPropagation();state.lb[String(c.id)]=Number(e.target.value);save();renderDeck();renderOwned();renderCatalog();renderGuide();renderDbGuideRecommendations()};s.querySelector('.thumb').onclick=()=>openCardInfo(c.id);s.querySelector('.deckname').onclick=()=>openCardInfo(c.id);s.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);s.querySelector('[data-skill]').disabled=!stats.total;s.querySelector('[data-skill]').onclick=()=>openSkillModal(c.id);s.querySelector('[data-remove]').onclick=()=>{state.deck[i]=null;save();renderDeck();renderGlobalSkills();renderGuide()};box.appendChild(s)});renderTypeSummary();renderMobileDock()}
+function renderMobileDock(){const b=$('#mobileDock');b.innerHTML='';state.deck.forEach((id,i)=>{const raw=id?cardById(id):null,c=raw&&isSupportVisibleForServer(raw)?raw:null;const x=document.createElement('button');x.className='dockSlot';x.innerHTML=c?`${c.image?`<img src="${esc(c.image)}">`:''}<span>${i+1}</span>`:`${i+1}<span>빈칸</span>`;x.onclick=()=>c?openCardInfo(c.id):openEmptySlotPicker(i);b.appendChild(x)})}
+function renderTypeSummary(){const b=$('#typeSummary');b.innerHTML='';const counts={};for(const c of activeDeckCards()){if(c)counts[c.type]=(counts[c.type]||0)+1}for(const [t,n] of Object.entries(counts)){const x=document.createElement('div');x.className='typeChip';x.innerHTML=`<span class="dot ${typeClass(t)}"></span>${esc(t)} ×${n}`;b.appendChild(x)}}
+function deckSkills(){const m=new Map();for(const c of activeDeckCards())for(const s of uniqueRare(c))m.set(String(s.id),s);return [...m.values()]}
 function skillRowHtml(s,checkbox=true,cond=state,checkedOverride=null,disabled=false){s=canonicalSkill(s);const sc=skillConditionScore(s,cond);const checked=checkedOverride===null?false:!!checkedOverride;return `${checkbox?`<input type="checkbox" ${checked?'checked':''} ${disabled?'disabled':''}>`:''}${skillIcon(s)}<div><div class="jp">${esc(s.jp)} <span class="tag">원문</span></div><div class="kr">${esc(s.kr||koSkill(s.jp))}</div><div class="tags">${(s.tags?.grounds||[]).map(x=>`<span class="tag">${groundLabel[x]||x}</span>`).join('')}${(s.tags?.distances||[]).map(x=>`<span class="tag">${distLabel[x]||x}</span>`).join('')}${(s.tags?.styles||[]).map(x=>`<span class="tag">${styleLabel[x]||x}</span>`).join('')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`}
-function renderGlobalSkills(){const list=deckSkills().sort((a,b)=>skillConditionScore(b)-skillConditionScore(a));const ds=state.deck.filter(Boolean).map(cardById).filter(Boolean).reduce((a,c)=>{const x=cardRareStats(c);a.got+=x.got;a.total+=x.total;return a},{got:0,total:0});$('#acqCount').textContent=ds.got;$('#rareCount').textContent=ds.total;$('#recCount').textContent=list.filter(s=>skillConditionScore(s)>0).length;$('#conditionText').textContent=`${groundLabel[state.ground]} · ${distLabel[state.distance]} · ${styleLabel[state.style]}`;const b=$('#globalSkills');b.innerHTML='';for(const sk of list){const r=document.createElement('label');r.className='skillRow';r.innerHTML=skillRowHtml(sk,true,state,isSkillAcquiredAnywhere(sk.id),true);r.title='획득 상태는 각 카드의 스킬 취득 버튼에서 변경합니다.';b.appendChild(r)}if(!list.length)b.innerHTML='<div class="note">현재 덱에 연결된 레어 스킬이 없습니다.</div>'}
+function renderGlobalSkills(){const list=deckSkills().sort((a,b)=>skillConditionScore(b)-skillConditionScore(a));const ds=activeDeckCards().reduce((a,c)=>{const x=cardRareStats(c);a.got+=x.got;a.total+=x.total;return a},{got:0,total:0});const acquired=list.filter(s=>isSkillAcquiredAnywhere(s.id));$('#acqCount').textContent=ds.got;$('#rareCount').textContent=ds.total;$('#recCount').textContent=acquired.filter(s=>skillConditionScore(s)>0).length;$('#conditionText').textContent=`${groundLabel[state.ground]} · ${distLabel[state.distance]} · ${styleLabel[state.style]}`;const b=$('#globalSkills');b.innerHTML='';for(const sk of list){const r=document.createElement('label');r.className='skillRow';r.innerHTML=skillRowHtml(sk,true,state,isSkillAcquiredAnywhere(sk.id),true);r.title='획득 상태는 각 카드의 스킬 취득 버튼에서 변경합니다.';b.appendChild(r)}if(!list.length)b.innerHTML='<div class="note">현재 덱에 연결된 레어 스킬이 없습니다.</div>'}
 function recommendedAxesForCard(card){const gs={turf:0,dirt:0},ds={short:0,mile:0,mid:0,long:0},ss={nige:0,senko:0,sashi:0,oikomi:0};for(const sk of allCardSkills(card)){for(const x of sk.tags?.grounds||[])if(gs[x]!==undefined)gs[x]++;for(const x of sk.tags?.distances||[])if(ds[x]!==undefined)ds[x]++;for(const x of sk.tags?.styles||[])if(ss[x]!==undefined)ss[x]++}const tops=(o,m)=>{const mx=Math.max(...Object.values(o));return mx<=0?'범용':Object.entries(o).filter(([,v])=>v===mx&&v>0).map(([k])=>m[k]||k).join(' / ')};return {ground:tops(gs,groundLabel),distance:tops(ds,distLabel),style:tops(ss,styleLabel)}}
 function openCardInfo(id){const c=cardById(id);if(!c)return;const lb=Number(state.lb[String(id)]??0),fit=cardSuitability(c),axes=recommendedAxesForCard(c);$('#cardModalTitle').textContent=c.krName;$('#cardModalJp').textContent=c.jpName;const effects=(c.supportEffects||[]).map(e=>`<tr><td>${esc(CONFIG.effectAliases[e.name]||e.name||e.symbol||'효과')}</td><td>${esc(effectValue(e,lb))}</td></tr>`).join('');const skillBlocks=allCardSkills(c).slice(0,30).map(raw=>{const s=canonicalSkill(raw);return `<div class="skillRow" style="grid-template-columns:auto 1fr auto">${skillIcon(s)}<div><div class="jp">${esc(s.jp)} <span class="tag">원문</span></div><div class="kr">${esc(s.kr||koSkill(s.jp))}</div><div class="tags">${(s.tags?.grounds||[]).map(x=>`<span class="tag">${groundLabel[x]||x}</span>`).join('')}${(s.tags?.distances||[]).map(x=>`<span class="tag">${distLabel[x]||x}</span>`).join('')}${(s.tags?.styles||[]).map(x=>`<span class="tag">${styleLabel[x]||x}</span>`).join('')}${!(s.tags?.grounds||[]).length&&!(s.tags?.distances||[]).length&&!(s.tags?.styles||[]).length?'<span class="tag">범용/코스조건</span>':''}</div></div><span class="${skillConditionScore(s)?'stars':'dim'}">${skillConditionScore(s)===3?'★★★':skillConditionScore(s)===2?'★★':'—'}</span></div>`}).join('');$('#cardInfo').innerHTML=`<div class="cardHero">${c.image?`<img src="${esc(c.image)}">`:''}<div><div class="tags"><span class="tag">${esc(c.type)}</span><span class="tag">ID ${c.id}</span></div><div style="margin-top:8px"><b>현재 육성 적합도</b><div class="rating">${scoreStars(fit)}</div><div class="sub">${fit.toFixed(1)} / 5 · 현재 ${groundLabel[state.ground]} / ${distLabel[state.distance]} / ${styleLabel[state.style]} 기준의 앱 휴리스틱</div></div><div class="scenarioBox"><div class="sub">추천 육성 조건 · 카드 스킬 태그 기준</div><div class="tags" style="margin-top:6px"><span class="tag">바장: ${esc(axes.ground)}</span><span class="tag">거리: ${esc(axes.distance)}</span><span class="tag">각질: ${esc(axes.style)}</span></div></div><div class="dataDiag ${(c.rareEvents?.length||c.eventSkillsAll?.length)?'good':'warn'}"><b>데이터 연결 상태</b><br>
 카드 데이터: ${esc(c.catalogSource||'저장 DB')}<br>
@@ -764,8 +764,7 @@ function findSkillByJp(name){
   return null
 }
 function deckHasSkillName(name){
- for(const id of state.deck.filter(Boolean)){
-   const c=cardById(id);
+ for(const c of activeDeckCards()){
    if(c&&allCardSkills(c).some(sk=>sk.jp===name))return true
  }
  const u=selectedUma();
@@ -773,8 +772,8 @@ function deckHasSkillName(name){
 }
 function selectedRareSkillNames(){
  const out=new Set();
- for(const id of state.deck.filter(Boolean)){
-   const c=cardById(id);if(!c)continue;
+ for(const c of activeDeckCards()){
+   if(!c)continue;
    for(const sid of acquiredSkillIdsForCard(c)){
      const meta=runtime.skills.get(Number(sid));
      if(meta&&Number(meta.rarity)===2&&meta.name)out.add(meta.name)
@@ -804,8 +803,7 @@ function scenarioMilestoneMet(milestone){
 }
 function deckOrUmaHasCharacter(jpName){
  const target=norm(jpName);
- for(const id of state.deck.filter(Boolean)){
-   const c=cardById(id);
+ for(const c of activeDeckCards()){
    if(c&&(norm(c.character)===target||norm(c.jpName).includes(target)))return true
  }
  const u=selectedUma();
@@ -1209,6 +1207,8 @@ function setGuideServer(server){
  renderGuideServerTabs();
  if(race)applyGuideRaceFromCondition(race.id);
  else{renderRaceCards();renderGuide()}
+ renderCatalog();renderOwned();renderDeck();renderGlobalSkills();
+ if($('#emptySlotModal')?.classList.contains('open'))renderEmptySlotCards();
 }
 function populateConditionGuideRace(){
  const sel=$('#conditionGuideRace');if(!sel)return;
@@ -1248,9 +1248,21 @@ function isKoreanImplementedSupport(card){
  const id=Number(card?.id);
  return Number.isFinite(id)&&id>=30000&&id<=Number(KOREA_SERVER_DATA.supportMaxId)
 }
+function isSupportVisibleForServer(card){
+ if(!card)return false;
+ return state.guideServer!=='kr'||isKoreanImplementedSupport(card)
+}
+function supportCatalogForServer(){
+ return state.guideServer==='kr'?runtime.catalog.filter(isKoreanImplementedSupport):runtime.catalog
+}
+function activeDeckIds(){
+ return state.deck.filter(Boolean).filter(id=>isSupportVisibleForServer(cardById(id)))
+}
+function activeDeckCards(){
+ return activeDeckIds().map(cardById).filter(Boolean)
+}
 function guideSupportCatalog(){
- if(state.guideServer!=='kr')return runtime.catalog;
- return runtime.catalog.filter(isKoreanImplementedSupport)
+ return supportCatalogForServer()
 }
 function supportRecommend(cond){return guideSupportCatalog().map(c=>({c,score:cardSuitability(c,cond,state.owned.map(String).includes(String(c.id))?null:4)})).sort((a,b)=>b.score-a.score).slice(0,10)}
 
