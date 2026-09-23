@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<title>우마무스메 트레이너 가이드 V5.7 WEB</title>
+<title>우마무스메 트레이너 가이드 V5.8 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -132,7 +132,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V5.7 WEB</div><div class="sub">육성 우마별 핑크 진화 · 시나리오 전용 진화 · SSR/스킬 추천 · 이벤트 카운터 DEBUG 반영</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V5.8 WEB</div><div class="sub">육성 우마별 핑크 진화 · 시나리오 전용 진화 · SSR/스킬 추천 · 이벤트 카운터 DEBUG 반영</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -266,13 +266,22 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
     <button class="btn" data-close="trainingFinishModal">닫기</button>
   </div>
 
+  <div class="finishSection" id="finishRmjSection" style="display:none">
+    <div class="sectionHead" style="margin-top:0">
+      <div><b>⓪ 트레센켄 · RMJ 진행 조건</b><div class="sub">기본값은 전부 대성황 이상 완주로 가정합니다. 실제 결과가 다르면 눌러서 해제하세요.</div></div>
+      <span class="status">진화 조건 / 진행 보상</span>
+    </div>
+    <div id="finishRmjChecks" class="finishOptions"></div>
+    <div id="finishRmjRareSummary" class="note" style="margin-top:7px"></div>
+  </div>
+
   <div class="finishSection" id="finishRamenSection" style="display:none">
     <div class="sectionHead" style="margin-top:0">
-      <div><b>⓪ URA 입장 전 · 궁극 트레센 라멘 선택</b><div class="sub">시니어급 12월 후반 3개 중 실제로 선택한 라멘 1개만 기록합니다.</div></div>
+      <div><b>① URA 입장 전 · 궁극 트레센 라멘 선택</b><div class="sub">시니어급 12월 후반 3개 중 실제로 선택한 라멘 1개만 기록합니다.</div></div>
       <span class="status">1개 필수 선택</span>
     </div>
     <div id="finishRamenChoices" class="finishOptions"></div>
-    <div class="note" style="margin-top:7px">선택한 라멘에서 받는 금스킬 힌트 Lv+2만 해당 시나리오 획득 가능 스킬로 반영합니다.</div>
+    <div class="note" style="margin-top:7px">선택한 라멘에서 받는 레어스킬은 선택한 1개만 시나리오 획득 스킬로 반영합니다.</div>
   </div>
 
   <div class="finishSection">
@@ -321,13 +330,13 @@ const FRIEND_SUPPORT_EVENTS={"version":1,"updated":"2026-09-23","note":"U-tools 
 
 </script>
 <script>
-const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v57_db_cache', LEGACY_CACHE_KEY='uma_trainer_v56_db_cache';
+const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v58_db_cache', LEGACY_CACHE_KEY='uma_trainer_v57_db_cache';
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
 const LB_MAX=[30,35,40,45,50], LB_INDEX=[6,7,8,9,10];
 let state=JSON.parse(localStorage.getItem(STATE_KEY)||'null')||{owned:[],deck:[null,null,null,null,null,null],acquired:{},eventChoice:{},lb:{},scenario:'tresenken',ground:'turf',distance:'mid',style:'senko',currentUmaId:null,guideRaceId:'cm_2026_10_classic'};
-state.deck=[...(state.deck||[]).slice(0,6),...Array(6).fill(null)].slice(0,6);state.lb=state.lb||{};state.owned=state.owned||[];state.acquired=state.acquired||{};state.eventChoice=state.eventChoice||{};state.eventDone=state.eventDone||{};state.scenario=state.scenario||'tresenken';state.tresenkenUltimateRamen=state.tresenkenUltimateRamen||null;state.evolutionPlan=state.evolutionPlan||null;
+state.deck=[...(state.deck||[]).slice(0,6),...Array(6).fill(null)].slice(0,6);state.lb=state.lb||{};state.owned=state.owned||[];state.acquired=state.acquired||{};state.eventChoice=state.eventChoice||{};state.eventDone=state.eventDone||{};state.scenario=state.scenario||'tresenken';state.tresenkenUltimateRamen=state.tresenkenUltimateRamen||null;state.tresenkenRmj={juniorBig:true,classicBig:true,seniorBig:true,...(state.tresenkenRmj||{})};state.evolutionPlan=state.evolutionPlan||null;
 let runtime={catalog:[],byId:new Map(),skills:new Map(),characters:[],courses:[],ready:false};let catType='전체',ownedType='전체',emptySlotType='전체',emptySlotTarget=0,catalogRecommendSort=false;
 
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -554,6 +563,8 @@ const SCENARIOS={
       {id:'jewel',jp:'珠玉のトレセンラーメン',kr:'주옥의 트레센 라멘',skill:'好奇心',hintLevel:2}
     ],
     scenarioAcquiredRareSkills:[
+      {name:'時中の妙',source:'GameWith / VIP Wiki 2026-09',acquisition:'클래식급 12월 후반 제2회 RMJ · 대성황 이상',verified:true,milestone:'classicRmjBig'},
+      {name:'極上の感謝を！',source:'GameWith / VIP Wiki 2026-09',acquisition:'육성 종료 엔딩 · 모든 RMJ 대성황 이상',verified:true,milestone:'allRmjBig'},
       {name:'勇迅一閃',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 파인 모션 대응 편성 시',verified:true},
       {name:'烈風一閃',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 나리타 탑로드 대응 편성 시',verified:true},
       {name:'閃く雷光',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 칼스톤 라이트 오 대응 편성 시',verified:true},
@@ -565,12 +576,12 @@ const SCENARIOS={
       {name:'好奇心',source:'Game8 2026-09-22',acquisition:'시니어급 12월 후반 궁극 라멘 선택 · 珠玉のトレセンラーメン · 힌트 Lv+2',verified:true,choiceGroup:'ultimateRamen',choiceId:'jewel'}
     ],
     evolutions:[
-      {from:'ギアチェンジ',to:'秘伝の味変アレンジ！',distances:['mile'],guideBoost:-0.5,note:'Game8 현행 가이드에서 우선도 낮음'},
-      {from:'お先に失礼っ！',to:'バリカタ、一丁上がり！',guideBoost:0},
-      {from:'時中の妙',to:'湯切りの妙技',guideBoost:0.9,note:'현행 가이드 최우선 후보'},
-      {from:'パスファインダー',to:'麺の極意、見つけたり',distances:['mid','long'],guideBoost:0.65,note:'중/장거리 우선 후보'},
-      {from:'元気溌剌',to:'元気特盛りのおもてなし',distances:['mile'],guideBoost:0.55,note:'마일에서 우선도 상승'},
-      {from:'悠々自適',to:'じっくり仕込みの一杯',distances:['mid','long'],guideBoost:-0.35,note:'회복이 특별히 필요할 때 검토'}
+      {from:'ギアチェンジ',to:'秘伝の味変アレンジ！',distances:['mile'],scenarioRequirement:'allRmjBig',extraRequirement:'마일 스킬 2개 이상',guideBoost:-0.5,note:'Game8 현행 가이드에서 우선도 낮음'},
+      {from:'お先に失礼っ！',to:'バリカタ、一丁上がり！',scenarioRequirement:'allRmjBig',guideBoost:0},
+      {from:'時中の妙',to:'湯切りの妙技',scenarioRequirement:'allRmjBig',guideBoost:0.9,note:'현행 가이드 최우선 후보'},
+      {from:'パスファインダー',to:'麺の極意、見つけたり',distances:['mid','long'],scenarioRequirement:'allRmjBig',extraRequirement:'중거리 또는 장거리 스킬 2개 이상',guideBoost:0.65,note:'중/장거리 우선 후보'},
+      {from:'元気溌剌',to:'元気特盛りのおもてなし',distances:['mile'],scenarioRequirement:'allRmjBig',extraRequirement:'마일 스킬 2개 이상',guideBoost:0.55,note:'마일에서 우선도 상승'},
+      {from:'悠々自適',to:'じっくり仕込みの一杯',distances:['mid','long'],scenarioRequirement:'allRmjBig',guideBoost:-0.35,note:'회복이 특별히 필요할 때 검토'}
     ]
   },
   dreams:{
@@ -746,14 +757,34 @@ function scenarioChoiceValue(group){
  if(group==='ultimateRamen'&&state.scenario==='tresenken')return state.tresenkenUltimateRamen||null;
  return null
 }
+function tresenkenAllRmjBig(){
+ const r=state.tresenkenRmj||{};
+ return !!(r.juniorBig&&r.classicBig&&r.seniorBig)
+}
+function scenarioMilestoneMet(milestone){
+ if(!milestone)return true;
+ if(state.scenario!=='tresenken')return false;
+ if(milestone==='classicRmjBig')return !!state.tresenkenRmj?.classicBig;
+ if(milestone==='allRmjBig')return tresenkenAllRmjBig();
+ return false
+}
 function scenarioRareSkillNames(){
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none,out=new Set();
  for(const x of sc.scenarioAcquiredRareSkills||[]){
    if(!x||x.verified!==true||!x.name)continue;
    if(x.choiceGroup&&scenarioChoiceValue(x.choiceGroup)!==x.choiceId)continue;
+   if(x.milestone&&!scenarioMilestoneMet(x.milestone))continue;
    out.add(x.name)
  }
  return out
+}
+function scenarioEvolutionRequirementStatus(x){
+ if(state.scenario!=='tresenken'||!x?.scenarioRequirement)return {met:true,label:'시나리오 조건 확인 ✓'};
+ if(x.scenarioRequirement==='allRmjBig'){
+   const met=tresenkenAllRmjBig();
+   return {met,label:met?'모든 RMJ 대성황 이상 ✓':'모든 RMJ 대성황 이상 필요'};
+ }
+ return {met:true,label:'시나리오 조건 확인 ✓'}
 }
 function evolutionBaseStatus(name){
  const selected=selectedRareSkillNames().has(name),uma=umaRareSkillNames().has(name),scenario=scenarioRareSkillNames().has(name);
@@ -866,8 +897,8 @@ function renderScenarioEvolution(cond){
     return
   }
   const arr=sc.evolutions.map(x=>{
-    const sk=findSkillByJp(x.to),status=evolutionBaseStatus(x.from);
-    return {...x,sk,...status,score:scenarioEvolutionScore(x,cond)}
+    const sk=findSkillByJp(x.to),status=evolutionBaseStatus(x.from),req=scenarioEvolutionRequirementStatus(x);
+    return {...x,sk,...status,scenarioConditionMet:req.met,scenarioConditionLabel:req.label,available:status.available&&req.met,score:scenarioEvolutionScore(x,cond)}
   }).sort((a,b)=>(b.score+(b.available?.25:0))-(a.score+(a.available?.25:0)));
   const recommended=arr.filter(x=>x.score>=2.5).slice(0,sc.maxEvolution);
   const recSet=new Set(recommended.map(x=>x.to));
@@ -904,6 +935,37 @@ function selectedUltimateRamen(){
  const sc=SCENARIOS.tresenken;
  return (sc.ultimateRamenChoices||[]).find(x=>x.id===state.tresenkenUltimateRamen)||null
 }
+function renderTresenkenRmjSection(){
+ const section=$('#finishRmjSection'),box=$('#finishRmjChecks'),summary=$('#finishRmjRareSummary');
+ if(!section||!box||!summary)return;
+ if(state.scenario!=='tresenken'){section.style.display='none';box.innerHTML='';summary.textContent='';return}
+ section.style.display='block';box.innerHTML='';
+ const rows=[
+   {key:'juniorBig',title:'주니어급 · 제1회 RMJ',sub:'대성황 이상'},
+   {key:'classicBig',title:'클래식급 · 제2회 RMJ',sub:'대성황 이상 · 달성 시 時中の妙 획득'},
+   {key:'seniorBig',title:'시니어급 · 초RMJ극',sub:'대성황 이상'}
+ ];
+ for(const x of rows){
+   const checked=!!state.tresenkenRmj?.[x.key],row=document.createElement('label');
+   row.className='finishOption'+(checked?' selected':'');
+   row.innerHTML=`<input type="checkbox" ${checked?'checked':''}><span class="skillFallback">${checked?'✓':'!'}</span><div><div class="finishName">${esc(x.title)}</div><div class="finishSub">${esc(x.sub)}</div></div><div class="finishRight">${checked?'달성':'미달성'}</div>`;
+   row.onclick=e=>{
+     e.preventDefault();
+     state.tresenkenRmj={juniorBig:true,classicBig:true,seniorBig:true,...(state.tresenkenRmj||{})};
+     state.tresenkenRmj[x.key]=!checked;
+     state.evolutionPlan=null;
+     save();
+     sanitizeFinishDraft();
+     renderTrainingFinishModal();
+     renderTrainingFinishSummary();
+     renderGuide()
+   };
+   box.appendChild(row)
+ }
+ const acquired=[...scenarioRareSkillNames()];
+ const progressOnly=acquired.filter(n=>['時中の妙','極上の感謝を！'].includes(n));
+ summary.innerHTML=`진행 보상 레어스킬: ${progressOnly.length?progressOnly.map(n=>`<span class="tag">${esc(n)}</span>`).join(' '):'현재 조건에서 없음'}${tresenkenAllRmjBig()?'<br>모든 RMJ 대성황 이상 → 시나리오 진화 공통 조건 충족 ✓':''}`;
+}
 function renderUltimateRamenSection(){
  const section=$('#finishRamenSection'),box=$('#finishRamenChoices');
  if(!section||!box)return;
@@ -932,14 +994,14 @@ function renderUltimateRamenSection(){
  }
 }
 function evolutionContextKey(){
- const u=selectedUma(),r=getGuideRace(),scenarioChoice=state.scenario==='tresenken'?(state.tresenkenUltimateRamen||'ramen-none'):'no-scenario-choice';
- return `${u?.id||'none'}|${state.scenario}|${scenarioChoice}|${r?.id||'none'}|${state.ground}|${state.distance}|${state.style}`
+ const u=selectedUma(),r=getGuideRace(),scenarioChoice=state.scenario==='tresenken'?(state.tresenkenUltimateRamen||'ramen-none'):'no-scenario-choice',rmj=state.scenario==='tresenken'?`${state.tresenkenRmj?.juniorBig?1:0}${state.tresenkenRmj?.classicBig?1:0}${state.tresenkenRmj?.seniorBig?1:0}`:'---';
+ return `${u?.id||'none'}|${state.scenario}|${scenarioChoice}|${rmj}|${r?.id||'none'}|${state.ground}|${state.distance}|${state.style}`
 }
 function scenarioEvolutionCandidates(cond){
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none;
  const arr=(sc.evolutions||[]).map(x=>{
-   const sk=findSkillByJp(x.to),status=evolutionBaseStatus(x.from);
-   return {...x,sk,...status,score:scenarioEvolutionScore(x,cond)}
+   const sk=findSkillByJp(x.to),status=evolutionBaseStatus(x.from),req=scenarioEvolutionRequirementStatus(x);
+   return {...x,sk,...status,scenarioConditionMet:req.met,scenarioConditionLabel:req.label,available:status.available&&req.met,score:scenarioEvolutionScore(x,cond)}
  }).sort((a,b)=>(b.score+(b.available?.25:0))-(a.score+(a.available?.25:0)));
  return {sc,arr}
 }
@@ -996,6 +1058,7 @@ function sanitizeFinishDraft(){
 function renderTrainingFinishModal(){
  const u=selectedUma(),race=getGuideRace(),cond=race?raceCond(race):state;if(!u)return;
  $('#finishContext').textContent=`${u.krName} · ${(SCENARIOS[state.scenario]||SCENARIOS.none).kr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;
+ renderTresenkenRmjSection();
  renderUltimateRamenSection();
 
  const cb=$('#finishCharacterEvos');cb.innerHTML='';
@@ -1031,9 +1094,10 @@ function renderTrainingFinishModal(){
  for(const x of scArr){
    const selected=finishDraft.scenario.includes(x.to),recommended=x.score>=2.5&&x.available;
    const row=document.createElement('label');row.className='finishOption'+(selected?' selected':'')+(recommended?' recommended':'')+(!x.available?' disabled':'');
-   const star=Math.max(1,Math.round(x.score)),avail=x.fromDeck?'현재 선택한 레어 스킬 확인 ✓':x.fromUma?'육성 우마 레어 스킬 확인 ✓':x.fromScenario?'시나리오 진행 획득 가능 ✓':'원본 레어 스킬 없음';
-   row.innerHTML=`<input type="checkbox" ${selected?'checked':''} ${x.available?'':'disabled'}>${x.sk?skillIcon(x.sk):'<span class="skillFallback">進</span>'}<div><div class="finishName">${esc(x.to)} <span class="pinkBadge">시나리오 핑크</span>${recommended?' <span class="scenarioRec">추천</span>':''}${!x.available?' <span class="finishLocked">선택 불가</span>':''}</div><div class="finishSub">${esc(x.from)} → 진화 · ${avail}</div><div class="evoTags">${x.sk?evolutionTagHtml(x.sk):evolutionTagHtml({tags:{grounds:x.grounds||[],distances:x.distances||[],styles:x.styles||[]}})}</div></div><div class="finishRight"><div class="evoStars">${'★'.repeat(star)}${'☆'.repeat(5-star)}</div>${x.available?(x.score>=4?'추천':'현재 조건 검토'):'원본 필요'}</div>`;
-   row.onclick=e=>{e.preventDefault();if(!x.available)return toast('덱에서 획득했거나, 육성 우마가 보유했거나, 현재 시나리오에서 획득 가능한 원본 레어 스킬이 없어 선택할 수 없습니다.');if(selected)finishDraft.scenario=finishDraft.scenario.filter(n=>n!==x.to);else{if(finishDraft.scenario.length>=sc.maxEvolution)return toast(`시나리오 진화는 최대 ${sc.maxEvolution}개까지 선택할 수 있습니다.`);finishDraft.scenario=[...finishDraft.scenario,x.to]}renderTrainingFinishModal()};
+   const star=Math.max(1,Math.round(x.score)),baseAvail=x.fromDeck?'현재 선택한 레어 스킬 확인 ✓':x.fromUma?'육성 우마 레어 스킬 확인 ✓':x.fromScenario?'시나리오 진행 획득 가능 ✓':'원본 레어 스킬 없음';
+   const avail=!x.scenarioConditionMet?x.scenarioConditionLabel:baseAvail;
+   row.innerHTML=`<input type="checkbox" ${selected?'checked':''} ${x.available?'':'disabled'}>${x.sk?skillIcon(x.sk):'<span class="skillFallback">進</span>'}<div><div class="finishName">${esc(x.to)} <span class="pinkBadge">시나리오 핑크</span>${recommended?' <span class="scenarioRec">추천</span>':''}${!x.available?' <span class="finishLocked">선택 불가</span>':''}</div><div class="finishSub">${esc(x.from)} → 진화 · ${avail}</div><div class="evoTags">${x.sk?evolutionTagHtml(x.sk):evolutionTagHtml({tags:{grounds:x.grounds||[],distances:x.distances||[],styles:x.styles||[]}})}${x.extraRequirement?`<span class="tag">추가 조건: ${esc(x.extraRequirement)}</span>`:''}</div></div><div class="finishRight"><div class="evoStars">${'★'.repeat(star)}${'☆'.repeat(5-star)}</div>${x.available?(x.score>=4?'추천':'현재 조건 검토'):(x.scenarioConditionMet?'원본 필요':'시나리오 조건 필요')}</div>`;
+   row.onclick=e=>{e.preventDefault();if(!x.available)return toast(!x.scenarioConditionMet?'트레센켄 시나리오 진화 조건을 먼저 충족해야 합니다.':'덱에서 획득했거나, 육성 우마가 보유했거나, 현재 시나리오에서 획득 가능한 원본 레어 스킬이 없어 선택할 수 없습니다.');if(selected)finishDraft.scenario=finishDraft.scenario.filter(n=>n!==x.to);else{if(finishDraft.scenario.length>=sc.maxEvolution)return toast(`시나리오 진화는 최대 ${sc.maxEvolution}개까지 선택할 수 있습니다.`);finishDraft.scenario=[...finishDraft.scenario,x.to]}renderTrainingFinishModal()};
    sb.appendChild(row)
  }
  renderFinishChoiceSummary()
@@ -1056,7 +1120,7 @@ function confirmTrainingFinish(){
  const u=selectedUma(),race=getGuideRace(),cond=race?raceCond(race):state;if(!u)return;
  const arr=characterEvolutionCandidates(u,cond),byId=new Map(arr.map(x=>[String(x.evo.id),x]));
  const characterNames=Object.values(finishDraft.character||{}).map(id=>byId.get(String(id))?.evo.jp).filter(Boolean);
- state.evolutionPlan={contextKey:evolutionContextKey(),umaId:u.id,scenario:state.scenario,ultimateRamen:state.scenario==='tresenken'?(state.tresenkenUltimateRamen||null):null,raceId:race?.id||null,ground:cond.ground,distance:cond.distance,style:cond.style,character:{...finishDraft.character},characterNames,scenarioSkills:[...(finishDraft.scenario||[])],completedAt:new Date().toISOString()};
+ state.evolutionPlan={contextKey:evolutionContextKey(),umaId:u.id,scenario:state.scenario,ultimateRamen:state.scenario==='tresenken'?(state.tresenkenUltimateRamen||null):null,rmj:state.scenario==='tresenken'?{...state.tresenkenRmj}:null,raceId:race?.id||null,ground:cond.ground,distance:cond.distance,style:cond.style,character:{...finishDraft.character},characterNames,scenarioSkills:[...(finishDraft.scenario||[])],completedAt:new Date().toISOString()};
  save();$('#trainingFinishModal').classList.remove('open');renderTrainingFinishSummary();
  toast(`육성 완료 · 진화 ${characterNames.length+finishDraft.scenario.length}개 선택 저장`)
 }
