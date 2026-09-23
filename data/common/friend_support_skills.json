@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-23",
+  "note": "친구 SSR은 Tsuyuchan supports/events 배포 대상에서 빠지는 카드가 있어 U-tools의 'イベントで取得'를 보조 표시 데이터로 사용. 이 목록은 카드 상세의 스킬 조회용이며 이벤트 선택지/획득 카운트는 임의 추정하지 않음.",
+  "cards": {
+    "30021": {
+      "name": "[ようこそ、トレセン学園へ！] 駿川たづな",
+      "skills": [
+        "コンセントレーション",
+        "集中力",
+        "展開窺い",
+        "尻尾上がり"
+      ],
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30021"
+    },
+    "30036": {
+      "name": "[徹底管理主義] 樫本理子",
+      "skills": [
+        "一陣の風",
+        "ペースアップ",
+        "おひとり様○",
+        "一匹狼",
+        "シンパシー"
+      ],
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30036"
+    },
+    "30052": {
+      "name": "[from the GROUND UP] ライトハロー",
+      "skills": [
+        "お先に失礼っ！",
+        "おひとり様○",
+        "逃げのコツ○",
+        "先行のコツ○"
+      ],
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30052"
+    },
+    "30160": {
+      "name": "[L'aubeは迫りて] 佐岳メイ",
+      "skills": [
+        "ネバーギブアップ",
+        "一匹狼",
+        "直線巧者"
+      ],
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30160"
+    },
+    "30188": {
+      "name": "[共に描くキラメキ] 都留岐涼花",
+      "skills": [
+        "機先の勝負",
+        "対抗意識○",
+        "末脚"
+      ],
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30188"
+    },
+    "30207": {
+      "name": "[謹製ッ！特大夢にんじん！] 秋川理事長",
+      "skills": [
+        "ウママニア",
+        "直線巧者",
+        "中盤巧者"
+      ],
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30207"
+    },
+    "30257": {
+      "name": "[本能は吼えているか！？] タッカーブライン",
+      "skills": [
+        "パスファインダー",
+        "活路を拓く！",
+        "直線回復",
+        "端緒"
+      ],
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30257"
+    },
+    "30276": {
+      "name": "[ゆるり、ゆこま旅館] 保科健子",
+      "skills": [
+        "お先に失礼っ！",
+        "遊びはおしまいっ！",
+        "序盤巧者",
+        "中盤巧者"
+      ],
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30276"
+    },
+    "30290": {
+      "name": "[American Dream] カジノドライヴ",
+      "skills": [
+        "いいとこ入った！",
+        "スリップストリーム",
+        "ウマ好み",
+        "末脚"
+      ],
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30290"
+    },
+    "30305": {
+      "name": "[一杯のノスタルジア] 駿川たづな",
+      "skills": [
+        "心惹かれて",
+        "遊びはおしまいっ！",
+        "お先に失礼っ！",
+        "中盤巧者"
+      ],
+      "sourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30305"
+    }
+  }
+}
