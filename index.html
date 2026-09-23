@@ -2360,11 +2360,17 @@ async function loadLocalAppData(){
  try{
    const data=await fetchJson('./data/jp/source_config.json');
    const sources=data?.sources&&typeof data.sources==='object'?data.sources:null;
+   const snapshotSources=data?.snapshotSources&&typeof data.snapshotSources==='object'?data.snapshotSources:null;
    const assetBases=data?.assetBases&&typeof data.assetBases==='object'?data.assetBases:null;
    const required=['catalog','supports','events','skills','characters','courses'];
+   const snapshotReady=data?.snapshotReady===true;
+   const snapshotValid=
+     snapshotSources &&
+     required.every(k=>typeof snapshotSources[k]==='string'&&snapshotSources[k]);
+   const activeSources=snapshotReady&&snapshotValid?snapshotSources:sources;
 
-   if(sources&&assetBases&&required.every(k=>typeof sources[k]==='string'&&sources[k])){
-     CONFIG.sources={...CONFIG.sources,...sources};
+   if(activeSources&&assetBases&&required.every(k=>typeof activeSources[k]==='string'&&activeSources[k])){
+     CONFIG.sources={...CONFIG.sources,...activeSources};
      CONFIG.assetBases={...CONFIG.assetBases,...assetBases};
      result.jpSourceConfig=true;
    }else{
