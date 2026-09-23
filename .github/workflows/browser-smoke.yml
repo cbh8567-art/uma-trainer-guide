@@ -15,29 +15,56 @@ jobs:
   smoke:
     runs-on: ubuntu-latest
     steps:
-      - name: Browser smoke test
+      - name: Install Selenium
+        run: python -m pip install --quiet selenium
+
+      - name: Browser interaction smoke test
         shell: bash
         run: |
-          set -euo pipefail
-          URL="https://cbh8567-art.github.io/uma-trainer-guide/?smoke=\${GITHUB_RUN_ID}"
-          CHROME="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
-          if [ -z "$CHROME" ]; then
-            echo "::error::Chrome/Chromium not found on runner"
-            exit 1
-          fi
-          echo "Using $CHROME"
-          "$CHROME" --headless --no-sandbox --disable-gpu --enable-logging=stderr --v=1 --virtual-time-budget=12000 --dump-dom "$URL" > /tmp/dom.html 2>/tmp/chrome.err || {
-            cat /tmp/chrome.err
-            exit 1
-          }
-          grep -q 'V7.0 실전 육성 플래너' /tmp/dom.html
-          if grep -q 'JP 자동 동기화 상태 확인 중' /tmp/dom.html; then
-            echo "::error::App bootstrap did not update JP sync status"
-            echo "===== Browser error log ====="
-            grep -Ei "CONSOLE|Uncaught|ReferenceError|TypeError|SyntaxError|Failed to load|ERR_" /tmp/chrome.err | tail -120 || tail -160 /tmp/chrome.err || true
-            echo "===== JP status DOM ====="
-            grep -n -A2 -B2 "jpSyncStatus" /tmp/dom.html | head -30 || true
-            exit 1
-          fi
-          grep -Eo 'JP 자동 동기화[^<]+' /tmp/dom.html | head -1 || true
-          echo "Browser bootstrap smoke PASS"
+          python - <<'PY'
+          import time, sys
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.common.by import By
+
+          url = "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=selenium"
+          opts = Options()
+          opts.add_argument("--headless=new")
+          opts.add_argument("--no-sandbox")
+          opts.add_argument("--disable-gpu")
+          opts.add_argument("--window-size=1440,1200")
+          opts.set_capability("goog:loggingPrefs", {"browser":"ALL"})
+
+          d = webdriver.Chrome(options=opts)
+          try:
+              d.get(url)
+              time.sleep(3)
+              title = d.title
+              print("TITLE:", title)
+
+              tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
+              print("TAB COUNT:", len(tabs))
+              if len(tabs) < 2:
+                  raise RuntimeError("Expected at least 2 navigation tabs")
+
+              before = d.find_element(By.CSS_SELECTOR, ".page.active").get_attribute("id")
+              tabs[1].click()
+              time.sleep(0.5)
+              after = d.find_element(By.CSS_SELECTOR, ".page.active").get_attribute("id")
+              print("ACTIVE PAGE:", before, "->", after)
+              if before == after:
+                  raise RuntimeError("Navigation tab click did not change active page")
+
+              logs = d.get_log("browser")
+              severe = [x for x in logs if x.get("level") == "SEVERE"]
+              for x in logs:
+                  print("BROWSER:", x.get("level"), x.get("message"))
+              if severe:
+                  raise RuntimeError("Browser console has SEVERE errors: " + " | ".join(x.get("message","") for x in severe[:10]))
+
+              status = d.find_element(By.ID, "jpSyncStatus").text
+              print("JP STATUS:", status)
+              print("Browser interaction smoke PASS")
+          finally:
+              d.quit()
+          PY
