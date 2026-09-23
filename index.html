@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<title>우마무스메 트레이너 가이드 V5.23 WEB</title>
+<title>우마무스메 트레이너 가이드 V5.24 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -132,7 +132,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V5.23 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V5.24 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -364,7 +364,7 @@ const FRIEND_SUPPORT_EVENTS={"version":1,"updated":"2026-09-23","note":"U-tools 
 
 </script>
 <script>
-const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v523_db_cache', LEGACY_CACHE_KEY='uma_trainer_v522_db_cache';
+const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v524_db_cache', LEGACY_CACHE_KEY='uma_trainer_v523_db_cache';
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
@@ -1626,6 +1626,13 @@ function evolutionMatchText(sk,cond,score){
 }
 
 const SUPPORT_OVERRIDES={
+ 30201:{title:'Take Them Down!',jpName:'[Take Them Down!]ナリタタイシン',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30201/event',rareEvents:[{id:'verified_30201_final',label:'助ける番',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'soar',label:'爽快だったよ！',skills:[{skillId:202901,hintLevel:2}]},{id:'shadow',label:'トラブルがあったなら、俺も手伝ったのに',skills:[{skillId:200641,hintLevel:2}]}]}]},
+ 30208:{title:'朝焼け苺の畑にて',jpName:'[朝焼け苺の畑にて]ニシノフラワー',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30208/event',rareEvents:[{id:'verified_30208_final',label:'憧れに手をのべて',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'heart',label:'にんじん、食べてもらわないとな！',skills:[{skillId:203041,hintLevel:0}]},{id:'orthodox',label:'これからも畑は続けるのか？',skills:[{skillId:203031,hintLevel:0}]}]}]},
+ 30211:{title:'Lucky☆Summertime',jpName:'[Lucky☆Summertime]コパノリッキー',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30211/event',rareEvents:[{id:'verified_30211_final',label:'五行相剋・大ピンチ？',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'frontier',label:'頑張れ、大事なのは強気で進む心だよ',skills:[{skillId:202951,hintLevel:2}]},{id:'expert',label:'頑張れ、大事なのは手間を惜しまない心だよ',skills:[{skillId:202841,hintLevel:2}]}]}]},
+ 30222:{title:"KNOCK 'EM DOWN!",jpName:"[KNOCK 'EM DOWN!]エスポワールシチー",eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30222/event',rareEvents:[{id:'verified_30222_final',label:'メンツの問題',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'step',label:'えーっと……抜群にかっこよかったよ！',skills:[{skillId:202331,hintLevel:2}]},{id:'clear',label:'先日の番組見ました！さすがの度胸でした！',skills:[{skillId:203181,hintLevel:2}]}]}]},
+ 30224:{title:'咆哮のアポヤンド',jpName:'[咆哮のアポヤンド]ナリタブライアン',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30224/event',rareEvents:[{id:'verified_30224_final',label:'「共鳴」',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'monster',label:'次のライブも楽しみだな',skills:[{skillId:202481,hintLevel:2}]},{id:'break',label:'次は自分たちのバンドで参加、とか？',skills:[{skillId:203221,hintLevel:2}]}]}]},
+ 30226:{title:'Cocoon',jpName:'[Cocoon]エアシャカール',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30226/event',rareEvents:[{id:'verified_30226_final',label:'Release:“Me”',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'chain',label:'答えは見つかった？',skills:[{skillId:203241,hintLevel:2}]},{id:'blaze',label:'今日はよく眠れそう？',skills:[{skillId:203251,hintLevel:2}]}]}]},
+
  30170:{title:'我が舞、巡りて',jpName:'[我が舞、巡りて]キングヘイロー',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30170/event',rareEvents:[{id:'verified_30170_final',label:'キングの流儀／相伝編',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'ifu',label:'ああ、すごい出来だ！',skills:[{skillId:202541,hintLevel:1}]},{id:'kikotsu',label:'……なんで君が自慢げなんだ？',skills:[{skillId:202751,hintLevel:1}]}]}]},
  30173:{title:'大地と我らのアンサンブル',jpName:'[大地と我らのアンサンブル]サウンズオブアース',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30173/event',rareEvents:[{id:'verified_30173_path',label:'いずれグランディオーソなセッションへ',selection:'single',note:'첫 연속 이벤트 선택에 따라 최종 획득 레어스킬이 결정됨',choices:[{id:'violin',label:'첫 이벤트에서 「ふ、俺は気まぐれなヴァイオリン……さ」 선택',skills:[{skillId:200361,hintLevel:2}]},{id:'recovery',label:'첫 이벤트에서 「え、ええっと？」 선택',skills:[{skillId:200381,hintLevel:2}]}]}]},
  30177:{title:'会心のウイニングスマイル',jpName:'[会心のウイニングスマイル]ヴィブロス',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30177/event',rareEvents:[{id:'verified_30177_final',label:'絶対！ときめきパワー！',selection:'single',note:'최종 선택지에 따라 레어스킬 1개 획득',choices:[{id:'swift',label:'君はやっぱりすごい！',skills:[{skillId:200591,hintLevel:2}]},{id:'hidden',label:'かっこよかったよ！！',skills:[{skillId:201691,hintLevel:2}]}]}]},
