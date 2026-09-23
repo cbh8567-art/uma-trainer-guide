@@ -555,7 +555,12 @@ function canonicalSkill(s){
  return {...s,jp,kr:koSkill(jp,meta.id),rarity:meta.rarity??s.rarity,iconId:meta.iconId??s.iconId,tags:meta.activation?.tags||s.tags||{grounds:[],distances:[],styles:[]}}
 }
 
-function skillIcon(s){if(!s?.iconId)return '<span class="skillFallback missingIcon" title="아이콘 미연결">?</span>';return `<img class="skillIcon" src="${CONFIG.assetBases.skillIcon}${s.iconId}.webp" loading="lazy" onerror="this.outerHTML='<span class=&quot;skillFallback missingIcon&quot; title=&quot;아이콘 로드 실패&quot;>?</span>'">`}
+function skillIcon(s){
+ if(!s?.iconId)return '<span class="skillFallback missingIcon" title="아이콘 미연결">?</span>';
+ const primary=`${CONFIG.assetBases.skillIcon}${s.iconId}.webp`;
+ const fallback=`https://gametora.com/images/umamusume/skill_icons/utx_ico_skill_${s.iconId}.png`;
+ return `<img class="skillIcon" src="${primary}" data-fallback="${fallback}" loading="lazy" onerror="if(!this.dataset.fallbackTried){this.dataset.fallbackTried='1';this.src=this.dataset.fallback}else{this.outerHTML='<span class=&quot;skillFallback missingIcon&quot; title=&quot;아이콘 로드 실패&quot;>?</span>'}">`
+}
 function cardById(id){return runtime.byId.get(Number(id))||runtime.byId.get(String(id))}
 function skillConditionScore(s,cond=state){const t=s?.tags||{grounds:[],distances:[],styles:[]};if((t.grounds||[]).length&&!t.grounds.includes(cond.ground))return 0;if((t.distances||[]).length&&!t.distances.includes(cond.distance))return 0;if((t.styles||[]).length&&!t.styles.includes(cond.style))return 0;const explicit=(t.grounds?.length?1:0)+(t.distances?.length?1:0)+(t.styles?.length?1:0);return explicit?3:2}
 function scoreStars(n){return n>=4.5?'★★★★★':n>=3.5?'★★★★☆':n>=2.5?'★★★☆☆':n>=1.5?'★★☆☆☆':'★☆☆☆☆'}
