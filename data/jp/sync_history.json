@@ -4,6 +4,104 @@
   "limit": 20,
   "runs": [
     {
+      "checkedAt": "2026-09-23T12:17:24.580Z",
+      "status": "pass",
+      "activeMode": "snapshot",
+      "message": "Validated snapshots promoted atomically.",
+      "collections": {
+        "catalog": {
+          "count": 559,
+          "previousCount": 559,
+          "removedCount": 0,
+          "changed": false,
+          "status": "pass",
+          "changes": {
+            "addedCount": 0,
+            "removedCount": 0,
+            "modifiedCount": 0,
+            "addedIds": [],
+            "removedIds": [],
+            "modifiedIds": []
+          }
+        },
+        "supports": {
+          "count": 43,
+          "previousCount": 43,
+          "removedCount": 0,
+          "changed": false,
+          "status": "pass",
+          "changes": {
+            "addedCount": 0,
+            "removedCount": 0,
+            "modifiedCount": 0,
+            "addedIds": [],
+            "removedIds": [],
+            "modifiedIds": []
+          }
+        },
+        "events": {
+          "count": 120,
+          "previousCount": 120,
+          "removedCount": 0,
+          "changed": false,
+          "status": "pass",
+          "changes": {
+            "addedCount": 0,
+            "removedCount": 0,
+            "modifiedCount": 0,
+            "addedIds": [],
+            "removedIds": [],
+            "modifiedIds": []
+          }
+        },
+        "skills": {
+          "count": 2181,
+          "previousCount": 2181,
+          "removedCount": 0,
+          "changed": false,
+          "status": "pass",
+          "changes": {
+            "addedCount": 0,
+            "removedCount": 0,
+            "modifiedCount": 0,
+            "addedIds": [],
+            "removedIds": [],
+            "modifiedIds": []
+          }
+        },
+        "characters": {
+          "count": 268,
+          "previousCount": 268,
+          "removedCount": 0,
+          "changed": false,
+          "status": "pass",
+          "changes": {
+            "addedCount": 0,
+            "removedCount": 0,
+            "modifiedCount": 0,
+            "addedIds": [],
+            "removedIds": [],
+            "modifiedIds": []
+          }
+        },
+        "courses": {
+          "count": 140,
+          "previousCount": 140,
+          "removedCount": 0,
+          "changed": false,
+          "status": "pass",
+          "changes": {
+            "addedCount": 0,
+            "removedCount": 0,
+            "modifiedCount": 0,
+            "addedIds": [],
+            "removedIds": [],
+            "modifiedIds": []
+          }
+        }
+      }
+    },
+    {
       "checkedAt": "2026-09-23T12:12:24.607Z",
       "status": "pass",
       "activeMode": "snapshot",
