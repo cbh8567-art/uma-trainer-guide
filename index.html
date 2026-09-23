@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<title>우마무스메 트레이너 가이드 V5.20 WEB</title>
+<title>우마무스메 트레이너 가이드 V5.21 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -132,7 +132,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V5.20 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V5.21 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -364,7 +364,7 @@ const FRIEND_SUPPORT_EVENTS={"version":1,"updated":"2026-09-23","note":"U-tools 
 
 </script>
 <script>
-const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v520_db_cache', LEGACY_CACHE_KEY='uma_trainer_v519_db_cache';
+const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v521_db_cache', LEGACY_CACHE_KEY='uma_trainer_v520_db_cache';
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
@@ -1642,7 +1642,13 @@ const SUPPORT_OVERRIDES={
      {id:'iikotoko',label:'넌 트레센 학원의 자랑이야!',skills:[{skillId:201652,hintLevel:0}]}
    ]}]
  },
- 30234:{title:'深窓の少女へ',jpName:'[深窓の少女へ]メジロアルダン',eventSource:'U-tools 검증 보강',rareEvents:[{id:'ut_30234_final',label:'夜空、刹那に輝き',selection:'single',choices:[{id:'watch',label:'（静かに見守ろう）',skills:[{skillId:202741,hintLevel:2}]},{id:'gift',label:'いい贈り物だったね',skills:[{skillId:203131,hintLevel:2}]},{id:'fireworks',label:'たまやー、かぎやー！',skills:[]}]}]}
+ 30234:{title:'深窓の少女へ',jpName:'[深窓の少女へ]メジロアルダン',eventSource:'U-tools 검증 보강',rareEvents:[{id:'ut_30234_final',label:'夜空、刹那に輝き',selection:'single',choices:[{id:'watch',label:'（静かに見守ろう）',skills:[{skillId:202741,hintLevel:2}]},{id:'gift',label:'いい贈り物だったね',skills:[{skillId:203131,hintLevel:2}]},{id:'fireworks',label:'たまやー、かぎやー！',skills:[]}]}]},
+ 30242:{title:'世界を変える眼差し',jpName:'[世界を変える眼差し]アーモンドアイ',eventSource:'Inven / U-tools 이벤트 분기 검증',eventSourceUrl:'https://uma.inven.co.kr/db/scard/30242',rareEvents:[{id:'verified_30242_final',label:'果てしなきアーモンドアイ',selection:'single',note:'선택한 결과에 따라 레어스킬 2개를 동시에 획득',choices:[{id:'rudolf',label:'シンボリルドルフらの反応を見る',skills:[{skillId:202701,hintLevel:0},{skillId:203431,hintLevel:0}]},{id:'around',label:'周囲の反応を見る',skills:[{skillId:200361,hintLevel:0},{skillId:200331,hintLevel:0}]}]}]},
+ 30245:{title:'Ballroom Tempest',jpName:'[Ballroom Tempest]ウオッカ',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30245/event',rareEvents:[{id:'verified_30245_final',label:'見せつけよ暗き眩き閃光を',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:201383,hintLevel:1},{skillId:203571,hintLevel:1}]}]}]},
+ 30246:{title:'誘うは夢心地',jpName:'[誘うは夢心地]ドリームジャーニー',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30246/event',rareEvents:[{id:'verified_30246_final',label:'そして今日も花が咲く',selection:'single',note:'첫 선택지는 레어스킬 2개, 두 번째 선택지는 레어스킬 없음',choices:[{id:'no_need',label:'そんなものいらないよ',skills:[{skillId:202881,hintLevel:1},{skillId:202931,hintLevel:1}]},{id:'trip',label:'それなら、また今度遠征の相談に……',skills:[]}]}]},
+ 30248:{title:'無垢の白妙',jpName:'[無垢の白妙]デアリングタクト',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30248/event',rareEvents:[{id:'verified_30248_final',label:'Innocent Wildflower',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:200591,hintLevel:1},{skillId:203591,hintLevel:1}]}]}]},
+ 30249:{title:'繋がれパレード・ノーツ♪',jpName:'[繋がれパレード・ノーツ♪]トランセンド',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30249/event',rareEvents:[{id:'verified_30249_final',label:'感謝困惑雨あられ',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:203091,hintLevel:1},{skillId:203601,hintLevel:1}]}]}]},
+ 30256:{title:'白き稲妻の如く',jpName:'[白き稲妻の如く]タマモクロス',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30256/event',rareEvents:[{id:'verified_30256_final',label:'遠くで光るその走り',selection:'single',note:'어느 선택지든 神速 + 추가 레어스킬 1개, 총 2개 획득',choices:[{id:'future',label:'将来が楽しみだ！',skills:[{skillId:202551,hintLevel:2},{skillId:203361,hintLevel:1}]},{id:'legacy',label:'君の想いは、継がれたみたいだな',skills:[{skillId:202551,hintLevel:2},{skillId:203661,hintLevel:1}]}]}]}
 };
 function materializeOverrideSkill(skillMap,x){const meta=skillMap.get(Number(x.skillId));if(meta)return makeSkill(meta,meta.name,x.hintLevel||0);return {id:Number(x.skillId),jp:x.skillName||`Skill ${x.skillId}`,kr:koSkill(x.skillName||''),rarity:2,iconId:null,hintLevel:x.hintLevel||0,tags:{grounds:[],distances:[],styles:[]}}}
 function applySupportOverrides(cards,skillMap){for(const c of cards){const o=SUPPORT_OVERRIDES[Number(c.id)];if(o){c.title=o.title||c.title;c.jpName=o.jpName||c.jpName;c.eventSource=o.eventSource||'override';c.eventSourceUrl=o.eventSourceUrl||c.eventSourceUrl;c.rareEvents=(o.rareEvents||[]).map(e=>({...e,choices:(e.choices||[]).map(ch=>({...ch,skills:(ch.skills||[]).map(x=>materializeOverrideSkill(skillMap,x))}))}))}c.catalogSource=c.catalogSource||'unknown';if(!c.eventSource)c.eventSource=c.rareEvents?.length?'events.json':'미연결'}return cards}
