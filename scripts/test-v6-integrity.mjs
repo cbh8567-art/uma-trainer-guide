@@ -44,6 +44,15 @@ await read("data/jp/source_health.json");
 await read("data/jp/entity_summary.json");
 await read("data/jp/change_impact.json");
 await read("data/jp/automation_report.json");
+
+// Parse every inline script without executing browser code.
+const inlineScripts=[...index.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(m=>m[1]);
+ok(inlineScripts.length>=2,"Expected inline scripts missing");
+for(let i=0;i<inlineScripts.length;i++){
+  try{ new Function(inlineScripts[i]); }
+  catch(error){ errors.push(`Inline script ${i+1} syntax error: ${error.message}`); }
+}
+
 ok(index.includes('id="v7Planner"'),"V7 planner UI missing");
 ok(index.includes("function renderV7Planner"),"V7 planner renderer missing");
 ok(index.includes("function v7RecommendedOwnedDeck"),"V7 owned deck recommender missing");
