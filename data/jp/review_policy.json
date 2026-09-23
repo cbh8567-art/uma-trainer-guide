@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-23",
+  "priorities": {
+    "characters": "high",
+    "catalog": "high",
+    "skills": "medium",
+    "events": "medium",
+    "supports": "medium",
+    "courses": "low"
+  },
+  "rules": {
+    "added": "review",
+    "removed": "critical_review",
+    "modified": "review",
+    "krAutoPromotion": false,
+    "krCandidateStatus": "verification_required"
+  }
+}

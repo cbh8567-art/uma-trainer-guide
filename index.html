@@ -195,6 +195,8 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
     <details class="dataDiag" id="jpSyncDashboard" style="margin-bottom:8px">
       <summary style="cursor:pointer;font-weight:900">JP 데이터 진단 상세 보기</summary>
       <div id="jpSyncDashboardBody" style="margin-top:7px">진단 데이터 확인 중…</div>
+      <div id="jpReviewQueue" style="margin-top:8px"></div>
+      <div id="krImportCandidates" style="margin-top:8px"></div>
     </details>
     <div class="note">PC: 카드 자체를 덱 슬롯으로 드래그 · 모바일: 「덱 슬롯」으로 보유 등록 없이 바로 편성할 수 있습니다.</div>
     <div class="dbGuideRecommend">
@@ -349,6 +351,11 @@ let JP_SYNC_HISTORY=null;
 let JP_CHANGE_REPORT=null;
 let JP_MANIFEST=null;
 let JP_SOURCE_HEALTH=null;
+let JP_REVIEW_QUEUE=null;
+let JP_ENTITY_SUMMARY=null;
+let KR_IMPORT_CANDIDATES=null;
+let JP_SCENARIO_WATCH=null;
+let JP_SYSTEM_STATUS=null;
 let UPCOMING={"version":1,"updated":"2026-09-23","source":"Game8/GameWith 2026-09-23 snapshot","sourceUrl":"https://game8.jp/umamusume/811062","races":[{"id":"cm_2026_09_mile","status":"현재","date":"2026-09-18~","event":"チャンピオンズミーティング MILE","eventKr":"챔피언스 미팅 MILE","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mile","meters":1800,"turn":"left","season":"autumn","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","秋ウマ娘○","晴れの日○","良バ場○","非根幹距離○"]},{"id":"cm_2026_09_longchamp_classic","status":"예정","date":"2026-09-29~","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"ロンシャン","placeKr":"롱샹","ground":"turf","distance":"mid","meters":2400,"turn":"right","season":"autumn","weather":"sunny","condition":"heavy","time":"day","greenSkills":["ロンシャンレース場○","右回り○","秋ウマ娘○","晴れの日○","道悪○","根幹距離○"]},{"id":"cm_2026_10_classic","status":"예정","date":"2026-10 중순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"京都","placeKr":"교토","ground":"turf","distance":"mid","meters":2200,"turn":"right","season":"autumn","weather":"cloudy","condition":"good","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","曇りの日○","良バ場○","非根幹距離○"]},{"id":"loh_2026_11_long","status":"예정","date":"2026-11 하순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"京都","placeKr":"교토","ground":"turf","distance":"long","meters":3000,"turn":"right","season":"autumn","weather":"random","condition":"random","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","非根幹距離○"]},{"id":"cm_2026_12_long","status":"예정","date":"2026-12 하순","event":"チャンピオンズミーティング LONG","eventKr":"챔피언스 미팅 LONG","place":"","placeKr":"미정","ground":"turf","distance":"long","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"cm_2027_01_classic","status":"예정","date":"2027-01 하순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"","placeKr":"미정","ground":"turf","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"loh_2027_02_dirt","status":"예정","date":"2027-02 중순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"","placeKr":"미정","ground":"dirt","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]}]};
 let KOREA_UPCOMING={"version":1,"updated":"2026-09-23","source":"한국 서버 5회차 CLASSIC 일정 스냅샷","sourceUrl":"https://namu.moe/w/%EC%9A%B0%EB%A7%88%EB%AC%B4%EC%8A%A4%EB%A9%94%20%ED%94%84%EB%A6%AC%ED%8B%B0%20%EB%8D%94%EB%B9%84/%EC%9D%B4%EB%B2%A4%ED%8A%B8/%EC%B1%94%ED%94%BC%EC%96%B8%EC%8A%A4%20%EB%AF%B8%ED%8C%85/5%ED%9A%8C%EC%B0%A8","races":[{"id":"kr_cm_2026_10_classic","status":"예정(미래시)","date":"2026-10-10~10-16 예상","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mid","meters":2400,"turn":"left","season":"spring","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","春ウマ娘○","晴れの日○","良バ場○","根幹距離○"]}]};
 let KOREA_SERVER_DATA={
@@ -1968,6 +1975,8 @@ function renderJpSyncStatus(){
  if(dash){
    const health=JP_SOURCE_HEALTH;
    const manifest=JP_MANIFEST;
+   const sys=JP_SYSTEM_STATUS;
+   const scenarioWatch=JP_SCENARIO_WATCH;
    const healthRows=Object.entries(health?.sources||{}).map(([name,s])=>
      `${name}: ${s?.ok?'정상':'실패'}${s?.httpStatus?` HTTP ${s.httpStatus}`:''}${Number.isFinite(Number(s?.durationMs))?` · ${s.durationMs}ms`:''}`
    );
@@ -1979,12 +1988,34 @@ function renderJpSyncStatus(){
      ?`참조 점검: 이벤트 누락 ${Number(ref.missingEventSkillCount||0)} · 서포트 힌트 누락 ${Number(ref.missingSupportHintSkillCount||0)}`
      :'참조 점검: 기록 없음';
    dash.innerHTML=[
+     `<div><b>V6 통합 상태:</b> ${sys?.status||'unknown'} · 시나리오 감시 ${scenarioWatch?.status||'unknown'}</div>`,
      `<div><b>소스 상태:</b> ${health?.status||'unknown'}</div>`,
      `<div>${healthRows.join(' · ')||'소스 상태 없음'}</div>`,
      `<div style="margin-top:5px"><b>Manifest:</b> ${manifestRows.join(' · ')||'없음'}</div>`,
      `<div style="margin-top:5px"><b>${refText}</b></div>`,
      rep?.warnings?.length?`<div style="margin-top:5px">경고: ${rep.warnings.join(' / ')}</div>`:''
    ].filter(Boolean).join('');
+ }
+
+ const reviewEl=$('#jpReviewQueue');
+ if(reviewEl){
+   const items=(JP_REVIEW_QUEUE?.items||[]).filter(x=>x?.status!=='resolved').slice(0,12);
+   reviewEl.innerHTML=`<b>자동 검토 큐 (${Number(JP_REVIEW_QUEUE?.openCount||0)}건)</b>`+
+     (items.length
+       ?`<div style="margin-top:4px">${items.map(x=>`<div>• [${x.priority||'medium'}] ${x.collection}/${x.changeType} · ${x.name||x.id} <span class="status">(${x.id})</span></div>`).join('')}</div>`
+       :'<div class="status" style="margin-top:4px">현재 열린 검토 항목 없음</div>');
+ }
+
+ const krEl=$('#krImportCandidates');
+ if(krEl){
+   const chars=KR_IMPORT_CANDIDATES?.characters||[];
+   const supports=KR_IMPORT_CANDIDATES?.supports||[];
+   const charText=chars.slice(0,8).map(x=>`${x.name||x.id} (${x.id})`).join(', ');
+   const supportText=supports.slice(0,8).map(x=>`${x.name||x.id} (${x.id})`).join(', ');
+   krEl.innerHTML=`<b>KR 도입 확인 후보</b>`+
+     `<div class="status" style="margin-top:4px">자동 승격하지 않음 · verification_required</div>`+
+     `<div style="margin-top:3px">우마무스메 ${chars.length}건${charText?`: ${charText}`:''}</div>`+
+     `<div>서포트 ${supports.length}건${supportText?`: ${supportText}`:''}</div>`;
  }
 }
 
@@ -2021,7 +2052,7 @@ function setOwnedFilter(t){ownedType=t;renderTypeFilters($('#ownedFilters'),owne
 renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);
 renderTypeFilters($('#ownedFilters'),ownedType,setOwnedFilter);
 async function loadLocalAppData(){
- const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krSkillNames:false,krTier:false,jpUpcoming:false,jpTier:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false,jpSyncState:false,jpValidationReport:false,jpSyncHistory:false,jpChangeReport:false,jpManifest:false,jpSourceHealth:false};
+ const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krSkillNames:false,krTier:false,jpUpcoming:false,jpTier:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false,jpSyncState:false,jpValidationReport:false,jpSyncHistory:false,jpChangeReport:false,jpManifest:false,jpSourceHealth:false,jpReviewQueue:false,jpEntitySummary:false,krImportCandidates:false,jpScenarioWatch:false,jpSystemStatus:false};
 
  try{
    const meta=await fetchJson('./data/kr/server_meta.json');
@@ -2593,6 +2624,36 @@ async function loadLocalAppData(){
  }catch(e){
    console.warn('[V5.6] JP source_health.json load failed.',e);
  }
+
+ try{
+   const data=await fetchJson('./data/jp/review_queue.json');
+   if(data&&Array.isArray(data.items)){ JP_REVIEW_QUEUE=data; result.jpReviewQueue=true; }
+   else throw new Error('JP review_queue validation failed');
+ }catch(e){ console.warn('[V6.0] JP review_queue.json load failed.',e); }
+
+ try{
+   const data=await fetchJson('./data/jp/entity_summary.json');
+   if(data&&data.collections&&typeof data.collections==='object'){ JP_ENTITY_SUMMARY=data; result.jpEntitySummary=true; }
+   else throw new Error('JP entity_summary validation failed');
+ }catch(e){ console.warn('[V6.0] JP entity_summary.json load failed.',e); }
+
+ try{
+   const data=await fetchJson('./data/kr/import_candidates.json');
+   if(data&&Array.isArray(data.characters)&&Array.isArray(data.supports)){ KR_IMPORT_CANDIDATES=data; result.krImportCandidates=true; }
+   else throw new Error('KR import_candidates validation failed');
+ }catch(e){ console.warn('[V6.0] KR import_candidates.json load failed.',e); }
+
+ try{
+   const data=await fetchJson('./data/jp/scenario_watch.json');
+   if(data&&typeof data.status==='string'&&Array.isArray(data.knownScenarioKeys)){ JP_SCENARIO_WATCH=data; result.jpScenarioWatch=true; }
+   else throw new Error('JP scenario_watch validation failed');
+ }catch(e){ console.warn('[V6.0] JP scenario_watch.json load failed.',e); }
+
+ try{
+   const data=await fetchJson('./data/jp/system_status.json');
+   if(data&&typeof data.status==='string'){ JP_SYSTEM_STATUS=data; result.jpSystemStatus=true; }
+   else throw new Error('JP system_status validation failed');
+ }catch(e){ console.warn('[V6.0] JP system_status.json load failed.',e); }
 
  return result;
 }

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-23",
+  "status": "verification_required",
+  "mode": "registry_watch",
+  "machineReadableSourceConfigured": false,
+  "knownScenarioKeys": [
+    "tresenken",
+    "dreams",
+    "onsen",
+    "island",
+    "legends",
+    "mecha",
+    "harvest",
+    "uaf",
+    "none"
+  ],
+  "message": "No machine-readable upstream scenario catalog is configured. Existing scenario registry is validated; new scenario auto-detection remains blocked until a reliable source is configured.",
+  "candidates": []
+}

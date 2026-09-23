@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-23",
+  "generatedAt": null,
+  "status": "not_run",
+  "snapshotReady": false,
+  "sourceHealth": "unknown",
+  "validation": "unknown",
+  "openReviewItems": 0,
+  "krCandidateCharacters": 0,
+  "krCandidateSupports": 0,
+  "scenarioWatch": "verification_required",
+  "changeTotals": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0
+  }
+}

@@ -146,6 +146,92 @@ function detailChanges(name, previousRecords, nextRecords, diff) {
   };
 }
 
+function priorityForCollection(policy, name) {
+  return policy?.priorities?.[name] || "medium";
+}
+
+function reviewKey(collection, changeType, id) {
+  return `${collection}:${changeType}:${id}`;
+}
+
+function buildReviewItems(changeReport, reviewPolicy, previousQueue) {
+  const previousByKey = new Map((previousQueue?.items || []).map(item => [item.key, item]));
+  const fresh = [];
+  for (const [collection, entry] of Object.entries(changeReport.collections || {})) {
+    const priority = priorityForCollection(reviewPolicy, collection);
+    const details = entry.details || {};
+    for (const changeType of ["added", "removed", "modified"]) {
+      for (const item of details[changeType] || []) {
+        const key = reviewKey(collection, changeType, item.id);
+        const old = previousByKey.get(key);
+        fresh.push({
+          key, collection, changeType,
+          id: String(item.id),
+          name: String(item.name || item.id),
+          priority: changeType === "removed" ? "critical" : priority,
+          status: old?.status || "open",
+          firstSeenAt: old?.firstSeenAt || changeReport.checkedAt,
+          lastSeenAt: changeReport.checkedAt,
+          note: old?.note || ""
+        });
+      }
+    }
+  }
+  for (const old of previousQueue?.items || []) {
+    if (old?.status === "resolved") continue;
+    if (!fresh.some(item => item.key === old.key)) fresh.push(old);
+  }
+  const order = { critical: 0, high: 1, medium: 2, low: 3 };
+  fresh.sort((a,b) =>
+    (order[a.priority] ?? 9) - (order[b.priority] ?? 9) ||
+    String(b.lastSeenAt || "").localeCompare(String(a.lastSeenAt || ""))
+  );
+  return fresh.slice(0, 500);
+}
+
+function summarizeCollection(name, records) {
+  const ids = records
+    .map((record, index) => canonicalId(name, record, index))
+    .filter(id => !String(id).startsWith("@index:"));
+  const numericIds = ids.map(Number).filter(Number.isFinite);
+  return {
+    count: records.length,
+    minId: numericIds.length ? Math.min(...numericIds) : null,
+    maxId: numericIds.length ? Math.max(...numericIds) : null,
+    sampleLatest: records.slice(-5).map((record, index) => {
+      const realIndex = Math.max(0, records.length - 5 + index);
+      const id = canonicalId(name, record, realIndex);
+      return { id, name: recordLabel(name, record, id) };
+    })
+  };
+}
+
+function buildKrCandidates(staged, changeReport, krUmaIds, krServerMeta) {
+  const krUmaSet = new Set((krUmaIds?.ids || []).map(Number));
+  const supportMaxId = Number(krServerMeta?.supportMaxId || 0);
+  const characters = [];
+  for (const item of changeReport.collections?.characters?.details?.added || []) {
+    const id = Number(item.id);
+    if (Number.isFinite(id) && !krUmaSet.has(id)) {
+      characters.push({
+        id, name: item.name, status: "verification_required",
+        reason: "New JP character card is not in KR uma allowlist."
+      });
+    }
+  }
+  const supports = [];
+  for (const item of changeReport.collections?.catalog?.details?.added || []) {
+    const id = Number(item.id);
+    if (Number.isFinite(id) && supportMaxId && id > supportMaxId) {
+      supports.push({
+        id, name: item.name, status: "verification_required",
+        reason: `ID is above current KR verified support boundary ${supportMaxId}; verify KR release before promotion.`
+      });
+    }
+  }
+  return { characters, supports, supportMaxId };
+}
+
 function collectSkillReferencesFromEvents(eventsData) {
   const ids = [];
   for (const event of eventsData?.events || []) {
@@ -206,9 +292,34 @@ const historyPath = path.join(JP, "sync_history.json");
 const changeReportPath = path.join(JP, "change_report.json");
 const manifestPath = path.join(JP, "manifest.json");
 const sourceHealthPath = path.join(JP, "source_health.json");
+const reviewPolicyPath = path.join(JP, "review_policy.json");
+const reviewQueuePath = path.join(JP, "review_queue.json");
+const entitySummaryPath = path.join(JP, "entity_summary.json");
+const krUmaIdsPath = path.join(ROOT, "data", "kr", "uma_ids.json");
+const krServerMetaPath = path.join(ROOT, "data", "kr", "server_meta.json");
+const krImportCandidatesPath = path.join(ROOT, "data", "kr", "import_candidates.json");
+const scenarioWatchPath = path.join(JP, "scenario_watch.json");
+const systemStatusPath = path.join(JP, "system_status.json");
 
 const sourceConfig = await readJson(sourceConfigPath);
 const policy = await readJson(policyPath);
+const reviewPolicy = await readJson(reviewPolicyPath).catch(() => ({
+  priorities: {},
+  rules: { krAutoPromotion: false, krCandidateStatus: "verification_required" }
+}));
+const previousReviewQueue = await readJson(reviewQueuePath).catch(() => ({
+  schemaVersion: 1, items: []
+}));
+const krUmaIds = await readJson(krUmaIdsPath).catch(() => ({ ids: [] }));
+const krServerMeta = await readJson(krServerMetaPath).catch(() => ({ supportMaxId: 0 }));
+const scenarioWatch = await readJson(scenarioWatchPath).catch(() => ({
+  schemaVersion: 1,
+  status: "verification_required",
+  mode: "registry_watch",
+  machineReadableSourceConfigured: false,
+  knownScenarioKeys: [],
+  candidates: []
+}));
 
 const report = {
   schemaVersion: 1,
@@ -253,6 +364,51 @@ const manifest = {
   updated: report.updated,
   generatedAt: report.checkedAt,
   collections: {}
+};
+
+const entitySummary = {
+  schemaVersion: 1,
+  updated: report.updated,
+  generatedAt: report.checkedAt,
+  collections: {}
+};
+
+let generatedReviewQueue = {
+  schemaVersion: 1,
+  updated: report.updated,
+  generatedAt: report.checkedAt,
+  openCount: 0,
+  items: []
+};
+
+let generatedKrCandidates = {
+  schemaVersion: 1,
+  updated: report.updated,
+  generatedAt: report.checkedAt,
+  status: "running",
+  characters: [],
+  supports: [],
+  supportMaxId: Number(krServerMeta?.supportMaxId || 0),
+  notes: [
+    "JP changes never auto-promote to KR.",
+    "Character candidates are checked against KR uma allowlist.",
+    "Support numeric boundary is a verification hint only."
+  ]
+};
+
+let generatedSystemStatus = {
+  schemaVersion: 1,
+  updated: report.updated,
+  generatedAt: report.checkedAt,
+  status: "running",
+  snapshotReady: Boolean(sourceConfig.snapshotReady),
+  sourceHealth: "running",
+  validation: "running",
+  openReviewItems: 0,
+  krCandidateCharacters: 0,
+  krCandidateSupports: 0,
+  scenarioWatch: scenarioWatch?.status || "unknown",
+  changeTotals: { added: 0, removed: 0, modified: 0 }
 };
 
 async function appendHistory(status, message) {
@@ -402,6 +558,7 @@ try {
     }
 
     report.collections[name] = entry;
+    entitySummary.collections[name] = summarizeCollection(name, records);
     manifest.collections[name] = {
       source: url,
       count: entry.count,
@@ -466,6 +623,31 @@ try {
 
   sourceHealth.status = Object.values(sourceHealth.sources).every(s => s.ok) ? "pass" : "fatal";
 
+  generatedReviewQueue.items = buildReviewItems(changeReport, reviewPolicy, previousReviewQueue);
+  generatedReviewQueue.openCount = generatedReviewQueue.items.filter(item => item.status !== "resolved").length;
+
+  const krCandidateData = buildKrCandidates(staged, changeReport, krUmaIds, krServerMeta);
+  generatedKrCandidates = {
+    ...generatedKrCandidates,
+    status: report.fatal.length ? "blocked" : "verification_required",
+    characters: krCandidateData.characters,
+    supports: krCandidateData.supports,
+    supportMaxId: krCandidateData.supportMaxId
+  };
+
+  generatedSystemStatus = {
+    ...generatedSystemStatus,
+    status: report.fatal.length ? "fatal" : "pass",
+    snapshotReady: report.fatal.length ? Boolean(sourceConfig.snapshotReady) : true,
+    sourceHealth: sourceHealth.status,
+    validation: report.fatal.length ? "fatal" : "pass",
+    openReviewItems: generatedReviewQueue.openCount,
+    krCandidateCharacters: generatedKrCandidates.characters.length,
+    krCandidateSupports: generatedKrCandidates.supports.length,
+    scenarioWatch: scenarioWatch?.status || "unknown",
+    changeTotals: changeReport.summary
+  };
+
   if (report.fatal.length) {
     report.status = "fatal";
     state.status = "fatal";
@@ -478,6 +660,10 @@ try {
     await writeJson(changeReportPath, changeReport);
     await writeJson(manifestPath, manifest);
     await writeJson(sourceHealthPath, sourceHealth);
+    await writeJson(entitySummaryPath, entitySummary);
+    await writeJson(reviewQueuePath, generatedReviewQueue);
+    await writeJson(krImportCandidatesPath, generatedKrCandidates);
+    await writeJson(systemStatusPath, generatedSystemStatus);
     await appendHistory("fatal", state.message);
     process.exitCode = 2;
   } else {
@@ -533,6 +719,10 @@ try {
     await writeJson(changeReportPath, changeReport);
     await writeJson(manifestPath, manifest);
     await writeJson(sourceHealthPath, sourceHealth);
+    await writeJson(entitySummaryPath, entitySummary);
+    await writeJson(reviewQueuePath, generatedReviewQueue);
+    await writeJson(krImportCandidatesPath, generatedKrCandidates);
+    await writeJson(systemStatusPath, generatedSystemStatus);
     await appendHistory("pass", state.message);
   }
 } catch (e) {
@@ -547,6 +737,12 @@ try {
   await writeJson(changeReportPath, changeReport).catch(() => {});
   await writeJson(manifestPath, manifest).catch(() => {});
   await writeJson(sourceHealthPath, sourceHealth).catch(() => {});
+  await writeJson(entitySummaryPath, entitySummary).catch(() => {});
+  await writeJson(reviewQueuePath, generatedReviewQueue).catch(() => {});
+  await writeJson(krImportCandidatesPath, generatedKrCandidates).catch(() => {});
+  generatedSystemStatus.status = "fatal";
+  generatedSystemStatus.validation = "fatal";
+  await writeJson(systemStatusPath, generatedSystemStatus).catch(() => {});
   await appendHistory("fatal", state.message).catch(() => {});
   process.exitCode = 2;
 }
