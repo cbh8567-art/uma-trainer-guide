@@ -26,14 +26,17 @@ jobs:
             exit 1
           fi
           echo "Using $CHROME"
-          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=12000 --dump-dom "$URL" > /tmp/dom.html 2>/tmp/chrome.err || {
+          "$CHROME" --headless --no-sandbox --disable-gpu --enable-logging=stderr --v=1 --virtual-time-budget=12000 --dump-dom "$URL" > /tmp/dom.html 2>/tmp/chrome.err || {
             cat /tmp/chrome.err
             exit 1
           }
           grep -q 'V7.0 실전 육성 플래너' /tmp/dom.html
           if grep -q 'JP 자동 동기화 상태 확인 중' /tmp/dom.html; then
             echo "::error::App bootstrap did not update JP sync status"
-            tail -100 /tmp/chrome.err || true
+            echo "===== Browser error log ====="
+            grep -Ei "CONSOLE|Uncaught|ReferenceError|TypeError|SyntaxError|Failed to load|ERR_" /tmp/chrome.err | tail -120 || tail -160 /tmp/chrome.err || true
+            echo "===== JP status DOM ====="
+            grep -n -A2 -B2 "jpSyncStatus" /tmp/dom.html | head -30 || true
             exit 1
           fi
           grep -Eo 'JP 자동 동기화[^<]+' /tmp/dom.html | head -1 || true
