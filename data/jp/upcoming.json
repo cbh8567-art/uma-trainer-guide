@@ -1,241 +1,161 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-23",
   "version": 1,
-  "snapshotDate": "JP 2025-06",
-  "mappedFor": "KR 2026-10 CLASSIC",
-  "sourceNote": "한국 공식 차기 챔미와 동일 조건의 일본 2025년 6월 CLASSIC GameWith 추천도 스냅샷. ★★★★★→SS+, ★★★★→SS, ★★★→S.",
-  "rows": [
+  "updated": "2026-09-23",
+  "source": "Game8/GameWith 2026-09-23 snapshot",
+  "sourceUrl": "https://game8.jp/umamusume/811062",
+  "races": [
     {
+      "id": "cm_2026_09_mile",
+      "status": "현재",
+      "date": "2026-09-18~",
+      "event": "チャンピオンズミーティング MILE",
+      "eventKr": "챔피언스 미팅 MILE",
+      "place": "東京",
+      "placeKr": "도쿄",
       "ground": "turf",
-      "distance": "mid",
-      "tier": "SS+",
-      "jp": "カツラギエース(正月)",
-      "kr": "카츠라기 에이스(신년)",
-      "styles": [
-        "nige"
+      "distance": "mile",
+      "meters": 1800,
+      "turn": "left",
+      "season": "autumn",
+      "weather": "sunny",
+      "condition": "good",
+      "time": "day",
+      "greenSkills": [
+        "東京レース場○",
+        "左回り○",
+        "秋ウマ娘○",
+        "晴れの日○",
+        "良バ場○",
+        "非根幹距離○"
       ]
     },
     {
+      "id": "cm_2026_09_longchamp_classic",
+      "status": "예정",
+      "date": "2026-09-29~",
+      "event": "チャンピオンズミーティング CLASSIC",
+      "eventKr": "챔피언스 미팅 CLASSIC",
+      "place": "ロンシャン",
+      "placeKr": "롱샹",
       "ground": "turf",
       "distance": "mid",
-      "tier": "SS+",
-      "jp": "ジェンティルドンナ",
-      "kr": "젠틸돈나",
-      "styles": [
-        "senko"
+      "meters": 2400,
+      "turn": "right",
+      "season": "autumn",
+      "weather": "sunny",
+      "condition": "heavy",
+      "time": "day",
+      "greenSkills": [
+        "ロンシャンレース場○",
+        "右回り○",
+        "秋ウマ娘○",
+        "晴れの日○",
+        "道悪○",
+        "根幹距離○"
       ]
     },
     {
+      "id": "cm_2026_10_classic",
+      "status": "예정",
+      "date": "2026-10 중순",
+      "event": "チャンピオンズミーティング CLASSIC",
+      "eventKr": "챔피언스 미팅 CLASSIC",
+      "place": "京都",
+      "placeKr": "교토",
       "ground": "turf",
       "distance": "mid",
-      "tier": "SS+",
-      "jp": "クロノジェネシス",
-      "kr": "크로노 제네시스",
-      "styles": [
-        "senko"
+      "meters": 2200,
+      "turn": "right",
+      "season": "autumn",
+      "weather": "cloudy",
+      "condition": "good",
+      "time": "day",
+      "greenSkills": [
+        "京都レース場○",
+        "右回り○",
+        "秋ウマ娘○",
+        "曇りの日○",
+        "良バ場○",
+        "非根幹距離○"
       ]
     },
     {
+      "id": "loh_2026_11_long",
+      "status": "예정",
+      "date": "2026-11 하순",
+      "event": "リーグ オブ ヒーローズ",
+      "eventKr": "리그 오브 히어로즈",
+      "place": "京都",
+      "placeKr": "교토",
       "ground": "turf",
-      "distance": "mid",
-      "tier": "SS+",
-      "jp": "ジャングルポケット",
-      "kr": "정글 포켓",
-      "styles": [
-        "sashi"
+      "distance": "long",
+      "meters": 3000,
+      "turn": "right",
+      "season": "autumn",
+      "weather": "random",
+      "condition": "random",
+      "time": "day",
+      "greenSkills": [
+        "京都レース場○",
+        "右回り○",
+        "秋ウマ娘○",
+        "非根幹距離○"
       ]
     },
     {
+      "id": "cm_2026_12_long",
+      "status": "예정",
+      "date": "2026-12 하순",
+      "event": "チャンピオンズミーティング LONG",
+      "eventKr": "챔피언스 미팅 LONG",
+      "place": "",
+      "placeKr": "미정",
       "ground": "turf",
-      "distance": "mid",
-      "tier": "SS+",
-      "jp": "ラヴズオンリーユー",
-      "kr": "러브즈 온리 유",
-      "styles": [
-        "sashi"
-      ]
+      "distance": "long",
+      "meters": null,
+      "turn": "",
+      "season": "",
+      "weather": "",
+      "condition": "",
+      "time": "",
+      "greenSkills": []
     },
     {
+      "id": "cm_2027_01_classic",
+      "status": "예정",
+      "date": "2027-01 하순",
+      "event": "チャンピオンズミーティング CLASSIC",
+      "eventKr": "챔피언스 미팅 CLASSIC",
+      "place": "",
+      "placeKr": "미정",
       "ground": "turf",
       "distance": "mid",
-      "tier": "SS+",
-      "jp": "エイシンフラッシュ(水着)",
-      "kr": "에이신 플래시(수영복)",
-      "styles": [
-        "sashi"
-      ]
+      "meters": null,
+      "turn": "",
+      "season": "",
+      "weather": "",
+      "condition": "",
+      "time": "",
+      "greenSkills": []
     },
     {
-      "ground": "turf",
+      "id": "loh_2027_02_dirt",
+      "status": "예정",
+      "date": "2027-02 중순",
+      "event": "リーグ オブ ヒーローズ",
+      "eventKr": "리그 오브 히어로즈",
+      "place": "",
+      "placeKr": "미정",
+      "ground": "dirt",
       "distance": "mid",
-      "tier": "SS+",
-      "jp": "オルフェーヴル",
-      "kr": "오르페브르",
-      "styles": [
-        "oikomi"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "サイレンススズカ(水着)",
-      "kr": "사일런스 스즈카(수영복)",
-      "styles": [
-        "nige"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "キタサンブラック(正月)",
-      "kr": "키타산 블랙(신년)",
-      "styles": [
-        "nige"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "マルゼンスキー",
-      "kr": "마루젠스키",
-      "styles": [
-        "nige",
-        "senko"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "アイネスフウジン(新衣装)",
-      "kr": "아이네스 후진(신의상)",
-      "styles": [
-        "nige"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "メジロラモーヌ(花嫁)",
-      "kr": "메지로 라모누(웨딩)",
-      "styles": [
-        "senko"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "シーザリオ(花嫁)",
-      "kr": "세자리오(웨딩)",
-      "styles": [
-        "sashi"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "バブルガムフェロー",
-      "kr": "버블검 펠로",
-      "styles": [
-        "senko"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "ウイニングチケット(新衣装)",
-      "kr": "위닝 티켓(신의상)",
-      "styles": [
-        "sashi"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "ネオユニヴァース",
-      "kr": "네오 유니버스",
-      "styles": [
-        "sashi"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "オグリキャップ(クリスマス)",
-      "kr": "오구리 캡(크리스마스)",
-      "styles": [
-        "senko"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "アドマイヤベガ(クリスマス)",
-      "kr": "어드마이어 베가(크리스마스)",
-      "styles": [
-        "oikomi"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "ドゥラメンテ",
-      "kr": "두라멘테",
-      "styles": [
-        "oikomi"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "SS",
-      "jp": "ウインバリアシオン",
-      "kr": "윈 바리아시옹",
-      "styles": [
-        "oikomi"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "S",
-      "jp": "ヤエノムテキ",
-      "kr": "야에노 무테키",
-      "styles": [
-        "senko"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "S",
-      "jp": "ヤエノムテキ(新衣装)",
-      "kr": "야에노 무테키(신의상)",
-      "styles": [
-        "sashi"
-      ]
-    },
-    {
-      "ground": "turf",
-      "distance": "mid",
-      "tier": "S",
-      "jp": "ミスターシービー(正月)",
-      "kr": "미스터 시비(신년)",
-      "styles": [
-        "oikomi"
-      ]
+      "meters": null,
+      "turn": "",
+      "season": "",
+      "weather": "",
+      "condition": "",
+      "time": "",
+      "greenSkills": []
     }
   ]
 }
