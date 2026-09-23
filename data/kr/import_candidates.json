@@ -1,13 +1,14 @@
 {
   "schemaVersion": 1,
   "updated": "2026-09-23",
-  "generatedAt": null,
-  "status": "not_run",
+  "generatedAt": "2026-09-23T12:34:09.268Z",
+  "status": "verification_required",
   "characters": [],
   "supports": [],
+  "supportMaxId": 30260,
   "notes": [
     "JP changes never auto-promote to KR.",
-    "Character candidates are checked against data/kr/uma_ids.json.",
-    "Support candidates use supportMaxId only as a verification hint, not proof of KR availability."
+    "Character candidates are checked against KR uma allowlist.",
+    "Support numeric boundary is a verification hint only."
   ]
 }
