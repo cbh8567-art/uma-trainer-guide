@@ -770,7 +770,7 @@ function matchingTierForUma(uma,cond){if(!uma)return null;const rows=TIER_DATA.r
 function renderSelectedUma(){const u=selectedUma(),b=$('#selectedUma');if(!u){b.innerHTML='';return}const race=getGuideRace(),cond=race?raceCond(race):state,t=matchingTierForUma(u,cond),aw=awakeningSkills(u).filter(s=>Number(s.rarity)===2),pink=runtime.ready?characterEvolutionCandidates(u,cond):[];b.innerHTML=`<div class="umaHero"><img src="${esc(u.image)}" onerror="this.style.opacity=.16"><div><div class="cardName" style="font-size:15px">${esc(u.krName)}</div><div class="cardJp">${esc(u.name)}</div><div class="tags"><span class="tag">육성 카드 ID ${u.id}</span>${t?`<span class="tag">현재 조건 Tier ${esc(t.tier)}</span>`:'<span class="tag">현재 조건 티어 데이터 없음</span>'}</div><div class="sub" style="margin-top:6px">각성 금스킬 ${aw.length}개 · 전용 핑크 진화 ${pink.length}개 · 가이드 레이스와 자동 비교합니다.</div></div></div>`}
 
 
-const SCENARIOS={
+let SCENARIOS={
   tresenken:{
     name:'らっしゃい！トレセン軒！',kr:'트레센켄(라면)',maxEvolution:2,
     source:'Game8 2026-09-22',sourceUrl:'https://game8.jp/umamusume/794793',
@@ -1919,7 +1919,7 @@ function setOwnedFilter(t){ownedType=t;renderTypeFilters($('#ownedFilters'),owne
 renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);
 renderTypeFilters($('#ownedFilters'),ownedType,setOwnedFilter);
 async function loadLocalAppData(){
- const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krSkillNames:false,krTier:false,jpUpcoming:false,jpTier:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false};
+ const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krSkillNames:false,krTier:false,jpUpcoming:false,jpTier:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false};
 
  try{
    const meta=await fetchJson('./data/kr/server_meta.json');
@@ -2232,6 +2232,42 @@ async function loadLocalAppData(){
    }
  }catch(e){
    console.warn('[V5.4] common friend_support_events.json load failed. Using embedded fallback.',e);
+ }
+
+ try{
+   const scenarioData=await fetchJson('./data/common/scenarios.json');
+   const scenarios=scenarioData?.scenarios&&typeof scenarioData.scenarios==='object'&&!Array.isArray(scenarioData.scenarios)
+     ?scenarioData.scenarios
+     :null;
+
+   const requiredIds=['tresenken','dreams','onsen','island','legends','mecha','harvest','uaf','none'];
+   const validIds=
+     scenarios &&
+     requiredIds.every(id=>Object.prototype.hasOwnProperty.call(scenarios,id));
+
+   const validScenarios=
+     validIds &&
+     Object.entries(scenarios).every(([id,s])=>
+       s &&
+       typeof s==='object' &&
+       typeof s.name==='string' &&
+       typeof s.kr==='string' &&
+       Number.isFinite(Number(s.maxEvolution)) &&
+       Array.isArray(s.scenarioAcquiredRareSkills) &&
+       Array.isArray(s.evolutions)
+     );
+
+   if(validScenarios){
+     SCENARIOS={
+       ...SCENARIOS,
+       ...scenarios
+     };
+     result.commonScenarios=true;
+   }else{
+     throw new Error('common scenarios validation failed');
+   }
+ }catch(e){
+   console.warn('[V5.4] common scenarios.json load failed. Using embedded fallback.',e);
  }
 
  return result;
