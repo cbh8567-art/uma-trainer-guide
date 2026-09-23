@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<title>우마무스메 트레이너 가이드 V5.8 WEB</title>
+<title>우마무스메 트레이너 가이드 V5.9 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -132,7 +132,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V5.8 WEB</div><div class="sub">육성 우마별 핑크 진화 · 시나리오 전용 진화 · SSR/스킬 추천 · 이벤트 카운터 DEBUG 반영</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V5.9 WEB</div><div class="sub">육성 우마별 핑크 진화 · 시나리오 전용 진화 · SSR/스킬 추천 · 이벤트 카운터 DEBUG 반영</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -195,6 +195,17 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 
  <section class="page" id="page-guide">
   <div class="panel">
+   <div class="sectionHead" style="margin-top:0">
+    <h2 style="margin:0">트레이너 가이드 서버</h2>
+    <span class="status" id="guideServerStatus"></span>
+   </div>
+   <div class="filters" id="guideServerTabs">
+    <button class="filter" data-guide-server="jp">🇯🇵 일본 서버</button>
+    <button class="filter" data-guide-server="kr">🇰🇷 한국 서버</button>
+   </div>
+   <div class="note" id="guideServerNote" style="margin-top:7px"></div>
+  </div>
+  <div class="panel" style="margin-top:10px">
    <h2>현재 육성 우마무스메</h2>
    <div class="search"><input id="umaSearch" placeholder="한국어/일본어로 검색 (예: 아그네스 디지털, ライスシャワー)"><button class="btn" id="umaClear">초기화</button></div>
    <div class="umaResults" id="umaResults"></div><div id="selectedUma"></div>
@@ -322,6 +333,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 /* Generated from the V4.12 application data. */
 const CONFIG={"version":4,"updated":"2026-09-23","sources":{"catalog":"https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json","supports":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json","events":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/events.json","skills":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/skills.json","characters":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/characters.json","courses":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/courses.json"},"assetBases":{"support":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/assets/supports/","character":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/assets/characters/","skillIcon":"https://raw.githubusercontent.com/daftuyda/Stitcher/master/img/skill_icons/"},"charAliases":{"アーモンドアイ":"아몬드 아이","トウカイテイオー":"토카이 테이오","カレンブーケドール":"카렌 부케도르","アドマイヤグルーヴ":"어드마이어 그루브","エフフォーリア":"에프포리아","フォーエバーヤング":"포에버 영","ファインモーション":"파인 모션","ナイスネイチャ":"나이스 네이처","メイショウドトウ":"메이쇼 도토","サクラチヨノオー":"사쿠라 치요노 오","デアリングタクト":"데어링 택트","ミスターシービー":"미스터 시비","グランアレグリア":"그란 알레그리아","ステイゴールド":"스테이 골드","キセキ":"키세키","アグネスデジタル":"아그네스 디지털","ライスシャワー":"라이스 샤워","カレンチャン":"카렌짱","ヴィブロス":"비블로스","ブエナビスタ":"부에나 비스타","オルフェーヴル":"오르페브르","ジェンティルドンナ":"젠틸돈나","クロノジェネシス":"크로노 제네시스","ラヴズオンリーユー":"러브즈 온리 유","エピファネイア":"에피파네이아","シュヴァルグラン":"슈발 그랑","マヤノトップガン":"마야노 탑건","キタサンブラック":"키타산 블랙","オグリキャップ":"오구리 캡","ビワハヤヒデ":"비와 하야히데","ナリタブライアン":"나리타 브라이언","トランセンド":"트랜센드","エスポワールシチー":"에스포와르 시티","スマートファルコン":"스마트 팔콘","ホッコータルマエ":"홋코 타루마에","ヴィクトワールピサ":"빅투아르 피사","ワンダーアキュート":"원더 어큐트","コパノリッキー":"코파노 리키","ハルウララ":"하루 우라라","サクラバクシンオー":"사쿠라 바쿠신 오","アストンマーチャン":"아스톤 마짱","バンブーメモリー":"뱀부 메모리","デュランダル":"듀란달","ケイエスミラクル":"케이에스 미라클","ダイイチルビー":"다이이치 루비","シーキングザパール":"시킹 더 펄","タイキシャトル":"타이키 셔틀","バブルガムフェロー":"버블검 펠로","メジロラモーヌ":"메지로 라모누","アイネスフウジン":"아이네스 후진","ラインクラフト":"라인 크라프트","ニシノフラワー":"니시노 플라워","セイウンスカイ":"세이운 스카이","デアリングハート":"데어링 하트","ネオユニヴァース":"네오 유니버스","マチカネフクキタル":"마치카네 후쿠키타루","キングヘイロー":"킹 헤일로","イナリワン":"이나리 원","フェノーメノ":"페노메노","ゴールドシップ":"골드 쉽","ミホノブルボン":"미호노 부르봉","フジキセキ":"후지 키세키","カルストンライトオ":"칼스톤 라이트 오","ドゥラメンテ":"두라멘테","ウインバリアシオン":"윈 바리아시온","メジロライアン":"메지로 라이언","タマモクロス":"타마모 크로스","ドリームジャーニー":"드림 저니","マチカネタンホイザ":"마치카네 탄호이저","駿川たづな":"타즈나","サトノダイヤモンド":"사토노 다이아몬드","タップダンスシチー":"탭 댄스 시티","エアグルーヴ":"에어 그루브","マルシュロレーヌ":"마르슈 로렌","スペシャルウィーク":"스페셜 위크","サイレンススズカ":"사일런스 스즈카","マルゼンスキー":"마루젠스키","ウオッカ":"보드카","ダイワスカーレット":"다이와 스칼렛","メジロマックイーン":"메지로 맥퀸","シンボリルドルフ":"심볼리 루돌프","テイエムオペラオー":"티엠 오페라 오","イクノディクタス":"이쿠노 딕터스","ツインターボ":"트윈 터보","メジロアルダン":"메지로 아르당"},"skillAliases":{"シンギュラリティ":"싱귤래리티","才気煥発":"재기환발","ハヤテ一文字":"하야테 일문자","弧線のプロフェッサー":"호선의 프로페서","円弧のマエストロ":"원호의 마에스트로","開花":"개화","清麗高雅":"청려고아","華麗な踏み込み":"화려한 발놀림","素質の証明":"소질의 증명","純真無垢":"순진무구","ショーダウン":"쇼다운","迸る気迫":"용솟음치는 기백","正々堂々":"정정당당","夢の舞台へ":"꿈의 무대로","比類なき":"비할 데 없는","躍動":"약동","天賦の才":"천부의 재능","才色兼備":"재색겸비","先手必勝":"선수필승","傑出":"걸출","迫る影":"다가오는 그림자","心頭滅却":"심두멸각","無我夢中":"무아몽중","用意周到":"용의주도","迅速果断":"신속과감","独立独歩":"독립독보","右回り○":"우회전○","左回り○":"좌회전○","東京レース場○":"도쿄 경기장○","京都レース場○":"교토 경기장○","良バ場○":"양호한 경기장○","道悪○":"악조건 경기장○","秋ウマ娘○":"가을 우마무스메○","晴れの日○":"맑은 날○","曇りの日○":"흐린 날○","非根幹距離○":"비근간거리○","根幹距離○":"근간거리○"},"effectAliases":{"Friendship Bonus":"우정 보너스","Mood Effect":"컨디션 효과 증가","Speed Bonus":"스피드 보너스","Stamina Bonus":"스태미나 보너스","Power Bonus":"파워 보너스","Guts Bonus":"근성 보너스","Wit Bonus":"지능 보너스","Training Effectiveness":"트레이닝 효과 증가","Initial Speed":"초기 스피드","Initial Stamina":"초기 스태미나","Initial Power":"초기 파워","Initial Guts":"초기 근성","Initial Wit":"초기 지능","Initial Friendship Gauge":"초기 우정 게이지","Race Bonus":"레이스 보너스","Fan Bonus":"팬 수 보너스","Hint Levels":"힌트 Lv 증가","Hint Frequency":"힌트 발생률 증가","Specialty Priority":"특기율 증가","Event Recovery":"이벤트 회복량 증가","Event Effectiveness":"이벤트 효과 증가","Failure Rate Reduction":"실패율 감소","Energy Cost Reduction":"체력 소비량 감소","Skill Point Bonus":"스킬 Pt 보너스","Wit Friendship Recovery":"지능 우정 회복량"}};
 const UPCOMING={"version":1,"updated":"2026-09-23","source":"Game8/GameWith 2026-09-23 snapshot","sourceUrl":"https://game8.jp/umamusume/811062","races":[{"id":"cm_2026_09_mile","status":"현재","date":"2026-09-18~","event":"チャンピオンズミーティング MILE","eventKr":"챔피언스 미팅 MILE","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mile","meters":1800,"turn":"left","season":"autumn","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","秋ウマ娘○","晴れの日○","良バ場○","非根幹距離○"]},{"id":"cm_2026_09_longchamp_classic","status":"예정","date":"2026-09-29~","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"ロンシャン","placeKr":"롱샹","ground":"turf","distance":"mid","meters":2400,"turn":"right","season":"autumn","weather":"sunny","condition":"heavy","time":"day","greenSkills":["ロンシャンレース場○","右回り○","秋ウマ娘○","晴れの日○","道悪○","根幹距離○"]},{"id":"cm_2026_10_classic","status":"예정","date":"2026-10 중순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"京都","placeKr":"교토","ground":"turf","distance":"mid","meters":2200,"turn":"right","season":"autumn","weather":"cloudy","condition":"good","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","曇りの日○","良バ場○","非根幹距離○"]},{"id":"loh_2026_11_long","status":"예정","date":"2026-11 하순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"京都","placeKr":"교토","ground":"turf","distance":"long","meters":3000,"turn":"right","season":"autumn","weather":"random","condition":"random","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","非根幹距離○"]},{"id":"cm_2026_12_long","status":"예정","date":"2026-12 하순","event":"チャンピオンズミーティング LONG","eventKr":"챔피언스 미팅 LONG","place":"","placeKr":"미정","ground":"turf","distance":"long","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"cm_2027_01_classic","status":"예정","date":"2027-01 하순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"","placeKr":"미정","ground":"turf","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"loh_2027_02_dirt","status":"예정","date":"2027-02 중순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"","placeKr":"미정","ground":"dirt","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]}]};
+const KOREA_UPCOMING={"version":1,"updated":"2026-09-23","source":"한국 서버 5회차 CLASSIC 일정 스냅샷","sourceUrl":"https://namu.moe/w/%EC%9A%B0%EB%A7%88%EB%AC%B4%EC%8A%A4%EB%A9%94%20%ED%94%84%EB%A6%AC%ED%8B%B0%20%EB%8D%94%EB%B9%84/%EC%9D%B4%EB%B2%A4%ED%8A%B8/%EC%B1%94%ED%94%BC%EC%96%B8%EC%8A%A4%20%EB%AF%B8%ED%8C%85/5%ED%9A%8C%EC%B0%A8","races":[{"id":"kr_cm_2026_10_classic","status":"예정(미래시)","date":"2026-10-10~10-16 예상","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mid","meters":2400,"turn":"left","season":"spring","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","春ウマ娘○","晴れの日○","良バ場○","根幹距離○"]}]};
 const TIER_DATA={"version":1,"snapshotDate":"2026-09-23","sourceNote":"Game8 거리별/더트 최강 캐릭터 랭킹 스냅샷. 각질 필터는 출처 본문에서 각질이 확인된 항목 위주.","sources":{"short":"https://game8.jp/umamusume/793845","mile":"https://game8.jp/umamusume/794084","mid":"https://game8.jp/umamusume/794085","long":"https://game8.jp/umamusume/794086","dirt":"https://game8.jp/umamusume/794087"},"rows":[{"ground":"turf","distance":"short","tier":"SS+","jp":"サクラバクシンオー(ダンス)","kr":"사쿠라 바쿠신 오(댄스)","styles":["nige","senko"]},{"ground":"turf","distance":"short","tier":"SS+","jp":"アストンマーチャン(バレンタイン)","kr":"아스톤 마짱(발렌타인)","styles":["nige"]},{"ground":"turf","distance":"short","tier":"SS+","jp":"バンブーメモリー(夏)","kr":"뱀부 메모리(여름)","styles":["sashi"]},{"ground":"turf","distance":"short","tier":"SS","jp":"デュランダル","kr":"듀란달","styles":["oikomi"]},{"ground":"turf","distance":"short","tier":"SS","jp":"ケイエスミラクル","kr":"케이에스 미라클","styles":["senko"]},{"ground":"turf","distance":"short","tier":"S","jp":"ダイイチルビー","kr":"다이이치 루비","styles":["sashi"]},{"ground":"turf","distance":"short","tier":"S","jp":"アストンマーチャン","kr":"아스톤 마짱","styles":["nige"]},{"ground":"turf","distance":"short","tier":"S","jp":"シーキングザパール","kr":"시킹 더 펄","styles":["nige","senko","sashi","oikomi"]},{"ground":"turf","distance":"mile","tier":"SS+","jp":"タイキシャトル(バレンタイン)","kr":"타이키 셔틀(발렌타인)","styles":["senko"]},{"ground":"turf","distance":"mile","tier":"SS+","jp":"グランアレグリア","kr":"그란 알레그리아","styles":["sashi"]},{"ground":"turf","distance":"mile","tier":"SS+","jp":"タイキシャトル","kr":"타이키 셔틀","styles":["senko"]},{"ground":"turf","distance":"mile","tier":"SS","jp":"バブルガムフェロー(正月)","kr":"버블검 펠로(신년)","styles":["senko"]},{"ground":"turf","distance":"mile","tier":"SS","jp":"オグリキャップ(シングレ)","kr":"오구리 캡(신데렐라 그레이)","styles":["senko"]},{"ground":"turf","distance":"mile","tier":"SS","jp":"ダイイチルビー(青)","kr":"다이이치 루비(신의상)","styles":["sashi"]},{"ground":"turf","distance":"mile","tier":"SS","jp":"メジロラモーヌ","kr":"메지로 라모누","styles":["senko"]},{"ground":"turf","distance":"mile","tier":"SS","jp":"アイネスフウジン(チョコ)","kr":"아이네스 후진(초코)","styles":["nige"]},{"ground":"turf","distance":"mile","tier":"S","jp":"ラインクラフト","kr":"라인 크라프트","styles":["senko"]},{"ground":"turf","distance":"mile","tier":"S","jp":"デュランダル","kr":"듀란달","styles":["oikomi"]},{"ground":"turf","distance":"mile","tier":"S","jp":"ニシノフラワー","kr":"니시노 플라워","styles":["senko"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"エピファネイア","kr":"에피파네이아","styles":["senko"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"アドマイヤグルーヴ","kr":"어드마이어 그루브","styles":["sashi"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"アーモンドアイ","kr":"아몬드 아이","styles":["senko"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"スティルインラブ","kr":"스틸 인 러브","styles":["sashi"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"クロノジェネシス","kr":"크로노 제네시스","styles":["senko"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"ラヴズオンリーユー","kr":"러브즈 온리 유","styles":["sashi"]},{"ground":"turf","distance":"mid","tier":"SS+","jp":"オルフェーヴル","kr":"오르페브르","styles":["oikomi"]},{"ground":"turf","distance":"mid","tier":"SS","jp":"セイウンスカイ(水着)","kr":"세이운 스카이(수영복)","styles":["nige"]},{"ground":"turf","distance":"mid","tier":"SS","jp":"キセキ","kr":"키세키","styles":["nige","sashi"]},{"ground":"turf","distance":"mid","tier":"SS","jp":"ステイゴールド","kr":"스테이 골드","styles":["sashi","oikomi"]},{"ground":"turf","distance":"mid","tier":"SS","jp":"ブエナビスタ","kr":"부에나 비스타","styles":["sashi"]},{"ground":"turf","distance":"mid","tier":"SS","jp":"ジェンティルドンナ","kr":"젠틸돈나","styles":["senko"]},{"ground":"turf","distance":"long","tier":"SS+","jp":"エピファネイア","kr":"에피파네이아","styles":["senko"]},{"ground":"turf","distance":"long","tier":"SS+","jp":"シュヴァルグラン(水着)","kr":"슈발 그랑(수영복)","styles":["senko"]},{"ground":"turf","distance":"long","tier":"SS+","jp":"オルフェーヴル","kr":"오르페브르","styles":["oikomi"]},{"ground":"turf","distance":"long","tier":"SS+","jp":"マヤノトップガン(ハロウィン)","kr":"마야노 탑건(할로윈)","styles":["nige"]},{"ground":"turf","distance":"long","tier":"SS+","jp":"キタサンブラック(新衣装)","kr":"키타산 블랙(신의상)","styles":["nige"]},{"ground":"turf","distance":"long","tier":"SS","jp":"キセキ","kr":"키세키","styles":["nige","sashi"]},{"ground":"turf","distance":"long","tier":"SS","jp":"ステイゴールド","kr":"스테이 골드","styles":["sashi","oikomi"]},{"ground":"turf","distance":"long","tier":"SS","jp":"オグリキャップ(シングレ)","kr":"오구리 캡(신데렐라 그레이)","styles":["senko"]},{"ground":"turf","distance":"long","tier":"SS","jp":"ビワハヤヒデ(メカ)","kr":"비와 하야히데(메카)","styles":["senko"]},{"ground":"turf","distance":"long","tier":"SS","jp":"ナリタブライアン(新衣装)","kr":"나리타 브라이언(신의상)","styles":["senko"]},{"ground":"dirt","distance":"mile","tier":"SS+","jp":"トランセンド(温泉)","kr":"트랜센드(온천)","styles":["nige"]},{"ground":"dirt","distance":"mile","tier":"SS+","jp":"エスポワールシチー","kr":"에스포와르 시티","styles":["senko"]},{"ground":"dirt","distance":"mile","tier":"SS+","jp":"スマートファルコン(バトン)","kr":"스마트 팔콘(바통)","styles":["nige"]},{"ground":"dirt","distance":"mile","tier":"SS+","jp":"ホッコータルマエ(水着)","kr":"홋코 타루마에(수영복)","styles":["senko"]},{"ground":"dirt","distance":"mid","tier":"SS+","jp":"ホッコータルマエ(水着)","kr":"홋코 타루마에(수영복)","styles":["senko"]},{"ground":"dirt","distance":"mid","tier":"SS","jp":"ヴィクトワールピサ","kr":"빅투아르 피사","styles":["sashi"]},{"ground":"dirt","distance":"mile","tier":"S","jp":"ワンダーアキュート(温泉)","kr":"원더 어큐트(온천)","styles":["senko","sashi"]},{"ground":"dirt","distance":"mile","tier":"S","jp":"コパノリッキー","kr":"코파노 리키","styles":["nige","senko"]},{"ground":"dirt","distance":"mid","tier":"S","jp":"ホッコータルマエ","kr":"홋코 타루마에","styles":["senko"]},{"ground":"dirt","distance":"mile","tier":"S","jp":"ハルウララ(正月)","kr":"하루 우라라(신년)","styles":["sashi"]}]};
 
 const FRIEND_SUPPORT_SKILLS={"updated":"2026-09-23","note":"친구 SSR은 Tsuyuchan supports/events 배포 대상에서 빠지는 카드가 있어 U-tools의 'イベントで取得'를 보조 표시 데이터로 사용. 이 목록은 카드 상세의 스킬 조회용이며 이벤트 선택지/획득 카운트는 임의 추정하지 않음.","cards":{"30021":{"name":"[ようこそ、トレセン学園へ！] 駿川たづな","skills":["コンセントレーション","集中力","展開窺い","尻尾上がり"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30021"},"30036":{"name":"[徹底管理主義] 樫本理子","skills":["一陣の風","ペースアップ","おひとり様○","一匹狼","シンパシー"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30036"},"30052":{"name":"[from the GROUND UP] ライトハロー","skills":["お先に失礼っ！","おひとり様○","逃げのコツ○","先行のコツ○"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30052"},"30160":{"name":"[L'aubeは迫りて] 佐岳メイ","skills":["ネバーギブアップ","一匹狼","直線巧者"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30160"},"30188":{"name":"[共に描くキラメキ] 都留岐涼花","skills":["機先の勝負","対抗意識○","末脚"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30188"},"30207":{"name":"[謹製ッ！特大夢にんじん！] 秋川理事長","skills":["ウママニア","直線巧者","中盤巧者"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30207"},"30257":{"name":"[本能は吼えているか！？] タッカーブライン","skills":["パスファインダー","活路を拓く！","直線回復","端緒"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30257"},"30276":{"name":"[ゆるり、ゆこま旅館] 保科健子","skills":["お先に失礼っ！","遊びはおしまいっ！","序盤巧者","中盤巧者"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30276"},"30290":{"name":"[American Dream] カジノドライヴ","skills":["いいとこ入った！","スリップストリーム","ウマ好み","末脚"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30290"},"30305":{"name":"[一杯のノスタルジア] 駿川たづな","skills":["心惹かれて","遊びはおしまいっ！","お先に失礼っ！","中盤巧者"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30305"}}};
@@ -330,13 +342,25 @@ const FRIEND_SUPPORT_EVENTS={"version":1,"updated":"2026-09-23","note":"U-tools 
 
 </script>
 <script>
-const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v58_db_cache', LEGACY_CACHE_KEY='uma_trainer_v57_db_cache';
+const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v59_db_cache', LEGACY_CACHE_KEY='uma_trainer_v58_db_cache';
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
+const KR_SKILL_ALIASES={
+ 'ハヤテ一文字':'한줄기 질풍','疾風より先へ':'질풍보다 앞으로',
+ '先手必勝':'선수 필승','夢の先駆者':'꿈의 선구자',
+ '王手':'결정적인 한 수','幾星霜が導く一手':'세월이 인도하는 한 수',
+ '時中の妙':'절묘한 타이밍','革命の岐路':'혁명의 기로',
+ '飛翔脚':'비상하는 다리','雲上飛翔':'운상비상',
+ '英俊豪傑':'영웅호걸','伝説降臨':'전설 강림',
+ '新たな伝説を築くもの':'새로운 전설을 세우는 자','新たな伝説を築く者':'새로운 전설을 세우는 자',
+ '時代を変える者':'시대를 바꾸는 자',
+ '東京レース場○':'도쿄 경기장○','左回り○':'반시계(좌) 방향○','春ウマ娘○':'봄 우마무스메○',
+ '晴れの日○':'맑은 날○','良バ場○':'양호한 경기장○','根幹距離○':'근간거리○'
+};
 const LB_MAX=[30,35,40,45,50], LB_INDEX=[6,7,8,9,10];
 let state=JSON.parse(localStorage.getItem(STATE_KEY)||'null')||{owned:[],deck:[null,null,null,null,null,null],acquired:{},eventChoice:{},lb:{},scenario:'tresenken',ground:'turf',distance:'mid',style:'senko',currentUmaId:null,guideRaceId:'cm_2026_10_classic'};
-state.deck=[...(state.deck||[]).slice(0,6),...Array(6).fill(null)].slice(0,6);state.lb=state.lb||{};state.owned=state.owned||[];state.acquired=state.acquired||{};state.eventChoice=state.eventChoice||{};state.eventDone=state.eventDone||{};state.scenario=state.scenario||'tresenken';state.tresenkenUltimateRamen=state.tresenkenUltimateRamen||null;state.tresenkenRmj={juniorBig:true,classicBig:true,seniorBig:true,...(state.tresenkenRmj||{})};state.evolutionPlan=state.evolutionPlan||null;
+state.deck=[...(state.deck||[]).slice(0,6),...Array(6).fill(null)].slice(0,6);state.lb=state.lb||{};state.owned=state.owned||[];state.acquired=state.acquired||{};state.eventChoice=state.eventChoice||{};state.eventDone=state.eventDone||{};state.scenario=state.scenario||'tresenken';state.tresenkenUltimateRamen=state.tresenkenUltimateRamen||null;state.tresenkenRmj={juniorBig:true,classicBig:true,seniorBig:true,...(state.tresenkenRmj||{})};state.guideServer=state.guideServer==='kr'?'kr':'jp';state.guideRaceIds=state.guideRaceIds||{};state.guideRaceIds.jp=state.guideRaceIds.jp||((UPCOMING.races||[]).some(r=>r.id===state.guideRaceId)?state.guideRaceId:(UPCOMING.races?.[0]?.id||null));state.guideRaceIds.kr=state.guideRaceIds.kr||(KOREA_UPCOMING.races?.[0]?.id||null);state.guideRaceId=state.guideRaceIds[state.guideServer]||((state.guideServer==='kr'?KOREA_UPCOMING:UPCOMING).races?.[0]?.id||null);state.evolutionPlan=state.evolutionPlan||null;
 let runtime={catalog:[],byId:new Map(),skills:new Map(),characters:[],courses:[],ready:false};let catType='전체',ownedType='전체',emptySlotType='전체',emptySlotTarget=0,catalogRecommendSort=false;
 
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -353,6 +377,7 @@ function katakanaToHangul(s){
 }
 function koChar(jp){return CONFIG.charAliases[jp]||katakanaToHangul(jp)}
 function koSkill(jp){
+ if(KR_SKILL_ALIASES[jp])return KR_SKILL_ALIASES[jp];
  if(CONFIG.skillAliases[jp])return CONFIG.skillAliases[jp];
  const prefix={'短距離':'단거리','マイル':'마일','中距離':'중거리','長距離':'장거리','逃げ':'도주','先行':'선행','差し':'선입','追込':'추입'};
  let m=jp.match(/^(短距離|マイル|中距離|長距離|逃げ|先行|差し|追込)(コーナー|直線)(○|◎)?$/);if(m)return `${prefix[m[1]]} ${m[2]==='コーナー'?'코너':'직선'}${m[3]||''}`;
@@ -576,12 +601,12 @@ const SCENARIOS={
       {name:'好奇心',source:'Game8 2026-09-22',acquisition:'시니어급 12월 후반 궁극 라멘 선택 · 珠玉のトレセンラーメン · 힌트 Lv+2',verified:true,choiceGroup:'ultimateRamen',choiceId:'jewel'}
     ],
     evolutions:[
-      {from:'ギアチェンジ',to:'秘伝の味変アレンジ！',distances:['mile'],scenarioRequirement:'allRmjBig',extraRequirement:'마일 스킬 2개 이상',guideBoost:-0.5,note:'Game8 현행 가이드에서 우선도 낮음'},
-      {from:'お先に失礼っ！',to:'バリカタ、一丁上がり！',scenarioRequirement:'allRmjBig',guideBoost:0},
-      {from:'時中の妙',to:'湯切りの妙技',scenarioRequirement:'allRmjBig',guideBoost:0.9,note:'현행 가이드 최우선 후보'},
-      {from:'パスファインダー',to:'麺の極意、見つけたり',distances:['mid','long'],scenarioRequirement:'allRmjBig',extraRequirement:'중거리 또는 장거리 스킬 2개 이상',guideBoost:0.65,note:'중/장거리 우선 후보'},
-      {from:'元気溌剌',to:'元気特盛りのおもてなし',distances:['mile'],scenarioRequirement:'allRmjBig',extraRequirement:'마일 스킬 2개 이상',guideBoost:0.55,note:'마일에서 우선도 상승'},
-      {from:'悠々自適',to:'じっくり仕込みの一杯',distances:['mid','long'],scenarioRequirement:'allRmjBig',guideBoost:-0.35,note:'회복이 특별히 필요할 때 검토'}
+      {from:'ギアチェンジ',to:'秘伝の味変アレンジ！',distances:['mile'],scenarioRequirement:'seniorRmjBig',requirementText:'초RMJ극 대성황 이상 + 마일 스킬 2개 이상',guideBoost:-0.5,note:'Game8 현행 가이드에서 우선도 낮음'},
+      {from:'お先に失礼っ！',to:'バリカタ、一丁上がり！',scenarioRequirement:'allRmjBig',requirementText:'모든 RMJ 대성황 이상',guideBoost:0},
+      {from:'時中の妙',to:'湯切りの妙技',scenarioRequirement:'allRmjBig',requirementText:'모든 RMJ 대성황 이상',guideBoost:0.9,note:'현행 가이드 최우선 후보'},
+      {from:'パスファインダー',to:'麺の極意、見つけたり',distances:['mid','long'],scenarioRequirement:'seniorRmjBig',requirementText:'초RMJ극 대성황 이상 + 중거리 또는 장거리 스킬 2개 이상',guideBoost:0.65,note:'중/장거리 우선 후보'},
+      {from:'元気溌剌',to:'元気特盛りのおもてなし',distances:['mile'],scenarioRequirement:'seniorRmjBig',requirementText:'초RMJ극 대성황 이상 + 마일 스킬 2개 이상',guideBoost:0.55,note:'마일에서 우선도 상승'},
+      {from:'悠々自適',to:'じっくり仕込みの一杯',distances:['mid','long'],scenarioRequirement:'allRmjBig',requirementText:'모든 RMJ 대성황 이상',guideBoost:-0.35,note:'회복이 특별히 필요할 때 검토'}
     ]
   },
   dreams:{
@@ -644,22 +669,23 @@ const SCENARIOS={
   },
   legends:{
     name:'The Twinkle Legends',kr:'레전즈',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/670791',
+    krSource:'우마무스메 인벤 스킬 DB',krSourceUrl:'https://uma.inven.co.kr/db/skill',normalCompletionAssumed:true,
     scenarioAcquiredRareSkills:[
-      {name:'飛翔脚',source:'Game8',acquisition:'「"私の"レースのこと」 · 오르페브르 대응 편성 시',verified:true},
-      {name:'遮二無二',source:'Game8',acquisition:'「"私の"レースのこと」 · 메지로 라모누 대응 편성 시',verified:true},
-      {name:'光芒一閃',source:'Game8',acquisition:'「"私の"レースのこと」 · 젠틸돈나 대응 편성 시',verified:true},
-      {name:'猛追',source:'Game8',acquisition:'「"私の"レースのこと」 · 시리우스 심볼리 대응 편성 시',verified:true},
-      {name:'砂塵円刃',source:'Game8',acquisition:'「"私の"レースのこと」 · 스마트 팔콘 대응 편성 시',verified:true},
-      {name:'時中の妙',source:'Game8',acquisition:'Dream Fest 승리 후',verified:true},
-      {name:'新たな伝説を築くもの',source:'Game8',acquisition:'시나리오 클리어 후 육성 완료 시',verified:true}
+      {name:'飛翔脚',source:'Game8',acquisition:'「"私の"レースのこと」 · 오르페브르 대응 편성 시',verified:true,requiredCharacter:'オルフェーヴル'},
+      {name:'遮二無二',source:'Game8',acquisition:'「"私の"レースのこと」 · 메지로 라모누 대응 편성 시',verified:true,requiredCharacter:'メジロラモーヌ'},
+      {name:'光芒一閃',source:'Game8',acquisition:'「"私の"レースのこと」 · 젠틸돈나 대응 편성 시',verified:true,requiredCharacter:'ジェンティルドンナ'},
+      {name:'猛追',source:'Game8',acquisition:'「"私の"レースのこと」 · 시리우스 심볼리 대응 편성 시',verified:true,requiredCharacter:'シリウスシンボリ'},
+      {name:'砂塵円刃',source:'Game8',acquisition:'「"私の"レースのこと」 · 스마트 팔콘 대응 편성 시',verified:true,requiredCharacter:'スマートファルコン'},
+      {name:'時中の妙',source:'Game8',acquisition:'Dream Fest 진행 보상 · 정상 완주 기준 자동 인정',verified:true},
+      {name:'新たな伝説を築くもの',source:'Game8/Inven',acquisition:'Dream Fest 전승 · 정상 완주 기준 자동 인정',verified:true}
     ],
     evolutions:[
-      {from:'ハヤテ一文字',to:'疾風より先へ'},
-      {from:'先手必勝',to:'夢の先駆者',styles:['nige']},
-      {from:'王手',to:'幾星霜が導く一手',styles:['senko','sashi']},
-      {from:'時中の妙',to:'革命の岐路'},
-      {from:'飛翔脚',to:'雲上飛翔',styles:['oikomi']},
-      {from:'英俊豪傑',to:'伝説降臨'}
+      {from:'ハヤテ一文字',to:'疾風より先へ',scenarioRequirement:'legendsNormal',requirementText:'팬 수 15만 이상'},
+      {from:'先手必勝',to:'夢の先駆者',styles:['nige'],scenarioRequirement:'legendsNormal',requirementText:'도주 스킬 2개 이상 + 팬 수 10만 이상'},
+      {from:'王手',to:'幾星霜が導く一手',styles:['senko','sashi'],scenarioRequirement:'legendsNormal',requirementText:'선행 또는 선입 스킬 2개 이상 + 팬 수 10만 이상'},
+      {from:'時中の妙',to:'革命の岐路',scenarioRequirement:'legendsNormal',requirementText:'팬 수 15만 이상'},
+      {from:'飛翔脚',to:'雲上飛翔',styles:['oikomi'],scenarioRequirement:'legendsNormal',requirementText:'추입 스킬 2개 이상 + 팬 수 10만 이상'},
+      {from:'英俊豪傑',to:'伝説降臨',scenarioRequirement:'legendsNormal',requirementText:'팬 수 15만 이상'}
     ]
   },
   mecha:{
@@ -768,21 +794,40 @@ function scenarioMilestoneMet(milestone){
  if(milestone==='allRmjBig')return tresenkenAllRmjBig();
  return false
 }
+function deckOrUmaHasCharacter(jpName){
+ const target=norm(jpName);
+ for(const id of state.deck.filter(Boolean)){
+   const c=cardById(id);
+   if(c&&(norm(c.character)===target||norm(c.jpName).includes(target)))return true
+ }
+ const u=selectedUma();
+ return !!(u&&(norm(u.character)===target||norm(u.name).includes(target)))
+}
 function scenarioRareSkillNames(){
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none,out=new Set();
  for(const x of sc.scenarioAcquiredRareSkills||[]){
    if(!x||x.verified!==true||!x.name)continue;
    if(x.choiceGroup&&scenarioChoiceValue(x.choiceGroup)!==x.choiceId)continue;
    if(x.milestone&&!scenarioMilestoneMet(x.milestone))continue;
+   if(x.requiredCharacter&&!deckOrUmaHasCharacter(x.requiredCharacter))continue;
    out.add(x.name)
  }
  return out
 }
 function scenarioEvolutionRequirementStatus(x){
- if(state.scenario!=='tresenken'||!x?.scenarioRequirement)return {met:true,label:'시나리오 조건 확인 ✓'};
- if(x.scenarioRequirement==='allRmjBig'){
-   const met=tresenkenAllRmjBig();
-   return {met,label:met?'모든 RMJ 대성황 이상 ✓':'모든 RMJ 대성황 이상 필요'};
+ if(!x?.scenarioRequirement)return {met:true,label:'시나리오 조건 확인 ✓'};
+ if(state.scenario==='tresenken'){
+   if(x.scenarioRequirement==='allRmjBig'){
+     const met=tresenkenAllRmjBig();
+     return {met,label:met?'모든 RMJ 대성황 이상 ✓':'모든 RMJ 대성황 이상 필요'};
+   }
+   if(x.scenarioRequirement==='seniorRmjBig'){
+     const met=!!state.tresenkenRmj?.seniorBig;
+     return {met,label:met?'초RMJ극 대성황 이상 ✓':'초RMJ극 대성황 이상 필요'};
+   }
+ }
+ if(state.scenario==='legends'&&x.scenarioRequirement==='legendsNormal'){
+   return {met:true,label:'레전즈 정상 완주 기준 자동 충족 ✓'};
  }
  return {met:true,label:'시나리오 조건 확인 ✓'}
 }
@@ -918,13 +963,13 @@ function renderScenarioEvolution(cond){
         <div class="jp">${esc(x.to)} <span class="pinkBadge">시나리오 핑크</span></div>
         <div class="kr">${x.sk?esc(x.sk.kr||koSkill(x.to)):esc(koSkill(x.to))}</div>
         <div class="evoTags">${x.sk?evolutionTagHtml(x.sk):evolutionTagHtml({tags:{grounds:x.grounds||[],distances:x.distances||[],styles:x.styles||[]}})}</div>
-        <div class="scenarioFrom">${esc(x.from)} → 진화 · ${avail}${x.note?` · ${esc(x.note)}`:''}</div>
+        <div class="scenarioFrom">${esc(x.from)} → 진화 · ${avail}${x.requirementText?` · 조건: ${esc(x.requirementText)}`:''}${x.note?` · ${esc(x.note)}`:''}</div>
       </div>
       <div class="evoScore"><div class="evoStars">${'★'.repeat(star)}${'☆'.repeat(5-star)}</div>${recSet.has(x.to)?'<span class="scenarioRec">추천 슬롯</span>':''}</div>`;
     b.appendChild(row)
   });
   const n=document.createElement('div');n.className='note';n.style.marginTop='7px';
-  n.innerHTML=`${esc(sc.kr)}에서는 한 번의 육성에서 시나리오 진화를 최대 <b>${sc.maxEvolution}개</b> 선택합니다. 추천은 현재 바장/거리/각질과 원본 스킬 확보 여부를 함께 봅니다.${sc.sourceUrl?` <a href="${sc.sourceUrl}" target="_blank" rel="noopener" style="color:#ff9fc2">시나리오 진화 출처 ↗</a>`:''}`;
+  n.innerHTML=`${esc(sc.kr)}에서는 한 번의 육성에서 시나리오 진화를 최대 <b>${sc.maxEvolution}개</b> 선택합니다. 추천은 현재 바장/거리/각질과 원본 스킬 확보 여부를 함께 봅니다.${sc.sourceUrl?` <a href="${sc.sourceUrl}" target="_blank" rel="noopener" style="color:#ff9fc2">시나리오 진화 출처 ↗</a>`:''}${sc.krSourceUrl?` · <a href="${sc.krSourceUrl}" target="_blank" rel="noopener" style="color:#70c5f4">한국어 DB(Inven) ↗</a>`:''}`;
   b.appendChild(n)
 }
 
@@ -1096,7 +1141,7 @@ function renderTrainingFinishModal(){
    const row=document.createElement('label');row.className='finishOption'+(selected?' selected':'')+(recommended?' recommended':'')+(!x.available?' disabled':'');
    const star=Math.max(1,Math.round(x.score)),baseAvail=x.fromDeck?'현재 선택한 레어 스킬 확인 ✓':x.fromUma?'육성 우마 레어 스킬 확인 ✓':x.fromScenario?'시나리오 진행 획득 가능 ✓':'원본 레어 스킬 없음';
    const avail=!x.scenarioConditionMet?x.scenarioConditionLabel:baseAvail;
-   row.innerHTML=`<input type="checkbox" ${selected?'checked':''} ${x.available?'':'disabled'}>${x.sk?skillIcon(x.sk):'<span class="skillFallback">進</span>'}<div><div class="finishName">${esc(x.to)} <span class="pinkBadge">시나리오 핑크</span>${recommended?' <span class="scenarioRec">추천</span>':''}${!x.available?' <span class="finishLocked">선택 불가</span>':''}</div><div class="finishSub">${esc(x.from)} → 진화 · ${avail}</div><div class="evoTags">${x.sk?evolutionTagHtml(x.sk):evolutionTagHtml({tags:{grounds:x.grounds||[],distances:x.distances||[],styles:x.styles||[]}})}${x.extraRequirement?`<span class="tag">추가 조건: ${esc(x.extraRequirement)}</span>`:''}</div></div><div class="finishRight"><div class="evoStars">${'★'.repeat(star)}${'☆'.repeat(5-star)}</div>${x.available?(x.score>=4?'추천':'현재 조건 검토'):(x.scenarioConditionMet?'원본 필요':'시나리오 조건 필요')}</div>`;
+   row.innerHTML=`<input type="checkbox" ${selected?'checked':''} ${x.available?'':'disabled'}>${x.sk?skillIcon(x.sk):'<span class="skillFallback">進</span>'}<div><div class="finishName">${esc(x.to)} <span class="pinkBadge">시나리오 핑크</span>${recommended?' <span class="scenarioRec">추천</span>':''}${!x.available?' <span class="finishLocked">선택 불가</span>':''}</div><div class="finishSub">${esc(x.from)} → 진화 · ${avail}</div><div class="evoTags">${x.sk?evolutionTagHtml(x.sk):evolutionTagHtml({tags:{grounds:x.grounds||[],distances:x.distances||[],styles:x.styles||[]}})}${x.requirementText?`<span class="tag">진화 조건: ${esc(x.requirementText)}</span>`:''}</div></div><div class="finishRight"><div class="evoStars">${'★'.repeat(star)}${'☆'.repeat(5-star)}</div>${x.available?(x.score>=4?'추천':'현재 조건 검토'):(x.scenarioConditionMet?'원본 필요':'시나리오 조건 필요')}</div>`;
    row.onclick=e=>{e.preventDefault();if(!x.available)return toast(!x.scenarioConditionMet?'트레센켄 시나리오 진화 조건을 먼저 충족해야 합니다.':'덱에서 획득했거나, 육성 우마가 보유했거나, 현재 시나리오에서 획득 가능한 원본 레어 스킬이 없어 선택할 수 없습니다.');if(selected)finishDraft.scenario=finishDraft.scenario.filter(n=>n!==x.to);else{if(finishDraft.scenario.length>=sc.maxEvolution)return toast(`시나리오 진화는 최대 ${sc.maxEvolution}개까지 선택할 수 있습니다.`);finishDraft.scenario=[...finishDraft.scenario,x.to]}renderTrainingFinishModal()};
    sb.appendChild(row)
  }
@@ -1127,14 +1172,38 @@ function confirmTrainingFinish(){
 function raceCond(r){return {ground:r.ground,distance:r.distance,style:state.style}}
 
 function guideRaceLabel(r){
- const meter=r.meters?` ${r.meters}m`:'';
- return `${r.date} · ${r.eventKr} · ${r.placeKr||'장소 미정'} · ${groundLabel[r.ground]} ${distLabel[r.distance]}${meter}`;
+ const meter=r.meters?` ${r.meters}m`:'',server=state.guideServer==='kr'?'한국':'일본';
+ return `[${server}] ${r.date} · ${r.eventKr} · ${r.placeKr||'장소 미정'} · ${groundLabel[r.ground]} ${distLabel[r.distance]}${meter}`;
+}
+function guideRaceSet(server=state.guideServer){
+ return server==='kr'?KOREA_UPCOMING:UPCOMING
+}
+function renderGuideServerTabs(){
+ const server=state.guideServer==='kr'?'kr':'jp',set=guideRaceSet(server);
+ document.querySelectorAll('[data-guide-server]').forEach(b=>b.classList.toggle('active',b.dataset.guideServer===server));
+ const st=$('#guideServerStatus');if(st)st.textContent=server==='kr'?'한국 서버':'일본 서버';
+ const note=$('#guideServerNote');
+ if(note)note.innerHTML=server==='kr'
+   ?`한국 서버 · 인벤 스킬 DB로 구현/한국어 명칭을 대조합니다. 레이스 일정은 현재 확인된 한국 5회차 일정만 표시합니다. <a href="https://uma.inven.co.kr/db/skill" target="_blank" rel="noopener" style="color:#70c5f4">Inven 스킬 DB ↗</a>`
+   :`일본 서버 · Game8/GameWith 최신 스냅샷 기준입니다. ${set.source?esc(set.source):''}`;
+}
+function setGuideServer(server){
+ state.guideServer=server==='kr'?'kr':'jp';
+ const set=guideRaceSet(),saved=state.guideRaceIds?.[state.guideServer];
+ const race=(set.races||[]).find(r=>r.id===saved)||set.races?.[0]||null;
+ state.guideRaceId=race?.id||null;
+ state.guideRaceIds={...(state.guideRaceIds||{}),[state.guideServer]:state.guideRaceId};
+ save();
+ populateConditionGuideRace();
+ renderGuideServerTabs();
+ if(race)applyGuideRaceFromCondition(race.id);
+ else{renderRaceCards();renderGuide()}
 }
 function populateConditionGuideRace(){
  const sel=$('#conditionGuideRace');if(!sel)return;
- const wanted=state.guideRaceId||UPCOMING.races?.[0]?.id||'';
+ const set=guideRaceSet(),wanted=state.guideRaceIds?.[state.guideServer]||state.guideRaceId||set.races?.[0]?.id||'';
  sel.innerHTML='';
- for(const r of UPCOMING.races||[]){
+ for(const r of set.races||[]){
    const o=document.createElement('option');
    o.value=r.id;
    o.textContent=guideRaceLabel(r);
@@ -1143,8 +1212,9 @@ function populateConditionGuideRace(){
  if([...sel.options].some(o=>o.value===wanted))sel.value=wanted;
 }
 function applyGuideRaceFromCondition(id){
- const r=UPCOMING.races.find(x=>x.id===id);if(!r)return;
+ const set=guideRaceSet(),r=(set.races||[]).find(x=>x.id===id);if(!r)return;
  state.guideRaceId=r.id;
+ state.guideRaceIds={...(state.guideRaceIds||{}),[state.guideServer]:r.id};
  state.ground=r.ground;
  state.distance=r.distance;
  $('#ground').value=state.ground;
@@ -1161,8 +1231,8 @@ function applyGuideRaceFromCondition(id){
  renderTier()
 }
 
-function getGuideRace(){return UPCOMING.races.find(r=>r.id===state.guideRaceId)||UPCOMING.races[0]}
-function renderRaceCards(){const b=$('#raceCards');b.innerHTML='';for(const r of UPCOMING.races){const d=document.createElement('div');d.className='raceCard'+(r.id===state.guideRaceId?' selected':'');d.innerHTML=`<div class="tags"><span class="tag">${esc(r.status)}</span><span class="tag">${esc(r.date)}</span></div><div class="raceTitle">${esc(r.eventKr)}</div><div class="cardJp">${esc(r.event)}</div><div class="raceMeta">${esc(r.placeKr||'미정')} · ${groundLabel[r.ground]} · ${distLabel[r.distance]}${r.meters?' '+r.meters+'m':''}<br>${r.turn==='left'?'좌회전':r.turn==='right'?'우회전':'상세 조건 미정'}</div><button class="btn" style="margin-top:7px;width:100%" data-guide>이 레이스 가이드</button>`;d.querySelector('[data-guide]').onclick=()=>{if($('#conditionGuideRace'))$('#conditionGuideRace').value=r.id;applyGuideRaceFromCondition(r.id)};b.appendChild(d)}}
+function getGuideRace(){const set=guideRaceSet();return (set.races||[]).find(r=>r.id===state.guideRaceId)||set.races?.[0]||null}
+function renderRaceCards(){const b=$('#raceCards');if(!b)return;b.innerHTML='';const set=guideRaceSet();for(const r of set.races||[]){const d=document.createElement('div');d.className='raceCard'+(r.id===state.guideRaceId?' selected':'');d.innerHTML=`<div class="tags"><span class="tag">${esc(r.status)}</span><span class="tag">${esc(r.date)}</span><span class="tag">${state.guideServer==='kr'?'한국':'일본'}</span></div><div class="raceTitle">${esc(r.eventKr)}</div><div class="cardJp">${esc(r.event)}</div><div class="raceMeta">${esc(r.placeKr||'미정')} · ${groundLabel[r.ground]} · ${distLabel[r.distance]}${r.meters?' '+r.meters+'m':''}<br>${r.turn==='left'?'좌회전':r.turn==='right'?'우회전':'상세 조건 미정'}</div><button class="btn" style="margin-top:7px;width:100%" data-guide>이 레이스 가이드</button>`;d.querySelector('[data-guide]').onclick=()=>{if($('#conditionGuideRace'))$('#conditionGuideRace').value=r.id;applyGuideRaceFromCondition(r.id)};b.appendChild(d)}}
 function supportRecommend(cond){return runtime.catalog.map(c=>({c,score:cardSuitability(c,cond,state.owned.map(String).includes(String(c.id))?null:4)})).sort((a,b)=>b.score-a.score).slice(0,10)}
 
 
@@ -1183,7 +1253,7 @@ function renderDbGuideRecommendations(){
    label.textContent='육성 우마무스메를 선택하면 현재 가이드 조건의 추천 SSR을 바로 표시합니다.';
    box.innerHTML='<div class="note">위 「육성 우마무스메」를 눌러 먼저 선택해 주세요.</div>';return
  }
- label.textContent=`${uma.krName} · ${race?race.eventKr:'현재 육성 조건'} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;
+ label.textContent=`${state.guideServer==='kr'?'한국':'일본'} 서버 · ${uma.krName} · ${race?race.eventKr:'현재 육성 조건'} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;
  const ownedIds=new Set(state.owned.map(String));
  const arr=runtime.catalog
    .filter(c=>!sameUmaSupport(c,uma))
@@ -1207,6 +1277,10 @@ function renderGuideUmaTier(){
   const box=$('#guideUmaTier');
   if(!box) return;
   box.innerHTML='';
+  if(state.guideServer==='kr'){
+    box.innerHTML='<div class="note"><b>한국 서버 모드</b><br>일본 Game8의 미래 캐릭터 티어를 한국 서버 티어처럼 섞어 표시하지 않습니다. 한국 서버 구현 여부와 스킬 한국어명은 Inven DB를 대조하며, 한국 서버용 티어 스냅샷은 별도 데이터가 검증된 항목부터 추가합니다.</div>';
+    return
+  }
   const race=getGuideRace();
   if(!race){box.innerHTML='<div class="note">가이드 레이스를 선택해 주세요.</div>';return}
   const cond=raceCond(race);
@@ -1244,7 +1318,7 @@ function renderGuideUmaTier(){
   box.appendChild(note);
 }
 
-function renderGuide(){const race=getGuideRace(),cond=raceCond(race);renderGuideUmaTier();renderTrainingFinishSummary();$('#guideCondition').textContent=`${race.eventKr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;const gs=$('#guideSkills');gs.innerHTML='';const u=selectedUma();let items=[];if(u)items=awakeningSkills(u).filter(sk=>Number(sk.rarity)===2).map(sk=>({...sk,source:`${u.krName} 각성 Lv${sk.awakening}`}));for(const n of race.greenSkills||[]){items.push({id:'green_'+n,jp:n,kr:koSkill(n),iconId:null,tags:{grounds:[],distances:[],styles:[]},source:'코스 대응 녹색 스킬',force:3})}items.sort((a,b)=>(b.force||skillConditionScore(b,cond))-(a.force||skillConditionScore(a,cond)));for(const s of items.slice(0,14)){const sc=s.force||skillConditionScore(s,cond),x=document.createElement('div');x.className='guideSkill';x.innerHTML=`${skillIcon(s)}<div><div class="jp">${esc(s.jp)} <span class="tag">원문</span></div><div class="kr">${esc(s.kr||koSkill(s.jp))}</div><div class="sub">${esc(s.source||'')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`;gs.appendChild(x)}if(!items.length)gs.innerHTML='<div class="note">육성 우마무스메를 선택하면 각성 스킬과 레이스 조건을 비교합니다.</div>';const ss=$('#guideSupports');ss.innerHTML='';if(!runtime.ready){ss.innerHTML='<div class="note">SSR DB 동기화가 필요합니다.</div>';return}for(const {c,score} of supportRecommend(cond)){const owned=state.owned.map(String).includes(String(c.id)),x=document.createElement('div');x.className='card';x.innerHTML=`${c.image?`<img src="${esc(c.image)}">`:''}<div><div class="cardName">${esc(c.krName)}</div><div class="cardJp">${esc(c.jpName)}</div><div class="stars">${scoreStars(score)} <span class="status">${owned?'보유 '+(Number(state.lb[String(c.id)]??0)===4?'풀돌':(Number(state.lb[String(c.id)]??0)+'돌')):'미보유 · 풀돌 기준'}</span></div><div class="actions"><button class="mini" data-info>상세</button>${owned?'<button class="mini" data-slot>덱 슬롯</button>':''}</div></div>`;x.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);if(owned)x.querySelector('[data-slot]').onclick=()=>openSlotPicker(c.id);ss.appendChild(x)}}
+function renderGuide(){renderGuideServerTabs();const race=getGuideRace();if(!race){$('#guideCondition').textContent='등록된 레이스 없음';return}const cond=raceCond(race);renderGuideUmaTier();renderTrainingFinishSummary();$('#guideCondition').textContent=`${state.guideServer==='kr'?'한국':'일본'} · ${race.eventKr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;const gs=$('#guideSkills');gs.innerHTML='';const u=selectedUma();let items=[];if(u)items=awakeningSkills(u).filter(sk=>Number(sk.rarity)===2).map(sk=>({...sk,source:`${u.krName} 각성 Lv${sk.awakening}`}));for(const n of race.greenSkills||[]){items.push({id:'green_'+n,jp:n,kr:koSkill(n),iconId:null,tags:{grounds:[],distances:[],styles:[]},source:'코스 대응 녹색 스킬',force:3})}items.sort((a,b)=>(b.force||skillConditionScore(b,cond))-(a.force||skillConditionScore(a,cond)));for(const s of items.slice(0,14)){const sc=s.force||skillConditionScore(s,cond),x=document.createElement('div');x.className='guideSkill';x.innerHTML=`${skillIcon(s)}<div><div class="jp">${esc(s.jp)} <span class="tag">원문</span></div><div class="kr">${esc(s.kr||koSkill(s.jp))}</div><div class="sub">${esc(s.source||'')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`;gs.appendChild(x)}if(!items.length)gs.innerHTML='<div class="note">육성 우마무스메를 선택하면 각성 스킬과 레이스 조건을 비교합니다.</div>';const ss=$('#guideSupports');ss.innerHTML='';if(!runtime.ready){ss.innerHTML='<div class="note">SSR DB 동기화가 필요합니다.</div>';return}for(const {c,score} of supportRecommend(cond)){const owned=state.owned.map(String).includes(String(c.id)),x=document.createElement('div');x.className='card';x.innerHTML=`${c.image?`<img src="${esc(c.image)}">`:''}<div><div class="cardName">${esc(c.krName)}</div><div class="cardJp">${esc(c.jpName)}</div><div class="stars">${scoreStars(score)} <span class="status">${owned?'보유 '+(Number(state.lb[String(c.id)]??0)===4?'풀돌':(Number(state.lb[String(c.id)]??0)+'돌')):'미보유 · 풀돌 기준'}</span></div><div class="actions"><button class="mini" data-info>상세</button>${owned?'<button class="mini" data-slot>덱 슬롯</button>':''}</div></div>`;x.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);if(owned)x.querySelector('[data-slot]').onclick=()=>openSlotPicker(c.id);ss.appendChild(x)}}
 function renderTier(){const g=$('#tierGround').value,d=$('#tierDistance').value,s=$('#tierStyle').value,q=norm($('#tierSearch').value),u=selectedUma(),b=$('#tierGrid');b.innerHTML='';for(const tier of ['SS+','SS','S']){let arr=TIER_DATA.rows.filter(x=>x.ground===g&&x.distance===d&&x.tier===tier&&(s==='all'||(x.styles||[]).includes(s)));if(q)arr=arr.filter(x=>norm(`${x.jp} ${x.kr} ${katakanaToHangul(x.jp)}`).includes(q));const row=document.createElement('div');row.className='tierRow';row.innerHTML=`<div class="tierLabel ${tier==='SS+'?'ssp':tier.toLowerCase()}">${tier}</div><div class="tierChars"></div>`;const rb=row.querySelector('.tierChars');if(!arr.length)rb.innerHTML='<span class="note">해당 조건의 스냅샷 항목 없음</span>';for(const x of arr){const z=document.createElement('div');z.className='tierChar'+(u&&(x.jp.includes(u.character)||u.character.includes(x.jp.replace(/\(.+?\)/g,'')))?' highlight':'');z.innerHTML=`<div class="jp">${esc(x.jp)}</div><div class="kr">${esc(x.kr)} · ${(x.styles||[]).map(y=>styleLabel[y]).join('/')}</div>`;rb.appendChild(z)}b.appendChild(row)}const key=g==='dirt'?'dirt':d;$('#tierSource').textContent=`스냅샷 ${TIER_DATA.snapshotDate} · 출처: Game8 · 현재 선택 육성 우마무스메는 금색 테두리로 표시`}
 async function fetchJson(url){const candidates=[url];if(url.includes('raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/'))candidates.push('https://cdn.jsdelivr.net/gh/Tsuyuchan-jp/umamusume-data@main/'+url.split('/main/')[1]);if(url.includes('raw.githubusercontent.com/daftuyda/UmaTools/main/'))candidates.push('https://cdn.jsdelivr.net/gh/daftuyda/UmaTools@main/'+url.split('/main/')[1]);let last;for(const u of candidates){try{const r=await fetch(u,{cache:'no-store',mode:'cors'});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json()}catch(e){last=e}}throw last||new Error('download failed')}
 function makeSkill(meta,name=null,hintLevel=0){
@@ -1361,14 +1435,15 @@ function loadCache(o){
  $('#dbStatus').textContent=`저장 DB ${runtime.catalog.length}장 · 일본어 원문 보정`;
  renderAll()
 }
-function renderAll(){populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderTier()}
+function renderAll(){renderGuideServerTabs();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderTier()}
 $('#scenario').value=state.scenario;$('#scenario').onchange=e=>{state.scenario=e.target.value;save();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary()};
 populateConditionGuideRace();
-$('#conditionGuideRace').value=state.guideRaceId||UPCOMING.races?.[0]?.id||'';
+$('#conditionGuideRace').value=getGuideRace()?.id||'';
 $('#conditionGuideRace').onchange=e=>{
  applyGuideRaceFromCondition(e.target.value);
- toast('트레이너 가이드의 바장/거리를 현재 육성 조건에 적용했습니다.')
+ toast(`${state.guideServer==='kr'?'한국':'일본'} 서버 가이드의 바장/거리를 현재 육성 조건에 적용했습니다.`)
 };
+document.querySelectorAll('[data-guide-server]').forEach(b=>b.onclick=()=>setGuideServer(b.dataset.guideServer));
 for(const id of ['ground','distance','style']){$('#'+id).value=state[id];$('#'+id).onchange=e=>{state[id]=e.target.value;save();renderDeck();renderGlobalSkills();renderConditionUmaSuitability();renderGuide();renderSelectedUma();renderDbGuideRecommendations();renderCatalog();renderTrainingFinishSummary();renderTier()}}
 $('#conditionUmaButton').onclick=openUmaPicker;
 $('#umaPickerSearch').oninput=renderUmaPicker;
