@@ -1,12 +1,127 @@
 {
   "schemaVersion": 1,
   "updated": "2026-09-23",
-  "checkedAt": null,
-  "status": "not_run",
+  "checkedAt": "2026-09-23T12:23:06.080Z",
+  "status": "pass",
   "summary": {
     "added": 0,
     "removed": 0,
     "modified": 0
   },
-  "collections": {}
+  "collections": {
+    "catalog": {
+      "count": 559,
+      "previousCount": 559,
+      "changed": false,
+      "status": "pass",
+      "changes": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "modifiedCount": 0,
+        "addedIds": [],
+        "removedIds": [],
+        "modifiedIds": []
+      },
+      "details": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      }
+    },
+    "supports": {
+      "count": 43,
+      "previousCount": 43,
+      "changed": false,
+      "status": "pass",
+      "changes": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "modifiedCount": 0,
+        "addedIds": [],
+        "removedIds": [],
+        "modifiedIds": []
+      },
+      "details": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      }
+    },
+    "events": {
+      "count": 120,
+      "previousCount": 120,
+      "changed": false,
+      "status": "pass",
+      "changes": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "modifiedCount": 0,
+        "addedIds": [],
+        "removedIds": [],
+        "modifiedIds": []
+      },
+      "details": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      }
+    },
+    "skills": {
+      "count": 2181,
+      "previousCount": 2181,
+      "changed": false,
+      "status": "pass",
+      "changes": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "modifiedCount": 0,
+        "addedIds": [],
+        "removedIds": [],
+        "modifiedIds": []
+      },
+      "details": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      }
+    },
+    "characters": {
+      "count": 268,
+      "previousCount": 268,
+      "changed": false,
+      "status": "pass",
+      "changes": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "modifiedCount": 0,
+        "addedIds": [],
+        "removedIds": [],
+        "modifiedIds": []
+      },
+      "details": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      }
+    },
+    "courses": {
+      "count": 140,
+      "previousCount": 140,
+      "changed": false,
+      "status": "pass",
+      "changes": {
+        "addedCount": 0,
+        "removedCount": 0,
+        "modifiedCount": 0,
+        "addedIds": [],
+        "removedIds": [],
+        "modifiedIds": []
+      },
+      "details": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      }
+    }
+  }
 }

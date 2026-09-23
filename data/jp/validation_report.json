@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "updated": "2026-09-23",
   "status": "pass",
-  "checkedAt": "2026-09-23T12:17:24.580Z",
+  "checkedAt": "2026-09-23T12:23:06.080Z",
   "fatal": [],
   "warnings": [],
   "collections": {
@@ -23,6 +23,11 @@
         "removedIds": [],
         "modifiedIds": []
       },
+      "changeDetails": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
       "changed": false
     },
     "supports": {
@@ -41,6 +46,11 @@
         "addedIds": [],
         "removedIds": [],
         "modifiedIds": []
+      },
+      "changeDetails": {
+        "added": [],
+        "removed": [],
+        "modified": []
       },
       "changed": false
     },
@@ -61,6 +71,11 @@
         "removedIds": [],
         "modifiedIds": []
       },
+      "changeDetails": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
       "changed": false
     },
     "skills": {
@@ -79,6 +94,11 @@
         "addedIds": [],
         "removedIds": [],
         "modifiedIds": []
+      },
+      "changeDetails": {
+        "added": [],
+        "removed": [],
+        "modified": []
       },
       "changed": false
     },
@@ -99,6 +119,11 @@
         "removedIds": [],
         "modifiedIds": []
       },
+      "changeDetails": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
       "changed": false
     },
     "courses": {
@@ -118,8 +143,19 @@
         "removedIds": [],
         "modifiedIds": []
       },
+      "changeDetails": {
+        "added": [],
+        "removed": [],
+        "modified": []
+      },
       "changed": false
     }
+  },
+  "referenceAudit": {
+    "missingEventSkillCount": 0,
+    "missingEventSkillIds": [],
+    "missingSupportHintSkillCount": 0,
+    "missingSupportHintSkillIds": []
   },
   "changeTotals": {
     "added": 0,
