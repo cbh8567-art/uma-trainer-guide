@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-23",
+  "updated": "2026-09-24",
   "status": "pass",
-  "checkedAt": "2026-09-23T18:45:36.557Z",
+  "checkedAt": "2026-09-24T18:46:01.900Z",
   "fatal": [],
   "warnings": [],
   "collections": {
     "catalog": {
       "source": "https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json",
       "count": 559,
-      "contentSha256": "c296804112161cbac691e32e70aa3aa493d40cd25727556fe7920d79db9fd9bf",
+      "contentSha256": "dda6181ee906824b712a30ff7aa8560a7e2596fcd3722210bd5a534028e7bfd2",
       "duplicateIds": [],
       "status": "pass",
       "previousCount": 559,
@@ -18,17 +18,34 @@
       "changes": {
         "addedCount": 0,
         "removedCount": 0,
-        "modifiedCount": 0,
+        "modifiedCount": 3,
         "addedIds": [],
         "removedIds": [],
-        "modifiedIds": []
+        "modifiedIds": [
+          "10082",
+          "20053",
+          "30122"
+        ]
       },
       "changeDetails": {
         "added": [],
         "removed": [],
-        "modified": []
+        "modified": [
+          {
+            "id": "10082",
+            "name": "シンボリクリスエス (R)"
+          },
+          {
+            "id": "20053",
+            "name": "ナリタトップロード (SR)"
+          },
+          {
+            "id": "30122",
+            "name": "エイシンフラッシュ (SSR)"
+          }
+        ]
       },
-      "changed": false
+      "changed": true
     },
     "supports": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
@@ -160,6 +177,6 @@
   "changeTotals": {
     "added": 0,
     "removed": 0,
-    "modified": 0
+    "modified": 3
   }
 }
