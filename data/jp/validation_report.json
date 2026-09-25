@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-24",
+  "updated": "2026-09-25",
   "status": "pass",
-  "checkedAt": "2026-09-24T18:46:01.900Z",
+  "checkedAt": "2026-09-25T18:45:22.802Z",
   "fatal": [],
   "warnings": [],
   "collections": {
@@ -18,34 +18,17 @@
       "changes": {
         "addedCount": 0,
         "removedCount": 0,
-        "modifiedCount": 3,
+        "modifiedCount": 0,
         "addedIds": [],
         "removedIds": [],
-        "modifiedIds": [
-          "10082",
-          "20053",
-          "30122"
-        ]
+        "modifiedIds": []
       },
       "changeDetails": {
         "added": [],
         "removed": [],
-        "modified": [
-          {
-            "id": "10082",
-            "name": "シンボリクリスエス (R)"
-          },
-          {
-            "id": "20053",
-            "name": "ナリタトップロード (SR)"
-          },
-          {
-            "id": "30122",
-            "name": "エイシンフラッシュ (SSR)"
-          }
-        ]
+        "modified": []
       },
-      "changed": true
+      "changed": false
     },
     "supports": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
@@ -177,6 +160,6 @@
   "changeTotals": {
     "added": 0,
     "removed": 0,
-    "modified": 3
+    "modified": 0
   }
 }

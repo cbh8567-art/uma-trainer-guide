@@ -1,48 +1,31 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-24",
-  "checkedAt": "2026-09-24T18:46:01.900Z",
+  "updated": "2026-09-25",
+  "checkedAt": "2026-09-25T18:45:22.802Z",
   "status": "pass",
   "summary": {
     "added": 0,
     "removed": 0,
-    "modified": 3
+    "modified": 0
   },
   "collections": {
     "catalog": {
       "count": 559,
       "previousCount": 559,
-      "changed": true,
+      "changed": false,
       "status": "pass",
       "changes": {
         "addedCount": 0,
         "removedCount": 0,
-        "modifiedCount": 3,
+        "modifiedCount": 0,
         "addedIds": [],
         "removedIds": [],
-        "modifiedIds": [
-          "10082",
-          "20053",
-          "30122"
-        ]
+        "modifiedIds": []
       },
       "details": {
         "added": [],
         "removed": [],
-        "modified": [
-          {
-            "id": "10082",
-            "name": "シンボリクリスエス (R)"
-          },
-          {
-            "id": "20053",
-            "name": "ナリタトップロード (SR)"
-          },
-          {
-            "id": "30122",
-            "name": "エイシンフラッシュ (SSR)"
-          }
-        ]
+        "modified": []
       }
     },
     "supports": {
