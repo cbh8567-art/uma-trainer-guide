@@ -1,14 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T20:22:10.189Z",
+  "generatedAt": "2026-09-26T20:24:59.722Z",
   "event": "push",
-  "sha": "527350ff62d8cf05ecc58c97d91e0e0122e20f2d",
+  "sha": "59f020449d8a18a725f55db229fa89b0fd9b1d90",
   "changedFiles": [
-    "assets/ramen/guts.png",
-    "assets/ramen/power.png",
-    "assets/ramen/speed.png",
-    "assets/ramen/stamina.png",
-    "assets/ramen/wisdom.png",
     "index.html"
   ],
   "categories": {
@@ -19,13 +14,7 @@
     "jpData": [],
     "krData": [],
     "commonData": [],
-    "other": [
-      "assets/ramen/guts.png",
-      "assets/ramen/power.png",
-      "assets/ramen/speed.png",
-      "assets/ramen/stamina.png",
-      "assets/ramen/wisdom.png"
-    ]
+    "other": []
   },
   "impactLevel": "high",
   "fullTest": true,
