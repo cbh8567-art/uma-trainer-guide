@@ -66,6 +66,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .inheritanceRow{grid-template-columns:auto auto minmax(0,1fr) auto!important;align-items:center}
 .inheritancePortrait{width:38px;height:38px;object-fit:cover;border-radius:8px;background:#292e3d;flex:none}
 .inheritancePortraitFallback{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid #47516a;border-radius:8px;color:#bfc7d9;font-size:12px;flex:none}
+.inheritancePortraitFallback[hidden]{display:none}
 @media(max-width:420px){.inheritanceRow{grid-template-columns:auto auto minmax(0,1fr)!important}.inheritanceRow>.tag{grid-column:3;justify-self:start}.ramenRegions{gap:6px}.ramenRegion{font-size:10px}}
 .ramenProfile{border:1px solid #5b4a2b;background:#211c13;border-radius:9px;padding:7px;margin:7px 0;font-size:9px;line-height:1.55}
 .ramenProfile b{color:#ffe091}
@@ -2242,7 +2243,7 @@ function renderV7Inheritance(cond,race){
    // 추천 데이터의 육성 카드 ID를 현재 DB와 연결해 해당 의상의 초상화를 표시합니다.
    const uma=runtime.characters.find(c=>Number(c.id)===Number(x.ownerUmaId));
    const portrait=uma?.image||((Number.isSafeInteger(Number(x.ownerUmaId))&&Number(x.ownerUmaId)>0)?CONFIG.assetBases.character+Number(x.ownerUmaId)+'.webp':'');
-   const portraitHtml=portrait?`<img class="inheritancePortrait" src="${esc(portrait)}" alt="${esc(owner)} 초상화" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="inheritancePortraitFallback" hidden aria-hidden="true">?</span>`:'<span class="inheritancePortraitFallback" aria-hidden="true">?</span>';
+   const portraitHtml=portrait?`<img class="inheritancePortrait" src="${esc(portrait)}" alt="${esc(owner)} 초상화" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="inheritancePortraitFallback" hidden aria-hidden="true">?</span>`:'<span class="inheritancePortraitFallback" aria-hidden="true">?</span>';
    return `<div class="skillRow inheritanceRow" style="margin-top:5px">${skillIcon({iconId:x.iconId})}${portraitHtml}<div><div class="jp">${esc(x.name)}</div><div class="kr">${esc(owner)} <span class="tag">${esc(why)}</span></div>${special?`<div class="sub">${esc(special)}</div>`:''}</div><span class="tag">계승</span></div>`
  }).join('')+'<div class="note" style="margin-top:7px">※ 공략 사이트 추천 스냅샷이며, 특정 챔미 코스의 유효 가속 타이밍까지 자동 판정한 결과는 아닙니다.</div>'
 }
