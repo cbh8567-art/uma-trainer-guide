@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.2">
-<title>우마무스메 트레이너 가이드 V7.2 WEB</title>
+<meta name="app-build" content="V7.3">
+<title>우마무스메 트레이너 가이드 V7.3 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -35,7 +35,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .scenarioEvo{display:grid;grid-template-columns:auto 1fr auto;gap:7px;align-items:center;border:1px solid #30374a;background:#191d29;border-radius:9px;padding:7px}
 .scenarioEvo.top{border-color:#9a7b22;box-shadow:0 0 0 1px rgba(255,212,93,.18) inset}
 
-/* V7.2 · 트레센켄 단계별 육성 가이드 */
+/* V7.3 · 트레센켄 단계별 육성 가이드 */
 .ramenGuide{margin-top:10px;border:1px solid #5b4a2b;background:linear-gradient(180deg,#211d15,#171a24);border-radius:12px;padding:9px}
 .ramenGuide[hidden]{display:none}
 .ramenGuideHead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}
@@ -52,7 +52,14 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .ramenRegion{border:1px solid #46506a;background:#202635;border-radius:999px;padding:4px 7px;font-size:9px;font-weight:850}
 .ramenRegion.top{border-color:#9d7821;background:#302813;color:#ffe49a}
 .ramenAlert{border:1px solid #6e5730;background:#2a2317;color:#f2d38d;border-radius:8px;padding:7px;font-size:9px;line-height:1.5;margin-top:6px}
-.ramenIngameRef{width:100%;height:auto;max-height:none;display:block;object-fit:initial;border-radius:8px;border:1px solid #343b50;background:#fff;margin-top:6px}\n.ramenRegion{display:inline-flex;align-items:center;gap:5px}\n.ramenRegionIcons{display:inline-flex;align-items:center;gap:2px}\n.ramenRegionIcons img{width:18px;height:18px;object-fit:contain;display:block}\n.ramenProfile{border:1px solid #5b4a2b;background:#211c13;border-radius:9px;padding:7px;margin:7px 0;font-size:9px;line-height:1.55}\n.ramenProfile b{color:#ffe091}
+.ramenIngameRef{width:100%;height:auto;max-height:none;display:block;object-fit:initial;border-radius:8px;border:1px solid #343b50;background:#fff;margin-top:6px}
+.ramenRegion{display:inline-flex;align-items:center;gap:6px;border:1px solid #46506a;background:#202635;border-radius:999px;padding:4px 7px;font-size:9px;font-weight:850}
+.ramenRegion.top{border-color:#9d7821;background:#302813;color:#ffe49a}
+.ramenRegionBadge{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:24px;padding:0 7px;border-radius:7px;border:1px solid #e2b768;background:linear-gradient(180deg,#fff1c9,#d7a74e);color:#5b3510;font-size:11px;font-weight:950;letter-spacing:.02em;box-shadow:inset 0 1px rgba(255,255,255,.65)}
+.ramenRegion.top .ramenRegionBadge{border-color:#ffe59a;background:linear-gradient(180deg,#fff4ce,#e6b957)}
+.ramenRegionKr{font-size:9px;font-weight:850;color:#f4e3b1}
+.ramenProfile{border:1px solid #5b4a2b;background:#211c13;border-radius:9px;padding:7px;margin:7px 0;font-size:9px;line-height:1.55}
+.ramenProfile b{color:#ffe091}
 .ramenIconNote{font-size:8px;color:#aeb6c9;line-height:1.45;margin-top:4px}
 .ramenDeckHint{border:1px solid #38614e;background:#172920;border-radius:8px;padding:7px;font-size:9px;line-height:1.5;margin-top:6px}
 @media(max-width:720px){.ramenGuideGrid{grid-template-columns:1fr}.ramenPhaseTabs{grid-template-columns:repeat(4,minmax(72px,1fr));overflow-x:auto}.ramenGuideRow{grid-template-columns:80px 1fr}}
@@ -157,7 +164,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.2 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.3 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -2305,18 +2312,17 @@ const RAMEN_INGAME_REF={
  senior:'https://img.gamewith.jp/img/67170ed5384d39531aac8ade0722e7a1.png'
 };
 
-const RAMEN_STAT_ICON_URL={
- speed:'https://img.game8.jp/5589601/5cb9b1b921009adcc6ea0e585b1fbbc1.png/show',
- stamina:'https://img.game8.jp/5589600/04c7965d2d4748b53e1a427cd4522472.png/show',
- power:'https://img.game8.jp/5589603/6964584eb351eb8ced43b89f212441c1.png/show',
- guts:'https://img.game8.jp/5589598/391ef1296df47d556801af8255653384.png/show',
- wit:'https://img.game8.jp/5589602/501c22a95faa0838791e423ab6f05ae7.png/show'
-};
-const RAMEN_STAT_KR={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능'};
-const RAMEN_REGION_STATS={
- '삿포로':['speed'],'하코다테':['stamina'],'니가타':['power'],'후쿠시마':['guts'],'도쿄':['wit'],
- '나카야마':['speed','power','wit'],'주쿄':['power','guts'],'교토':['stamina','guts'],
- '한신':['stamina','power'],'고쿠라':['wit']
+const RAMEN_REGION_LABELS={
+ '삿포로':{jp:'札幌',kr:'삿포로'},
+ '하코다테':{jp:'函館',kr:'하코다테'},
+ '니가타':{jp:'新潟',kr:'니가타'},
+ '후쿠시마':{jp:'福島',kr:'후쿠시마'},
+ '도쿄':{jp:'東京',kr:'도쿄'},
+ '나카야마':{jp:'中山',kr:'나카야마'},
+ '주쿄':{jp:'中京',kr:'주쿄'},
+ '교토':{jp:'京都',kr:'교토'},
+ '한신':{jp:'阪神',kr:'한신'},
+ '고쿠라':{jp:'小倉',kr:'고쿠라'}
 };
 
 const RAMEN_GUIDE_DATA={
@@ -2382,8 +2388,8 @@ function genericRegions(counts,phase){
 function ramenRegionsForPhase(phase,deck,profile){return profile.regions?.[phase]||genericRegions(deck.counts,phase)}
 function ramenRegionHtml(name,phase,index){
  if(name.includes('라멘'))return '<span class="ramenRegion'+(index===0?' top':'')+'">'+esc(name)+'</span>';
- const stats=RAMEN_REGION_STATS[name]||[],icons=stats.map(s=>'<img src="'+RAMEN_STAT_ICON_URL[s]+'" alt="'+RAMEN_STAT_KR[s]+'" title="'+RAMEN_STAT_KR[s]+'" loading="lazy" referrerpolicy="no-referrer">').join('');
- return '<span class="ramenRegion'+(index===0?' top':'')+'"><span class="ramenRegionIcons">'+icons+'</span>'+esc(name)+'</span>'
+ const region=RAMEN_REGION_LABELS[name]||{jp:name,kr:name};
+ return '<span class="ramenRegion'+(index===0?' top':'')+'"><span class="ramenRegionBadge">'+esc(region.jp)+'</span><span class="ramenRegionKr">'+esc(region.kr)+'</span></span>'
 }
 function renderRamenScenarioGuide(){
  const root=$('#ramenScenarioGuide'),body=$('#ramenGuideBody'),status=$('#ramenGuideDeckStatus');
