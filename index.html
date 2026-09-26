@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.0">
-<title>우마무스메 트레이너 가이드 V7.0 WEB</title>
+<meta name="app-build" content="V7.1">
+<title>우마무스메 트레이너 가이드 V7.1 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -34,6 +34,28 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .scenarioEvoGrid{display:grid;gap:6px;margin-top:7px}
 .scenarioEvo{display:grid;grid-template-columns:auto 1fr auto;gap:7px;align-items:center;border:1px solid #30374a;background:#191d29;border-radius:9px;padding:7px}
 .scenarioEvo.top{border-color:#9a7b22;box-shadow:0 0 0 1px rgba(255,212,93,.18) inset}
+
+/* V7.1 · 트레센켄 단계별 육성 가이드 */
+.ramenGuide{margin-top:10px;border:1px solid #5b4a2b;background:linear-gradient(180deg,#211d15,#171a24);border-radius:12px;padding:9px}
+.ramenGuide[hidden]{display:none}
+.ramenGuideHead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}
+.ramenPhaseTabs{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:8px 0}
+.ramenPhaseTab{border:1px solid #474d60;background:#171b26;color:#cbd1df;border-radius:9px;padding:8px 5px;font-size:10px;font-weight:850;cursor:pointer}
+.ramenPhaseTab.active{border-color:#d5ad43;background:#382f18;color:#ffe69a}
+.ramenGuideGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:8px}
+.ramenGuideCard{border:1px solid #343b50;background:#141823;border-radius:10px;padding:8px}
+.ramenGuideCard h3{font-size:11px;margin:0 0 6px;color:#ffe091}
+.ramenGuideRows{display:grid;gap:5px}
+.ramenGuideRow{display:grid;grid-template-columns:92px 1fr;gap:6px;align-items:start;padding:6px;border:1px solid #2f3547;background:#191d28;border-radius:8px;font-size:9px;line-height:1.5}
+.ramenGuideRow b{color:#f4d778}
+.ramenRegions{display:flex;gap:5px;flex-wrap:wrap;margin:5px 0}
+.ramenRegion{border:1px solid #46506a;background:#202635;border-radius:999px;padding:4px 7px;font-size:9px;font-weight:850}
+.ramenRegion.top{border-color:#9d7821;background:#302813;color:#ffe49a}
+.ramenAlert{border:1px solid #6e5730;background:#2a2317;color:#f2d38d;border-radius:8px;padding:7px;font-size:9px;line-height:1.5;margin-top:6px}
+.ramenIngameRef{width:100%;max-height:250px;object-fit:contain;border-radius:8px;border:1px solid #343b50;background:#fff;margin-top:6px}
+.ramenIconNote{font-size:8px;color:#aeb6c9;line-height:1.45;margin-top:4px}
+.ramenDeckHint{border:1px solid #38614e;background:#172920;border-radius:8px;padding:7px;font-size:9px;line-height:1.5;margin-top:6px}
+@media(max-width:720px){.ramenGuideGrid{grid-template-columns:1fr}.ramenPhaseTabs{grid-template-columns:repeat(4,minmax(72px,1fr));overflow-x:auto}.ramenGuideRow{grid-template-columns:80px 1fr}}
 
 .pinkSource{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap;border:1px solid #593b52;background:#241923;border-radius:9px;padding:7px;margin-bottom:7px}
 .pinkSource a{color:#ff9fc2;text-decoration:none;font-size:9px;font-weight:850}
@@ -135,7 +157,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.0 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.1 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -175,6 +197,22 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
      <div class="field"><label>육성 우마무스메</label><button type="button" class="umaSelectButton" id="conditionUmaButton"><span id="conditionUmaButtonInner"><span class="pickMain">우마무스메 선택</span><span class="pickSub">눌러서 썸네일 목록 열기</span></span></button></div>
     </div>
     <div class="scenarioBox"><div class="sub">트레이너 가이드를 바꾸면 해당 레이스의 바장/거리가 자동 적용됩니다. 각질은 육성 우마에 맞게 직접 선택할 수 있습니다.</div><div class="sub" style="margin-top:5px">현재 육성 우마무스메 적합도</div><div class="rating" id="conditionUmaScore" style="font-size:20px">—</div><div class="note" id="conditionUmaScoreReason">DB 동기화 후 육성 우마무스메를 선택하면 표시됩니다.</div></div>
+    <div class="ramenGuide" id="ramenScenarioGuide" hidden>
+      <div class="ramenGuideHead">
+        <div>
+          <h2 style="margin:0">트레센켄 · 단계별 육성 가이드</h2>
+          <div class="sub">현재 덱 구성과 육성 시기에 맞춰 라멘·숨은맛 비결·훈련 우선도를 차례로 확인합니다.</div>
+        </div>
+        <span class="status" id="ramenGuideDeckStatus"></span>
+      </div>
+      <div class="ramenPhaseTabs" id="ramenPhaseTabs">
+        <button type="button" class="ramenPhaseTab active" data-ramen-phase="junior">주니어</button>
+        <button type="button" class="ramenPhaseTab" data-ramen-phase="classic">클래식</button>
+        <button type="button" class="ramenPhaseTab" data-ramen-phase="senior">시니어</button>
+        <button type="button" class="ramenPhaseTab" data-ramen-phase="ura">URA</button>
+      </div>
+      <div id="ramenGuideBody"></div>
+    </div>
     <div class="sectionHead"><h2 style="margin:0">현재 덱</h2><span class="status">모바일: 「슬롯 선택」 권장 · PC: 드래그 가능</span></div>
     <div class="deck" id="deck"></div><div class="typeSummary" id="typeSummary"></div>
     <div class="counts"><div class="countbox"><div class="sub">레어 스킬 이벤트 획득</div><div class="big"><span id="acqCount">0</span> / <span id="rareCount">0</span></div><div class="sub" id="rareUniqueText">고유 레어스킬 0 / 0</div></div><div class="countbox"><div class="sub">획득 완료 · 현재 조건 적합 레어 스킬</div><div class="big"><span id="recCount">0</span> ★</div><div class="sub" id="conditionText"></div></div></div>
@@ -2256,8 +2294,126 @@ function renderV7Planner(){
  const apply=$('#v7ApplyDeck');if(apply){apply.disabled=!rec.length;apply.onclick=applyV7RecommendedDeck}
 }
 
-function renderAll(){renderJpSyncStatus();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier()}
-applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;save();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner()};
+
+/* V7.1 · 트레센켄 단계별 육성 가이드
+   인게임 아이콘/효과 이미지는 임의 재제작 대신 실제 게임 화면이 포함된 확인용 자료를 표시한다.
+   공략 기준: GameWith 트레센켄 최신 공략의 지역 효과/스피3 추천 + Game8 비결 운영. */
+let ramenGuidePhase='junior';
+const RAMEN_INGAME_REF={
+ junior:'https://img.gamewith.jp/img/1cc4e3899c03f3e0d5bd0851d24ec4e3.png',
+ classic:'https://img.gamewith.jp/img/2bd87ea319033fbf84bbfb63cea1f12f.png',
+ senior:'https://img.gamewith.jp/img/67170ed5384d39531aac8ade0722e7a1.png'
+};
+const RAMEN_GUIDE_DATA={
+ junior:{
+  title:'주니어급',
+  priority:'인연·게이지 확보 → 강한 훈련',
+  sauce:'숨은맛 비결은 기본적으로 아낌',
+  regions:['삿포로 · 스피드','하코다테 · 스태미나','도쿄 · 지능'],
+  points:[
+   ['초반 2턴','게이지를 쌓기 어렵기 때문에 지능/체력 보존 위주로 운영'],
+   ['라멘 시식','초반은 인연 +10 활용 가치가 큼. 코츠가 넘치기 전에 우정훈련과 함께 사용'],
+   ['숨은맛 비결','초반 라멘 효과가 약하므로 원칙적으로 0개 사용. 매우 좋은 다중 우정만 예외'],
+   ['12월 후반','일반 코츠는 연말에 리셋되므로 목표 레이스를 고려해 1~2턴 일찍 소진']
+  ],
+  alert:'핵심: 인연을 빨리 올리고 코츠 10개 상한을 넘기지 않는 것이 우선입니다.'
+ },
+ classic:{
+  title:'클래식급',
+  priority:'지능·스태미나 우선 → 스피드는 후반 준비',
+  sauce:'본격 사용 · 여름합숙 직전 2개 이하',
+  regions:['중산/교토 · 편성 대응','한신 · 스태/파워','고쿠라 · 지능'],
+  points:[
+   ['훈련 우선도','스피3 기준 클래식에서는 지능·스태를 먼저 확보. 지능 1200 이상을 목표'],
+   ['타즈나 외출','합숙 전 2회 + 합숙 후 1회가 안정적. 체력이 충분히 빠졌을 때 사용'],
+   ['7월 전반 전','이벤트로 비결 2개를 얻으므로 보유 비결을 반드시 2개 이하로 조정'],
+   ['여름합숙','매턴 비결 획득 구간에서는 3개 이하를 유지하며 좋은 우정턴에 적극 소비'],
+   ['연말','일반 코츠는 12월 후반까지 소진. 비결은 리셋되지 않으므로 억지로 모두 쓸 필요 없음']
+  ],
+  alert:'핵심: 클래식에서 지능을 미리 완성해 시니어의 스피드·스태 폭발 구간을 확보합니다.'
+ },
+ senior:{
+  title:'시니어급',
+  priority:'스피드·스태미나 강한 우정 최우선',
+  sauce:'아끼지 말고 강한 우정턴에 적극 사용',
+  regions:['삿포로 · 스피드 단일','하코다테 · 스태 단일','교토/한신 · 3종 안정형'],
+  points:[
+   ['스피 1인 우정','스피3 편성에서는 라멘/비결을 대체로 보류'],
+   ['스피 2인 우정','훈련 수치가 높고 재료가 맞으면 적극 사용'],
+   ['스피 3인 우정','최우선 라멘 + 비결 투입 후보. 고점 핵심 턴'],
+   ['비결 운영','상한 4개에 닿기 전에 소비. 한 번의 시식회에서는 최대 2개까지 대체 가능'],
+   ['훈련 선택','클래식에서 지능을 확보했다면 시니어는 스피드·스태미나를 집중적으로 밟음']
+  ],
+  alert:'핵심: 시니어는 비결을 남기는 것보다 다중 우정 한 번을 강화하는 가치가 큽니다.'
+ },
+ ura:{
+  title:'URA 파이널즈',
+  priority:'궁극 라멘 → 부족 스탯 마감',
+  sauce:'남은 재료/비결을 최종 고점 턴에 사용',
+  regions:['욕심쟁이 트레센 라멘 · 스피/스태/파워/지능 상한','스페셜 트레센 라멘','주옥의 트레센 라멘'],
+  points:[
+   ['공통 효과','체력 +20 · 의욕 상승 · 레이스 보너스 +100% · 우정보너스 +150%'],
+   ['4종 편성 조건','스킬Pt 훈련효과 +150% · 스킬Pt 획득 상한 +100'],
+   ['추가 배치','모든 서포트가 추가로 1곳의 훈련에 출현'],
+   ['마무리','현재 상한에 가장 덜 찬 스피드/스태/지능을 우선 마감']
+  ],
+  alert:'스피3 범용 운영에서는 욕심쟁이 트레센 라멘을 우선 검토하되, 최종 선택은 필요한 상한과 금스킬에 맞춥니다.'
+ }
+};
+function ramenDeckSummary(){
+ const cards=typeof activeDeckCards==='function'?activeDeckCards():[];
+ const counts={};
+ for(const card of cards){const t=normalizeType(card?.type);counts[t]=(counts[t]||0)+1}
+ const order=['스피드','스태미나','파워','근성','지능','친구','그룹'];
+ return {counts,text:order.filter(k=>counts[k]).map(k=>k+'×'+counts[k]).join(' · ')||'편성 없음',speed3:(counts['스피드']||0)>=3}
+}
+function ramenRegionsForPhase(phase,deck){
+ if(!deck.speed3)return RAMEN_GUIDE_DATA[phase].regions;
+ if(phase==='junior')return ['삿포로 · 스피드','하코다테 · 스태미나','도쿄 · 지능'];
+ if(phase==='classic')return ['중산 또는 교토','한신','고쿠라'];
+ if(phase==='senior')return ['한신 또는 삿포로','하코다테','도쿄'];
+ if(phase==='ura')return ['욕심쟁이 트레센 라멘'];
+ return RAMEN_GUIDE_DATA[phase].regions
+}
+function renderRamenScenarioGuide(){
+ const root=$('#ramenScenarioGuide'),body=$('#ramenGuideBody'),status=$('#ramenGuideDeckStatus');
+ if(!root||!body)return;
+ const active=state.scenario==='tresenken';
+ root.hidden=!active;
+ if(!active)return;
+ const phase=RAMEN_GUIDE_DATA[ramenGuidePhase]?ramenGuidePhase:'junior',d=RAMEN_GUIDE_DATA[phase],deck=ramenDeckSummary();
+ if(status)status.textContent='현재 덱 · '+deck.text+(deck.speed3?' · 스피3 최적화 적용':'');
+ document.querySelectorAll('[data-ramen-phase]').forEach(b=>b.classList.toggle('active',b.dataset.ramenPhase===phase));
+ const regions=ramenRegionsForPhase(phase,deck);
+ const ref=RAMEN_INGAME_REF[phase];
+ const deckNote=deck.speed3
+   ? '스피드 3장 편성이 감지되어 스피3용 추천 지역을 우선 표시합니다.'
+   : '현재 편성 타입에 맞춰 위 추천을 기본값으로 보고, 파워/근성 카드가 많다면 대응 지역으로 교체하세요.';
+ body.innerHTML=
+  '<div class="ramenGuideGrid">'+
+    '<div class="ramenGuideCard"><h3>'+esc(d.title)+' 운영</h3>'+
+      '<div class="ramenGuideRows">'+
+        '<div class="ramenGuideRow"><b>훈련 우선</b><span>'+esc(d.priority)+'</span></div>'+
+        '<div class="ramenGuideRow"><b>특별소스</b><span>'+esc(d.sauce)+'</span></div>'+
+      '</div>'+
+      '<h3 style="margin-top:8px">추천 지역/라멘</h3>'+
+      '<div class="ramenRegions">'+regions.map((x,i)=>'<span class="ramenRegion'+(i===0?' top':'')+'">'+esc(x)+'</span>').join('')+'</div>'+
+      '<div class="ramenDeckHint">'+esc(deckNote)+'</div>'+
+      '<div class="ramenAlert">'+esc(d.alert)+'</div>'+
+    '</div>'+
+    '<div class="ramenGuideCard"><h3>턴별 체크</h3>'+
+      '<div class="ramenGuideRows">'+d.points.map(x=>'<div class="ramenGuideRow"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('')+'</div>'+
+      (ref?'<img class="ramenIngameRef" src="'+ref+'" alt="'+esc(d.title)+' 인게임 라멘 아이콘과 효과 참고" loading="lazy" referrerpolicy="no-referrer"><div class="ramenIconNote">인게임 아이콘/효과 화면 참고 · 이미지가 로드되지 않아도 공략 데이터는 그대로 표시됩니다.</div>':'')+
+    '</div>'+
+  '</div>';
+}
+function initRamenScenarioGuide(){
+ document.querySelectorAll('[data-ramen-phase]').forEach(b=>b.onclick=()=>{ramenGuidePhase=b.dataset.ramenPhase;renderRamenScenarioGuide()});
+ renderRamenScenarioGuide()
+}
+
+function renderAll(){renderJpSyncStatus();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide()}
+applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;save();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide()};
 populateConditionGuideRace();
 $('#conditionGuideRace').value=getGuideRace()?.id||'';
 $('#conditionGuideRace').onchange=e=>{
@@ -2922,6 +3078,7 @@ async function bootstrapApp(){
  setTimeout(()=>{if(!runtime.ready&&navigator.onLine)syncDb()},650);
 }
 
+initRamenScenarioGuide();
 bootstrapApp();
 
 
