@@ -58,8 +58,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .ramenRegionBadge{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:24px;padding:0 7px;border-radius:7px;border:1px solid #e2b768;background:linear-gradient(180deg,#fff1c9,#d7a74e);color:#5b3510;font-size:11px;font-weight:950;letter-spacing:.02em;box-shadow:inset 0 1px rgba(255,255,255,.65)}
 .ramenRegion.top .ramenRegionBadge{border-color:#ffe59a;background:linear-gradient(180deg,#fff4ce,#e6b957)}
 .ramenRegionKr{font-size:9px;font-weight:850;color:#f4e3b1}
-.ramenRegionIcons{display:inline-flex;align-items:center;gap:2px;flex:none}
-.ramenRegionIcons img{width:19px;height:20px;object-fit:contain}
+.ramenRegionIngameIcon{display:inline-block;width:34px;height:45px;flex:none;background-image:url('./assets/ramen/region-map.jpg');background-repeat:no-repeat;background-size:333px 340px;border-radius:4px}
 .ramenRegion{max-width:100%;min-width:0;white-space:normal}
 .ramenGuideCard,.ramenGuideRow,.guideBox,.skillRow{min-width:0}
 .ramenGuideRow span,.skillRow>div{min-width:0;overflow-wrap:anywhere}
@@ -230,7 +229,8 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
       </div>
       <div id="ramenGuideBody"></div>
     </div>
-    <div class="sectionHead"><h2 style="margin:0">현재 덱</h2><span class="status">모바일: 「슬롯 선택」 권장 · PC: 드래그 가능</span></div>
+    <div class="sectionHead"><h2 style="margin:0">현재 덱</h2><button type="button" class="btn" id="saveDeckAsOwned">현재 편성을 보유 SSR로 빠른 저장</button></div>
+    <div class="note">모바일: 「슬롯 선택」 권장 · PC: 드래그 가능</div>
     <div class="deck" id="deck"></div><div class="typeSummary" id="typeSummary"></div>
     <div class="counts"><div class="countbox"><div class="sub">레어 스킬 이벤트 획득</div><div class="big"><span id="acqCount">0</span> / <span id="rareCount">0</span></div><div class="sub" id="rareUniqueText">고유 레어스킬 0 / 0</div></div><div class="countbox"><div class="sub">획득 완료 · 현재 조건 적합 레어 스킬</div><div class="big"><span id="recCount">0</span> ★</div><div class="sub" id="conditionText"></div></div></div>
     <h2>덱 전체 레어 스킬</h2><div class="skillList" id="globalSkills"></div>
@@ -818,6 +818,17 @@ function toggleDeckCard(id){
  state.deck[empty]=id;
  save();renderDeck();renderOwned();renderCatalog();renderGlobalSkills();renderGuide();renderDbGuideRecommendations();
  toast(`${empty+1}번 슬롯에 배치했습니다.`);
+}
+function saveCurrentDeckAsOwned(){
+ const ids=[...new Set(state.deck.filter(id=>id!==null&&id!==undefined&&id!=='').map(String))];
+ if(!ids.length)return toast('저장할 SSR이 없습니다. 먼저 덱에 카드를 배치해 주세요.');
+ // DB가 아직 로드되지 않았거나 서버에 없는 카드가 섞였다면 일부만 저장하지 않습니다.
+ if(ids.some(id=>!cardById(id)||!isSupportVisibleForServer(cardById(id))))return toast('현재 서버의 카드 DB를 불러온 뒤 다시 저장해 주세요.');
+ const owned=new Set(state.owned.map(String)),newIds=ids.filter(id=>!owned.has(id));
+ if(!newIds.length)return toast('현재 편성의 SSR이 모두 보유 목록에 있습니다.');
+ state.owned.push(...newIds.map(Number));save();
+ renderOwned();renderDeck();renderCatalog();renderGuide();renderDbGuideRecommendations();renderV7Planner();
+ toast(`현재 ${state.guideServer==='kr'?'한국':'일본'} 덱의 SSR ${newIds.length}장을 보유 목록에 저장했습니다.`);
 }
 function openSlotPicker(id){const c=cardById(id);if(!c||!isSupportVisibleForServer(c))return toast('현재 서버에서는 사용할 수 없는 서포트 카드입니다.');$('#slotCardName').textContent=`${c?.krName||''} / ${c?.jpName||''}`;const b=$('#slotPicker');b.innerHTML='';state.deck.forEach((x,i)=>{const old=x?cardById(x):null;const z=document.createElement('button');z.className='pickSlot';z.innerHTML=`<b>${i+1}번 슬롯</b><br>${old?`${old.image?`<img src="${esc(old.image)}">`:''}${esc(old.krName)}`:'빈칸'}`;z.onclick=()=>{placeAt(id,i);$('#slotModal').classList.remove('open')};b.appendChild(z)});$('#slotModal').classList.add('open')}
 function renderDeck(){const box=$('#deck');box.innerHTML='';state.deck.forEach((id,i)=>{const raw=id?cardById(id):null,c=raw&&isSupportVisibleForServer(raw)?raw:null,hiddenByServer=!!(raw&&!c);const s=document.createElement('div');s.className='slot'+(c?'':' empty');s.ondragover=e=>{e.preventDefault();s.classList.add('dragover')};s.ondragleave=()=>s.classList.remove('dragover');s.ondrop=e=>{e.preventDefault();s.classList.remove('dragover');try{const d=JSON.parse(e.dataTransfer.getData('application/json'));if(d.kind==='owned'||d.kind==='catalog')placeAt(d.id,i);if(d.kind==='deck'){[state.deck[d.index],state.deck[i]]=[state.deck[i],state.deck[d.index]];save();renderDeck();renderGlobalSkills()}}catch(_){}};if(!c){s.innerHTML=`<div><b>${i+1}번</b><br>빈 슬롯</div>`;s.onclick=()=>openEmptySlotPicker(i);box.appendChild(s);return}const stats=cardRareStats(c),lb=Number(state.lb[String(c.id)]??0),fit=cardSuitability(c),isOwned=state.owned.map(String).includes(String(c.id));s.classList.toggle('rareAcquired',stats.got>0);s.title=stats.got>0?'레어스킬 획득 선택됨':'';s.draggable=true;s.ondragstart=e=>e.dataTransfer.setData('application/json',JSON.stringify({kind:'deck',index:i,id:c.id}));s.innerHTML=`<div class="thumb"><img src="${esc(c.image||'')}" onerror="this.style.opacity=.16"><span class="typeBadge">${esc(c.type)}${isOwned?'':' · 임시'}</span><span class="lbBadge">${lb===4?'풀돌':lb+'돌'}</span></div><div class="deckname">${esc(c.krName)}</div><div class="deckjp">${esc(c.title||c.jpName)}</div><div class="stars" style="font-size:10px">${scoreStars(fit)}</div><select class="deckLbSelect" data-lb><option value="0">0돌 · Lv30</option><option value="1">1돌 · Lv35</option><option value="2">2돌 · Lv40</option><option value="3">3돌 · Lv45</option><option value="4">풀돌 · Lv50</option></select><div class="deckactions"><button class="mini" data-info>정보</button><button class="mini gold" data-skill>${stats.total?`스킬 ${stats.got}/${stats.total}`:SUPPORT_NO_RARE_SKILL_IDS.has(Number(c.id))?'레어 없음':'스킬 확인'}</button><button class="mini red" data-remove>×</button></div>`;const lbSel=s.querySelector('[data-lb]');lbSel.value=String(lb);lbSel.onchange=e=>{e.stopPropagation();state.lb[String(c.id)]=Number(e.target.value);save();renderDeck();renderOwned();renderCatalog();renderGuide();renderDbGuideRecommendations()};s.querySelector('.thumb').onclick=()=>openCardInfo(c.id);s.querySelector('.deckname').onclick=()=>openCardInfo(c.id);s.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);s.querySelector('[data-skill]').disabled=!stats.total;s.querySelector('[data-skill]').onclick=()=>openSkillModal(c.id);s.querySelector('[data-remove]').onclick=()=>{state.deck[i]=null;save();renderDeck();renderGlobalSkills();renderGuide()};box.appendChild(s)});renderTypeSummary();renderMobileDock()}
@@ -2407,11 +2418,18 @@ function genericRegions(counts,phase){
  return ['욕심쟁이 트레센 라멘']
 }
 function ramenRegionsForPhase(phase,deck,profile){return profile.regions?.[phase]||genericRegions(deck.counts,phase)}
+// 게임 화면의 전국 라멘 지도에서 지역 한자 표지의 위치 (절반 크기 좌표).
+const RAMEN_REGION_ICON_POS={
+ '삿포로':[-221,-35],'하코다테':[-163,-55],'니가타':[-147,-123],
+ '후쿠시마':[-218,-141],'도쿄':[-215,-255],'나카야마':[-241,-196],
+ '주쿄':[-146,-271],'교토':[-120,-176],'한신':[-102,-280],'고쿠라':[-54,-208]
+};
 function ramenRegionHtml(name,phase,index){
  if(name.includes('라멘'))return '<span class="ramenRegion'+(index===0?' top':'')+'">'+esc(name)+'</span>';
  const region=RAMEN_REGION_LABELS[name]||{jp:name,kr:name};
- const icons=(RAMEN_REGION_STATS[name]||[]).map(stat=>'<img src="./assets/ramen/'+stat+'.png" alt="" loading="lazy">').join('');
- return '<span class="ramenRegion'+(index===0?' top':'')+'"><span class="ramenRegionIcons" aria-hidden="true">'+icons+'</span><span class="ramenRegionKr">'+esc(region.kr)+'</span></span>'
+ const pos=RAMEN_REGION_ICON_POS[name];
+ const icon=pos?'<span class="ramenRegionIngameIcon" role="img" aria-label="'+esc(region.jp)+' 지역 아이콘" style="background-position:'+pos[0]+'px '+pos[1]+'px"></span>':'<span class="ramenRegionBadge">'+esc(region.jp)+'</span>';
+ return '<span class="ramenRegion'+(index===0?' top':'')+'">'+icon+'<span class="ramenRegionKr">'+esc(region.kr)+'</span></span>'
 }
 function renderRamenScenarioGuide(){
  const root=$('#ramenScenarioGuide'),body=$('#ramenGuideBody'),status=$('#ramenGuideDeckStatus');
@@ -2452,6 +2470,7 @@ $('#openGuideFromDb').onclick=()=>{
  const tab=document.querySelector('.tab[data-page="guide"]');if(tab)tab.click()
 };
 $('#trainingFinishBtn').onclick=openTrainingFinishModal;
+$('#saveDeckAsOwned').onclick=saveCurrentDeckAsOwned;
 $('#finishAutoRecommend').onclick=()=>{finishDraft=makeRecommendedFinishDraft();renderTrainingFinishModal();toast('현재 조건 추천안으로 선택했습니다.')};
 $('#finishReset').onclick=()=>{finishDraft={character:{},scenario:[]};renderTrainingFinishModal()};
 $('#finishConfirm').onclick=confirmTrainingFinish;
