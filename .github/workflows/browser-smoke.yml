@@ -32,9 +32,9 @@ jobs:
           from selenium.webdriver.support import expected_conditions as EC
 
           TARGETS = [
-              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v77"),
-              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v77"),
-              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v77"),
+              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v78"),
+              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v78"),
+              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v78"),
           ]
 
           def make_driver(width=1440, height=1200):
@@ -49,7 +49,7 @@ jobs:
               return driver
 
           def wait_app(driver):
-              WebDriverWait(driver, 25).until(lambda d: "V7.7" in d.title)
+              WebDriverWait(driver, 25).until(lambda d: "V7.8" in d.title)
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "scenarioRareSkillPanel")))
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "finishRamenLinkChoices")))
 
