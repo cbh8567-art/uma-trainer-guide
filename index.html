@@ -1591,35 +1591,63 @@ function renderTresenkenRmjSection(){
  const progressOnly=acquired.filter(n=>['時中の妙','極上の感謝を！'].includes(n));
  summary.innerHTML=`진행 보상 레어스킬: ${progressOnly.length?progressOnly.map(n=>`<span class="tag">${esc(n)}</span>`).join(' '):'현재 조건에서 없음'}${tresenkenAllRmjBig()?'<br>모든 RMJ 대성황 이상 → 시나리오 진화 공통 조건 충족 ✓':''}`;
 }
+function renderScenarioProgressSection(){
+ const section=$('#finishScenarioProgressSection'),box=$('#finishScenarioProgressChecks'),title=$('#finishScenarioProgressTitle');
+ if(!section||!box||!title)return;
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none,checks=sc.progressChecks||[];
+ if(!checks.length){section.style.display='none';box.innerHTML='';return}
+ section.style.display='block';box.innerHTML='';title.textContent=(sc.kr||sc.name||'시나리오')+' · 진행 조건';
+ for(const x of checks){
+   const key=state.scenario+':progress:'+x.id,checked=scenarioProgressMet(x.id),row=document.createElement('label');
+   row.className='finishOption'+(checked?' selected':'');
+   row.innerHTML='<input type="checkbox" '+(checked?'checked':'')+'><span class="skillFallback">'+(checked?'✓':'!')+'</span><div><div class="finishName">'+esc(x.label)+'</div><div class="finishSub">'+esc(x.sub||'')+'</div></div><div class="finishRight">'+(checked?'달성':'미달성')+'</div>';
+   row.onclick=function(e){
+     e.preventDefault();
+     state.eventDone=state.eventDone||{};
+     state.eventDone[key]=!checked;
+     state.evolutionPlan=null;
+     save();
+     sanitizeFinishDraft();
+     renderTrainingFinishModal();
+     renderTrainingFinishSummary();
+     renderGuide()
+   };
+   box.appendChild(row)
+ }
+}
 function renderRamenLinkEventSection(){
- const section=$('#finishRamenLinkSection'),box=$('#finishRamenLinkChoices'),summary=$('#finishRamenLinkSummary');
- if(!section||!box||!summary)return;
- const sc=SCENARIOS[state.scenario]||SCENARIOS.none,choices=sc.ramenLinkEventChoices||[];
- if(state.scenario!=='tresenken'||!choices.length){section.style.display='none';box.innerHTML='';summary.textContent='';return}
+ const section=$('#finishRamenLinkSection'),box=$('#finishRamenLinkChoices'),summary=$('#finishRamenLinkSummary'),title=$('#finishRamenLinkTitle'),sub=$('#finishRamenLinkSub');
+ if(!section||!box||!summary||!title||!sub)return;
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none,choices=scenarioLinkChoices(sc);
+ if(!choices.length){section.style.display='none';box.innerHTML='';summary.textContent='';return}
  section.style.display='block';box.innerHTML='';
- const selectedId=scenarioChoiceValue('ramenLinkEvent');
+ const isRamen=state.scenario==='tresenken',group=scenarioLinkChoiceGroup(),selectedId=scenarioChoiceValue(group);
+ const meta=isRamen?{title:'貴方と私とラーメンと',kr:'당신과 나와 라멘과',when:'시니어급 9월 전반'}:(sc.linkEvent||{});
+ title.textContent=(meta.when?meta.when+' · ':'')+(meta.kr||meta.title||'시나리오 선택 이벤트');
+ sub.textContent='실제 선택한 1개만 기록합니다. 현재 덱/육성 우마의 링크 캐릭터 편성 여부에 따라 금스킬 또는 일반 스킬을 자동 판정합니다.';
  for(const x of choices){
-   const selected=selectedId===x.id,result=ramenLinkEventResult(x),row=document.createElement('label');
+   const selected=selectedId===x.id,result=scenarioLinkEventResult(x),row=document.createElement('label');
    row.className='finishOption'+(selected?' selected':'')+(result?.linked?' recommended':'');
-   const icon=result?.skill?skillIcon(result.skill):'<span class="skillFallback">'+(result?.linked?'金':'白')+'</span>';
-   const linkedText=x.alwaysGold?'편성 무관 · 항상 금스킬':(result?.linked?'링크 캐릭터 편성/육성 확인 ✓':'링크 캐릭터 미편성');
-   row.innerHTML=`<input type="radio" name="ramenLinkEvent" ${selected?'checked':''}>${icon}<div><div class="finishName">${esc(x.jp)}${selected?' <span class="scenarioRec">선택됨</span>':''}</div><div class="kr">${esc(x.kr)}</div><div class="finishSub">${esc(result?.skillName||'스킬 없음')} · 힌트 Lv+${x.hintLevel} · ${result?.linked?'레어 스킬':'일반 스킬'}</div><div class="evoTags"><span class="tag">${esc(linkedText)}</span></div></div><div class="finishRight">${result?.linked?'금스킬':'백스킬'}</div>`;
-   row.onclick=e=>{
+   const skillVisual=result?.skill?skillIcon(result.skill):'<span class="skillFallback">'+(result?.linked?'金':'白')+'</span>';
+   const linkedText=x.alwaysGold?'편성 무관 · 항상 금스킬':x.alwaysWhite?'현재 금스킬 미구현 · 일반 스킬':(result?.linked?'링크 캐릭터 편성/육성 확인 ✓':'링크 캐릭터 미편성');
+   row.innerHTML='<input type="radio" name="scenarioLinkEvent" '+(selected?'checked':'')+'><span class="linkVisuals">'+linkCharacterIconsHtml(x.characters)+skillVisual+'</span><div><div class="finishName">'+esc(x.jp)+(selected?' <span class="scenarioRec">선택됨</span>':'')+'</div><div class="kr">'+esc(x.kr)+'</div><div class="finishSub">'+esc(result?.skillName||'스킬 없음')+' · 힌트 Lv+'+(x.hintLevel||1)+' · '+(result?.linked?'레어 스킬':'일반 스킬')+'</div><div class="evoTags"><span class="tag">'+esc(linkedText)+'</span></div></div><div class="finishRight">'+(result?.linked?'금스킬':'백스킬')+'</div>';
+   row.onclick=function(e){
      e.preventDefault();
      state.eventChoice=state.eventChoice||{};
-     state.eventChoice['tresenken:ramenLinkEvent']=x.id;
+     const key=isRamen?'tresenken:ramenLinkEvent':state.scenario+':scenarioLinkEvent';
+     state.eventChoice[key]=x.id;
      state.evolutionPlan=null;
      save();
      sanitizeFinishDraft();
      renderTrainingFinishModal();
      renderTrainingFinishSummary();
      renderGuide();
-     toast(`${x.kr} 선택 · ${result?.skillName||'스킬 없음'}`)
+     toast(x.kr+' 선택 · '+(result?.skillName||'스킬 없음'))
    };
    box.appendChild(row)
  }
- const selected=ramenLinkEventChoice(),result=ramenLinkEventResult(selected);
- summary.innerHTML=!selected?'아직 선택하지 않았습니다. 선택 전에는 이 이벤트의 금스킬을 획득한 것으로 계산하지 않습니다.':`선택 결과: <b>${esc(selected.kr)}</b> → <span class="tag">${esc(result?.skillName||'스킬 없음')}</span> · ${result?.linked?'레어 스킬로 반영':'일반 스킬이므로 레어스킬 카운트에 포함하지 않음'}`;
+ const selected=scenarioLinkEventChoice(),result=scenarioLinkEventResult(selected);
+ summary.innerHTML=!selected?'아직 선택하지 않았습니다. 선택 전에는 이 이벤트의 금스킬을 획득한 것으로 계산하지 않습니다.':'선택 결과: <b>'+esc(selected.kr)+'</b> → <span class="tag">'+esc(result?.skillName||'스킬 없음')+'</span> · '+(result?.linked?'레어 스킬로 반영':'일반 스킬이므로 레어스킬 카운트에 포함하지 않음')
 }
 function renderUltimateRamenSection(){
  const section=$('#finishRamenSection'),box=$('#finishRamenChoices');
@@ -1714,6 +1742,7 @@ function renderTrainingFinishModal(){
  const u=selectedUma(),race=getGuideRace(),cond=race?raceCond(race):state;if(!u)return;
  $('#finishContext').textContent=`${u.krName} · ${(SCENARIOS[state.scenario]||SCENARIOS.none).kr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;
  renderTresenkenRmjSection();
+ renderScenarioProgressSection();
  renderRamenLinkEventSection();
  renderUltimateRamenSection();
 
