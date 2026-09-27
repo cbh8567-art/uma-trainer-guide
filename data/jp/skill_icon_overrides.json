@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-24",
+  "updated": "2026-09-27",
   "overrides": {
     "202711": {
       "iconId": 20042,
@@ -41,6 +41,291 @@
       "iconId": 20011,
       "status": "verified",
       "note": "突き抜ける走り explicit verified override from UmaTools skills_all.json; upstream Tsuyuchan iconId is 0"
+    },
+    "91101411": {
+      "iconId": 20011,
+      "status": "verified",
+      "note": "光れ！弾けろ！超新星爆発！ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "100101311": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "強襲のラン verified from BWiki skill page; upstream iconId is 0"
+    },
+    "100201311": {
+      "iconId": 10012,
+      "status": "verified",
+      "note": "私だけの世界 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "100301311": {
+      "iconId": 20042,
+      "status": "verified",
+      "note": "皇帝を超えて verified from BWiki skill page; upstream iconId is 0"
+    },
+    "100503111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "響け、万雷の喝采よ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "100503211": {
+      "iconId": 20042,
+      "status": "verified",
+      "note": "光輝なるは白き王 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "101401311": {
+      "iconId": 20042,
+      "status": "verified",
+      "note": "怪鳥は飛んでいく verified from BWiki skill page; upstream iconId is 0"
+    },
+    "102003111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "のらりくらりdeバカンス♪ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "102003211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "夏風フロントランナー verified from BWiki skill page; upstream iconId is 0"
+    },
+    "102203111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "替え玉一丁、承ります♪ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "102203211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "熱々、上等！へいお待ち！ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "102503111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "超常体験 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "102503211": {
+      "iconId": 20042,
+      "status": "verified",
+      "note": "コノヨナラザル verified from BWiki skill page; upstream iconId is 0"
+    },
+    "104103111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "超速×迅雷＝超バクシン！！ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "104103211": {
+      "iconId": 20042,
+      "status": "verified",
+      "note": "猛進、桜吹雪の如く verified from BWiki skill page; upstream iconId is 0"
+    },
+    "104302111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "ラスカル・ロンプ！ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "104302211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "ワルの大脱走 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "104901311": {
+      "iconId": 10012,
+      "status": "verified",
+      "note": "All-in!! verified from BWiki skill page; upstream iconId is 0"
+    },
+    "105003221": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "不屈のRebellion verified from BWiki skill page; upstream iconId is 0"
+    },
+    "106902221": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "桜咲くときは今――！ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "107002121": {
+      "iconId": 10032,
+      "status": "verified",
+      "note": "すべてを焼き焦がす星 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "107403111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "浜辺の追いかけっこ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "107403211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "薫風もたらすルドベキア verified from BWiki skill page; upstream iconId is 0"
+    },
+    "107703111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "湯気立つ勝負道 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "107703211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "いざ、開店です！ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "108202111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "流麗なる急追 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "108202211": {
+      "iconId": 20042,
+      "status": "verified",
+      "note": "春風、蒼穹を駆ける verified from BWiki skill page; upstream iconId is 0"
+    },
+    "109402111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "気合いの三三七拍子！ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "109402211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "“最強”の焔 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "111201111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "Rush to Catch Me! verified from BWiki skill page; upstream iconId is 0"
+    },
+    "111201211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "Out in Front verified from BWiki skill page; upstream iconId is 0"
+    },
+    "111302111": {
+      "iconId": 10012,
+      "status": "verified",
+      "note": "愛されすぎてマジごめん♡ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "111302211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "秘める気のない才気 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "111602111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "――さあ、踊りましょう verified from BWiki skill page; upstream iconId is 0"
+    },
+    "111602211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "最強淑女の誇り verified from BWiki skill page; upstream iconId is 0"
+    },
+    "111701121": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "凱歌へのプレパラシオン verified from BWiki skill page; upstream iconId is 0"
+    },
+    "111801111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "雪魄氷姿 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "111801211": {
+      "iconId": 20042,
+      "status": "verified",
+      "note": "無比なる六花 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "112001121": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "起光一迅！ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "112702111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "王道刑事、強面派 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "112702211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "トドメのかつ丼！ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "113001111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "紫香くゆらす verified from BWiki skill page; upstream iconId is 0"
+    },
+    "113001211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "霞薙ぐ花形 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "113401111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "舞いひらく花路 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "113401211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "想い束ね、前へ verified from BWiki skill page; upstream iconId is 0"
+    },
+    "113601111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "覚醒せし聖女 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "113601211": {
+      "iconId": 20042,
+      "status": "verified",
+      "note": "天与の恩寵 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "114101111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "星奔光天 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "114101211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "天意の彼方 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "114101221": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "久遠の天際 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "114301111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "Chain of Hearts verified from BWiki skill page; upstream iconId is 0"
+    },
+    "114301211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "暗夜の灯 verified from BWiki skill page; upstream iconId is 0"
+    },
+    "114401111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "Impeccable verified from BWiki skill page; upstream iconId is 0"
+    },
+    "114401211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "Rose of Steel verified from BWiki skill page; upstream iconId is 0"
+    },
+    "114501211": {
+      "iconId": 20042,
+      "status": "verified",
+      "note": "強襲トリック verified from BWiki skill page; upstream iconId is 0"
+    },
+    "114901111": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "妙技・坂落とし verified from BWiki skill page; upstream iconId is 0"
+    },
+    "114901211": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "寄らば斬る！ verified from BWiki skill page; upstream iconId is 0"
     }
   }
 }
