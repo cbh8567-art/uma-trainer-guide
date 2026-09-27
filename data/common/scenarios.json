@@ -15,21 +15,21 @@
           "jp": "スペシャルトレセンラーメン",
           "kr": "스페셜 트레센 라멘",
           "skill": "火事場のバ鹿力",
-          "hintLevel": 2
+          "hintLevel": 3
         },
         {
           "id": "greedy",
           "jp": "よくばりトレセンラーメン",
           "kr": "욕심쟁이 트레센 라멘",
           "skill": "いいとこ入った！",
-          "hintLevel": 2
+          "hintLevel": 3
         },
         {
           "id": "jewel",
           "jp": "珠玉のトレセンラーメン",
           "kr": "주옥의 트레센 라멘",
           "skill": "好奇心",
-          "hintLevel": 2
+          "hintLevel": 3
         }
       ],
       "scenarioAcquiredRareSkills": [
