@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-28",
+  "server": "kr",
+  "event": {
+    "id": "kr_masters_2026_07",
+    "nameKr": "마스터즈 챌린지",
+    "nameJp": "マスターズチャレンジ",
+    "period": "2026-07-20 ~ 2026-10-16 11:59",
+    "officialSource": "카카오게임즈 개최 정보",
+    "officialUrl": "https://kakaogames.oqupie.com/portals/1576/articles/76599",
+    "referenceSource": "일본 2025-03 제5회 마스터즈 챌린지 상세",
+    "referenceUrl": "https://wikiwiki.jp/sppenpen/%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%BA%E3%83%81%E3%83%A3%E3%83%AC%E3%83%B3%E3%82%B8",
+    "rules": [
+      "각 레이스 LEVEL 1~3. 1착 시 다음 LEVEL 해방",
+      "전당 입성 우마무스메 1명당 레이스별 각 LEVEL 3회까지 출전",
+      "5개 레이스 LEVEL 3 전부 클리어 시 LEVEL EX 3종 해방"
+    ]
+  },
+  "races": [
+    {
+      "id": "kr_masters_2026_fillies",
+      "kind": "masters",
+      "status": "개최 중",
+      "date": "~ 2026-10-16",
+      "event": "フィリーズレビュー",
+      "eventKr": "마스터즈 챌린지 · 필리스 레뷰",
+      "raceKr": "필리스 레뷰",
+      "place": "阪神",
+      "placeKr": "한신",
+      "ground": "turf",
+      "distance": "short",
+      "meters": 1400,
+      "turn": "right",
+      "course": "inner",
+      "season": "spring",
+      "weather": "cloudy",
+      "condition": "good",
+      "time": "day",
+      "levelGroup": "LEVEL 1~3",
+      "opponents": [
+        "라인 크라프트",
+        "데어링 하트",
+        "에어 메사이어"
+      ],
+      "greenSkills": [
+        "阪神レース場○",
+        "右回り○",
+        "春ウマ娘○",
+        "曇りの日○",
+        "良バ場○",
+        "非根幹距離○"
+      ]
+    },
+    {
+      "id": "kr_masters_2026_yasuda",
+      "kind": "masters",
+      "status": "개최 중",
+      "date": "~ 2026-10-16",
+      "event": "安田記念",
+      "eventKr": "마스터즈 챌린지 · 야스다 기념",
+      "raceKr": "야스다 기념",
+      "place": "東京",
+      "placeKr": "도쿄",
+      "ground": "turf",
+      "distance": "mile",
+      "meters": 1600,
+      "turn": "left",
+      "season": "spring",
+      "weather": "sunny",
+      "condition": "good",
+      "time": "day",
+      "levelGroup": "LEVEL 1~3",
+      "opponents": [
+        "야마닌 제퍼",
+        "이쿠노 딕터스",
+        "니시노 플라워"
+      ],
+      "greenSkills": [
+        "東京レース場○",
+        "左回り○",
+        "春ウマ娘○",
+        "晴れの日○",
+        "良バ場○",
+        "根幹距離○"
+      ]
+    },
+    {
+      "id": "kr_masters_2026_shuka",
+      "kind": "masters",
+      "status": "개최 중",
+      "date": "~ 2026-10-16",
+      "event": "秋華賞",
+      "eventKr": "마스터즈 챌린지 · 추화상",
+      "raceKr": "추화상",
+      "place": "京都",
+      "placeKr": "교토",
+      "ground": "turf",
+      "distance": "mid",
+      "meters": 2000,
+      "turn": "right",
+      "course": "inner",
+      "season": "autumn",
+      "weather": "cloudy",
+      "condition": "good",
+      "time": "day",
+      "levelGroup": "LEVEL 1~3",
+      "opponents": [
+        "젠틸돈나",
+        "비르시나"
+      ],
+      "greenSkills": [
+        "京都レース場○",
+        "右回り○",
+        "秋ウマ娘○",
+        "曇りの日○",
+        "良バ場○",
+        "根幹距離○"
+      ]
+    },
+    {
+      "id": "kr_masters_2026_kikuka",
+      "kind": "masters",
+      "status": "개최 중",
+      "date": "~ 2026-10-16",
+      "event": "菊花賞",
+      "eventKr": "마스터즈 챌린지 · 국화상",
+      "raceKr": "국화상",
+      "place": "京都",
+      "placeKr": "교토",
+      "ground": "turf",
+      "distance": "long",
+      "meters": 3000,
+      "turn": "right",
+      "course": "outer",
+      "season": "autumn",
+      "weather": "cloudy",
+      "condition": "good",
+      "time": "day",
+      "levelGroup": "LEVEL 1~3",
+      "opponents": [
+        "오르페브르",
+        "윈 바리아시옹"
+      ],
+      "greenSkills": [
+        "京都レース場○",
+        "右回り○",
+        "秋ウマ娘○",
+        "曇りの日○",
+        "良バ場○",
+        "非根幹距離○"
+      ]
+    },
+    {
+      "id": "kr_masters_2026_kashiwa",
+      "kind": "masters",
+      "status": "개최 중",
+      "date": "~ 2026-10-16",
+      "event": "かしわ記念",
+      "eventKr": "마스터즈 챌린지 · 카시와 기념",
+      "raceKr": "카시와 기념",
+      "place": "船橋",
+      "placeKr": "후나바시",
+      "ground": "dirt",
+      "distance": "mile",
+      "meters": 1600,
+      "turn": "left",
+      "season": "spring",
+      "weather": "cloudy",
+      "condition": "slightly_heavy",
+      "time": "day",
+      "levelGroup": "LEVEL 1~3",
+      "opponents": [
+        "후리오소",
+        "에스포와르 시티"
+      ],
+      "greenSkills": [
+        "左回り○",
+        "春ウマ娘○",
+        "曇りの日○",
+        "道悪○",
+        "根幹距離○"
+      ]
+    },
+    {
+      "id": "kr_masters_2026_ex_derby",
+      "kind": "masters",
+      "status": "LEVEL EX",
+      "date": "5개 LEVEL3 클리어 후",
+      "event": "日本ダービー",
+      "eventKr": "마스터즈 챌린지 EX · 일본 더비",
+      "raceKr": "일본 더비",
+      "place": "東京",
+      "placeKr": "도쿄",
+      "ground": "turf",
+      "distance": "mid",
+      "meters": 2400,
+      "turn": "left",
+      "season": "spring",
+      "weather": "cloudy",
+      "condition": "heavy",
+      "time": "day",
+      "levelGroup": "LEVEL EX",
+      "opponents": [
+        "세인트 라이트"
+      ],
+      "greenSkills": [
+        "東京レース場○",
+        "左回り○",
+        "春ウマ娘○",
+        "曇りの日○",
+        "道悪○",
+        "根幹距離○"
+      ]
+    },
+    {
+      "id": "kr_masters_2026_ex_arima",
+      "kind": "masters",
+      "status": "LEVEL EX",
+      "date": "5개 LEVEL3 클리어 후",
+      "event": "有馬記念",
+      "eventKr": "마스터즈 챌린지 EX · 아리마 기념",
+      "raceKr": "아리마 기념",
+      "place": "中山",
+      "placeKr": "나카야마",
+      "ground": "turf",
+      "distance": "long",
+      "meters": 2500,
+      "turn": "right",
+      "course": "outer",
+      "season": "winter",
+      "weather": "cloudy",
+      "condition": "good",
+      "time": "day",
+      "levelGroup": "LEVEL EX",
+      "opponents": [
+        "스피드 심볼리"
+      ],
+      "greenSkills": [
+        "中山レース場○",
+        "右回り○",
+        "冬ウマ娘○",
+        "曇りの日○",
+        "良バ場○",
+        "非根幹距離○"
+      ]
+    },
+    {
+      "id": "kr_masters_2026_ex_tokyo_daishoten",
+      "kind": "masters",
+      "status": "LEVEL EX",
+      "date": "5개 LEVEL3 클리어 후",
+      "event": "東京大賞典",
+      "eventKr": "마스터즈 챌린지 EX · 도쿄 대상전",
+      "raceKr": "도쿄 대상전",
+      "place": "大井",
+      "placeKr": "오이",
+      "ground": "dirt",
+      "distance": "mid",
+      "meters": 2000,
+      "turn": "right",
+      "season": "winter",
+      "weather": "sunny",
+      "condition": "good",
+      "time": "evening",
+      "levelGroup": "LEVEL EX",
+      "opponents": [
+        "하이세이코"
+      ],
+      "greenSkills": [
+        "右回り○",
+        "冬ウマ娘○",
+        "晴れの日○",
+        "良バ場○",
+        "根幹距離○"
+      ]
+    }
+  ]
+}
