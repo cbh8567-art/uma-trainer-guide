@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.9">
-<title>우마무스메 트레이너 가이드 V7.9 WEB</title>
+<meta name="app-build" content="V7.10">
+<title>우마무스메 트레이너 가이드 V7.10 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -231,6 +231,25 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .watchPlaceholder[hidden]{display:none}
 .watchPrivacy{margin-top:7px;padding:7px 8px;border:1px solid #3a465d;background:#141b28;border-radius:9px;font-size:9px;color:#b9c4d6;line-height:1.55}
 .watchMeta{font-size:9px;color:#b9c3d5}
+.watchAnalysis{margin-top:9px;border:1px solid #45536c;background:#111824;border-radius:11px;padding:9px}
+.watchAnalysisHead{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.watchSceneNow{font-size:18px;font-weight:950;line-height:1.2;color:#f3f6fb}.watchSceneNow.known{color:#bff2d4}.watchSceneNow.unknown{color:#ffd7a1}
+.watchConfidence{font-size:9px;color:#aeb8cb;margin-top:3px}
+.watchSampleButtons{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.watchSampleBtn{border:1px solid #49556d;background:#20283a;color:#e9edf5;border-radius:8px;padding:6px 8px;font-size:9px;font-weight:850;cursor:pointer}
+.watchSampleBtn:disabled{opacity:.45;cursor:default}
+.watchSampleBtn span{color:#8fd7b5;margin-left:3px}
+.watchAnalysisGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.watchAnalysisCard{border:1px solid #333d51;background:#171e2b;border-radius:9px;padding:8px;min-width:0}
+.watchAnalysisCard b{font-size:10px}.watchAnalysisCard .note{margin-top:4px}
+.watchMeter{height:7px;background:#0d1119;border:1px solid #30384b;border-radius:99px;overflow:hidden;margin-top:6px}
+.watchMeterFill{height:100%;width:0;background:linear-gradient(90deg,#69d5a1,#70c5f4);transition:width .2s ease}
+.watchDiag{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px;font-size:8px;color:#99a6bb}
+.watchDiag span{border:1px solid #354057;border-radius:99px;padding:3px 6px;background:#151c28}
+.watchCalibration{margin-top:7px;padding:7px 8px;border:1px solid #5a4b68;background:#211b2a;border-radius:8px;font-size:9px;line-height:1.5;color:#d6c7df}
+.watchClearSamples{border-color:#6a4348;color:#ffc2c8}
+@media(max-width:720px){.watchAnalysisGrid{grid-template-columns:1fr}.watchSampleButtons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.watchSampleBtn{width:100%}}
+
 @media(max-width:720px){.watchPreviewWrap{min-height:170px}.watchPilot{padding:9px}}
 .finishOption.disabled input{cursor:not-allowed}
 .finishLocked{font-size:8px;color:#e2a3ad;border:1px solid #73434b;border-radius:99px;padding:2px 5px;white-space:nowrap}
@@ -258,7 +277,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.9 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.10 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -447,7 +466,32 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
     <video class="watchPreview" id="watchPilotVideo" autoplay muted playsinline hidden></video>
     <div class="watchPlaceholder" id="watchPilotPlaceholder">아직 공유된 화면이 없습니다.<br>첫 테스트에서는 AI 분석이나 외부 전송을 하지 않고, 캡처가 정상적으로 보이는지만 확인합니다.</div>
    </div>
-   <div class="watchPrivacy">이 테스트는 영상 프레임을 서버나 AI로 전송하지 않습니다. 공유는 브라우저 탭을 닫거나 「공유 중지」를 누르면 종료됩니다. 우마무스메 창이 검게 보이면 창 대신 해당 모니터 전체 공유로 다시 시험해 보세요.</div>
+   <div class="watchAnalysis" id="watchAnalysis">
+    <div class="watchAnalysisHead">
+     <div>
+      <div class="sub">로컬 화면 판별</div>
+      <div class="watchSceneNow unknown" id="watchSceneNow">학습 샘플 필요</div>
+      <div class="watchConfidence" id="watchSceneConfidence">아래 버튼으로 현재 화면을 한 번씩 학습시키면 자동 판별을 시작합니다.</div>
+     </div>
+     <button type="button" class="mini watchClearSamples" id="watchClearSamples">학습 초기화</button>
+    </div>
+    <div class="watchMeter"><div class="watchMeterFill" id="watchSimilarityMeter"></div></div>
+    <div class="watchSampleButtons" id="watchSampleButtons">
+     <button type="button" class="watchSampleBtn" data-watch-label="home" disabled>홈 <span data-watch-count="home">0</span></button>
+     <button type="button" class="watchSampleBtn" data-watch-label="trainingMain" disabled>육성 메인 <span data-watch-count="trainingMain">0</span></button>
+     <button type="button" class="watchSampleBtn" data-watch-label="training" disabled>훈련 선택 <span data-watch-count="training">0</span></button>
+     <button type="button" class="watchSampleBtn" data-watch-label="event" disabled>이벤트 <span data-watch-count="event">0</span></button>
+     <button type="button" class="watchSampleBtn" data-watch-label="race" disabled>레이스 <span data-watch-count="race">0</span></button>
+    </div>
+    <div class="watchAnalysisGrid">
+     <div class="watchAnalysisCard"><b>변화 감지</b><div class="note" id="watchMotionText">공유 시작 후 프레임 변화를 측정합니다.</div></div>
+     <div class="watchAnalysisCard"><b>다음 연결 단계</b><div class="note" id="watchNextStep">화면 종류 판별이 안정되면 훈련 화면 전용 수치 판독을 연결합니다.</div></div>
+    </div>
+    <div class="watchDiag"><span id="watchSampleTotal">학습 0개</span><span id="watchAnalysisRate">분석 대기</span><span>외부 전송 없음</span></div>
+    <div class="watchCalibration">빠른 캘리브레이션: 게임에서 각 화면을 열고 해당 버튼을 1~3회 눌러 주세요. 같은 종류라도 배경/캐릭터가 달라질 수 있으므로 샘플이 여러 개일수록 판별이 안정됩니다.</div>
+    <canvas id="watchFeatureCanvas" width="10" height="18" hidden></canvas>
+   </div>
+   <div class="watchPrivacy">영상 프레임과 학습 샘플은 서버나 AI로 전송하지 않습니다. 화면 종류 학습값은 이 브라우저의 LocalStorage에만 소량 저장됩니다. 자동조작 기능은 없습니다.</div>
   </div>
   <div class="panel" style="margin-top:10px">
    <div class="sectionHead" style="margin-top:0"><div><h2 style="margin:0">트레이너 가이드 목표 레이스</h2><div class="sub">챔피언스 미팅과 마스터즈 챌린지를 같은 추천 엔진으로 비교합니다.</div></div><span class="status" id="guideRaceSourceStatus"></span></div>
@@ -3006,9 +3050,38 @@ function initLegendsScenarioGuide(){
 }
 
 
-/* V7.9 · 디지탄 관전 모드 화면 공유 테스트
-   로컬 미리보기 전용: 프레임 업로드/AI 전송/자동 입력 없음 */
+/* V7.10 · 디지탄 관전 모드
+   화면 공유 + 브라우저 로컬 장면 분류. 프레임 업로드/AI 전송/자동 입력 없음 */
 let watchPilotStream=null;
+let watchAnalysisTimer=null;
+let watchLastFeature=null;
+const WATCH_SCENE_KEY='uma_watch_scene_samples_v1';
+const WATCH_SCENE_LABELS={
+ home:'홈',
+ trainingMain:'육성 메인',
+ training:'훈련 선택',
+ event:'이벤트',
+ race:'레이스'
+};
+const WATCH_FEATURE_W=10,WATCH_FEATURE_H=18,WATCH_MAX_SAMPLES=5;
+let watchSceneSamples=loadWatchSceneSamples();
+
+function loadWatchSceneSamples(){
+ try{
+  const x=JSON.parse(localStorage.getItem(WATCH_SCENE_KEY)||'{}');
+  const out={};
+  for(const k of Object.keys(WATCH_SCENE_LABELS)){
+   out[k]=Array.isArray(x?.[k])?x[k].filter(a=>Array.isArray(a)&&a.length===WATCH_FEATURE_W*WATCH_FEATURE_H*3).slice(-WATCH_MAX_SAMPLES):[]
+  }
+  return out
+ }catch(_){
+  return Object.fromEntries(Object.keys(WATCH_SCENE_LABELS).map(k=>[k,[]]))
+ }
+}
+function saveWatchSceneSamples(){
+ try{localStorage.setItem(WATCH_SCENE_KEY,JSON.stringify(watchSceneSamples))}catch(e){console.warn('[V7.10] watch scene samples save failed',e)}
+}
+
 
 function watchPilotEls(){
  return {
@@ -3017,7 +3090,14 @@ function watchPilotEls(){
   state:$('#watchPilotState'),
   meta:$('#watchPilotMeta'),
   video:$('#watchPilotVideo'),
-  placeholder:$('#watchPilotPlaceholder')
+  placeholder:$('#watchPilotPlaceholder'),
+  scene:$('#watchSceneNow'),
+  confidence:$('#watchSceneConfidence'),
+  meter:$('#watchSimilarityMeter'),
+  motion:$('#watchMotionText'),
+  total:$('#watchSampleTotal'),
+  rate:$('#watchAnalysisRate'),
+  canvas:$('#watchFeatureCanvas')
  }
 }
 function setWatchPilotUi(mode,message){
@@ -3037,13 +3117,110 @@ function watchPilotTrackMeta(track){
  if(s.frameRate)bits.push(Math.round(s.frameRate)+'fps');
  return bits.length?bits.join(' · '):'화면 공유 연결됨'
 }
+function updateWatchSampleUi(){
+ let total=0;
+ for(const k of Object.keys(WATCH_SCENE_LABELS)){
+  const n=watchSceneSamples[k]?.length||0;total+=n;
+  const x=document.querySelector('[data-watch-count="'+k+'"]');if(x)x.textContent=String(n)
+ }
+ document.querySelectorAll('.watchSampleBtn').forEach(b=>b.disabled=!watchPilotStream);
+ const e=watchPilotEls();if(e.total)e.total.textContent='학습 '+total+'개'
+}
+function watchFeatureFromVideo(){
+ const e=watchPilotEls(),v=e.video,cv=e.canvas;
+ if(!v||!cv||!watchPilotStream||v.readyState<2||!v.videoWidth||!v.videoHeight)return null;
+ const ctx=cv.getContext('2d',{willReadFrequently:true});
+ ctx.drawImage(v,0,0,WATCH_FEATURE_W,WATCH_FEATURE_H);
+ const px=ctx.getImageData(0,0,WATCH_FEATURE_W,WATCH_FEATURE_H).data,out=[];
+ for(let i=0;i<px.length;i+=4){out.push(px[i],px[i+1],px[i+2])}
+ return out
+}
+function watchFeatureDistance(a,b){
+ if(!a||!b||a.length!==b.length)return 1;
+ let sum=0;
+ for(let i=0;i<a.length;i++){const d=(a[i]-b[i])/255;sum+=d*d}
+ return Math.sqrt(sum/a.length)
+}
+function classifyWatchFeature(feature){
+ const candidates=[];
+ for(const [label,samples] of Object.entries(watchSceneSamples)){
+  if(!samples?.length)continue;
+  let best=Infinity;
+  for(const s of samples)best=Math.min(best,watchFeatureDistance(feature,s));
+  candidates.push({label,distance:best})
+ }
+ candidates.sort((a,b)=>a.distance-b.distance);
+ if(!candidates.length)return {label:null,distance:1,similarity:0,second:null};
+ const best=candidates[0],second=candidates[1]||null;
+ const similarity=Math.max(0,Math.min(1,1-best.distance/0.34));
+ const margin=second?second.distance-best.distance:0.2;
+ const known=best.distance<=0.235&&(second?margin>=0.012||best.distance<=0.12:true);
+ return {label:known?best.label:null,nearest:best.label,distance:best.distance,similarity,second}
+}
+function renderWatchSceneResult(result,motion){
+ const e=watchPilotEls();if(!e.scene)return;
+ const pct=Math.round((result?.similarity||0)*100);
+ if(result?.label){
+  e.scene.textContent=WATCH_SCENE_LABELS[result.label]||result.label;e.scene.className='watchSceneNow known';
+  e.confidence.textContent='로컬 유사도 '+pct+'% · 가장 가까운 학습 화면과 비교한 값입니다.'
+ }else if(result?.nearest){
+  e.scene.textContent='판별 보류 · '+(WATCH_SCENE_LABELS[result.nearest]||result.nearest)+' 후보';e.scene.className='watchSceneNow unknown';
+  e.confidence.textContent='유사도 '+pct+'% · 확신이 낮아 자동 판정을 보류했습니다. 해당 화면 샘플을 추가해 주세요.'
+ }else{
+  e.scene.textContent='학습 샘플 필요';e.scene.className='watchSceneNow unknown';
+  e.confidence.textContent='홈/육성 메인/훈련/이벤트/레이스 화면을 버튼으로 학습시켜 주세요.'
+ }
+ if(e.meter)e.meter.style.width=pct+'%';
+ if(e.motion){
+  const mp=Math.round(Math.min(1,(motion||0)/0.22)*100);
+  e.motion.textContent=watchLastFeature?'직전 분석 대비 화면 변화 '+mp+'%'+(motion>0.09?' · 화면 전환/큰 애니메이션 가능성':' · 비교적 안정된 화면'):'첫 분석 프레임'
+ }
+}
+function analyzeWatchScene(){
+ if(!watchPilotStream)return;
+ const f=watchFeatureFromVideo();if(!f)return;
+ const motion=watchLastFeature?watchFeatureDistance(f,watchLastFeature):0;
+ const result=classifyWatchFeature(f);
+ renderWatchSceneResult(result,motion);
+ watchLastFeature=f;
+ const e=watchPilotEls();if(e.rate)e.rate.textContent='로컬 분석 1.25Hz'
+}
+function startWatchSceneAnalysis(){
+ stopWatchSceneAnalysis();watchLastFeature=null;
+ analyzeWatchScene();
+ watchAnalysisTimer=setInterval(analyzeWatchScene,800);
+ updateWatchSampleUi()
+}
+function stopWatchSceneAnalysis(){
+ if(watchAnalysisTimer){clearInterval(watchAnalysisTimer);watchAnalysisTimer=null}
+ watchLastFeature=null
+}
+function addWatchSceneSample(label){
+ if(!WATCH_SCENE_LABELS[label]||!watchPilotStream)return;
+ const f=watchFeatureFromVideo();if(!f)return toast('현재 영상 프레임을 아직 읽을 수 없습니다.');
+ const arr=watchSceneSamples[label]||(watchSceneSamples[label]=[]);
+ arr.push(f);while(arr.length>WATCH_MAX_SAMPLES)arr.shift();
+ saveWatchSceneSamples();updateWatchSampleUi();analyzeWatchScene();
+ toast(WATCH_SCENE_LABELS[label]+' 화면 샘플을 학습했습니다. ('+arr.length+'/'+WATCH_MAX_SAMPLES+')')
+}
+function clearWatchSceneSamples(){
+ if(!confirm('관전 모드의 화면 종류 학습 샘플을 모두 지울까요?'))return;
+ watchSceneSamples=Object.fromEntries(Object.keys(WATCH_SCENE_LABELS).map(k=>[k,[]]));
+ saveWatchSceneSamples();watchLastFeature=null;updateWatchSampleUi();
+ renderWatchSceneResult({label:null,distance:1,similarity:0},0);
+ toast('관전 모드 학습 샘플을 초기화했습니다.')
+}
+
 function stopWatchPilot(reason='화면 공유가 종료되었습니다.'){
  const stream=watchPilotStream;watchPilotStream=null;
+ stopWatchSceneAnalysis();
  if(stream)for(const t of stream.getTracks())try{t.stop()}catch(_){}
  const e=watchPilotEls();
  if(e.video){try{e.video.pause()}catch(_){} e.video.srcObject=null;e.video.hidden=true}
  if(e.placeholder)e.placeholder.hidden=false;
- setWatchPilotUi('idle',reason)
+ setWatchPilotUi('idle',reason);
+ updateWatchSampleUi();
+ if(e.rate)e.rate.textContent='분석 대기'
 }
 async function startWatchPilot(){
  if(!navigator.mediaDevices?.getDisplayMedia){
@@ -3073,7 +3250,8 @@ async function startWatchPilot(){
    const refresh=()=>{if(watchPilotStream===stream)setWatchPilotUi('live',watchPilotTrackMeta(track)+(e.video.videoWidth?' · 실제 영상 '+e.video.videoWidth+'×'+e.video.videoHeight:''))};
    if(e.video.videoWidth)refresh();else e.video.addEventListener('loadedmetadata',refresh,{once:true});
   }
-  setWatchPilotUi('live',watchPilotTrackMeta(track))
+  setWatchPilotUi('live',watchPilotTrackMeta(track));
+  startWatchSceneAnalysis()
  }catch(err){
   const name=err?.name||'Error';
   let msg='화면 공유를 시작하지 못했습니다.';
@@ -3089,6 +3267,9 @@ function initWatchPilot(){
  const e=watchPilotEls();if(!e.start||!e.stop)return;
  e.start.onclick=startWatchPilot;
  e.stop.onclick=()=>stopWatchPilot('사용자가 화면 공유를 중지했습니다.');
+ document.querySelectorAll('[data-watch-label]').forEach(b=>b.onclick=()=>addWatchSceneSample(b.dataset.watchLabel));
+ const clear=$('#watchClearSamples');if(clear)clear.onclick=clearWatchSceneSamples;
+ updateWatchSampleUi();
  if(!navigator.mediaDevices?.getDisplayMedia)setWatchPilotUi('unsupported','현재 브라우저는 화면 공유 API를 지원하지 않습니다.');
  else if(!window.isSecureContext)setWatchPilotUi('unsupported','HTTPS 보안 페이지에서 열어야 화면 공유를 사용할 수 있습니다.');
  else setWatchPilotUi('idle','준비 완료 · 「화면 공유 시작」을 누른 뒤 우마무스메 창 또는 모니터를 선택하세요.');
