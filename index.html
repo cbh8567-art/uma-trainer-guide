@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.11">
-<title>우마무스메 트레이너 가이드 V7.11 WEB</title>
+<meta name="app-build" content="V7.12">
+<title>우마무스메 트레이너 가이드 V7.12 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -30,6 +30,25 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .mobileDock{display:none}.modal{position:fixed;inset:0;background:rgba(0,0,0,.73);display:none;align-items:center;justify-content:center;padding:14px;z-index:50}.modal.open{display:flex}.dialog{width:min(920px,100%);max-height:92vh;overflow:auto;background:#1b1f2b;border:1px solid #444b62;border-radius:15px;padding:13px}.dialogHead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.cardHero{display:grid;grid-template-columns:125px 1fr;gap:11px;margin:10px 0}.cardHero img{width:125px;aspect-ratio:3/4;object-fit:cover;border-radius:10px;background:#2a2f3e}.rating{font-size:26px;color:var(--gold);letter-spacing:1px}.effectTable{width:100%;border-collapse:collapse;font-size:10px;margin-top:8px}.effectTable th,.effectTable td{border-bottom:1px solid #303649;padding:6px;text-align:left}.event{border:1px solid #343b50;background:#141823;border-radius:10px;padding:8px;margin:7px 0}.choice{border:1px solid #30374a;background:#1a1e2a;border-radius:9px;padding:7px;margin-top:5px}.choice.recommended{border-color:#947821;box-shadow:0 0 0 1px rgba(255,212,93,.16) inset}.choiceHead{display:flex;justify-content:space-between;gap:8px;align-items:center}
 .slotPicker{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.pickSlot{border:1px solid var(--line);background:#171b26;color:#fff;border-radius:10px;padding:8px;min-height:96px;cursor:pointer}.pickSlot img{height:58px;width:44px;object-fit:cover;border-radius:5px;vertical-align:middle;margin-right:5px}
 .raceCards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.raceCard{border:1px solid #343b50;background:#151925;border-radius:10px;padding:8px}.raceCard.selected{border-color:#a0842b}.raceTitle{font-size:11px;font-weight:900}.raceMeta{font-size:10px;color:#b6bdcf;line-height:1.5}.guideGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.guideBox{background:#141823;border:1px solid #30374a;border-radius:10px;padding:9px}.guideSkill{display:grid;grid-template-columns:auto 1fr auto;gap:7px;align-items:center;border-bottom:1px solid #2d3345;padding:6px 0}.guideSkill:last-child{border:0}.umaHero{display:grid;grid-template-columns:92px 1fr;gap:9px;background:#141823;border:1px solid #30374a;border-radius:10px;padding:8px;margin:8px 0}.umaHero img{width:92px;aspect-ratio:1/1;object-fit:cover;border-radius:50%;background:#292e3d}.tierFilters{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.tierRow{display:grid;grid-template-columns:70px 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;margin-top:7px}.tierLabel{display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:950;background:#242938}.tierLabel.ssp{background:#60491f;color:#ffe087}.tierLabel.ss{background:#503f67;color:#e6d4ff}.tierLabel.s{background:#285061;color:#bcecff}.tierChars{display:flex;gap:5px;flex-wrap:wrap;padding:8px;background:#151925}.tierChar{border:1px solid #343b50;background:#232837;border-radius:8px;padding:5px 7px}.tierChar.highlight{border-color:var(--gold);box-shadow:0 0 0 1px rgba(255,212,93,.25) inset}
+.tierChar{display:grid;grid-template-columns:42px minmax(0,1fr);gap:7px;align-items:center;min-width:170px}
+.tierPortrait,.guideUmaPortrait{width:42px;height:42px;border-radius:50%;object-fit:cover;object-position:50% 18%;background:#292e3d;border:1px solid #4b556f;flex:none}
+.tierPortraitFallback,.guideUmaPortraitFallback{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#292e3d;border:1px solid #4b556f;color:#d5dbe8;font-size:10px;font-weight:900}
+.tierCharText{min-width:0}.tierCharText .jp,.tierCharText .kr{white-space:normal;overflow-wrap:anywhere}
+.guideUma{display:grid;grid-template-columns:42px minmax(0,1fr);gap:7px;align-items:center;min-width:185px}
+.guideUmaText{min-width:0}
+.ramenThreeList{display:grid;gap:5px;margin-top:7px}
+.ramenThreeItem{display:grid;grid-template-columns:46px minmax(0,1fr);gap:7px;align-items:center;border:1px solid #3a4256;background:#181d28;border-radius:9px;padding:6px;min-width:0}
+.ramenThreeItem.top{border-color:#9d7821;background:linear-gradient(90deg,#2d2717,#191d28)}
+.ramenThreeIcon{display:flex;align-items:center;justify-content:center}
+.ramenThreeIcon .ramenRegionIngameIcon{transform:scale(.92);transform-origin:center}
+.ramenThreeName{font-size:10px;font-weight:900;color:#ffe091}
+.ramenThreeJp{font-size:8px;color:#aeb6c9;margin-left:4px}
+.ramenThreeMeta{display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin-top:4px;font-size:8px;color:#b8c1d3}
+.ramenStatIcon{width:20px;height:20px;object-fit:contain;border-radius:4px;background:#202635}
+.ramenUltimateBadge{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid #d6aa49;background:radial-gradient(circle at 40% 35%,#fff2bc,#bd812e 72%);color:#4b2b09;font-size:16px;font-weight:950}
+.ramenUltimateSkill{font-size:9px;color:#ffd976;margin-top:3px}
+@media(max-width:720px){.tierChar,.guideUma{min-width:145px;grid-template-columns:36px minmax(0,1fr)}.tierPortrait,.guideUmaPortrait,.tierPortraitFallback,.guideUmaPortraitFallback{width:36px;height:36px}.ramenThreeItem{grid-template-columns:42px minmax(0,1fr)}}
+
 .scenarioBox{background:#141823;border:1px solid #30374a;border-radius:10px;padding:9px;margin-top:8px}
 .scenarioEvoGrid{display:grid;gap:6px;margin-top:7px}
 .scenarioEvo{display:grid;grid-template-columns:auto 1fr auto;gap:7px;align-items:center;border:1px solid #30374a;background:#191d29;border-radius:9px;padding:7px}
@@ -292,7 +311,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.11 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.12 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -2225,6 +2244,29 @@ function renderDbGuideRecommendations(){
  }
 }
 
+function tierBaseName(row){
+ return String(row?.jp||'').replace(/\(.+?\)/g,'').trim()
+}
+function tierUmaForRow(row){
+ if(!runtime.characters?.length)return null;
+ const base=norm(tierBaseName(row)),krBase=norm(String(row?.kr||'').replace(/\(.+?\)/g,''));
+ let arr=runtime.characters.filter(ch=>isUmaVisibleForServer(ch,state.guideServer)).filter(ch=>{
+  const cb=norm(ch.character||''),ck=norm(ch.krName||''),cn=norm(ch.name||'');
+  return cb===base||ck===krBase||cn===norm(row?.jp||'')||base.includes(cb)||cb.includes(base)
+ });
+ if(!arr.length)return null;
+ const current=selectedUma();
+ if(current){
+  const hit=arr.find(ch=>Number(ch.id)===Number(current.id));
+  if(hit)return hit
+ }
+ return arr.slice().sort((a,b)=>Number(a.id)-Number(b.id))[0]
+}
+function tierPortraitHtml(row,guide=false){
+ const u=tierUmaForRow(row),cls=guide?'guideUmaPortrait':'tierPortrait',fallback=guide?'guideUmaPortraitFallback':'tierPortraitFallback';
+ if(u?.image)return '<img class="'+cls+'" src="'+esc(u.image)+'" alt="'+esc(row.kr||row.jp)+'" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="'+fallback+'" hidden>'+esc((row.kr||row.jp||'?').slice(0,1))+'</span>';
+ return '<span class="'+fallback+'">'+esc((row.kr||row.jp||'?').slice(0,1))+'</span>'
+}
 function renderGuideUmaTier(){
   const box=$('#guideUmaTier');
   if(!box) return;
@@ -2258,7 +2300,7 @@ function renderGuideUmaTier(){
       const cleanJp=x.jp.replace(/\(.+?\)/g,'');
       const isCurrent=current && (x.jp.includes(current.character)||current.character.includes(cleanJp));
       item.className='guideUma'+(isCurrent?' current':'');
-      item.innerHTML=`<div class="uKr">${esc(x.kr)}</div><div class="uJp">${esc(x.jp)}</div>`;
+      item.innerHTML=`${tierPortraitHtml(x,true)}<div class="guideUmaText"><div class="uKr">${esc(x.kr)}</div><div class="uJp">${esc(x.jp)}</div></div>`;
       item.title=(x.styles||[]).map(s=>styleLabel[s]).join('/');
       chars.appendChild(item);
     }
@@ -2285,7 +2327,7 @@ function renderTier(){
    if(q)arr=arr.filter(x=>norm(`${x.jp} ${x.kr} ${katakanaToHangul(x.jp)}`).includes(q));
    const row=document.createElement('div');row.className='tierRow';row.innerHTML=`<div class="tierLabel ${tier==='SS+'?'ssp':tier.toLowerCase()}">${tier}</div><div class="tierChars"></div>`;
    const rb=row.querySelector('.tierChars');if(!arr.length)rb.innerHTML='<span class="note">해당 조건의 스냅샷 항목 없음</span>';
-   for(const x of arr){const z=document.createElement('div');z.className='tierChar'+(u&&(x.jp.includes(u.character)||u.character.includes(x.jp.replace(/\(.+?\)/g,'')))?' highlight':'');z.innerHTML=`<div class="jp">${esc(x.jp)}</div><div class="kr">${esc(x.kr)} · ${(x.styles||[]).map(y=>styleLabel[y]).join('/')}</div>`;rb.appendChild(z)}
+   for(const x of arr){const z=document.createElement('div');z.className='tierChar'+(u&&(x.jp.includes(u.character)||u.character.includes(x.jp.replace(/\(.+?\)/g,'')))?' highlight':'');z.innerHTML=`${tierPortraitHtml(x)}<div class="tierCharText"><div class="jp">${esc(x.jp)}</div><div class="kr">${esc(x.kr)} · ${(x.styles||[]).map(y=>styleLabel[y]).join('/')}</div></div>`;rb.appendChild(z)}
    b.appendChild(row)
  }
  if(kr){
@@ -2928,6 +2970,34 @@ const RAMEN_REGION_STATS={
  '나카야마':['speed','power','wisdom'],'주쿄':['power','guts'],
  '교토':['stamina','guts'],'한신':['stamina','power'],'고쿠라':['wisdom']
 };
+const RAMEN_STAT_LABELS={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wisdom:'지능'};
+const RAMEN_PHASE_REGION_FALLBACKS={
+ junior:['삿포로','하코다테','도쿄'],
+ classic:['나카야마','한신','고쿠라'],
+ senior:['삿포로','나카야마','고쿠라']
+};
+function normalizedRamenRegions(phase,regions){
+ if(phase==='ura')return regions;
+ const out=[...new Set(regions||[])].filter(Boolean);
+ for(const x of RAMEN_PHASE_REGION_FALLBACKS[phase]||[])if(out.length<3&&!out.includes(x))out.push(x);
+ return out.slice(0,3)
+}
+function ramenStatsHtml(name){
+ return (RAMEN_REGION_STATS[name]||[]).map(stat=>'<span title="'+esc(RAMEN_STAT_LABELS[stat]||stat)+'"><img class="ramenStatIcon" src="./assets/ramen/'+stat+'.png" alt="'+esc(RAMEN_STAT_LABELS[stat]||stat)+'"></span>').join('')
+}
+function ramenThreeListHtml(phase,regions){
+ if(phase==='ura'){
+  const choices=SCENARIOS?.tresenken?.ultimateRamenChoices||[];
+  return '<h3 style="margin-top:9px">궁극 라멘 3종</h3><div class="ramenThreeList">'+choices.map((x,i)=>'<div class="ramenThreeItem'+(i===0?' top':'')+'"><div class="ramenThreeIcon"><span class="ramenUltimateBadge">'+(i+1)+'</span></div><div><div class="ramenThreeName">'+esc(x.kr)+' <span class="ramenThreeJp">'+esc(x.jp)+'</span></div><div class="ramenUltimateSkill">금스킬 · '+esc(koSkill(x.skill)||x.skill)+' ('+esc(x.skill)+') 힌트 Lv+'+esc(x.hintLevel||2)+'</div></div></div>').join('')+'</div>'
+ }
+ const list=normalizedRamenRegions(phase,regions);
+ return '<h3 style="margin-top:9px">이번 단계 라멘 3종</h3><div class="ramenThreeList">'+list.map((name,i)=>{
+  const region=RAMEN_REGION_LABELS[name]||{jp:name,kr:name},pos=RAMEN_REGION_ICON_POS[name];
+  const icon=pos?'<span class="ramenRegionIngameIcon" style="background-position:'+pos[0]+'px '+pos[1]+'px"></span>':'<span class="ramenRegionBadge">'+esc(region.jp)+'</span>';
+  return '<div class="ramenThreeItem'+(i===0?' top':'')+'"><div class="ramenThreeIcon">'+icon+'</div><div><div class="ramenThreeName">'+esc(region.kr)+' <span class="ramenThreeJp">'+esc(region.jp)+'</span></div><div class="ramenThreeMeta">'+ramenStatsHtml(name)+'<span>'+esc((RAMEN_REGION_STATS[name]||[]).map(s=>RAMEN_STAT_LABELS[s]||s).join(' · ')||'지역 효과 확인')+'</span></div></div></div>'
+ }).join('')+'</div>'
+}
+
 
 const RAMEN_GUIDE_DATA={
  junior:{title:'주니어급',priority:'인연·게이지 확보 → 강한 훈련',sauce:'숨은맛 비결은 기본적으로 아낌',
@@ -2941,7 +3011,7 @@ const RAMEN_GUIDE_DATA={
   alert:'시니어는 비결을 남기는 것보다 다중 우정 한 번을 강화하는 가치가 큽니다.'},
  ura:{title:'URA 파이널즈',priority:'궁극 라멘 → 부족 스탯 마감',sauce:'남은 재료/비결을 최종 고점 턴에 사용',
   points:[['공통 효과','체력 +20 · 의욕 상승 · 레이스 보너스 +100% · 우정보너스 +150%'],['4종 편성 조건','스킬Pt 훈련효과 +150% · 스킬Pt 획득 상한 +100'],['추가 배치','모든 서포트가 추가로 1곳의 훈련에 출현'],['마무리','현재 상한에 가장 덜 찬 주력/보조 스탯을 우선 마감']],
-  alert:'욕심쟁이 트레센 라멘을 우선 검토하되, 최종 선택은 필요한 상한과 금스킬에 맞춥니다.'}
+  alert:'궁극 라멘 3종을 모두 비교하고, 최종 선택은 편성 효과와 필요한 금스킬에 맞춥니다.'}
 };
 
 const RAMEN_COMPOSITION_PROFILES={
@@ -2989,7 +3059,7 @@ function genericRegions(counts,phase){
  if(phase==='senior')return [...new Set(weighted.map(([k])=>j[k]))].slice(0,3);
  return ['욕심쟁이 트레센 라멘']
 }
-function ramenRegionsForPhase(phase,deck,profile){return profile.regions?.[phase]||genericRegions(deck.counts,phase)}
+function ramenRegionsForPhase(phase,deck,profile){return normalizedRamenRegions(phase,profile.regions?.[phase]||genericRegions(deck.counts,phase))}
 // 게임 화면의 전국 라멘 지도에서 지역 한자 표지의 위치 (절반 크기 좌표).
 const RAMEN_REGION_ICON_POS={
  '삿포로':[-221,-35],'하코다테':[-163,-55],'니가타':[-147,-123],
@@ -3017,6 +3087,7 @@ function renderRamenScenarioGuide(){
   '<h3 style="margin-top:8px">편성별 추천 지역</h3><div class="ramenRegions">'+regions.map((x,i)=>ramenRegionHtml(x,phase,i)).join('')+'</div>'+
   '<div class="ramenDeckHint">편성 타입을 바꾸면 추천 지역과 단계별 공략도 자동으로 다시 계산됩니다.</div><div class="ramenAlert">'+esc(d.alert)+'</div></div>'+
   '<div class="ramenGuideCard"><h3>턴별 체크</h3><div class="ramenGuideRows">'+d.points.map(x=>'<div class="ramenGuideRow"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('')+'</div>'+
+  ramenThreeListHtml(phase,regions)+
   (ref?'<img class="ramenIngameRef" src="'+ref+'" alt="'+esc(d.title)+' 인게임 라멘 아이콘과 효과 참고" loading="lazy" referrerpolicy="no-referrer"><div class="ramenIconNote">인게임 효과 참고 이미지 · 원본 비율 전체 표시.</div>':'')+'</div></div>'
 }
 function initRamenScenarioGuide(){
