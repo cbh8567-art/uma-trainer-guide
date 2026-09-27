@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.18">
-<title>우마무스메 트레이너 가이드 V7.18 WEB</title>
+<meta name="app-build" content="V7.19">
+<title>우마무스메 트레이너 가이드 V7.19 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -305,7 +305,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .finishLockDetail .finishRoute{display:block;margin-top:2px;color:#d8c79e}
 .finishOption.disabled .finishLockDetail{opacity:1;filter:none}
 
-/* V7.18 · deck readability, status border, bilingual labels
+/* V7.19 · deck readability, status border, bilingual labels
    - 원본 일러는 object-fit:contain으로 왜곡 없이 표시
    - 전체 타이포그래피를 약 10~15% 확대
    - 모바일에서도 작은 보조문구가 지나치게 축소되지 않도록 최소 크기 확보 */
@@ -375,7 +375,7 @@ body{font-size:14px;line-height:1.5}
 }
 
 
-/* V7.18 · 육성 준비 플로우 */
+/* V7.19 · 육성 준비 플로우 */
 .setupProgress{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:0 0 10px}
 .setupProgressStep{border:1px solid #3e475c;background:#171c28;border-radius:10px;padding:7px 8px;min-width:0}
 .setupProgressStep .n{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:50%;background:#2a3142;margin-right:5px;font-size:10px;font-weight:950}
@@ -397,7 +397,7 @@ body{font-size:14px;line-height:1.5}
  .setupSummary{grid-template-columns:1fr 1fr}
  .rentalSlotHeader{font-size:11px;padding:5px}
 }
-/* V7.18 · 육성 준비 플로우 */
+/* V7.19 · 육성 준비 플로우 */
 .setupStepPanel{margin-top:10px;border:1px solid #46506a;background:linear-gradient(180deg,#181d29,#141823);border-radius:12px;padding:10px}
 .setupStepHead{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .setupStepBadge{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:27px;border-radius:50%;background:#2a3142;border:1px solid #4c5874;font-weight:950;color:#dce4f3}
@@ -418,12 +418,32 @@ body{font-size:14px;line-height:1.5}
 .deckConfirmedNote{color:#9fe3bd;font-weight:850}
 [hidden]{display:none!important}
 @media(max-width:720px){.inheritanceGrid{grid-template-columns:1fr}.setupActions .btn{flex:1 1 140px}.deckConfirmBar .btn{flex:1 1 145px}}
+
+/* V7.19 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
+.scenarioPlanPanel{border-color:#5d4f77;background:linear-gradient(180deg,#1c1928,#151821)}
+.scenarioPlanPanel.confirmed{border-color:#486d59;background:linear-gradient(180deg,#17241e,#151a18)}
+.planChoiceGroup{margin-top:9px}.planChoiceTitle{font-size:11px;font-weight:950;margin-bottom:6px}
+.planChoiceGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.planChoice{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:7px;align-items:center;border:1px solid #343c50;background:#171c28;border-radius:10px;padding:7px;cursor:pointer;min-width:0}
+.planChoice:hover{border-color:#63708d}.planChoice.selected{border-color:#d0a653;box-shadow:0 0 0 1px rgba(255,212,93,.18) inset;background:#242015}
+.planChoice input{accent-color:var(--pink)}.planChoiceName{font-size:10.5px;font-weight:900}.planChoiceSub{font-size:9px;color:#aeb7ca;line-height:1.45}
+.planChoiceRight{font-size:9px;font-weight:900;text-align:right;white-space:nowrap}
+.planSummary{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.planSummary .tag{font-size:10px}
+.trainingStartPanel{margin-top:9px;border:1px solid #4d5d76;background:linear-gradient(180deg,#182130,#151923);border-radius:12px;padding:10px}
+.trainingStartPanel.active{border-color:#3d7c5a;background:linear-gradient(180deg,#14271e,#151b18)}
+.trainingStartMain{display:flex;justify-content:space-between;align-items:center;gap:9px;flex-wrap:wrap}
+.trainingStartSummary{font-size:10px;line-height:1.55;color:#c2cada}
+.trainingLive{font-weight:950;color:#9ff0c4}
+@media(max-width:720px){
+ .planChoiceGrid{grid-template-columns:1fr}
+ .trainingStartMain .btn{width:100%}
+}
 </style>
 </head>
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.18 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.19 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -526,6 +546,23 @@ body{font-size:14px;line-height:1.5}
     <div class="deck" id="deck"></div><div class="typeSummary" id="typeSummary"></div>
     <div class="setupSummary" id="deckSetupSummary"></div>
     <div class="deckConfirmBar"><span class="status" id="deckConfirmStatus">육성 우마 → 계승 → 서포트 순서로 확정해 주세요.</span><button type="button" class="btn primary" id="confirmDeckBtn">이 덱 확정</button></div>
+
+    <div class="setupMovePanel scenarioPlanPanel" id="scenarioPlanPanel">
+      <div class="setupStepHead">
+        <div><h2 style="margin:0">④ 시나리오 플랜</h2><div class="sub">육성 시작 전에 주요 선택을 정합니다. 실제 결과가 달라지면 육성 중에도 「계획 변경」으로 수정할 수 있습니다.</div></div>
+        <span class="status" id="scenarioPlanStatus">서포트 덱 확정 필요</span>
+      </div>
+      <div id="scenarioPlanBody"></div>
+      <div class="setupActions"><button type="button" class="btn primary" id="confirmScenarioPlanBtn">시나리오 플랜 확정</button></div>
+    </div>
+
+    <div class="trainingStartPanel" id="trainingStartPanel">
+      <div class="trainingStartMain">
+        <div><b>⑤ 육성 시작</b><div class="trainingStartSummary" id="trainingStartSummary">①~④ 준비를 완료하면 시작할 수 있습니다.</div></div>
+        <button type="button" class="btn primary" id="trainingStartBtn">육성 시작</button>
+      </div>
+    </div>
+
     <div class="dbGuideRecommend deckGuideRecommend" id="deckGuideRecommendBox">
       <div class="dbGuideRecommendHead">
         <div><b style="font-size:12px">트레이너 가이드 추천 SSR</b><div class="sub" id="dbGuideRecCondition">육성 우마무스메와 가이드 레이스를 선택하면 추천 카드가 표시됩니다.</div></div>
@@ -957,7 +994,7 @@ let KR_SKILL_ALIASES={
 };
 const LB_MAX=[30,35,40,45,50], LB_INDEX=[6,7,8,9,10];
 const KOREA_SCENARIO_IDS=new Set(['uaf','harvest','mecha','legends','none']);
-const SERVER_PROFILE_FIELDS=['owned','deck','acquired','eventChoice','eventDone','lb','scenario','tresenkenUltimateRamen','tresenkenRmj','ground','distance','style','currentUmaId','currentUmaConfirmed','inheritanceParentIds','inheritanceConfirmed','deckConfirmed','guideRaceId','evolutionPlan'];
+const SERVER_PROFILE_FIELDS=['owned','deck','acquired','eventChoice','eventDone','lb','scenario','tresenkenUltimateRamen','tresenkenRmj','ground','distance','style','currentUmaId','currentUmaConfirmed','inheritanceParentIds','inheritanceConfirmed','deckConfirmed','scenarioPlanLinkChoice','scenarioPlanUltimateRamen','scenarioPlanConfirmed','trainingActive','guideRaceId','evolutionPlan'];
 function cloneStateValue(v){return v===undefined?undefined:JSON.parse(JSON.stringify(v))}
 function serverDefaultProfile(server){
  const set=server==='kr'?KOREA_UPCOMING:UPCOMING,r=set.races?.[0]||null;
@@ -967,6 +1004,7 @@ function serverDefaultProfile(server){
    tresenkenRmj:{juniorBig:true,classicBig:true,seniorBig:true},
    ground:r?.ground||'turf',distance:r?.distance||'mid',style:'senko',currentUmaId:null,
    currentUmaConfirmed:false,inheritanceParentIds:[null,null],inheritanceConfirmed:false,deckConfirmed:false,
+   scenarioPlanLinkChoice:null,scenarioPlanUltimateRamen:null,scenarioPlanConfirmed:false,trainingActive:false,
    guideRaceId:r?.id||null,evolutionPlan:null
  }
 }
@@ -978,6 +1016,10 @@ function normalizeServerProfile(profile,server){
  p.inheritanceParentIds=[...(p.inheritanceParentIds||[]).slice(0,2),null,null].slice(0,2);
  p.inheritanceConfirmed=!!p.inheritanceConfirmed;
  p.deckConfirmed=!!p.deckConfirmed;
+ p.scenarioPlanLinkChoice=p.scenarioPlanLinkChoice||null;
+ p.scenarioPlanUltimateRamen=p.scenarioPlanUltimateRamen||null;
+ p.scenarioPlanConfirmed=!!p.scenarioPlanConfirmed;
+ p.trainingActive=!!p.trainingActive;
  p.tresenkenUltimateRamen=p.tresenkenUltimateRamen||null;
  p.tresenkenRmj={juniorBig:true,classicBig:true,seniorBig:true,...(p.tresenkenRmj||{})};
  const set=server==='kr'?KOREA_UPCOMING:UPCOMING;
@@ -1213,7 +1255,7 @@ function ensureDeckCardDefaultLb(id){
  const key=String(id);
  if(!Object.prototype.hasOwnProperty.call(state.lb||{},key))state.lb[key]=4;
 }
-function invalidateDeckConfirmation(){if(state.deckConfirmed)state.deckConfirmed=false}
+function invalidateDeckConfirmation(){if(state.deckConfirmed)state.deckConfirmed=false;state.scenarioPlanConfirmed=false;state.trainingActive=false}
 function placeAt(id,i){
  ensureDeckCardDefaultLb(id);
  const old=state.deck.findIndex(x=>String(x)===String(id));
@@ -1246,7 +1288,7 @@ function saveCurrentDeckAsOwned(){
 }
 function confirmCurrentDeck(){
  if(state.deckConfirmed){
-   state.deckConfirmed=false;save();renderDeck();renderGuide();renderDbGuideRecommendations();
+   state.deckConfirmed=false;state.scenarioPlanConfirmed=false;state.trainingActive=false;save();renderDeck();renderGuide();renderDbGuideRecommendations();renderScenarioPlan();
    return toast('서포트 편성을 다시 변경할 수 있습니다.');
  }
  if(!state.currentUmaConfirmed)return toast('먼저 육성 우마무스메를 확정해 주세요.');
@@ -1256,21 +1298,108 @@ function confirmCurrentDeck(){
  for(const id of state.deck)ensureDeckCardDefaultLb(id);
  const add=firstFive.filter(id=>!owned.has(id));
  if(add.length)state.owned.push(...add.map(Number));
- state.deckConfirmed=true;save();
- renderOwned();renderCatalog();renderDeck();renderGuide();renderDbGuideRecommendations();renderV7Planner();
+ state.deckConfirmed=true;state.scenarioPlanConfirmed=false;state.trainingActive=false;save();
+ renderOwned();renderCatalog();renderDeck();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderScenarioPlan();
  toast('서포트 덱을 확정했습니다. 보유 5장 + 렌탈 1장으로 가이드를 시작합니다.');
 }
+function scenarioPlanLinkChoices(){
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none;
+ return scenarioLinkChoices(sc)
+}
+function scenarioPlanLinkSelected(){
+ return scenarioPlanLinkChoices().find(x=>x.id===state.scenarioPlanLinkChoice)||null
+}
+function scenarioPlanRamenSelected(){
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none;
+ return (sc.ultimateRamenChoices||[]).find(x=>x.id===state.scenarioPlanUltimateRamen)||null
+}
+function scenarioPlanReady(){
+ if(!state.deckConfirmed)return false;
+ const links=scenarioPlanLinkChoices();
+ if(links.length&&!state.scenarioPlanLinkChoice)return false;
+ if(state.scenario==='tresenken'&&(SCENARIOS.tresenken.ultimateRamenChoices||[]).length&&!state.scenarioPlanUltimateRamen)return false;
+ return true
+}
+function setScenarioPlanLinkChoice(id){
+ state.scenarioPlanLinkChoice=id||null;state.scenarioPlanConfirmed=false;save();
+ renderScenarioPlan();renderSetupProgress()
+}
+function setScenarioPlanUltimateRamen(id){
+ state.scenarioPlanUltimateRamen=id||null;state.scenarioPlanConfirmed=false;save();
+ renderScenarioPlan();renderSetupProgress()
+}
+function confirmScenarioPlan(){
+ if(!state.deckConfirmed)return toast('먼저 서포트 덱을 확정해 주세요.');
+ if(state.scenarioPlanConfirmed){
+   state.scenarioPlanConfirmed=false;save();renderScenarioPlan();renderSetupProgress();
+   return toast('계획 변경 모드로 전환했습니다. 선택을 바꾼 뒤 다시 확정해 주세요.');
+ }
+ if(!scenarioPlanReady())return toast(state.scenario==='tresenken'?'시니어 9월 전반 선택과 궁극 트레센 라멘을 모두 정해 주세요.':'시나리오의 주요 선택을 먼저 정해 주세요.');
+ state.scenarioPlanConfirmed=true;save();renderScenarioPlan();renderSetupProgress();renderTrainingStartPanel();
+ toast(state.trainingActive?'변경한 시나리오 계획을 다시 확정했습니다.':'시나리오 플랜을 확정했습니다.')
+}
+function startTrainingSession(){
+ if(!state.currentUmaConfirmed)return toast('육성 우마무스메를 확정해 주세요.');
+ if(!state.inheritanceConfirmed)return toast('계승 우마무스메를 확정해 주세요.');
+ if(!state.deckConfirmed)return toast('서포트 덱을 확정해 주세요.');
+ if(!state.scenarioPlanConfirmed)return toast('시나리오 플랜을 확정해 주세요.');
+ if(state.trainingActive)return toast('현재 육성이 이미 진행 중입니다.');
+ state.trainingActive=true;save();renderSetupProgress();renderTrainingStartPanel();renderScenarioPlan();
+ const u=selectedUma();toast((u?.krName||'육성 우마')+' 육성을 시작했습니다.')
+}
+function renderScenarioPlan(){
+ const root=$('#scenarioPlanPanel'),body=$('#scenarioPlanBody'),btn=$('#confirmScenarioPlanBtn'),status=$('#scenarioPlanStatus');
+ if(!root||!body||!btn||!status)return;
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none,enabled=!!state.deckConfirmed;
+ root.classList.toggle('confirmed',!!state.scenarioPlanConfirmed);
+ btn.disabled=!enabled;btn.textContent=state.scenarioPlanConfirmed?'계획 변경':'시나리오 플랜 확정';btn.classList.toggle('primary',!state.scenarioPlanConfirmed);
+ status.textContent=!enabled?'서포트 덱 확정 필요':state.scenarioPlanConfirmed?'플랜 확정 ✓':scenarioPlanReady()?'확정 가능':'주요 선택 필요';
+ let html='<div class="note" style="margin-top:7px"><b>'+esc(sc.kr||sc.name||'현재 시나리오')+'</b> · '+(state.trainingActive?'육성 진행 중에도 계획 변경 가능':'육성 시작 전 주요 선택을 미리 지정')+'</div>';
+ const links=scenarioPlanLinkChoices();
+ if(links.length){
+   const isRamen=state.scenario==='tresenken',meta=isRamen?{kr:'당신과 나와 라멘과',jp:'貴方と私とラーメンと',when:'시니어급 9월 전반'}:(sc.linkEvent||{});
+   html+='<div class="planChoiceGroup"><div class="planChoiceTitle">'+esc((meta.when?meta.when+' · ':'')+(meta.kr||meta.title||'시나리오 선택 이벤트'))+'</div><div class="planChoiceGrid">';
+   for(const x of links){
+     const selected=state.scenarioPlanLinkChoice===x.id,result=scenarioLinkEventResult(x);
+     const tier=x.alwaysGold?'항상 금스킬':result?.linked?'금스킬 예상':'백스킬 예상';
+     html+='<label class="planChoice'+(selected?' selected':'')+'" data-plan-link="'+esc(x.id)+'"><input type="radio" name="scenarioPlanLink" '+(selected?'checked':'')+'><span class="linkVisuals">'+linkCharacterIconsHtml(x.characters)+'</span><span><span class="planChoiceName">'+esc(x.kr||x.jp)+'</span><span class="planChoiceSub">'+esc(x.jp)+'<br>'+esc(result?.skillName||'스킬 없음')+' · 힌트 Lv+'+(x.hintLevel||1)+'</span></span><span class="planChoiceRight">'+esc(tier)+'</span></label>'
+   }
+   html+='</div></div>'
+ }
+ if(state.scenario==='tresenken'){
+   html+='<div class="planChoiceGroup"><div class="planChoiceTitle">URA 입장 전 · 궁극 트레센 라멘 목표</div><div class="planChoiceGrid">';
+   for(const x of SCENARIOS.tresenken.ultimateRamenChoices||[]){
+     const selected=state.scenarioPlanUltimateRamen===x.id,skill=findSkillByJp(x.skill);
+     html+='<label class="planChoice'+(selected?' selected':'')+'" data-plan-ramen="'+esc(x.id)+'"><input type="radio" name="scenarioPlanRamen" '+(selected?'checked':'')+'>'+(skill?skillIcon(skill):'<span class="skillFallback">麺</span>')+'<span><span class="planChoiceName">'+esc(x.kr)+'</span><span class="planChoiceSub">'+esc(x.jp)+'<br>'+esc(x.skill)+' · 힌트 Lv+'+x.hintLevel+'</span></span><span class="planChoiceRight">'+(selected?'목표':'선택')+'</span></label>'
+   }
+   html+='</div></div>'
+ }
+ const planLink=scenarioPlanLinkSelected(),planRamen=scenarioPlanRamenSelected();
+ html+='<div class="planSummary">'+(planLink?'<span class="tag">이벤트: '+esc(planLink.kr||planLink.jp)+'</span>':'')+(planRamen?'<span class="tag">궁극 라멘: '+esc(planRamen.kr||planRamen.jp)+'</span>':'')+'</div>';
+ body.innerHTML=html;
+ body.querySelectorAll('[data-plan-link]').forEach(el=>el.onclick=e=>{e.preventDefault();if(!enabled)return;setScenarioPlanLinkChoice(el.dataset.planLink)});
+ body.querySelectorAll('[data-plan-ramen]').forEach(el=>el.onclick=e=>{e.preventDefault();if(!enabled)return;setScenarioPlanUltimateRamen(el.dataset.planRamen)});
+ renderTrainingStartPanel()
+}
+function renderTrainingStartPanel(){
+ const root=$('#trainingStartPanel'),btn=$('#trainingStartBtn'),summary=$('#trainingStartSummary');if(!root||!btn||!summary)return;
+ root.classList.toggle('active',!!state.trainingActive);
+ const ready=!!(state.currentUmaConfirmed&&state.inheritanceConfirmed&&state.deckConfirmed&&state.scenarioPlanConfirmed);
+ btn.disabled=!ready||!!state.trainingActive;btn.textContent=state.trainingActive?'육성 진행 중 ✓':'육성 시작';
+ const u=selectedUma(),sc=SCENARIOS[state.scenario]||SCENARIOS.none,link=scenarioPlanLinkSelected(),ramen=scenarioPlanRamenSelected();
+ if(state.trainingActive){
+   summary.innerHTML='<span class="trainingLive">육성 진행 중</span> · '+esc(u?.krName||'육성 우마')+' · '+esc(sc.kr||sc.name||'시나리오')+(link?' · '+esc(link.kr||link.jp):'')+(ramen?' · '+esc(ramen.kr||ramen.jp):'');
+ }else if(ready)summary.textContent='①~④ 준비 완료 · 버튼을 누르면 이번 육성 세션을 시작합니다.';
+ else summary.textContent='① 육성 우마 · ② 계승 · ③ 서포트 · ④ 시나리오 플랜을 순서대로 확정해 주세요.';
+}
 function renderSetupProgress(){
- const stages=[['uma',!!state.currentUmaConfirmed],['inheritance',!!state.inheritanceConfirmed],['deck',!!state.deckConfirmed]];
+ const stages=[['uma',!!state.currentUmaConfirmed],['inheritance',!!state.inheritanceConfirmed],['deck',!!state.deckConfirmed],['scenario',!!state.scenarioPlanConfirmed],['start',!!state.trainingActive]];
  const firstPending=stages.findIndex(x=>!x[1]);
  for(let i=0;i<stages.length;i++){
   const [key,done]=stages[i],el=document.querySelector('[data-setup-progress="'+key+'"]');if(!el)continue;
-  el.classList.toggle('done',done);el.classList.toggle('current',!done&&i===firstPending);
+  el.classList.remove('future');el.classList.toggle('done',done);el.classList.toggle('current',!done&&i===firstPending);
   const n=el.querySelector('.n');if(n)n.textContent=done?'✓':String(i+1)
  }
- const futureScenario=document.querySelector('[data-setup-progress="scenario"]'),futureStart=document.querySelector('[data-setup-progress="start"]');
- if(futureScenario)futureScenario.classList.toggle('current',firstPending<0);
- if(futureStart)futureStart.classList.remove('current')
 }
 function renderDeckSetupSummary(){
  const box=$('#deckSetupSummary');if(!box)return;
@@ -1294,7 +1423,7 @@ function renderDeckConfirmationUi(){
  }
  if(rec)rec.hidden=!!state.deckConfirmed;
  if(guideBox)guideBox.hidden=!!state.deckConfirmed;
- renderDeckSetupSummary();renderSetupProgress()
+ renderDeckSetupSummary();renderSetupProgress();renderScenarioPlan();renderTrainingStartPanel()
 }
 function openSlotPicker(id){const c=cardById(id);if(!c||!isSupportVisibleForServer(c))return toast('현재 서버에서는 사용할 수 없는 서포트 카드입니다.');$('#slotCardName').textContent=`${c?.krName||''} / ${c?.jpName||''}`;const b=$('#slotPicker');b.innerHTML='';state.deck.forEach((x,i)=>{const old=x?cardById(x):null;const z=document.createElement('button');z.className='pickSlot';z.innerHTML=`<b>${i+1}번 슬롯${i===5?' · 렌탈':''}</b><br>${old?`${old.image?`<img src="${esc(old.image)}">`:''}${esc(old.krName)}`:'빈칸'}`;z.onclick=()=>{placeAt(id,i);$('#slotModal').classList.remove('open')};b.appendChild(z)});$('#slotModal').classList.add('open')}
 function lbStageLabel(lb){return Number(lb)>=4?'풀돌':Number(lb)+'돌'}
@@ -1382,13 +1511,13 @@ function setCurrentUma(c){
  const prev=state.currentUmaId;
  state.currentUmaId=c?c.id:null;
  if(Number(prev)!==Number(state.currentUmaId)){
-   state.currentUmaConfirmed=false;state.inheritanceConfirmed=false;state.deckConfirmed=false;
+   state.currentUmaConfirmed=false;state.inheritanceConfirmed=false;state.deckConfirmed=false;state.scenarioPlanConfirmed=false;state.trainingActive=false;
  }
  save();renderConditionUmaSelector();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderGuide();renderTier();renderDbGuideRecommendations();renderV7Planner();renderDeckConfirmationUi()
 }
 function confirmCurrentUma(){
  const u=selectedUma();if(!u)return toast('먼저 육성 우마무스메를 선택해 주세요.');
- state.currentUmaConfirmed=true;state.inheritanceConfirmed=false;state.deckConfirmed=false;save();
+ state.currentUmaConfirmed=true;state.inheritanceConfirmed=false;state.deckConfirmed=false;state.scenarioPlanConfirmed=false;state.trainingActive=false;save();
  renderSelectedUma();renderInheritanceSetup();renderDeckConfirmationUi();
  toast(`${u.krName}을(를) 이번 육성 우마무스메로 확정했습니다.`)
 }
@@ -1447,7 +1576,7 @@ function inheritanceParent(index){
 function setInheritanceParent(index,u){
  if(!state.currentUmaConfirmed)return toast('먼저 육성 우마무스메를 확정해 주세요.');
  state.inheritanceParentIds=[...(state.inheritanceParentIds||[null,null])];
- state.inheritanceParentIds[index]=u?u.id:null;state.inheritanceConfirmed=false;state.deckConfirmed=false;save();
+ state.inheritanceParentIds[index]=u?u.id:null;state.inheritanceConfirmed=false;state.deckConfirmed=false;state.scenarioPlanConfirmed=false;state.trainingActive=false;save();
  renderInheritanceSetup();renderDeckConfirmationUi()
 }
 function confirmInheritance(){
@@ -1458,7 +1587,7 @@ function confirmInheritance(){
  }
  const parents=[inheritanceParent(0),inheritanceParent(1)];
  if(parents.some(x=>!x))return toast('계승 부모 2명을 모두 선택해 주세요.');
- state.inheritanceConfirmed=true;state.deckConfirmed=false;save();renderInheritanceSetup();renderDeckConfirmationUi();
+ state.inheritanceConfirmed=true;state.deckConfirmed=false;state.scenarioPlanConfirmed=false;state.trainingActive=false;save();renderInheritanceSetup();renderDeckConfirmationUi();
  toast('계승 우마무스메 2명을 확정했습니다.')
 }
 function renderInheritanceSetup(){
@@ -3246,7 +3375,7 @@ function renderV7Planner(){
 }
 
 
-/* V7.18 · 트레센켄 단계별 육성 가이드
+/* V7.19 · 트레센켄 단계별 육성 가이드
    카드 편성별 지역 추천 + 실제 인게임 스탯 아이콘 + 라멘 3종 텍스트 효과 안내 */
 let ramenGuidePhase='junior';
 
@@ -3725,8 +3854,8 @@ function setSsrDbOpen(open,scroll=false){
  if(open&&scroll)setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),20)
 }
 function toggleSsrDb(){setSsrDbOpen($('#ssrDbBody')?.hidden!==false,true)}
-function renderAll(){renderJpSyncStatus();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderDeckConfirmationUi()}
-applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;save();renderScenarioRareSkillPanel();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide();renderLegendsScenarioGuide()};
+function renderAll(){renderJpSyncStatus();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderDeckConfirmationUi();renderScenarioPlan();renderTrainingStartPanel()}
+applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;state.scenarioPlanLinkChoice=null;state.scenarioPlanUltimateRamen=null;state.scenarioPlanConfirmed=false;state.trainingActive=false;save();renderScenarioRareSkillPanel();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderScenarioPlan();renderSetupProgress();renderTrainingStartPanel()};
 populateConditionGuideRace();
 $('#conditionGuideRace').value=getGuideRace()?.id||'';
 $('#conditionGuideRace').onchange=e=>{
@@ -3749,6 +3878,8 @@ $('#trainingFinishBtn').onclick=openTrainingFinishModal;
 $('#saveDeckAsOwned').onclick=saveCurrentDeckAsOwned;
 $('#confirmInheritanceBtn').onclick=confirmInheritance;
 $('#confirmDeckBtn').onclick=confirmCurrentDeck;
+$('#confirmScenarioPlanBtn').onclick=confirmScenarioPlan;
+$('#trainingStartBtn').onclick=startTrainingSession;
 $('#clearAllAcquiredSkills').onclick=clearAllDeckSkillAcquisition;
 $('#finishAutoRecommend').onclick=()=>{finishDraft=makeRecommendedFinishDraft();renderTrainingFinishModal();toast('현재 조건 추천안으로 선택했습니다.')};
 $('#finishReset').onclick=()=>{finishDraft={character:{},scenario:[]};renderTrainingFinishModal()};
