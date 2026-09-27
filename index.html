@@ -696,9 +696,11 @@ const save=()=>{syncActiveServerProfile();localStorage.setItem(STATE_KEY,JSON.st
 function clearAllDeckSkillAcquisition(){
  if(!confirm('현재 서버의 덱 스킬 획득 체크를 전부 취소할까요? 덱 편성과 보유 SSR은 유지됩니다.'))return;
  state.acquired={};
- state.eventDone={};
+ const keepDone={};
+ for(const [k,v] of Object.entries(state.eventDone||{}))if(String(k).includes(':progress:'))keepDone[k]=v;
+ state.eventDone=keepDone;
  const keep={};
- for(const [k,v] of Object.entries(state.eventChoice||{}))if(String(k).startsWith('tresenken:'))keep[k]=v;
+ for(const [k,v] of Object.entries(state.eventChoice||{}))if(String(k).startsWith('tresenken:')||String(k).endsWith(':scenarioLinkEvent'))keep[k]=v;
  state.eventChoice=keep;
  state.evolutionPlan=null;
  save();
@@ -1677,8 +1679,11 @@ function renderUltimateRamenSection(){
  }
 }
 function evolutionContextKey(){
- const u=selectedUma(),r=getGuideRace(),scenarioChoice=state.scenario==='tresenken'?(state.tresenkenUltimateRamen||'ramen-none'):'no-scenario-choice',rmj=state.scenario==='tresenken'?`${state.tresenkenRmj?.juniorBig?1:0}${state.tresenkenRmj?.classicBig?1:0}${state.tresenkenRmj?.seniorBig?1:0}`:'---';
- return `${u?.id||'none'}|${state.scenario}|${scenarioChoice}|${rmj}|${r?.id||'none'}|${state.ground}|${state.distance}|${state.style}`
+ const u=selectedUma(),r=getGuideRace(),scenarioChoice=state.scenario==='tresenken'?(state.tresenkenUltimateRamen||'ramen-none'):'no-scenario-choice';
+ const linkChoice=scenarioChoiceValue(scenarioLinkChoiceGroup())||'link-none',sc=SCENARIOS[state.scenario]||SCENARIOS.none;
+ const progress=(sc.progressChecks||[]).map(x=>scenarioProgressMet(x.id)?1:0).join('');
+ const rmj=state.scenario==='tresenken'?String(Number(!!state.tresenkenRmj?.juniorBig))+String(Number(!!state.tresenkenRmj?.classicBig))+String(Number(!!state.tresenkenRmj?.seniorBig)):'---';
+ return [u?.id||'none',state.scenario,scenarioChoice,linkChoice,progress,rmj,r?.id||'none',state.ground,state.distance,state.style].join('|')
 }
 function scenarioEvolutionCandidates(cond){
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none;
