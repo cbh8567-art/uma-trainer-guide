@@ -60,19 +60,20 @@ jobs:
                       return row
               raise RuntimeError(f"Could not find option containing {text!r} in #{section_id}; rows={len(rows)}")
 
-          def wait_images(driver, row, expected_min=1):
-              WebDriverWait(driver, 12).until(
-                  lambda d: len(row.find_elements(By.CSS_SELECTOR, ".linkCharIcon")) >= expected_min
-              )
+          def wait_images(driver, section_id, text, expected_min=1):
               def loaded(_):
-                  imgs = row.find_elements(By.CSS_SELECTOR, ".linkCharIcon")
-                  if len(imgs) < expected_min:
+                  try:
+                      row = option_with_text(driver, section_id, text)
+                      imgs = row.find_elements(By.CSS_SELECTOR, ".linkCharIcon")
+                      if len(imgs) < expected_min:
+                          return False
+                      ok = all(driver.execute_script(
+                          "return arguments[0].complete && arguments[0].naturalWidth > 0", img
+                      ) for img in imgs)
+                      return (row, imgs) if ok else False
+                  except Exception:
                       return False
-                  return all(driver.execute_script(
-                      "return arguments[0].complete && arguments[0].naturalWidth > 0", img
-                  ) for img in imgs)
-              WebDriverWait(driver, 15).until(loaded)
-              return row.find_elements(By.CSS_SELECTOR, ".linkCharIcon")
+              return WebDriverWait(driver, 18).until(loaded)
 
           def select_scenario(driver, value):
               select_el = driver.find_element(By.ID, "scenario")
@@ -93,8 +94,7 @@ jobs:
               # Tracenken: always-gold staff row must show both Tazuna + Light Hello;
               # a normal unlinked Uma row must remain white skill on a fresh profile.
               select_scenario(driver, "tresenken")
-              staff = option_with_text(driver, "finishRamenLinkChoices", "타즈나 & 라이트 하로")
-              staff_imgs = wait_images(driver, staff, 2)
+              staff, staff_imgs = wait_images(driver, "finishRamenLinkChoices", "타즈나 & 라이트 하로", 2)
               if len(staff_imgs) < 2:
                   raise RuntimeError("Tracenken staff row did not render two character badges")
               if "금스킬" not in staff.find_element(By.CSS_SELECTOR, ".finishRight").text:
@@ -112,8 +112,7 @@ jobs:
               ]
               for scenario, label in cases:
                   select_scenario(driver, scenario)
-                  row = option_with_text(driver, "finishRamenLinkChoices", label)
-                  wait_images(driver, row, 1)
+                  row, _ = wait_images(driver, "finishRamenLinkChoices", label, 1)
                   print("BADGE PASS:", scenario, label, row.find_element(By.CSS_SELECTOR, ".finishRight").text)
 
               sugar = option_with_text(driver, "finishRamenLinkChoices", "슈가 라이츠")
