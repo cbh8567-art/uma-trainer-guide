@@ -32,9 +32,9 @@ jobs:
           from selenium.webdriver.support import expected_conditions as EC
 
           TARGETS = [
-              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v711"),
-              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v711"),
-              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v711"),
+              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v712"),
+              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v712"),
+              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v712"),
           ]
 
           def make_driver(width=1440, height=1200):
@@ -49,7 +49,7 @@ jobs:
               return driver
 
           def wait_app(driver):
-              WebDriverWait(driver, 25).until(lambda d: "V7.11" in d.title)
+              WebDriverWait(driver, 25).until(lambda d: "V7.12" in d.title)
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "scenarioRareSkillPanel")))
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "finishRamenLinkChoices")))
 
@@ -225,6 +225,40 @@ jobs:
                   time.sleep(0.3)
 
                   check_scenario_badges(d)
+
+                  # V7.12: Tresenken turn checklist shows all 3 ramen choices.
+                  select_scenario(d, "tresenken")
+                  d.execute_script("document.querySelector('[data-ramen-phase=senior]').click()")
+                  WebDriverWait(d, 8).until(lambda x: len(x.find_elements(By.CSS_SELECTOR, "#ramenGuideBody .ramenThreeItem")) == 3)
+                  senior_ramen = d.find_elements(By.CSS_SELECTOR, "#ramenGuideBody .ramenThreeItem")
+                  stat_icons = d.find_elements(By.CSS_SELECTOR, "#ramenGuideBody .ramenStatIcon")
+                  if len(senior_ramen) != 3 or len(stat_icons) == 0:
+                      raise RuntimeError("Senior ramen checklist should show 3 regional ramen and stat icons")
+                  d.execute_script("document.querySelector('[data-ramen-phase=ura]').click()")
+                  WebDriverWait(d, 8).until(lambda x: len(x.find_elements(By.CSS_SELECTOR, "#ramenGuideBody .ramenThreeItem")) == 3)
+                  ura_text = d.find_element(By.ID, "ramenGuideBody").text
+                  for expected in ["스페셜 트레센 라멘", "욕심쟁이 트레센 라멘", "주옥의 트레센 라멘"]:
+                      if expected not in ura_text:
+                          raise RuntimeError(f"Missing ultimate ramen choice: {expected}")
+                  print("RAMEN THREE-CHOICE PASS")
+
+                  # V7.12: character tier snapshot uses existing Uma portraits.
+                  tier_tab = d.find_element(By.CSS_SELECTOR, '.tab[data-page="tier"]')
+                  d.execute_script("arguments[0].click()", tier_tab)
+                  d.execute_script("""
+                      document.getElementById('tierGround').value='turf';
+                      document.getElementById('tierDistance').value='mid';
+                      document.getElementById('tierStyle').value='all';
+                      renderTier();
+                  """)
+                  WebDriverWait(d, 8).until(lambda x: len(x.find_elements(By.CSS_SELECTOR, "#tierGrid .tierChar")) > 0)
+                  tier_cards = d.find_elements(By.CSS_SELECTOR, "#tierGrid .tierChar")
+                  tier_portraits = d.find_elements(By.CSS_SELECTOR, "#tierGrid .tierPortrait")
+                  if len(tier_portraits) == 0:
+                      raise RuntimeError("Uma tier rows rendered without character portraits")
+                  print("UMA TIER PORTRAIT PASS:", len(tier_portraits), "/", len(tier_cards))
+                  d.execute_script("arguments[0].click()", d.find_element(By.CSS_SELECTOR, '.tab[data-page="deck"]'))
+                  time.sleep(0.2)
 
                   # V7.8: Twinkle Legends guide renders with all three in-game legend routes.
                   select_scenario(d, "legends")
