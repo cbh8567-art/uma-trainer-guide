@@ -32,9 +32,9 @@ jobs:
           from selenium.webdriver.support import expected_conditions as EC
 
           TARGETS = [
-              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v78"),
-              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v78"),
-              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v78"),
+              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v79"),
+              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v79"),
+              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v79"),
           ]
 
           def make_driver(width=1440, height=1200):
@@ -49,7 +49,7 @@ jobs:
               return driver
 
           def wait_app(driver):
-              WebDriverWait(driver, 25).until(lambda d: "V7.8" in d.title)
+              WebDriverWait(driver, 25).until(lambda d: "V7.9" in d.title)
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "scenarioRareSkillPanel")))
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "finishRamenLinkChoices")))
 
@@ -157,6 +157,15 @@ jobs:
                   d.get(url)
                   wait_app(d)
                   print("TITLE:", d.title)
+                  # V7.9 spectator mode: verify HTTPS screen-share UI/API without invoking the permission dialog.
+                  watch_start = d.find_element(By.ID, "watchPilotStart")
+                  watch_video = d.find_element(By.ID, "watchPilotVideo")
+                  capture_api = d.execute_script("return !!window.isSecureContext && !!navigator.mediaDevices && typeof navigator.mediaDevices.getDisplayMedia === 'function'")
+                  if not watch_start.is_displayed() or not watch_video:
+                      raise RuntimeError("Spectator screen-share UI is missing")
+                  if not capture_api:
+                      raise RuntimeError("getDisplayMedia is unavailable on deployed HTTPS target")
+                  print("WATCH PILOT UI/API PASS")
                   tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
                   print("TAB COUNT:", len(tabs))
                   if len(tabs) < 2:
