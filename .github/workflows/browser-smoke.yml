@@ -203,6 +203,20 @@ jobs:
                   picker_cards = d.find_elements(By.CSS_SELECTOR, "#emptySlotCards .card")
                   if len(picker_cards) == 0:
                       raise RuntimeError("Deck-slot SSR picker opened but rendered no cards")
+                  picker_imgs = d.find_elements(By.CSS_SELECTOR, "#emptySlotCards .card img")
+                  if len(picker_imgs) == 0:
+                      raise RuntimeError("Deck-slot SSR picker rendered no artwork")
+                  art_fit = d.execute_script("return getComputedStyle(arguments[0]).objectFit", picker_imgs[0])
+                  if art_fit != "contain":
+                      raise RuntimeError(f"SSR picker artwork should preserve ratio with contain, got {art_fit}")
+                  art_dims = d.execute_script("""
+                      const i=arguments[0],r=i.getBoundingClientRect();
+                      return {nw:i.naturalWidth,nh:i.naturalHeight,w:r.width,h:r.height};
+                  """, picker_imgs[0])
+                  if art_dims["nw"] and art_dims["nh"] and art_dims["w"] and art_dims["h"]:
+                      if abs((art_dims["nw"]/art_dims["nh"])-(art_dims["w"]/art_dims["h"])) > 0.03:
+                          raise RuntimeError(f"SSR picker artwork ratio changed: {art_dims}")
+                  print("SSR PICKER ART RATIO PASS:", art_dims)
                   d.execute_script("document.getElementById('emptySlotModal').classList.remove('open')")
                   print("DECK SLOT PICKER PASS:", len(picker_cards))
 
