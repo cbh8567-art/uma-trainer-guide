@@ -685,6 +685,9 @@ function canonicalSkill(s){
 
 function skillIcon(s){
  if(!s?.iconId)return '<span class="skillFallback missingIcon" title="아이콘 미연결">?</span>';
+ // 시나리오 전용 원본 아이콘은 앱과 함께 배포해 외부 저장소 누락을 방지합니다.
+ const bundled=[20226,20246,20256,20266,20276,20286,20296,20306,20316,20326,20336,20346,20366,20376];
+ if(bundled.includes(Number(s.iconId)))return `<img class="skillIcon" src="./assets/skill-icons/${Number(s.iconId)}.png" width="35" height="35" alt="${esc(s.jp||'시나리오 진화 스킬')} 아이콘" loading="lazy" onerror="this.outerHTML='<span class=&quot;skillFallback missingIcon&quot; title=&quot;아이콘 로드 실패&quot;>?</span>'">`;
  const primary=`${CONFIG.assetBases.skillIcon}${s.iconId}.webp`;
  const fallback=`https://gametora.com/images/umamusume/skill_icons/utx_ico_skill_${s.iconId}.png`;
  return `<img class="skillIcon" src="${primary}" data-fallback="${fallback}" loading="lazy" onerror="if(!this.dataset.fallbackTried){this.dataset.fallbackTried='1';this.src=this.dataset.fallback}else{this.outerHTML='<span class=&quot;skillFallback missingIcon&quot; title=&quot;아이콘 로드 실패&quot;>?</span>'}">`
@@ -1098,6 +1101,10 @@ let SCENARIOS={
 
 function findSkillByJp(name){
   for(const x of runtime.skills.values())if(x.name===name)return makeSkill(x);
+  // 원문 표기는 유지하면서 기존 시나리오 표기와 DB의 이름 차이만 연결합니다.
+  const aliases={'Turn the tables！':'Turn the tables!','新しい夢の旅路':'新しい夢への旅路'};
+  const alias=aliases[name];
+  if(alias)for(const x of runtime.skills.values())if(x.name===alias)return makeSkill(x);
   return null
 }
 function deckHasSkillName(name){
