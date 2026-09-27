@@ -18,7 +18,8 @@ ok(index.includes("gametora.com/images/umamusume/skill_icons/utx_ico_skill_"),"G
 ok(index.includes("30305")&&index.includes("いつでも、毎秒、その時だ"),"Tazuna invariant missing");
 ok(index.includes("./data/jp/system_status.json"),"system_status loader missing");
 ok(index.includes("./data/jp/scenario_watch.json"),"scenario_watch loader missing");
-ok(index.includes('<meta name="app-build" content="V7.0">'),"V7.0 app build marker missing");
+ok(/<meta name="app-build" content="V7\.\d+">/.test(index),"V7.x app build marker missing");
+ok(index.includes('id="dbLoadPanel"')&&index.includes('id="dbRetryBtn"'),"DB loading/retry UI missing");
 const meta=await read("data/kr/server_meta.json");
 ok(Number(meta.supportMaxId)===30260,"KR supportMaxId must stay 30260");
 ok(Number(meta.implementedUmaCards)===212,"KR implementedUmaCards must stay 212");
@@ -44,6 +45,7 @@ ok(inheritance?.scope==="jp","JP inheritance recommendation scope invalid");
 ok(Array.isArray(inheritance?.distance?.mid)&&inheritance.distance.mid.length>=8,"JP mid inheritance recommendations missing");
 ok(Array.isArray(inheritance?.style?.senko)&&inheritance.style.senko.length>=5,"JP style inheritance recommendations missing");
 for(const [skillId,iconId] of Object.entries({"204572":20011,"204702":20011,"204532":20011,"204701":20012,"204531":20012,"204571":20012,"204372":20011}))ok(Number(iconOverrides?.overrides?.[skillId]?.iconId)===Number(iconId),`E F Fouria icon override missing: ${skillId}`);
+ok(Number(iconOverrides?.overrides?.["100301311"]?.iconId)===20042,"Tokai Teio evolution icon override missing");
 await read("data/jp/change_report.json");
 await read("data/jp/manifest.json");
 await read("data/jp/source_health.json");
