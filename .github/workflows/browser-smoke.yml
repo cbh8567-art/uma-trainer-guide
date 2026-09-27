@@ -173,6 +173,46 @@ jobs:
                   time.sleep(0.3)
 
                   check_scenario_badges(d)
+
+                  # V7.8: Twinkle Legends guide renders with all three in-game legend routes.
+                  select_scenario(d, "legends")
+                  legends = WebDriverWait(d, 12).until(
+                      lambda x: x.find_element(By.ID, "legendsScenarioGuide")
+                  )
+                  if not legends.is_displayed():
+                      raise RuntimeError("Twinkle Legends guide is not visible")
+                  legend_routes = d.find_elements(By.CSS_SELECTOR, "#legendsRouteGrid .legendsRoute")
+                  if len(legend_routes) != 3:
+                      raise RuntimeError(f"Expected 3 Legends routes, got {len(legend_routes)}")
+                  legend_text = " ".join(x.text for x in legend_routes)
+                  for expected in ["하이세이코", "스피드 심볼리", "세인트 라이트"]:
+                      if expected not in legend_text:
+                          raise RuntimeError(f"Missing Legends route: {expected}")
+                  if not d.find_element(By.ID, "legendsGuideBody").text.strip():
+                      raise RuntimeError("Twinkle Legends guide body is empty")
+                  print("LEGENDS GUIDE PASS")
+
+                  # V7.8: Korean Trainer Guide includes Masters Challenge races in its existing selector.
+                  d.find_element(By.CSS_SELECTOR, '[data-app-server="kr"]').click()
+                  WebDriverWait(d, 15).until(
+                      lambda x: any(
+                          o.get_attribute("value") == "kr_masters_2026_shuka"
+                          for o in Select(x.find_element(By.ID, "conditionGuideRace")).options
+                      )
+                  )
+                  masters_count = sum(
+                      1 for o in Select(d.find_element(By.ID, "conditionGuideRace")).options
+                      if (o.get_attribute("value") or "").startswith("kr_masters_")
+                  )
+                  if masters_count != 8:
+                      raise RuntimeError(f"Expected 8 Masters targets, got {masters_count}")
+                  print("MASTERS GUIDE PASS:", masters_count)
+
+                  # Restore JP before the legacy mobile smoke because Tresenken is JP-only at this date.
+                  d.find_element(By.CSS_SELECTOR, '[data-app-server="jp"]').click()
+                  WebDriverWait(d, 12).until(
+                      lambda x: Select(x.find_element(By.ID, "scenario")).first_selected_option.get_attribute("value") != ""
+                  )
                   check_mobile(d)
 
                   logs = d.get_log("browser")
