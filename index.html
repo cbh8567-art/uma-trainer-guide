@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.4">
-<title>우마무스메 트레이너 가이드 V7.4 WEB</title>
+<meta name="app-build" content="V7.5-RC1">
+<title>우마무스메 트레이너 가이드 V7.5-RC1 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -189,7 +189,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.4 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.5-RC1 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -956,15 +956,23 @@ let SCENARIOS={
       {id:'greedy',jp:'よくばりトレセンラーメン',kr:'욕심쟁이 트레센 라멘',skill:'いいとこ入った！',hintLevel:2},
       {id:'jewel',jp:'珠玉のトレセンラーメン',kr:'주옥의 트레센 라멘',skill:'好奇心',hintLevel:2}
     ],
+    ramenLinkEventChoices:[
+      {id:'fine',jp:'ファインモーション',kr:'파인 모션',characters:['ファインモーション'],gold:'勇迅一閃',normal:'先行直線○',hintLevel:1},
+      {id:'toproad',jp:'ナリタトップロード',kr:'나리타 탑로드',characters:['ナリタトップロード'],gold:'烈風一閃',normal:'長距離直線○',hintLevel:1},
+      {id:'lighto',jp:'カルストンライトオ',kr:'칼스톤 라이트 오',characters:['カルストンライトオ'],gold:'閃く雷光',normal:'弾ける足取り',hintLevel:1},
+      {id:'doto',jp:'メイショウドトウ',kr:'메이쇼 도토',characters:['メイショウドトウ'],gold:'ネバーギブアップ',normal:'折れない心',hintLevel:1},
+      {id:'nature',jp:'ナイスネイチャ',kr:'나이스 네이처',characters:['ナイスネイチャ'],gold:'光芒一閃',normal:'中距離直線○',hintLevel:1},
+      {id:'staff',jp:'駿川たづな＆ライトハロー',kr:'타즈나 & 라이트 하로',characters:['駿川たづな','ライトハロー'],gold:'英俊豪傑',normal:null,hintLevel:1,alwaysGold:true}
+    ],
     scenarioAcquiredRareSkills:[
       {name:'時中の妙',source:'GameWith / VIP Wiki 2026-09',acquisition:'클래식급 12월 후반 제2회 RMJ · 대성황 이상',verified:true,milestone:'classicRmjBig'},
       {name:'極上の感謝を！',source:'GameWith / VIP Wiki 2026-09',acquisition:'육성 종료 엔딩 · 모든 RMJ 대성황 이상',verified:true,milestone:'allRmjBig'},
-      {name:'勇迅一閃',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 파인 모션 대응 편성 시',verified:true},
-      {name:'烈風一閃',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 나리타 탑로드 대응 편성 시',verified:true},
-      {name:'閃く雷光',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 칼스톤 라이트 오 대응 편성 시',verified:true},
-      {name:'ネバーギブアップ',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 메이쇼 도토 대응 편성 시',verified:true},
-      {name:'光芒一閃',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 나이스 네이처 대응 편성 시',verified:true},
-      {name:'英俊豪傑',source:'Game8 2026-09-22',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 타즈나/라이트 헬로 대응 편성 시',verified:true},
+      {name:'勇迅一閃',source:'Game8 2026-09-26',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 파인 모션 선택 + 파인 모션 편성/육성 시',verified:true,choiceGroup:'ramenLinkEvent',choiceId:'fine',requiredCharacter:'ファインモーション'},
+      {name:'烈風一閃',source:'Game8 2026-09-26',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 나리타 탑로드 선택 + 나리타 탑로드 편성/육성 시',verified:true,choiceGroup:'ramenLinkEvent',choiceId:'toproad',requiredCharacter:'ナリタトップロード'},
+      {name:'閃く雷光',source:'Game8 2026-09-26',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 칼스톤 라이트 오 선택 + 칼스톤 라이트 오 편성/육성 시',verified:true,choiceGroup:'ramenLinkEvent',choiceId:'lighto',requiredCharacter:'カルストンライトオ'},
+      {name:'ネバーギブアップ',source:'Game8 2026-09-26',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 메이쇼 도토 선택 + 메이쇼 도토 편성/육성 시',verified:true,choiceGroup:'ramenLinkEvent',choiceId:'doto',requiredCharacter:'メイショウドトウ'},
+      {name:'光芒一閃',source:'Game8 2026-09-26',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 나이스 네이처 선택 + 나이스 네이처 편성/육성 시',verified:true,choiceGroup:'ramenLinkEvent',choiceId:'nature',requiredCharacter:'ナイスネイチャ'},
+      {name:'英俊豪傑',source:'Game8 2026-09-26',acquisition:'시니어급 9월 전반 「貴方と私とラーメンと」 · 타즈나&라이트 하로 선택 시',verified:true,choiceGroup:'ramenLinkEvent',choiceId:'staff'},
       {name:'火事場のバ鹿力',source:'Game8 2026-09-22',acquisition:'시니어급 12월 후반 궁극 라멘 선택 · スペシャルトレセンラーメン · 힌트 Lv+2',verified:true,choiceGroup:'ultimateRamen',choiceId:'special'},
       {name:'いいとこ入った！',source:'Game8 2026-09-22',acquisition:'시니어급 12월 후반 궁극 라멘 선택 · よくばりトレセンラーメン · 힌트 Lv+2',verified:true,choiceGroup:'ultimateRamen',choiceId:'greedy'},
       {name:'好奇心',source:'Game8 2026-09-22',acquisition:'시니어급 12월 후반 궁극 라멘 선택 · 珠玉のトレセンラーメン · 힌트 Lv+2',verified:true,choiceGroup:'ultimateRamen',choiceId:'jewel'}
@@ -1153,6 +1161,7 @@ function umaRareSkillNames(){
 }
 function scenarioChoiceValue(group){
  if(group==='ultimateRamen'&&state.scenario==='tresenken')return state.tresenkenUltimateRamen||null;
+ if(group==='ramenLinkEvent'&&state.scenario==='tresenken')return state.eventChoice?.['tresenken:ramenLinkEvent']||null;
  return null
 }
 function tresenkenAllRmjBig(){
@@ -1173,6 +1182,18 @@ function deckOrUmaHasCharacter(jpName){
  }
  const u=selectedUma();
  return !!(u&&(norm(u.character)===target||norm(u.name).includes(target)))
+}
+function deckOrUmaHasAnyCharacter(names){return (names||[]).some(deckOrUmaHasCharacter)}
+function ramenLinkEventChoice(){
+ if(state.scenario!=='tresenken')return null;
+ const id=scenarioChoiceValue('ramenLinkEvent');
+ return (SCENARIOS.tresenken.ramenLinkEventChoices||[]).find(x=>x.id===id)||null
+}
+function ramenLinkEventResult(x){
+ if(!x)return null;
+ const linked=!!x.alwaysGold||deckOrUmaHasAnyCharacter(x.characters);
+ const skillName=linked?x.gold:x.normal;
+ return {linked,skillName,skill:skillName?findSkillByJp(skillName):null}
 }
 function scenarioRareSkillNames(){
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none,out=new Set();
