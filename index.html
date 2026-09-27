@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.8">
-<title>우마무스메 트레이너 가이드 V7.8 WEB</title>
+<meta name="app-build" content="V7.9">
+<title>우마무스메 트레이너 가이드 V7.9 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -215,6 +215,23 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .finishOption.disabled:hover{border-color:#343a4d}
 .finishOption.disabled .skillIcon{opacity:.9}.finishOption.disabled .finishName{color:#e3e6ef}.finishOption.disabled .finishSub{color:#b7bfce}
 .finishOption.disabled .finishRight{color:#e4b2ba}.finishOption.disabled .finishLocked{background:#341f25}
+
+/* V7.9 · 디지탄 관전 모드 화면 공유 테스트 */
+.watchPilot{margin-top:10px;border:1px solid #4d607a;background:linear-gradient(180deg,#192333,#151a25);border-radius:14px;padding:11px}
+.watchPilotHead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.watchPilotActions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.watchPilotStatus{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.watchState{display:inline-flex;align-items:center;gap:5px;border:1px solid #465168;background:#1a2030;border-radius:999px;padding:4px 8px;font-size:9px;font-weight:900}
+.watchState.live{border-color:#3f7d60;background:#183025;color:#bdf2d3}
+.watchState.error{border-color:#844956;background:#2b1c22;color:#ffc2cc}
+.watchPreviewWrap{margin-top:9px;border:1px solid #343d51;border-radius:12px;background:#080a0f;overflow:hidden;position:relative;min-height:210px;display:flex;align-items:center;justify-content:center}
+.watchPreview{display:block;width:100%;height:auto;max-height:62vh;object-fit:contain;background:#000}
+.watchPreview[hidden]{display:none}
+.watchPlaceholder{padding:36px 16px;text-align:center;color:#8f9aaf;font-size:10px;line-height:1.6}
+.watchPlaceholder[hidden]{display:none}
+.watchPrivacy{margin-top:7px;padding:7px 8px;border:1px solid #3a465d;background:#141b28;border-radius:9px;font-size:9px;color:#b9c4d6;line-height:1.55}
+.watchMeta{font-size:9px;color:#b9c3d5}
+@media(max-width:720px){.watchPreviewWrap{min-height:170px}.watchPilot{padding:9px}}
 .finishOption.disabled input{cursor:not-allowed}
 .finishLocked{font-size:8px;color:#e2a3ad;border:1px solid #73434b;border-radius:99px;padding:2px 5px;white-space:nowrap}
 .scenarioRareSkillPanel{margin-top:10px;padding:10px;border:1px solid #58617a;border-radius:12px;background:linear-gradient(180deg,#1a2230,#171b24)}
@@ -241,7 +258,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.8 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.9 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -410,6 +427,27 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
    <h2>현재 육성 우마무스메</h2>
    <div class="search"><input id="umaSearch" placeholder="한국어/일본어로 검색 (예: 아그네스 디지털, ライスシャワー)"><button class="btn" id="umaClear">초기화</button></div>
    <div class="umaResults" id="umaResults"></div><div id="selectedUma"></div>
+  </div>
+  <div class="panel watchPilot" id="watchPilotPanel">
+   <div class="watchPilotHead">
+    <div>
+     <h2 style="margin:0">디지탄 관전 모드 테스트</h2>
+     <div class="sub">자동조작 없음 · 사용자가 직접 선택한 화면/창만 브라우저에서 미리보기합니다.</div>
+    </div>
+    <span class="watchState" id="watchPilotState">대기</span>
+   </div>
+   <div class="watchPilotActions">
+    <button type="button" class="btn primary" id="watchPilotStart">화면 공유 시작</button>
+    <button type="button" class="btn" id="watchPilotStop" disabled>공유 중지</button>
+   </div>
+   <div class="watchPilotStatus">
+    <span class="watchMeta" id="watchPilotMeta">Chrome/Edge의 화면 공유 선택창에서 우마무스메 창 또는 해당 모니터를 선택해 주세요.</span>
+   </div>
+   <div class="watchPreviewWrap">
+    <video class="watchPreview" id="watchPilotVideo" autoplay muted playsinline hidden></video>
+    <div class="watchPlaceholder" id="watchPilotPlaceholder">아직 공유된 화면이 없습니다.<br>첫 테스트에서는 AI 분석이나 외부 전송을 하지 않고, 캡처가 정상적으로 보이는지만 확인합니다.</div>
+   </div>
+   <div class="watchPrivacy">이 테스트는 영상 프레임을 서버나 AI로 전송하지 않습니다. 공유는 브라우저 탭을 닫거나 「공유 중지」를 누르면 종료됩니다. 우마무스메 창이 검게 보이면 창 대신 해당 모니터 전체 공유로 다시 시험해 보세요.</div>
   </div>
   <div class="panel" style="margin-top:10px">
    <div class="sectionHead" style="margin-top:0"><div><h2 style="margin:0">트레이너 가이드 목표 레이스</h2><div class="sub">챔피언스 미팅과 마스터즈 챌린지를 같은 추천 엔진으로 비교합니다.</div></div><span class="status" id="guideRaceSourceStatus"></span></div>
@@ -2967,6 +3005,96 @@ function initLegendsScenarioGuide(){
  renderLegendsScenarioGuide()
 }
 
+
+/* V7.9 · 디지탄 관전 모드 화면 공유 테스트
+   로컬 미리보기 전용: 프레임 업로드/AI 전송/자동 입력 없음 */
+let watchPilotStream=null;
+
+function watchPilotEls(){
+ return {
+  start:$('#watchPilotStart'),
+  stop:$('#watchPilotStop'),
+  state:$('#watchPilotState'),
+  meta:$('#watchPilotMeta'),
+  video:$('#watchPilotVideo'),
+  placeholder:$('#watchPilotPlaceholder')
+ }
+}
+function setWatchPilotUi(mode,message){
+ const e=watchPilotEls();if(!e.state)return;
+ e.state.className='watchState'+(mode==='live'?' live':mode==='error'?' error':'');
+ e.state.textContent=mode==='live'?'공유 중':mode==='error'?'오류':mode==='unsupported'?'지원 안 됨':'대기';
+ if(e.meta&&message)e.meta.textContent=message;
+ if(e.start)e.start.disabled=mode==='live'||mode==='unsupported';
+ if(e.stop)e.stop.disabled=mode!=='live'
+}
+function watchPilotTrackMeta(track){
+ if(!track)return '영상 트랙 정보를 확인할 수 없습니다.';
+ const s=track.getSettings?.()||{};
+ const bits=[];
+ if(s.displaySurface)bits.push('공유 대상 '+s.displaySurface);
+ if(s.width&&s.height)bits.push(s.width+'×'+s.height);
+ if(s.frameRate)bits.push(Math.round(s.frameRate)+'fps');
+ return bits.length?bits.join(' · '):'화면 공유 연결됨'
+}
+function stopWatchPilot(reason='화면 공유가 종료되었습니다.'){
+ const stream=watchPilotStream;watchPilotStream=null;
+ if(stream)for(const t of stream.getTracks())try{t.stop()}catch(_){}
+ const e=watchPilotEls();
+ if(e.video){try{e.video.pause()}catch(_){} e.video.srcObject=null;e.video.hidden=true}
+ if(e.placeholder)e.placeholder.hidden=false;
+ setWatchPilotUi('idle',reason)
+}
+async function startWatchPilot(){
+ if(!navigator.mediaDevices?.getDisplayMedia){
+  setWatchPilotUi('unsupported','이 브라우저에서는 화면 공유 API를 사용할 수 없습니다. 최신 Chrome 또는 Edge의 HTTPS 페이지에서 다시 확인해 주세요.');
+  return
+ }
+ if(!window.isSecureContext){
+  setWatchPilotUi('unsupported','화면 공유는 HTTPS 보안 페이지에서만 사용할 수 있습니다.');
+  return
+ }
+ stopWatchPilot('공유 대상을 선택하는 중입니다…');
+ const e=watchPilotEls();
+ try{
+  const stream=await navigator.mediaDevices.getDisplayMedia({
+   video:{frameRate:{ideal:5,max:15}},
+   audio:false
+  });
+  watchPilotStream=stream;
+  const track=stream.getVideoTracks()[0];
+  if(!track)throw new Error('영상 트랙을 찾지 못했습니다.');
+  track.addEventListener('ended',()=>{if(watchPilotStream===stream)stopWatchPilot('브라우저에서 화면 공유가 종료되었습니다.')},{once:true});
+  if(e.video){
+   e.video.srcObject=stream;
+   e.video.hidden=false;
+   if(e.placeholder)e.placeholder.hidden=true;
+   await e.video.play().catch(()=>{});
+   const refresh=()=>{if(watchPilotStream===stream)setWatchPilotUi('live',watchPilotTrackMeta(track)+(e.video.videoWidth?' · 실제 영상 '+e.video.videoWidth+'×'+e.video.videoHeight:''))};
+   if(e.video.videoWidth)refresh();else e.video.addEventListener('loadedmetadata',refresh,{once:true});
+  }
+  setWatchPilotUi('live',watchPilotTrackMeta(track))
+ }catch(err){
+  const name=err?.name||'Error';
+  let msg='화면 공유를 시작하지 못했습니다.';
+  if(name==='NotAllowedError')msg='공유가 취소되었거나 권한이 허용되지 않았습니다. 다시 눌러 원하는 창/화면을 직접 선택해 주세요.';
+  else if(name==='NotFoundError')msg='공유 가능한 화면을 찾지 못했습니다.';
+  else if(name==='InvalidStateError')msg='버튼을 직접 눌러 화면 공유를 시작해야 합니다.';
+  else if(err?.message)msg+=' '+err.message;
+  stopWatchPilot(msg);
+  setWatchPilotUi('error',msg)
+ }
+}
+function initWatchPilot(){
+ const e=watchPilotEls();if(!e.start||!e.stop)return;
+ e.start.onclick=startWatchPilot;
+ e.stop.onclick=()=>stopWatchPilot('사용자가 화면 공유를 중지했습니다.');
+ if(!navigator.mediaDevices?.getDisplayMedia)setWatchPilotUi('unsupported','현재 브라우저는 화면 공유 API를 지원하지 않습니다.');
+ else if(!window.isSecureContext)setWatchPilotUi('unsupported','HTTPS 보안 페이지에서 열어야 화면 공유를 사용할 수 있습니다.');
+ else setWatchPilotUi('idle','준비 완료 · 「화면 공유 시작」을 누른 뒤 우마무스메 창 또는 모니터를 선택하세요.');
+ window.addEventListener('pagehide',()=>{if(watchPilotStream)stopWatchPilot('페이지를 벗어나 화면 공유가 종료되었습니다.')},{once:true})
+}
+
 function renderAll(){renderJpSyncStatus();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide();renderLegendsScenarioGuide()}
 applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;save();renderScenarioRareSkillPanel();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide();renderLegendsScenarioGuide()};
 populateConditionGuideRace();
@@ -3651,6 +3779,7 @@ async function bootstrapApp(){
 
 initRamenScenarioGuide();
 initLegendsScenarioGuide();
+initWatchPilot();
 bootstrapApp();
 
 
