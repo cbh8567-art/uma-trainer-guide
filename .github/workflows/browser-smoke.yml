@@ -32,9 +32,9 @@ jobs:
           from selenium.webdriver.support import expected_conditions as EC
 
           TARGETS = [
-              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v79"),
-              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v79"),
-              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v79"),
+              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v711"),
+              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v711"),
+              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v711"),
           ]
 
           def make_driver(width=1440, height=1200):
@@ -49,7 +49,7 @@ jobs:
               return driver
 
           def wait_app(driver):
-              WebDriverWait(driver, 25).until(lambda d: "V7.9" in d.title)
+              WebDriverWait(driver, 25).until(lambda d: "V7.11" in d.title)
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "scenarioRareSkillPanel")))
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "finishRamenLinkChoices")))
 
@@ -166,6 +166,29 @@ jobs:
                   if not capture_api:
                       raise RuntimeError("getDisplayMedia is unavailable on deployed HTTPS target")
                   print("WATCH PILOT DOM/API PASS")
+
+                  # V7.11: compact SSR DB and deck-first card picker.
+                  db_body = d.find_element(By.ID, "ssrDbBody")
+                  if db_body.is_displayed():
+                      raise RuntimeError("SSR DB should be collapsed by default")
+                  toggle_db = d.find_element(By.ID, "toggleSsrDb")
+                  toggle_db.click()
+                  WebDriverWait(d, 8).until(lambda x: x.find_element(By.ID, "ssrDbBody").is_displayed())
+                  toggle_db.click()
+                  WebDriverWait(d, 8).until(lambda x: not x.find_element(By.ID, "ssrDbBody").is_displayed())
+                  rec = d.find_element(By.ID, "dbGuideRecommend")
+                  global_skills = d.find_element(By.ID, "globalSkills")
+                  rec_before = d.execute_script(
+                      "return !!(arguments[0].compareDocumentPosition(arguments[1]) & Node.DOCUMENT_POSITION_FOLLOWING)",
+                      rec, global_skills
+                  )
+                  if not rec_before:
+                      raise RuntimeError("Trainer Guide recommended SSR strip should be directly before skill sections")
+                  scopes = d.find_elements(By.CSS_SELECTOR, "#emptySlotScope [data-picker-scope]")
+                  if len(scopes) != 3:
+                      raise RuntimeError(f"Expected 3 deck picker scopes, got {len(scopes)}")
+                  print("SSR COMPACT UI PASS")
+
                   tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
                   print("TAB COUNT:", len(tabs))
                   if len(tabs) < 2:
