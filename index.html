@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.5">
-<title>우마무스메 트레이너 가이드 V7.5 WEB</title>
+<meta name="app-build" content="V7.6-RC1">
+<title>우마무스메 트레이너 가이드 V7.6-RC1 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -189,7 +189,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.5 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.6-RC1 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -1009,12 +1009,21 @@ let SCENARIOS={
   },
   dreams:{
     name:'Dreams',kr:'드림즈',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/763918',
+    linkEvent:{title:'決意表明・BC遠征を前に',kr:'결의표명 · BC 원정을 앞두고',when:'시니어급 9월 후반'},
+    linkEventChoices:[
+      {id:'espoir',jp:'エスポワールシチー',kr:'에스포와르 시티',characters:['エスポワールシチー'],gold:'砂の開拓者',normal:'パイオニア',hintLevel:1},
+      {id:'loves',jp:'ラヴズオンリーユー',kr:'러브즈 온리 유',characters:['ラヴズオンリーユー'],gold:'行雲流水',normal:'淀みなし',hintLevel:1},
+      {id:'red',jp:'レッドディザイア',kr:'레드 디자이어',characters:['レッドディザイア'],gold:'気炎万丈',normal:'闘争心',hintLevel:1},
+      {id:'forever',jp:'フォーエバーヤング',kr:'포에버 영',characters:['フォーエバーヤング'],gold:'英俊豪傑',normal:'比類なき',hintLevel:1},
+      {id:'marche',jp:'マルシュロレーヌ',kr:'마르슈 로렌',characters:['マルシュロレーヌ'],gold:null,normal:'ダートコーナー○',hintLevel:1,alwaysWhite:true},
+      {id:'casino',jp:'カジノドライヴ',kr:'카지노 드라이브',characters:['カジノドライヴ'],gold:'お先に失礼っ！',normal:'遊びはおしまいっ！',hintLevel:1}
+    ],
     scenarioAcquiredRareSkills:[
-      {name:'砂の開拓者',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 에스푸아르 시티 대응 편성 시',verified:true},
-      {name:'行雲流水',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 러브즈 온리 유 대응 편성 시',verified:true},
-      {name:'気炎万丈',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 레드 디자이어 대응 편성 시',verified:true},
-      {name:'英俊豪傑',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 포에버 영 대응 편성 시',verified:true},
-      {name:'お先に失礼っ！',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 카지노 드라이브 대응 편성 시',verified:true}
+      {name:'砂の開拓者',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 에스포와르 시티 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'espoir',requiredCharacter:'エスポワールシチー'},
+      {name:'行雲流水',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 러브즈 온리 유 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'loves',requiredCharacter:'ラヴズオンリーユー'},
+      {name:'気炎万丈',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 레드 디자이어 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'red',requiredCharacter:'レッドディザイア'},
+      {name:'英俊豪傑',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 포에버 영 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'forever',requiredCharacter:'フォーエバーヤング'},
+      {name:'お先に失礼っ！',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 카지노 드라이브 선택 + 편성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'casino',requiredCharacter:'カジノドライヴ'}
     ],
     evolutions:[
       {from:'イノベーション',to:'Turn the tables！',grounds:['dirt']},
@@ -1026,16 +1035,25 @@ let SCENARIOS={
   },
   onsen:{
     name:'温泉郷',kr:'온천향',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/734327',
+    linkEvent:{title:'ある日、ゆこま温泉で……♪',kr:'어느 날, 유코마 온천에서……♪',when:'URA 파이널즈 예선 직전'},
+    linkEventChoices:[
+      {id:'acute',jp:'ワンダーアキュート',kr:'원더 어큐트',characters:['ワンダーアキュート'],gold:'猛追',normal:'食らいつき',hintLevel:1},
+      {id:'tarumae',jp:'ホッコータルマエ',kr:'홋코 타루마에',characters:['ホッコータルマエ'],gold:'見事な砂蹴り',normal:'砂蹴り',hintLevel:1},
+      {id:'transcend',jp:'トランセンド',kr:'트랜센드',characters:['トランセンド'],gold:'コンセントレーション',normal:'集中力',hintLevel:1},
+      {id:'bourbon',jp:'ミホノブルボン',kr:'미호노 부르봉',characters:['ミホノブルボン'],gold:'踏ませぬ影',normal:'粘り腰',hintLevel:1},
+      {id:'teio',jp:'トウカイテイオー',kr:'토카이 테이오',characters:['トウカイテイオー'],gold:'アンストッパブル',normal:'攻めの姿勢',hintLevel:1},
+      {id:'kenko',jp:'保科健子',kr:'호시나 켄코',characters:['保科健子'],gold:'全身全霊',normal:'末脚',hintLevel:1}
+    ],
     scenarioAcquiredRareSkills:[
       {name:'機先の勝負',source:'Game8',acquisition:'제2회 「湯浴み会」 종료 후',verified:true},
       {name:'時中の妙',source:'Game8',acquisition:'제3회 「湯浴み会」 종료 후',verified:true},
       {name:'本気で休んで、もう一度',source:'Game8',acquisition:'제3회 「湯浴み会」 종료 후',verified:true},
-      {name:'猛追',source:'Game8',acquisition:'URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 원더 어큐트 대응 편성 시',verified:true},
-      {name:'見事な砂蹴り',source:'Game8',acquisition:'URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 홋코 타루마에 대응 편성 시',verified:true},
-      {name:'コンセントレーション',source:'Game8',acquisition:'URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 트랜센드 대응 편성 시',verified:true},
-      {name:'踏ませぬ影',source:'Game8',acquisition:'URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 미호노 부르봉 대응 편성 시',verified:true},
-      {name:'アンストッパブル',source:'Game8',acquisition:'URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 토카이 테이오 대응 편성 시',verified:true},
-      {name:'全身全霊',source:'Game8',acquisition:'URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 호시나 켄코 대응 편성 시',verified:true}
+      {name:'猛追',source:'Game8',acquisition:'「ある日、ゆこま温泉で……♪」 · 원더 어큐트 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'acute',requiredCharacter:'ワンダーアキュート'},
+      {name:'見事な砂蹴り',source:'Game8',acquisition:'「ある日、ゆこま温泉で……♪」 · 홋코 타루마에 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'tarumae',requiredCharacter:'ホッコータルマエ'},
+      {name:'コンセントレーション',source:'Game8',acquisition:'「ある日、ゆこま温泉で……♪」 · 트랜센드 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'transcend',requiredCharacter:'トランセンド'},
+      {name:'踏ませぬ影',source:'Game8',acquisition:'「ある日、ゆこま温泉で……♪」 · 미호노 부르봉 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'bourbon',requiredCharacter:'ミホノブルボン'},
+      {name:'アンストッパブル',source:'Game8',acquisition:'「ある日、ゆこま温泉で……♪」 · 토카이 테이오 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'teio',requiredCharacter:'トウカイテイオー'},
+      {name:'全身全霊',source:'Game8',acquisition:'「ある日、ゆこま温泉で……♪」 · 호시나 켄코 선택 + 편성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'kenko',requiredCharacter:'保科健子'}
     ],
     evolutions:[
       {from:'先手必勝',to:'一番風呂いただきます！',styles:['nige']},
@@ -1047,13 +1065,22 @@ let SCENARIOS={
   },
   island:{
     name:'無人島',kr:'무인도',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/701249',
+    linkEvent:{title:'トレセン島のススメ',kr:'트레센섬의 권유',when:'시니어급 9월 전반'},
+    linkEventChoices:[
+      {id:'ines',jp:'アイネスフウジン',kr:'아이네스 후진',characters:['アイネスフウジン'],gold:'王道一途',normal:'正面突破',hintLevel:1},
+      {id:'city',jp:'ゴールドシチー',kr:'골드 시티',characters:['ゴールドシチー'],gold:'昂る鼓動',normal:'込み上げる熱',hintLevel:1},
+      {id:'ryan',jp:'メジロライアン',kr:'메지로 라이언',characters:['メジロライアン'],gold:'トップギア',normal:'キレる脚',hintLevel:1},
+      {id:'chiyono',jp:'サクラチヨノオー',kr:'사쿠라 치요노 오',characters:['サクラチヨノオー'],gold:'影従打破',normal:'アグレッシブ',hintLevel:1},
+      {id:'tamamo',jp:'タマモクロス',kr:'타마모 크로스',characters:['タマモクロス'],gold:'尻尾の滝登り',normal:'尻尾上がり',hintLevel:1},
+      {id:'tucker',jp:'タッカーブライン',kr:'터커 브라인',characters:['タッカーブライン'],gold:'アガッてきた！',normal:'ペースアップ',hintLevel:1}
+    ],
     scenarioAcquiredRareSkills:[
-      {name:'王道一途',source:'Game8',acquisition:'시니어급 9월 전반 「トレセン島のススメ」 · 아이네스 후진 대응 편성 시',verified:true},
-      {name:'昂る鼓動',source:'Game8',acquisition:'시니어급 9월 전반 「トレセン島のススメ」 · 골드 시티 대응 편성 시',verified:true},
-      {name:'トップギア',source:'Game8',acquisition:'시니어급 9월 전반 「トレセン島のススメ」 · 메지로 라이언 대응 편성 시',verified:true},
-      {name:'影従打破',source:'Game8',acquisition:'시니어급 9월 전반 「トレセン島のススメ」 · 사쿠라 치요노 오 대응 편성 시',verified:true},
-      {name:'尻尾の滝登り',source:'Game8',acquisition:'시니어급 9월 전반 「トレセン島のススメ」 · 타마모 크로스 대응 편성 시',verified:true},
-      {name:'アガッてきた！',source:'Game8',acquisition:'시니어급 9월 전반 「トレセン島のススメ」 · 터커 브라인 대응 편성 시',verified:true},
+      {name:'王道一途',source:'Game8',acquisition:'「トレセン島のススメ」 · 아이네스 후진 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'ines',requiredCharacter:'アイネスフウジン'},
+      {name:'昂る鼓動',source:'Game8',acquisition:'「トレセン島のススメ」 · 골드 시티 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'city',requiredCharacter:'ゴールドシチー'},
+      {name:'トップギア',source:'Game8',acquisition:'「トレセン島のススメ」 · 메지로 라이언 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'ryan',requiredCharacter:'メジロライアン'},
+      {name:'影従打破',source:'Game8',acquisition:'「トレセン島のススメ」 · 사쿠라 치요노 오 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'chiyono',requiredCharacter:'サクラチヨノオー'},
+      {name:'尻尾の滝登り',source:'Game8',acquisition:'「トレセン島のススメ」 · 타마모 크로스 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'tamamo',requiredCharacter:'タマモクロス'},
+      {name:'アガッてきた！',source:'Game8',acquisition:'「トレセン島のススメ」 · 터커 브라인 선택 + 편성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'tucker',requiredCharacter:'タッカーブライン'},
       {name:'本能の懸け橋',source:'Game8',acquisition:'시나리오 클리어 후 육성 완료 시',verified:true}
     ],
     evolutions:[
