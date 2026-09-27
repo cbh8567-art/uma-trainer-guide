@@ -61,19 +61,24 @@ jobs:
               raise RuntimeError(f"Could not find option containing {text!r} in #{section_id}; rows={len(rows)}")
 
           def wait_images(driver, section_id, text, expected_min=1):
-              def loaded(_):
+              # External image CDNs can be slow/flaky in CI. Verify the badge DOM first,
+              # then try to confirm pixels without making an unrelated network hiccup fail the app smoke.
+              def present(_):
                   try:
                       row = option_with_text(driver, section_id, text)
                       imgs = row.find_elements(By.CSS_SELECTOR, ".linkCharIcon")
-                      if len(imgs) < expected_min:
-                          return False
-                      ok = all(driver.execute_script(
-                          "return arguments[0].complete && arguments[0].naturalWidth > 0", img
-                      ) for img in imgs)
-                      return (row, imgs) if ok else False
+                      return (row, imgs) if len(imgs) >= expected_min else False
                   except Exception:
                       return False
-              return WebDriverWait(driver, 18).until(loaded)
+              row, imgs = WebDriverWait(driver, 18).until(present)
+              try:
+                  WebDriverWait(driver, 5).until(lambda d: all(
+                      d.execute_script("return arguments[0].complete && arguments[0].naturalWidth > 0", img)
+                      for img in imgs
+                  ))
+              except Exception:
+                  print("IMAGE LOAD WARN:", section_id, text, "badges=", len(imgs))
+              return row, imgs
 
           def select_scenario(driver, value):
               select_el = driver.find_element(By.ID, "scenario")
@@ -188,6 +193,18 @@ jobs:
                   if len(scopes) != 3:
                       raise RuntimeError(f"Expected 3 deck picker scopes, got {len(scopes)}")
                   print("SSR COMPACT UI PASS")
+
+                  # V7.11: direct deck-slot picker should open and expose all three scopes.
+                  WebDriverWait(d, 25).until(
+                      lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true")
+                  )
+                  d.execute_script("openEmptySlotPicker(0)")
+                  WebDriverWait(d, 8).until(lambda x: x.find_element(By.ID, "emptySlotModal").get_attribute("class").find("open") >= 0)
+                  picker_cards = d.find_elements(By.CSS_SELECTOR, "#emptySlotCards .card")
+                  if len(picker_cards) == 0:
+                      raise RuntimeError("Deck-slot SSR picker opened but rendered no cards")
+                  d.execute_script("document.getElementById('emptySlotModal').classList.remove('open')")
+                  print("DECK SLOT PICKER PASS:", len(picker_cards))
 
                   tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
                   print("TAB COUNT:", len(tabs))
