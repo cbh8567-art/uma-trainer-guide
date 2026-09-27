@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.5">
-<title>우마무스메 트레이너 가이드 V7.5 WEB</title>
+<meta name="app-build" content="V7.6">
+<title>우마무스메 트레이너 가이드 V7.6 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -179,6 +179,14 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .finishOption.disabled .finishRight{color:#e4b2ba}.finishOption.disabled .finishLocked{background:#341f25}
 .finishOption.disabled input{cursor:not-allowed}
 .finishLocked{font-size:8px;color:#e2a3ad;border:1px solid #73434b;border-radius:99px;padding:2px 5px;white-space:nowrap}
+.linkVisuals{display:flex;align-items:center;gap:5px;flex:none}
+.linkCharIcons{display:flex;align-items:center}
+.linkCharIcon{width:30px;height:30px;border-radius:50%;object-fit:cover;background:#292e3d;border:1px solid #596176;box-shadow:0 0 0 1px rgba(255,255,255,.04)}
+.linkCharIcon+.linkCharIcon{margin-left:-8px}
+.linkCharFallback{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid #596176;background:#242938;color:#ffe091;font-size:13px;font-weight:900}
+.linkVisuals .skillIcon{margin-left:1px}
+@media(max-width:720px){.linkCharIcon,.linkCharFallback{width:26px;height:26px}.linkCharIcon+.linkCharIcon{margin-left:-7px}.linkVisuals{gap:4px}}
+
 .finishLockDetail{margin-top:6px;padding:6px 7px;border:1px solid #70434d;border-radius:8px;background:#251a20;color:#d9bec4;font-size:8px;line-height:1.5}
 .finishLockDetail b{color:#ffb6c3}
 .finishLockDetail .finishFix{display:block;margin-top:2px;color:#b9c9dd}
@@ -189,7 +197,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.5 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.6 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -421,9 +429,17 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
     <div id="finishRmjRareSummary" class="note" style="margin-top:7px"></div>
   </div>
 
+  <div class="finishSection" id="finishScenarioProgressSection" style="display:none">
+    <div class="sectionHead" style="margin-top:0">
+      <div><b id="finishScenarioProgressTitle">시나리오 진행 조건</b><div class="sub">실제 달성한 조건만 체크하면 해당 보상 스킬 판정에 반영됩니다.</div></div>
+      <span class="status">진행 조건</span>
+    </div>
+    <div id="finishScenarioProgressChecks" class="finishOptions"></div>
+  </div>
+
   <div class="finishSection" id="finishRamenLinkSection" style="display:none">
     <div class="sectionHead" style="margin-top:0">
-      <div><b>① 시니어급 9월 전반 · 貴方と私とラーメンと</b><div class="sub">실제 선택한 1개를 기록합니다. 현재 덱/육성 우마에 따라 금스킬 또는 일반 스킬 결과를 자동 판정합니다.</div></div>
+      <div><b id="finishRamenLinkTitle">시나리오 선택 이벤트</b><div class="sub" id="finishRamenLinkSub">실제 선택한 1개를 기록합니다. 현재 덱/육성 우마에 따라 금스킬 또는 일반 스킬 결과를 자동 판정합니다.</div></div>
       <span class="status">1개 선택</span>
     </div>
     <div id="finishRamenLinkChoices" class="finishOptions"></div>
@@ -680,9 +696,11 @@ const save=()=>{syncActiveServerProfile();localStorage.setItem(STATE_KEY,JSON.st
 function clearAllDeckSkillAcquisition(){
  if(!confirm('현재 서버의 덱 스킬 획득 체크를 전부 취소할까요? 덱 편성과 보유 SSR은 유지됩니다.'))return;
  state.acquired={};
- state.eventDone={};
+ const keepDone={};
+ for(const [k,v] of Object.entries(state.eventDone||{}))if(String(k).includes(':progress:'))keepDone[k]=v;
+ state.eventDone=keepDone;
  const keep={};
- for(const [k,v] of Object.entries(state.eventChoice||{}))if(String(k).startsWith('tresenken:'))keep[k]=v;
+ for(const [k,v] of Object.entries(state.eventChoice||{}))if(String(k).startsWith('tresenken:')||String(k).endsWith(':scenarioLinkEvent'))keep[k]=v;
  state.eventChoice=keep;
  state.evolutionPlan=null;
  save();
@@ -1009,12 +1027,21 @@ let SCENARIOS={
   },
   dreams:{
     name:'Dreams',kr:'드림즈',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/763918',
+    linkEvent:{title:'決意表明・BC遠征を前に',kr:'결의표명 · BC 원정을 앞두고',when:'시니어급 9월 후반'},
+    linkEventChoices:[
+      {id:'espoir',jp:'エスポワールシチー',kr:'에스포와르 시티',characters:['エスポワールシチー'],gold:'砂の開拓者',normal:'パイオニア',hintLevel:1},
+      {id:'loves',jp:'ラヴズオンリーユー',kr:'러브즈 온리 유',characters:['ラヴズオンリーユー'],gold:'行雲流水',normal:'淀みなし',hintLevel:1},
+      {id:'red',jp:'レッドディザイア',kr:'레드 디자이어',characters:['レッドディザイア'],gold:'気炎万丈',normal:'闘争心',hintLevel:1},
+      {id:'forever',jp:'フォーエバーヤング',kr:'포에버 영',characters:['フォーエバーヤング'],gold:'英俊豪傑',normal:'比類なき',hintLevel:1},
+      {id:'marche',jp:'マルシュロレーヌ',kr:'마르슈 로렌',characters:['マルシュロレーヌ'],gold:null,normal:'ダートコーナー○',hintLevel:1,alwaysWhite:true},
+      {id:'casino',jp:'カジノドライヴ',kr:'카지노 드라이브',characters:['カジノドライヴ'],gold:'お先に失礼っ！',normal:'遊びはおしまいっ！',hintLevel:1}
+    ],
     scenarioAcquiredRareSkills:[
-      {name:'砂の開拓者',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 에스푸아르 시티 대응 편성 시',verified:true},
-      {name:'行雲流水',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 러브즈 온리 유 대응 편성 시',verified:true},
-      {name:'気炎万丈',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 레드 디자이어 대응 편성 시',verified:true},
-      {name:'英俊豪傑',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 포에버 영 대응 편성 시',verified:true},
-      {name:'お先に失礼っ！',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 카지노 드라이브 대응 편성 시',verified:true}
+      {name:'砂の開拓者',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 에스포와르 시티 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'espoir',requiredCharacter:'エスポワールシチー'},
+      {name:'行雲流水',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 러브즈 온리 유 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'loves',requiredCharacter:'ラヴズオンリーユー'},
+      {name:'気炎万丈',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 레드 디자이어 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'red',requiredCharacter:'レッドディザイア'},
+      {name:'英俊豪傑',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 포에버 영 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'forever',requiredCharacter:'フォーエバーヤング'},
+      {name:'お先に失礼っ！',source:'Game8',acquisition:'시니어급 9월 후반 「決意表明・BC遠征を前に」 · 카지노 드라이브 선택 + 편성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'casino',requiredCharacter:'カジノドライヴ'}
     ],
     evolutions:[
       {from:'イノベーション',to:'Turn the tables！',grounds:['dirt']},
@@ -1026,16 +1053,25 @@ let SCENARIOS={
   },
   onsen:{
     name:'温泉郷',kr:'온천향',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/734327',
+    linkEvent:{title:'ある日、ゆこま温泉で……♪',kr:'어느 날, 유코마 온천에서……♪',when:'URA 파이널즈 예선 직전'},
+    linkEventChoices:[
+      {id:'acute',jp:'ワンダーアキュート',kr:'원더 어큐트',characters:['ワンダーアキュート'],gold:'猛追',normal:'食らいつき',hintLevel:1},
+      {id:'tarumae',jp:'ホッコータルマエ',kr:'홋코 타루마에',characters:['ホッコータルマエ'],gold:'見事な砂蹴り',normal:'砂蹴り',hintLevel:1},
+      {id:'transcend',jp:'トランセンド',kr:'트랜센드',characters:['トランセンド'],gold:'コンセントレーション',normal:'集中力',hintLevel:1},
+      {id:'bourbon',jp:'ミホノブルボン',kr:'미호노 부르봉',characters:['ミホノブルボン'],gold:'踏ませぬ影',normal:'粘り腰',hintLevel:1},
+      {id:'teio',jp:'トウカイテイオー',kr:'토카이 테이오',characters:['トウカイテイオー'],gold:'アンストッパブル',normal:'攻めの姿勢',hintLevel:1},
+      {id:'kenko',jp:'保科健子',kr:'호시나 켄코',characters:['保科健子'],gold:'全身全霊',normal:'末脚',hintLevel:1}
+    ],
     scenarioAcquiredRareSkills:[
       {name:'機先の勝負',source:'Game8',acquisition:'제2회 「湯浴み会」 종료 후',verified:true},
       {name:'時中の妙',source:'Game8',acquisition:'제3회 「湯浴み会」 종료 후',verified:true},
       {name:'本気で休んで、もう一度',source:'Game8',acquisition:'제3회 「湯浴み会」 종료 후',verified:true},
-      {name:'猛追',source:'Game8',acquisition:'URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 원더 어큐트 대응 편성 시',verified:true},
-      {name:'見事な砂蹴り',source:'Game8',acquisition:'URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 홋코 타루마에 대응 편성 시',verified:true},
-      {name:'コンセントレーション',source:'Game8',acquisition:'URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 트랜센드 대응 편성 시',verified:true},
-      {name:'踏ませぬ影',source:'Game8',acquisition:'URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 미호노 부르봉 대응 편성 시',verified:true},
-      {name:'アンストッパブル',source:'Game8',acquisition:'URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 토카이 테이오 대응 편성 시',verified:true},
-      {name:'全身全霊',source:'Game8',acquisition:'URA 파이널즈 전 「ある日、ゆこま温泉で……♪」 · 호시나 켄코 대응 편성 시',verified:true}
+      {name:'猛追',source:'Game8',acquisition:'「ある日、ゆこま温泉で……♪」 · 원더 어큐트 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'acute',requiredCharacter:'ワンダーアキュート'},
+      {name:'見事な砂蹴り',source:'Game8',acquisition:'「ある日、ゆこま温泉で……♪」 · 홋코 타루마에 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'tarumae',requiredCharacter:'ホッコータルマエ'},
+      {name:'コンセントレーション',source:'Game8',acquisition:'「ある日、ゆこま温泉で……♪」 · 트랜센드 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'transcend',requiredCharacter:'トランセンド'},
+      {name:'踏ませぬ影',source:'Game8',acquisition:'「ある日、ゆこま温泉で……♪」 · 미호노 부르봉 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'bourbon',requiredCharacter:'ミホノブルボン'},
+      {name:'アンストッパブル',source:'Game8',acquisition:'「ある日、ゆこま温泉で……♪」 · 토카이 테이오 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'teio',requiredCharacter:'トウカイテイオー'},
+      {name:'全身全霊',source:'Game8',acquisition:'「ある日、ゆこま温泉で……♪」 · 호시나 켄코 선택 + 편성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'kenko',requiredCharacter:'保科健子'}
     ],
     evolutions:[
       {from:'先手必勝',to:'一番風呂いただきます！',styles:['nige']},
@@ -1047,13 +1083,22 @@ let SCENARIOS={
   },
   island:{
     name:'無人島',kr:'무인도',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/701249',
+    linkEvent:{title:'トレセン島のススメ',kr:'트레센섬의 권유',when:'시니어급 9월 전반'},
+    linkEventChoices:[
+      {id:'ines',jp:'アイネスフウジン',kr:'아이네스 후진',characters:['アイネスフウジン'],gold:'王道一途',normal:'正面突破',hintLevel:1},
+      {id:'city',jp:'ゴールドシチー',kr:'골드 시티',characters:['ゴールドシチー'],gold:'昂る鼓動',normal:'込み上げる熱',hintLevel:1},
+      {id:'ryan',jp:'メジロライアン',kr:'메지로 라이언',characters:['メジロライアン'],gold:'トップギア',normal:'キレる脚',hintLevel:1},
+      {id:'chiyono',jp:'サクラチヨノオー',kr:'사쿠라 치요노 오',characters:['サクラチヨノオー'],gold:'影従打破',normal:'アグレッシブ',hintLevel:1},
+      {id:'tamamo',jp:'タマモクロス',kr:'타마모 크로스',characters:['タマモクロス'],gold:'尻尾の滝登り',normal:'尻尾上がり',hintLevel:1},
+      {id:'tucker',jp:'タッカーブライン',kr:'터커 브라인',characters:['タッカーブライン'],gold:'アガッてきた！',normal:'ペースアップ',hintLevel:1}
+    ],
     scenarioAcquiredRareSkills:[
-      {name:'王道一途',source:'Game8',acquisition:'시니어급 9월 전반 「トレセン島のススメ」 · 아이네스 후진 대응 편성 시',verified:true},
-      {name:'昂る鼓動',source:'Game8',acquisition:'시니어급 9월 전반 「トレセン島のススメ」 · 골드 시티 대응 편성 시',verified:true},
-      {name:'トップギア',source:'Game8',acquisition:'시니어급 9월 전반 「トレセン島のススメ」 · 메지로 라이언 대응 편성 시',verified:true},
-      {name:'影従打破',source:'Game8',acquisition:'시니어급 9월 전반 「トレセン島のススメ」 · 사쿠라 치요노 오 대응 편성 시',verified:true},
-      {name:'尻尾の滝登り',source:'Game8',acquisition:'시니어급 9월 전반 「トレセン島のススメ」 · 타마모 크로스 대응 편성 시',verified:true},
-      {name:'アガッてきた！',source:'Game8',acquisition:'시니어급 9월 전반 「トレセン島のススメ」 · 터커 브라인 대응 편성 시',verified:true},
+      {name:'王道一途',source:'Game8',acquisition:'「トレセン島のススメ」 · 아이네스 후진 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'ines',requiredCharacter:'アイネスフウジン'},
+      {name:'昂る鼓動',source:'Game8',acquisition:'「トレセン島のススメ」 · 골드 시티 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'city',requiredCharacter:'ゴールドシチー'},
+      {name:'トップギア',source:'Game8',acquisition:'「トレセン島のススメ」 · 메지로 라이언 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'ryan',requiredCharacter:'メジロライアン'},
+      {name:'影従打破',source:'Game8',acquisition:'「トレセン島のススメ」 · 사쿠라 치요노 오 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'chiyono',requiredCharacter:'サクラチヨノオー'},
+      {name:'尻尾の滝登り',source:'Game8',acquisition:'「トレセン島のススメ」 · 타마모 크로스 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'tamamo',requiredCharacter:'タマモクロス'},
+      {name:'アガッてきた！',source:'Game8',acquisition:'「トレセン島のススメ」 · 터커 브라인 선택 + 편성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'tucker',requiredCharacter:'タッカーブライン'},
       {name:'本能の懸け橋',source:'Game8',acquisition:'시나리오 클리어 후 육성 완료 시',verified:true}
     ],
     evolutions:[
@@ -1068,12 +1113,22 @@ let SCENARIOS={
   legends:{
     name:'The Twinkle Legends',kr:'레전즈',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/670791',
     krSource:'우마무스메 인벤 스킬 DB',krSourceUrl:'https://uma.inven.co.kr/db/skill',normalCompletionAssumed:true,
+    linkEvent:{title:'"私の"レースのこと',kr:'"나의" 레이스에 대하여',when:'시니어급 10월 전반'},
+    linkEventChoices:[
+      {id:'orfe',jp:'オルフェーヴル',kr:'오르페브르',characters:['オルフェーヴル'],gold:'飛翔脚',normal:'推力十分',hintLevel:1},
+      {id:'ramonu',jp:'メジロラモーヌ',kr:'메지로 라모누',characters:['メジロラモーヌ'],gold:'遮二無二',normal:'向こう見ず',hintLevel:1},
+      {id:'gentildonna',jp:'ジェンティルドンナ',kr:'젠틸돈나',characters:['ジェンティルドンナ'],gold:'光芒一閃',normal:'中距離直線○',hintLevel:1},
+      {id:'sirius',jp:'シリウスシンボリ',kr:'시리우스 심볼리',characters:['シリウスシンボリ'],gold:'猛追',normal:'食らいつき',hintLevel:1},
+      {id:'falcon',jp:'スマートファルコン',kr:'스마트 팔콘',characters:['スマートファルコン'],gold:'砂塵円刃',normal:'ダートコーナー○',hintLevel:1},
+      {id:'legends',jp:'レジェンドたち',kr:'레전드들',characters:[],gold:'機先の勝負',normal:null,hintLevel:1,alwaysGold:true}
+    ],
     scenarioAcquiredRareSkills:[
-      {name:'飛翔脚',source:'Game8',acquisition:'「"私の"レースのこと」 · 오르페브르 대응 편성 시',verified:true,requiredCharacter:'オルフェーヴル'},
-      {name:'遮二無二',source:'Game8',acquisition:'「"私の"レースのこと」 · 메지로 라모누 대응 편성 시',verified:true,requiredCharacter:'メジロラモーヌ'},
-      {name:'光芒一閃',source:'Game8',acquisition:'「"私の"レースのこと」 · 젠틸돈나 대응 편성 시',verified:true,requiredCharacter:'ジェンティルドンナ'},
-      {name:'猛追',source:'Game8',acquisition:'「"私の"レースのこと」 · 시리우스 심볼리 대응 편성 시',verified:true,requiredCharacter:'シリウスシンボリ'},
-      {name:'砂塵円刃',source:'Game8',acquisition:'「"私の"レースのこと」 · 스마트 팔콘 대응 편성 시',verified:true,requiredCharacter:'スマートファルコン'},
+      {name:'飛翔脚',source:'Game8',acquisition:'「"私の"レースのこと」 · 오르페브르 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'orfe',requiredCharacter:'オルフェーヴル'},
+      {name:'遮二無二',source:'Game8',acquisition:'「"私の"レースのこと」 · 메지로 라모누 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'ramonu',requiredCharacter:'メジロラモーヌ'},
+      {name:'光芒一閃',source:'Game8',acquisition:'「"私の"レースのこと」 · 젠틸돈나 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'gentildonna',requiredCharacter:'ジェンティルドンナ'},
+      {name:'猛追',source:'Game8',acquisition:'「"私の"レースのこと」 · 시리우스 심볼리 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'sirius',requiredCharacter:'シリウスシンボリ'},
+      {name:'砂塵円刃',source:'Game8',acquisition:'「"私の"レースのこと」 · 스마트 팔콘 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'falcon',requiredCharacter:'スマートファルコン'},
+      {name:'機先の勝負',source:'Game8',acquisition:'「"私の"レースのこと」 · 레전드들 선택',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'legends'},
       {name:'時中の妙',source:'Game8',acquisition:'Dream Fest 진행 보상 · 정상 완주 기준 자동 인정',verified:true},
       {name:'新たな伝説を築くもの',source:'Game8/Inven',acquisition:'Dream Fest 전승 · 정상 완주 기준 자동 인정',verified:true}
     ],
@@ -1088,13 +1143,22 @@ let SCENARIOS={
   },
   mecha:{
     name:'走れ！メカウマ娘',kr:'메카 우마무스메',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/650520',
+    linkEvent:{title:'4.1研究レポートの配布',kr:'4.1 연구 리포트 배포',when:'시니어급 후반 고정 이벤트'},
+    linkEventChoices:[
+      {id:'biwa',jp:'ビワハヤヒデ',kr:'비와 하야히데',characters:['ビワハヤヒデ'],gold:'熾烈の極み',normal:'熱狂的',hintLevel:1},
+      {id:'taishin',jp:'ナリタタイシン',kr:'나리타 타이신',characters:['ナリタタイシン'],gold:'月影一閃',normal:'追込直線○',hintLevel:1},
+      {id:'shakur',jp:'エアシャカール',kr:'에어 샤커',characters:['エアシャカール'],gold:'弧線のプロフェッサー',normal:'コーナー巧者○',hintLevel:1},
+      {id:'kris',jp:'シンボリクリスエス',kr:'심볼리 크리스 에스',characters:['シンボリクリスエス'],gold:'迅速果断',normal:'位置取り押し上げ',hintLevel:1},
+      {id:'gimlet',jp:'タニノギムレット',kr:'타니노 김렛',characters:['タニノギムレット'],gold:'閃光',normal:'光差す方へ',hintLevel:1},
+      {id:'sugar',jp:'シュガーライツ',kr:'슈가 라이츠',characters:['シュガーライツ'],gold:'キラーチューン',normal:null,hintLevel:1,alwaysGold:true}
+    ],
     scenarioAcquiredRareSkills:[
-      {name:'熾烈の極み',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 비와 하야히데 대응 편성 시',verified:true},
-      {name:'月影一閃',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 나리타 타이신 대응 편성 시',verified:true},
-      {name:'弧線のプロフェッサー',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 에어 샤커 대응 편성 시',verified:true},
-      {name:'迅速果断',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 심볼리 크리스 에스 대응 편성 시',verified:true},
-      {name:'閃光',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 타니노 김렛 대응 편성 시',verified:true},
-      {name:'キラーチューン',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 슈가 라이츠 선택',verified:true},
+      {name:'熾烈の極み',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 비와 하야히데 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'biwa',requiredCharacter:'ビワハヤヒデ'},
+      {name:'月影一閃',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 나리타 타이신 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'taishin',requiredCharacter:'ナリタタイシン'},
+      {name:'弧線のプロフェッサー',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 에어 샤커 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'shakur',requiredCharacter:'エアシャカール'},
+      {name:'迅速果断',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 심볼리 크리스 에스 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'kris',requiredCharacter:'シンボリクリスエス'},
+      {name:'閃光',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 타니노 김렛 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'gimlet',requiredCharacter:'タニノギムレット'},
+      {name:'キラーチューン',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 슈가 라이츠 선택',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'sugar'},
       {name:'全身全霊',source:'Game8',acquisition:'시니어급 12월 후반 종료 시',verified:true},
       {name:'もう少しだけ、いい景色',source:'Game8',acquisition:'시나리오 클리어 후 육성 완료 시',verified:true}
     ],
@@ -1109,15 +1173,28 @@ let SCENARIOS={
   },
   harvest:{
     name:'収穫ッ！満腹ッ！大豊食祭',kr:'대풍식제',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/621051',
+    linkEvent:{title:'それぞれの食',kr:'각자의 음식',when:'시니어급 10월 전반'},
+    linkEventChoices:[
+      {id:'ace',jp:'カツラギエース',kr:'카츠라기 에이스',characters:['カツラギエース'],gold:'シックスセンス',normal:'危険回避',hintLevel:1},
+      {id:'specialweek',jp:'スペシャルウィーク',kr:'스페셜 위크',characters:['スペシャルウィーク'],gold:'食いしん坊',normal:'栄養補給',hintLevel:1},
+      {id:'flower',jp:'ニシノフラワー',kr:'니시노 플라워',characters:['ニシノフラワー'],gold:'ハヤテ一文字',normal:'直線巧者',hintLevel:1},
+      {id:'akebono',jp:'ヒシアケボノ',kr:'히시 아케보노',characters:['ヒシアケボノ'],gold:'電迅速攻',normal:'瞬発力',hintLevel:1},
+      {id:'rice',jp:'ライスシャワー',kr:'라이스 샤워',characters:['ライスシャワー'],gold:'決意の直滑降',normal:'直滑降',hintLevel:1},
+      {id:'chair',jp:'秋川理事長',kr:'아키카와 이사장',characters:['秋川理事長'],gold:'風翔',normal:'風切り',hintLevel:1}
+    ],
+    progressChecks:[
+      {id:'festivalSatisfied',label:'대만족/초만족 달성',sub:'「成就ッ！食の大祝祭ッ！」에서 時中の妙 획득',default:true},
+      {id:'festivalSuperSatisfied',label:'초만족으로 시나리오 종료',sub:'「夢は今」에서 私たちの走る道程 획득',default:false}
+    ],
     scenarioAcquiredRareSkills:[
-      {name:'時中の妙',source:'Game8',acquisition:'「成就ッ！食の大祝祭ッ！」 대만족/초만족 달성 시',verified:true},
-      {name:'シックスセンス',source:'Game8',acquisition:'시니어급 10월 전반 「それぞれの食」 · 카츠라기 에이스 대응 편성 시',verified:true},
-      {name:'食いしん坊',source:'Game8',acquisition:'시니어급 10월 전반 「それぞれの食」 · 스페셜 위크 대응 편성 시',verified:true},
-      {name:'ハヤテ一文字',source:'Game8',acquisition:'시니어급 10월 전반 「それぞれの食」 · 니시노 플라워 대응 편성 시',verified:true},
-      {name:'電迅速攻',source:'Game8',acquisition:'시니어급 10월 전반 「それぞれの食」 · 히시 아케보노 대응 편성 시',verified:true},
-      {name:'決意の直滑降',source:'Game8',acquisition:'시니어급 10월 전반 「それぞれの食」 · 라이스 샤워 대응 편성 시',verified:true},
-      {name:'風翔',source:'Game8',acquisition:'시니어급 10월 전반 「それぞれの食」 · 아키카와 이사장 대응 편성 시',verified:true},
-      {name:'私たちの走る道程',source:'Game8',acquisition:'초만족 상태로 시나리오 종료 「夢は今」',verified:true}
+      {name:'時中の妙',source:'Game8',acquisition:'「成就ッ！食の大祝祭ッ！」 대만족/초만족 달성 시',verified:true,progressKey:'festivalSatisfied'},
+      {name:'シックスセンス',source:'Game8',acquisition:'「それぞれの食」 · 카츠라기 에이스 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'ace',requiredCharacter:'カツラギエース'},
+      {name:'食いしん坊',source:'Game8',acquisition:'「それぞれの食」 · 스페셜 위크 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'specialweek',requiredCharacter:'スペシャルウィーク'},
+      {name:'ハヤテ一文字',source:'Game8',acquisition:'「それぞれの食」 · 니시노 플라워 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'flower',requiredCharacter:'ニシノフラワー'},
+      {name:'電迅速攻',source:'Game8',acquisition:'「それぞれの食」 · 히시 아케보노 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'akebono',requiredCharacter:'ヒシアケボノ'},
+      {name:'決意の直滑降',source:'Game8',acquisition:'「それぞれの食」 · 라이스 샤워 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'rice',requiredCharacter:'ライスシャワー'},
+      {name:'風翔',source:'Game8',acquisition:'「それぞれの食」 · 아키카와 이사장 선택 + 편성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'chair',requiredCharacter:'秋川理事長'},
+      {name:'私たちの走る道程',source:'Game8',acquisition:'초만족 상태로 시나리오 종료 「夢は今」',verified:true,progressKey:'festivalSuperSatisfied'}
     ],
     evolutions:[
       {from:'時中の妙',to:'ここらで味変！',distances:['short','mile']},
@@ -1130,11 +1207,15 @@ let SCENARIOS={
   },
   uaf:{
     name:'U.A.F. Ready GO!',kr:'UAF',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/595640',
+    progressChecks:[
+      {id:'showDownWin',label:'SHOW DOWN 우승',sub:'全身全霊 / 爆熱のキラメキ！ 획득 조건',default:true},
+      {id:'allUafFactors',label:'UAF 시나리오 인자 3종 모두 계승',sub:'アスリート魂 획득 조건',default:false}
+    ],
     scenarioAcquiredRareSkills:[
       {name:'決死の覚悟',source:'Game8',acquisition:'시니어급 9월 후반',verified:true},
-      {name:'全身全霊',source:'Game8',acquisition:'SHOW DOWN 우승 후',verified:true},
-      {name:'爆熱のキラメキ！',source:'Game8',acquisition:'SHOW DOWN 우승 후 엔딩',verified:true},
-      {name:'アスリート魂',source:'Game8',acquisition:'UAF 시나리오 인자 3종 모두 계승 시',verified:true}
+      {name:'全身全霊',source:'Game8',acquisition:'SHOW DOWN 우승 후',verified:true,progressKey:'showDownWin'},
+      {name:'爆熱のキラメキ！',source:'Game8',acquisition:'SHOW DOWN 우승 후 엔딩',verified:true,progressKey:'showDownWin'},
+      {name:'アスリート魂',source:'Game8',acquisition:'UAF 시나리오 인자 3종 모두 계승 시',verified:true,progressKey:'allUafFactors'}
     ],
     evolutions:[
       {from:'アガッてきた！',to:'燃えてきたッ！！',distances:['mile','mid']},
@@ -1183,6 +1264,7 @@ function umaRareSkillNames(){
 function scenarioChoiceValue(group){
  if(group==='ultimateRamen'&&state.scenario==='tresenken')return state.tresenkenUltimateRamen||null;
  if(group==='ramenLinkEvent'&&state.scenario==='tresenken')return state.eventChoice?.['tresenken:ramenLinkEvent']||null;
+ if(group==='scenarioLinkEvent')return state.eventChoice?.[state.scenario+':scenarioLinkEvent']||null;
  return null
 }
 function tresenkenAllRmjBig(){
@@ -1205,16 +1287,39 @@ function deckOrUmaHasCharacter(jpName){
  return !!(u&&(norm(u.character)===target||norm(u.name).includes(target)))
 }
 function deckOrUmaHasAnyCharacter(names){return (names||[]).some(deckOrUmaHasCharacter)}
-function ramenLinkEventChoice(){
- if(state.scenario!=='tresenken')return null;
- const id=scenarioChoiceValue('ramenLinkEvent');
- return (SCENARIOS.tresenken.ramenLinkEventChoices||[]).find(x=>x.id===id)||null
+function scenarioLinkChoiceGroup(){return state.scenario==='tresenken'?'ramenLinkEvent':'scenarioLinkEvent'}
+function scenarioLinkChoices(sc){sc=sc||SCENARIOS[state.scenario]||SCENARIOS.none;return sc.linkEventChoices||sc.ramenLinkEventChoices||[]}
+function scenarioLinkEventChoice(){
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none,id=scenarioChoiceValue(scenarioLinkChoiceGroup());
+ return scenarioLinkChoices(sc).find(x=>x.id===id)||null
 }
-function ramenLinkEventResult(x){
+function scenarioLinkEventResult(x){
  if(!x)return null;
- const linked=!!x.alwaysGold||deckOrUmaHasAnyCharacter(x.characters);
+ const linked=!!x.alwaysGold||(!x.alwaysWhite&&deckOrUmaHasAnyCharacter(x.characters));
  const skillName=linked?x.gold:x.normal;
  return {linked,skillName,skill:skillName?findSkillByJp(skillName):null}
+}
+function ramenLinkEventChoice(){return state.scenario==='tresenken'?scenarioLinkEventChoice():null}
+function ramenLinkEventResult(x){return scenarioLinkEventResult(x)}
+function scenarioProgressMet(id){
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none,cfg=(sc.progressChecks||[]).find(x=>x.id===id);
+ const key=state.scenario+':progress:'+id;
+ return state.eventDone?.[key]!==undefined?!!state.eventDone[key]:!!cfg?.default
+}
+function linkCharacterImage(name){
+ const target=norm(name);
+ const uma=runtime.characters.find(c=>norm(c.character)===target||norm(c.name).includes(target));
+ if(uma?.image)return uma.image;
+ const sup=runtime.catalog.find(c=>norm(c.character)===target||norm(c.jpName).includes(target));
+ return sup?.image||''
+}
+function linkCharacterIconsHtml(names){
+ const list=(names||[]).filter(Boolean);
+ if(!list.length)return '<span class="linkCharFallback">★</span>';
+ return '<span class="linkCharIcons">'+list.map(function(name){
+   const img=linkCharacterImage(name),label=koChar(name)||name;
+   return img?'<img class="linkCharIcon" src="'+esc(img)+'" alt="'+esc(label)+'" loading="lazy" onerror="this.style.opacity=.18">':'<span class="linkCharFallback" title="'+esc(label)+'">?</span>'
+ }).join('')+'</span>'
 }
 function scenarioRareSkillNames(){
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none,out=new Set();
@@ -1222,6 +1327,7 @@ function scenarioRareSkillNames(){
    if(!x||x.verified!==true||!x.name)continue;
    if(x.choiceGroup&&scenarioChoiceValue(x.choiceGroup)!==x.choiceId)continue;
    if(x.milestone&&!scenarioMilestoneMet(x.milestone))continue;
+   if(x.progressKey&&!scenarioProgressMet(x.progressKey))continue;
    if(x.requiredCharacter&&!deckOrUmaHasCharacter(x.requiredCharacter))continue;
    out.add(x.name)
  }
@@ -1265,7 +1371,14 @@ function scenarioRareSkillRouteDetails(name){
      }else if(r.choiceGroup==='ramenLinkEvent'){
        const choice=(sc.ramenLinkEventChoices||[]).find(x=>x.id===r.choiceId);
        missing.push('貴方と私とラーメンと · '+(choice?.kr||choice?.jp||r.choiceId)+' 선택');
+     }else if(r.choiceGroup==='scenarioLinkEvent'){
+       const choice=(sc.linkEventChoices||[]).find(x=>x.id===r.choiceId);
+       missing.push((sc.linkEvent?.kr||sc.linkEvent?.title||'시나리오 선택 이벤트')+' · '+(choice?.kr||choice?.jp||r.choiceId)+' 선택');
      }else missing.push('시나리오 선택지 '+r.choiceId);
+   }
+   if(r.progressKey&&!scenarioProgressMet(r.progressKey)){
+     const cfg=(sc.progressChecks||[]).find(x=>x.id===r.progressKey);
+     missing.push(cfg?.label||('진행 조건 '+r.progressKey));
    }
    if(r.milestone&&!scenarioMilestoneMet(r.milestone)){
      if(r.milestone==='classicRmjBig')missing.push('클래식급 제2회 RMJ 대성황');
@@ -1480,35 +1593,63 @@ function renderTresenkenRmjSection(){
  const progressOnly=acquired.filter(n=>['時中の妙','極上の感謝を！'].includes(n));
  summary.innerHTML=`진행 보상 레어스킬: ${progressOnly.length?progressOnly.map(n=>`<span class="tag">${esc(n)}</span>`).join(' '):'현재 조건에서 없음'}${tresenkenAllRmjBig()?'<br>모든 RMJ 대성황 이상 → 시나리오 진화 공통 조건 충족 ✓':''}`;
 }
+function renderScenarioProgressSection(){
+ const section=$('#finishScenarioProgressSection'),box=$('#finishScenarioProgressChecks'),title=$('#finishScenarioProgressTitle');
+ if(!section||!box||!title)return;
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none,checks=sc.progressChecks||[];
+ if(!checks.length){section.style.display='none';box.innerHTML='';return}
+ section.style.display='block';box.innerHTML='';title.textContent=(sc.kr||sc.name||'시나리오')+' · 진행 조건';
+ for(const x of checks){
+   const key=state.scenario+':progress:'+x.id,checked=scenarioProgressMet(x.id),row=document.createElement('label');
+   row.className='finishOption'+(checked?' selected':'');
+   row.innerHTML='<input type="checkbox" '+(checked?'checked':'')+'><span class="skillFallback">'+(checked?'✓':'!')+'</span><div><div class="finishName">'+esc(x.label)+'</div><div class="finishSub">'+esc(x.sub||'')+'</div></div><div class="finishRight">'+(checked?'달성':'미달성')+'</div>';
+   row.onclick=function(e){
+     e.preventDefault();
+     state.eventDone=state.eventDone||{};
+     state.eventDone[key]=!checked;
+     state.evolutionPlan=null;
+     save();
+     sanitizeFinishDraft();
+     renderTrainingFinishModal();
+     renderTrainingFinishSummary();
+     renderGuide()
+   };
+   box.appendChild(row)
+ }
+}
 function renderRamenLinkEventSection(){
- const section=$('#finishRamenLinkSection'),box=$('#finishRamenLinkChoices'),summary=$('#finishRamenLinkSummary');
- if(!section||!box||!summary)return;
- const sc=SCENARIOS[state.scenario]||SCENARIOS.none,choices=sc.ramenLinkEventChoices||[];
- if(state.scenario!=='tresenken'||!choices.length){section.style.display='none';box.innerHTML='';summary.textContent='';return}
+ const section=$('#finishRamenLinkSection'),box=$('#finishRamenLinkChoices'),summary=$('#finishRamenLinkSummary'),title=$('#finishRamenLinkTitle'),sub=$('#finishRamenLinkSub');
+ if(!section||!box||!summary||!title||!sub)return;
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none,choices=scenarioLinkChoices(sc);
+ if(!choices.length){section.style.display='none';box.innerHTML='';summary.textContent='';return}
  section.style.display='block';box.innerHTML='';
- const selectedId=scenarioChoiceValue('ramenLinkEvent');
+ const isRamen=state.scenario==='tresenken',group=scenarioLinkChoiceGroup(),selectedId=scenarioChoiceValue(group);
+ const meta=isRamen?{title:'貴方と私とラーメンと',kr:'당신과 나와 라멘과',when:'시니어급 9월 전반'}:(sc.linkEvent||{});
+ title.textContent=(meta.when?meta.when+' · ':'')+(meta.kr||meta.title||'시나리오 선택 이벤트');
+ sub.textContent='실제 선택한 1개만 기록합니다. 현재 덱/육성 우마의 링크 캐릭터 편성 여부에 따라 금스킬 또는 일반 스킬을 자동 판정합니다.';
  for(const x of choices){
-   const selected=selectedId===x.id,result=ramenLinkEventResult(x),row=document.createElement('label');
+   const selected=selectedId===x.id,result=scenarioLinkEventResult(x),row=document.createElement('label');
    row.className='finishOption'+(selected?' selected':'')+(result?.linked?' recommended':'');
-   const icon=result?.skill?skillIcon(result.skill):'<span class="skillFallback">'+(result?.linked?'金':'白')+'</span>';
-   const linkedText=x.alwaysGold?'편성 무관 · 항상 금스킬':(result?.linked?'링크 캐릭터 편성/육성 확인 ✓':'링크 캐릭터 미편성');
-   row.innerHTML=`<input type="radio" name="ramenLinkEvent" ${selected?'checked':''}>${icon}<div><div class="finishName">${esc(x.jp)}${selected?' <span class="scenarioRec">선택됨</span>':''}</div><div class="kr">${esc(x.kr)}</div><div class="finishSub">${esc(result?.skillName||'스킬 없음')} · 힌트 Lv+${x.hintLevel} · ${result?.linked?'레어 스킬':'일반 스킬'}</div><div class="evoTags"><span class="tag">${esc(linkedText)}</span></div></div><div class="finishRight">${result?.linked?'금스킬':'백스킬'}</div>`;
-   row.onclick=e=>{
+   const skillVisual=result?.skill?skillIcon(result.skill):'<span class="skillFallback">'+(result?.linked?'金':'白')+'</span>';
+   const linkedText=x.alwaysGold?'편성 무관 · 항상 금스킬':x.alwaysWhite?'현재 금스킬 미구현 · 일반 스킬':(result?.linked?'링크 캐릭터 편성/육성 확인 ✓':'링크 캐릭터 미편성');
+   row.innerHTML='<input type="radio" name="scenarioLinkEvent" '+(selected?'checked':'')+'><span class="linkVisuals">'+linkCharacterIconsHtml(x.characters)+skillVisual+'</span><div><div class="finishName">'+esc(x.jp)+(selected?' <span class="scenarioRec">선택됨</span>':'')+'</div><div class="kr">'+esc(x.kr)+'</div><div class="finishSub">'+esc(result?.skillName||'스킬 없음')+' · 힌트 Lv+'+(x.hintLevel||1)+' · '+(result?.linked?'레어 스킬':'일반 스킬')+'</div><div class="evoTags"><span class="tag">'+esc(linkedText)+'</span></div></div><div class="finishRight">'+(result?.linked?'금스킬':'백스킬')+'</div>';
+   row.onclick=function(e){
      e.preventDefault();
      state.eventChoice=state.eventChoice||{};
-     state.eventChoice['tresenken:ramenLinkEvent']=x.id;
+     const key=isRamen?'tresenken:ramenLinkEvent':state.scenario+':scenarioLinkEvent';
+     state.eventChoice[key]=x.id;
      state.evolutionPlan=null;
      save();
      sanitizeFinishDraft();
      renderTrainingFinishModal();
      renderTrainingFinishSummary();
      renderGuide();
-     toast(`${x.kr} 선택 · ${result?.skillName||'스킬 없음'}`)
+     toast(x.kr+' 선택 · '+(result?.skillName||'스킬 없음'))
    };
    box.appendChild(row)
  }
- const selected=ramenLinkEventChoice(),result=ramenLinkEventResult(selected);
- summary.innerHTML=!selected?'아직 선택하지 않았습니다. 선택 전에는 이 이벤트의 금스킬을 획득한 것으로 계산하지 않습니다.':`선택 결과: <b>${esc(selected.kr)}</b> → <span class="tag">${esc(result?.skillName||'스킬 없음')}</span> · ${result?.linked?'레어 스킬로 반영':'일반 스킬이므로 레어스킬 카운트에 포함하지 않음'}`;
+ const selected=scenarioLinkEventChoice(),result=scenarioLinkEventResult(selected);
+ summary.innerHTML=!selected?'아직 선택하지 않았습니다. 선택 전에는 이 이벤트의 금스킬을 획득한 것으로 계산하지 않습니다.':'선택 결과: <b>'+esc(selected.kr)+'</b> → <span class="tag">'+esc(result?.skillName||'스킬 없음')+'</span> · '+(result?.linked?'레어 스킬로 반영':'일반 스킬이므로 레어스킬 카운트에 포함하지 않음')
 }
 function renderUltimateRamenSection(){
  const section=$('#finishRamenSection'),box=$('#finishRamenChoices');
@@ -1538,8 +1679,11 @@ function renderUltimateRamenSection(){
  }
 }
 function evolutionContextKey(){
- const u=selectedUma(),r=getGuideRace(),scenarioChoice=state.scenario==='tresenken'?(state.tresenkenUltimateRamen||'ramen-none'):'no-scenario-choice',rmj=state.scenario==='tresenken'?`${state.tresenkenRmj?.juniorBig?1:0}${state.tresenkenRmj?.classicBig?1:0}${state.tresenkenRmj?.seniorBig?1:0}`:'---';
- return `${u?.id||'none'}|${state.scenario}|${scenarioChoice}|${rmj}|${r?.id||'none'}|${state.ground}|${state.distance}|${state.style}`
+ const u=selectedUma(),r=getGuideRace(),scenarioChoice=state.scenario==='tresenken'?(state.tresenkenUltimateRamen||'ramen-none'):'no-scenario-choice';
+ const linkChoice=scenarioChoiceValue(scenarioLinkChoiceGroup())||'link-none',sc=SCENARIOS[state.scenario]||SCENARIOS.none;
+ const progress=(sc.progressChecks||[]).map(x=>scenarioProgressMet(x.id)?1:0).join('');
+ const rmj=state.scenario==='tresenken'?String(Number(!!state.tresenkenRmj?.juniorBig))+String(Number(!!state.tresenkenRmj?.classicBig))+String(Number(!!state.tresenkenRmj?.seniorBig)):'---';
+ return [u?.id||'none',state.scenario,scenarioChoice,linkChoice,progress,rmj,r?.id||'none',state.ground,state.distance,state.style].join('|')
 }
 function scenarioEvolutionCandidates(cond){
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none;
@@ -1603,6 +1747,7 @@ function renderTrainingFinishModal(){
  const u=selectedUma(),race=getGuideRace(),cond=race?raceCond(race):state;if(!u)return;
  $('#finishContext').textContent=`${u.krName} · ${(SCENARIOS[state.scenario]||SCENARIOS.none).kr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;
  renderTresenkenRmjSection();
+ renderScenarioProgressSection();
  renderRamenLinkEventSection();
  renderUltimateRamenSection();
 
