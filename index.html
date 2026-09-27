@@ -179,6 +179,14 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .finishOption.disabled .finishRight{color:#e4b2ba}.finishOption.disabled .finishLocked{background:#341f25}
 .finishOption.disabled input{cursor:not-allowed}
 .finishLocked{font-size:8px;color:#e2a3ad;border:1px solid #73434b;border-radius:99px;padding:2px 5px;white-space:nowrap}
+.linkVisuals{display:flex;align-items:center;gap:5px;flex:none}
+.linkCharIcons{display:flex;align-items:center}
+.linkCharIcon{width:30px;height:30px;border-radius:50%;object-fit:cover;background:#292e3d;border:1px solid #596176;box-shadow:0 0 0 1px rgba(255,255,255,.04)}
+.linkCharIcon+.linkCharIcon{margin-left:-8px}
+.linkCharFallback{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid #596176;background:#242938;color:#ffe091;font-size:13px;font-weight:900}
+.linkVisuals .skillIcon{margin-left:1px}
+@media(max-width:720px){.linkCharIcon,.linkCharFallback{width:26px;height:26px}.linkCharIcon+.linkCharIcon{margin-left:-7px}.linkVisuals{gap:4px}}
+
 .finishLockDetail{margin-top:6px;padding:6px 7px;border:1px solid #70434d;border-radius:8px;background:#251a20;color:#d9bec4;font-size:8px;line-height:1.5}
 .finishLockDetail b{color:#ffb6c3}
 .finishLockDetail .finishFix{display:block;margin-top:2px;color:#b9c9dd}
@@ -421,9 +429,17 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
     <div id="finishRmjRareSummary" class="note" style="margin-top:7px"></div>
   </div>
 
+  <div class="finishSection" id="finishScenarioProgressSection" style="display:none">
+    <div class="sectionHead" style="margin-top:0">
+      <div><b id="finishScenarioProgressTitle">시나리오 진행 조건</b><div class="sub">실제 달성한 조건만 체크하면 해당 보상 스킬 판정에 반영됩니다.</div></div>
+      <span class="status">진행 조건</span>
+    </div>
+    <div id="finishScenarioProgressChecks" class="finishOptions"></div>
+  </div>
+
   <div class="finishSection" id="finishRamenLinkSection" style="display:none">
     <div class="sectionHead" style="margin-top:0">
-      <div><b>① 시니어급 9월 전반 · 貴方と私とラーメンと</b><div class="sub">실제 선택한 1개를 기록합니다. 현재 덱/육성 우마에 따라 금스킬 또는 일반 스킬 결과를 자동 판정합니다.</div></div>
+      <div><b id="finishRamenLinkTitle">시나리오 선택 이벤트</b><div class="sub" id="finishRamenLinkSub">실제 선택한 1개를 기록합니다. 현재 덱/육성 우마에 따라 금스킬 또는 일반 스킬 결과를 자동 판정합니다.</div></div>
       <span class="status">1개 선택</span>
     </div>
     <div id="finishRamenLinkChoices" class="finishOptions"></div>
