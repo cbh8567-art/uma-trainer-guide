@@ -1,24 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T01:21:24.280Z",
+  "generatedAt": "2026-09-27T01:34:44.633Z",
   "event": "push",
-  "sha": "6950cb00b5bdb6818e2276be9be29aae3b76c001",
+  "sha": "77b45a69c094ded026027227eef168a061d5d245",
   "changedFiles": [
-    "assets/skill-icons/20226.png",
-    "assets/skill-icons/20246.png",
-    "assets/skill-icons/20256.png",
-    "assets/skill-icons/20266.png",
-    "assets/skill-icons/20276.png",
-    "assets/skill-icons/20286.png",
-    "assets/skill-icons/20296.png",
-    "assets/skill-icons/20306.png",
-    "assets/skill-icons/20316.png",
-    "assets/skill-icons/20326.png",
-    "assets/skill-icons/20336.png",
-    "assets/skill-icons/20346.png",
-    "assets/skill-icons/20366.png",
-    "assets/skill-icons/20376.png",
-    "assets/skill-icons/README.md",
+    "assets/skill-icons/10012.png",
+    "assets/skill-icons/10032.png",
+    "assets/skill-icons/20011.png",
+    "assets/skill-icons/20012.png",
+    "assets/skill-icons/20042.png",
+    "data/jp/skill_icon_overrides.json",
     "index.html"
   ],
   "categories": {
@@ -26,25 +17,17 @@
       "index.html"
     ],
     "pipeline": [],
-    "jpData": [],
+    "jpData": [
+      "data/jp/skill_icon_overrides.json"
+    ],
     "krData": [],
     "commonData": [],
     "other": [
-      "assets/skill-icons/20226.png",
-      "assets/skill-icons/20246.png",
-      "assets/skill-icons/20256.png",
-      "assets/skill-icons/20266.png",
-      "assets/skill-icons/20276.png",
-      "assets/skill-icons/20286.png",
-      "assets/skill-icons/20296.png",
-      "assets/skill-icons/20306.png",
-      "assets/skill-icons/20316.png",
-      "assets/skill-icons/20326.png",
-      "assets/skill-icons/20336.png",
-      "assets/skill-icons/20346.png",
-      "assets/skill-icons/20366.png",
-      "assets/skill-icons/20376.png",
-      "assets/skill-icons/README.md"
+      "assets/skill-icons/10012.png",
+      "assets/skill-icons/10032.png",
+      "assets/skill-icons/20011.png",
+      "assets/skill-icons/20012.png",
+      "assets/skill-icons/20042.png"
     ]
   },
   "impactLevel": "high",
