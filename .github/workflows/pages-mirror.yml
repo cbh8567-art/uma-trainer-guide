@@ -34,7 +34,7 @@ jobs:
         run: |
           test -f index.html
           test -d data
-          grep -q '<meta name="app-build" content="V7.0">' index.html
+          grep -qE '<meta name="app-build" content="V7\.[0-9]+">' index.html
           if grep -nE "(fetchJson|fetch)\(['\"]/[^/]" index.html; then
             echo "::error::Root-absolute local fetch path found; GitHub Pages project sites require relative paths."
             exit 1
