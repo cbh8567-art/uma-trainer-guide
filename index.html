@@ -1095,12 +1095,22 @@ let SCENARIOS={
   legends:{
     name:'The Twinkle Legends',kr:'레전즈',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/670791',
     krSource:'우마무스메 인벤 스킬 DB',krSourceUrl:'https://uma.inven.co.kr/db/skill',normalCompletionAssumed:true,
+    linkEvent:{title:'"私の"レースのこと',kr:'"나의" 레이스에 대하여',when:'시니어급 10월 전반'},
+    linkEventChoices:[
+      {id:'orfe',jp:'オルフェーヴル',kr:'오르페브르',characters:['オルフェーヴル'],gold:'飛翔脚',normal:'推力十分',hintLevel:1},
+      {id:'ramonu',jp:'メジロラモーヌ',kr:'메지로 라모누',characters:['メジロラモーヌ'],gold:'遮二無二',normal:'向こう見ず',hintLevel:1},
+      {id:'gentildonna',jp:'ジェンティルドンナ',kr:'젠틸돈나',characters:['ジェンティルドンナ'],gold:'光芒一閃',normal:'中距離直線○',hintLevel:1},
+      {id:'sirius',jp:'シリウスシンボリ',kr:'시리우스 심볼리',characters:['シリウスシンボリ'],gold:'猛追',normal:'食らいつき',hintLevel:1},
+      {id:'falcon',jp:'スマートファルコン',kr:'스마트 팔콘',characters:['スマートファルコン'],gold:'砂塵円刃',normal:'ダートコーナー○',hintLevel:1},
+      {id:'legends',jp:'レジェンドたち',kr:'레전드들',characters:[],gold:'機先の勝負',normal:null,hintLevel:1,alwaysGold:true}
+    ],
     scenarioAcquiredRareSkills:[
-      {name:'飛翔脚',source:'Game8',acquisition:'「"私の"レースのこと」 · 오르페브르 대응 편성 시',verified:true,requiredCharacter:'オルフェーヴル'},
-      {name:'遮二無二',source:'Game8',acquisition:'「"私の"レースのこと」 · 메지로 라모누 대응 편성 시',verified:true,requiredCharacter:'メジロラモーヌ'},
-      {name:'光芒一閃',source:'Game8',acquisition:'「"私の"レースのこと」 · 젠틸돈나 대응 편성 시',verified:true,requiredCharacter:'ジェンティルドンナ'},
-      {name:'猛追',source:'Game8',acquisition:'「"私の"レースのこと」 · 시리우스 심볼리 대응 편성 시',verified:true,requiredCharacter:'シリウスシンボリ'},
-      {name:'砂塵円刃',source:'Game8',acquisition:'「"私の"レースのこと」 · 스마트 팔콘 대응 편성 시',verified:true,requiredCharacter:'スマートファルコン'},
+      {name:'飛翔脚',source:'Game8',acquisition:'「"私の"レースのこと」 · 오르페브르 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'orfe',requiredCharacter:'オルフェーヴル'},
+      {name:'遮二無二',source:'Game8',acquisition:'「"私の"レースのこと」 · 메지로 라모누 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'ramonu',requiredCharacter:'メジロラモーヌ'},
+      {name:'光芒一閃',source:'Game8',acquisition:'「"私の"レースのこと」 · 젠틸돈나 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'gentildonna',requiredCharacter:'ジェンティルドンナ'},
+      {name:'猛追',source:'Game8',acquisition:'「"私の"レースのこと」 · 시리우스 심볼리 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'sirius',requiredCharacter:'シリウスシンボリ'},
+      {name:'砂塵円刃',source:'Game8',acquisition:'「"私の"レースのこと」 · 스마트 팔콘 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'falcon',requiredCharacter:'スマートファルコン'},
+      {name:'機先の勝負',source:'Game8',acquisition:'「"私の"レースのこと」 · 레전드들 선택',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'legends'},
       {name:'時中の妙',source:'Game8',acquisition:'Dream Fest 진행 보상 · 정상 완주 기준 자동 인정',verified:true},
       {name:'新たな伝説を築くもの',source:'Game8/Inven',acquisition:'Dream Fest 전승 · 정상 완주 기준 자동 인정',verified:true}
     ],
@@ -1115,13 +1125,22 @@ let SCENARIOS={
   },
   mecha:{
     name:'走れ！メカウマ娘',kr:'메카 우마무스메',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/650520',
+    linkEvent:{title:'4.1研究レポートの配布',kr:'4.1 연구 리포트 배포',when:'시니어급 후반 고정 이벤트'},
+    linkEventChoices:[
+      {id:'biwa',jp:'ビワハヤヒデ',kr:'비와 하야히데',characters:['ビワハヤヒデ'],gold:'熾烈の極み',normal:'熱狂的',hintLevel:1},
+      {id:'taishin',jp:'ナリタタイシン',kr:'나리타 타이신',characters:['ナリタタイシン'],gold:'月影一閃',normal:'追込直線○',hintLevel:1},
+      {id:'shakur',jp:'エアシャカール',kr:'에어 샤커',characters:['エアシャカール'],gold:'弧線のプロフェッサー',normal:'コーナー巧者○',hintLevel:1},
+      {id:'kris',jp:'シンボリクリスエス',kr:'심볼리 크리스 에스',characters:['シンボリクリスエス'],gold:'迅速果断',normal:'位置取り押し上げ',hintLevel:1},
+      {id:'gimlet',jp:'タニノギムレット',kr:'타니노 김렛',characters:['タニノギムレット'],gold:'閃光',normal:'光差す方へ',hintLevel:1},
+      {id:'sugar',jp:'シュガーライツ',kr:'슈가 라이츠',characters:['シュガーライツ'],gold:'キラーチューン',normal:null,hintLevel:1,alwaysGold:true}
+    ],
     scenarioAcquiredRareSkills:[
-      {name:'熾烈の極み',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 비와 하야히데 대응 편성 시',verified:true},
-      {name:'月影一閃',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 나리타 타이신 대응 편성 시',verified:true},
-      {name:'弧線のプロフェッサー',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 에어 샤커 대응 편성 시',verified:true},
-      {name:'迅速果断',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 심볼리 크리스 에스 대응 편성 시',verified:true},
-      {name:'閃光',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 타니노 김렛 대응 편성 시',verified:true},
-      {name:'キラーチューン',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 슈가 라이츠 선택',verified:true},
+      {name:'熾烈の極み',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 비와 하야히데 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'biwa',requiredCharacter:'ビワハヤヒデ'},
+      {name:'月影一閃',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 나리타 타이신 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'taishin',requiredCharacter:'ナリタタイシン'},
+      {name:'弧線のプロフェッサー',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 에어 샤커 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'shakur',requiredCharacter:'エアシャカール'},
+      {name:'迅速果断',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 심볼리 크리스 에스 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'kris',requiredCharacter:'シンボリクリスエス'},
+      {name:'閃光',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 타니노 김렛 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'gimlet',requiredCharacter:'タニノギムレット'},
+      {name:'キラーチューン',source:'Game8',acquisition:'「4.1研究レポートの配布」 · 슈가 라이츠 선택',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'sugar'},
       {name:'全身全霊',source:'Game8',acquisition:'시니어급 12월 후반 종료 시',verified:true},
       {name:'もう少しだけ、いい景色',source:'Game8',acquisition:'시나리오 클리어 후 육성 완료 시',verified:true}
     ],
@@ -1136,15 +1155,28 @@ let SCENARIOS={
   },
   harvest:{
     name:'収穫ッ！満腹ッ！大豊食祭',kr:'대풍식제',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/621051',
+    linkEvent:{title:'それぞれの食',kr:'각자의 음식',when:'시니어급 10월 전반'},
+    linkEventChoices:[
+      {id:'ace',jp:'カツラギエース',kr:'카츠라기 에이스',characters:['カツラギエース'],gold:'シックスセンス',normal:'危険回避',hintLevel:1},
+      {id:'specialweek',jp:'スペシャルウィーク',kr:'스페셜 위크',characters:['スペシャルウィーク'],gold:'食いしん坊',normal:'栄養補給',hintLevel:1},
+      {id:'flower',jp:'ニシノフラワー',kr:'니시노 플라워',characters:['ニシノフラワー'],gold:'ハヤテ一文字',normal:'直線巧者',hintLevel:1},
+      {id:'akebono',jp:'ヒシアケボノ',kr:'히시 아케보노',characters:['ヒシアケボノ'],gold:'電迅速攻',normal:'瞬発力',hintLevel:1},
+      {id:'rice',jp:'ライスシャワー',kr:'라이스 샤워',characters:['ライスシャワー'],gold:'決意の直滑降',normal:'直滑降',hintLevel:1},
+      {id:'chair',jp:'秋川理事長',kr:'아키카와 이사장',characters:['秋川理事長'],gold:'風翔',normal:'風切り',hintLevel:1}
+    ],
+    progressChecks:[
+      {id:'festivalSatisfied',label:'대만족/초만족 달성',sub:'「成就ッ！食の大祝祭ッ！」에서 時中の妙 획득',default:true},
+      {id:'festivalSuperSatisfied',label:'초만족으로 시나리오 종료',sub:'「夢は今」에서 私たちの走る道程 획득',default:false}
+    ],
     scenarioAcquiredRareSkills:[
-      {name:'時中の妙',source:'Game8',acquisition:'「成就ッ！食の大祝祭ッ！」 대만족/초만족 달성 시',verified:true},
-      {name:'シックスセンス',source:'Game8',acquisition:'시니어급 10월 전반 「それぞれの食」 · 카츠라기 에이스 대응 편성 시',verified:true},
-      {name:'食いしん坊',source:'Game8',acquisition:'시니어급 10월 전반 「それぞれの食」 · 스페셜 위크 대응 편성 시',verified:true},
-      {name:'ハヤテ一文字',source:'Game8',acquisition:'시니어급 10월 전반 「それぞれの食」 · 니시노 플라워 대응 편성 시',verified:true},
-      {name:'電迅速攻',source:'Game8',acquisition:'시니어급 10월 전반 「それぞれの食」 · 히시 아케보노 대응 편성 시',verified:true},
-      {name:'決意の直滑降',source:'Game8',acquisition:'시니어급 10월 전반 「それぞれの食」 · 라이스 샤워 대응 편성 시',verified:true},
-      {name:'風翔',source:'Game8',acquisition:'시니어급 10월 전반 「それぞれの食」 · 아키카와 이사장 대응 편성 시',verified:true},
-      {name:'私たちの走る道程',source:'Game8',acquisition:'초만족 상태로 시나리오 종료 「夢は今」',verified:true}
+      {name:'時中の妙',source:'Game8',acquisition:'「成就ッ！食の大祝祭ッ！」 대만족/초만족 달성 시',verified:true,progressKey:'festivalSatisfied'},
+      {name:'シックスセンス',source:'Game8',acquisition:'「それぞれの食」 · 카츠라기 에이스 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'ace',requiredCharacter:'カツラギエース'},
+      {name:'食いしん坊',source:'Game8',acquisition:'「それぞれの食」 · 스페셜 위크 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'specialweek',requiredCharacter:'スペシャルウィーク'},
+      {name:'ハヤテ一文字',source:'Game8',acquisition:'「それぞれの食」 · 니시노 플라워 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'flower',requiredCharacter:'ニシノフラワー'},
+      {name:'電迅速攻',source:'Game8',acquisition:'「それぞれの食」 · 히시 아케보노 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'akebono',requiredCharacter:'ヒシアケボノ'},
+      {name:'決意の直滑降',source:'Game8',acquisition:'「それぞれの食」 · 라이스 샤워 선택 + 편성/육성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'rice',requiredCharacter:'ライスシャワー'},
+      {name:'風翔',source:'Game8',acquisition:'「それぞれの食」 · 아키카와 이사장 선택 + 편성',verified:true,choiceGroup:'scenarioLinkEvent',choiceId:'chair',requiredCharacter:'秋川理事長'},
+      {name:'私たちの走る道程',source:'Game8',acquisition:'초만족 상태로 시나리오 종료 「夢は今」',verified:true,progressKey:'festivalSuperSatisfied'}
     ],
     evolutions:[
       {from:'時中の妙',to:'ここらで味変！',distances:['short','mile']},
@@ -1157,11 +1189,15 @@ let SCENARIOS={
   },
   uaf:{
     name:'U.A.F. Ready GO!',kr:'UAF',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/595640',
+    progressChecks:[
+      {id:'showDownWin',label:'SHOW DOWN 우승',sub:'全身全霊 / 爆熱のキラメキ！ 획득 조건',default:true},
+      {id:'allUafFactors',label:'UAF 시나리오 인자 3종 모두 계승',sub:'アスリート魂 획득 조건',default:false}
+    ],
     scenarioAcquiredRareSkills:[
       {name:'決死の覚悟',source:'Game8',acquisition:'시니어급 9월 후반',verified:true},
-      {name:'全身全霊',source:'Game8',acquisition:'SHOW DOWN 우승 후',verified:true},
-      {name:'爆熱のキラメキ！',source:'Game8',acquisition:'SHOW DOWN 우승 후 엔딩',verified:true},
-      {name:'アスリート魂',source:'Game8',acquisition:'UAF 시나리오 인자 3종 모두 계승 시',verified:true}
+      {name:'全身全霊',source:'Game8',acquisition:'SHOW DOWN 우승 후',verified:true,progressKey:'showDownWin'},
+      {name:'爆熱のキラメキ！',source:'Game8',acquisition:'SHOW DOWN 우승 후 엔딩',verified:true,progressKey:'showDownWin'},
+      {name:'アスリート魂',source:'Game8',acquisition:'UAF 시나리오 인자 3종 모두 계승 시',verified:true,progressKey:'allUafFactors'}
     ],
     evolutions:[
       {from:'アガッてきた！',to:'燃えてきたッ！！',distances:['mile','mid']},
