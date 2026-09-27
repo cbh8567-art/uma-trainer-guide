@@ -161,11 +161,11 @@ jobs:
                   watch_start = d.find_element(By.ID, "watchPilotStart")
                   watch_video = d.find_element(By.ID, "watchPilotVideo")
                   capture_api = d.execute_script("return !!window.isSecureContext && !!navigator.mediaDevices && typeof navigator.mediaDevices.getDisplayMedia === 'function'")
-                  if not watch_start.is_displayed() or not watch_video:
+                  if not watch_start or not watch_video:
                       raise RuntimeError("Spectator screen-share UI is missing")
                   if not capture_api:
                       raise RuntimeError("getDisplayMedia is unavailable on deployed HTTPS target")
-                  print("WATCH PILOT UI/API PASS")
+                  print("WATCH PILOT DOM/API PASS")
                   tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
                   print("TAB COUNT:", len(tabs))
                   if len(tabs) < 2:
@@ -178,6 +178,9 @@ jobs:
                   print("ACTIVE PAGE:", before, "->", after)
                   if before == after:
                       raise RuntimeError("Navigation tab click did not change active page")
+                  if not d.find_element(By.ID, "watchPilotStart").is_displayed():
+                      raise RuntimeError("Spectator screen-share start button is not visible in Trainer Guide")
+                  print("WATCH PILOT UI PASS")
                   tabs[0].click()
                   time.sleep(0.3)
 
