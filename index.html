@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.13">
-<title>우마무스메 트레이너 가이드 V7.13 WEB</title>
+<meta name="app-build" content="V7.14">
+<title>우마무스메 트레이너 가이드 V7.14 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -304,12 +304,70 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .finishLockDetail .finishFix{display:block;margin-top:2px;color:#b9c9dd}
 .finishLockDetail .finishRoute{display:block;margin-top:2px;color:#d8c79e}
 .finishOption.disabled .finishLockDetail{opacity:1;filter:none}
+
+/* V7.14 · readability + support-card aspect-ratio pass
+   - 원본 일러는 object-fit:contain으로 왜곡 없이 표시
+   - 전체 타이포그래피를 약 10~15% 확대
+   - 모바일에서도 작은 보조문구가 지나치게 축소되지 않도록 최소 크기 확보 */
+:root{--support-art-ratio:16/9}
+body{font-size:14px;line-height:1.5}
+.sub,.note{font-size:13px;line-height:1.58}
+.panel h2{font-size:18px}
+.field label{font-size:12px}
+.field input,.field select{font-size:14px}
+.filter{font-size:12px}
+.slot{padding:7px;min-height:248px}
+.slot.empty{font-size:13px}
+.thumb{aspect-ratio:var(--support-art-ratio);display:flex;align-items:center;justify-content:center;background:#202635}
+.thumb img{width:100%;height:100%;aspect-ratio:auto;object-fit:contain;object-position:center}
+.typeBadge,.lbBadge{font-size:11px}
+.deckname{font-size:14px;line-height:1.35;margin-top:7px}
+.deckjp{font-size:12px;line-height:1.4}
+.deckReplaceHint{font-size:11px;line-height:1.4;margin-top:4px}
+.deckLbSelect{font-size:12px;padding:6px 7px}
+.mini{font-size:12px;padding:6px 8px}
+.typeChip{font-size:12px}
+.jp{font-size:13px}.kr{font-size:12px}
+.tag{font-size:11px;padding:3px 6px}
+.cardName{font-size:13px}.cardJp{font-size:11.5px}
+.status{font-size:12px}
+.recSupport img{width:100%;aspect-ratio:var(--support-art-ratio);height:auto;object-fit:contain;object-position:center}
+.recSupport .rName{font-size:13px}
+.recSupport .rMeta{font-size:11.5px}
+.recSupport .rStars{font-size:14px}
+.pickerCardRec{font-size:11px}
+.dataDiag{font-size:12px}
+.effectTable{font-size:12px}
+.raceTitle{font-size:13px}
+.ramenPhaseTab{font-size:12px}
+.ramenGuideCard h3{font-size:14px}
+.ramenGuideRow{font-size:12.5px;line-height:1.6}
+.ramenRegion,.ramenRegionKr{font-size:11px}
+.ramenAlert{font-size:12px;line-height:1.6}
+.ramenThreeName{font-size:14px}
+.ramenThreeJp{font-size:11px}
+.ramenThreeMeta{font-size:11.5px}
+.ramenUltimateSkill{font-size:12px}
+.ramenEffectLine{font-size:12.5px;line-height:1.58}
+.ramenEffectCond{font-size:11.5px;line-height:1.55}
+@media(max-width:720px){
+  body{font-size:14px}
+  .title{font-size:20px}
+  .sub,.note{font-size:13px}
+  .slot{min-height:278px}
+  .deckname{font-size:14px}
+  .deckjp{font-size:12px}
+  .mini,.deckLbSelect{font-size:12px}
+  .ramenGuideRow{grid-template-columns:88px 1fr;font-size:12px}
+  .ramenThreeItem{grid-template-columns:46px minmax(0,1fr);padding:8px}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.13 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.14 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -2939,8 +2997,8 @@ function renderV7Planner(){
 }
 
 
-/* V7.2 · 트레센켄 단계별 육성 가이드
-   카드 편성별 지역 추천 + 실제 인게임 스탯 아이콘 + 전체 비율 참고 이미지 */
+/* V7.14 · 트레센켄 단계별 육성 가이드
+   카드 편성별 지역 추천 + 실제 인게임 스탯 아이콘 + 라멘 3종 텍스트 효과 안내 */
 let ramenGuidePhase='junior';
 
 const RAMEN_REGION_LABELS={
