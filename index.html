@@ -1246,6 +1246,7 @@ function umaRareSkillNames(){
 function scenarioChoiceValue(group){
  if(group==='ultimateRamen'&&state.scenario==='tresenken')return state.tresenkenUltimateRamen||null;
  if(group==='ramenLinkEvent'&&state.scenario==='tresenken')return state.eventChoice?.['tresenken:ramenLinkEvent']||null;
+ if(group==='scenarioLinkEvent')return state.eventChoice?.[state.scenario+':scenarioLinkEvent']||null;
  return null
 }
 function tresenkenAllRmjBig(){
@@ -1268,16 +1269,39 @@ function deckOrUmaHasCharacter(jpName){
  return !!(u&&(norm(u.character)===target||norm(u.name).includes(target)))
 }
 function deckOrUmaHasAnyCharacter(names){return (names||[]).some(deckOrUmaHasCharacter)}
-function ramenLinkEventChoice(){
- if(state.scenario!=='tresenken')return null;
- const id=scenarioChoiceValue('ramenLinkEvent');
- return (SCENARIOS.tresenken.ramenLinkEventChoices||[]).find(x=>x.id===id)||null
+function scenarioLinkChoiceGroup(){return state.scenario==='tresenken'?'ramenLinkEvent':'scenarioLinkEvent'}
+function scenarioLinkChoices(sc){sc=sc||SCENARIOS[state.scenario]||SCENARIOS.none;return sc.linkEventChoices||sc.ramenLinkEventChoices||[]}
+function scenarioLinkEventChoice(){
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none,id=scenarioChoiceValue(scenarioLinkChoiceGroup());
+ return scenarioLinkChoices(sc).find(x=>x.id===id)||null
 }
-function ramenLinkEventResult(x){
+function scenarioLinkEventResult(x){
  if(!x)return null;
- const linked=!!x.alwaysGold||deckOrUmaHasAnyCharacter(x.characters);
+ const linked=!!x.alwaysGold||(!x.alwaysWhite&&deckOrUmaHasAnyCharacter(x.characters));
  const skillName=linked?x.gold:x.normal;
  return {linked,skillName,skill:skillName?findSkillByJp(skillName):null}
+}
+function ramenLinkEventChoice(){return state.scenario==='tresenken'?scenarioLinkEventChoice():null}
+function ramenLinkEventResult(x){return scenarioLinkEventResult(x)}
+function scenarioProgressMet(id){
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none,cfg=(sc.progressChecks||[]).find(x=>x.id===id);
+ const key=state.scenario+':progress:'+id;
+ return state.eventDone?.[key]!==undefined?!!state.eventDone[key]:!!cfg?.default
+}
+function linkCharacterImage(name){
+ const target=norm(name);
+ const uma=runtime.characters.find(c=>norm(c.character)===target||norm(c.name).includes(target));
+ if(uma?.image)return uma.image;
+ const sup=runtime.catalog.find(c=>norm(c.character)===target||norm(c.jpName).includes(target));
+ return sup?.image||''
+}
+function linkCharacterIconsHtml(names){
+ const list=(names||[]).filter(Boolean);
+ if(!list.length)return '<span class="linkCharFallback">★</span>';
+ return '<span class="linkCharIcons">'+list.map(function(name){
+   const img=linkCharacterImage(name),label=koChar(name)||name;
+   return img?'<img class="linkCharIcon" src="'+esc(img)+'" alt="'+esc(label)+'" loading="lazy" onerror="this.style.opacity=.18">':'<span class="linkCharFallback" title="'+esc(label)+'">?</span>'
+ }).join('')+'</span>'
 }
 function scenarioRareSkillNames(){
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none,out=new Set();
@@ -1285,6 +1309,7 @@ function scenarioRareSkillNames(){
    if(!x||x.verified!==true||!x.name)continue;
    if(x.choiceGroup&&scenarioChoiceValue(x.choiceGroup)!==x.choiceId)continue;
    if(x.milestone&&!scenarioMilestoneMet(x.milestone))continue;
+   if(x.progressKey&&!scenarioProgressMet(x.progressKey))continue;
    if(x.requiredCharacter&&!deckOrUmaHasCharacter(x.requiredCharacter))continue;
    out.add(x.name)
  }
