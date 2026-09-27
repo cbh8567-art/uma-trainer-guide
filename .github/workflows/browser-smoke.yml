@@ -1,4 +1,4 @@
-name: GitHub Pages browser smoke
+name: Deployed browser smoke
 
 on:
   workflow_dispatch:
@@ -6,6 +6,7 @@ on:
     branches:
       - main
     paths:
+      - "index.html"
       - ".github/workflows/browser-smoke.yml"
 
 permissions:
@@ -14,6 +15,7 @@ permissions:
 jobs:
   smoke:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
       - name: Install Selenium
         run: python -m pip install --quiet selenium
@@ -22,49 +24,160 @@ jobs:
         shell: bash
         run: |
           python - <<'PY'
-          import time, sys
+          import time
           from selenium import webdriver
           from selenium.webdriver.chrome.options import Options
           from selenium.webdriver.common.by import By
+          from selenium.webdriver.support.ui import Select, WebDriverWait
+          from selenium.webdriver.support import expected_conditions as EC
 
-          url = "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=selenium"
-          opts = Options()
-          opts.add_argument("--headless=new")
-          opts.add_argument("--no-sandbox")
-          opts.add_argument("--disable-gpu")
-          opts.add_argument("--window-size=1440,1200")
-          opts.set_capability("goog:loggingPrefs", {"browser":"ALL"})
+          TARGETS = [
+              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v77"),
+              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v77"),
+              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v77"),
+          ]
 
-          d = webdriver.Chrome(options=opts)
-          try:
-              d.get(url)
-              time.sleep(3)
-              title = d.title
-              print("TITLE:", title)
+          def make_driver(width=1440, height=1200):
+              opts = Options()
+              opts.add_argument("--headless=new")
+              opts.add_argument("--no-sandbox")
+              opts.add_argument("--disable-gpu")
+              opts.add_argument(f"--window-size={width},{height}")
+              opts.set_capability("goog:loggingPrefs", {"browser":"ALL"})
+              driver = webdriver.Chrome(options=opts)
+              driver.set_window_size(width, height)
+              return driver
 
-              logs = d.get_log("browser")
-              severe = [x for x in logs if x.get("level") == "SEVERE"]
-              for x in logs:
-                  print("BROWSER:", x.get("level"), x.get("message"))
-              if severe:
-                  raise RuntimeError("Browser console has SEVERE errors: " + " | ".join(x.get("message","") for x in severe[:10]))
+          def wait_app(driver):
+              WebDriverWait(driver, 25).until(lambda d: "V7.7" in d.title)
+              WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "scenarioRareSkillPanel")))
+              WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "finishRamenLinkChoices")))
 
-              tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
-              print("TAB COUNT:", len(tabs))
-              if len(tabs) < 2:
-                  raise RuntimeError("Expected at least 2 navigation tabs")
+          def option_with_text(driver, section_id, text):
+              rows = driver.find_elements(By.CSS_SELECTOR, f"#{section_id} .finishOption")
+              for row in rows:
+                  if text in row.text:
+                      return row
+              raise RuntimeError(f"Could not find option containing {text!r} in #{section_id}; rows={len(rows)}")
 
-              before = d.find_element(By.CSS_SELECTOR, ".page.active").get_attribute("id")
-              tabs[1].click()
-              time.sleep(0.5)
-              after = d.find_element(By.CSS_SELECTOR, ".page.active").get_attribute("id")
-              print("ACTIVE PAGE:", before, "->", after)
-              if before == after:
-                  raise RuntimeError("Navigation tab click did not change active page")
+          def wait_images(driver, row, expected_min=1):
+              WebDriverWait(driver, 12).until(
+                  lambda d: len(row.find_elements(By.CSS_SELECTOR, ".linkCharIcon")) >= expected_min
+              )
+              def loaded(_):
+                  imgs = row.find_elements(By.CSS_SELECTOR, ".linkCharIcon")
+                  if len(imgs) < expected_min:
+                      return False
+                  return all(driver.execute_script(
+                      "return arguments[0].complete && arguments[0].naturalWidth > 0", img
+                  ) for img in imgs)
+              WebDriverWait(driver, 15).until(loaded)
+              return row.find_elements(By.CSS_SELECTOR, ".linkCharIcon")
 
-              status = d.find_element(By.ID, "jpSyncStatus").text
-              print("JP STATUS:", status)
-              print("Browser interaction smoke PASS")
-          finally:
-              d.quit()
+          def select_scenario(driver, value):
+              Select(driver.find_element(By.ID, "scenario")).select_by_value(value)
+              time.sleep(0.7)
+              panel = driver.find_element(By.ID, "scenarioRareSkillPanel")
+              if not panel.is_displayed():
+                  raise RuntimeError(f"Scenario panel hidden after selecting {value}")
+
+          def check_scenario_badges(driver):
+              # Tracenken: always-gold staff row must show both Tazuna + Light Hello;
+              # a normal unlinked Uma row must remain white skill on a fresh profile.
+              select_scenario(driver, "tresenken")
+              staff = option_with_text(driver, "finishRamenLinkChoices", "타즈나 & 라이트 하로")
+              staff_imgs = wait_images(driver, staff, 2)
+              if len(staff_imgs) < 2:
+                  raise RuntimeError("Tracenken staff row did not render two character badges")
+              if "금스킬" not in staff.find_element(By.CSS_SELECTOR, ".finishRight").text:
+                  raise RuntimeError("Tracenken staff row should be gold skill")
+              fine = option_with_text(driver, "finishRamenLinkChoices", "파인 모션")
+              if "백스킬" not in fine.find_element(By.CSS_SELECTOR, ".finishRight").text:
+                  raise RuntimeError("Unlinked Fine Motion row should be white skill on a fresh profile")
+
+              cases = [
+                  ("dreams", "카지노 드라이브"),
+                  ("onsen", "호시나 켄코"),
+                  ("island", "터커 브라인"),
+                  ("harvest", "아키카와 이사장"),
+                  ("mecha", "슈가 라이츠"),
+              ]
+              for scenario, label in cases:
+                  select_scenario(driver, scenario)
+                  row = option_with_text(driver, "finishRamenLinkChoices", label)
+                  wait_images(driver, row, 1)
+                  print("BADGE PASS:", scenario, label, row.find_element(By.CSS_SELECTOR, ".finishRight").text)
+
+              sugar = option_with_text(driver, "finishRamenLinkChoices", "슈가 라이츠")
+              if "금스킬" not in sugar.find_element(By.CSS_SELECTOR, ".finishRight").text:
+                  raise RuntimeError("Sugar Lights row should be always-gold")
+
+          def check_mobile(driver):
+              driver.set_window_size(390, 844)
+              driver.refresh()
+              wait_app(driver)
+              select_scenario(driver, "tresenken")
+              panel = driver.find_element(By.ID, "scenarioRareSkillPanel")
+              driver.execute_script("arguments[0].scrollIntoView({block:'start'});", panel)
+              time.sleep(0.6)
+              metrics = driver.execute_script("""
+                  const panel = document.querySelector('#scenarioRareSkillPanel');
+                  const rows = [...panel.querySelectorAll('.finishOption')].filter(x => x.offsetParent !== null);
+                  return {
+                    viewport: window.innerWidth,
+                    documentWidth: document.documentElement.scrollWidth,
+                    panelRight: panel.getBoundingClientRect().right,
+                    panelLeft: panel.getBoundingClientRect().left,
+                    rowOverflow: rows.filter(x => x.scrollWidth > x.clientWidth + 1).length,
+                    rowCount: rows.length,
+                    dockDisplay: getComputedStyle(document.querySelector('#mobileDock')).display
+                  };
+              """)
+              print("MOBILE METRICS:", metrics)
+              if metrics["documentWidth"] > metrics["viewport"] + 1:
+                  raise RuntimeError(f"Mobile horizontal overflow: {metrics}")
+              if metrics["panelLeft"] < -1 or metrics["panelRight"] > metrics["viewport"] + 1:
+                  raise RuntimeError(f"Scenario panel clipped on mobile: {metrics}")
+              if metrics["rowOverflow"] != 0:
+                  raise RuntimeError(f"Scenario option content overflow on mobile: {metrics}")
+              if metrics["dockDisplay"] == "none":
+                  raise RuntimeError("Mobile dock should be visible at 390px")
+
+          for name, url in TARGETS:
+              print("\n=== TARGET", name, url, "===")
+              d = make_driver()
+              try:
+                  d.get(url)
+                  wait_app(d)
+                  print("TITLE:", d.title)
+                  tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
+                  print("TAB COUNT:", len(tabs))
+                  if len(tabs) < 2:
+                      raise RuntimeError("Expected at least 2 navigation tabs")
+
+                  before = d.find_element(By.CSS_SELECTOR, ".page.active").get_attribute("id")
+                  tabs[1].click()
+                  time.sleep(0.4)
+                  after = d.find_element(By.CSS_SELECTOR, ".page.active").get_attribute("id")
+                  print("ACTIVE PAGE:", before, "->", after)
+                  if before == after:
+                      raise RuntimeError("Navigation tab click did not change active page")
+                  tabs[0].click()
+                  time.sleep(0.3)
+
+                  check_scenario_badges(d)
+                  check_mobile(d)
+
+                  logs = d.get_log("browser")
+                  severe = [x for x in logs if x.get("level") == "SEVERE"]
+                  for x in logs:
+                      print("BROWSER:", x.get("level"), x.get("message"))
+                  if severe:
+                      raise RuntimeError("Browser console has SEVERE errors: " + " | ".join(x.get("message","") for x in severe[:10]))
+
+                  print("TARGET PASS:", name)
+              finally:
+                  d.quit()
+
+          print("Deployed browser interaction smoke PASS")
           PY
