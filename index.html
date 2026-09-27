@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.3">
-<title>우마무스메 트레이너 가이드 V7.3 WEB</title>
+<meta name="app-build" content="V7.4-RC1">
+<title>우마무스메 트레이너 가이드 V7.4-RC1 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -179,12 +179,17 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .finishOption.disabled .finishRight{color:#e4b2ba}.finishOption.disabled .finishLocked{background:#341f25}
 .finishOption.disabled input{cursor:not-allowed}
 .finishLocked{font-size:8px;color:#e2a3ad;border:1px solid #73434b;border-radius:99px;padding:2px 5px;white-space:nowrap}
+.finishLockDetail{margin-top:6px;padding:6px 7px;border:1px solid #70434d;border-radius:8px;background:#251a20;color:#d9bec4;font-size:8px;line-height:1.5}
+.finishLockDetail b{color:#ffb6c3}
+.finishLockDetail .finishFix{display:block;margin-top:2px;color:#b9c9dd}
+.finishLockDetail .finishRoute{display:block;margin-top:2px;color:#d8c79e}
+.finishOption.disabled .finishLockDetail{opacity:1;filter:none}
 </style>
 </head>
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.3 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.4-RC1 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -1181,25 +1186,78 @@ function scenarioRareSkillNames(){
  return out
 }
 function scenarioEvolutionRequirementStatus(x){
- if(!x?.scenarioRequirement)return {met:true,label:'시나리오 조건 확인 ✓'};
+ if(!x?.scenarioRequirement)return {met:true,label:'시나리오 조건 확인 ✓',missing:[],action:''};
  if(state.scenario==='tresenken'){
    if(x.scenarioRequirement==='allRmjBig'){
-     const met=tresenkenAllRmjBig();
-     return {met,label:met?'모든 RMJ 대성황 이상 ✓':'모든 RMJ 대성황 이상 필요'};
+     const r=state.tresenkenRmj||{},missing=[];
+     if(!r.juniorBig)missing.push('주니어급 RMJ 대성황');
+     if(!r.classicBig)missing.push('클래식급 RMJ 대성황');
+     if(!r.seniorBig)missing.push('시니어급 초RMJ극 대성황');
+     const met=missing.length===0;
+     return {met,label:met?'모든 RMJ 대성황 이상 ✓':missing.join(' · ')+' 필요',missing,action:met?'':'육성 마지막 단계의 RMJ 체크에서 빠진 항목을 대성황 이상으로 달성해 주세요.'};
    }
    if(x.scenarioRequirement==='seniorRmjBig'){
      const met=!!state.tresenkenRmj?.seniorBig;
-     return {met,label:met?'초RMJ극 대성황 이상 ✓':'초RMJ극 대성황 이상 필요'};
+     return {met,label:met?'초RMJ극 대성황 이상 ✓':'시니어급 초RMJ극 대성황 필요',missing:met?[]:['시니어급 초RMJ극 대성황'],action:met?'':'시니어급 초RMJ극을 대성황 이상으로 완료한 뒤 RMJ 체크를 켜 주세요.'};
    }
  }
  if(state.scenario==='legends'&&x.scenarioRequirement==='legendsNormal'){
-   return {met:true,label:'레전즈 정상 완주 기준 자동 충족 ✓'};
+   return {met:true,label:'레전즈 정상 완주 기준 자동 충족 ✓',missing:[],action:''};
  }
- return {met:true,label:'시나리오 조건 확인 ✓'}
+ return {met:true,label:'시나리오 조건 확인 ✓',missing:[],action:''}
 }
 function evolutionBaseStatus(name){
  const selected=selectedRareSkillNames().has(name),uma=umaRareSkillNames().has(name),scenario=scenarioRareSkillNames().has(name);
  return {available:selected||uma||scenario,fromDeck:selected,fromUma:uma,fromScenario:scenario}
+}
+function scenarioRareSkillRouteDetails(name){
+ const sc=SCENARIOS[state.scenario]||SCENARIOS.none;
+ const routes=(sc.scenarioAcquiredRareSkills||[]).filter(r=>r&&r.verified===true&&r.name===name);
+ if(!routes.length)return [];
+ return routes.map(r=>{
+   const missing=[];
+   if(r.choiceGroup&&scenarioChoiceValue(r.choiceGroup)!==r.choiceId){
+     if(r.choiceGroup==='ultimateRamen'){
+       const choice=(sc.ultimateRamenChoices||[]).find(x=>x.id===r.choiceId);
+       missing.push((choice?.kr||choice?.jp||r.choiceId)+' 선택');
+     }else missing.push('시나리오 선택지 '+r.choiceId);
+   }
+   if(r.milestone&&!scenarioMilestoneMet(r.milestone)){
+     if(r.milestone==='classicRmjBig')missing.push('클래식급 제2회 RMJ 대성황');
+     else if(r.milestone==='allRmjBig')missing.push('모든 RMJ 대성황');
+     else missing.push('시나리오 진행 조건 '+r.milestone);
+   }
+   if(r.requiredCharacter&&!deckOrUmaHasCharacter(r.requiredCharacter))missing.push(koChar(r.requiredCharacter)+' 편성/육성');
+   return {acquisition:r.acquisition||'',missing}
+ })
+}
+function characterEvolutionLockDetail(x,base){
+ if(x.available)return null;
+ const baseName=base?.jp||x.base?.jp||'원본 금스킬';
+ if(!base?.jp&&!x.base?.jp)return {reason:'원본 금스킬 연결 정보를 찾지 못했습니다.',fix:'DB의 진화 원본 매핑을 확인해야 합니다.',route:''};
+ const routes=scenarioRareSkillRouteDetails(baseName),blocked=routes.filter(r=>r.missing.length);
+ const routeText=blocked.length?blocked.map(r=>r.missing.join(' + ')).join(' / '):(routes.length?routes.map(r=>r.acquisition).filter(Boolean).join(' / '):'');
+ return {reason:`원본 금스킬 「${baseName}」이 현재 획득 경로에서 확인되지 않았습니다.`,fix:'서포트 이벤트 획득 체크, 육성 우마 각성 스킬, 또는 시나리오 보상 경로를 확인해 주세요.',route:routeText}
+}
+function scenarioEvolutionLockDetail(x){
+ if(x.available)return null;
+ const reasons=[],fixes=[],routes=[];
+ if(!x.scenarioConditionMet){
+   const req=scenarioEvolutionRequirementStatus(x);
+   if(req.missing?.length)reasons.push(...req.missing);else reasons.push(req.label||'시나리오 진화 조건 미충족');
+   if(req.action)fixes.push(req.action)
+ }
+ if(!(x.fromDeck||x.fromUma||x.fromScenario)){
+   reasons.push(`원본 금스킬 「${x.from}」 미획득`);
+   const routeInfo=scenarioRareSkillRouteDetails(x.from);
+   for(const r of routeInfo){if(r.missing.length)routes.push(r.missing.join(' + '));else if(r.acquisition)routes.push(r.acquisition)}
+   fixes.push('덱 이벤트의 레어스킬 획득 체크, 육성 우마 보유 여부, 시나리오 획득 경로를 확인해 주세요.')
+ }
+ return {reason:[...new Set(reasons)].join(' · ')||'선택 조건 미충족',fix:[...new Set(fixes)].join(' '),route:[...new Set(routes)].join(' / ')}
+}
+function finishLockDetailHtml(detail){
+ if(!detail)return '';
+ return `<div class="finishLockDetail"><b>미충족 이유:</b> ${esc(detail.reason)}${detail.fix?`<span class="finishFix">해결: ${esc(detail.fix)}</span>`:''}${detail.route?`<span class="finishRoute">관련 경로: ${esc(detail.route)}</span>`:''}</div>`
 }
 function evolutionTagHtml(sk){
   if(!sk)return '<span class="tag">조건 데이터 확인 필요</span>';
@@ -1491,10 +1549,11 @@ function renderTrainingFinishModal(){
    for(const x of items){
      const selected=String(finishDraft.character[String(slot)]||'')===String(x.evo.id),recommended=x.available&&x.score===best&&x.score>=4;
      const row=document.createElement('label');row.className='finishOption'+(selected?' selected':'')+(recommended?' recommended':'')+(!x.available?' disabled':'');
-     const rank=!x.available?'원본 필요':(x.score>=5?'최우선':x.score>=4?'추천':evolutionMatchText(x.evo,cond,x.score));
+     const rank=!x.available?'조건 확인':(x.score>=5?'최우선':x.score>=4?'추천':evolutionMatchText(x.evo,cond,x.score));
      const source=x.fromDeck?'현재 선택한 레어 스킬':x.fromUma?'육성 우마의 레어 스킬':x.fromScenario?'시나리오 진행 획득 가능':'원본 레어 스킬 없음';
-     row.innerHTML=`<input type="radio" name="charEvo_${slot}" ${selected?'checked':''} ${x.available?'':'disabled'}>${skillIcon(x.evo)}<div><div class="finishName">${esc(x.evo.jp)} <span class="pinkBadge">핑크</span>${recommended?' <span class="scenarioRec">추천</span>':''}${!x.available?' <span class="finishLocked">선택 불가</span>':''}</div><div class="kr">${esc(x.evo.kr||koSkill(x.evo.jp))}</div><div class="evoTags">${evolutionTagHtml(x.evo)}</div><div class="finishSub">${base?esc(base.jp):'원본 미확정'} · ${source}</div></div><div class="finishRight"><div class="evoStars">${'★'.repeat(x.score)}${'☆'.repeat(5-x.score)}</div>${rank}</div>`;
-     row.onclick=e=>{e.preventDefault();if(!x.available)return toast('원본 레어 스킬이 없어 이 진화 스킬은 선택할 수 없습니다.');finishDraft.character[String(slot)]=String(x.evo.id);renderTrainingFinishModal()};opts.appendChild(row)
+     const lockDetail=characterEvolutionLockDetail(x,base);
+     row.innerHTML=`<input type="radio" name="charEvo_${slot}" ${selected?'checked':''} ${x.available?'':'disabled'}>${skillIcon(x.evo)}<div><div class="finishName">${esc(x.evo.jp)} <span class="pinkBadge">핑크</span>${recommended?' <span class="scenarioRec">추천</span>':''}${!x.available?' <span class="finishLocked">선택 불가</span>':''}</div><div class="kr">${esc(x.evo.kr||koSkill(x.evo.jp))}</div><div class="evoTags">${evolutionTagHtml(x.evo)}</div><div class="finishSub">${base?esc(base.jp):'원본 미확정'} · ${source}</div>${finishLockDetailHtml(lockDetail)}</div><div class="finishRight"><div class="evoStars">${'★'.repeat(x.score)}${'☆'.repeat(5-x.score)}</div>${rank}</div>`;
+     row.onclick=e=>{e.preventDefault();if(!x.available)return toast(lockDetail?.reason||'진화 스킬 선택 조건이 충족되지 않았습니다.');finishDraft.character[String(slot)]=String(x.evo.id);renderTrainingFinishModal()};opts.appendChild(row)
    }
    cb.appendChild(g)
  }
@@ -1507,8 +1566,9 @@ function renderTrainingFinishModal(){
    const row=document.createElement('label');row.className='finishOption'+(selected?' selected':'')+(recommended?' recommended':'')+(!x.available?' disabled':'');
    const star=Math.max(1,Math.round(x.score)),baseAvail=x.fromDeck?'현재 선택한 레어 스킬 확인 ✓':x.fromUma?'육성 우마 레어 스킬 확인 ✓':x.fromScenario?'시나리오 진행 획득 가능 ✓':'원본 레어 스킬 없음';
    const avail=!x.scenarioConditionMet?x.scenarioConditionLabel:baseAvail;
-   row.innerHTML=`<input type="checkbox" ${selected?'checked':''} ${x.available?'':'disabled'}>${x.sk?skillIcon(x.sk):'<span class="skillFallback">進</span>'}<div><div class="finishName">${esc(x.to)} <span class="pinkBadge">시나리오 핑크</span>${recommended?' <span class="scenarioRec">추천</span>':''}${!x.available?' <span class="finishLocked">선택 불가</span>':''}</div><div class="finishSub">${esc(x.from)} → 진화 · ${avail}</div><div class="evoTags">${x.sk?evolutionTagHtml(x.sk):evolutionTagHtml({tags:{grounds:x.grounds||[],distances:x.distances||[],styles:x.styles||[]}})}${x.requirementText?`<span class="tag">진화 조건: ${esc(x.requirementText)}</span>`:''}</div></div><div class="finishRight"><div class="evoStars">${'★'.repeat(star)}${'☆'.repeat(5-star)}</div>${x.available?(x.score>=4?'추천':'현재 조건 검토'):(x.scenarioConditionMet?'원본 필요':'시나리오 조건 필요')}</div>`;
-   row.onclick=e=>{e.preventDefault();if(!x.available)return toast(!x.scenarioConditionMet?'트레센켄 시나리오 진화 조건을 먼저 충족해야 합니다.':'덱에서 획득했거나, 육성 우마가 보유했거나, 현재 시나리오에서 획득 가능한 원본 레어 스킬이 없어 선택할 수 없습니다.');if(selected)finishDraft.scenario=finishDraft.scenario.filter(n=>n!==x.to);else{if(finishDraft.scenario.length>=sc.maxEvolution)return toast(`시나리오 진화는 최대 ${sc.maxEvolution}개까지 선택할 수 있습니다.`);finishDraft.scenario=[...finishDraft.scenario,x.to]}renderTrainingFinishModal()};
+   const lockDetail=scenarioEvolutionLockDetail(x);
+   row.innerHTML=`<input type="checkbox" ${selected?'checked':''} ${x.available?'':'disabled'}>${x.sk?skillIcon(x.sk):'<span class="skillFallback">進</span>'}<div><div class="finishName">${esc(x.to)} <span class="pinkBadge">시나리오 핑크</span>${recommended?' <span class="scenarioRec">추천</span>':''}${!x.available?' <span class="finishLocked">선택 불가</span>':''}</div><div class="finishSub">${esc(x.from)} → 진화 · ${avail}</div><div class="evoTags">${x.sk?evolutionTagHtml(x.sk):evolutionTagHtml({tags:{grounds:x.grounds||[],distances:x.distances||[],styles:x.styles||[]}})}${x.requirementText?`<span class="tag">진화 조건: ${esc(x.requirementText)}</span>`:''}</div>${finishLockDetailHtml(lockDetail)}</div><div class="finishRight"><div class="evoStars">${'★'.repeat(star)}${'☆'.repeat(5-star)}</div>${x.available?(x.score>=4?'추천':'현재 조건 검토'):'조건 확인'}</div>`;
+   row.onclick=e=>{e.preventDefault();if(!x.available)return toast(lockDetail?.reason||'시나리오 진화 조건이 충족되지 않았습니다.');if(selected)finishDraft.scenario=finishDraft.scenario.filter(n=>n!==x.to);else{if(finishDraft.scenario.length>=sc.maxEvolution)return toast(`시나리오 진화는 최대 ${sc.maxEvolution}개까지 선택할 수 있습니다.`);finishDraft.scenario=[...finishDraft.scenario,x.to]}renderTrainingFinishModal()};
    sb.appendChild(row)
  }
  renderFinishChoiceSummary()
