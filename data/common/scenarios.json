@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-23",
+  "updated": "2026-09-28",
   "scenarios": {
     "tresenken": {
       "name": "らっしゃい！トレセン軒！",
@@ -543,7 +543,159 @@
           "scenarioRequirement": "legendsNormal",
           "requirementText": "팬 수 15만 이상"
         }
-      ]
+      ],
+      "guide": {
+        "version": 1,
+        "source": "Game8 2026-09-11 / 우마무스메 공식 포털",
+        "sourceUrl": "https://game8.jp/umamusume/670480",
+        "officialUrl": "https://umamusume.jp/contents/game/scenario/thetwinklelegends/",
+        "defaultRoute": "haiseiko",
+        "intro": "일정 턴마다 「心得」을 선택하고, 클래식급 7월 전반에 가장 많이 모은 색에 따라 「레전드의 인도」가 결정됩니다. 매년 말 Dream Fest가 개최됩니다.",
+        "routes": [
+          {
+            "id": "haiseiko",
+            "jp": "ハイセイコー",
+            "kr": "하이세이코",
+            "color": "pink",
+            "label": "평균 고점 추천",
+            "image": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/97c54d01e7704527865601d33b142a66/character_haiseiko_thumb.png",
+            "summary": "특기 훈련을 가진 협력자가 합류하고 친우 게이지/친우 Lv를 활용해 대인수 우정훈련의 고점을 크게 높입니다.",
+            "play": "클래식 7월 전반 이전에는 핑크 心得을 우선. 인도 획득 뒤에는 색보다 강한 훈련 강화 心得을 우선하고, 인원이 많은 훈련을 적극 선택합니다."
+          },
+          {
+            "id": "speed",
+            "jp": "スピードシンボリ",
+            "kr": "스피드 심볼리",
+            "color": "green",
+            "label": "안정형 / 초보 추천",
+            "image": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2274a376efe84b129b8049ead1f33529/character_speed_thumb.png",
+            "summary": "훈련 4회 성공 후 도전 존에 진입. 도전 존에서는 훈련이 반드시 성공하고 효과가 강화됩니다.",
+            "play": "체력 관리가 쉽고 필수 心得 의존도가 비교적 낮아 안정적인 완주와 평균점을 노리기 좋습니다."
+          },
+          {
+            "id": "saint",
+            "jp": "セントライト",
+            "kr": "세인트 라이트",
+            "color": "blue",
+            "label": "고난도 조건형",
+            "image": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a2b5879dab134608bef3c7b85f84e319/character_saint_thumb.png",
+            "summary": "의욕 상승 효과를 3회 얻으면 3턴간 초절호조. 초절호조 중 의욕 상승으로 최대 2회 연장됩니다.",
+            "play": "휴식/외출과 의욕 상승 타이밍 관리가 필요하고 필수 心得 의존도가 높아 일반 육성에서는 우선도가 낮습니다."
+          }
+        ],
+        "phases": {
+          "junior": {
+            "title": "주니어급",
+            "priority": "인연 게이지·힌트 발생률 확보 + 핑크 心得 우선",
+            "points": [
+              [
+                "초반 心得",
+                "「トーク術」「トレンドチェック」처럼 인연/힌트 계열을 우선합니다."
+              ],
+              [
+                "색 선택",
+                "하이세이코 루트를 목표로 한다면 클래식 7월 전반까지 핑크 개수를 가장 많게 유지합니다."
+              ],
+              [
+                "훈련",
+                "목표 외 레이스보다 인연을 쌓는 훈련을 우선합니다."
+              ],
+              [
+                "연말",
+                "Dream Fest 승리를 놓치지 말고 다음 해 인도 준비 상태를 확인합니다."
+              ]
+            ]
+          },
+          "classic": {
+            "title": "클래식급",
+            "priority": "7월 전반에 인도 확정 → 이후 색보다 강한 훈련 心得",
+            "points": [
+              [
+                "7월 전반",
+                "그동안 가장 많이 획득한 心得 색에 따라 레전드의 인도를 1개 획득합니다."
+              ],
+              [
+                "하이세이코",
+                "친우 게이지 효율을 위해 가능한 한 인원이 많은 훈련을 우선합니다."
+              ],
+              [
+                "추천 心得",
+                "高潔なる魂 / 絆が織りなす光 / 君となら、もっと！ / 飽くなき挑戦心 등 강한 훈련 강화 계열을 우선합니다."
+              ],
+              [
+                "운영",
+                "우정훈련을 최우선. 목표 외 레이스·불필요한 외출은 최소화합니다."
+              ]
+            ]
+          },
+          "senior": {
+            "title": "시니어급",
+            "priority": "강한 心得 완성 + 우정훈련 최우선 + 링크 금스킬 확보",
+            "points": [
+              [
+                "心得",
+                "색은 더 이상 크게 신경 쓰지 말고 강한 훈련 강화 효과를 우선합니다."
+              ],
+              [
+                "링크 이벤트",
+                "「“私の”レースのこと」에서 편성/육성 우마에 맞는 금스킬을 확인합니다."
+              ],
+              [
+                "Dream Fest",
+                "마지막 Dream Fest 승리를 목표로 스탯과 체력을 마감합니다."
+              ],
+              [
+                "진화",
+                "시나리오 진화는 최대 2개이므로 목표 레이스에 맞는 원본 금스킬 확보 여부를 함께 확인합니다."
+              ]
+            ]
+          }
+        },
+        "heartPriority": {
+          "early": [
+            "トーク術",
+            "トレンドチェック"
+          ],
+          "top": [
+            "高潔なる魂",
+            "絆が織りなす光",
+            "君となら、もっと！",
+            "飽くなき挑戦心",
+            "集いし理想",
+            "一緒に輝きましょう！",
+            "絆が奏でるハーモニー",
+            "怪物チャンスマイル♪"
+          ],
+          "secondary": [
+            "社交術",
+            "共に頂へ",
+            "極限の集中",
+            "愛し子よ、共に栄光へ",
+            "交渉術",
+            "切磋琢磨",
+            "日進月歩",
+            "百折不撓",
+            "素敵なハーモニー"
+          ]
+        },
+        "officialRefs": [
+          {
+            "id": "heart",
+            "label": "心得 선택 화면",
+            "image": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8353e9e6c3ab44eab5516d4e0058a995/2-1_03.png?w=450"
+          },
+          {
+            "id": "combination",
+            "label": "心得 조합 화면",
+            "image": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/db3e03d6369e4057b8b979c85d74b0ed/2-2_02.png?w=450"
+          },
+          {
+            "id": "guidance",
+            "label": "레전드의 인도 화면",
+            "image": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/93fd062fc5ce487da52c59d6031cb26d/2-3.png?w=450"
+          }
+        ]
+      }
     },
     "mecha": {
       "name": "走れ！メカウマ娘",
