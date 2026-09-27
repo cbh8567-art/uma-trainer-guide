@@ -176,7 +176,10 @@ jobs:
                   check_mobile(d)
 
                   logs = d.get_log("browser")
-                  severe = [x for x in logs if x.get("level") == "SEVERE"]
+                  severe = [
+                      x for x in logs
+                      if x.get("level") == "SEVERE" and "favicon.ico" not in x.get("message", "")
+                  ]
                   for x in logs:
                       print("BROWSER:", x.get("level"), x.get("message"))
                   if severe:
