@@ -34,6 +34,7 @@ jobs:
         run: |
           test -f index.html
           test -d data
+          test -d assets
           grep -qE '<meta name="app-build" content="V7\.[0-9]+">' index.html
           if grep -nE "(fetchJson|fetch)\(['\"]/[^/]" index.html; then
             echo "::error::Root-absolute local fetch path found; GitHub Pages project sites require relative paths."
@@ -48,6 +49,7 @@ jobs:
           mkdir -p _site
           cp index.html _site/index.html
           cp -R data _site/data
+          cp -R assets _site/assets
           touch _site/.nojekyll
 
       - name: Configure Pages
