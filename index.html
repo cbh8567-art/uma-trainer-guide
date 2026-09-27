@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.7">
-<title>우마무스메 트레이너 가이드 V7.7 WEB</title>
+<meta name="app-build" content="V7.8">
+<title>우마무스메 트레이너 가이드 V7.8 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -73,6 +73,44 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .ramenDeckHint{border:1px solid #38614e;background:#172920;border-radius:8px;padding:7px;font-size:9px;line-height:1.5;margin-top:6px}
 @media(max-width:720px){.ramenGuideGrid{grid-template-columns:1fr}.ramenPhaseTabs{grid-template-columns:repeat(4,minmax(72px,1fr));overflow-x:auto}.ramenGuideRow{grid-template-columns:80px 1fr}}
 
+
+/* V7.8 · The Twinkle Legends 단계별 육성 가이드 */
+.legendsGuide{margin-top:10px;border:1px solid #69587f;background:linear-gradient(180deg,#201b2d,#171a24);border-radius:12px;padding:9px}
+.legendsGuide[hidden]{display:none}
+.legendsGuideHead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}
+.legendsRouteGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:8px 0}
+.legendsRoute{display:grid;grid-template-columns:54px 1fr;gap:7px;align-items:center;border:1px solid #444b60;background:#171b26;color:#eef1f7;border-radius:10px;padding:7px;cursor:pointer;text-align:left;min-width:0}
+.legendsRoute img{width:54px;height:54px;object-fit:cover;object-position:50% 20%;border-radius:50%;background:#292e3d;border:2px solid #667087}
+.legendsRoute[data-color="pink"]{border-color:#8a5570}.legendsRoute[data-color="green"]{border-color:#46765d}.legendsRoute[data-color="blue"]{border-color:#466c88}
+.legendsRoute.active{box-shadow:0 0 0 2px rgba(255,255,255,.12) inset,0 0 18px rgba(137,105,184,.18)}
+.legendsRoute[data-color="pink"].active{background:linear-gradient(90deg,#352032,#1b1a26)}
+.legendsRoute[data-color="green"].active{background:linear-gradient(90deg,#183328,#1b1a26)}
+.legendsRoute[data-color="blue"].active{background:linear-gradient(90deg,#193148,#1b1a26)}
+.legendsRouteName{font-size:11px;font-weight:950}.legendsRouteLabel{font-size:8px;color:#c6bdd2;margin-top:2px}.legendsRouteSummary{font-size:8px;color:#aeb6c9;line-height:1.4;margin-top:3px}
+.legendsPhaseTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:8px 0}
+.legendsPhaseTab{border:1px solid #4b4f64;background:#171b26;color:#cbd1df;border-radius:9px;padding:8px 5px;font-size:10px;font-weight:850;cursor:pointer}
+.legendsPhaseTab.active{border-color:#aa7cc0;background:#30233a;color:#f1d8ff}
+.legendsGuideGrid{display:grid;grid-template-columns:1.08fr .92fr;gap:8px}
+.legendsGuideCard{border:1px solid #343b50;background:#141823;border-radius:10px;padding:8px;min-width:0}
+.legendsGuideCard h3{font-size:11px;margin:0 0 6px;color:#e8c8ff}
+.legendsGuideRows{display:grid;gap:5px}
+.legendsGuideRow{display:grid;grid-template-columns:92px 1fr;gap:6px;align-items:start;padding:6px;border:1px solid #2f3547;background:#191d28;border-radius:8px;font-size:9px;line-height:1.5}
+.legendsGuideRow b{color:#e0c0f2}.legendsGuideRow span{min-width:0;overflow-wrap:anywhere}
+.legendsHeartList{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.legendsHeart{border:1px solid #674d70;background:#251d2b;border-radius:999px;padding:4px 7px;font-size:8px;font-weight:850}
+.legendsHeart.top{border-color:#a579b3;background:#33243b;color:#f3d9ff}
+.legendsRefGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:6px}
+.legendsRef{border:1px solid #343b50;background:#10141e;border-radius:8px;padding:5px;min-width:0}
+.legendsRef img{display:block;width:100%;height:auto;border-radius:6px;background:#fff}
+.legendsRef div{font-size:8px;color:#b6bed0;margin-top:4px;text-align:center}
+.legendsDeckHint{border:1px solid #4c5f7a;background:#172231;border-radius:8px;padding:7px;font-size:9px;line-height:1.5;margin-top:6px}
+.mastersGuideDetail{margin-top:8px;border:1px solid #665c3c;background:linear-gradient(180deg,#242116,#171a22);border-radius:10px;padding:9px}
+.mastersGuideDetail[hidden]{display:none}
+.mastersOpponents{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}.mastersOpponent{border:1px solid #66572e;background:#2a2416;color:#ffe5a0;border-radius:999px;padding:4px 7px;font-size:9px;font-weight:850}
+.raceCard.masters{border-color:#625733}.raceCard.masters.selected{border-color:#d0ad4e;box-shadow:0 0 0 1px rgba(255,212,93,.15) inset}
+.raceKindBadge{font-size:8px;font-weight:950;border:1px solid #6d5c2c;color:#ffe09a;border-radius:99px;padding:2px 5px;background:#2b2413}
+@media(max-width:720px){.legendsGuideGrid{grid-template-columns:1fr}.legendsRouteGrid{grid-template-columns:1fr}.legendsRefGrid{grid-template-columns:1fr 1fr 1fr}.legendsGuideRow{grid-template-columns:80px 1fr}}
+@media(max-width:420px){.legendsRefGrid{grid-template-columns:1fr}.legendsRoute{grid-template-columns:48px 1fr}.legendsRoute img{width:48px;height:48px}}
 .pinkSource{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap;border:1px solid #593b52;background:#241923;border-radius:9px;padding:7px;margin-bottom:7px}
 .pinkSource a{color:#ff9fc2;text-decoration:none;font-size:9px;font-weight:850}
 .evoGroup{border:1px solid #3d3340;background:#181720;border-radius:10px;margin-top:7px;overflow:hidden}
@@ -203,7 +241,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.7 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.8 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -258,6 +296,22 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
         <button type="button" class="ramenPhaseTab" data-ramen-phase="ura">URA</button>
       </div>
       <div id="ramenGuideBody"></div>
+    </div>
+    <div class="legendsGuide" id="legendsScenarioGuide" hidden>
+      <div class="legendsGuideHead">
+        <div>
+          <h2 style="margin:0">The Twinkle Legends · 단계별 육성 가이드</h2>
+          <div class="sub">인게임 「心得」·「레전드의 인도」 흐름을 그대로 따라가며 현재 덱과 육성 시기에 맞춘 운영을 확인합니다.</div>
+        </div>
+        <span class="status" id="legendsGuideDeckStatus"></span>
+      </div>
+      <div class="legendsRouteGrid" id="legendsRouteGrid"></div>
+      <div class="legendsPhaseTabs">
+        <button type="button" class="legendsPhaseTab active" data-legends-phase="junior">주니어</button>
+        <button type="button" class="legendsPhaseTab" data-legends-phase="classic">클래식</button>
+        <button type="button" class="legendsPhaseTab" data-legends-phase="senior">시니어</button>
+      </div>
+      <div id="legendsGuideBody"></div>
     </div>
     <div class="sectionHead"><h2 style="margin:0">현재 덱</h2><button type="button" class="btn" id="saveDeckAsOwned">현재 편성을 보유 SSR로 빠른 저장</button></div>
     <div class="note">모바일: 「슬롯 선택」 권장 · PC: 드래그 가능</div>
@@ -358,7 +412,9 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
    <div class="umaResults" id="umaResults"></div><div id="selectedUma"></div>
   </div>
   <div class="panel" style="margin-top:10px">
-   <h2>앞으로 열릴 대인전 레이스</h2><div class="raceCards" id="raceCards"></div>
+   <div class="sectionHead" style="margin-top:0"><div><h2 style="margin:0">트레이너 가이드 목표 레이스</h2><div class="sub">챔피언스 미팅과 마스터즈 챌린지를 같은 추천 엔진으로 비교합니다.</div></div><span class="status" id="guideRaceSourceStatus"></span></div>
+   <div class="raceCards" id="raceCards"></div>
+   <div class="mastersGuideDetail" id="mastersGuideDetail" hidden></div>
   </div>
   <div class="panel" style="margin-top:10px">
    <div class="sectionHead" style="margin-top:0"><h2 style="margin:0">트레이너 가이드</h2><span class="status" id="guideCondition"></span></div>
@@ -523,6 +579,7 @@ let JP_SYSTEM_STATUS=null;
 let JP_INHERITANCE_RECOMMENDATIONS=null;
 let UPCOMING={"version":1,"updated":"2026-09-23","source":"Game8/GameWith 2026-09-23 snapshot","sourceUrl":"https://game8.jp/umamusume/811062","races":[{"id":"cm_2026_09_mile","status":"현재","date":"2026-09-18~","event":"チャンピオンズミーティング MILE","eventKr":"챔피언스 미팅 MILE","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mile","meters":1800,"turn":"left","season":"autumn","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","秋ウマ娘○","晴れの日○","良バ場○","非根幹距離○"]},{"id":"cm_2026_09_longchamp_classic","status":"예정","date":"2026-09-29~","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"ロンシャン","placeKr":"롱샹","ground":"turf","distance":"mid","meters":2400,"turn":"right","season":"autumn","weather":"sunny","condition":"heavy","time":"day","greenSkills":["ロンシャンレース場○","右回り○","秋ウマ娘○","晴れの日○","道悪○","根幹距離○"]},{"id":"cm_2026_10_classic","status":"예정","date":"2026-10 중순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"京都","placeKr":"교토","ground":"turf","distance":"mid","meters":2200,"turn":"right","season":"autumn","weather":"cloudy","condition":"good","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","曇りの日○","良バ場○","非根幹距離○"]},{"id":"loh_2026_11_long","status":"예정","date":"2026-11 하순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"京都","placeKr":"교토","ground":"turf","distance":"long","meters":3000,"turn":"right","season":"autumn","weather":"random","condition":"random","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","非根幹距離○"]},{"id":"cm_2026_12_long","status":"예정","date":"2026-12 하순","event":"チャンピオンズミーティング LONG","eventKr":"챔피언스 미팅 LONG","place":"","placeKr":"미정","ground":"turf","distance":"long","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"cm_2027_01_classic","status":"예정","date":"2027-01 하순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"","placeKr":"미정","ground":"turf","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"loh_2027_02_dirt","status":"예정","date":"2027-02 중순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"","placeKr":"미정","ground":"dirt","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]}]};
 let KOREA_UPCOMING={"version":1,"updated":"2026-09-23","source":"한국 서버 5회차 CLASSIC 일정 스냅샷","sourceUrl":"https://namu.moe/w/%EC%9A%B0%EB%A7%88%EB%AC%B4%EC%8A%A4%EB%A9%94%20%ED%94%84%EB%A6%AC%ED%8B%B0%20%EB%8D%94%EB%B9%84/%EC%9D%B4%EB%B2%A4%ED%8A%B8/%EC%B1%94%ED%94%BC%EC%96%B8%EC%8A%A4%20%EB%AF%B8%ED%8C%85/5%ED%9A%8C%EC%B0%A8","races":[{"id":"kr_cm_2026_10_classic","status":"예정(미래시)","date":"2026-10-10~10-16 예상","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mid","meters":2400,"turn":"left","season":"spring","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","春ウマ娘○","晴れの日○","良バ場○","根幹距離○"]}]};
+let KOREA_MASTERS_CHALLENGE={"schemaVersion":1,"updated":"2026-09-28","server":"kr","event":{"id":"kr_masters_2026_07","nameKr":"마스터즈 챌린지","nameJp":"マスターズチャレンジ","period":"2026-07-20 ~ 2026-10-16 11:59","officialSource":"카카오게임즈 개최 정보","officialUrl":"https://kakaogames.oqupie.com/portals/1576/articles/76599","referenceSource":"일본 2025-03 제5회 마스터즈 챌린지 상세","referenceUrl":"https://wikiwiki.jp/sppenpen/%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%BA%E3%83%81%E3%83%A3%E3%83%AC%E3%83%B3%E3%82%B8","rules":["각 레이스 LEVEL 1~3. 1착 시 다음 LEVEL 해방","전당 입성 우마무스메 1명당 레이스별 각 LEVEL 3회까지 출전","5개 레이스 LEVEL 3 전부 클리어 시 LEVEL EX 3종 해방"]},"races":[{"id":"kr_masters_2026_fillies","kind":"masters","status":"개최 중","date":"~ 2026-10-16","event":"フィリーズレビュー","eventKr":"마스터즈 챌린지 · 필리스 레뷰","raceKr":"필리스 레뷰","place":"阪神","placeKr":"한신","ground":"turf","distance":"short","meters":1400,"turn":"right","course":"inner","season":"spring","weather":"cloudy","condition":"good","time":"day","levelGroup":"LEVEL 1~3","opponents":["라인 크라프트","데어링 하트","에어 메사이어"],"greenSkills":["阪神レース場○","右回り○","春ウマ娘○","曇りの日○","良バ場○","非根幹距離○"]},{"id":"kr_masters_2026_yasuda","kind":"masters","status":"개최 중","date":"~ 2026-10-16","event":"安田記念","eventKr":"마스터즈 챌린지 · 야스다 기념","raceKr":"야스다 기념","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mile","meters":1600,"turn":"left","season":"spring","weather":"sunny","condition":"good","time":"day","levelGroup":"LEVEL 1~3","opponents":["야마닌 제퍼","이쿠노 딕터스","니시노 플라워"],"greenSkills":["東京レース場○","左回り○","春ウマ娘○","晴れの日○","良バ場○","根幹距離○"]},{"id":"kr_masters_2026_shuka","kind":"masters","status":"개최 중","date":"~ 2026-10-16","event":"秋華賞","eventKr":"마스터즈 챌린지 · 추화상","raceKr":"추화상","place":"京都","placeKr":"교토","ground":"turf","distance":"mid","meters":2000,"turn":"right","course":"inner","season":"autumn","weather":"cloudy","condition":"good","time":"day","levelGroup":"LEVEL 1~3","opponents":["젠틸돈나","비르시나"],"greenSkills":["京都レース場○","右回り○","秋ウマ娘○","曇りの日○","良バ場○","根幹距離○"]},{"id":"kr_masters_2026_kikuka","kind":"masters","status":"개최 중","date":"~ 2026-10-16","event":"菊花賞","eventKr":"마스터즈 챌린지 · 국화상","raceKr":"국화상","place":"京都","placeKr":"교토","ground":"turf","distance":"long","meters":3000,"turn":"right","course":"outer","season":"autumn","weather":"cloudy","condition":"good","time":"day","levelGroup":"LEVEL 1~3","opponents":["오르페브르","윈 바리아시옹"],"greenSkills":["京都レース場○","右回り○","秋ウマ娘○","曇りの日○","良バ場○","非根幹距離○"]},{"id":"kr_masters_2026_kashiwa","kind":"masters","status":"개최 중","date":"~ 2026-10-16","event":"かしわ記念","eventKr":"마스터즈 챌린지 · 카시와 기념","raceKr":"카시와 기념","place":"船橋","placeKr":"후나바시","ground":"dirt","distance":"mile","meters":1600,"turn":"left","season":"spring","weather":"cloudy","condition":"slightly_heavy","time":"day","levelGroup":"LEVEL 1~3","opponents":["후리오소","에스포와르 시티"],"greenSkills":["左回り○","春ウマ娘○","曇りの日○","道悪○","根幹距離○"]},{"id":"kr_masters_2026_ex_derby","kind":"masters","status":"LEVEL EX","date":"5개 LEVEL3 클리어 후","event":"日本ダービー","eventKr":"마스터즈 챌린지 EX · 일본 더비","raceKr":"일본 더비","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mid","meters":2400,"turn":"left","season":"spring","weather":"cloudy","condition":"heavy","time":"day","levelGroup":"LEVEL EX","opponents":["세인트 라이트"],"greenSkills":["東京レース場○","左回り○","春ウマ娘○","曇りの日○","道悪○","根幹距離○"]},{"id":"kr_masters_2026_ex_arima","kind":"masters","status":"LEVEL EX","date":"5개 LEVEL3 클리어 후","event":"有馬記念","eventKr":"마스터즈 챌린지 EX · 아리마 기념","raceKr":"아리마 기념","place":"中山","placeKr":"나카야마","ground":"turf","distance":"long","meters":2500,"turn":"right","course":"outer","season":"winter","weather":"cloudy","condition":"good","time":"day","levelGroup":"LEVEL EX","opponents":["스피드 심볼리"],"greenSkills":["中山レース場○","右回り○","冬ウマ娘○","曇りの日○","良バ場○","非根幹距離○"]},{"id":"kr_masters_2026_ex_tokyo_daishoten","kind":"masters","status":"LEVEL EX","date":"5개 LEVEL3 클리어 후","event":"東京大賞典","eventKr":"마스터즈 챌린지 EX · 도쿄 대상전","raceKr":"도쿄 대상전","place":"大井","placeKr":"오이","ground":"dirt","distance":"mid","meters":2000,"turn":"right","season":"winter","weather":"sunny","condition":"good","time":"evening","levelGroup":"LEVEL EX","opponents":["하이세이코"],"greenSkills":["右回り○","冬ウマ娘○","晴れの日○","良バ場○","根幹距離○"]}]};
 let KOREA_SERVER_DATA={
   updated:'2026-09-23',
   supportMaxId:30260,
@@ -1891,11 +1948,15 @@ function applyScenarioServerOptions(){
  sel.value=state.scenario
 }
 function guideRaceLabel(r){
- const meter=r.meters?` ${r.meters}m`:'',server=state.guideServer==='kr'?'한국':'일본';
- return `[${server}] ${r.date} · ${r.eventKr} · ${r.placeKr||'장소 미정'} · ${groundLabel[r.ground]} ${distLabel[r.distance]}${meter}`;
+ const meter=r.meters?` ${r.meters}m`:'',server=state.guideServer==='kr'?'한국':'일본',kind=r.kind==='masters'?'마챌':'대인전';
+ return `[${server}·${kind}] ${r.date} · ${r.eventKr} · ${r.placeKr||'장소 미정'} · ${groundLabel[r.ground]} ${distLabel[r.distance]}${meter}`;
 }
 function guideRaceSet(server=state.guideServer){
- return server==='kr'?KOREA_UPCOMING:UPCOMING
+ if(server==='kr'){
+   const masters=Array.isArray(KOREA_MASTERS_CHALLENGE?.races)?KOREA_MASTERS_CHALLENGE.races:[];
+   return {...KOREA_UPCOMING,races:[...(KOREA_UPCOMING.races||[]),...masters]};
+ }
+ return UPCOMING
 }
 function renderAppServerTabs(){
  const server=state.activeServer==='kr'?'kr':'jp';
@@ -1964,7 +2025,34 @@ function applyGuideRaceFromCondition(id){
 }
 
 function getGuideRace(){const set=guideRaceSet();return (set.races||[]).find(r=>r.id===state.guideRaceId)||set.races?.[0]||null}
-function renderRaceCards(){const b=$('#raceCards');if(!b)return;b.innerHTML='';const set=guideRaceSet();for(const r of set.races||[]){const d=document.createElement('div');d.className='raceCard'+(r.id===state.guideRaceId?' selected':'');d.innerHTML=`<div class="tags"><span class="tag">${esc(r.status)}</span><span class="tag">${esc(r.date)}</span><span class="tag">${state.guideServer==='kr'?'한국':'일본'}</span></div><div class="raceTitle">${esc(r.eventKr)}</div><div class="cardJp">${esc(r.event)}</div><div class="raceMeta">${esc(r.placeKr||'미정')} · ${groundLabel[r.ground]} · ${distLabel[r.distance]}${r.meters?' '+r.meters+'m':''}<br>${r.turn==='left'?'좌회전':r.turn==='right'?'우회전':'상세 조건 미정'}</div><button class="btn" style="margin-top:7px;width:100%" data-guide>이 레이스 가이드</button>`;d.querySelector('[data-guide]').onclick=()=>{if($('#conditionGuideRace'))$('#conditionGuideRace').value=r.id;applyGuideRaceFromCondition(r.id)};b.appendChild(d)}}
+function raceWeatherKr(r){
+ const weather={sunny:'맑음',cloudy:'흐림',rain:'비',snow:'눈'}[r.weather]||r.weather||'';
+ const cond={good:'양호',slightly_heavy:'다소 무거움',heavy:'무거움',bad:'불량'}[r.condition]||r.condition||'';
+ return [weather,cond].filter(Boolean).join(' · ')
+}
+function renderMastersGuideDetail(race=getGuideRace()){
+ const box=$('#mastersGuideDetail'),status=$('#guideRaceSourceStatus');if(!box)return;
+ const isMasters=race?.kind==='masters';
+ box.hidden=!isMasters;
+ if(status)status.textContent=state.guideServer==='kr'?(isMasters?'한국 마스터즈 챌린지 개최 데이터':'한국 차기 대인전 데이터'):'일본 최신 대인전 데이터';
+ if(!isMasters)return;
+ const event=KOREA_MASTERS_CHALLENGE?.event||{},opps=Array.isArray(race.opponents)?race.opponents:[];
+ box.innerHTML='<div class="sectionHead" style="margin-top:0"><div><b>'+esc(race.eventKr)+'</b><div class="sub">'+esc(event.period||race.date||'')+'</div></div><span class="raceKindBadge">'+esc(race.levelGroup||'MASTER')+'</span></div>'+
+   '<div class="raceMeta" style="margin-top:6px">'+esc(race.placeKr||'')+' · '+esc(groundLabel[race.ground])+' · '+esc(distLabel[race.distance])+(race.meters?' '+race.meters+'m':'')+' · '+(race.turn==='left'?'좌회전':'우회전')+(raceWeatherKr(race)?' · '+esc(raceWeatherKr(race)):'')+'</div>'+
+   (opps.length?'<div class="sub" style="margin-top:7px">주요 강적</div><div class="mastersOpponents">'+opps.map(x=>'<span class="mastersOpponent">'+esc(x)+'</span>').join('')+'</div>':'')+
+   '<div class="note" style="margin-top:7px">'+esc((event.rules||[]).join(' · '))+'</div>'
+}
+function renderRaceCards(){
+ const b=$('#raceCards');if(!b)return;b.innerHTML='';const set=guideRaceSet();
+ for(const r of set.races||[]){
+   const d=document.createElement('div'),isMasters=r.kind==='masters';
+   d.className='raceCard'+(isMasters?' masters':'')+(r.id===state.guideRaceId?' selected':'');
+   d.innerHTML=`<div class="tags"><span class="tag">${esc(r.status)}</span><span class="tag">${esc(r.date)}</span><span class="tag">${state.guideServer==='kr'?'한국':'일본'}</span>${isMasters?'<span class="raceKindBadge">MASTER</span>':''}</div><div class="raceTitle">${esc(r.eventKr)}</div><div class="cardJp">${esc(r.event)}</div><div class="raceMeta">${esc(r.placeKr||'미정')} · ${groundLabel[r.ground]} · ${distLabel[r.distance]}${r.meters?' '+r.meters+'m':''}<br>${r.turn==='left'?'좌회전':r.turn==='right'?'우회전':'상세 조건 미정'}${raceWeatherKr(r)?' · '+esc(raceWeatherKr(r)):''}${isMasters&&r.opponents?.length?'<br>강적 · '+r.opponents.map(esc).join(' / '):''}</div><button class="btn" style="margin-top:7px;width:100%" data-guide>이 레이스 가이드</button>`;
+   d.querySelector('[data-guide]').onclick=()=>{if($('#conditionGuideRace'))$('#conditionGuideRace').value=r.id;applyGuideRaceFromCondition(r.id)};
+   b.appendChild(d)
+ }
+ renderMastersGuideDetail(getGuideRace())
+}
 function isKoreanImplementedSupport(card){
  const id=Number(card?.id);
  return Number.isFinite(id)&&id>=30000&&id<=Number(KOREA_SERVER_DATA.supportMaxId)
@@ -2074,7 +2162,7 @@ function renderGuideUmaTier(){
   box.appendChild(note);
 }
 
-function renderGuide(){renderGuideServerTabs();const race=getGuideRace();if(!race){$('#guideCondition').textContent='등록된 레이스 없음';return}const cond=raceCond(race);renderGuideUmaTier();renderTrainingFinishSummary();$('#guideCondition').textContent=`${state.guideServer==='kr'?'한국':'일본'} · ${race.eventKr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;const gs=$('#guideSkills');gs.innerHTML='';const u=selectedUma();let items=[];if(u)items=awakeningSkills(u).filter(sk=>Number(sk.rarity)===2).map(sk=>({...sk,source:`${u.krName} 각성 Lv${sk.awakening}`}));for(const n of race.greenSkills||[]){const dbSkill=skillFromName(runtime.skills,n);items.push(dbSkill?{...dbSkill,source:'코스 대응 녹색 스킬',force:3}:{id:'green_'+n,jp:n,kr:koSkill(n),iconId:null,tags:{grounds:[],distances:[],styles:[]},source:'코스 대응 녹색 스킬 · DB 미연결',force:3})}items.sort((a,b)=>(b.force||skillConditionScore(b,cond))-(a.force||skillConditionScore(a,cond)));for(const s of items.slice(0,14)){const sc=s.force||skillConditionScore(s,cond),x=document.createElement('div');x.className='guideSkill';x.innerHTML=`${skillIcon(s)}<div><div class="jp">${esc(s.jp)} <span class="tag">원문</span></div><div class="kr">${esc(s.kr||koSkill(s.jp))}</div><div class="sub">${esc(s.source||'')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`;gs.appendChild(x)}if(!items.length)gs.innerHTML='<div class="note">육성 우마무스메를 선택하면 각성 스킬과 레이스 조건을 비교합니다.</div>';const ss=$('#guideSupports');ss.innerHTML='';if(!runtime.ready){ss.innerHTML='<div class="note">SSR DB 동기화가 필요합니다.</div>';return}const supportRows=supportRecommend(cond);if(state.guideServer==='kr'&&!supportRows.length){ss.innerHTML='<div class="note">현재 동기화 DB에 Inven 기준 한국 서버 구현 SSR이 없습니다. 온라인 DB를 다시 동기화해 주세요.</div>';return}for(const {c,score} of supportRows){const owned=state.owned.map(String).includes(String(c.id)),x=document.createElement('div');x.className='card';x.innerHTML=`${c.image?`<img src="${esc(c.image)}">`:''}<div><div class="cardName">${esc(c.krName)}</div><div class="cardJp">${esc(c.jpName)}</div><div class="stars">${scoreStars(score)} <span class="status">${state.guideServer==='kr'?'한국 구현 · ':''}${owned?'보유 '+(Number(state.lb[String(c.id)]??0)===4?'풀돌':(Number(state.lb[String(c.id)]??0)+'돌')):'미보유 · 풀돌 기준'}</span></div><div class="actions"><button class="mini" data-info>상세</button>${owned?'<button class="mini" data-slot>덱 슬롯</button>':''}</div></div>`;x.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);if(owned)x.querySelector('[data-slot]').onclick=()=>openSlotPicker(c.id);ss.appendChild(x)}}
+function renderGuide(){renderGuideServerTabs();const race=getGuideRace();renderMastersGuideDetail(race);if(!race){$('#guideCondition').textContent='등록된 레이스 없음';return}const cond=raceCond(race);renderGuideUmaTier();renderTrainingFinishSummary();$('#guideCondition').textContent=`${state.guideServer==='kr'?'한국':'일본'} · ${race.eventKr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;const gs=$('#guideSkills');gs.innerHTML='';const u=selectedUma();let items=[];if(u)items=awakeningSkills(u).filter(sk=>Number(sk.rarity)===2).map(sk=>({...sk,source:`${u.krName} 각성 Lv${sk.awakening}`}));for(const n of race.greenSkills||[]){const dbSkill=skillFromName(runtime.skills,n);items.push(dbSkill?{...dbSkill,source:'코스 대응 녹색 스킬',force:3}:{id:'green_'+n,jp:n,kr:koSkill(n),iconId:null,tags:{grounds:[],distances:[],styles:[]},source:'코스 대응 녹색 스킬 · DB 미연결',force:3})}items.sort((a,b)=>(b.force||skillConditionScore(b,cond))-(a.force||skillConditionScore(a,cond)));for(const s of items.slice(0,14)){const sc=s.force||skillConditionScore(s,cond),x=document.createElement('div');x.className='guideSkill';x.innerHTML=`${skillIcon(s)}<div><div class="jp">${esc(s.jp)} <span class="tag">원문</span></div><div class="kr">${esc(s.kr||koSkill(s.jp))}</div><div class="sub">${esc(s.source||'')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`;gs.appendChild(x)}if(!items.length)gs.innerHTML='<div class="note">육성 우마무스메를 선택하면 각성 스킬과 레이스 조건을 비교합니다.</div>';const ss=$('#guideSupports');ss.innerHTML='';if(!runtime.ready){ss.innerHTML='<div class="note">SSR DB 동기화가 필요합니다.</div>';return}const supportRows=supportRecommend(cond);if(state.guideServer==='kr'&&!supportRows.length){ss.innerHTML='<div class="note">현재 동기화 DB에 Inven 기준 한국 서버 구현 SSR이 없습니다. 온라인 DB를 다시 동기화해 주세요.</div>';return}for(const {c,score} of supportRows){const owned=state.owned.map(String).includes(String(c.id)),x=document.createElement('div');x.className='card';x.innerHTML=`${c.image?`<img src="${esc(c.image)}">`:''}<div><div class="cardName">${esc(c.krName)}</div><div class="cardJp">${esc(c.jpName)}</div><div class="stars">${scoreStars(score)} <span class="status">${state.guideServer==='kr'?'한국 구현 · ':''}${owned?'보유 '+(Number(state.lb[String(c.id)]??0)===4?'풀돌':(Number(state.lb[String(c.id)]??0)+'돌')):'미보유 · 풀돌 기준'}</span></div><div class="actions"><button class="mini" data-info>상세</button>${owned?'<button class="mini" data-slot>덱 슬롯</button>':''}</div></div>`;x.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);if(owned)x.querySelector('[data-slot]').onclick=()=>openSlotPicker(c.id);ss.appendChild(x)}}
 function renderTier(){
  const g=$('#tierGround').value,d=$('#tierDistance').value,s=$('#tierStyle').value,q=norm($('#tierSearch').value),u=selectedUma(),b=$('#tierGrid');b.innerHTML='';
  const kr=state.guideServer==='kr';
@@ -2828,8 +2916,59 @@ function initRamenScenarioGuide(){
  renderRamenScenarioGuide()
 }
 
-function renderAll(){renderJpSyncStatus();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide()}
-applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;save();renderScenarioRareSkillPanel();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide()};
+
+/* V7.8 · The Twinkle Legends 단계별 육성 가이드 */
+let legendsGuidePhase='junior';
+let legendsGuideRoute='haiseiko';
+const LEGENDS_GUIDE_FALLBACK={
+ routes:[
+  {id:'haiseiko',jp:'ハイセイコー',kr:'하이세이코',color:'pink',label:'평균 고점 추천',image:'https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/97c54d01e7704527865601d33b142a66/character_haiseiko_thumb.png',summary:'친우 게이지와 대인수 우정훈련으로 고점을 노리는 현행 추천 루트.',play:'클래식 7월 전반까지 핑크 心得 우선 → 인도 획득 후 강한 훈련 心得 우선.'},
+  {id:'speed',jp:'スピードシンボリ',kr:'스피드 심볼리',color:'green',label:'안정형 / 초보 추천',image:'https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2274a376efe84b129b8049ead1f33529/character_speed_thumb.png',summary:'4회 훈련 성공 후 도전 존. 도전 존에서는 훈련 성공이 보장되는 안정형.',play:'체력 관리 부담이 낮아 시나리오 적응 단계에서 안정적.'},
+  {id:'saint',jp:'セントライト',kr:'세인트 라이트',color:'blue',label:'고난도 조건형',image:'https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a2b5879dab134608bef3c7b85f84e319/character_saint_thumb.png',summary:'의욕 상승 3회로 초절호조를 만들고 연장하는 조건형 루트.',play:'의욕 상승 타이밍과 휴식/외출 관리가 필요해 난도가 높음.'}
+ ],
+ phases:{
+  junior:{title:'주니어급',priority:'인연·힌트 확보 + 목표 인도의 색 우선',points:[['초반','하이세이코 목표면 핑크 心得을 가장 많이 유지'],['훈련','인연 게이지와 힌트 발생률을 우선'],['연말','Dream Fest 승리와 다음 해 인도 준비 상태 확인']]},
+  classic:{title:'클래식급',priority:'7월 전반 인도 확정 → 강한 훈련 心得',points:[['7월 전반','최다 색에 따라 레전드의 인도 1개 획득'],['이후','색보다 강한 훈련 강화 心得 우선'],['하이세이코','인원이 많은 훈련과 우정훈련 적극 선택']]},
+  senior:{title:'시니어급',priority:'강한 心得 완성 + 우정훈련 + 링크 금스킬',points:[['心得','색보다 효과 우선'],['링크 이벤트','편성/육성 우마에 맞는 금스킬 확인'],['마무리','마지막 Dream Fest와 시나리오 진화 2개 준비']]}
+ },
+ heartPriority:{early:['トーク術','トレンドチェック'],top:['高潔なる魂','絆が織りなす光','君となら、もっと！','飽くなき挑戦心']},
+ officialRefs:[]
+};
+function legendsGuideData(){return SCENARIOS?.legends?.guide||LEGENDS_GUIDE_FALLBACK}
+function renderLegendsScenarioGuide(){
+ const root=$('#legendsScenarioGuide'),body=$('#legendsGuideBody'),routes=$('#legendsRouteGrid'),status=$('#legendsGuideDeckStatus');
+ if(!root||!body||!routes)return;
+ const active=state.scenario==='legends';root.hidden=!active;if(!active)return;
+ const guide=legendsGuideData(),phase=guide.phases?.[legendsGuidePhase]?legendsGuidePhase:'junior',d=guide.phases?.[phase]||LEGENDS_GUIDE_FALLBACK.phases[phase];
+ const deck=ramenDeckSummary();
+ if(status)status.textContent='현재 덱 · '+deck.text;
+ if(!guide.routes?.some(x=>x.id===legendsGuideRoute))legendsGuideRoute=guide.defaultRoute||guide.routes?.[0]?.id||'haiseiko';
+ routes.innerHTML='';
+ for(const r of guide.routes||[]){
+   const b=document.createElement('button');b.type='button';b.className='legendsRoute'+(r.id===legendsGuideRoute?' active':'');b.dataset.color=r.color||'';
+   b.innerHTML=(r.image?'<img src="'+esc(r.image)+'" alt="'+esc(r.kr)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.opacity=.18">':'')+'<div><div class="legendsRouteName">'+esc(r.kr)+' <span class="cardJp">'+esc(r.jp)+'</span></div><div class="legendsRouteLabel">'+esc(r.label||'')+'</div><div class="legendsRouteSummary">'+esc(r.summary||'')+'</div></div>';
+   b.onclick=()=>{legendsGuideRoute=r.id;renderLegendsScenarioGuide()};
+   routes.appendChild(b)
+ }
+ document.querySelectorAll('[data-legends-phase]').forEach(b=>b.classList.toggle('active',b.dataset.legendsPhase===phase));
+ const route=(guide.routes||[]).find(x=>x.id===legendsGuideRoute)||guide.routes?.[0]||{};
+ const hearts=phase==='junior'?(guide.heartPriority?.early||[]):(guide.heartPriority?.top||[]);
+ const refs=Array.isArray(guide.officialRefs)?guide.officialRefs:[];
+ body.innerHTML='<div class="legendsGuideGrid"><div class="legendsGuideCard"><h3>'+esc(d.title)+' 운영</h3>'+
+   '<div class="legendsGuideRows"><div class="legendsGuideRow"><b>훈련 우선</b><span>'+esc(d.priority||'')+'</span></div><div class="legendsGuideRow"><b>'+esc(route.kr||'현재 루트')+'</b><span>'+esc(route.play||route.summary||'')+'</span></div>'+
+   (d.points||[]).map(x=>'<div class="legendsGuideRow"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('')+'</div>'+
+   '<h3 style="margin-top:8px">추천 心得</h3><div class="legendsHeartList">'+hearts.map((x,i)=>'<span class="legendsHeart'+(i<4?' top':'')+'">'+esc(x)+'</span>').join('')+'</div>'+
+   '<div class="legendsDeckHint">클래식 7월 전반까지는 목표 인도의 색 관리가 핵심이고, 인도 확정 뒤에는 색보다 강한 훈련 효과를 우선합니다.</div></div>'+
+   '<div class="legendsGuideCard"><h3>인게임 UI 참고</h3><div class="note">공식 The Twinkle Legends 페이지의 실제 「心得 / 레전드의 인도」 화면을 그대로 참고합니다.</div>'+
+   (refs.length?'<div class="legendsRefGrid">'+refs.map(x=>'<div class="legendsRef"><img src="'+esc(x.image)+'" alt="'+esc(x.label||'인게임 참고')+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.opacity=.18"><div>'+esc(x.label||'')+'</div></div>').join('')+'</div>':'<div class="note" style="margin-top:7px">공식 참고 이미지를 불러오는 중입니다.</div>')+'</div></div>'
+}
+function initLegendsScenarioGuide(){
+ document.querySelectorAll('[data-legends-phase]').forEach(b=>b.onclick=()=>{legendsGuidePhase=b.dataset.legendsPhase;renderLegendsScenarioGuide()});
+ renderLegendsScenarioGuide()
+}
+
+function renderAll(){renderJpSyncStatus();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide();renderLegendsScenarioGuide()}
+applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;save();renderScenarioRareSkillPanel();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide();renderLegendsScenarioGuide()};
 populateConditionGuideRace();
 $('#conditionGuideRace').value=getGuideRace()?.id||'';
 $('#conditionGuideRace').onchange=e=>{
@@ -2863,7 +3002,7 @@ function setOwnedFilter(t){ownedType=t;renderTypeFilters($('#ownedFilters'),owne
 renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);
 renderTypeFilters($('#ownedFilters'),ownedType,setOwnedFilter);
 async function loadLocalAppData(){
- const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krSkillNames:false,krTier:false,jpUpcoming:false,jpTier:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false,jpSyncState:false,jpValidationReport:false,jpSyncHistory:false,jpChangeReport:false,jpManifest:false,jpSourceHealth:false,jpReviewQueue:false,jpEntitySummary:false,krImportCandidates:false,jpScenarioWatch:false,jpSystemStatus:false,jpInheritanceRecommendations:false};
+ const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krMasters:false,krSkillNames:false,krTier:false,jpUpcoming:false,jpTier:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false,jpSyncState:false,jpValidationReport:false,jpSyncHistory:false,jpChangeReport:false,jpManifest:false,jpSourceHealth:false,jpReviewQueue:false,jpEntitySummary:false,krImportCandidates:false,jpScenarioWatch:false,jpSystemStatus:false,jpInheritanceRecommendations:false};
 
  try{
    const meta=await fetchJson('./data/kr/server_meta.json');
@@ -2946,6 +3085,18 @@ async function loadLocalAppData(){
    }
  }catch(e){
    console.warn('[V5.4] KR upcoming.json load failed. Using embedded fallback.',e);
+ }
+
+ try{
+   const data=await fetchJson('./data/kr/masters_challenge.json');
+   const races=Array.isArray(data?.races)?data.races:[];
+   const valid=races.length>=5&&races.every(r=>r&&r.kind==='masters'&&typeof r.id==='string'&&typeof r.eventKr==='string'&&typeof r.ground==='string'&&typeof r.distance==='string');
+   if(valid){
+     KOREA_MASTERS_CHALLENGE={...KOREA_MASTERS_CHALLENGE,...data,races};
+     result.krMasters=true;
+   }else throw new Error('KR Masters Challenge validation failed');
+ }catch(e){
+   console.warn('[V7.8] KR masters_challenge.json load failed. Using embedded fallback.',e);
  }
 
  try{
@@ -3499,6 +3650,7 @@ async function bootstrapApp(){
 }
 
 initRamenScenarioGuide();
+initLegendsScenarioGuide();
 bootstrapApp();
 
 
