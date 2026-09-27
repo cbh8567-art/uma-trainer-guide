@@ -75,11 +75,19 @@ jobs:
               return row.find_elements(By.CSS_SELECTOR, ".linkCharIcon")
 
           def select_scenario(driver, value):
-              Select(driver.find_element(By.ID, "scenario")).select_by_value(value)
-              time.sleep(0.7)
-              panel = driver.find_element(By.ID, "scenarioRareSkillPanel")
-              if not panel.is_displayed():
-                  raise RuntimeError(f"Scenario panel hidden after selecting {value}")
+              select_el = driver.find_element(By.ID, "scenario")
+              Select(select_el).select_by_value(value)
+              driver.execute_script(
+                  "arguments[0].dispatchEvent(new Event('change', {bubbles:true}));",
+                  select_el
+              )
+              WebDriverWait(driver, 12).until(
+                  lambda d: d.find_element(By.ID, "scenarioRareSkillPanel").is_displayed()
+              )
+              if value in {"tresenken", "dreams", "onsen", "island", "harvest", "mecha"}:
+                  WebDriverWait(driver, 12).until(
+                      lambda d: len(d.find_elements(By.CSS_SELECTOR, "#finishRamenLinkChoices .finishOption")) > 0
+                  )
 
           def check_scenario_badges(driver):
               # Tracenken: always-gold staff row must show both Tazuna + Light Hello;
