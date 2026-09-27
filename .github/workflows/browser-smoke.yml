@@ -172,9 +172,9 @@ jobs:
                   if db_body.is_displayed():
                       raise RuntimeError("SSR DB should be collapsed by default")
                   toggle_db = d.find_element(By.ID, "toggleSsrDb")
-                  toggle_db.click()
+                  d.execute_script("arguments[0].click()", toggle_db)
                   WebDriverWait(d, 8).until(lambda x: x.find_element(By.ID, "ssrDbBody").is_displayed())
-                  toggle_db.click()
+                  d.execute_script("arguments[0].click()", toggle_db)
                   WebDriverWait(d, 8).until(lambda x: not x.find_element(By.ID, "ssrDbBody").is_displayed())
                   rec = d.find_element(By.ID, "dbGuideRecommend")
                   global_skills = d.find_element(By.ID, "globalSkills")
