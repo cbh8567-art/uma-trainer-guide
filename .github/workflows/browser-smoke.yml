@@ -32,9 +32,9 @@ jobs:
           from selenium.webdriver.support import expected_conditions as EC
 
           TARGETS = [
-              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v712"),
-              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v712"),
-              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v712"),
+              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v713"),
+              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v713"),
+              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v713"),
           ]
 
           def make_driver(width=1440, height=1200):
@@ -49,7 +49,7 @@ jobs:
               return driver
 
           def wait_app(driver):
-              WebDriverWait(driver, 25).until(lambda d: "V7.12" in d.title)
+              WebDriverWait(driver, 25).until(lambda d: "V7.13" in d.title)
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "scenarioRareSkillPanel")))
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "finishRamenLinkChoices")))
 
@@ -240,6 +240,37 @@ jobs:
                   for expected in ["스페셜 트레센 라멘", "욕심쟁이 트레센 라멘", "주옥의 트레센 라멘"]:
                       if expected not in ura_text:
                           raise RuntimeError(f"Missing ultimate ramen choice: {expected}")
+                  # V7.13: no giant reference screenshot; effect text is carried by the three cards.
+                  ramen_body = d.find_element(By.ID, "ramenGuideBody")
+                  if len(ramen_body.find_elements(By.CSS_SELECTOR, ".ramenIngameRef")) != 0:
+                      raise RuntimeError("Obsolete ramen reference screenshot is still rendered")
+                  effect_lines = ramen_body.find_elements(By.CSS_SELECTOR, ".ramenEffectLine")
+                  if len(effect_lines) < 6:
+                      raise RuntimeError("Ramen three-choice cards are missing detailed effect text")
+                  if "힌트 Lv+3" not in ramen_body.text:
+                      # Current phase may be senior; verify URA once more for corrected hint level.
+                      d.execute_script("document.querySelector('[data-ramen-phase=ura]').click()")
+                      WebDriverWait(d, 8).until(lambda x: "힌트 Lv+3" in x.find_element(By.ID, "ramenGuideBody").text)
+                  print("RAMEN TEXT GUIDE PASS:", len(effect_lines))
+
+                  # V7.13: recommended SSR art must preserve the source card aspect ratio.
+                  d.execute_script("document.querySelector('[data-ramen-phase=senior]').click()")
+                  rec_imgs = d.find_elements(By.CSS_SELECTOR, ".recSupport img")
+                  if rec_imgs:
+                      fit = d.execute_script("return getComputedStyle(arguments[0]).objectFit", rec_imgs[0])
+                      if fit != "contain":
+                          raise RuntimeError(f"Recommended SSR artwork should use contain, got {fit}")
+                      dims = d.execute_script("""
+                          const i=arguments[0];
+                          return {nw:i.naturalWidth,nh:i.naturalHeight,w:i.getBoundingClientRect().width,h:i.getBoundingClientRect().height};
+                      """, rec_imgs[0])
+                      if dims["nw"] and dims["nh"] and dims["w"] and dims["h"]:
+                          natural = dims["nw"]/dims["nh"]
+                          shown = dims["w"]/dims["h"]
+                          if abs(natural-shown) > 0.03:
+                              raise RuntimeError(f"SSR artwork ratio changed: natural={natural}, shown={shown}")
+                  print("SSR ART RATIO PASS:", len(rec_imgs))
+
                   print("RAMEN THREE-CHOICE PASS")
 
                   # V7.12: character tier snapshot uses existing Uma portraits.
