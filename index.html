@@ -1369,7 +1369,14 @@ function scenarioRareSkillRouteDetails(name){
      }else if(r.choiceGroup==='ramenLinkEvent'){
        const choice=(sc.ramenLinkEventChoices||[]).find(x=>x.id===r.choiceId);
        missing.push('貴方と私とラーメンと · '+(choice?.kr||choice?.jp||r.choiceId)+' 선택');
+     }else if(r.choiceGroup==='scenarioLinkEvent'){
+       const choice=(sc.linkEventChoices||[]).find(x=>x.id===r.choiceId);
+       missing.push((sc.linkEvent?.kr||sc.linkEvent?.title||'시나리오 선택 이벤트')+' · '+(choice?.kr||choice?.jp||r.choiceId)+' 선택');
      }else missing.push('시나리오 선택지 '+r.choiceId);
+   }
+   if(r.progressKey&&!scenarioProgressMet(r.progressKey)){
+     const cfg=(sc.progressChecks||[]).find(x=>x.id===r.progressKey);
+     missing.push(cfg?.label||('진행 조건 '+r.progressKey));
    }
    if(r.milestone&&!scenarioMilestoneMet(r.milestone)){
      if(r.milestone==='classicRmjBig')missing.push('클래식급 제2회 RMJ 대성황');
