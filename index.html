@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.7-RC1">
-<title>우마무스메 트레이너 가이드 V7.7-RC1 WEB</title>
+<meta name="app-build" content="V7.7">
+<title>우마무스메 트레이너 가이드 V7.7 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -184,11 +184,14 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .scenarioRareSkillPanel .finishOptions{margin-top:6px}
 .linkVisuals{display:flex;align-items:center;gap:5px;flex:none}
 .linkCharIcons{display:flex;align-items:center}
-.linkCharIcon{width:30px;height:30px;border-radius:50%;object-fit:cover;background:#292e3d;border:1px solid #596176;box-shadow:0 0 0 1px rgba(255,255,255,.04)}
-.linkCharIcon+.linkCharIcon{margin-left:-8px}
+.linkCharIcon{width:30px;height:30px;border-radius:50%;object-fit:cover;object-position:50% 22%;background:#292e3d;border:1px solid #596176;box-shadow:0 0 0 1px rgba(255,255,255,.04)}
+.linkCharIcons>*+*{margin-left:-8px}
 .linkCharFallback{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid #596176;background:#242938;color:#ffe091;font-size:13px;font-weight:900}
 .linkVisuals .skillIcon{margin-left:1px}
-@media(max-width:720px){.linkCharIcon,.linkCharFallback{width:26px;height:26px}.linkCharIcon+.linkCharIcon{margin-left:-7px}.linkVisuals{gap:4px}}
+.scenarioRareSkillPanel .finishOption>div{min-width:0}
+.scenarioRareSkillPanel .finishName,.scenarioRareSkillPanel .finishSub{overflow-wrap:anywhere}
+@media(max-width:720px){.linkCharIcon,.linkCharFallback{width:26px;height:26px}.linkCharIcons>*+*{margin-left:-7px}.linkVisuals{gap:4px}}
+@media(max-width:420px){.scenarioRareSkillPanel{padding:8px}.scenarioRareSkillPanel .finishOptions{padding:5px}.scenarioRareSkillPanel .finishOption{gap:5px;padding:6px}.scenarioRareSkillPanel .linkVisuals{align-self:start;padding-top:1px}}
 
 .finishLockDetail{margin-top:6px;padding:6px 7px;border:1px solid #70434d;border-radius:8px;background:#251a20;color:#d9bec4;font-size:8px;line-height:1.5}
 .finishLockDetail b{color:#ffb6c3}
@@ -200,7 +203,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.7-RC1 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.7 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -1320,24 +1323,55 @@ function scenarioProgressMet(id){
 const LINK_CHARACTER_SUPPORT_FALLBACK_IDS={
  '駿川たづな':30305,'ライトハロー':30052,'秋川理事長':30207,'タッカーブライン':30257,'保科健子':30276,'カジノドライヴ':30290
 };
-function linkCharacterImage(name){
- const target=norm(name),matches=v=>{const n=norm(v);return !!n&&(n===target||n.includes(target)||target.includes(n))};
+const LINK_CHARACTER_OFFICIAL_FALLBACKS={
+ '駿川たづな':'https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3a778cbeb7f342d489c98f7d978a68a3/hayakawatazuna_01.png',
+ 'ライトハロー':'https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ed5da1ee8aa4474bbc845aa4dc9c2d10/lighthello_01.png',
+ '秋川理事長':'https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/36796474515b4273a1a37f854b36e359/akikawayayoi_01.png',
+ 'タッカーブライン':'https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5760a0e1bd8247f487322c661a85be90/tuckerbryne_01.png',
+ '保科健子':'https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b7da205cb41f4dbf899afee790d962b2/hoshinakiyoko_01.png',
+ 'カジノドライヴ':'https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/91ab89209fbe44cb9e774c86e0ae4769/casinodrive_01.png',
+ 'シュガーライツ':'https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e053c7f75c6b4a70a8094b5b87e653ef/sugarlights_01.png'
+};
+function linkCharacterImageCandidates(name){
+ const target=norm(name),urls=[],matches=v=>{const n=norm(v);return !!n&&(n===target||n.includes(target)||target.includes(n))};
+ const add=url=>{if(url&&!urls.includes(url))urls.push(url)};
  const uma=runtime.characters.find(c=>matches(c.character)||matches(c.name)||matches(c.krName));
- if(uma?.image)return uma.image;
+ add(uma?.image);
  const sup=runtime.catalog.find(c=>matches(c.character)||matches(c.jpName)||matches(c.title)||matches(c.krName));
- if(sup?.image)return sup.image;
+ add(sup?.image);
  for(const [id,x] of Object.entries(FRIEND_SUPPORT_SKILLS?.cards||{})){
-   if(matches(x?.name))return `${CONFIG.assetBases.support}${id}.webp`
+   if(matches(x?.name))add(`${CONFIG.assetBases.support}${id}.webp`)
  }
  const fallbackId=LINK_CHARACTER_SUPPORT_FALLBACK_IDS[name];
- return fallbackId?`${CONFIG.assetBases.support}${fallbackId}.webp`:''
+ if(fallbackId){
+   add(`${CONFIG.assetBases.support}${fallbackId}.webp`);
+   add(`https://media.gametora.com/umamusume/supports/full/small/${fallbackId}.png`)
+ }
+ add(LINK_CHARACTER_OFFICIAL_FALLBACKS[name]);
+ return urls
+}
+function linkCharacterImage(name){return linkCharacterImageCandidates(name)[0]||''}
+function cycleLinkCharacterImage(img){
+ const pending=(img.dataset.fallbacks||'').split('|').filter(Boolean);
+ if(pending.length){
+   img.dataset.fallbacks=pending.slice(1).join('|');
+   img.src=decodeURIComponent(pending[0]);
+   return
+ }
+ const span=document.createElement('span');
+ span.className='linkCharFallback';
+ span.title=img.alt||'';
+ span.textContent='?';
+ img.replaceWith(span)
 }
 function linkCharacterIconsHtml(names){
  const list=(names||[]).filter(Boolean);
  if(!list.length)return '<span class="linkCharFallback">★</span>';
  return '<span class="linkCharIcons">'+list.map(function(name){
-   const img=linkCharacterImage(name),label=koChar(name)||name;
-   return img?'<img class="linkCharIcon" src="'+esc(img)+'" alt="'+esc(label)+'" loading="lazy" onerror="this.style.opacity=.18">':'<span class="linkCharFallback" title="'+esc(label)+'">?</span>'
+   const urls=linkCharacterImageCandidates(name),label=koChar(name)||name;
+   if(!urls.length)return '<span class="linkCharFallback" title="'+esc(label)+'">?</span>';
+   const fallbacks=urls.slice(1).map(encodeURIComponent).join('|');
+   return '<img class="linkCharIcon" src="'+esc(urls[0])+'" alt="'+esc(label)+'" loading="lazy" data-fallbacks="'+esc(fallbacks)+'" onerror="cycleLinkCharacterImage(this)">'
  }).join('')+'</span>'
 }
 function scenarioRareSkillNames(){
