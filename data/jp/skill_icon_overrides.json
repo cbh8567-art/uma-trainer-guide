@@ -1,16 +1,26 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-27",
+  "updated": "2026-09-28",
   "overrides": {
     "202711": {
       "iconId": 20042,
       "status": "verified",
       "note": "王手 explicit verified override; do not derive iconId from skillId"
     },
+    "203641": {
+      "iconId": 20012,
+      "status": "verified",
+      "note": "曙光 verified from BWiki skill page (Utx ico skill 20012.png); do not derive iconId from skillId"
+    },
     "204372": {
       "iconId": 20011,
       "status": "verified",
       "note": "流れに任せて explicit verified override from UmaTools skills_all.json; upstream Tsuyuchan iconId is 0"
+    },
+    "204391": {
+      "iconId": 20022,
+      "status": "verified",
+      "note": "悠々自適 verified from BWiki skill page (Utx ico skill 20022.png); do not derive iconId from skillId"
     },
     "204531": {
       "iconId": 20012,
