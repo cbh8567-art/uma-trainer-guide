@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.52">
-<title>우마무스메 트레이너 가이드 V7.52 WEB</title>
+<meta name="app-build" content="V7.53">
+<title>우마무스메 트레이너 가이드 V7.53 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -608,6 +608,34 @@ body.trainingMode .counts{margin-top:8px}
 .historyCompareDeckItem img{width:100%;height:58px;object-fit:contain;border-radius:4px;background:#242b36}
 .historyCompareDeckItem span{display:block;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 @media(max-width:720px){.historyCompareGrid{grid-template-columns:92px minmax(0,1fr) minmax(0,1fr)}.historyCompareDeck{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* V7.53 · 최근 육성 SSR별 실제 획득 금스킬 비교 */
+.historyRareCompare{margin-top:10px;border:1px solid #3f4d63;background:#111720;border-radius:10px;padding:8px}
+.historyRareCompareHead{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:7px}
+.historyRareCompareHead b{font-size:10px}.historyRareCompareHead span{font-size:8px;color:#9facc0}
+.historyRareCompareList{display:grid;gap:6px}
+.historyRareCompareRow{display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,1fr);gap:5px;align-items:stretch}
+.historyRareCompareCard,.historyRareCompareSide{border:1px solid #344155;background:#151b25;border-radius:8px;padding:6px;min-width:0}
+.historyRareCompareCard{display:grid;grid-template-columns:42px minmax(0,1fr);gap:6px;align-items:center}
+.historyRareCompareCard img{width:42px;height:55px;object-fit:contain;border-radius:5px;background:#242b36}
+.historyRareCompareCard .name{font-size:8px;font-weight:950;line-height:1.3;overflow-wrap:anywhere}
+.historyRareCompareCard .meta{font-size:7px;color:#98a5b8;margin-top:2px}
+.historyRareCompareSide.changed{border-color:#9a7730;background:#292316}
+.historyRareCompareSide.only{border-color:#805160;background:#2c1d22}
+.historyRareCompareSide .label{font-size:7px;color:#9aa7ba;margin-bottom:4px}
+.historyRareCompareSkills{display:flex;gap:4px;flex-wrap:wrap}
+.historyRareCompareSkill{border:1px solid #536078;background:#222a38;border-radius:999px;padding:3px 6px;font-size:7px}
+.historyRareCompareSkill.common{border-color:#49745c;background:#183023;color:#baf1ce}
+.historyRareCompareSkill.added{border-color:#3f825e;background:#163322;color:#a8f0c3}
+.historyRareCompareSkill.removed{border-color:#8a5360;background:#321d22;color:#ffc3cc}
+.historyRareCompareNone{font-size:7.5px;color:#7f8ba0}
+.historyRareCompareLegacy{font-size:8px;color:#aab4c6;padding:7px;border:1px dashed #46536a;border-radius:8px}
+@media(max-width:720px){
+ .historyRareCompareRow{grid-template-columns:62px minmax(0,1fr) minmax(0,1fr)}
+ .historyRareCompareCard{grid-template-columns:1fr;text-align:center}
+ .historyRareCompareCard img{width:40px;height:52px;margin:auto}
+ .historyRareCompareCard .name{font-size:7px}
+ .historyRareCompareSkill{font-size:6.5px;padding:2px 4px}
+}
 /* V7.47 · SSR별 실제 획득 레어스킬 기록 */
 .supportRareHistoryGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:7px}
 .supportRareHistoryCard{display:grid;grid-template-columns:54px minmax(0,1fr);gap:8px;align-items:start;border:1px solid #39475b;background:#121821;border-radius:9px;padding:6px;min-width:0}
@@ -3692,6 +3720,57 @@ function historyDeckDiff(before=[],after=[]){
  }
  return {changed,rentalChanged}
 }
+function historyRareCardKey(x){
+ return String(x?.cardId??x?.id??x?.cardName??x?.name??'')
+}
+function historyRareSkillKey(x){
+ return String(x?.id??x?.jp??x?.name??'')
+}
+function historyRareSkillLabel(x){
+ return x?.name||x?.jp||String(x?.id||'스킬')
+}
+function historyRareCompareRows(a,b){
+ const aa=Array.isArray(a?.supportRareCards)?a.supportRareCards.filter(Boolean):[];
+ const bb=Array.isArray(b?.supportRareCards)?b.supportRareCards.filter(Boolean):[];
+ const ma=new Map(aa.map(x=>[historyRareCardKey(x),x])),mb=new Map(bb.map(x=>[historyRareCardKey(x),x]));
+ const order=[];
+ for(const x of aa){const k=historyRareCardKey(x);if(k&&!order.includes(k))order.push(k)}
+ for(const x of bb){const k=historyRareCardKey(x);if(k&&!order.includes(k))order.push(k)}
+ return order.map(k=>({key:k,a:ma.get(k)||null,b:mb.get(k)||null}))
+}
+function historyRareCompareSideHtml(card,otherCard,side){
+ if(!card)return '<div class="historyRareCompareSide only"><div class="label">'+esc(side)+'</div><div class="historyRareCompareNone">편성되지 않음</div></div>';
+ const mine=new Map((card.skills||[]).map(sk=>[historyRareSkillKey(sk),sk]));
+ const other=new Set((otherCard?.skills||[]).map(historyRareSkillKey));
+ const skills=[...mine.entries()].map(([k,sk])=>({sk,common:other.has(k)}));
+ const cls=otherCard&&(
+   historyRareCardKey(card)===historyRareCardKey(otherCard)
+   && ((card.skills||[]).map(historyRareSkillKey).sort().join('|')!==((otherCard.skills||[]).map(historyRareSkillKey).sort().join('|'))
+ )?' changed':(!otherCard?' only':'');
+ return '<div class="historyRareCompareSide'+cls+'"><div class="label">'+esc(side)+(card.rental?' · 렌탈':'')+'</div>'+
+   (skills.length?'<div class="historyRareCompareSkills">'+skills.map(x=>'<span class="historyRareCompareSkill '+(x.common?'common':(side==='A'?'removed':'added'))+'">'+esc(historyRareSkillLabel(x.sk))+'</span>').join('')+'</div>':'<div class="historyRareCompareNone">획득 레어스킬 없음</div>')+
+   '</div>'
+}
+function historyRareCompareHtml(a,b){
+ const hasA=Array.isArray(a?.supportRareCards),hasB=Array.isArray(b?.supportRareCards);
+ if(!hasA&&!hasB)return '<div class="historyRareCompare"><div class="historyRareCompareHead"><b>SSR별 실제 획득 금스킬 비교</b></div><div class="historyRareCompareLegacy">두 기록 모두 V7.47 이전 형식이라 카드별 실제 획득 스킬 데이터가 없습니다.</div></div>';
+ if(!hasA||!hasB)return '<div class="historyRareCompare"><div class="historyRareCompareHead"><b>SSR별 실제 획득 금스킬 비교</b></div><div class="historyRareCompareLegacy">한쪽 기록이 V7.47 이전 형식이라 카드별 스킬을 완전 비교할 수 없습니다. 새 기록끼리 비교하면 카드 단위 차이가 표시됩니다.</div></div>';
+ const rows=historyRareCompareRows(a,b);
+ if(!rows.length)return '<div class="historyRareCompare"><div class="historyRareCompareHead"><b>SSR별 실제 획득 금스킬 비교</b></div><div class="historyRareCompareLegacy">비교할 서포트 카드 기록이 없습니다.</div></div>';
+ let changed=0;
+ for(const row of rows){
+   const as=(row.a?.skills||[]).map(historyRareSkillKey).sort().join('|'),bs=(row.b?.skills||[]).map(historyRareSkillKey).sort().join('|');
+   if(!row.a||!row.b||as!==bs)changed++
+ }
+ return '<div class="historyRareCompare"><div class="historyRareCompareHead"><b>SSR별 실제 획득 금스킬 비교</b><span>변화 '+changed+'장 · 초록=공통 · 빨강=A만 · 초록 강조=B만</span></div><div class="historyRareCompareList">'+
+   rows.map(row=>{
+     const card=row.b||row.a,name=card?.cardName||'SSR',image=card?.image||'',rental=!!(row.a?.rental||row.b?.rental);
+     return '<div class="historyRareCompareRow"><div class="historyRareCompareCard">'+
+       (image?'<img src="'+esc(image)+'" alt="'+esc(name)+'" data-fallbacks="'+esc(supportImageFallbackAttrById(card?.cardId))+'" onerror="cycleSupportImage(this)">':'')+
+       '<div><div class="name">'+esc(name)+'</div><div class="meta">'+(rental?'렌탈 포함':'보유 SSR')+'</div></div></div>'+
+       historyRareCompareSideHtml(row.a,row.b,'A')+historyRareCompareSideHtml(row.b,row.a,'B')+'</div>'
+   }).join('')+'</div></div>'
+}
 function historyChangeSummaryHtml(a,b){
  const at=Date.parse(a?.completedAt||'')||0,bt=Date.parse(b?.completedAt||'')||0;
  const before=at&&bt&&at>bt?b:a,after=before===a?b:a;
@@ -3708,6 +3787,16 @@ function historyChangeSummaryHtml(a,b){
  if(historyCompareText(before,'condition')!==historyCompareText(after,'condition'))chips.push('<span class="historyChangeChip changed">레이스 조건 변경</span>');
  if(historyCompareText(before,'scenario')!==historyCompareText(after,'scenario'))chips.push('<span class="historyChangeChip changed">시나리오 변경</span>');
  if(historyCompareText(before,'uma')!==historyCompareText(after,'uma'))chips.push('<span class="historyChangeChip changed">육성 우마 변경</span>');
+ const rareRows=historyRareCompareRows(before,after);
+ if(Array.isArray(before.supportRareCards)&&Array.isArray(after.supportRareCards)){
+   const rareChanged=rareRows.filter(row=>{
+     if(!row.a||!row.b)return true;
+     const as=(row.a.skills||[]).map(historyRareSkillKey).sort().join('|');
+     const bs=(row.b.skills||[]).map(historyRareSkillKey).sort().join('|');
+     return as!==bs
+   }).length;
+   if(rareChanged)chips.push('<span class="historyChangeChip changed">SSR별 획득 스킬 '+rareChanged+'장 변화</span>')
+ }
  const deck=historyDeckDiff(before.deck,after.deck);
  if(deck.changed)chips.push('<span class="historyChangeChip changed">서포트 편성 '+deck.changed+'칸 변경</span>');
  if(deck.rentalChanged)chips.push('<span class="historyChangeChip changed">렌탈 카드 변경</span>');
@@ -3733,7 +3822,7 @@ function openTrainingHistoryCompare(){
    const ah=key==='deck'?historyCompareDeckHtml(a):esc(av);
    const bh=key==='deck'?historyCompareDeckHtml(b):esc(bv);
    return '<div class="historyCompareLabel">'+esc(label)+'</div><div class="historyCompareCell'+different+'">'+ah+'</div><div class="historyCompareCell'+different+'">'+bh+'</div>'
- }).join('')+'</div>';
+ }).join('')+'</div>'+historyRareCompareHtml(a,b);
  $('#trainingHistoryCompareModal').classList.add('open')
 }
 function toggleTrainingHistoryCompare(index){
