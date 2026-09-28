@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.42">
-<title>우마무스메 트레이너 가이드 V7.42 WEB</title>
+<meta name="app-build" content="V7.43">
+<title>우마무스메 트레이너 가이드 V7.43 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -305,7 +305,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .finishLockDetail .finishRoute{display:block;margin-top:2px;color:#d8c79e}
 .finishOption.disabled .finishLockDetail{opacity:1;filter:none}
 
-/* V7.42 · deck readability, status border, bilingual labels
+/* V7.43 · deck readability, status border, bilingual labels
    - 원본 일러는 object-fit:contain으로 왜곡 없이 표시
    - 전체 타이포그래피를 약 10~15% 확대
    - 모바일에서도 작은 보조문구가 지나치게 축소되지 않도록 최소 크기 확보 */
@@ -375,7 +375,7 @@ body{font-size:14px;line-height:1.5}
 }
 
 
-/* V7.42 · 육성 준비 플로우 */
+/* V7.43 · 육성 준비 플로우 */
 .setupProgress{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:0 0 10px}
 .setupProgressStep{border:1px solid #3e475c;background:#171c28;border-radius:10px;padding:7px 8px;min-width:0}
 .setupProgressStep .n{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:50%;background:#2a3142;margin-right:5px;font-size:10px;font-weight:950}
@@ -397,7 +397,7 @@ body{font-size:14px;line-height:1.5}
  .setupSummary{grid-template-columns:1fr 1fr}
  .rentalSlotHeader{font-size:11px;padding:5px}
 }
-/* V7.42 · 육성 준비 플로우 */
+/* V7.43 · 육성 준비 플로우 */
 .setupStepPanel{margin-top:10px;border:1px solid #46506a;background:linear-gradient(180deg,#181d29,#141823);border-radius:12px;padding:10px}
 .setupStepHead{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .setupStepBadge{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:27px;border-radius:50%;background:#2a3142;border:1px solid #4c5874;font-weight:950;color:#dce4f3}
@@ -419,7 +419,7 @@ body{font-size:14px;line-height:1.5}
 [hidden]{display:none!important}
 @media(max-width:720px){.inheritanceGrid{grid-template-columns:1fr}.setupActions .btn{flex:1 1 140px}.deckConfirmBar .btn{flex:1 1 145px}}
 
-/* V7.42 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
+/* V7.43 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
 .scenarioPlanPanel{border-color:#5d4f77;background:linear-gradient(180deg,#1c1928,#151821)}
 .scenarioPlanPanel.confirmed{border-color:#486d59;background:linear-gradient(180deg,#17241e,#151a18)}
 .planChoiceGroup{margin-top:9px}.planChoiceTitle{font-size:11px;font-weight:950;margin-bottom:6px}
@@ -439,7 +439,7 @@ body{font-size:14px;line-height:1.5}
  .trainingStartMain .btn{width:100%}
 }
 
-/* V7.42 · 시니어 9월 계획 → 실제 선택 승격 */
+/* V7.43 · 시니어 9월 계획 → 실제 선택 승격 */
 .plannedEventBox{border:1px solid #65527c;background:linear-gradient(180deg,#201a2b,#171923);border-radius:10px;padding:9px;margin:7px 0}
 .plannedEventBox.done{border-color:#3e7657;background:linear-gradient(180deg,#16271f,#171b19)}
 .plannedEventBox.diff{border-color:#9b7142;background:linear-gradient(180deg,#2a2116,#1c1915)}
@@ -450,7 +450,7 @@ body{font-size:14px;line-height:1.5}
 .plannedEventActions .btn{font-size:10px;padding:7px 9px}
 @media(max-width:720px){.plannedEventActions .btn{flex:1 1 145px}}
 
-/* V7.42 · PC 육성 진행 대시보드 / 라멘 아이콘 / 레어스킬 요약 */
+/* V7.43 · PC 육성 진행 대시보드 / 라멘 아이콘 / 레어스킬 요약 */
 .ramenDishIcon{width:62px;height:62px;object-fit:contain;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.32));flex:0 0 auto}
 .planChoice .ramenDishIcon{width:62px;height:62px}
 .finishOption .ramenDishIcon{width:58px;height:58px}
@@ -476,7 +476,7 @@ body{font-size:14px;line-height:1.5}
  .rareSkillOverview{grid-template-columns:1fr}
 }
 
-/* V7.42 · 라멘 결과 스킬 아이콘 / 육성 모드 전환 */
+/* V7.43 · 라멘 결과 스킬 아이콘 / 육성 모드 전환 */
 .ramenDishWrap{display:inline-flex;align-items:center;justify-content:center;width:62px;height:62px;flex:0 0 62px}
 .ramenDishWrap .ramenDishIcon{width:100%;height:100%}
 .ramenDishWrap .ramenDishFallback{width:46px;height:46px}
@@ -508,7 +508,7 @@ body.trainingMode.trainingSetupEdit #confirmDeckBtn{display:inline-flex!importan
  body.trainingMode.trainingSetupEdit #setupProgress{display:flex!important}
 }
 
-/* V7.42 · PC 육성 완료/포기/세션 정리 */
+/* V7.43 · PC 육성 완료/포기/세션 정리 */
 .trainingSessionActions{display:flex;gap:6px;flex-wrap:wrap}
 .trainingSessionActions .btn,.trainingSessionActions .mini{white-space:nowrap}
 .trainingResultHero{border:1px solid #4f755d;background:linear-gradient(180deg,#17291f,#151b18);border-radius:12px;padding:11px;margin-top:9px}
@@ -528,7 +528,7 @@ body.trainingMode.trainingSetupEdit #confirmDeckBtn{display:inline-flex!importan
  .trainingResultDeck{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
-/* V7.42 · PC 실전 육성 UX / 히스토리 / 덱 프리셋 / 추천 근거 */
+/* V7.43 · PC 실전 육성 UX / 히스토리 / 덱 프리셋 / 추천 근거 */
 body:not(.trainingMode) #ramenScenarioGuide,
 body:not(.trainingMode) #legendsScenarioGuide{display:none!important}
 .pendingShortcutList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}
@@ -542,7 +542,7 @@ body:not(.trainingMode) #legendsScenarioGuide{display:none!important}
 @media(max-width:900px){.pendingShortcutList,.trainingHistoryList{grid-template-columns:1fr}}
 @media(max-width:720px){.deckPresetBar,.trainingHistoryPanel{display:none}}
 
-/* V7.42 · PC 밀도 조정 / 아이콘 보강 */
+/* V7.43 · PC 밀도 조정 / 아이콘 보강 */
 #conditionSetupBlock{margin-top:4px}
 body.trainingMode:not(.trainingSetupEdit) #conditionSetupTitle,
 body.trainingMode:not(.trainingSetupEdit) #conditionSetupBlock,
@@ -557,7 +557,7 @@ body.trainingMode .counts{margin-top:8px}
 .card:hover .recReason,.recSupport:hover .recReason,.cardHero .recReason{display:block;-webkit-line-clamp:unset;overflow:visible}
 .iconAuditNote{font-size:8.5px;color:#aeb7ca;margin-top:4px}
 
-/* V7.42 · 스킬 모달 카드 헤더 */
+/* V7.43 · 스킬 모달 카드 헤더 */
 .skillModalCardHero{display:grid;grid-template-columns:104px 1fr;gap:12px;align-items:center;border:1px solid #3b465d;background:#131924;border-radius:11px;padding:9px;margin:0 0 10px}
 .skillModalCardHero img{width:104px;height:138px;object-fit:contain;border-radius:8px;background:#262d39}
 .skillModalCardHero .title{font-size:14px;font-weight:950}.skillModalCardHero .jp{font-size:9px;color:#aeb8ca;margin-top:3px}
@@ -565,7 +565,7 @@ body.trainingMode .counts{margin-top:8px}
 @media(max-width:900px){.autoRareList{grid-template-columns:1fr}}
 @media(max-width:720px){.skillModalCardHero{grid-template-columns:78px 1fr}.skillModalCardHero img{width:78px;height:104px}}
 
-/* V7.42 · 자동 획득 compact / 최근 육성 상세 */
+/* V7.43 · 자동 획득 compact / 최근 육성 상세 */
 .trainingHistoryCard{cursor:pointer;transition:border-color .12s,background .12s}
 .trainingHistoryCard:hover{border-color:#607493;background:#182131}
 .trainingHistoryCard .hOpen{font-size:8px;color:#9eb3d0;margin-top:6px}
@@ -586,7 +586,7 @@ body.trainingMode .counts{margin-top:8px}
  .historyDetailDeck{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
-/* V7.42 · 최근 육성 2개 비교 */
+/* V7.43 · 최근 육성 2개 비교 */
 .trainingHistoryCompareBar{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap;margin:7px 0 2px;padding:7px;border:1px solid #3a4960;background:#121923;border-radius:9px}
 .trainingHistoryCard.compareSelected{border-color:#ffd45d;box-shadow:0 0 0 1px rgba(255,212,93,.22) inset;background:#211f18}
 .trainingHistoryCardActions{display:flex;gap:5px;align-items:center;justify-content:space-between;margin-top:7px}
@@ -604,7 +604,7 @@ body.trainingMode .counts{margin-top:8px}
 @media(max-width:720px){.historyCompareGrid{grid-template-columns:92px minmax(0,1fr) minmax(0,1fr)}.historyCompareDeck{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 
-/* V7.42 · 비교 변화 요약 + 공략 단계 동기화 */
+/* V7.43 · 비교 변화 요약 + 공략 단계 동기화 */
 .historyChangeSummary{border:1px solid #4a5a72;background:linear-gradient(180deg,#17202d,#121821);border-radius:10px;padding:9px;margin-top:9px}
 .historyChangeSummaryHead{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
 .historyChangeSummaryHead b{font-size:11px}.historyChangeSummaryHead span{font-size:8.5px;color:#aeb8ca}
@@ -623,7 +623,7 @@ body.trainingMode .counts{margin-top:8px}
 .ramenPhaseTab.currentSync,.legendsPhaseTab.currentSync{box-shadow:0 0 0 2px rgba(255,212,93,.22),0 0 12px rgba(255,212,93,.10)}
 @media(max-width:720px){.trainingPhaseBtn{flex:1 1 78px}.historyChangeChip{font-size:8px}}
 
-/* V7.42 · PC 스킬 카운트 6카드 사이드 레일 */
+/* V7.43 · PC 스킬 카운트 6카드 사이드 레일 */
 @media(min-width:721px){
  body.trainingMode #pendingShortcutList{display:none!important}
  body.trainingMode #ramenScenarioGuide,
@@ -675,7 +675,7 @@ body.trainingMode .skillCountSideRail{display:block}
  .skillCountSideRail{display:none!important}
 }
 
-/* V7.42 · 육성 진행 시각화 */
+/* V7.43 · 육성 진행 시각화 */
 body.trainingMode .trainingProgressHead .sub,
 .activeTrainingSetupBar.active{padding:8px 10px}
 .activeTrainingSetupBar>div:first-child{min-width:0;flex:1}
@@ -713,7 +713,7 @@ body.trainingMode .trainingProgressHead .sub,
  .trainingVisualChip{font-size:8px}
 }
 
-/* V7.42 · 육성 헤더 / 핵심 대시보드 정리 */
+/* V7.43 · 육성 헤더 / 핵심 대시보드 정리 */
 .activeTrainingSetupInfo{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px 12px;width:100%;align-items:center}
 .trainingSetupMeta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;min-width:0}
 .trainingHeaderGuide{display:flex;align-items:center;justify-content:flex-end;min-width:0}
@@ -743,7 +743,7 @@ body.trainingMode .trainingProgressHead .sub,
  .trainingHeaderGuide{width:100%}.trainingHeaderGuideChip{max-width:100%}
 }
 
-/* V7.42 · URA 궁극 트레센 라멘 표시 */
+/* V7.43 · URA 궁극 트레센 라멘 표시 */
 .ramenUltimateGuide{margin-top:10px;border:1px solid #715b2d;background:linear-gradient(180deg,#2a2418,#1d1a15);border-radius:10px;padding:9px}
 .ramenUltimateGuideHead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
 .ramenUltimateGuideHead b{font-size:11px}.ramenUltimateGuideHead span{font-size:8px;color:#d7c392}
@@ -761,7 +761,7 @@ body.trainingMode .trainingProgressHead .sub,
 .ramenUltimateBadge.actual{border-color:#477b5b;background:#193024;color:#baf0ce!important}
 @media(max-width:1000px){.ramenUltimateGuideGrid{grid-template-columns:1fr}}
 
-/* V7.42 · 트레센켄 공략 모드 / URA 라멘 카드 통합 */
+/* V7.43 · 트레센켄 공략 모드 / URA 라멘 카드 통합 */
 .ramenGuideModeBar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:8px 0 2px}
 .ramenGuideModeLabel{font-size:9px;font-weight:950;color:#c8d2df}
 .ramenGuideModeBtn{border:1px solid #46546b;background:#1a2130;color:#c8d3e4;border-radius:999px;padding:5px 9px;font-size:8px;font-weight:950;cursor:pointer}
@@ -780,7 +780,7 @@ body.trainingMode .trainingProgressHead .sub,
 .ramenThreeStatus .tag.actual{border-color:#4f8061;color:#bceccc}
 @media(max-width:900px){.ramenThreeItem.ultimateVisual{grid-template-columns:78px minmax(0,1fr)}}
 
-/* V7.42 · 트레센켄 코츠 습득 게이지 */
+/* V7.43 · 트레센켄 코츠 습득 게이지 */
 .ramenGaugePanel{margin-top:10px;border:1px solid #41566f;background:linear-gradient(180deg,#172232,#141b26);border-radius:10px;padding:9px}
 .ramenGaugeHead{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .ramenGaugeHead b{font-size:10px}.ramenGaugeHead span{font-size:7.5px;color:#9eb0c4}
@@ -794,14 +794,14 @@ body.trainingMode .trainingProgressHead .sub,
 .ramenGaugeRatio.good{color:#9fe0b7}.ramenGaugeRatio.warn{color:#f0c878}
 @media(max-width:760px){.ramenGaugeValues{grid-template-columns:1fr}}
 
-/* V7.42 · 단계별 다음 시나리오 선택 */
+/* V7.43 · 단계별 다음 시나리오 선택 */
 .trainingProgressItem.nextScenario.future{border-color:#435a78;background:#182333}
 .trainingProgressItem.nextScenario.future .trainingMetricIcon{border-color:#496483;background:#1d2a3d;color:#a9cff8}
 .trainingProgressItem.nextScenario.active{border-color:#80662f;background:#282216}
 .trainingProgressItem.nextScenario.overdue{border-color:#8a4d4d;background:#2a1b1b}
 .trainingProgressItem.nextScenario.overdue .trainingMetricIcon{border-color:#8a4d4d;background:#361f1f;color:#ffb2b2}
 
-/* V7.42 · 대시보드 시나리오 선택 */
+/* V7.43 · 대시보드 시나리오 선택 */
 .trainingProgressItem.nextScenario{cursor:pointer}
 .trainingProgressItem.nextScenario:hover{filter:brightness(1.06)}
 .trainingQuickChoice{grid-column:1/-1;border:1px solid #495c74;background:#131c28;border-radius:10px;padding:9px}
@@ -818,16 +818,32 @@ body.trainingMode .trainingProgressHead .sub,
 .trainingQuickChoiceRight{font-size:7px;font-weight:950;color:#c8d4e2;white-space:nowrap}
 @media(max-width:900px){.trainingQuickChoiceGrid{grid-template-columns:1fr}}
 
-/* V7.42 · 선택 완료 후에도 변경 가능 */
+/* V7.43 · 선택 완료 후에도 변경 가능 */
 .trainingProgressItem.nextScenario.done{border-color:#4b805f;background:#17271e}
 .trainingProgressItem.nextScenario.done .trainingMetricIcon{border-color:#4b805f;background:#1d3326;color:#b9edca}
 .trainingQuickChoiceStack{grid-column:1/-1;display:grid;gap:8px}
+
+/* V7.43 · 밸런스형 / 고점형 전 단계 비교 */
+.ramenModeCompare{margin-top:8px;border:1px solid #3c4c61;background:#121a25;border-radius:10px;padding:8px}
+.ramenModeCompareHead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.ramenModeCompareHead b{font-size:9px}.ramenModeCompareHead span{font-size:7px;color:#94a6bb}
+.ramenModeCompareGrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.ramenModeCompareRow{display:grid;grid-template-columns:auto minmax(0,1fr);gap:7px;align-items:center;border:1px solid #36465b;background:#18212e;color:#dce7f3;border-radius:8px;padding:7px;text-align:left;cursor:pointer}
+.ramenModeCompareRow:hover{border-color:#5f7898}
+.ramenModeCompareRow.active{border-color:#527aa4;background:#1d2b3d}
+.ramenModeCompareRow.highroll.active{border-color:#9a772f;background:#302816}
+.ramenModeCompareBadge{display:inline-flex;align-items:center;justify-content:center;min-width:50px;border:1px solid #465b74;border-radius:999px;padding:3px 6px;font-size:7px;font-weight:950}
+.ramenModeCompareRow.highroll .ramenModeCompareBadge{border-color:#856a31;color:#f2d285}
+.ramenModeCompareBody{min-width:0}.ramenModeCompareRegions{font-size:8px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ramenModeCompareGauge{font-size:7px;color:#aab9ca;margin-top:3px}
+.ramenModeCompareGauge.good{color:#9fe0b7}
+@media(max-width:760px){.ramenModeCompareGrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.42 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.43 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -3579,7 +3595,7 @@ function resetActiveTrainingSession(){
  state.trainingActive=false;
  state.currentUmaId=null;
  state.currentUmaConfirmed=false;
- // V7.42: 완료/포기 후에도 부모 우마 2명과 계승 확정 상태는 유지한다.
+ // V7.43: 완료/포기 후에도 부모 우마 2명과 계승 확정 상태는 유지한다.
  state.deckConfirmed=false;
  state.scenarioPlanLinkChoice=null;
  state.scenarioPlanUltimateRamen=null;
@@ -4498,7 +4514,7 @@ function renderV7Planner(){
 }
 
 
-/* V7.42 · 트레센켄 단계별 육성 가이드
+/* V7.43 · 트레센켄 단계별 육성 가이드
    카드 편성별 지역 추천 + 실제 인게임 스탯 아이콘 + 라멘 3종 텍스트 효과 안내 */
 let ramenGuidePhase='junior';
 
@@ -4694,8 +4710,31 @@ function genericRegions(counts,phase){
  return ['욕심쟁이 트레센 라멘']
 }
 const RAMEN_GUIDE_MODE_OVERRIDES={
+ balanced:{
+   speed3stam1:{
+     junior:['삿포로','하코다테','도쿄'],
+     classic:['나카야마','한신','고쿠라'],
+     senior:['하코다테','나카야마','한신']
+   }
+ },
  highroll:{
-   speed3stam1:{junior:['삿포로','하코다테','후쿠시마']}
+   speed3stam1:{
+     junior:['삿포로','하코다테','후쿠시마'],
+     classic:['한신','교토','고쿠라'],
+     senior:['하코다테','나카야마','교토']
+   }
+ }
+};
+const RAMEN_GUIDE_MODE_TIPS={
+ balanced:{
+  junior:'밸런스형 기준. 삿포로·하코다테·도쿄로 재현성과 평균 기대값을 우선합니다.',
+  classic:'밸런스형 기준. 나카야마·한신·고쿠라로 스태미나·파워·지능을 안정적으로 끌어올립니다.',
+  senior:'밸런스형 기준. 하코다테·나카야마·한신으로 부족한 스태미나·지능을 보완하면서 범용성을 확보합니다.'
+ },
+ highroll:{
+  junior:'고점형 기준. 도쿄 대신 후쿠시마를 선택해 2·3·5 코츠 분배와 최대 상한을 노립니다.',
+  classic:'고점형 기준. 한신·교토·고쿠라로 2·3·5 코츠 분배를 유지하고 고쿠라로 지능 고점을 노립니다.',
+  senior:'고점형 기준. 하코다테·나카야마·교토로 2·3·5 코츠 분배를 유지하며 스피드·스태미나 다중 우정 고점을 노립니다.'
  }
 };
 function ramenGuideMode(){return ['balanced','highroll'].includes(state.ramenGuideMode)?state.ramenGuideMode:'balanced'}
@@ -4703,17 +4742,32 @@ function setRamenGuideMode(mode){
  state.ramenGuideMode=['balanced','highroll'].includes(mode)?mode:'balanced';
  save();renderRamenScenarioGuide();renderTrainingProgressDashboard()
 }
-function ramenGuideModeHtml(phase){
- if(phase!=='junior')return '';
+function ramenGuideModeHtml(phase,profile){
+ if(phase==='ura'||profile?.key!=='speed3stam1')return '';
  const mode=ramenGuideMode();
  return '<div class="ramenGuideModeBar"><span class="ramenGuideModeLabel">공략 모드</span>'+
   '<button type="button" class="ramenGuideModeBtn'+(mode==='balanced'?' active':'')+'" data-ramen-guide-mode="balanced">밸런스형</button>'+
   '<button type="button" class="ramenGuideModeBtn highroll'+(mode==='highroll'?' active':'')+'" data-ramen-guide-mode="highroll">고점형</button>'+
-  '<span class="ramenGuideModeNote">'+(mode==='highroll'?'최대 상한 우선 · 일부 안정성 감소':'재현성·평균 기대값 우선')+'</span></div>'
+  '<span class="ramenGuideModeNote">'+(mode==='highroll'?'2·3·5 코츠 분배 · 최대 고점 우선':'스탯 안정성 · 재현성 우선')+'</span></div>'
+}
+function ramenModeRegions(mode,phase,deck,profile){
+ const override=RAMEN_GUIDE_MODE_OVERRIDES?.[mode]?.[profile.key]?.[phase];
+ return normalizedRamenRegions(phase,override||profile.regions?.[phase]||genericRegions(deck.counts,phase))
 }
 function ramenRegionsForPhase(phase,deck,profile){
- const mode=ramenGuideMode(),override=RAMEN_GUIDE_MODE_OVERRIDES?.[mode]?.[profile.key]?.[phase];
- return normalizedRamenRegions(phase,override||profile.regions?.[phase]||genericRegions(deck.counts,phase))
+ return ramenModeRegions(ramenGuideMode(),phase,deck,profile)
+}
+function ramenModeCompareHtml(phase,deck,profile){
+ if(phase==='ura'||profile?.key!=='speed3stam1')return '';
+ const active=ramenGuideMode();
+ const row=mode=>{
+   const list=ramenModeRegions(mode,phase,deck,profile),values=ramenGaugeValues(list),sorted=[...values].sort((a,b)=>a-b),is235=sorted[0]===2&&sorted[1]===3&&sorted[2]===5;
+   return '<button type="button" class="ramenModeCompareRow '+(mode==='highroll'?'highroll ':'')+(active===mode?'active':'')+'" data-ramen-guide-mode="'+mode+'">'+
+    '<span class="ramenModeCompareBadge">'+(mode==='highroll'?'고점형':'밸런스형')+'</span>'+
+    '<span class="ramenModeCompareBody"><span class="ramenModeCompareRegions">'+list.map(esc).join(' · ')+'</span>'+
+    '<span class="ramenModeCompareGauge '+(is235?'good':'')+'">면 +'+values[0]+' · 스프 +'+values[1]+' · 토핑 +'+values[2]+(is235?' · 2·3·5 ✓':'')+'</span></span></button>'
+ };
+ return '<div class="ramenModeCompare"><div class="ramenModeCompareHead"><b>운영 모드 비교</b><span>행을 눌러 즉시 전환</span></div><div class="ramenModeCompareGrid">'+row('balanced')+row('highroll')+'</div></div>'
 }
 // 게임 화면의 전국 라멘 지도에서 지역 한자 표지의 위치 (절반 크기 좌표).
 const RAMEN_REGION_ICON_POS={
@@ -4750,17 +4804,15 @@ function renderRamenScenarioGuide(){
  document.querySelectorAll('[data-ramen-phase]').forEach(b=>{const on=b.dataset.ramenPhase===phase;b.classList.toggle('active',on);b.classList.toggle('currentSync',on);b.setAttribute('aria-pressed',on?'true':'false')});
  const regions=ramenRegionsForPhase(phase,deck,profile);
  let phaseTip=profile.phaseTip?.[phase]||'';
- if(phase==='junior'&&profile.key==='speed3stam1'){
-   phaseTip=ramenGuideMode()==='highroll'
-     ?'고점형 기준. 도쿄 대신 후쿠시마를 선택해 최대 상한을 노립니다.'
-     :'밸런스형 기준. 삿포로·하코다테·도쿄로 재현성과 평균 기대값을 우선합니다.'
+ if(profile.key==='speed3stam1'&&phase!=='ura'){
+   phaseTip=RAMEN_GUIDE_MODE_TIPS?.[ramenGuideMode()]?.[phase]||phaseTip
  }
- body.innerHTML='<div class="ramenProfile"><b>자동 판별 편성: '+esc(profile.label)+'</b><br>'+esc(profile.note)+(phaseTip?'<br><b>'+esc(d.title)+':</b> '+esc(phaseTip):'')+ramenGuideModeHtml(phase)+'</div>'+
+ body.innerHTML='<div class="ramenProfile"><b>자동 판별 편성: '+esc(profile.label)+'</b><br>'+esc(profile.note)+(phaseTip?'<br><b>'+esc(d.title)+':</b> '+esc(phaseTip):'')+ramenGuideModeHtml(phase,profile)+'</div>'+
   '<div class="ramenGuideGrid"><div class="ramenGuideCard"><h3>'+esc(d.title)+' 운영</h3>'+
   '<div class="ramenGuideRows"><div class="ramenGuideRow"><b>훈련 우선</b><span>'+esc(d.priority)+'</span></div><div class="ramenGuideRow"><b>특별소스</b><span>'+esc(d.sauce)+'</span></div></div>'+
   '<h3 style="margin-top:8px">편성별 추천 지역</h3><div class="ramenRegions">'+regions.map((x,i)=>ramenRegionHtml(x,phase,i)).join('')+'</div>'+
   '<div class="ramenDeckHint">편성 타입을 바꾸면 추천 지역과 단계별 공략도 자동으로 다시 계산됩니다.</div><div class="ramenAlert">'+esc(d.alert)+'</div>'+
-  ramenGaugePanelHtml(phase,regions)+'</div>'+
+  ramenGaugePanelHtml(phase,regions)+ramenModeCompareHtml(phase,deck,profile)+'</div>'+
   '<div class="ramenGuideCard"><h3>턴별 체크</h3><div class="ramenGuideRows">'+d.points.map(x=>'<div class="ramenGuideRow"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('')+'</div>'+
   ramenThreeListHtml(phase,regions)+'</div></div>';
  body.querySelectorAll('[data-ramen-guide-mode]').forEach(b=>b.onclick=()=>setRamenGuideMode(b.dataset.ramenGuideMode));
