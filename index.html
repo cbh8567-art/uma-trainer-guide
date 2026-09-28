@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.57.2">
-<title>우마무스메 트레이너 가이드 V7.57.2 WEB</title>
+<meta name="app-build" content="V7.57.3">
+<title>우마무스메 트레이너 가이드 V7.57.3 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -776,6 +776,16 @@ body.trainingMode.skillRailBottom:not(.skillRailHiddenPage){padding-bottom:96px}
    left:6px;right:6px;bottom:6px;padding:5px 6px;border-radius:12px;
    max-height:min(52vh,330px);overflow:auto
  }
+ .globalSkillCountRail.bottomDock.mobileCollapsed{
+   left:auto;right:8px;width:min(270px,calc(100vw - 16px));padding:4px;
+   overflow:visible;max-height:none
+ }
+ .globalSkillCountRail.bottomDock.mobileCollapsed .skillRailMobileToggle{
+   padding:7px 9px;border-radius:9px
+ }
+ .globalSkillCountRail.bottomDock.mobileCollapsed .skillRailMobileToggle .summary{
+   font-size:7.5px
+ }
  .globalSkillCountRail .skillRailMobileToggle{
    display:flex;width:100%;align-items:center;justify-content:space-between;gap:8px;
    border:1px solid #46556d;background:#17202d;color:#eef3fb;border-radius:9px;
@@ -801,7 +811,7 @@ body.trainingMode.skillRailBottom:not(.skillRailHiddenPage){padding-bottom:96px}
  .globalSkillCountRail.bottomDock .skillCountRailBadge{height:17px;min-width:26px;font-size:6.5px;right:3px;bottom:3px}
  .globalSkillCountRail.bottomDock .skillCountRailSlot{min-width:17px;height:17px;font-size:7px}
  .globalSkillCountRail.bottomDock .skillCountRailRental{font-size:5.8px}
- body.trainingMode.skillRailBottom:not(.skillRailHiddenPage){padding-bottom:56px}
+ body.trainingMode.skillRailBottom:not(.skillRailHiddenPage){padding-bottom:24px}
  body.trainingMode.skillRailBottom.skillRailMobileOpen:not(.skillRailHiddenPage){padding-bottom:210px}
 }
 /* V7.46 · 육성 진행 시각화 */
