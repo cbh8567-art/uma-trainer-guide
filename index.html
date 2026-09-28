@@ -1957,9 +1957,9 @@ function renderActiveTrainingSetupBar(){
  if(!active){document.body.classList.remove('trainingSetupEdit');renderSkillCountSideRails();return}
  const u=selectedUma(),p1=inheritanceParent(0),p2=inheritanceParent(1),sc=SCENARIOS[state.scenario]||SCENARIOS.none;
  const phaseCfg=trainingGuidePhaseConfig(),phase=phaseCfg.current?Object.fromEntries(phaseCfg.phases)[phaseCfg.current]:'진행 중';
- const face=x=>x?.image?'<img class="miniFace" src="'+esc(x.image)+'" alt="'+esc(x.krName||'우마')+'" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">':'';
+ const face=x=>x?.image?'<img class="miniFace" src="'+esc(x.image)+'" alt="'+esc(x.krName||'우마')+'" onerror="this.style.opacity=.16">':'';
  info.innerHTML='<div class="trainingUmaStatus">'+
-   (u?.image?'<img src="'+esc(u.image)+'" alt="'+esc(u.krName||'육성 우마')+'" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">':'<span class="fallback">UMA</span>')+
+   (u?.image?'<img src="'+esc(u.image)+'" alt="'+esc(u.krName||'육성 우마')+'" onerror="this.style.opacity=.16">':'<span class="fallback">UMA</span>')+
    '<div class="trainingUmaStatusText"><strong>'+esc(u?.krName||'육성 우마')+'</strong><span>육성 진행 중</span></div></div>'+
   '<div class="trainingSetupMeta">'+
    trainingHeaderConditionHtml()+
@@ -2064,6 +2064,9 @@ function supportImageFallbacks(id){
 function supportImageFallbackAttr(card){
  return supportImageFallbacks(card?.id).map(encodeURIComponent).join('|')
 }
+function supportImageFallbackAttrById(id){
+ return supportImageFallbacks(id).map(encodeURIComponent).join('|')
+}
 function cycleSupportImage(img){
  const pending=(img.dataset.fallbacks||'').split('|').filter(Boolean);
  if(pending.length){
@@ -2119,7 +2122,7 @@ function skillCountRailCardHtml(card,index){
  const title=(card.krName||card.jpName||String(card.id))+' · 분기 '+(x.branchTotal-x.pendingBranch)+'/'+x.branchTotal+' · 자동 '+x.autoDone+'/'+x.autoTotal+' · 레어 '+x.got+'/'+x.total;
  return '<button type="button" class="skillCountRailCard '+x.status+'" data-skill-rail-card="'+esc(card.id)+'" title="'+esc(title)+'" aria-label="'+esc(title)+'">'+
   '<span class="skillCountRailSlot">'+(index+1)+'</span>'+(rental?'<span class="skillCountRailRental">렌탈</span>':'')+
-  (card.image?'<img class="skillCountRailThumb" src="'+esc(card.image)+'" alt="'+esc(card.krName||card.jpName||'SSR')+'" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">':'<span class="skillCountRailEmpty">SSR</span>')+
+  (card.image?'<img class="skillCountRailThumb" src="'+esc(card.image)+'" alt="'+esc(card.krName||card.jpName||'SSR')+'" data-fallbacks="'+esc(supportImageFallbackAttr(card))+'" onerror="cycleSupportImage(this)">':'<span class="skillCountRailEmpty">SSR</span>')+
   '<span class="skillCountRailBadge">'+esc(badge)+'</span>'+
   '<span class="skillCountRailName">'+esc(card.krName||card.jpName||String(card.id))+'</span>'+
   '<span class="skillCountRailType '+typeClass(card.type)+'">'+esc((rental?'렌탈 · ':'')+normalizeType(card.type))+'</span>'+
@@ -2202,7 +2205,7 @@ function renderAutomaticRareItems(){
  for(const item of visible){
    const {card,event,skills,done}=item,d=document.createElement('button');d.type='button';d.className='autoRareItem'+(done?' done':'');
    const skill=skills[0],extra=skills.length>1?' 외 '+(skills.length-1)+'개':'';
-   d.innerHTML=(card.image?'<img class="supportThumb" src="'+esc(card.image)+'" alt="'+esc(card.krName||card.jpName||'SSR')+'" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">':'<span class="supportThumb"></span>')+
+   d.innerHTML=(card.image?'<img class="supportThumb" src="'+esc(card.image)+'" alt="'+esc(card.krName||card.jpName||'SSR')+'" data-fallbacks="'+esc(supportImageFallbackAttr(card))+'" onerror="cycleSupportImage(this)">':'<span class="supportThumb"></span>')+
     (skill?skillIcon(skill):'<span class="skillFallback">技</span>')+
     '<span class="autoRareText"><b>'+esc(card.krName||card.jpName||String(card.id))+'</b><span>'+esc(skill?.kr||skill?.jp||'레어 스킬')+esc(extra)+'</span><span class="autoRareVisualBadges"><span class="autoRareVisualBadge">AUTO</span><span class="autoRareVisualBadge'+(done?' done':'')+'">'+(done?'체크 완료':'획득 예정')+'</span></span></span>'+
     '<span class="autoRareState">'+(done?'✓':'AUTO')+'</span>';
@@ -2275,7 +2278,7 @@ function bindTrainingPhaseSync(){
  document.querySelectorAll('[data-training-phase]').forEach(b=>b.onclick=()=>setTrainingGuidePhase(b.dataset.trainingPhase,{scrollGuide:false}))
 }
 function dashboardSupportThumbs(){
- return activeDeckCards().slice(0,3).map(card=>card.image?'<img src="'+esc(card.image)+'" alt="'+esc(card.krName||card.jpName||'SSR')+'" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">':'').join('')
+ return activeDeckCards().slice(0,3).map(card=>card.image?'<img src="'+esc(card.image)+'" alt="'+esc(card.krName||card.jpName||'SSR')+'" data-fallbacks="'+esc(supportImageFallbackAttr(card))+'" onerror="cycleSupportImage(this)">':'').join('')
 }
 function dashboardScenarioSkillIcons(limit=2){
  const names=[...scenarioRareSkillNames()].slice(0,limit),out=[];
@@ -2414,7 +2417,7 @@ function renderUmaResults(){
  if(!runtime.characters.length){b.innerHTML='<div class="note">온라인 DB 동기화 후 육성 우마무스메 검색을 사용할 수 있습니다.</div>';return}
  if(!q){b.innerHTML=`<div class="note">${state.activeServer==='kr'?'한국 서버 구현 육성 우마무스메만 표시합니다. ':''}육성 우마무스메 이름을 검색해 선택하세요.</div>`;return}
  const arr=umaCharactersForServer().filter(c=>norm(`${c.name} ${c.character} ${c.krName} ${katakanaToHangul(c.character)}`).includes(q)).slice(0,20);
- for(const c of arr){const d=document.createElement('div');d.className='card';d.innerHTML=`<img src="${esc(c.image)}" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)"><div><div class="cardName">${esc(c.krName)}</div><div class="cardJp">${esc(c.name)}</div><div class="actions"><button class="mini" data-select>이 우마무스메로 육성</button></div></div>`;d.querySelector('[data-select]').onclick=()=>{$('#umaSearch').value='';setCurrentUma(c);renderUmaResults()};b.appendChild(d)}
+ for(const c of arr){const d=document.createElement('div');d.className='card';d.innerHTML=`<img src="${esc(c.image)}" onerror="this.style.opacity=.16"><div><div class="cardName">${esc(c.krName)}</div><div class="cardJp">${esc(c.name)}</div><div class="actions"><button class="mini" data-select>이 우마무스메로 육성</button></div></div>`;d.querySelector('[data-select]').onclick=()=>{$('#umaSearch').value='';setCurrentUma(c);renderUmaResults()};b.appendChild(d)}
  if(!arr.length)b.innerHTML=`<div class="note">${state.activeServer==='kr'?'한국 서버 구현 범위에서 ':''}검색 결과가 없습니다.</div>`
 }
 function selectedUma(){
@@ -2443,7 +2446,7 @@ function renderConditionUmaSelector(){
  const btn=$('#conditionUmaButton'),inner=$('#conditionUmaButtonInner');if(!btn||!inner)return;
  const u=selectedUma();
  inner.innerHTML=u
-   ?`${u.image?`<img src="${esc(u.image)}" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">`:''}<span style="min-width:0"><div class="pickMain">${esc(u.krName)}${state.currentUmaConfirmed?' ✓':''}</div><div class="pickSub">${esc(u.name)}</div></span>`
+   ?`${u.image?`<img src="${esc(u.image)}" onerror="this.style.opacity=.16">`:''}<span style="min-width:0"><div class="pickMain">${esc(u.krName)}${state.currentUmaConfirmed?' ✓':''}</div><div class="pickSub">${esc(u.name)}</div></span>`
    :`<span><div class="pickMain">우마무스메 선택</div><div class="pickSub">눌러서 썸네일 목록 열기</div></span>`;
 }
 function openUmaPicker(mode='current',target=0){
@@ -2465,7 +2468,7 @@ function renderUmaPicker(){
  for(const ch of arr.slice(0,240)){
    const x=document.createElement('button');x.type='button';x.className='umaPickCard'+(Number(selectedId)===Number(ch.id)?' selected':'');
    const rec=umaPickerMode==='inheritance'?inheritanceRecommendation(ch):null;
-   x.innerHTML=`<img src="${esc(ch.image)}" loading="lazy" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)"><div class="pkKr">${esc(ch.krName)}</div><div class="pkJp">${esc(ch.name)}</div>${rec?`<div class="stars" style="font-size:10px">${esc(rec.stars)} ${esc(rec.label)}</div>`:''}`;
+   x.innerHTML=`<img src="${esc(ch.image)}" loading="lazy" onerror="this.style.opacity=.16"><div class="pkKr">${esc(ch.krName)}</div><div class="pkJp">${esc(ch.name)}</div>${rec?`<div class="stars" style="font-size:10px">${esc(rec.stars)} ${esc(rec.label)}</div>`:''}`;
    x.onclick=()=>{if(umaPickerMode==='inheritance')setInheritanceParent(inheritancePickerTarget,ch);else setCurrentUma(ch);$('#umaPickerModal').classList.remove('open')};
    b.appendChild(x)
  }
@@ -2513,7 +2516,7 @@ function renderInheritanceSetup(){
  const enabled=!!state.currentUmaConfirmed;grid.innerHTML='';
  for(let i=0;i<2;i++){
   const u=inheritanceParent(i),rec=inheritanceRecommendation(u),wrap=document.createElement('div');wrap.className='inheritancePick';
-  wrap.innerHTML=`<button type="button" class="pickParent" ${enabled?'':'disabled'}>${u&&u.image?`<img src="${esc(u.image)}" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">`:'<span class="inheritanceEmpty">＋</span>'}<span><b>부모 ${i+1}</b><div class="cardName">${u?esc(u.krName):'선택 필요'}</div><div class="cardJp">${u?esc(u.name):'육성 우마 확정 후 선택'}</div></span></button><div class="inheritanceRec"><strong>${esc(rec.stars)} ${esc(rec.label)}</strong><br>${esc(rec.reason)}</div>`;
+  wrap.innerHTML=`<button type="button" class="pickParent" ${enabled?'':'disabled'}>${u&&u.image?`<img src="${esc(u.image)}" onerror="this.style.opacity=.16">`:'<span class="inheritanceEmpty">＋</span>'}<span><b>부모 ${i+1}</b><div class="cardName">${u?esc(u.krName):'선택 필요'}</div><div class="cardJp">${u?esc(u.name):'육성 우마 확정 후 선택'}</div></span></button><div class="inheritanceRec"><strong>${esc(rec.stars)} ${esc(rec.label)}</strong><br>${esc(rec.reason)}</div>`;
   wrap.querySelector('.pickParent').onclick=()=>openUmaPicker('inheritance',i);grid.appendChild(wrap)
  }
  if(btn){btn.disabled=!enabled;btn.textContent=state.inheritanceConfirmed?'계승 변경':'계승 확정';btn.classList.toggle('primary',!state.inheritanceConfirmed)}
@@ -2525,7 +2528,7 @@ function renderSelectedUma(){
  const badge=$('#umaSetupStepBadge');if(badge){badge.textContent=state.currentUmaConfirmed?'✓':'1';badge.classList.toggle('done',!!state.currentUmaConfirmed)}
  const u=selectedUma(),b=$('#selectedUma');if(!u){b.innerHTML='';renderInheritanceSetup();return}
  const race=getGuideRace(),cond=race?raceCond(race):state,t=matchingTierForUma(u,cond),aw=awakeningSkills(u).filter(s=>Number(s.rarity)===2),pink=runtime.ready?characterEvolutionCandidates(u,cond):[];
- b.innerHTML=`<div class="umaHero"><img src="${esc(u.image)}" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)"><div><div class="cardName" style="font-size:15px">${esc(u.krName)}</div><div class="cardJp">${esc(u.name)}</div><div class="tags"><span class="tag">육성 카드 ID ${u.id}</span>${t?`<span class="tag">현재 조건 Tier ${esc(t.tier)}</span>`:'<span class="tag">현재 조건 티어 데이터 없음</span>'}${state.currentUmaConfirmed?'<span class="tag" style="color:#9fe3bd">육성 우마 확정 ✓</span>':''}</div><div class="sub" style="margin-top:6px">각성 금스킬 ${aw.length}개 · 전용 핑크 진화 ${pink.length}개 · 가이드 레이스와 자동 비교합니다.</div><div class="setupActions"><button type="button" class="btn ${state.currentUmaConfirmed?'':'primary'}" id="confirmCurrentUmaBtn">${state.currentUmaConfirmed?'육성 우마 변경':'① 이 우마로 확정'}</button></div></div></div>`;
+ b.innerHTML=`<div class="umaHero"><img src="${esc(u.image)}" onerror="this.style.opacity=.16"><div><div class="cardName" style="font-size:15px">${esc(u.krName)}</div><div class="cardJp">${esc(u.name)}</div><div class="tags"><span class="tag">육성 카드 ID ${u.id}</span>${t?`<span class="tag">현재 조건 Tier ${esc(t.tier)}</span>`:'<span class="tag">현재 조건 티어 데이터 없음</span>'}${state.currentUmaConfirmed?'<span class="tag" style="color:#9fe3bd">육성 우마 확정 ✓</span>':''}</div><div class="sub" style="margin-top:6px">각성 금스킬 ${aw.length}개 · 전용 핑크 진화 ${pink.length}개 · 가이드 레이스와 자동 비교합니다.</div><div class="setupActions"><button type="button" class="btn ${state.currentUmaConfirmed?'':'primary'}" id="confirmCurrentUmaBtn">${state.currentUmaConfirmed?'육성 우마 변경':'① 이 우마로 확정'}</button></div></div></div>`;
  const confirm=$('#confirmCurrentUmaBtn');if(confirm)confirm.onclick=state.currentUmaConfirmed?()=>openUmaPicker('current'):confirmCurrentUma;
  const searchWrap=$('#umaSetupSearchWrap'),panel=$('#umaSetupPanel');if(searchWrap)searchWrap.hidden=!!state.currentUmaConfirmed;if(panel)panel.classList.toggle('confirmed',!!state.currentUmaConfirmed);
  renderInheritanceSetup();renderSetupProgress()
@@ -3534,7 +3537,7 @@ function supportRareHistoryHtml(items){
  const rows=(items||[]).filter(Boolean);
  if(!rows.length)return '<div class="note">SSR별 획득 기록이 없습니다.</div>';
  return '<div class="supportRareHistoryGrid">'+rows.map(x=>'<div class="supportRareHistoryCard'+(x.rental?' rental':'')+'>'+
-   (x.image?'<img src="'+esc(x.image)+'" alt="'+esc(x.cardName||'SSR')+'" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">':'')+
+   (x.image?'<img src="'+esc(x.image)+'" alt="'+esc(x.cardName||'SSR')+'" data-fallbacks="'+esc(supportImageFallbackAttrById(x.cardId))+'" onerror="cycleSupportImage(this)">':'')+
    '<div class="cardMeta"><div class="cardName">'+(x.rental?'렌탈 · ':'')+esc(x.cardName||'SSR')+'</div>'+
    ((x.skills||[]).length?'<div class="skillList">'+x.skills.map(sk=>'<span class="skillPill">'+esc(sk.name||sk.jp||sk.id)+'</span>').join('')+'</div>':'<div class="none">획득 체크된 레어스킬 없음</div>')+
    '</div></div>').join('')+'</div>'
@@ -3597,11 +3600,11 @@ function openTrainingHistoryDetail(index){
  const r=(state.trainingHistory||[])[Number(index)];if(!r)return;
  const b=$('#trainingHistoryDetailBody');if(!b)return;
  const when=r.completedAt?new Date(r.completedAt).toLocaleString('ko-KR'):'';
- const deck=(r.deck||[]).map((x,i)=>x?'<div class="historyDetailSupport'+(x.rental?' rental':'')+'>'+(x.image?'<img src="'+esc(x.image)+'" alt="'+esc(x.name)+'" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">':'')+'<span>'+(x.rental?'렌탈 · ':'')+esc(x.name)+'</span></div>':'<div class="historyDetailSupport"><span>빈 슬롯</span></div>').join('');
+ const deck=(r.deck||[]).map((x,i)=>x?'<div class="historyDetailSupport'+(x.rental?' rental':'')+'>'+(x.image?'<img src="'+esc(x.image)+'" alt="'+esc(x.name)+'" data-fallbacks="'+esc(supportImageFallbackAttrById(x.id))+'" onerror="cycleSupportImage(this)">':'')+'<span>'+(x.rental?'렌탈 · ':'')+esc(x.name)+'</span></div>':'<div class="historyDetailSupport"><span>빈 슬롯</span></div>').join('');
  const evo=(r.evolution||[]).length?(r.evolution||[]).map(x=>'<span class="tag">'+esc(x)+'</span>').join(' '):'선택 없음';
  const scenario=(r.scenarioSkills||[]).length?(r.scenarioSkills||[]).map(x=>'<span class="tag">'+esc(x)+'</span>').join(' '):'없음';
  b.innerHTML='<div class="historyDetailHero">'+
-   (r.uma?.image?'<img src="'+esc(r.uma.image)+'" alt="'+esc(r.uma.name||'육성 우마')+'" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">':'')+
+   (r.uma?.image?'<img src="'+esc(r.uma.image)+'" alt="'+esc(r.uma.name||'육성 우마')+'" onerror="this.style.opacity=.16">':'')+
    '<div><h3>'+esc(r.uma?.name||'육성 우마')+' · '+esc(r.scenario||'시나리오')+'</h3><div class="historyDetailMeta">'+esc(r.condition||'')+(r.race?'<br>'+esc(r.race):'')+(when?'<br>'+esc(when):'')+'</div></div></div>'+
    '<div class="historyDetailGrid">'+
     '<div class="historyDetailSection"><b>레어스킬 결과</b><div class="body">SSR 이벤트 '+Number(r.supportRare?.got||0)+' / '+Number(r.supportRare?.total||0)+'<br>시나리오 확정 '+Number(r.scenarioSkills?.length||0)+'개'+(r.pending?'<br>미확정 '+Number(r.pending)+'개':'')+'</div></div>'+
@@ -3630,7 +3633,7 @@ function historyCompareDeckHtml(r){
  return '<div class="historyCompareDeck">'+Array.from({length:6},(_,i)=>{
    const x=(r.deck||[])[i];
    if(!x)return '<div class="historyCompareDeckItem"><span>'+(i+1)+' · 빈 슬롯</span></div>';
-   return '<div class="historyCompareDeckItem'+(x.rental?' rental':'')+'>'+(x.image?'<img src="'+esc(x.image)+'" alt="'+esc(x.name||'서포트')+'" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">':'')+'<span>'+(x.rental?'렌탈 · ':'')+esc(x.name||'서포트')+'</span></div>'
+   return '<div class="historyCompareDeckItem'+(x.rental?' rental':'')+'>'+(x.image?'<img src="'+esc(x.image)+'" alt="'+esc(x.name||'서포트')+'" data-fallbacks="'+esc(supportImageFallbackAttrById(x.id))+'" onerror="cycleSupportImage(this)">':'')+'<span>'+(x.rental?'렌탈 · ':'')+esc(x.name||'서포트')+'</span></div>'
  }).join('')+'</div>'
 }
 function historyListDiff(before=[],after=[]){
