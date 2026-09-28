@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.46">
-<title>우마무스메 트레이너 가이드 V7.46 WEB</title>
+<meta name="app-build" content="V7.47">
+<title>우마무스메 트레이너 가이드 V7.47 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -602,6 +602,18 @@ body.trainingMode .counts{margin-top:8px}
 .historyCompareDeckItem img{width:100%;height:58px;object-fit:contain;border-radius:4px;background:#242b36}
 .historyCompareDeckItem span{display:block;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 @media(max-width:720px){.historyCompareGrid{grid-template-columns:92px minmax(0,1fr) minmax(0,1fr)}.historyCompareDeck{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* V7.47 · SSR별 실제 획득 레어스킬 기록 */
+.supportRareHistoryGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:7px}
+.supportRareHistoryCard{display:grid;grid-template-columns:54px minmax(0,1fr);gap:8px;align-items:start;border:1px solid #39475b;background:#121821;border-radius:9px;padding:6px;min-width:0}
+.supportRareHistoryCard.rental{border-color:#755a9e}
+.supportRareHistoryCard img{width:54px;height:70px;object-fit:contain;border-radius:6px;background:#242b36}
+.supportRareHistoryCard .cardMeta{min-width:0}
+.supportRareHistoryCard .cardName{font-size:9px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.supportRareHistoryCard .skillList{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.supportRareHistoryCard .skillPill{display:inline-flex;align-items:center;border:1px solid #8a6c2e;background:#2c2518;color:#ffe2a0;border-radius:999px;padding:3px 6px;font-size:7.5px;font-weight:850;max-width:100%}
+.supportRareHistoryCard .none{font-size:8px;color:#8996aa;margin-top:5px}
+@media(max-width:720px){.supportRareHistoryGrid{grid-template-columns:1fr}.supportRareHistoryCard{grid-template-columns:46px minmax(0,1fr)}.supportRareHistoryCard img{width:46px;height:60px}}
+
 
 
 /* V7.46 · 비교 변화 요약 + 공략 단계 동기화 */
@@ -656,29 +668,42 @@ body.trainingMode #pendingShortcutList{display:none!important}
 
 /* V7.46 · 실제 .app 오른쪽 여백이 부족할 때만 하단 가로 HUD로 전환 */
 .globalSkillCountRail.bottomDock{
- left:8px;right:8px;top:auto;bottom:8px;width:auto;max-height:none;overflow:visible;
- padding:5px 7px;border-radius:11px;
+ left:10px;right:10px;top:auto;bottom:8px;width:auto;max-height:none;overflow:visible;
+ padding:8px 10px;border-radius:12px;
 }
 .globalSkillCountRail.bottomDock .skillCountRailHead{display:none}
-.globalSkillCountRail.bottomDock .skillCountRailList{grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
-.globalSkillCountRail.bottomDock .skillCountRailCard{display:grid;grid-template-columns:34px minmax(0,1fr);grid-template-rows:auto auto;padding:3px;text-align:left;align-items:center}
-.globalSkillCountRail.bottomDock .skillCountRailThumb,.globalSkillCountRail.bottomDock .skillCountRailEmpty{grid-row:1/3;width:34px;height:42px}
-.globalSkillCountRail.bottomDock .skillCountRailName{margin:0 2px;font-size:6.5px}
-.globalSkillCountRail.bottomDock .skillCountRailType{margin:0 2px;font-size:5.8px}
-.globalSkillCountRail.bottomDock .skillCountRailMeta{display:none}
-.globalSkillCountRail.bottomDock .skillCountRailBadge{right:2px;bottom:2px;height:15px;font-size:6px}
-.globalSkillCountRail.bottomDock .skillCountRailSlot{min-width:14px;height:14px;font-size:6px}
-.globalSkillCountRail.bottomDock .skillCountRailRental{font-size:5.5px}
+.globalSkillCountRail.bottomDock .skillCountRailList{grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.globalSkillCountRail.bottomDock .skillCountRailCard{
+ display:grid;grid-template-columns:50px minmax(0,1fr);grid-template-rows:auto auto auto;
+ gap:1px 6px;padding:5px;text-align:left;align-items:center;min-height:72px
+}
+.globalSkillCountRail.bottomDock .skillCountRailThumb,.globalSkillCountRail.bottomDock .skillCountRailEmpty{
+ grid-row:1/4;width:50px;height:62px;border-radius:7px
+}
+.globalSkillCountRail.bottomDock .skillCountRailName{margin:0;font-size:9.5px;line-height:1.2}
+.globalSkillCountRail.bottomDock .skillCountRailType{margin:0;font-size:7.5px;justify-self:start;padding:2px 5px}
+.globalSkillCountRail.bottomDock .skillCountRailMeta{display:block;margin:0;font-size:8px;color:#b9c5d8}
+.globalSkillCountRail.bottomDock .skillCountRailBadge{right:4px;bottom:4px;min-width:22px;height:19px;font-size:7.5px}
+.globalSkillCountRail.bottomDock .skillCountRailSlot{left:3px;top:3px;min-width:18px;height:18px;font-size:8px}
+.globalSkillCountRail.bottomDock .skillCountRailRental{right:3px;top:3px;font-size:6.5px;padding:2px 5px}
 .globalSkillCountRail.bottomDock .skillCountRailLegend{display:none}
-body.trainingMode.skillRailBottom:not(.skillRailHiddenPage){padding-bottom:68px}
+body.trainingMode.skillRailBottom:not(.skillRailHiddenPage){padding-bottom:96px}
+@media(max-width:900px){
+ .globalSkillCountRail.bottomDock .skillCountRailCard{grid-template-columns:44px minmax(0,1fr);min-height:66px}
+ .globalSkillCountRail.bottomDock .skillCountRailThumb,.globalSkillCountRail.bottomDock .skillCountRailEmpty{width:44px;height:56px}
+ .globalSkillCountRail.bottomDock .skillCountRailName{font-size:8.5px}
+ .globalSkillCountRail.bottomDock .skillCountRailType{font-size:7px}
+}
 @media(max-width:720px){
- .globalSkillCountRail.bottomDock{left:5px;right:5px;bottom:5px;padding:4px}
+ .globalSkillCountRail.bottomDock{left:5px;right:5px;bottom:5px;padding:4px 5px}
  .globalSkillCountRail.bottomDock .skillCountRailList{gap:3px}
- .globalSkillCountRail.bottomDock .skillCountRailCard{grid-template-columns:30px minmax(0,1fr);padding:2px}
- .globalSkillCountRail.bottomDock .skillCountRailThumb,.globalSkillCountRail.bottomDock .skillCountRailEmpty{width:30px;height:38px}
- .globalSkillCountRail.bottomDock .skillCountRailName{font-size:5.8px}
+ .globalSkillCountRail.bottomDock .skillCountRailCard{grid-template-columns:32px minmax(0,1fr);grid-template-rows:auto auto;padding:2px;min-height:42px;gap:0 3px}
+ .globalSkillCountRail.bottomDock .skillCountRailThumb,.globalSkillCountRail.bottomDock .skillCountRailEmpty{grid-row:1/3;width:32px;height:40px}
+ .globalSkillCountRail.bottomDock .skillCountRailName{font-size:6.5px}
  .globalSkillCountRail.bottomDock .skillCountRailType{display:none}
- body.trainingMode.skillRailBottom:not(.skillRailHiddenPage){padding-bottom:58px}
+ .globalSkillCountRail.bottomDock .skillCountRailMeta{display:none}
+ .globalSkillCountRail.bottomDock .skillCountRailBadge{height:15px;font-size:6px}
+ body.trainingMode.skillRailBottom:not(.skillRailHiddenPage){padding-bottom:62px}
 }
 /* V7.46 · 육성 진행 시각화 */
 body.trainingMode .trainingProgressHead .sub,
@@ -3469,11 +3494,31 @@ function renderFinishChoiceSummary(){
  if(!names.length){b.innerHTML='<span class="finishNone">진화 스킬을 선택하지 않았습니다.</span>';return}
  for(const n of names){const x=document.createElement('span');x.className='finishChip';x.textContent=n;b.appendChild(x)}
 }
+function supportRareSkillSnapshot(card,index){
+ if(!card)return null;
+ const rareById=new Map(uniqueRare(card).map(sk=>[String(sk.id),canonicalSkill(sk)]));
+ const skillIds=[...acquiredSkillIdsForCard(card)];
+ const skills=skillIds.map(id=>{
+   const sk=rareById.get(String(id));
+   return {id:String(id),name:sk?(sk.kr||koSkill(sk.jp)||sk.jp||String(id)):String(id),jp:sk?.jp||''}
+ });
+ return {cardId:card.id,cardName:card.krName||card.jpName||String(card.id),image:card.image||'',rental:index===5,skills}
+}
+function supportRareHistoryHtml(items){
+ const rows=(items||[]).filter(Boolean);
+ if(!rows.length)return '<div class="note">SSR별 획득 기록이 없습니다.</div>';
+ return '<div class="supportRareHistoryGrid">'+rows.map(x=>'<div class="supportRareHistoryCard'+(x.rental?' rental':'')+'>'+
+   (x.image?'<img src="'+esc(x.image)+'" alt="'+esc(x.cardName||'SSR')+'" onerror="this.style.opacity=.16">':'')+
+   '<div class="cardMeta"><div class="cardName">'+(x.rental?'렌탈 · ':'')+esc(x.cardName||'SSR')+'</div>'+
+   ((x.skills||[]).length?'<div class="skillList">'+x.skills.map(sk=>'<span class="skillPill">'+esc(sk.name||sk.jp||sk.id)+'</span>').join('')+'</div>':'<div class="none">획득 체크된 레어스킬 없음</div>')+
+   '</div></div>').join('')+'</div>'
+}
 function buildTrainingResultSnapshot(){
  const u=selectedUma(),race=getGuideRace(),cond=race?raceCond(race):state,sc=SCENARIOS[state.scenario]||SCENARIOS.none;
  const ds=activeDeckCards().reduce((a,card)=>{const x=cardRareStats(card);a.got+=x.got;a.total+=x.total;return a},{got:0,total:0});
  const scenarioSkills=[...scenarioRareSkillNames()],ramen=state.scenario==='tresenken'?selectedUltimateRamen():null,link=scenarioLinkEventChoice();
  const deck=state.deck.map((id,i)=>{const card=id?cardById(id):null;return card?{id:card.id,name:card.krName||card.jpName||String(card.id),image:card.image||'',rental:i===5}:null});
+ const supportRareCards=state.deck.map((id,i)=>{const card=id?cardById(id):null;return supportRareSkillSnapshot(card,i)});
  const evo=state.evolutionPlan||{};
  return {
    uma:u?{id:u.id,name:u.krName,jp:u.jpName,image:u.image||''}:null,
@@ -3482,6 +3527,7 @@ function buildTrainingResultSnapshot(){
    condition:groundLabel[cond.ground]+' · '+distLabel[cond.distance]+' · '+styleLabel[cond.style],
    deck,
    supportRare:{got:ds.got,total:ds.total},
+   supportRareCards,
    scenarioSkills,
    pending:pendingRareChoiceCount(),
    evolution:[...(evo.characterNames||[]),...(evo.scenarioSkills||[])],
@@ -3501,6 +3547,7 @@ function renderTrainingResultModal(){
  '<div class="trainingResultCard"><b>시나리오 실제 선택</b><div class="main">'+(r.link?esc(r.link.name)+' → '+esc(r.link.result):'링크 이벤트 미확정')+(r.ramen?'<br>'+esc(r.ramen.name)+' → '+esc(r.ramen.skill):'')+'</div></div>'+
  '<div class="trainingResultCard"><b>시나리오 레어스킬</b><div class="main">'+sc+'</div></div>'+
  '</div>'+
+ '<div class="sub" style="margin-top:10px"><b>SSR별 실제 획득 레어스킬</b></div>'+supportRareHistoryHtml(r.supportRareCards)+
  '<div class="sub" style="margin-top:10px"><b>최종 서포트 편성</b></div><div class="trainingResultDeck">'+supports+'</div>'+
  (r.pending?'<div class="trainingResultWarnings">미확정 선택 '+r.pending+'개는 획득하지 않은 상태로 결과에 남습니다.</div>':'')
 }
@@ -3536,6 +3583,7 @@ function openTrainingHistoryDetail(index){
     '<div class="historyDetailSection"><b>시나리오 실제 선택</b><div class="body">'+(r.link?esc(r.link.name)+' → '+esc(r.link.result):'시니어/링크 선택 기록 없음')+(r.ramen?'<br>'+esc(r.ramen.name)+' → '+esc(r.ramen.skill):'')+'</div></div>'+
     '<div class="historyDetailSection"><b>시나리오 레어스킬</b><div class="body">'+scenario+'</div></div>'+
    '</div>'+
+   '<div class="historyDetailSection" style="margin-top:8px"><b>SSR별 실제 획득 레어스킬</b>'+supportRareHistoryHtml(r.supportRareCards)+'</div>'+
    '<div class="historyDetailSection" style="margin-top:8px"><b>서포트 편성</b><div class="historyDetailDeck">'+deck+'</div></div>';
  $('#trainingHistoryDetailModal').classList.add('open')
 }
@@ -3638,7 +3686,7 @@ function renderTrainingHistory(){
    const d=document.createElement('div'),selected=trainingHistoryCompareSelection.includes(index);
    d.className='trainingHistoryCard'+(selected?' compareSelected':'');d.tabIndex=0;
    const when=r.completedAt?new Date(r.completedAt).toLocaleString('ko-KR'):'';
-   d.innerHTML='<div class="hTitle">'+esc(r.uma?.name||'육성 우마')+' · '+esc(r.scenario||'시나리오')+'</div><div class="hMeta">'+esc(r.condition||'')+(when?'<br>'+esc(when):'')+'<br>SSR 레어 '+Number(r.supportRare?.got||0)+'/'+Number(r.supportRare?.total||0)+' · 시나리오 '+Number(r.scenarioSkills?.length||0)+' · 진화 '+Number(r.evolution?.length||0)+'</div><div class="hTags">'+(r.ramen?'<span class="tag">'+esc(r.ramen.name)+'</span>':'')+(r.evolution||[]).slice(0,3).map(x=>'<span class="tag">'+esc(x)+'</span>').join('')+'</div><div class="trainingHistoryCardActions"><span class="hOpen">클릭해서 당시 편성·스킬 상세 보기</span><button type="button" class="mini historyComparePick" aria-pressed="'+(selected?'true':'false')+'">'+(selected?'비교 선택됨':'비교 선택')+'</button></div>';
+   d.innerHTML='<div class="hTitle">'+esc(r.uma?.name||'육성 우마')+' · '+esc(r.scenario||'시나리오')+'</div><div class="hMeta">'+esc(r.condition||'')+(when?'<br>'+esc(when):'')+'<br>SSR 레어 '+Number(r.supportRare?.got||0)+'/'+Number(r.supportRare?.total||0)+' · 카드별 획득 '+Number((r.supportRareCards||[]).filter(x=>x?.skills?.length).length)+'장 · 시나리오 '+Number(r.scenarioSkills?.length||0)+' · 진화 '+Number(r.evolution?.length||0)+'</div><div class="hTags">'+(r.ramen?'<span class="tag">'+esc(r.ramen.name)+'</span>':'')+(r.evolution||[]).slice(0,3).map(x=>'<span class="tag">'+esc(x)+'</span>').join('')+'</div><div class="trainingHistoryCardActions"><span class="hOpen">클릭해서 당시 편성·스킬 상세 보기</span><button type="button" class="mini historyComparePick" aria-pressed="'+(selected?'true':'false')+'">'+(selected?'비교 선택됨':'비교 선택')+'</button></div>';
    d.onclick=()=>openTrainingHistoryDetail(index);
    d.onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&e.target===d){e.preventDefault();openTrainingHistoryDetail(index)}};
    const pick=d.querySelector('.historyComparePick');if(pick)pick.onclick=e=>{e.stopPropagation();toggleTrainingHistoryCompare(index)};
