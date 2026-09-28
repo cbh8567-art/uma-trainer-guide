@@ -1930,7 +1930,7 @@ function renderActiveTrainingSetupBar(){
  const active=!!state.trainingActive;
  bar.classList.toggle('active',active);
  document.body.classList.toggle('trainingMode',active);
- if(!active){document.body.classList.remove('trainingSetupEdit');return}
+ if(!active){document.body.classList.remove('trainingSetupEdit');renderSkillCountSideRails();return}
  const u=selectedUma(),p1=inheritanceParent(0),p2=inheritanceParent(1),sc=SCENARIOS[state.scenario]||SCENARIOS.none;
  const phaseCfg=trainingGuidePhaseConfig(),phase=phaseCfg.current?Object.fromEntries(phaseCfg.phases)[phaseCfg.current]:'진행 중';
  const face=x=>x?.image?'<img class="miniFace" src="'+esc(x.image)+'" alt="'+esc(x.krName||'우마')+'" onerror="this.style.opacity=.16">':'';
