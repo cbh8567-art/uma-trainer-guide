@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.26">
-<title>우마무스메 트레이너 가이드 V7.26 WEB</title>
+<meta name="app-build" content="V7.27">
+<title>우마무스메 트레이너 가이드 V7.27 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -305,7 +305,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .finishLockDetail .finishRoute{display:block;margin-top:2px;color:#d8c79e}
 .finishOption.disabled .finishLockDetail{opacity:1;filter:none}
 
-/* V7.26 · deck readability, status border, bilingual labels
+/* V7.27 · deck readability, status border, bilingual labels
    - 원본 일러는 object-fit:contain으로 왜곡 없이 표시
    - 전체 타이포그래피를 약 10~15% 확대
    - 모바일에서도 작은 보조문구가 지나치게 축소되지 않도록 최소 크기 확보 */
@@ -375,7 +375,7 @@ body{font-size:14px;line-height:1.5}
 }
 
 
-/* V7.26 · 육성 준비 플로우 */
+/* V7.27 · 육성 준비 플로우 */
 .setupProgress{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:0 0 10px}
 .setupProgressStep{border:1px solid #3e475c;background:#171c28;border-radius:10px;padding:7px 8px;min-width:0}
 .setupProgressStep .n{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:50%;background:#2a3142;margin-right:5px;font-size:10px;font-weight:950}
@@ -397,7 +397,7 @@ body{font-size:14px;line-height:1.5}
  .setupSummary{grid-template-columns:1fr 1fr}
  .rentalSlotHeader{font-size:11px;padding:5px}
 }
-/* V7.26 · 육성 준비 플로우 */
+/* V7.27 · 육성 준비 플로우 */
 .setupStepPanel{margin-top:10px;border:1px solid #46506a;background:linear-gradient(180deg,#181d29,#141823);border-radius:12px;padding:10px}
 .setupStepHead{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .setupStepBadge{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:27px;border-radius:50%;background:#2a3142;border:1px solid #4c5874;font-weight:950;color:#dce4f3}
@@ -419,7 +419,7 @@ body{font-size:14px;line-height:1.5}
 [hidden]{display:none!important}
 @media(max-width:720px){.inheritanceGrid{grid-template-columns:1fr}.setupActions .btn{flex:1 1 140px}.deckConfirmBar .btn{flex:1 1 145px}}
 
-/* V7.26 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
+/* V7.27 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
 .scenarioPlanPanel{border-color:#5d4f77;background:linear-gradient(180deg,#1c1928,#151821)}
 .scenarioPlanPanel.confirmed{border-color:#486d59;background:linear-gradient(180deg,#17241e,#151a18)}
 .planChoiceGroup{margin-top:9px}.planChoiceTitle{font-size:11px;font-weight:950;margin-bottom:6px}
@@ -439,7 +439,7 @@ body{font-size:14px;line-height:1.5}
  .trainingStartMain .btn{width:100%}
 }
 
-/* V7.26 · 시니어 9월 계획 → 실제 선택 승격 */
+/* V7.27 · 시니어 9월 계획 → 실제 선택 승격 */
 .plannedEventBox{border:1px solid #65527c;background:linear-gradient(180deg,#201a2b,#171923);border-radius:10px;padding:9px;margin:7px 0}
 .plannedEventBox.done{border-color:#3e7657;background:linear-gradient(180deg,#16271f,#171b19)}
 .plannedEventBox.diff{border-color:#9b7142;background:linear-gradient(180deg,#2a2116,#1c1915)}
@@ -450,7 +450,7 @@ body{font-size:14px;line-height:1.5}
 .plannedEventActions .btn{font-size:10px;padding:7px 9px}
 @media(max-width:720px){.plannedEventActions .btn{flex:1 1 145px}}
 
-/* V7.26 · PC 육성 진행 대시보드 / 라멘 아이콘 / 레어스킬 요약 */
+/* V7.27 · PC 육성 진행 대시보드 / 라멘 아이콘 / 레어스킬 요약 */
 .ramenDishIcon{width:62px;height:62px;object-fit:contain;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.32));flex:0 0 auto}
 .planChoice .ramenDishIcon{width:62px;height:62px}
 .finishOption .ramenDishIcon{width:58px;height:58px}
@@ -476,7 +476,7 @@ body{font-size:14px;line-height:1.5}
  .rareSkillOverview{grid-template-columns:1fr}
 }
 
-/* V7.26 · 라멘 결과 스킬 아이콘 / 육성 모드 전환 */
+/* V7.27 · 라멘 결과 스킬 아이콘 / 육성 모드 전환 */
 .ramenDishWrap{display:inline-flex;align-items:center;justify-content:center;width:62px;height:62px;flex:0 0 62px}
 .ramenDishWrap .ramenDishIcon{width:100%;height:100%}
 .ramenDishWrap .ramenDishFallback{width:46px;height:46px}
@@ -508,7 +508,7 @@ body.trainingMode.trainingSetupEdit #confirmDeckBtn{display:inline-flex!importan
  body.trainingMode.trainingSetupEdit #setupProgress{display:flex!important}
 }
 
-/* V7.26 · PC 육성 완료/포기/세션 정리 */
+/* V7.27 · PC 육성 완료/포기/세션 정리 */
 .trainingSessionActions{display:flex;gap:6px;flex-wrap:wrap}
 .trainingSessionActions .btn,.trainingSessionActions .mini{white-space:nowrap}
 .trainingResultHero{border:1px solid #4f755d;background:linear-gradient(180deg,#17291f,#151b18);border-radius:12px;padding:11px;margin-top:9px}
@@ -528,7 +528,7 @@ body.trainingMode.trainingSetupEdit #confirmDeckBtn{display:inline-flex!importan
  .trainingResultDeck{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
-/* V7.26 · PC 실전 육성 UX / 히스토리 / 덱 프리셋 / 추천 근거 */
+/* V7.27 · PC 실전 육성 UX / 히스토리 / 덱 프리셋 / 추천 근거 */
 body:not(.trainingMode) #ramenScenarioGuide,
 body:not(.trainingMode) #legendsScenarioGuide{display:none!important}
 .pendingShortcutList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}
@@ -541,12 +541,27 @@ body:not(.trainingMode) #legendsScenarioGuide{display:none!important}
 .recReason{font-size:8.5px;color:#c1c9d7;line-height:1.45;margin-top:4px;padding-top:4px;border-top:1px solid #303748}.recReason.friend{color:#cbbcf0}
 @media(max-width:900px){.pendingShortcutList,.trainingHistoryList{grid-template-columns:1fr}}
 @media(max-width:720px){.deckPresetBar,.trainingHistoryPanel{display:none}}
+
+/* V7.27 · PC 밀도 조정 / 아이콘 보강 */
+#conditionSetupBlock{margin-top:4px}
+body.trainingMode:not(.trainingSetupEdit) #conditionSetupTitle,
+body.trainingMode:not(.trainingSetupEdit) #conditionSetupBlock,
+body.trainingMode:not(.trainingSetupEdit) #conditionScenarioSummary,
+body.trainingMode #trainingHistoryPanel{display:none!important}
+body.trainingMode #deckPresetBar{display:none!important}
+body.trainingMode #deck>.slot{min-height:0}
+body.trainingMode .deck{margin-top:7px}
+body.trainingMode .sectionHead{margin-top:10px}
+body.trainingMode .counts{margin-top:8px}
+.recReason{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card:hover .recReason,.recSupport:hover .recReason,.cardHero .recReason{display:block;-webkit-line-clamp:unset;overflow:visible}
+.iconAuditNote{font-size:8.5px;color:#aeb7ca;margin-top:4px}
 </style>
 </head>
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.26 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.27 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -609,8 +624,8 @@ body:not(.trainingMode) #legendsScenarioGuide{display:none!important}
       <div class="setupActions"><button type="button" class="btn primary" id="confirmInheritanceBtn">계승 확정</button></div>
     </div>
 
-    <h2>이번 육성 조건</h2>
-    <div class="settings">
+    <h2 id="conditionSetupTitle">이번 육성 조건</h2>
+    <div class="settings" id="conditionSetupBlock">
      <div class="field"><label>시나리오</label><select id="scenario"><option value="tresenken">らっしゃい！トレセン軒！ · 트레센켄(라면)</option><option value="dreams">Dreams · 드림즈</option><option value="mecha">走れ！メカウマ娘 · 메카 우마무스메</option><option value="legends">The Twinkle Legends · 레전즈</option><option value="island">無人島 · 무인도</option><option value="onsen">温泉郷 · 온천향</option><option value="harvest">収穫ッ！満腹ッ！大豊食祭 · 대풍식제</option><option value="uaf">U.A.F. Ready GO!</option><option value="none">기타 / 시나리오 진화 미사용</option></select></div>
      <div class="field"><label>트레이너 가이드</label><select id="conditionGuideRace"></select></div>
      <div class="field"><label>바장</label><select id="ground"><option value="turf">芝 · 잔디</option><option value="dirt">ダート · 더트</option></select></div>
@@ -618,7 +633,7 @@ body:not(.trainingMode) #legendsScenarioGuide{display:none!important}
      <div class="field"><label>각질</label><select id="style"><option value="nige">逃げ · 도주</option><option value="senko">先行 · 선행</option><option value="sashi">差し · 선입</option><option value="oikomi">追込 · 추입</option></select></div>
      <div class="field"><label>육성 우마무스메</label><button type="button" class="umaSelectButton" id="conditionUmaButton"><span id="conditionUmaButtonInner"><span class="pickMain">우마무스메 선택</span><span class="pickSub">눌러서 썸네일 목록 열기</span></span></button></div>
     </div>
-    <div class="scenarioBox"><div class="sub">트레이너 가이드를 바꾸면 해당 레이스의 바장/거리가 자동 적용됩니다. 각질은 육성 우마에 맞게 직접 선택할 수 있습니다.</div><div class="sub" style="margin-top:5px">현재 육성 우마무스메 적합도</div><div class="rating" id="conditionUmaScore" style="font-size:20px">—</div><div class="note" id="conditionUmaScoreReason">DB 동기화 후 육성 우마무스메를 선택하면 표시됩니다.</div></div>
+    <div class="scenarioBox" id="conditionScenarioSummary"><div class="sub">트레이너 가이드를 바꾸면 해당 레이스의 바장/거리가 자동 적용됩니다. 각질은 육성 우마에 맞게 직접 선택할 수 있습니다.</div><div class="sub" style="margin-top:5px">현재 육성 우마무스메 적합도</div><div class="rating" id="conditionUmaScore" style="font-size:20px">—</div><div class="note" id="conditionUmaScoreReason">DB 동기화 후 육성 우마무스메를 선택하면 표시됩니다.</div></div>
     <div class="ramenGuide" id="ramenScenarioGuide" hidden>
       <div class="ramenGuideHead">
         <div>
@@ -652,7 +667,7 @@ body:not(.trainingMode) #legendsScenarioGuide{display:none!important}
       <div id="legendsGuideBody"></div>
     </div>
     <div class="sectionHead"><div><h2 style="margin:0">현재 덱</h2><div class="sub">1~5번은 보유 SSR · 6번은 렌탈 SSR 슬롯입니다.</div></div><button type="button" class="mini" id="saveDeckAsOwned">1~5번 보유 저장</button></div>
-    <div class="deckPresetBar"><select id="deckPresetSelect"><option value="">덱 프리셋 선택</option></select><button type="button" class="mini" id="saveDeckPreset">현재 덱 저장</button><button type="button" class="mini" id="loadDeckPreset">불러오기</button><button type="button" class="mini red" id="deleteDeckPreset">삭제</button></div>
+    <div class="deckPresetBar" id="deckPresetBar"><select id="deckPresetSelect"><option value="">덱 프리셋 선택</option></select><button type="button" class="mini" id="saveDeckPreset">현재 덱 저장</button><button type="button" class="mini" id="loadDeckPreset">불러오기</button><button type="button" class="mini red" id="deleteDeckPreset">삭제</button></div>
     <div class="note">새로 배치하는 카드는 기본 풀돌 · 기존 보유 SSR의 저장된 돌파 상태는 유지합니다.</div>
     <div class="deck" id="deck"></div><div class="typeSummary" id="typeSummary"></div>
     <div class="setupSummary" id="deckSetupSummary"></div>
@@ -1015,7 +1030,10 @@ body:not(.trainingMode) #legendsScenarioGuide{display:none!important}
 const CONFIG={"version":4,"updated":"2026-09-23","sources":{"catalog":"https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json","supports":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json","events":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/events.json","skills":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/skills.json","characters":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/characters.json","courses":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/courses.json"},"assetBases":{"support":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/assets/supports/","character":"https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/assets/characters/","skillIcon":"https://raw.githubusercontent.com/daftuyda/Stitcher/master/img/skill_icons/"},"charAliases":{"アーモンドアイ":"아몬드 아이","トウカイテイオー":"토카이 테이오","カレンブーケドール":"카렌 부케도르","アドマイヤグルーヴ":"어드마이어 그루브","エフフォーリア":"에프포리아","フォーエバーヤング":"포에버 영","ファインモーション":"파인 모션","ナイスネイチャ":"나이스 네이처","メイショウドトウ":"메이쇼 도토","サクラチヨノオー":"사쿠라 치요노 오","デアリングタクト":"데어링 택트","ミスターシービー":"미스터 시비","グランアレグリア":"그란 알레그리아","ステイゴールド":"스테이 골드","キセキ":"키세키","アグネスデジタル":"아그네스 디지털","ライスシャワー":"라이스 샤워","カレンチャン":"카렌짱","ヴィブロス":"비블로스","ブエナビスタ":"부에나 비스타","オルフェーヴル":"오르페브르","ジェンティルドンナ":"젠틸돈나","クロノジェネシス":"크로노 제네시스","ラヴズオンリーユー":"러브즈 온리 유","エピファネイア":"에피파네이아","シュヴァルグラン":"슈발 그랑","マヤノトップガン":"마야노 탑건","キタサンブラック":"키타산 블랙","オグリキャップ":"오구리 캡","ビワハヤヒデ":"비와 하야히데","ナリタブライアン":"나리타 브라이언","トランセンド":"트랜센드","エスポワールシチー":"에스포와르 시티","スマートファルコン":"스마트 팔콘","ホッコータルマエ":"홋코 타루마에","ヴィクトワールピサ":"빅투아르 피사","ワンダーアキュート":"원더 어큐트","コパノリッキー":"코파노 리키","ハルウララ":"하루 우라라","サクラバクシンオー":"사쿠라 바쿠신 오","アストンマーチャン":"아스톤 마짱","バンブーメモリー":"뱀부 메모리","デュランダル":"듀란달","ケイエスミラクル":"케이에스 미라클","ダイイチルビー":"다이이치 루비","シーキングザパール":"시킹 더 펄","タイキシャトル":"타이키 셔틀","バブルガムフェロー":"버블검 펠로","メジロラモーヌ":"메지로 라모누","アイネスフウジン":"아이네스 후진","ラインクラフト":"라인 크라프트","ニシノフラワー":"니시노 플라워","セイウンスカイ":"세이운 스카이","デアリングハート":"데어링 하트","ネオユニヴァース":"네오 유니버스","マチカネフクキタル":"마치카네 후쿠키타루","キングヘイロー":"킹 헤일로","イナリワン":"이나리 원","フェノーメノ":"페노메노","ゴールドシップ":"골드 쉽","ミホノブルボン":"미호노 부르봉","フジキセキ":"후지 키세키","カルストンライトオ":"칼스톤 라이트 오","ドゥラメンテ":"두라멘테","ウインバリアシオン":"윈 바리아시온","メジロライアン":"메지로 라이언","タマモクロス":"타마모 크로스","ドリームジャーニー":"드림 저니","マチカネタンホイザ":"마치카네 탄호이저","駿川たづな":"타즈나","サトノダイヤモンド":"사토노 다이아몬드","タップダンスシチー":"탭 댄스 시티","エアグルーヴ":"에어 그루브","マルシュロレーヌ":"마르슈 로렌","スペシャルウィーク":"스페셜 위크","サイレンススズカ":"사일런스 스즈카","マルゼンスキー":"마루젠스키","ウオッカ":"보드카","ダイワスカーレット":"다이와 스칼렛","メジロマックイーン":"메지로 맥퀸","シンボリルドルフ":"심볼리 루돌프","テイエムオペラオー":"티엠 오페라 오","イクノディクタス":"이쿠노 딕터스","ツインターボ":"트윈 터보","メジロアルダン":"메지로 아르당"},"skillAliases":{"シンギュラリティ":"싱귤래리티","才気煥発":"재기환발","ハヤテ一文字":"하야테 일문자","弧線のプロフェッサー":"호선의 프로페서","円弧のマエストロ":"원호의 마에스트로","開花":"개화","清麗高雅":"청려고아","華麗な踏み込み":"화려한 발놀림","素質の証明":"소질의 증명","純真無垢":"순진무구","ショーダウン":"쇼다운","迸る気迫":"용솟음치는 기백","正々堂々":"정정당당","夢の舞台へ":"꿈의 무대로","比類なき":"비할 데 없는","躍動":"약동","天賦の才":"천부의 재능","才色兼備":"재색겸비","先手必勝":"선수필승","傑出":"걸출","迫る影":"다가오는 그림자","心頭滅却":"심두멸각","無我夢中":"무아몽중","用意周到":"용의주도","迅速果断":"신속과감","独立独歩":"독립독보","右回り○":"우회전○","左回り○":"좌회전○","東京レース場○":"도쿄 경기장○","京都レース場○":"교토 경기장○","良バ場○":"양호한 경기장○","道悪○":"악조건 경기장○","秋ウマ娘○":"가을 우마무스메○","晴れの日○":"맑은 날○","曇りの日○":"흐린 날○","非根幹距離○":"비근간거리○","根幹距離○":"근간거리○"},"effectAliases":{"Friendship Bonus":"우정 보너스","Mood Effect":"컨디션 효과 증가","Speed Bonus":"스피드 보너스","Stamina Bonus":"스태미나 보너스","Power Bonus":"파워 보너스","Guts Bonus":"근성 보너스","Wit Bonus":"지능 보너스","Training Effectiveness":"트레이닝 효과 증가","Initial Speed":"초기 스피드","Initial Stamina":"초기 스태미나","Initial Power":"초기 파워","Initial Guts":"초기 근성","Initial Wit":"초기 지능","Initial Friendship Gauge":"초기 우정 게이지","Race Bonus":"레이스 보너스","Fan Bonus":"팬 수 보너스","Hint Levels":"힌트 Lv 증가","Hint Frequency":"힌트 발생률 증가","Specialty Priority":"특기율 증가","Event Recovery":"이벤트 회복량 증가","Event Effectiveness":"이벤트 효과 증가","Failure Rate Reduction":"실패율 감소","Energy Cost Reduction":"체력 소비량 감소","Skill Point Bonus":"스킬 Pt 보너스","Wit Friendship Recovery":"지능 우정 회복량"}};
 let JP_UPDATE_META=null;
 let JP_DATA_CONTRACT=null;
-let JP_SKILL_ICON_OVERRIDES={};
+let JP_SKILL_ICON_OVERRIDES={
+ '203641':{iconId:20012,status:'verified',note:'曙光 verified from BWiki skill page'},
+ '204391':{iconId:20022,status:'verified',note:'悠々自適 verified from BWiki skill page'}
+};
 let JP_SYNC_STATE=null;
 let JP_VALIDATION_REPORT=null;
 let JP_SYNC_HISTORY=null;
@@ -1572,7 +1590,9 @@ function renderActiveTrainingSetupBar(){
  document.body.classList.toggle('trainingMode',active);
  if(!active){document.body.classList.remove('trainingSetupEdit');return}
  const u=selectedUma(),p1=inheritanceParent(0),p2=inheritanceParent(1),sc=SCENARIOS[state.scenario]||SCENARIOS.none,ramen=scenarioPlanRamenSelected();
+ const phase=state.scenario==='tresenken'?({junior:'주니어',classic:'클래식',senior:'시니어',ura:'URA'}[typeof ramenGuidePhase==='string'?ramenGuidePhase:'junior']||'주니어'):'진행 중';
  info.innerHTML='<span class="tag">'+esc(u?.krName||'육성 우마')+'</span>'+
+  '<span class="tag">'+esc(phase)+'</span>'+
   '<span class="tag">계승 '+esc(p1?.krName||'—')+' / '+esc(p2?.krName||'—')+'</span>'+
   '<span class="tag">서포트 5 + 렌탈 1</span>'+
   '<span class="tag">'+esc(sc.kr||sc.name||'시나리오')+'</span>'+
@@ -1744,7 +1764,7 @@ function openCardInfo(id){const c=cardById(id);if(!c)return;const lb=Number(stat
 ${c.eventSkillsAll?.length&&!c.rareEvents?.length?'<br>※ 이벤트 레어스킬은 확인됐지만 분기 구조가 없어 직접 획득 체크 fallback을 사용합니다.':''}${c.eventSourceUrl?`<br><a href="${esc(c.eventSourceUrl)}" target="_blank" rel="noopener" style="color:#ff9fc2">이벤트 원본 확인 ↗</a>`:''}
 ${c.catalogSource==='UmaTools fallback'?'<br>※ 얼굴형 썸네일은 fallback 카드일 가능성이 높아 이벤트/풀 일러스트 데이터가 별도 보강될 수 있습니다.':''}</div><div class="field" style="margin-top:9px"><label>돌파 단계</label>${lbStepperHtml(lb)}</div><div class="actions"><button class="btn" id="slotFromInfo">덱 슬롯 선택</button><button class="btn primary" id="skillFromInfo">스킬 취득</button></div></div></div><h2>현재 돌파 효과</h2>${effects?`<table class="effectTable"><thead><tr><th>효과</th><th>${lbStageLabel(lb)}</th></tr></thead><tbody>${effects}</tbody></table>`:'<div class="note">효과 데이터 미연결</div>'}<h2 style="margin-top:12px">힌트 / 이벤트 획득 스킬</h2>
 <div class="note" style="margin-bottom:7px">${c.type==='친구'?'친구 카드는 훈련 힌트보다 이벤트 획득 스킬 비중이 높습니다.':''}${c.eventSkillSource?` · 스킬 목록 출처: ${esc(c.eventSkillSource)}`:''}${c.eventSkillSourceUrl?` <a href="${esc(c.eventSkillSourceUrl)}" target="_blank" rel="noopener" style="color:#ff9fc2">U-tools 원본 ↗</a>`:(c.type==='친구'?` <a href="https://xn--gck1f423k.xn--1bvt37a.tools/supports/${c.id}" target="_blank" rel="noopener" style="color:#ff9fc2">U-tools에서 확인 ↗</a>`:'')}</div>
-<div class="skillList">${skillBlocks||'<div class="note">현재 연결된 스킬 데이터가 없습니다.</div>'}</div>`;const infoMinus=$('#cardInfo [data-lb-minus]'),infoPlus=$('#cardInfo [data-lb-plus]');if(infoMinus)infoMinus.onclick=()=>{if(lb>0){state.lb[String(id)]=lb-1;save();renderDeck();renderOwned();renderCatalog();renderGuide();renderDbGuideRecommendations();openCardInfo(id)}};if(infoPlus)infoPlus.onclick=()=>{if(lb<4){state.lb[String(id)]=lb+1;save();renderDeck();renderOwned();renderCatalog();renderGuide();renderDbGuideRecommendations();openCardInfo(id)}};$('#slotFromInfo').onclick=()=>{$('#cardModal').classList.remove('open');openSlotPicker(id)};$('#skillFromInfo').disabled=!uniqueRare(c).length;$('#skillFromInfo').onclick=()=>{$('#cardModal').classList.remove('open');openSkillModal(id)};$('#cardModal').classList.add('open')}
+<div class="skillList">${skillBlocks||'<div class="note">현재 연결된 스킬 데이터가 없습니다.</div>'}</div>${allCardSkills(c).some(s=>!Number(s.iconId))?'<div class="iconAuditNote">※ 이 카드에 원본 iconId가 아직 검증되지 않은 스킬이 있어 일부 아이콘은 fallback으로 표시될 수 있습니다.</div>':''}`;const infoMinus=$('#cardInfo [data-lb-minus]'),infoPlus=$('#cardInfo [data-lb-plus]');if(infoMinus)infoMinus.onclick=()=>{if(lb>0){state.lb[String(id)]=lb-1;save();renderDeck();renderOwned();renderCatalog();renderGuide();renderDbGuideRecommendations();openCardInfo(id)}};if(infoPlus)infoPlus.onclick=()=>{if(lb<4){state.lb[String(id)]=lb+1;save();renderDeck();renderOwned();renderCatalog();renderGuide();renderDbGuideRecommendations();openCardInfo(id)}};$('#slotFromInfo').onclick=()=>{$('#cardModal').classList.remove('open');openSlotPicker(id)};$('#skillFromInfo').disabled=!uniqueRare(c).length;$('#skillFromInfo').onclick=()=>{$('#cardModal').classList.remove('open');openSkillModal(id)};$('#cardModal').classList.add('open')}
 function setSingleEventChoice(card,e,ch){const k=eventStateKey(card,e);state.eventChoice[k]=ch.id;delete state.eventChoice[e.id];save()}
 function clearSingleEventChoice(card,e){const k=eventStateKey(card,e);delete state.eventChoice[k];delete state.eventChoice[e.id];save()}
 function toggleAutoEvent(card,e){const k=eventStateKey(card,e);state.eventDone[k]=!autoEventDone(card,e);delete state.eventDone[e.id];save()}
@@ -3258,6 +3278,12 @@ function applySkillIconOverrides(skills){
   return skills
 }
 
+function skillIconCoverageAudit(){
+ const rows=[...(runtime.skills?.values?.()||[])],missing=rows.filter(s=>!Number(s?.iconId));
+ const activeMissing=[];
+ for(const card of activeDeckCards())for(const s of allCardSkills(card))if(!Number(s?.iconId)&&!activeMissing.some(x=>String(x.id)===String(s.id)))activeMissing.push(s);
+ return {total:rows.length,missing:missing.length,activeMissing}
+}
 function makeSkill(meta,name=null,hintLevel=0){
   if(!meta)return null;
   const jpOriginal=meta.name||name||'';
@@ -3853,7 +3879,7 @@ function renderV7Planner(){
 }
 
 
-/* V7.26 · 트레센켄 단계별 육성 가이드
+/* V7.27 · 트레센켄 단계별 육성 가이드
    카드 편성별 지역 추천 + 실제 인게임 스탯 아이콘 + 라멘 3종 텍스트 효과 안내 */
 let ramenGuidePhase='junior';
 
