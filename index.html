@@ -1324,11 +1324,24 @@ function cardRecommendationSummary(card){
  const rare=uniqueRare(card),rareFit=rare.filter(s=>skillConditionScore(s,state)>0).length;
  return `${distLabel[state.distance]} / ${styleLabel[state.style]} · 적합 스킬 ${fit}/${skills.length}${rare.length?` · 금스킬 ${rareFit}/${rare.length}`:''}`
 }
+function cardRecommendationReasons(card,cond=state,lbOverride=null){
+ const lb=lbOverride??Number(state.lb[String(card.id)]??0),skills=allCardSkills(card),rare=uniqueRare(card);
+ const fit=skills.filter(s=>skillConditionScore(s,cond)>0).length,rareFit=rare.filter(s=>skillConditionScore(s,cond)>0).length;
+ const wanted=cond.distance==='long'?['스피드','스태미나','지능','친구']:cond.distance==='mid'?['스피드','스태미나','파워','지능','친구']:['스피드','파워','근성','지능','친구'];
+ const out=[];
+ if(card.type==='친구'||card.type==='그룹')out.push(card.type+' 카드 · 별점은 일반 SSR과 같은 휴리스틱 참고값');
+ else out.push(wanted.includes(card.type)?distLabel[cond.distance]+' 선호 타입':distLabel[cond.distance]+' 비주력 타입');
+ if(skills.length)out.push('조건 적합 스킬 '+fit+'/'+skills.length);
+ if(rare.length)out.push('적합 레어 '+rareFit+'/'+rare.length);
+ const tr=effectByName(card,'Training Effectiveness',lb),rb=effectByName(card,'Race Bonus',lb),sp=effectByName(card,'Skill Point Bonus',lb);
+ if(tr>0)out.push('트레이닝 효과 +'+tr);if(rb>0)out.push('레이스 보너스 +'+rb);if(sp>0)out.push('스킬Pt 보너스 +'+sp);
+ return out.slice(0,4)
+}
 function searchHay(c){return norm(`${c.id} ${c.jpName} ${c.character} ${c.title} ${c.krName} ${katakanaToHangul(c.character||'')} ${c.englishName||''}`)}
 function cardBlock(c,owned){
  const lb=Number(state.lb[String(c.id)]??0),stats=cardRareStats(c),rec=cardSuitability(c,state,lb);
- const recTop=rec>=3.5,recText=cardRecommendationSummary(c);
- return `${c.image?`<img src="${esc(c.image)}" loading="lazy" onerror="this.style.opacity=.16">`:'<div style="width:62px;height:82px;background:#292e3d;border-radius:7px"></div>'}<div><div class="cardName">${esc(c.krName)} ${recTop?'<span class="scenarioRec">추천</span>':''}</div><div class="cardJp">${esc(c.jpName)}</div><div class="tags"><span class="tag">${esc(c.type)}</span><span class="tag">${lb===4?'풀돌':lb+'돌'}</span>${stats.total?`<span class="tag">금스킬 ${stats.total}</span>`:''}</div><div class="recInline${recTop?' top':''}"><strong>추천 ${scoreStars(rec)}</strong><br>${esc(recText)}</div><div class="actions">${owned?'<button class="mini" data-slot>슬롯 선택</button><button class="mini" data-info>정보</button><button class="mini red" data-unown>보유 해제</button>':'<button class="mini" data-temp-slot>덱 슬롯</button><button class="mini" data-own>보유 등록</button><button class="mini" data-info>정보</button>'}</div></div>`
+ const recTop=rec>=3.5,recText=cardRecommendationSummary(c),recReasons=cardRecommendationReasons(c,state,lb);
+ return `${c.image?`<img src="${esc(c.image)}" loading="lazy" onerror="this.style.opacity=.16">`:'<div style="width:62px;height:82px;background:#292e3d;border-radius:7px"></div>'}<div><div class="cardName">${esc(c.krName)} ${recTop?'<span class="scenarioRec">추천</span>':''}</div><div class="cardJp">${esc(c.jpName)}</div><div class="tags"><span class="tag">${esc(c.type)}</span><span class="tag">${lb===4?'풀돌':lb+'돌'}</span>${stats.total?`<span class="tag">금스킬 ${stats.total}</span>`:''}</div><div class="recInline${recTop?' top':''}"><strong>추천 ${scoreStars(rec)}</strong><br>${esc(recText)}</div><div class="recReason${c.type==='친구'||c.type==='그룹'?' friend':''}">${recReasons.map(esc).join(' · ')}</div><div class="actions">${owned?'<button class="mini" data-slot>슬롯 선택</button><button class="mini" data-info>정보</button><button class="mini red" data-unown>보유 해제</button>':'<button class="mini" data-temp-slot>덱 슬롯</button><button class="mini" data-own>보유 등록</button><button class="mini" data-info>정보</button>'}</div></div>`
 }
 function renderCatalog(){
  const q=norm($('#catalogSearch').value),box=$('#catalog');box.innerHTML='';
@@ -1439,6 +1452,24 @@ function saveCurrentDeckAsOwned(){
  save();renderOwned();renderDeck();renderCatalog();renderGuide();renderDbGuideRecommendations();renderV7Planner();
  toast(newIds.length?`1~5번 슬롯의 SSR ${newIds.length}장을 보유 목록에 저장했습니다.`:'1~5번 슬롯의 SSR이 모두 보유 목록에 있습니다.');
 }
+function renderDeckPresets(){
+ const sel=$('#deckPresetSelect');if(!sel)return;const current=sel.value,presets=state.deckPresets||[];
+ sel.innerHTML='<option value="">덱 프리셋 선택</option>'+presets.map(p=>'<option value="'+esc(p.id)+'">'+esc(p.name)+'</option>').join('');
+ if(presets.some(p=>p.id===current))sel.value=current
+}
+function saveDeckPreset(){
+ if(state.deck.some(id=>!id))return toast('6장 편성을 완료한 뒤 프리셋으로 저장해 주세요.');
+ const presets=state.deckPresets||[],defaultName='덱 프리셋 '+(presets.length+1),name=prompt('프리셋 이름을 입력해 주세요.',defaultName);if(!name)return;
+ const id='preset_'+Date.now(),lb={};for(const cardId of state.deck)if(cardId!==null&&cardId!==undefined)lb[String(cardId)]=Number(state.lb[String(cardId)]??4);
+ state.deckPresets=[{id,name:name.trim().slice(0,40),deck:[...state.deck],lb,createdAt:new Date().toISOString()},...presets].slice(0,5);save();renderDeckPresets();$('#deckPresetSelect').value=id;toast('현재 덱을 프리셋으로 저장했습니다.')
+}
+function loadDeckPreset(){
+ if(state.trainingActive)return toast('육성 진행 중에는 덱 프리셋을 불러올 수 없습니다.');const id=$('#deckPresetSelect')?.value,p=(state.deckPresets||[]).find(x=>x.id===id);if(!p)return toast('불러올 프리셋을 선택해 주세요.');
+ const deck=[...(p.deck||[]).slice(0,6),...Array(6).fill(null)].slice(0,6);if(deck.some(cardId=>cardId&&!cardById(cardId)))return toast('현재 DB에 없는 SSR이 포함된 프리셋입니다.');
+ state.deck=deck;for(const [k,v] of Object.entries(p.lb||{}))state.lb[k]=Number(v);invalidateDeckConfirmation();save();renderDeck();renderOwned();renderCatalog();renderGlobalSkills();renderGuide();renderDbGuideRecommendations();renderDeckPresets();toast('덱 프리셋을 불러왔습니다. 편성을 확인한 뒤 다시 확정해 주세요.')
+}
+function deleteDeckPreset(){const id=$('#deckPresetSelect')?.value,p=(state.deckPresets||[]).find(x=>x.id===id);if(!p)return toast('삭제할 프리셋을 선택해 주세요.');if(!confirm('「'+p.name+'」 프리셋을 삭제할까요?'))return;state.deckPresets=(state.deckPresets||[]).filter(x=>x.id!==id);save();renderDeckPresets();toast('덱 프리셋을 삭제했습니다.')}
+
 function confirmCurrentDeck(){
  if(state.deckConfirmed){
    state.deckConfirmed=false;state.scenarioPlanConfirmed=false;state.trainingActive=false;save();renderDeck();renderGuide();renderDbGuideRecommendations();renderScenarioPlan();
@@ -3098,6 +3129,7 @@ function renderDbGuideRecommendations(){
    x.innerHTML=`${c.image?`<img src="${esc(c.image)}" loading="lazy" onerror="this.style.opacity=.16">`:''}
     <div class="rName">${esc(c.krName)}</div><div class="rMeta">${esc(c.type)} · ${state.guideServer==='kr'?'한국 구현 · ':''}${owned?(Number(state.lb[String(c.id)]??0)===4?'보유 풀돌':'보유 '+Number(state.lb[String(c.id)]??0)+'돌'):'미보유 · 풀돌 평가'}</div>
     <div class="rStars">${scoreStars(score)}</div>
+    <div class="recReason${c.type==='친구'||c.type==='그룹'?' friend':''}">${cardRecommendationReasons(c,cond,owned?null:4).map(esc).join(' · ')}</div>
     <div class="actions"><button class="mini" data-slot>덱 슬롯</button><button class="mini" data-info>정보</button></div>`;
    x.querySelector('[data-slot]').onclick=()=>openSlotPicker(c.id);
    x.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);
