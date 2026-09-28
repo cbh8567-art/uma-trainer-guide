@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.22">
-<title>우마무스메 트레이너 가이드 V7.22 WEB</title>
+<meta name="app-build" content="V7.23">
+<title>우마무스메 트레이너 가이드 V7.23 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -305,7 +305,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .finishLockDetail .finishRoute{display:block;margin-top:2px;color:#d8c79e}
 .finishOption.disabled .finishLockDetail{opacity:1;filter:none}
 
-/* V7.22 · deck readability, status border, bilingual labels
+/* V7.23 · deck readability, status border, bilingual labels
    - 원본 일러는 object-fit:contain으로 왜곡 없이 표시
    - 전체 타이포그래피를 약 10~15% 확대
    - 모바일에서도 작은 보조문구가 지나치게 축소되지 않도록 최소 크기 확보 */
@@ -375,7 +375,7 @@ body{font-size:14px;line-height:1.5}
 }
 
 
-/* V7.22 · 육성 준비 플로우 */
+/* V7.23 · 육성 준비 플로우 */
 .setupProgress{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:0 0 10px}
 .setupProgressStep{border:1px solid #3e475c;background:#171c28;border-radius:10px;padding:7px 8px;min-width:0}
 .setupProgressStep .n{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:50%;background:#2a3142;margin-right:5px;font-size:10px;font-weight:950}
@@ -397,7 +397,7 @@ body{font-size:14px;line-height:1.5}
  .setupSummary{grid-template-columns:1fr 1fr}
  .rentalSlotHeader{font-size:11px;padding:5px}
 }
-/* V7.22 · 육성 준비 플로우 */
+/* V7.23 · 육성 준비 플로우 */
 .setupStepPanel{margin-top:10px;border:1px solid #46506a;background:linear-gradient(180deg,#181d29,#141823);border-radius:12px;padding:10px}
 .setupStepHead{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .setupStepBadge{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:27px;border-radius:50%;background:#2a3142;border:1px solid #4c5874;font-weight:950;color:#dce4f3}
@@ -419,7 +419,7 @@ body{font-size:14px;line-height:1.5}
 [hidden]{display:none!important}
 @media(max-width:720px){.inheritanceGrid{grid-template-columns:1fr}.setupActions .btn{flex:1 1 140px}.deckConfirmBar .btn{flex:1 1 145px}}
 
-/* V7.22 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
+/* V7.23 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
 .scenarioPlanPanel{border-color:#5d4f77;background:linear-gradient(180deg,#1c1928,#151821)}
 .scenarioPlanPanel.confirmed{border-color:#486d59;background:linear-gradient(180deg,#17241e,#151a18)}
 .planChoiceGroup{margin-top:9px}.planChoiceTitle{font-size:11px;font-weight:950;margin-bottom:6px}
@@ -439,7 +439,7 @@ body{font-size:14px;line-height:1.5}
  .trainingStartMain .btn{width:100%}
 }
 
-/* V7.22 · 시니어 9월 계획 → 실제 선택 승격 */
+/* V7.23 · 시니어 9월 계획 → 실제 선택 승격 */
 .plannedEventBox{border:1px solid #65527c;background:linear-gradient(180deg,#201a2b,#171923);border-radius:10px;padding:9px;margin:7px 0}
 .plannedEventBox.done{border-color:#3e7657;background:linear-gradient(180deg,#16271f,#171b19)}
 .plannedEventBox.diff{border-color:#9b7142;background:linear-gradient(180deg,#2a2116,#1c1915)}
@@ -450,7 +450,7 @@ body{font-size:14px;line-height:1.5}
 .plannedEventActions .btn{font-size:10px;padding:7px 9px}
 @media(max-width:720px){.plannedEventActions .btn{flex:1 1 145px}}
 
-/* V7.22 · PC 육성 진행 대시보드 / 라멘 아이콘 / 레어스킬 요약 */
+/* V7.23 · PC 육성 진행 대시보드 / 라멘 아이콘 / 레어스킬 요약 */
 .ramenDishIcon{width:62px;height:62px;object-fit:contain;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.32));flex:0 0 auto}
 .planChoice .ramenDishIcon{width:62px;height:62px}
 .finishOption .ramenDishIcon{width:58px;height:58px}
@@ -476,7 +476,7 @@ body{font-size:14px;line-height:1.5}
  .rareSkillOverview{grid-template-columns:1fr}
 }
 
-/* V7.22 · 라멘 결과 스킬 아이콘 / 육성 모드 전환 */
+/* V7.23 · 라멘 결과 스킬 아이콘 / 육성 모드 전환 */
 .ramenVisualPair{display:flex;align-items:center;gap:7px;flex:0 0 auto}
 .ramenVisualPair .skillIcon,.ramenVisualPair .skillFallback{width:38px;height:38px;flex:0 0 38px}
 .activeTrainingSetupBar{display:none;border:1px solid #46715a;background:linear-gradient(180deg,#16271f,#151b18);border-radius:12px;padding:10px;margin-bottom:10px}
@@ -508,7 +508,7 @@ body.trainingMode.trainingSetupEdit #confirmDeckBtn{display:inline-flex!importan
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.22 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.23 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -2564,19 +2564,61 @@ function renderRamenLinkEventSection(){
    summary.innerHTML=(mismatch?'<span class="tag">계획과 실제 다름</span> ':'')+'선택 결과: <b>'+esc(selected.kr)+'</b> → <span class="tag">'+esc(result?.skillName||'스킬 없음')+'</span> · '+(result?.linked?'레어 스킬로 반영':'일반 스킬이므로 레어스킬 카운트에 포함하지 않음')
  }
 }
+function applyPlannedUltimateRamenChoice(){
+ if(state.scenario!=='tresenken')return;
+ const planned=(SCENARIOS.tresenken.ultimateRamenChoices||[]).find(x=>x.id===state.scenarioPlanUltimateRamen);
+ if(!planned)return toast('궁극 트레센 라멘 계획이 없습니다.');
+ if(!state.trainingActive)return toast('육성 시작 후 URA 입장 전 실제 선택에서 확정해 주세요.');
+ state.tresenkenUltimateRamen=planned.id;
+ state.evolutionPlan=null;
+ save();
+ sanitizeFinishDraft();
+ renderScenarioRareSkillPanel();
+ renderTrainingFinishSummary();
+ renderGuide();
+ toast('계획대로 실제 라멘 선택 완료 · '+planned.kr+' → '+planned.skill)
+}
 function renderUltimateRamenSection(){
  const section=$('#finishRamenSection'),box=$('#finishRamenChoices');
  if(!section||!box)return;
+ section.querySelectorAll('.plannedEventBox').forEach(x=>x.remove());
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none,choices=sc.ultimateRamenChoices||[];
  if(state.scenario!=='tresenken'||!choices.length){
    section.style.display='none';box.innerHTML='';return
  }
  section.style.display='block';box.innerHTML='';
+ const planned=choices.find(x=>x.id===state.scenarioPlanUltimateRamen)||null;
+ const actual=choices.find(x=>x.id===state.tresenkenUltimateRamen)||null;
+
+ if(planned){
+   const same=!!actual&&actual.id===planned.id,diff=!!actual&&actual.id!==planned.id,skill=findSkillByJp(planned.skill),p=document.createElement('div');
+   p.className='plannedEventBox'+(same?' done':diff?' diff':'');
+   const visual='<span class="ramenVisualPair">'+ramenDishIconHtml(planned.id,planned.kr)+(skill?skillIcon(skill):'<span class="skillFallback">技</span>')+'</span>';
+   if(!actual){
+     p.innerHTML='<div class="plannedEventHead"><div class="plannedEventTitle">사전 계획 · '+esc(planned.kr)+'</div><span class="status">'+(state.trainingActive?'URA 실제 선택 대기':'육성 시작 전')+'</span></div>'+
+       '<div class="plannedEventMeta" style="display:flex;align-items:center;gap:9px">'+visual+'<span>'+esc(planned.jp)+' → <b>'+esc(planned.skill)+'</b> · 힌트 Lv+'+planned.hintLevel+'<br>계획만으로는 획득 처리하지 않습니다. 실제 URA 입장 전 이 라멘을 골랐다면 확정하세요.</span></div>'+
+       '<div class="plannedEventActions"><button type="button" class="btn primary" data-apply-ramen-plan '+(state.trainingActive?'':'disabled')+'>계획대로 라멘 선택 완료</button><button type="button" class="btn" data-show-ramen-choices>다른 라멘으로 변경</button></div>';
+   }else if(same){
+     p.innerHTML='<div class="plannedEventHead"><div class="plannedEventTitle">계획대로 실제 라멘 선택 완료 ✓</div><span class="status">카운터 반영 중</span></div>'+
+       '<div class="plannedEventMeta" style="display:flex;align-items:center;gap:9px">'+visual+'<span>'+esc(actual.kr)+' → <b>'+esc(actual.skill)+'</b> · 힌트 Lv+'+actual.hintLevel+'</span></div>'+
+       '<div class="plannedEventActions"><button type="button" class="btn" data-show-ramen-choices>실제 라멘 변경</button></div>';
+   }else{
+     const actualSkill=findSkillByJp(actual.skill);
+     p.innerHTML='<div class="plannedEventHead"><div class="plannedEventTitle">계획과 실제 라멘이 다름</div><span class="status">실제 선택 우선</span></div>'+
+       '<div class="plannedEventMeta">계획: '+esc(planned.kr)+' → '+esc(planned.skill)+'<br>실제: <b>'+esc(actual.kr)+'</b> → <b>'+esc(actual.skill)+'</b><br>시나리오 레어스킬 카운터와 진화 판정은 실제 라멘을 기준으로 계산합니다.</div>'+
+       '<div class="plannedEventActions"><button type="button" class="btn" data-show-ramen-choices>실제 라멘 변경</button></div>';
+   }
+   section.insertBefore(p,box);
+   if(!actual)box.hidden=true;else box.hidden=true;
+   const apply=p.querySelector('[data-apply-ramen-plan]');if(apply)apply.onclick=applyPlannedUltimateRamenChoice;
+   const show=p.querySelector('[data-show-ramen-choices]');if(show)show.onclick=()=>{box.hidden=false;show.disabled=true;show.textContent='아래에서 실제 라멘을 고르세요.'};
+ }else box.hidden=false;
+
  for(const x of choices){
    const selected=state.tresenkenUltimateRamen===x.id,row=document.createElement('label');
    row.className='finishOption'+(selected?' selected':'');
    const skill=findSkillByJp(x.skill);
-   row.innerHTML=`<input type="radio" name="ultimateRamen" ${selected?'checked':''}><span class="ramenVisualPair">${ramenDishIconHtml(x.id,x.kr)}${skill?skillIcon(skill):'<span class="skillFallback">技</span>'}</span><div><div class="finishName">${esc(x.jp)}${selected?' <span class="scenarioRec">선택됨</span>':''}</div><div class="kr">${esc(x.kr)}</div><div class="finishSub">${esc(x.skill)} · 힌트 Lv+${x.hintLevel}</div></div><div class="finishRight">${selected?'URA 적용':'선택'}</div>`;
+   row.innerHTML=`<input type="radio" name="ultimateRamen" ${selected?'checked':''}><span class="ramenVisualPair">${ramenDishIconHtml(x.id,x.kr)}${skill?skillIcon(skill):'<span class="skillFallback">技</span>'}</span><div><div class="finishName">${esc(x.jp)}${selected?' <span class="scenarioRec">실제 선택</span>':''}</div><div class="kr">${esc(x.kr)}</div><div class="finishSub">${esc(x.skill)} · 힌트 Lv+${x.hintLevel}</div></div><div class="finishRight">${selected?'URA 적용':'선택'}</div>`;
    row.onclick=e=>{
      e.preventDefault();
      state.tresenkenUltimateRamen=x.id;
@@ -2586,9 +2628,17 @@ function renderUltimateRamenSection(){
      renderScenarioRareSkillPanel();
      renderTrainingFinishSummary();
      renderGuide();
-     toast(`${x.kr} 선택 · ${x.skill} 힌트 Lv+${x.hintLevel}`)
+     const mismatch=planned&&planned.id!==x.id;
+     toast((mismatch?'계획 변경 · 실제 ':'')+`${x.kr} 선택 · ${x.skill} 힌트 Lv+${x.hintLevel}`)
    };
    box.appendChild(row)
+ }
+ const note=section.querySelector(':scope > .note');
+ if(note){
+   if(!actual&&planned)note.innerHTML='사전 계획은 <b>'+esc(planned.kr)+'</b>입니다. 아직 실제 라멘 선택이 확정되지 않아 레어스킬 카운터에는 포함하지 않습니다.';
+   else if(actual&&planned&&actual.id!==planned.id)note.innerHTML='<span class="tag">계획과 실제 다름</span> 실제 라멘 <b>'+esc(actual.kr)+'</b>의 '+esc(actual.skill)+'만 시나리오 획득 스킬로 반영합니다.';
+   else if(actual)note.innerHTML='실제 선택: <b>'+esc(actual.kr)+'</b> → '+esc(actual.skill)+' · 시나리오 획득 스킬로 반영 중입니다.';
+   else note.textContent='선택한 라멘의 레어스킬만 시나리오 획득 스킬로 반영합니다.'
  }
 }
 function evolutionContextKey(){
@@ -3605,7 +3655,7 @@ function renderV7Planner(){
 }
 
 
-/* V7.22 · 트레센켄 단계별 육성 가이드
+/* V7.23 · 트레센켄 단계별 육성 가이드
    카드 편성별 지역 추천 + 실제 인게임 스탯 아이콘 + 라멘 3종 텍스트 효과 안내 */
 let ramenGuidePhase='junior';
 
