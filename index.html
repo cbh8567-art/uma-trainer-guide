@@ -3743,10 +3743,9 @@ function historyRareCompareSideHtml(card,otherCard,side){
  const mine=new Map((card.skills||[]).map(sk=>[historyRareSkillKey(sk),sk]));
  const other=new Set((otherCard?.skills||[]).map(historyRareSkillKey));
  const skills=[...mine.entries()].map(([k,sk])=>({sk,common:other.has(k)}));
- const cls=otherCard&&(
-   historyRareCardKey(card)===historyRareCardKey(otherCard)
-   && ((card.skills||[]).map(historyRareSkillKey).sort().join('|')!==((otherCard.skills||[]).map(historyRareSkillKey).sort().join('|'))
- )?' changed':(!otherCard?' only':'');
+ const mineKey=(card.skills||[]).map(historyRareSkillKey).sort().join('|');
+ const otherKey=(otherCard?.skills||[]).map(historyRareSkillKey).sort().join('|');
+ const cls=!otherCard?' only':(mineKey!==otherKey?' changed':'');
  return '<div class="historyRareCompareSide'+cls+'"><div class="label">'+esc(side)+(card.rental?' · 렌탈':'')+'</div>'+
    (skills.length?'<div class="historyRareCompareSkills">'+skills.map(x=>'<span class="historyRareCompareSkill '+(x.common?'common':(side==='A'?'removed':'added'))+'">'+esc(historyRareSkillLabel(x.sk))+'</span>').join('')+'</div>':'<div class="historyRareCompareNone">획득 레어스킬 없음</div>')+
    '</div>'
