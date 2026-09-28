@@ -4880,18 +4880,18 @@ function v7StatDifficulty(stat,goal,deck){
 function v7StatTargetHtml(cond,race){
  const names={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능'},rows=v7StatTargets(cond,race);
  const plan=v7ResolvedStatGoal(cond,race),deck=activeDeckCards();
- return '<div class="v7TargetToolbar"><div class="sub">자동 목표를 기준으로 권장값만 직접 수정할 수 있습니다. 최소/고점 목표는 권장값에 맞춰 자동 재계산됩니다.</div><button type="button" class="mini" id="v7ResetStatTargets">자동값 복원</button></div>'+
+ return '<div class="v7TargetToolbar"><div class="sub">자동 목표를 기준으로 권장값만 직접 수정할 수 있습니다. 최소/상한권 목표는 권장값에 맞춰 자동 재계산됩니다.</div><button type="button" class="mini" id="v7ResetStatTargets">자동값 복원</button></div>'+
   '<div class="v7TargetGrid numeric">'+rows.map(x=>{
    const range=v7StatRange(plan.resolved[x.key]),difficulty=v7StatDifficulty(x.key,range.goal,deck);
    const custom=Number(plan.saved?.[x.key])===range.goal;
    return '<div class="v7StatTarget numeric priority'+x.score+'"><span class="name">'+names[x.key]+'</span><span class="level">'+x.label+'</span>'+
     '<div class="v7StatNumbers"><div class="v7StatNum"><span>최소</span><b>'+range.min+'</b></div>'+
     '<div class="v7StatNum goal"><span>권장</span><input class="v7StatGoalInput" type="number" min="300" max="2000" step="10" value="'+range.goal+'" data-v7-stat="'+x.key+'" aria-label="'+names[x.key]+' 권장 목표"></div>'+
-    '<div class="v7StatNum"><span>고점</span><b>'+range.stretch+'</b></div></div>'+
+    '<div class="v7StatNum"><span>상한권</span><b>'+range.stretch+'</b></div></div>'+
     '<span class="v7Difficulty '+difficulty.cls+'">'+difficulty.label+'</span>'+(custom?'<div class="v7TargetCustom">사용자 목표 적용 중</div>':'')+
     '<div class="v7TargetWhy">'+esc(x.why)+'</div></div>'
   }).join('')+'</div>'+
-  '<div class="note" style="margin-top:6px">※ 숫자는 현재 거리·실제 거리(m)·각질·플랜 유형을 반영한 육성 계획용 휴리스틱입니다. 「고점」은 게임의 시스템 상한을 뜻하지 않습니다. 회복량·인자·시나리오별 실제 상한 정밀 계산은 후속 단계에서 보정합니다.</div>'
+  '<div class="note" style="margin-top:6px">※ 숫자는 현재 거리·실제 거리(m)·각질·플랜 유형을 반영한 육성 계획용 휴리스틱입니다. 「상한권」은 게임의 시스템 상한을 뜻하지 않습니다. 회복량·인자·시나리오별 실제 상한 정밀 계산은 후속 단계에서 보정합니다.</div>'
 }
 function bindV7StatTargetControls(cond,race){
  const key=v7TargetPlanKey(cond,race);
