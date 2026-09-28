@@ -3,8 +3,8 @@
   "updated": "2026-09-28",
   "status": "pass",
   "snapshotReady": true,
-  "lastSuccessfulSync": "2026-09-28T05:17:17.863Z",
-  "lastAttempt": "2026-09-28T05:17:17.863Z",
+  "lastSuccessfulSync": "2026-09-28T05:23:55.897Z",
+  "lastAttempt": "2026-09-28T05:23:55.897Z",
   "activeMode": "snapshot",
   "message": "Validated snapshots promoted atomically.",
   "changeTotals": {
