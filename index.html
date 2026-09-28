@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.53">
-<title>우마무스메 트레이너 가이드 V7.53 WEB</title>
+<meta name="app-build" content="V7.54">
+<title>우마무스메 트레이너 가이드 V7.54 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -562,6 +562,19 @@ body.trainingMode .counts{margin-top:8px}
 .recReason{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card:hover .recReason,.recSupport:hover .recReason,.cardHero .recReason{display:block;-webkit-line-clamp:unset;overflow:visible}
 .iconAuditNote{font-size:8.5px;color:#aeb7ca;margin-top:4px}
+.iconAuditPanel{margin-top:8px;border:1px solid #40506a;background:#121923;border-radius:9px;padding:8px}
+.iconAuditHead{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap}
+.iconAuditHead b{font-size:10px}.iconAuditSummary{font-size:8.5px;color:#aeb8ca;margin-top:5px;line-height:1.5}
+.iconAuditStats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-top:7px}
+.iconAuditStat{border:1px solid #354359;background:#171e29;border-radius:7px;padding:6px;min-width:0}
+.iconAuditStat b{display:block;font-size:13px;color:#ffe096}.iconAuditStat span{display:block;font-size:7.5px;color:#98a7bb;margin-top:2px}
+.iconAuditSection{margin-top:7px;border-top:1px solid #303b4e;padding-top:6px}
+.iconAuditSection> b{font-size:8.5px}
+.iconAuditRows{display:grid;gap:4px;margin-top:5px;max-height:180px;overflow:auto}
+.iconAuditRow{display:grid;grid-template-columns:70px minmax(0,1fr) auto;gap:6px;align-items:center;border:1px solid #303d50;background:#151b25;border-radius:6px;padding:5px;font-size:7.5px}
+.iconAuditRow .id{color:#91a3bc}.iconAuditRow .name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.iconAuditRow .why{color:#e6bd78}
+.iconAuditEmpty{font-size:8px;color:#7f8da2;margin-top:4px}
+@media(max-width:720px){.iconAuditStats{grid-template-columns:repeat(2,minmax(0,1fr))}.iconAuditRow{grid-template-columns:58px minmax(0,1fr)}}
 
 /* V7.46 · 스킬 모달 카드 헤더 */
 .skillModalCardHero{display:grid;grid-template-columns:104px 1fr;gap:12px;align-items:center;border:1px solid #3b465d;background:#131924;border-radius:11px;padding:9px;margin:0 0 10px}
@@ -1160,6 +1173,7 @@ body.trainingMode .trainingProgressHead .sub,
       <summary style="cursor:pointer;font-weight:900">JP 데이터 진단 상세 보기</summary>
       <div id="jpSyncDashboardBody" style="margin-top:7px">진단 데이터 확인 중…</div>
       <div id="jpReviewQueue" style="margin-top:8px"></div>
+      <div id="skillIconAudit" class="iconAuditPanel"><div class="iconAuditHead"><b>스킬 아이콘 런타임 진단</b><div class="actions"><button type="button" class="mini" id="skillIconAuditRefresh">새로고침</button><button type="button" class="mini red" id="skillIconAuditClear">로드 실패 기록 초기화</button></div></div><div class="iconAuditSummary">DB iconId와 실제 브라우저 이미지 로드 실패를 함께 검사합니다.</div></div>
       <div id="krImportCandidates" style="margin-top:8px"></div>
     </details>
     <div class="note">PC: 카드 자체를 덱 슬롯으로 드래그 · 모바일: 「덱 슬롯」으로 보유 등록 없이 바로 편성할 수 있습니다.</div>
@@ -1679,12 +1693,13 @@ function canonicalSkill(s){
 
 function skillIcon(s){
  if(!s?.iconId)return '<span class="skillFallback missingIcon" title="아이콘 미연결">?</span>';
+ const sid=Number(s.id)||0,iconId=Number(s.iconId)||0;
  // 시나리오 전용 원본 아이콘은 앱과 함께 배포해 외부 저장소 누락을 방지합니다.
  const bundled=[10012,10032,20011,20012,20042,20226,20246,20256,20266,20276,20286,20296,20306,20316,20326,20336,20346,20366,20376];
- if(bundled.includes(Number(s.iconId)))return `<img class="skillIcon" src="./assets/skill-icons/${Number(s.iconId)}.png" width="35" height="35" alt="${esc(s.jp||'시나리오 진화 스킬')} 아이콘" loading="lazy" onerror="this.outerHTML='<span class=&quot;skillFallback missingIcon&quot; title=&quot;아이콘 로드 실패&quot;>?</span>'">`;
- const primary=`${CONFIG.assetBases.skillIcon}${s.iconId}.webp`;
- const fallback=`https://gametora.com/images/umamusume/skill_icons/utx_ico_skill_${s.iconId}.png`;
- return `<img class="skillIcon" src="${primary}" data-fallback="${fallback}" loading="lazy" onerror="if(!this.dataset.fallbackTried){this.dataset.fallbackTried='1';this.src=this.dataset.fallback}else{this.outerHTML='<span class=&quot;skillFallback missingIcon&quot; title=&quot;아이콘 로드 실패&quot;>?</span>'}">`
+ if(bundled.includes(iconId))return `<img class="skillIcon" src="./assets/skill-icons/${iconId}.png" width="35" height="35" alt="${esc(s.jp||'시나리오 진화 스킬')} 아이콘" loading="lazy" onerror="recordSkillIconLoadFailure(${sid},${iconId},'bundled');this.outerHTML='<span class=&quot;skillFallback missingIcon&quot; title=&quot;아이콘 로드 실패&quot;>?</span>'">`;
+ const primary=`${CONFIG.assetBases.skillIcon}${iconId}.webp`;
+ const fallback=`https://gametora.com/images/umamusume/skill_icons/utx_ico_skill_${iconId}.png`;
+ return `<img class="skillIcon" src="${primary}" data-fallback="${fallback}" loading="lazy" onerror="if(!this.dataset.fallbackTried){this.dataset.fallbackTried='1';this.src=this.dataset.fallback}else{recordSkillIconLoadFailure(${sid},${iconId},'remote');this.outerHTML='<span class=&quot;skillFallback missingIcon&quot; title=&quot;아이콘 로드 실패&quot;>?</span>'}">`
 }
 function cardById(id){return runtime.byId.get(Number(id))||runtime.byId.get(String(id))}
 function skillConditionScore(s,cond=state){const t=s?.tags||{grounds:[],distances:[],styles:[]};if((t.grounds||[]).length&&!t.grounds.includes(cond.ground))return 0;if((t.distances||[]).length&&!t.distances.includes(cond.distance))return 0;if((t.styles||[]).length&&!t.styles.includes(cond.style))return 0;const explicit=(t.grounds?.length?1:0)+(t.distances?.length?1:0)+(t.styles?.length?1:0);return explicit?3:2}
@@ -4173,6 +4188,61 @@ function renderTier(){
  }
 }
 async function fetchJson(url){const candidates=[url];if(url.includes('raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/'))candidates.push('https://cdn.jsdelivr.net/gh/Tsuyuchan-jp/umamusume-data@main/'+url.split('/main/')[1]);if(url.includes('raw.githubusercontent.com/daftuyda/UmaTools/main/'))candidates.push('https://cdn.jsdelivr.net/gh/daftuyda/UmaTools@main/'+url.split('/main/')[1]);let last;for(const u of candidates){try{const r=await fetch(u,{cache:'no-store',mode:'cors'});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json()}catch(e){last=e}}throw last||new Error('download failed')}
+const RUNTIME_SKILL_ICON_FAILURES=new Map();
+let skillIconAuditRaf=0;
+function recordSkillIconLoadFailure(skillId,iconId,source='remote'){
+ const key=String(skillId||'')+'|'+String(iconId||'');
+ const meta=runtime.skills?.get?.(Number(skillId));
+ const old=RUNTIME_SKILL_ICON_FAILURES.get(key)||{};
+ RUNTIME_SKILL_ICON_FAILURES.set(key,{
+   skillId:Number(skillId)||skillId||'',
+   iconId:Number(iconId)||iconId||'',
+   jp:meta?.name||old.jp||'',
+   kr:meta?koSkill(meta.name,meta.id):(old.kr||''),
+   source,
+   count:Number(old.count||0)+1,
+   lastAt:new Date().toISOString()
+ });
+ scheduleSkillIconAuditRender()
+}
+function scheduleSkillIconAuditRender(){
+ if(skillIconAuditRaf)cancelAnimationFrame(skillIconAuditRaf);
+ skillIconAuditRaf=requestAnimationFrame(()=>{skillIconAuditRaf=0;renderSkillIconAudit()})
+}
+function skillIconAuditRowsHtml(rows,kind){
+ if(!rows.length)return '<div class="iconAuditEmpty">현재 확인된 항목 없음</div>';
+ return '<div class="iconAuditRows">'+rows.slice(0,30).map(x=>{
+   const id=x.id??x.skillId??'',icon=x.iconId??'',jp=x.jp||x.name||'',kr=x.kr||koSkill(jp,id);
+   const why=kind==='load'?(x.source+' · icon '+icon+' · '+Number(x.count||1)+'회'):(icon?'icon '+icon:'iconId 없음');
+   return '<div class="iconAuditRow"><span class="id">ID '+esc(id)+'</span><span class="name">'+esc(kr&&kr!=='한국어 번역 미등록'?kr:jp||'이름 미등록')+'</span><span class="why">'+esc(why)+'</span></div>'
+ }).join('')+'</div>'
+}
+function renderSkillIconAudit(){
+ const el=$('#skillIconAudit');if(!el)return;
+ const audit=skillIconCoverageAudit();
+ const active=activeDeckCards().flatMap(card=>allCardSkills(card)).map(canonicalSkill);
+ const activeMissingMap=new Map();
+ for(const s of active)if(s&&!Number(s.iconId))activeMissingMap.set(String(s.id),s);
+ const activeMissing=[...activeMissingMap.values()];
+ const missingAll=[...(runtime.skills?.values?.()||[])].filter(s=>!Number(s?.iconId));
+ const failures=[...RUNTIME_SKILL_ICON_FAILURES.values()].sort((a,b)=>Number(b.count||0)-Number(a.count||0));
+ const overrideCount=Object.values(JP_SKILL_ICON_OVERRIDES||{}).filter(x=>x?.status==='verified'&&Number(x.iconId)>0).length;
+ el.innerHTML='<div class="iconAuditHead"><b>스킬 아이콘 런타임 진단</b><div class="actions"><button type="button" class="mini" id="skillIconAuditRefresh">새로고침</button><button type="button" class="mini red" id="skillIconAuditClear">로드 실패 기록 초기화</button></div></div>'+
+   '<div class="iconAuditSummary">iconId 메타데이터 누락과 실제 화면에서 1차/대체 이미지까지 실패한 항목을 분리해서 표시합니다.</div>'+
+   '<div class="iconAuditStats">'+
+    '<div class="iconAuditStat"><b>'+Number(audit.total||0)+'</b><span>런타임 스킬 전체</span></div>'+
+    '<div class="iconAuditStat"><b>'+missingAll.length+'</b><span>DB iconId 미연결</span></div>'+
+    '<div class="iconAuditStat"><b>'+activeMissing.length+'</b><span>현재 덱에서 미연결</span></div>'+
+    '<div class="iconAuditStat"><b>'+failures.length+'</b><span>실제 이미지 로드 실패</span></div>'+
+   '</div>'+
+   '<div class="iconAuditSummary">검증 override '+overrideCount+'개 · 현재 덱 누락은 우선 수정 대상으로 보면 됩니다.</div>'+
+   '<div class="iconAuditSection"><b>현재 덱에서 iconId가 없는 스킬</b>'+skillIconAuditRowsHtml(activeMissing,'meta')+'</div>'+
+   '<div class="iconAuditSection"><b>실제 이미지 로드 실패</b>'+skillIconAuditRowsHtml(failures,'load')+'</div>'+
+   '<div class="iconAuditSection"><b>DB 전체 iconId 미연결 · 상위 30개</b>'+skillIconAuditRowsHtml(missingAll,'meta')+'</div>';
+ const refresh=$('#skillIconAuditRefresh'),clear=$('#skillIconAuditClear');
+ if(refresh)refresh.onclick=renderSkillIconAudit;
+ if(clear)clear.onclick=()=>{RUNTIME_SKILL_ICON_FAILURES.clear();renderSkillIconAudit()}
+}
 function applySkillIconOverrides(skills){
   for(const skill of skills||[]){
     const o=JP_SKILL_ICON_OVERRIDES?.[String(skill?.id)];
@@ -4592,6 +4662,8 @@ function renderJpSyncStatus(){
        ?`<div style="margin-top:4px">${items.map(x=>`<div>• [${x.priority||'medium'}] ${x.collection}/${x.changeType} · ${x.name||x.id} <span class="status">(${x.id})</span></div>`).join('')}</div>`
        :'<div class="status" style="margin-top:4px">현재 열린 검토 항목 없음</div>');
  }
+
+ renderSkillIconAudit();
 
  const krEl=$('#krImportCandidates');
  if(krEl){
@@ -5390,7 +5462,7 @@ function setSsrDbOpen(open,scroll=false){
  if(open&&scroll)setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),20)
 }
 function toggleSsrDb(){setSsrDbOpen($('#ssrDbBody')?.hidden!==false,true)}
-function renderAll(){renderJpSyncStatus();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderDeckConfirmationUi();renderScenarioPlan();renderTrainingStartPanel();renderDeckPresets();renderTrainingHistory()}
+function renderAll(){renderJpSyncStatus();renderSkillIconAudit();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderDeckConfirmationUi();renderScenarioPlan();renderTrainingStartPanel();renderDeckPresets();renderTrainingHistory()}
 applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;state.scenarioPlanLinkChoice=null;state.scenarioPlanUltimateRamen=null;state.scenarioPlanConfirmed=false;state.trainingActive=false;save();renderScenarioRareSkillPanel();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderScenarioPlan();renderSetupProgress();renderTrainingStartPanel()};
 populateConditionGuideRace();
 $('#conditionGuideRace').value=getGuideRace()?.id||'';
