@@ -1590,7 +1590,8 @@ function enterTrainingView(){
  document.body.classList.remove('trainingSetupEdit');
  renderActiveTrainingSetupBar();
  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-  const target=!$('#ramenScenarioGuide')?.hidden?$('#ramenScenarioGuide'):(!$('#legendsScenarioGuide')?.hidden?$('#legendsScenarioGuide'):$('#deck'));
+  ensureTrainingRuntimeOrder();
+  const target=$('#trainingProgressDashboard')||(!$('#ramenScenarioGuide')?.hidden?$('#ramenScenarioGuide'):(!$('#legendsScenarioGuide')?.hidden?$('#legendsScenarioGuide'):$('#deck')));
   target?.scrollIntoView({behavior:'smooth',block:'start'})
  }))
 }
@@ -1678,18 +1679,24 @@ function skillDisplayNameHtml(s){
  return bilingualNameHtml(s?.kr||koSkill(s?.jp),s?.jp||'',true)
 }
 function skillRowHtml(s,checkbox=true,cond=state,checkedOverride=null,disabled=false){s=canonicalSkill(s);const sc=skillConditionScore(s,cond);const checked=checkedOverride===null?false:!!checkedOverride;return `${checkbox?`<input type="checkbox" ${checked?'checked':''} ${disabled?'disabled':''}>`:''}${skillIcon(s)}<div><div class="jp">${skillDisplayNameHtml(s)}</div><div class="tags">${(s.tags?.grounds||[]).map(x=>`<span class="tag">${groundLabel[x]||x}</span>`).join('')}${(s.tags?.distances||[]).map(x=>`<span class="tag">${distLabel[x]||x}</span>`).join('')}${(s.tags?.styles||[]).map(x=>`<span class="tag">${styleLabel[x]||x}</span>`).join('')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`}
-function pendingRareChoiceCount(){
- let n=0;
- for(const card of activeDeckCards()){
-  for(const e of card?.rareEvents||[]){
-   if(isBranchEvent(e)&&eventMaxCount(e)>0&&!selectedChoiceId(card,e))n++;
-  }
- }
+function pendingChoiceItems(){
+ const out=[];
+ for(const card of activeDeckCards())for(const e of card?.rareEvents||[])if(isBranchEvent(e)&&eventMaxCount(e)>0&&!selectedChoiceId(card,e))out.push({kind:'support',cardId:card.id,title:card.krName||card.jpName||String(card.id),detail:e.krTitle||e.jpTitle||e.name||'레어스킬 분기 이벤트'});
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none;
- if(scenarioLinkChoices(sc).length&&!scenarioLinkEventChoice())n++;
- if(state.scenario==='tresenken'&&(sc.ultimateRamenChoices||[]).length&&!selectedUltimateRamen())n++;
- return n
+ if(scenarioLinkChoices(sc).length&&!scenarioLinkEventChoice())out.push({kind:'scenarioLink',title:state.scenario==='tresenken'?'시니어 9월 실제 선택':'시나리오 선택 이벤트',detail:'실제 선택 미확정'});
+ if(state.scenario==='tresenken'&&(sc.ultimateRamenChoices||[]).length&&!selectedUltimateRamen())out.push({kind:'ultimateRamen',title:'궁극 트레센 라멘',detail:'실제 라멘 미확정'});
+ return out
 }
+function openPendingChoice(item){
+ if(!item)return;if(item.kind==='support')return openSkillModal(item.cardId);
+ const target=item.kind==='ultimateRamen'?$('#finishRamenSection'):$('#finishRamenLinkSection');
+ if(target){target.scrollIntoView({behavior:'smooth',block:'center'});target.style.outline='2px solid #d6a24c';setTimeout(()=>target.style.outline='',1600)}
+}
+function renderPendingShortcuts(){
+ const box=$('#pendingShortcutList');if(!box)return;const items=pendingChoiceItems();box.innerHTML='';if(!state.trainingActive||!items.length){box.hidden=true;return}box.hidden=false;
+ for(const item of items.slice(0,6)){const b=document.createElement('button');b.type='button';b.className='pendingShortcut';b.innerHTML='<b>'+esc(item.title)+'</b>'+esc(item.detail)+' · 눌러서 확인';b.onclick=()=>openPendingChoice(item);box.appendChild(b)}
+}
+function pendingRareChoiceCount(){return pendingChoiceItems().length}
 function trainingNextImportantEvent(){
  if(state.scenario==='tresenken'){
   if(!scenarioLinkEventChoice())return '시니어 9월 전반 · 당신과 나와 라멘과';
@@ -1700,9 +1707,12 @@ function trainingNextImportantEvent(){
  if(scenarioLinkChoices(sc).length&&!scenarioLinkEventChoice())return (sc.linkEvent?.when?sc.linkEvent.when+' · ':'')+(sc.linkEvent?.kr||'시나리오 선택 이벤트');
  return '현재 시나리오 공략 확인'
 }
+function ensureTrainingRuntimeOrder(){
+ const dash=$('#trainingProgressDashboard'),ramen=$('#ramenScenarioGuide'),legends=$('#legendsScenarioGuide');if(!dash)return;const anchor=ramen||legends;if(anchor&&anchor.parentElement===dash.parentElement&&dash.nextElementSibling!==anchor)anchor.parentElement.insertBefore(dash,anchor)
+}
 function renderTrainingProgressDashboard(){
- const root=$('#trainingProgressDashboard'),grid=$('#trainingProgressGrid'),status=$('#trainingProgressStatus');if(!root||!grid)return;
- root.classList.toggle('active',!!state.trainingActive);if(!state.trainingActive)return;
+ const root=$('#trainingProgressDashboard'),grid=$('#trainingProgressGrid'),status=$('#trainingProgressStatus');if(!root||!grid)return;ensureTrainingRuntimeOrder();
+ root.classList.toggle('active',!!state.trainingActive);if(!state.trainingActive){renderPendingShortcuts();return;}
  const ds=activeDeckCards().reduce((a,card)=>{const x=cardRareStats(card);a.got+=x.got;a.total+=x.total;return a},{got:0,total:0});
  const scenarioCount=scenarioRareSkillNames().size,pending=pendingRareChoiceCount();
  const link=scenarioPlanLinkSelected(),ramen=scenarioPlanRamenSelected();
@@ -1717,6 +1727,7 @@ function renderTrainingProgressDashboard(){
   '<div class="trainingProgressItem"><b>시나리오 확정 레어</b><strong>'+scenarioCount+'개</strong></div>'+
   '<div class="trainingProgressItem"><b>미확정 선택</b><strong>'+pending+'개</strong></div>'+
   '<div class="trainingProgressItem"><b>현재 조건</b><strong>'+esc(groundLabel[state.ground]+' · '+distLabel[state.distance]+' · '+styleLabel[state.style])+'</strong></div>';
+ renderPendingShortcuts()
 }
 function renderGlobalSkills(){const list=deckSkills().sort((a,b)=>skillConditionScore(b)-skillConditionScore(a));const ds=activeDeckCards().reduce((a,c)=>{const x=cardRareStats(c);a.got+=x.got;a.total+=x.total;return a},{got:0,total:0});const acquired=list.filter(s=>isSkillAcquiredAnywhere(s.id));$('#acqCount').textContent=ds.got;$('#rareCount').textContent=ds.total;$('#rareUniqueText').textContent=`고유 레어스킬 ${acquired.length} / ${list.length}`;$('#recCount').textContent=acquired.filter(s=>skillConditionScore(s)>0).length;$('#conditionText').textContent=`${state.guideServer==='kr'?'한국':'일본'} · ${groundLabel[state.ground]} · ${distLabel[state.distance]} · ${styleLabel[state.style]}`;
  const scenarioCount=scenarioRareSkillNames().size,pending=pendingRareChoiceCount();
@@ -2911,6 +2922,13 @@ function confirmTrainingFinish(){
  $('#trainingResultModal').classList.add('open');
  toast('진화 선택 저장 · 최종 결과를 확인해 주세요.')
 }
+function renderTrainingHistory(){
+ const list=$('#trainingHistoryList'),count=$('#trainingHistoryCount');if(!list)return;const rows=state.trainingHistory||[];if(count)count.textContent=rows.length+'회';list.innerHTML='';
+ if(!rows.length){list.innerHTML='<div class="note">아직 완료 확정한 육성 기록이 없습니다.</div>';return}
+ for(const r of rows){const d=document.createElement('div');d.className='trainingHistoryCard';const when=r.completedAt?new Date(r.completedAt).toLocaleString('ko-KR'):'';d.innerHTML='<div class="hTitle">'+esc(r.uma?.name||'육성 우마')+' · '+esc(r.scenario||'시나리오')+'</div><div class="hMeta">'+esc(r.condition||'')+(when?'<br>'+esc(when):'')+'<br>SSR 레어 '+Number(r.supportRare?.got||0)+'/'+Number(r.supportRare?.total||0)+' · 시나리오 '+Number(r.scenarioSkills?.length||0)+' · 진화 '+Number(r.evolution?.length||0)+'</div><div class="hTags">'+(r.ramen?'<span class="tag">'+esc(r.ramen.name)+'</span>':'')+(r.evolution||[]).slice(0,3).map(x=>'<span class="tag">'+esc(x)+'</span>').join('')+'</div>';list.appendChild(d)}
+}
+function archivePendingTrainingResult(){if(!pendingTrainingResult)return;const entry={...pendingTrainingResult,completedAt:new Date().toISOString()};state.trainingHistory=[entry,...(state.trainingHistory||[])].slice(0,5)}
+
 function resetActiveTrainingSession(){
  state.acquired={};
  state.eventChoice={};
@@ -2939,8 +2957,8 @@ function resetActiveTrainingSession(){
 function confirmCompletedTrainingSession(){
  if(!pendingTrainingResult)return toast('확정할 육성 결과가 없습니다.');
  if(!confirm('이 육성을 완료 확정할까요?\n현재 육성의 스킬 체크·시나리오 진행 기록은 정리되고, 보유 SSR·돌파·현재 덱은 유지됩니다.'))return;
- resetActiveTrainingSession();
- toast('육성 완료 확정 · 새 육성을 시작할 수 있습니다.')
+ archivePendingTrainingResult();resetActiveTrainingSession();
+ toast('육성 완료 확정 · 최근 육성 결과에 저장했습니다.')
 }
 function editCompletedTrainingSession(){
  if(!state.trainingActive)return;
@@ -4314,7 +4332,7 @@ function setSsrDbOpen(open,scroll=false){
  if(open&&scroll)setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),20)
 }
 function toggleSsrDb(){setSsrDbOpen($('#ssrDbBody')?.hidden!==false,true)}
-function renderAll(){renderJpSyncStatus();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderDeckConfirmationUi();renderScenarioPlan();renderTrainingStartPanel()}
+function renderAll(){renderJpSyncStatus();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderDeckConfirmationUi();renderScenarioPlan();renderTrainingStartPanel();renderDeckPresets();renderTrainingHistory()}
 applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;state.scenarioPlanLinkChoice=null;state.scenarioPlanUltimateRamen=null;state.scenarioPlanConfirmed=false;state.trainingActive=false;save();renderScenarioRareSkillPanel();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderScenarioPlan();renderSetupProgress();renderTrainingStartPanel()};
 populateConditionGuideRace();
 $('#conditionGuideRace').value=getGuideRace()?.id||'';
@@ -4336,6 +4354,7 @@ $('#toggleSsrDb').onclick=toggleSsrDb;
 document.querySelectorAll('[data-picker-scope]').forEach(b=>b.onclick=()=>setEmptySlotScope(b.dataset.pickerScope));
 $('#trainingFinishBtn').onclick=openTrainingFinishModal;
 $('#saveDeckAsOwned').onclick=saveCurrentDeckAsOwned;
+$('#saveDeckPreset').onclick=saveDeckPreset;$('#loadDeckPreset').onclick=loadDeckPreset;$('#deleteDeckPreset').onclick=deleteDeckPreset;
 $('#confirmInheritanceBtn').onclick=confirmInheritance;
 $('#confirmDeckBtn').onclick=confirmCurrentDeck;
 $('#confirmScenarioPlanBtn').onclick=confirmScenarioPlan;
