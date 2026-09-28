@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.27">
-<title>우마무스메 트레이너 가이드 V7.27 WEB</title>
+<meta name="app-build" content="V7.28">
+<title>우마무스메 트레이너 가이드 V7.28 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -305,7 +305,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .finishLockDetail .finishRoute{display:block;margin-top:2px;color:#d8c79e}
 .finishOption.disabled .finishLockDetail{opacity:1;filter:none}
 
-/* V7.27 · deck readability, status border, bilingual labels
+/* V7.28 · deck readability, status border, bilingual labels
    - 원본 일러는 object-fit:contain으로 왜곡 없이 표시
    - 전체 타이포그래피를 약 10~15% 확대
    - 모바일에서도 작은 보조문구가 지나치게 축소되지 않도록 최소 크기 확보 */
@@ -375,7 +375,7 @@ body{font-size:14px;line-height:1.5}
 }
 
 
-/* V7.27 · 육성 준비 플로우 */
+/* V7.28 · 육성 준비 플로우 */
 .setupProgress{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:0 0 10px}
 .setupProgressStep{border:1px solid #3e475c;background:#171c28;border-radius:10px;padding:7px 8px;min-width:0}
 .setupProgressStep .n{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:50%;background:#2a3142;margin-right:5px;font-size:10px;font-weight:950}
@@ -397,7 +397,7 @@ body{font-size:14px;line-height:1.5}
  .setupSummary{grid-template-columns:1fr 1fr}
  .rentalSlotHeader{font-size:11px;padding:5px}
 }
-/* V7.27 · 육성 준비 플로우 */
+/* V7.28 · 육성 준비 플로우 */
 .setupStepPanel{margin-top:10px;border:1px solid #46506a;background:linear-gradient(180deg,#181d29,#141823);border-radius:12px;padding:10px}
 .setupStepHead{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .setupStepBadge{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:27px;border-radius:50%;background:#2a3142;border:1px solid #4c5874;font-weight:950;color:#dce4f3}
@@ -419,7 +419,7 @@ body{font-size:14px;line-height:1.5}
 [hidden]{display:none!important}
 @media(max-width:720px){.inheritanceGrid{grid-template-columns:1fr}.setupActions .btn{flex:1 1 140px}.deckConfirmBar .btn{flex:1 1 145px}}
 
-/* V7.27 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
+/* V7.28 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
 .scenarioPlanPanel{border-color:#5d4f77;background:linear-gradient(180deg,#1c1928,#151821)}
 .scenarioPlanPanel.confirmed{border-color:#486d59;background:linear-gradient(180deg,#17241e,#151a18)}
 .planChoiceGroup{margin-top:9px}.planChoiceTitle{font-size:11px;font-weight:950;margin-bottom:6px}
@@ -439,7 +439,7 @@ body{font-size:14px;line-height:1.5}
  .trainingStartMain .btn{width:100%}
 }
 
-/* V7.27 · 시니어 9월 계획 → 실제 선택 승격 */
+/* V7.28 · 시니어 9월 계획 → 실제 선택 승격 */
 .plannedEventBox{border:1px solid #65527c;background:linear-gradient(180deg,#201a2b,#171923);border-radius:10px;padding:9px;margin:7px 0}
 .plannedEventBox.done{border-color:#3e7657;background:linear-gradient(180deg,#16271f,#171b19)}
 .plannedEventBox.diff{border-color:#9b7142;background:linear-gradient(180deg,#2a2116,#1c1915)}
@@ -450,7 +450,7 @@ body{font-size:14px;line-height:1.5}
 .plannedEventActions .btn{font-size:10px;padding:7px 9px}
 @media(max-width:720px){.plannedEventActions .btn{flex:1 1 145px}}
 
-/* V7.27 · PC 육성 진행 대시보드 / 라멘 아이콘 / 레어스킬 요약 */
+/* V7.28 · PC 육성 진행 대시보드 / 라멘 아이콘 / 레어스킬 요약 */
 .ramenDishIcon{width:62px;height:62px;object-fit:contain;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.32));flex:0 0 auto}
 .planChoice .ramenDishIcon{width:62px;height:62px}
 .finishOption .ramenDishIcon{width:58px;height:58px}
@@ -476,7 +476,7 @@ body{font-size:14px;line-height:1.5}
  .rareSkillOverview{grid-template-columns:1fr}
 }
 
-/* V7.27 · 라멘 결과 스킬 아이콘 / 육성 모드 전환 */
+/* V7.28 · 라멘 결과 스킬 아이콘 / 육성 모드 전환 */
 .ramenDishWrap{display:inline-flex;align-items:center;justify-content:center;width:62px;height:62px;flex:0 0 62px}
 .ramenDishWrap .ramenDishIcon{width:100%;height:100%}
 .ramenDishWrap .ramenDishFallback{width:46px;height:46px}
@@ -508,7 +508,7 @@ body.trainingMode.trainingSetupEdit #confirmDeckBtn{display:inline-flex!importan
  body.trainingMode.trainingSetupEdit #setupProgress{display:flex!important}
 }
 
-/* V7.27 · PC 육성 완료/포기/세션 정리 */
+/* V7.28 · PC 육성 완료/포기/세션 정리 */
 .trainingSessionActions{display:flex;gap:6px;flex-wrap:wrap}
 .trainingSessionActions .btn,.trainingSessionActions .mini{white-space:nowrap}
 .trainingResultHero{border:1px solid #4f755d;background:linear-gradient(180deg,#17291f,#151b18);border-radius:12px;padding:11px;margin-top:9px}
@@ -528,7 +528,7 @@ body.trainingMode.trainingSetupEdit #confirmDeckBtn{display:inline-flex!importan
  .trainingResultDeck{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
-/* V7.27 · PC 실전 육성 UX / 히스토리 / 덱 프리셋 / 추천 근거 */
+/* V7.28 · PC 실전 육성 UX / 히스토리 / 덱 프리셋 / 추천 근거 */
 body:not(.trainingMode) #ramenScenarioGuide,
 body:not(.trainingMode) #legendsScenarioGuide{display:none!important}
 .pendingShortcutList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}
@@ -542,7 +542,7 @@ body:not(.trainingMode) #legendsScenarioGuide{display:none!important}
 @media(max-width:900px){.pendingShortcutList,.trainingHistoryList{grid-template-columns:1fr}}
 @media(max-width:720px){.deckPresetBar,.trainingHistoryPanel{display:none}}
 
-/* V7.27 · PC 밀도 조정 / 아이콘 보강 */
+/* V7.28 · PC 밀도 조정 / 아이콘 보강 */
 #conditionSetupBlock{margin-top:4px}
 body.trainingMode:not(.trainingSetupEdit) #conditionSetupTitle,
 body.trainingMode:not(.trainingSetupEdit) #conditionSetupBlock,
@@ -556,12 +556,32 @@ body.trainingMode .counts{margin-top:8px}
 .recReason{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card:hover .recReason,.recSupport:hover .recReason,.cardHero .recReason{display:block;-webkit-line-clamp:unset;overflow:visible}
 .iconAuditNote{font-size:8.5px;color:#aeb7ca;margin-top:4px}
+
+/* V7.28 · 자동 획득 카드 표시 / 스킬 모달 카드 헤더 */
+.autoRarePanel{margin-top:9px;border:1px solid #36566f;background:#111b25;border-radius:10px;padding:8px}
+.autoRareHead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.autoRareHead b{font-size:10px}.autoRareHead .sub{font-size:8.5px}
+.autoRareList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.autoRareItem{display:grid;grid-template-columns:42px auto 1fr auto;gap:7px;align-items:center;border:1px solid #33495d;background:#131c27;border-radius:9px;padding:6px;color:#eef3fb;text-align:left;cursor:pointer;min-width:0}
+.autoRareItem:hover{border-color:#5b85a7;background:#172433}
+.autoRareItem.done{border-color:#3e7359;background:#14271e}
+.autoRareItem img.supportThumb{width:42px;height:54px;object-fit:contain;border-radius:6px;background:#252d3a}
+.autoRareItem .skillIcon{width:31px;height:31px}
+.autoRareText{min-width:0}.autoRareText b{display:block;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.autoRareText span{display:block;font-size:8px;color:#aeb9cc;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.autoRareState{font-size:8px;font-weight:900;white-space:nowrap}.autoRareItem.done .autoRareState{color:#8fe0b2}
+.skillModalCardHero{display:grid;grid-template-columns:104px 1fr;gap:12px;align-items:center;border:1px solid #3b465d;background:#131924;border-radius:11px;padding:9px;margin:0 0 10px}
+.skillModalCardHero img{width:104px;height:138px;object-fit:contain;border-radius:8px;background:#262d39}
+.skillModalCardHero .title{font-size:14px;font-weight:950}.skillModalCardHero .jp{font-size:9px;color:#aeb8ca;margin-top:3px}
+.skillModalCardHero .meta{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+@media(max-width:900px){.autoRareList{grid-template-columns:1fr}}
+@media(max-width:720px){.skillModalCardHero{grid-template-columns:78px 1fr}.skillModalCardHero img{width:78px;height:104px}}
 </style>
 </head>
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.27 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.28 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -696,6 +716,10 @@ body.trainingMode .counts{margin-top:8px}
       </div>
       <div class="trainingProgressGrid" id="trainingProgressGrid"></div>
       <div class="pendingShortcutList" id="pendingShortcutList"></div>
+      <div class="autoRarePanel" id="autoRarePanel">
+        <div class="autoRareHead"><div><b>자동 획득 레어스킬</b><div class="sub">선택지가 없는 SSR 이벤트 · 이벤트 도달 후 획득 완료만 체크합니다.</div></div><span class="status" id="autoRareStatus">0개</span></div>
+        <div class="autoRareList" id="autoRareList"></div>
+      </div>
       <div class="trainingProgressActions">
         <button type="button" class="mini" id="dashboardOpenSkills">스킬 카운트 보기</button>
         <button type="button" class="mini red" id="dashboardResetSkills">스킬 카운트 초기화</button>
@@ -1022,7 +1046,7 @@ body.trainingMode .counts{margin-top:8px}
 
 <div class="modal" id="cardModal"><div class="dialog"><div class="dialogHead"><div><h2 id="cardModalTitle" style="margin:0"></h2><div class="sub" id="cardModalJp"></div></div><button class="btn" data-close="cardModal">닫기</button></div><div id="cardInfo"></div></div></div>
 
-<div class="modal" id="skillModal"><div class="dialog"><div class="dialogHead"><div><h2 id="skillModalTitle" style="margin:0"></h2><div class="sub">이벤트 선택지별 레어 스킬 · 일본어 원문 우선 / 한국어 번역 병기 · 현재 조건 추천</div></div><button class="btn" data-close="skillModal">닫기</button></div><div id="skillEvents"></div></div></div>
+<div class="modal" id="skillModal"><div class="dialog"><div class="dialogHead"><div><h2 id="skillModalTitle" style="margin:0"></h2><div class="sub">이벤트 선택지별 레어 스킬 · 일본어 원문 우선 / 한국어 번역 병기 · 현재 조건 추천</div></div><button class="btn" data-close="skillModal">닫기</button></div><div class="skillModalCardHero" id="skillModalCardHero"></div><div id="skillEvents"></div></div></div>
 
 
 <script>
@@ -1699,6 +1723,35 @@ function skillDisplayNameHtml(s){
  return bilingualNameHtml(s?.kr||koSkill(s?.jp),s?.jp||'',true)
 }
 function skillRowHtml(s,checkbox=true,cond=state,checkedOverride=null,disabled=false){s=canonicalSkill(s);const sc=skillConditionScore(s,cond);const checked=checkedOverride===null?false:!!checkedOverride;return `${checkbox?`<input type="checkbox" ${checked?'checked':''} ${disabled?'disabled':''}>`:''}${skillIcon(s)}<div><div class="jp">${skillDisplayNameHtml(s)}</div><div class="tags">${(s.tags?.grounds||[]).map(x=>`<span class="tag">${groundLabel[x]||x}</span>`).join('')}${(s.tags?.distances||[]).map(x=>`<span class="tag">${distLabel[x]||x}</span>`).join('')}${(s.tags?.styles||[]).map(x=>`<span class="tag">${styleLabel[x]||x}</span>`).join('')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`}
+function automaticRareItems(){
+ const out=[];
+ for(const card of activeDeckCards()){
+  for(const e of card?.rareEvents||[]){
+   if(isBranchEvent(e)||eventMaxCount(e)<=0)continue;
+   const skills=eventSkills(e);
+   if(!skills.length)continue;
+   out.push({card,event:e,skills,done:autoEventDone(card,e)})
+  }
+ }
+ return out
+}
+function renderAutomaticRareItems(){
+ const root=$('#autoRarePanel'),box=$('#autoRareList'),status=$('#autoRareStatus');if(!root||!box)return;
+ const items=automaticRareItems();
+ root.hidden=!state.trainingActive||!items.length;
+ if(status)status.textContent=items.filter(x=>x.done).length+' / '+items.length+' 완료';
+ box.innerHTML='';
+ if(root.hidden)return;
+ for(const item of items){
+   const {card,event,skills,done}=item,d=document.createElement('button');d.type='button';d.className='autoRareItem'+(done?' done':'');
+   const skill=skills[0],extra=skills.length>1?' 외 '+(skills.length-1)+'개':'';
+   d.innerHTML=(card.image?'<img class="supportThumb" src="'+esc(card.image)+'" alt="'+esc(card.krName||card.jpName||'SSR')+'" onerror="this.style.opacity=.16">':'<span class="supportThumb"></span>')+
+    (skill?skillIcon(skill):'<span class="skillFallback">技</span>')+
+    '<span class="autoRareText"><b>'+esc(card.krName||card.jpName||String(card.id))+'</b><span>'+esc(skill?.kr||skill?.jp||'레어 스킬')+esc(extra)+' · '+esc(event.labelKr||event.labelJp||event.label||'자동 이벤트')+'</span></span>'+
+    '<span class="autoRareState">'+(done?'획득 완료 ✓':'획득 예정')+'</span>';
+   d.onclick=()=>openSkillModal(card.id);box.appendChild(d)
+ }
+}
 function pendingChoiceItems(){
  const out=[];
  for(const card of activeDeckCards())for(const e of card?.rareEvents||[])if(isBranchEvent(e)&&eventMaxCount(e)>0&&!selectedChoiceId(card,e))out.push({kind:'support',cardId:card.id,title:card.krName||card.jpName||String(card.id),detail:e.krTitle||e.jpTitle||e.name||'레어스킬 분기 이벤트'});
@@ -1732,7 +1785,7 @@ function ensureTrainingRuntimeOrder(){
 }
 function renderTrainingProgressDashboard(){
  const root=$('#trainingProgressDashboard'),grid=$('#trainingProgressGrid'),status=$('#trainingProgressStatus');if(!root||!grid)return;ensureTrainingRuntimeOrder();
- root.classList.toggle('active',!!state.trainingActive);if(!state.trainingActive){renderPendingShortcuts();return;}
+ root.classList.toggle('active',!!state.trainingActive);if(!state.trainingActive){renderPendingShortcuts();renderAutomaticRareItems();return;}
  const ds=activeDeckCards().reduce((a,card)=>{const x=cardRareStats(card);a.got+=x.got;a.total+=x.total;return a},{got:0,total:0});
  const scenarioCount=scenarioRareSkillNames().size,pending=pendingRareChoiceCount();
  const link=scenarioPlanLinkSelected(),ramen=scenarioPlanRamenSelected();
@@ -1747,7 +1800,8 @@ function renderTrainingProgressDashboard(){
   '<div class="trainingProgressItem"><b>시나리오 확정 레어</b><strong>'+scenarioCount+'개</strong></div>'+
   '<div class="trainingProgressItem"><b>미확정 선택</b><strong>'+pending+'개</strong></div>'+
   '<div class="trainingProgressItem"><b>현재 조건</b><strong>'+esc(groundLabel[state.ground]+' · '+distLabel[state.distance]+' · '+styleLabel[state.style])+'</strong></div>';
- renderPendingShortcuts()
+ renderPendingShortcuts();
+ renderAutomaticRareItems()
 }
 function renderGlobalSkills(){const list=deckSkills().sort((a,b)=>skillConditionScore(b)-skillConditionScore(a));const ds=activeDeckCards().reduce((a,c)=>{const x=cardRareStats(c);a.got+=x.got;a.total+=x.total;return a},{got:0,total:0});const acquired=list.filter(s=>isSkillAcquiredAnywhere(s.id));$('#acqCount').textContent=ds.got;$('#rareCount').textContent=ds.total;$('#rareUniqueText').textContent=`고유 레어스킬 ${acquired.length} / ${list.length}`;$('#recCount').textContent=acquired.filter(s=>skillConditionScore(s)>0).length;$('#conditionText').textContent=`${state.guideServer==='kr'?'한국':'일본'} · ${groundLabel[state.ground]} · ${distLabel[state.distance]} · ${styleLabel[state.style]}`;
  const scenarioCount=scenarioRareSkillNames().size,pending=pendingRareChoiceCount();
@@ -1768,7 +1822,7 @@ ${c.catalogSource==='UmaTools fallback'?'<br>※ 얼굴형 썸네일은 fallback
 function setSingleEventChoice(card,e,ch){const k=eventStateKey(card,e);state.eventChoice[k]=ch.id;delete state.eventChoice[e.id];save()}
 function clearSingleEventChoice(card,e){const k=eventStateKey(card,e);delete state.eventChoice[k];delete state.eventChoice[e.id];save()}
 function toggleAutoEvent(card,e){const k=eventStateKey(card,e);state.eventDone[k]=!autoEventDone(card,e);delete state.eventDone[e.id];save()}
-function openSkillModal(id){const c=cardById(id);$('#skillModalTitle').textContent=`${c.krName} · 스킬 취득`;const b=$('#skillEvents');b.innerHTML='';for(const e of c.rareEvents||[]){const ev=document.createElement('div');ev.className='event';ev.innerHTML=`<div class="jp">${(e.labelKr||e.labelJp)?bilingualNameHtml(e.labelKr||e.label||'',e.labelJp||'',false):esc(e.label||'연속 이벤트')} <span class="eventMode">${e.selection==='single'?'선택형':e.selection==='result'?'결과 기록':'자동/단일 획득'}</span></div>${e.note?`<div class="sub" style="margin:4px 0 6px">${esc(e.note)}</div>`:''}`;if(!isBranchEvent(e)){const skills=eventSkills(e),done=autoEventDone(c,e),box=document.createElement('div');box.className='choice'+(done?' eventDone':'');box.innerHTML=`<div class="choiceHead"><div><b>${skills.length>1?`레어 스킬 ${skills.length}개 자동 획득`:'레어 스킬 자동 획득'}</b></div><button class="mini">${done?'획득 취소':'획득 완료'}</button></div><div class="skillList" style="margin-top:5px"></div>`;const sb=box.querySelector('.skillList');for(const sk of skills){const r=document.createElement('div');r.className='skillRow';r.innerHTML=skillRowHtml(sk,false);sb.appendChild(r)}box.querySelector('button').onclick=()=>{toggleAutoEvent(c,e);renderDeck();renderOwned();renderGlobalSkills();openSkillModal(id)};ev.appendChild(box)}else{const scores=(e.choices||[]).map(ch=>(ch.skills||[]).reduce((a,sk)=>a+skillConditionScore(sk),0)),best=Math.max(...scores,0);(e.choices||[]).forEach((ch,i)=>{const picked=selectedChoiceId(c,e)===ch.id,rec=scores[i]===best&&best>0,x=document.createElement('div');x.className='choice'+(rec?' recommended':'')+(picked?' eventChoicePicked':'');x.innerHTML=`<div class="choiceHead"><div><b>${(ch.labelKr||ch.labelJp)?bilingualNameHtml(ch.labelKr||ch.label||'',ch.labelJp||'',false):esc(ch.label||`선택지 ${i+1}`)}</b>${rec?' <span class="stars">추천</span>':''}${picked?` <span class="tag">${e.selection==='result'?'결과 기록됨':'선택 완료'}</span>`:''}</div><button class="mini">${picked?(e.selection==='result'?'기록 취소':'선택 취소'):(e.selection==='result'?'이 결과 기록':'이 선택지 획득')}</button></div><div class="skillList" style="margin-top:5px"></div>`;const sb=x.querySelector('.skillList');for(const sk of ch.skills||[]){const r=document.createElement('div');r.className='skillRow';r.innerHTML=skillRowHtml(sk,false);sb.appendChild(r)}x.querySelector('button').onclick=()=>{if(picked)clearSingleEventChoice(c,e);else setSingleEventChoice(c,e,ch);renderDeck();renderOwned();renderGlobalSkills();openSkillModal(id)};ev.appendChild(x)})}b.appendChild(ev)}if(!c.rareEvents?.length){
+function openSkillModal(id){const c=cardById(id);if(!c)return;const lb=Number(state.lb[String(id)]??0);$('#skillModalTitle').textContent=`${c.krName} · 스킬 취득`;const hero=$('#skillModalCardHero');if(hero)hero.innerHTML=(c.image?`<img src="${esc(c.image)}" alt="${esc(c.krName||c.jpName||'SSR')}" onerror="this.style.opacity=.16">`:'')+`<div><div class="title">${cardDisplayNameHtml(c)}</div><div class="jp">${esc(c.title||c.jpName||'')}</div><div class="meta"><span class="tag">${esc(c.type)}</span><span class="tag">${lb===4?'풀돌':lb+'돌'}</span><span class="tag">SSR 이벤트 ${cardRareStats(c).got}/${cardRareStats(c).total}</span></div></div>`;const b=$('#skillEvents');b.innerHTML='';for(const e of c.rareEvents||[]){const ev=document.createElement('div');ev.className='event';ev.innerHTML=`<div class="jp">${(e.labelKr||e.labelJp)?bilingualNameHtml(e.labelKr||e.label||'',e.labelJp||'',false):esc(e.label||'연속 이벤트')} <span class="eventMode">${e.selection==='single'?'선택형':e.selection==='result'?'결과 기록':'자동/단일 획득'}</span></div>${e.note?`<div class="sub" style="margin:4px 0 6px">${esc(e.note)}</div>`:''}`;if(!isBranchEvent(e)){const skills=eventSkills(e),done=autoEventDone(c,e),box=document.createElement('div');box.className='choice'+(done?' eventDone':'');box.innerHTML=`<div class="choiceHead"><div><b>${skills.length>1?`레어 스킬 ${skills.length}개 자동 획득`:'레어 스킬 자동 획득'}</b></div><button class="mini">${done?'획득 취소':'획득 완료'}</button></div><div class="skillList" style="margin-top:5px"></div>`;const sb=box.querySelector('.skillList');for(const sk of skills){const r=document.createElement('div');r.className='skillRow';r.innerHTML=skillRowHtml(sk,false);sb.appendChild(r)}box.querySelector('button').onclick=()=>{toggleAutoEvent(c,e);renderDeck();renderOwned();renderGlobalSkills();openSkillModal(id)};ev.appendChild(box)}else{const scores=(e.choices||[]).map(ch=>(ch.skills||[]).reduce((a,sk)=>a+skillConditionScore(sk),0)),best=Math.max(...scores,0);(e.choices||[]).forEach((ch,i)=>{const picked=selectedChoiceId(c,e)===ch.id,rec=scores[i]===best&&best>0,x=document.createElement('div');x.className='choice'+(rec?' recommended':'')+(picked?' eventChoicePicked':'');x.innerHTML=`<div class="choiceHead"><div><b>${(ch.labelKr||ch.labelJp)?bilingualNameHtml(ch.labelKr||ch.label||'',ch.labelJp||'',false):esc(ch.label||`선택지 ${i+1}`)}</b>${rec?' <span class="stars">추천</span>':''}${picked?` <span class="tag">${e.selection==='result'?'결과 기록됨':'선택 완료'}</span>`:''}</div><button class="mini">${picked?(e.selection==='result'?'기록 취소':'선택 취소'):(e.selection==='result'?'이 결과 기록':'이 선택지 획득')}</button></div><div class="skillList" style="margin-top:5px"></div>`;const sb=x.querySelector('.skillList');for(const sk of ch.skills||[]){const r=document.createElement('div');r.className='skillRow';r.innerHTML=skillRowHtml(sk,false);sb.appendChild(r)}x.querySelector('button').onclick=()=>{if(picked)clearSingleEventChoice(c,e);else setSingleEventChoice(c,e,ch);renderDeck();renderOwned();renderGlobalSkills();openSkillModal(id)};ev.appendChild(x)})}b.appendChild(ev)}if(!c.rareEvents?.length){
   b.innerHTML=c.eventSkillsAll?.length
     ?'<div class="note"><b>이벤트 스킬 목록은 연결되어 있습니다.</b><br>다만 어떤 선택지에서 어떤 스킬을 얻는지에 대한 이벤트 분기 데이터가 없어서, 획득 체크 기능은 아직 사용할 수 없습니다. 카드 상세의 「힌트 / 이벤트 획득 스킬」에서 스킬 목록을 확인해 주세요.</div>'
     :'<div class="note">이 카드의 이벤트 스킬/선택지 데이터가 아직 연결되지 않았습니다.</div>';
@@ -3879,7 +3933,7 @@ function renderV7Planner(){
 }
 
 
-/* V7.27 · 트레센켄 단계별 육성 가이드
+/* V7.28 · 트레센켄 단계별 육성 가이드
    카드 편성별 지역 추천 + 실제 인게임 스탯 아이콘 + 라멘 3종 텍스트 효과 안내 */
 let ramenGuidePhase='junior';
 
