@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T07:18:15.620Z",
+  "generatedAt": "2026-09-28T07:46:40.550Z",
   "status": "pass",
-  "gitSha": "492a96a65569af4dca22786a926d6d144b8d3ba0",
+  "gitSha": "0d338d63dda2f0ea0d05fe8864fe2c19e7c9a92e",
   "event": "push",
   "sync": {
     "exitCode": 0,
@@ -10,7 +10,7 @@
   },
   "tests": {
     "integrity": "success",
-    "deploySmoke": "rate_limited"
+    "deploySmoke": "success"
   },
   "impact": {
     "level": "high",
@@ -20,8 +20,6 @@
   },
   "sourceHealth": "pass",
   "failures": [],
-  "warnings": [
-    "Vercel deployment rate limited; GitHub integrity validation passed but production deployment was not refreshed."
-  ],
+  "warnings": [],
   "failedSources": []
 }
