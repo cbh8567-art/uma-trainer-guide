@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.50">
-<title>우마무스메 트레이너 가이드 V7.50 WEB</title>
+<meta name="app-build" content="V7.51">
+<title>우마무스메 트레이너 가이드 V7.51 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -2054,9 +2054,14 @@ function supportPrimaryImageUrl(id){
  const sid=encodeURIComponent(id);
  return CONFIG.assetBases.support+sid+'.webp'
 }
+function supportBwikiImageUrl(id){
+ const sid=encodeURIComponent(id);
+ return 'https://wiki.biligame.com/umamusume/Special:Redirect/file/Support%20thumb%20'+sid+'.png'
+}
 function supportImageFallbacks(id){
  const sid=encodeURIComponent(id);
  return [
+  supportBwikiImageUrl(id),
   'https://media.gametora.com/umamusume/supports/full/small/'+sid+'.png'
  ]
 }
