@@ -1868,18 +1868,18 @@ function skillCountRailCardState(card){
    if(isBranchEvent(e)){branchTotal++;if(!selectedChoiceId(card,e))pendingBranch++}
    else{autoTotal++;if(autoEventDone(card,e))autoDone++;else autoPending++}
  }
- const stats=cardRareStats(card);
+ const stats=cardRareStats(card),allHandled=(branchTotal+autoTotal)>0&&pendingBranch===0&&autoPending===0;
  let status='neutral';
  if(pendingBranch>0)status='pending';
- else if(stats.total>0&&stats.got>=stats.total)status='done';
+ else if(allHandled)status='done';
  else if(autoPending>0||autoTotal>0)status='autoPending';
- return {pendingBranch,branchTotal,autoPending,autoTotal,autoDone,got:stats.got,total:stats.total,status}
+ return {pendingBranch,branchTotal,autoPending,autoTotal,autoDone,got:stats.got,total:stats.total,status,allHandled}
 }
 function skillCountRailCardHtml(card,index){
  const rental=index===5;
  if(!card)return '<button type="button" class="skillCountRailCard neutral" disabled><span class="skillCountRailSlot">'+(index+1)+'</span>'+(rental?'<span class="skillCountRailRental">렌탈</span>':'')+'<span class="skillCountRailEmpty">빈 슬롯</span><span class="skillCountRailName">미편성</span><span class="skillCountRailMeta">0 / 0</span></button>';
  const x=skillCountRailCardState(card);
- const badge=x.pendingBranch>0?'분기 '+x.pendingBranch:(x.autoPending>0?'AUTO '+x.autoPending:(x.total>0&&x.got>=x.total?'✓':'확인'));
+ const badge=x.pendingBranch>0?'분기 '+x.pendingBranch:(x.autoPending>0?'AUTO '+x.autoPending:(x.allHandled?'✓':'확인'));
  const title=(card.krName||card.jpName||String(card.id))+' · 분기 '+(x.branchTotal-x.pendingBranch)+'/'+x.branchTotal+' · 자동 '+x.autoDone+'/'+x.autoTotal+' · 레어 '+x.got+'/'+x.total;
  return '<button type="button" class="skillCountRailCard '+x.status+'" data-skill-rail-card="'+esc(card.id)+'" title="'+esc(title)+'" aria-label="'+esc(title)+'">'+
   '<span class="skillCountRailSlot">'+(index+1)+'</span>'+(rental?'<span class="skillCountRailRental">렌탈</span>':'')+
