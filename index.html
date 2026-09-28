@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.56">
-<title>우마무스메 트레이너 가이드 V7.56 WEB</title>
+<meta name="app-build" content="V7.57">
+<title>우마무스메 트레이너 가이드 V7.57 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -590,6 +590,19 @@ body.trainingMode .counts{margin-top:8px}
 .v7Aptitude.recommended{border-color:#4d7d68;background:#18271f}.v7Aptitude.recommended .goal{color:#b8edce}
 .v7Aptitude .note{font-size:7.5px;color:#9eabba;line-height:1.4;margin-top:3px}
 @media(max-width:720px){.v7TargetGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.v7AptitudeGrid{grid-template-columns:1fr 1fr 1fr}}
+/* V7.57 · 일반 흰/초록 스킬 추천 */
+.v7GeneralSkillHead{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap;margin-bottom:6px}
+.v7GeneralSkillList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.v7GeneralSkill{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:7px;align-items:center;border:1px solid #35445a;background:#151c27;border-radius:9px;padding:7px;min-width:0}
+.v7GeneralSkill.top{border-color:#a98031;background:#2a2418}
+.v7GeneralSkill.good{border-color:#4c6f8e;background:#172431}
+.v7GeneralSkill.situational{border-color:#495467;background:#171d27}
+.v7GeneralSkill .body{min-width:0}.v7GeneralSkill .name{font-size:9px;font-weight:950;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v7GeneralSkill .jp{font-size:7.5px;color:#98a6ba;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v7GeneralSkill .reason{font-size:7.5px;color:#b7c2d1;line-height:1.4;margin-top:4px}
+.v7GeneralSkill .source{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px}
+.v7GeneralSkillRank{font-size:11px;font-weight:950;color:#ffd66f;white-space:nowrap}
+@media(max-width:720px){.v7GeneralSkillList{grid-template-columns:1fr}.v7GeneralSkill{grid-template-columns:auto minmax(0,1fr) auto}}
 
 /* V7.46 · 스킬 모달 카드 헤더 */
 .skillModalCardHero{display:grid;grid-template-columns:104px 1fr;gap:12px;align-items:center;border:1px solid #3b465d;background:#131924;border-radius:11px;padding:9px;margin:0 0 10px}
@@ -1327,12 +1340,19 @@ body.trainingMode .trainingProgressHead .sub,
      <div class="recommendStrip" id="v7DeckRecommend"></div>
     </div>
     <div class="guideBox">
-     <h2>스킬 우선순위</h2>
+     <h2>레어스킬 우선순위</h2>
      <div id="v7SkillPriority"></div>
     </div>
     <div class="guideBox">
      <h2>부족 요소 분석</h2>
      <div id="v7Deficit"></div>
+    </div>
+    <div class="guideBox" style="grid-column:1/-1">
+     <div class="v7GeneralSkillHead">
+      <div><h2 style="margin:0">일반 스킬 추천</h2><div class="sub">현재 6카드 힌트 · 이벤트 일반 스킬 · 육성 우마 각성 · 코스 조건을 자동 대조합니다.</div></div>
+      <span class="status" id="v7GeneralSkillStatus">계산 준비 중</span>
+     </div>
+     <div id="v7GeneralSkillRecommend"></div>
     </div>
     <div class="guideBox" style="grid-column:1/-1">
      <h2>고유기 계승 추천</h2>
@@ -4851,6 +4871,68 @@ function v7SkillPlan(cond,uma,deck){
  for(const c of deck)for(const s of uniqueRare(c.c||c))add(s,'서포트');
  return [...m.values()].filter(x=>x.score>0).sort((a,b)=>b.weight-a.weight)
 }
+function v7GeneralSkillSources(cond,uma,deck,race){
+ const map=new Map();
+ const courseNames=new Set((race?.greenSkills||[]).map(String));
+ const add=(raw,source,detail='')=>{
+   const s=canonicalSkill(raw);if(!s||!s.id||Number(s.rarity)!==1)return;
+   const key=String(s.id);
+   if(!map.has(key))map.set(key,{s,sources:new Set(),details:new Set(),courseExact:false,hintLevel:0});
+   const row=map.get(key);row.sources.add(source);if(detail)row.details.add(detail);
+   row.hintLevel=Math.max(Number(row.hintLevel||0),Number(s.hintLevel||0));
+   if(courseNames.has(String(s.jp||'')))row.courseExact=true
+ };
+ for(const c of deck||[]){
+   for(const s of c?.hints||[])add(s,'SSR 힌트',c.krName||c.jpName||String(c.id));
+   for(const s of c?.eventSkillsAll||[])add(s,'SSR 이벤트',c.krName||c.jpName||String(c.id))
+ }
+ for(const s of awakeningSkills(uma))add(s,'육성 우마 각성',uma?.krName||'육성 우마');
+ for(const name of race?.greenSkills||[]){
+   const s=skillFromName(runtime.skills,name);
+   if(s)add(s,'코스 조건',race?.placeKr||race?.eventKr||'선택 레이스')
+ }
+ return [...map.values()]
+}
+function v7GeneralSkillScore(row,cond,race){
+ const s=row.s,fit=skillConditionScore(s,cond);
+ let score=0,reasons=[];
+ if(row.courseExact){score+=55;reasons.push('현재 레이스의 코스/환경 조건과 직접 일치')}
+ if(fit===3){score+=38;reasons.push('현재 거리·각질·바장 조건에 직접 적합')}
+ else if(fit===2){score+=18;reasons.push('조건 제한이 적은 범용 후보')}
+ else if(!row.courseExact){score-=40;reasons.push('현재 조건 태그와 불일치')}
+ if(row.sources.has('SSR 힌트')){score+=12;reasons.push('현재 덱에서 힌트 획득 가능')}
+ if(row.sources.has('SSR 이벤트')){score+=7;reasons.push('현재 덱 이벤트 획득 후보')}
+ if(row.sources.has('육성 우마 각성')){score+=10;reasons.push('육성 우마 각성 보유')}
+ if(row.hintLevel>0){score+=Math.min(8,row.hintLevel*2);reasons.push('힌트 Lv '+row.hintLevel+' 확인')}
+ const kind=v7PlanKind(race);
+ if(row.courseExact&&(kind==='champions'||kind==='loh'))score+=8;
+ return {score,reasons:[...new Set(reasons)]}
+}
+function v7GeneralSkillPlan(cond,uma,deck,race){
+ return v7GeneralSkillSources(cond,uma,deck,race)
+  .map(row=>Object.assign({},row,v7GeneralSkillScore(row,cond,race)))
+  .filter(row=>row.score>0)
+  .sort((a,b)=>b.score-a.score||Number(b.hintLevel||0)-Number(a.hintLevel||0)||Number(a.s.id)-Number(b.s.id))
+}
+function v7GeneralSkillRank(score){
+ if(score>=55)return {stars:'★★★',label:'최우선',cls:'top'};
+ if(score>=32)return {stars:'★★',label:'추천',cls:'good'};
+ return {stars:'★',label:'상황별',cls:'situational'}
+}
+function renderV7GeneralSkills(cond,uma,race){
+ const box=$('#v7GeneralSkillRecommend'),status=$('#v7GeneralSkillStatus');if(!box)return;
+ if(!runtime.ready){box.innerHTML='<div class="note">SSR/스킬 DB 동기화 후 계산합니다.</div>';if(status)status.textContent='DB 필요';return}
+ const deck=activeDeckCards(),rows=v7GeneralSkillPlan(cond,uma,deck,race).slice(0,16);
+ if(status)status.textContent=(deck.length?'현재 덱 '+deck.length+'/6 · ':'현재 덱 없음 · ')+'후보 '+rows.length+'개';
+ if(!rows.length){box.innerHTML='<div class="note">현재 덱/육성 우마/코스 조건에서 추천 가능한 일반 스킬 후보를 찾지 못했습니다.</div>';return}
+ box.innerHTML='<div class="v7GeneralSkillList">'+rows.map(row=>{
+   const r=v7GeneralSkillRank(row.score),s=row.s;
+   const sources=[...row.sources].map(x=>'<span class="tag">'+esc(x)+'</span>').join('');
+   const details=[...row.details].slice(0,2).join(' · ');
+   const display=(s.kr&&s.kr!=='한국어 번역 미등록')?s.kr:s.jp;
+   return '<div class="v7GeneralSkill '+r.cls+'">'+skillIcon(s)+'<div class="body"><div class="name">'+esc(display)+'</div><div class="jp">'+esc(s.jp||'')+'</div><div class="reason">'+esc(row.reasons.slice(0,3).join(' · '))+(details?' · '+esc(details):'')+'</div><div class="source">'+sources+'</div></div><div class="v7GeneralSkillRank">'+r.stars+'<br><span style="font-size:7px">'+r.label+'</span></div></div>'
+ }).join('')+'</div><div class="note" style="margin-top:7px">1차 엔진은 현재 확보 가능한 후보의 조건 적합도와 출처를 평가합니다. SP 비용/힌트 할인 기반 구매 최적화는 데이터 검증 후 별도 단계에서 연결합니다.</div>'
+}
 function v7DeckDeficits(cond,deckCards){
  const plan=v7TypePlan(cond.distance),counts={};
  for(const c of deckCards)counts[c.type]=(counts[c.type]||0)+1;
@@ -4928,13 +5010,15 @@ function renderV7Planner(){
  const root=$('#v7Planner');if(!root)return;
  const race=getGuideRace(),uma=selectedUma(),trust=v7Trust();
  const trustEl=$('#v7PlannerTrust');if(trustEl){trustEl.textContent=trust.label;trustEl.className='status'}
- const raceEl=$('#v7RaceSummary'),statEl=$('#v7StatPriority'),aptEl=$('#v7AptitudeTarget'),aptStatus=$('#v7AptitudeStatus'),deckEl=$('#v7DeckRecommend'),reasonEl=$('#v7DeckReason'),skillEl=$('#v7SkillPriority'),defEl=$('#v7Deficit'),evEl=$('#v7Evidence');
+ const raceEl=$('#v7RaceSummary'),statEl=$('#v7StatPriority'),aptEl=$('#v7AptitudeTarget'),aptStatus=$('#v7AptitudeStatus'),deckEl=$('#v7DeckRecommend'),reasonEl=$('#v7DeckReason'),skillEl=$('#v7SkillPriority'),generalEl=$('#v7GeneralSkillRecommend'),generalStatus=$('#v7GeneralSkillStatus'),defEl=$('#v7Deficit'),evEl=$('#v7Evidence');
  if(!race){
    if(raceEl)raceEl.textContent='가이드 레이스를 선택해 주세요.';
    if(statEl)statEl.innerHTML='<div class="note">가이드 레이스를 선택하면 자동 계산합니다.</div>';
    if(aptEl)aptEl.innerHTML='<div class="note">가이드 레이스를 선택하면 목표 적성을 표시합니다.</div>';
    if(aptStatus)aptStatus.textContent='레이스 선택 필요';
    if(deckEl)deckEl.innerHTML='';if(skillEl)skillEl.innerHTML='';if(defEl)defEl.innerHTML='';
+   if(generalEl)generalEl.innerHTML='<div class="note">가이드 레이스를 선택하면 일반 스킬 후보를 계산합니다.</div>';
+   if(generalStatus)generalStatus.textContent='레이스 선택 필요';
    renderV7Inheritance(null,null);
    return
  }
@@ -4948,6 +5032,8 @@ function renderV7Planner(){
    if(deckEl)deckEl.innerHTML='<div class="note">SSR DB 동기화 후 보유 카드 추천을 계산합니다.</div>';
    if(reasonEl)reasonEl.textContent='DB 미동기화';
    if(skillEl)skillEl.innerHTML='<div class="note">DB 동기화 후 계산합니다.</div>';
+   if(generalEl)generalEl.innerHTML='<div class="note">DB 동기화 후 일반 스킬 후보를 계산합니다.</div>';
+   if(generalStatus)generalStatus.textContent='DB 필요';
    if(defEl)defEl.innerHTML='<div class="note">DB 동기화 후 계산합니다.</div>';
    return
  }
@@ -4968,6 +5054,7 @@ function renderV7Planner(){
    skillEl.innerHTML=(core.length?`<div><b>우선 검토</b></div>${core.map(x=>`<div class="skillRow" style="grid-template-columns:auto 1fr auto">${skillIcon(x.s)}<div><div class="jp">${esc(x.s.jp)}</div><div class="kr">${esc(x.s.kr||koSkill(x.s.jp))}</div></div><span class="tag">${x.source}</span></div>`).join('')}`:'<div class="note">조건 태그가 직접 맞는 각성/금스킬을 찾지 못했습니다.</div>')+
     (generic.length?`<div style="margin-top:7px"><b>범용 후보</b></div>${generic.map(x=>`<div class="note">• ${esc(x.s.kr||koSkill(x.s.jp))} <span class="tag">${x.source}</span></div>`).join('')}`:'')
  }
+ renderV7GeneralSkills(cond,uma,race);
  const current=activeDeckCards(),def=v7DeckDeficits(cond,current);
  if(defEl){
    const currentTypes={};for(const c of current)currentTypes[c.type]=(currentTypes[c.type]||0)+1;
