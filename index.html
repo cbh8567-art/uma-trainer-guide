@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.21">
-<title>우마무스메 트레이너 가이드 V7.21 WEB</title>
+<meta name="app-build" content="V7.22">
+<title>우마무스메 트레이너 가이드 V7.22 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -305,7 +305,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .finishLockDetail .finishRoute{display:block;margin-top:2px;color:#d8c79e}
 .finishOption.disabled .finishLockDetail{opacity:1;filter:none}
 
-/* V7.21 · deck readability, status border, bilingual labels
+/* V7.22 · deck readability, status border, bilingual labels
    - 원본 일러는 object-fit:contain으로 왜곡 없이 표시
    - 전체 타이포그래피를 약 10~15% 확대
    - 모바일에서도 작은 보조문구가 지나치게 축소되지 않도록 최소 크기 확보 */
@@ -375,7 +375,7 @@ body{font-size:14px;line-height:1.5}
 }
 
 
-/* V7.21 · 육성 준비 플로우 */
+/* V7.22 · 육성 준비 플로우 */
 .setupProgress{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:0 0 10px}
 .setupProgressStep{border:1px solid #3e475c;background:#171c28;border-radius:10px;padding:7px 8px;min-width:0}
 .setupProgressStep .n{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:50%;background:#2a3142;margin-right:5px;font-size:10px;font-weight:950}
@@ -397,7 +397,7 @@ body{font-size:14px;line-height:1.5}
  .setupSummary{grid-template-columns:1fr 1fr}
  .rentalSlotHeader{font-size:11px;padding:5px}
 }
-/* V7.21 · 육성 준비 플로우 */
+/* V7.22 · 육성 준비 플로우 */
 .setupStepPanel{margin-top:10px;border:1px solid #46506a;background:linear-gradient(180deg,#181d29,#141823);border-radius:12px;padding:10px}
 .setupStepHead{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .setupStepBadge{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:27px;border-radius:50%;background:#2a3142;border:1px solid #4c5874;font-weight:950;color:#dce4f3}
@@ -419,7 +419,7 @@ body{font-size:14px;line-height:1.5}
 [hidden]{display:none!important}
 @media(max-width:720px){.inheritanceGrid{grid-template-columns:1fr}.setupActions .btn{flex:1 1 140px}.deckConfirmBar .btn{flex:1 1 145px}}
 
-/* V7.21 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
+/* V7.22 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
 .scenarioPlanPanel{border-color:#5d4f77;background:linear-gradient(180deg,#1c1928,#151821)}
 .scenarioPlanPanel.confirmed{border-color:#486d59;background:linear-gradient(180deg,#17241e,#151a18)}
 .planChoiceGroup{margin-top:9px}.planChoiceTitle{font-size:11px;font-weight:950;margin-bottom:6px}
@@ -439,7 +439,7 @@ body{font-size:14px;line-height:1.5}
  .trainingStartMain .btn{width:100%}
 }
 
-/* V7.21 · 시니어 9월 계획 → 실제 선택 승격 */
+/* V7.22 · 시니어 9월 계획 → 실제 선택 승격 */
 .plannedEventBox{border:1px solid #65527c;background:linear-gradient(180deg,#201a2b,#171923);border-radius:10px;padding:9px;margin:7px 0}
 .plannedEventBox.done{border-color:#3e7657;background:linear-gradient(180deg,#16271f,#171b19)}
 .plannedEventBox.diff{border-color:#9b7142;background:linear-gradient(180deg,#2a2116,#1c1915)}
@@ -450,7 +450,7 @@ body{font-size:14px;line-height:1.5}
 .plannedEventActions .btn{font-size:10px;padding:7px 9px}
 @media(max-width:720px){.plannedEventActions .btn{flex:1 1 145px}}
 
-/* V7.21 · PC 육성 진행 대시보드 / 라멘 아이콘 / 레어스킬 요약 */
+/* V7.22 · PC 육성 진행 대시보드 / 라멘 아이콘 / 레어스킬 요약 */
 .ramenDishIcon{width:62px;height:62px;object-fit:contain;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.32));flex:0 0 auto}
 .planChoice .ramenDishIcon{width:62px;height:62px}
 .finishOption .ramenDishIcon{width:58px;height:58px}
@@ -475,12 +475,40 @@ body{font-size:14px;line-height:1.5}
  .trainingProgressDashboard{display:none!important}
  .rareSkillOverview{grid-template-columns:1fr}
 }
+
+/* V7.22 · 라멘 결과 스킬 아이콘 / 육성 모드 전환 */
+.ramenVisualPair{display:flex;align-items:center;gap:7px;flex:0 0 auto}
+.ramenVisualPair .skillIcon,.ramenVisualPair .skillFallback{width:38px;height:38px;flex:0 0 38px}
+.activeTrainingSetupBar{display:none;border:1px solid #46715a;background:linear-gradient(180deg,#16271f,#151b18);border-radius:12px;padding:10px;margin-bottom:10px}
+.activeTrainingSetupBar.active{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.activeTrainingSetupInfo{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:5px}
+.activeTrainingSetupInfo .tag{font-size:10px}
+body.trainingMode #setupProgress,
+body.trainingMode #umaSetupPanel,
+body.trainingMode #inheritanceSetupPanel,
+body.trainingMode #deckSetupSummary,
+body.trainingMode #deckConfirmStatus,
+body.trainingMode #confirmDeckBtn,
+body.trainingMode #scenarioPlanPanel,
+body.trainingMode #trainingStartPanel{display:none!important}
+body.trainingMode.trainingSetupEdit #setupProgress{display:grid!important}
+body.trainingMode.trainingSetupEdit #umaSetupPanel,
+body.trainingMode.trainingSetupEdit #inheritanceSetupPanel,
+body.trainingMode.trainingSetupEdit #scenarioPlanPanel,
+body.trainingMode.trainingSetupEdit #trainingStartPanel{display:block!important}
+body.trainingMode.trainingSetupEdit #deckSetupSummary{display:grid!important}
+body.trainingMode.trainingSetupEdit #deckConfirmStatus{display:inline!important}
+body.trainingMode.trainingSetupEdit #confirmDeckBtn{display:inline-flex!important}
+@media(max-width:720px){
+ .ramenVisualPair{gap:5px}.ramenVisualPair .skillIcon,.ramenVisualPair .skillFallback{width:32px;height:32px;flex-basis:32px}
+ body.trainingMode.trainingSetupEdit #setupProgress{display:flex!important}
+}
 </style>
 </head>
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.21 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.22 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -510,6 +538,13 @@ body{font-size:14px;line-height:1.5}
  <section class="page active" id="page-deck">
   <div class="layout">
    <div class="panel">
+    <div class="activeTrainingSetupBar" id="activeTrainingSetupBar">
+      <div>
+        <b>육성 진행 중</b>
+        <div class="activeTrainingSetupInfo" id="activeTrainingSetupInfo"></div>
+      </div>
+      <button type="button" class="btn" id="toggleTrainingSetupEdit">설정 변경</button>
+    </div>
     <div class="setupProgress" id="setupProgress">
       <div class="setupProgressStep" data-setup-progress="uma"><div><span class="n">1</span><span class="t">육성 우마</span></div><div class="s">선택/확정</div></div>
       <div class="setupProgressStep" data-setup-progress="inheritance"><div><span class="n">2</span><span class="t">계승</span></div><div class="s">부모 2명</div></div>
@@ -1402,7 +1437,7 @@ function startTrainingSession(){
  if(!state.deckConfirmed)return toast('서포트 덱을 확정해 주세요.');
  if(!state.scenarioPlanConfirmed)return toast('시나리오 플랜을 확정해 주세요.');
  if(state.trainingActive)return toast('현재 육성이 이미 진행 중입니다.');
- state.trainingActive=true;save();renderSetupProgress();renderTrainingStartPanel();renderScenarioPlan();
+ state.trainingActive=true;save();renderSetupProgress();renderTrainingStartPanel();renderScenarioPlan();enterTrainingView();
  const u=selectedUma();toast((u?.krName||'육성 우마')+' 육성을 시작했습니다.')
 }
 function renderScenarioPlan(){
@@ -1428,7 +1463,7 @@ function renderScenarioPlan(){
    html+='<div class="planChoiceGroup"><div class="planChoiceTitle">URA 입장 전 · 궁극 트레센 라멘 목표</div><div class="planChoiceGrid">';
    for(const x of SCENARIOS.tresenken.ultimateRamenChoices||[]){
      const selected=state.scenarioPlanUltimateRamen===x.id,skill=findSkillByJp(x.skill);
-     html+='<label class="planChoice'+(selected?' selected':'')+'" data-plan-ramen="'+esc(x.id)+'"><input type="radio" name="scenarioPlanRamen" '+(selected?'checked':'')+'>'+ramenDishIconHtml(x.id,x.kr)+'<span><span class="planChoiceName">'+esc(x.kr)+'</span><span class="planChoiceSub">'+esc(x.jp)+'<br>'+esc(x.skill)+' · 힌트 Lv+'+x.hintLevel+'</span></span><span class="planChoiceRight">'+(selected?'목표':'선택')+'</span></label>'
+     html+='<label class="planChoice'+(selected?' selected':'')+'" data-plan-ramen="'+esc(x.id)+'"><input type="radio" name="scenarioPlanRamen" '+(selected?'checked':'')+'><span class="ramenVisualPair">'+ramenDishIconHtml(x.id,x.kr)+(skill?skillIcon(skill):'<span class="skillFallback">技</span>')+'</span><span><span class="planChoiceName">'+esc(x.kr)+'</span><span class="planChoiceSub">'+esc(x.jp)+'<br>'+esc(x.skill)+' · 힌트 Lv+'+x.hintLevel+'</span></span><span class="planChoiceRight">'+(selected?'목표':'선택')+'</span></label>'
    }
    html+='</div></div>'
  }
@@ -1438,6 +1473,35 @@ function renderScenarioPlan(){
  body.querySelectorAll('[data-plan-link]').forEach(el=>el.onclick=e=>{e.preventDefault();if(!enabled)return;setScenarioPlanLinkChoice(el.dataset.planLink)});
  body.querySelectorAll('[data-plan-ramen]').forEach(el=>el.onclick=e=>{e.preventDefault();if(!enabled)return;setScenarioPlanUltimateRamen(el.dataset.planRamen)});
  renderTrainingStartPanel()
+}
+function renderActiveTrainingSetupBar(){
+ const bar=$('#activeTrainingSetupBar'),info=$('#activeTrainingSetupInfo'),toggle=$('#toggleTrainingSetupEdit');if(!bar||!info||!toggle)return;
+ const active=!!state.trainingActive;
+ bar.classList.toggle('active',active);
+ document.body.classList.toggle('trainingMode',active);
+ if(!active){document.body.classList.remove('trainingSetupEdit');return}
+ const u=selectedUma(),p1=inheritanceParent(0),p2=inheritanceParent(1),sc=SCENARIOS[state.scenario]||SCENARIOS.none,ramen=scenarioPlanRamenSelected();
+ info.innerHTML='<span class="tag">'+esc(u?.krName||'육성 우마')+'</span>'+
+  '<span class="tag">계승 '+esc(p1?.krName||'—')+' / '+esc(p2?.krName||'—')+'</span>'+
+  '<span class="tag">서포트 5 + 렌탈 1</span>'+
+  '<span class="tag">'+esc(sc.kr||sc.name||'시나리오')+'</span>'+
+  (ramen?'<span class="tag">'+esc(ramen.kr||ramen.jp)+'</span>':'');
+ toggle.textContent=document.body.classList.contains('trainingSetupEdit')?'설정 닫기':'설정 변경'
+}
+function toggleTrainingSetupEdit(){
+ if(!state.trainingActive)return;
+ document.body.classList.toggle('trainingSetupEdit');
+ renderActiveTrainingSetupBar();
+ const target=document.body.classList.contains('trainingSetupEdit')?$('#setupProgress'):(!$('#ramenScenarioGuide')?.hidden?$('#ramenScenarioGuide'):(!$('#legendsScenarioGuide')?.hidden?$('#legendsScenarioGuide'):$('#deck')));
+ target?.scrollIntoView({behavior:'smooth',block:'start'})
+}
+function enterTrainingView(){
+ document.body.classList.remove('trainingSetupEdit');
+ renderActiveTrainingSetupBar();
+ requestAnimationFrame(()=>requestAnimationFrame(()=>{
+  const target=!$('#ramenScenarioGuide')?.hidden?$('#ramenScenarioGuide'):(!$('#legendsScenarioGuide')?.hidden?$('#legendsScenarioGuide'):$('#deck'));
+  target?.scrollIntoView({behavior:'smooth',block:'start'})
+ }))
 }
 function renderTrainingStartPanel(){
  const root=$('#trainingStartPanel'),btn=$('#trainingStartBtn'),summary=$('#trainingStartSummary');if(!root||!btn||!summary)return;
@@ -1449,7 +1513,7 @@ function renderTrainingStartPanel(){
    summary.innerHTML='<span class="trainingLive">육성 진행 중</span> · '+esc(u?.krName||'육성 우마')+' · '+esc(sc.kr||sc.name||'시나리오')+(link?' · '+esc(link.kr||link.jp):'')+(ramen?' · '+esc(ramen.kr||ramen.jp):'');
  }else if(ready)summary.textContent='①~④ 준비 완료 · 버튼을 누르면 이번 육성 세션을 시작합니다.';
  else summary.textContent='① 육성 우마 · ② 계승 · ③ 서포트 · ④ 시나리오 플랜을 순서대로 확정해 주세요.';
- renderTrainingProgressDashboard()
+ renderTrainingProgressDashboard();renderActiveTrainingSetupBar()
 }
 function renderSetupProgress(){
  const stages=[['uma',!!state.currentUmaConfirmed],['inheritance',!!state.inheritanceConfirmed],['deck',!!state.deckConfirmed],['scenario',!!state.scenarioPlanConfirmed],['start',!!state.trainingActive]];
@@ -2512,7 +2576,7 @@ function renderUltimateRamenSection(){
    const selected=state.tresenkenUltimateRamen===x.id,row=document.createElement('label');
    row.className='finishOption'+(selected?' selected':'');
    const skill=findSkillByJp(x.skill);
-   row.innerHTML=`<input type="radio" name="ultimateRamen" ${selected?'checked':''}>${ramenDishIconHtml(x.id,x.kr)}<div><div class="finishName">${esc(x.jp)}${selected?' <span class="scenarioRec">선택됨</span>':''}</div><div class="kr">${esc(x.kr)}</div><div class="finishSub">${esc(x.skill)} · 힌트 Lv+${x.hintLevel}</div></div><div class="finishRight">${selected?'URA 적용':'선택'}</div>`;
+   row.innerHTML=`<input type="radio" name="ultimateRamen" ${selected?'checked':''}><span class="ramenVisualPair">${ramenDishIconHtml(x.id,x.kr)}${skill?skillIcon(skill):'<span class="skillFallback">技</span>'}</span><div><div class="finishName">${esc(x.jp)}${selected?' <span class="scenarioRec">선택됨</span>':''}</div><div class="kr">${esc(x.kr)}</div><div class="finishSub">${esc(x.skill)} · 힌트 Lv+${x.hintLevel}</div></div><div class="finishRight">${selected?'URA 적용':'선택'}</div>`;
    row.onclick=e=>{
      e.preventDefault();
      state.tresenkenUltimateRamen=x.id;
@@ -3541,7 +3605,7 @@ function renderV7Planner(){
 }
 
 
-/* V7.21 · 트레센켄 단계별 육성 가이드
+/* V7.22 · 트레센켄 단계별 육성 가이드
    카드 편성별 지역 추천 + 실제 인게임 스탯 아이콘 + 라멘 3종 텍스트 효과 안내 */
 let ramenGuidePhase='junior';
 
@@ -4046,6 +4110,7 @@ $('#confirmInheritanceBtn').onclick=confirmInheritance;
 $('#confirmDeckBtn').onclick=confirmCurrentDeck;
 $('#confirmScenarioPlanBtn').onclick=confirmScenarioPlan;
 $('#trainingStartBtn').onclick=startTrainingSession;
+$('#toggleTrainingSetupEdit').onclick=toggleTrainingSetupEdit;
 $('#clearAllAcquiredSkills').onclick=clearAllDeckSkillAcquisition;
 $('#dashboardResetSkills').onclick=clearAllDeckSkillAcquisition;
 $('#dashboardOpenSkills').onclick=()=>{const d=$('#rareSkillDetails');if(d)d.open=true;d?.scrollIntoView({behavior:'smooth',block:'start'})};
