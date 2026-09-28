@@ -1,4 +1,5 @@
 name: Deploy GitHub Pages mirror
+# V7.58 redeploy recovery trigger
 
 on:
   workflow_dispatch:
