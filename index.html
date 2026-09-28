@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.32">
-<title>우마무스메 트레이너 가이드 V7.32 WEB</title>
+<meta name="app-build" content="V7.33">
+<title>우마무스메 트레이너 가이드 V7.33 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -305,7 +305,7 @@ button,input,select{font:inherit}.app{max-width:1540px;margin:auto;padding:14px}
 .finishLockDetail .finishRoute{display:block;margin-top:2px;color:#d8c79e}
 .finishOption.disabled .finishLockDetail{opacity:1;filter:none}
 
-/* V7.32 · deck readability, status border, bilingual labels
+/* V7.33 · deck readability, status border, bilingual labels
    - 원본 일러는 object-fit:contain으로 왜곡 없이 표시
    - 전체 타이포그래피를 약 10~15% 확대
    - 모바일에서도 작은 보조문구가 지나치게 축소되지 않도록 최소 크기 확보 */
@@ -375,7 +375,7 @@ body{font-size:14px;line-height:1.5}
 }
 
 
-/* V7.32 · 육성 준비 플로우 */
+/* V7.33 · 육성 준비 플로우 */
 .setupProgress{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:0 0 10px}
 .setupProgressStep{border:1px solid #3e475c;background:#171c28;border-radius:10px;padding:7px 8px;min-width:0}
 .setupProgressStep .n{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:50%;background:#2a3142;margin-right:5px;font-size:10px;font-weight:950}
@@ -397,7 +397,7 @@ body{font-size:14px;line-height:1.5}
  .setupSummary{grid-template-columns:1fr 1fr}
  .rentalSlotHeader{font-size:11px;padding:5px}
 }
-/* V7.32 · 육성 준비 플로우 */
+/* V7.33 · 육성 준비 플로우 */
 .setupStepPanel{margin-top:10px;border:1px solid #46506a;background:linear-gradient(180deg,#181d29,#141823);border-radius:12px;padding:10px}
 .setupStepHead{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .setupStepBadge{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:27px;border-radius:50%;background:#2a3142;border:1px solid #4c5874;font-weight:950;color:#dce4f3}
@@ -419,7 +419,7 @@ body{font-size:14px;line-height:1.5}
 [hidden]{display:none!important}
 @media(max-width:720px){.inheritanceGrid{grid-template-columns:1fr}.setupActions .btn{flex:1 1 140px}.deckConfirmBar .btn{flex:1 1 145px}}
 
-/* V7.32 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
+/* V7.33 · ④ 시나리오 플랜 / ⑤ 육성 시작 */
 .scenarioPlanPanel{border-color:#5d4f77;background:linear-gradient(180deg,#1c1928,#151821)}
 .scenarioPlanPanel.confirmed{border-color:#486d59;background:linear-gradient(180deg,#17241e,#151a18)}
 .planChoiceGroup{margin-top:9px}.planChoiceTitle{font-size:11px;font-weight:950;margin-bottom:6px}
@@ -439,7 +439,7 @@ body{font-size:14px;line-height:1.5}
  .trainingStartMain .btn{width:100%}
 }
 
-/* V7.32 · 시니어 9월 계획 → 실제 선택 승격 */
+/* V7.33 · 시니어 9월 계획 → 실제 선택 승격 */
 .plannedEventBox{border:1px solid #65527c;background:linear-gradient(180deg,#201a2b,#171923);border-radius:10px;padding:9px;margin:7px 0}
 .plannedEventBox.done{border-color:#3e7657;background:linear-gradient(180deg,#16271f,#171b19)}
 .plannedEventBox.diff{border-color:#9b7142;background:linear-gradient(180deg,#2a2116,#1c1915)}
@@ -450,7 +450,7 @@ body{font-size:14px;line-height:1.5}
 .plannedEventActions .btn{font-size:10px;padding:7px 9px}
 @media(max-width:720px){.plannedEventActions .btn{flex:1 1 145px}}
 
-/* V7.32 · PC 육성 진행 대시보드 / 라멘 아이콘 / 레어스킬 요약 */
+/* V7.33 · PC 육성 진행 대시보드 / 라멘 아이콘 / 레어스킬 요약 */
 .ramenDishIcon{width:62px;height:62px;object-fit:contain;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.32));flex:0 0 auto}
 .planChoice .ramenDishIcon{width:62px;height:62px}
 .finishOption .ramenDishIcon{width:58px;height:58px}
@@ -476,7 +476,7 @@ body{font-size:14px;line-height:1.5}
  .rareSkillOverview{grid-template-columns:1fr}
 }
 
-/* V7.32 · 라멘 결과 스킬 아이콘 / 육성 모드 전환 */
+/* V7.33 · 라멘 결과 스킬 아이콘 / 육성 모드 전환 */
 .ramenDishWrap{display:inline-flex;align-items:center;justify-content:center;width:62px;height:62px;flex:0 0 62px}
 .ramenDishWrap .ramenDishIcon{width:100%;height:100%}
 .ramenDishWrap .ramenDishFallback{width:46px;height:46px}
@@ -508,7 +508,7 @@ body.trainingMode.trainingSetupEdit #confirmDeckBtn{display:inline-flex!importan
  body.trainingMode.trainingSetupEdit #setupProgress{display:flex!important}
 }
 
-/* V7.32 · PC 육성 완료/포기/세션 정리 */
+/* V7.33 · PC 육성 완료/포기/세션 정리 */
 .trainingSessionActions{display:flex;gap:6px;flex-wrap:wrap}
 .trainingSessionActions .btn,.trainingSessionActions .mini{white-space:nowrap}
 .trainingResultHero{border:1px solid #4f755d;background:linear-gradient(180deg,#17291f,#151b18);border-radius:12px;padding:11px;margin-top:9px}
@@ -528,7 +528,7 @@ body.trainingMode.trainingSetupEdit #confirmDeckBtn{display:inline-flex!importan
  .trainingResultDeck{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
-/* V7.32 · PC 실전 육성 UX / 히스토리 / 덱 프리셋 / 추천 근거 */
+/* V7.33 · PC 실전 육성 UX / 히스토리 / 덱 프리셋 / 추천 근거 */
 body:not(.trainingMode) #ramenScenarioGuide,
 body:not(.trainingMode) #legendsScenarioGuide{display:none!important}
 .pendingShortcutList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}
@@ -542,7 +542,7 @@ body:not(.trainingMode) #legendsScenarioGuide{display:none!important}
 @media(max-width:900px){.pendingShortcutList,.trainingHistoryList{grid-template-columns:1fr}}
 @media(max-width:720px){.deckPresetBar,.trainingHistoryPanel{display:none}}
 
-/* V7.32 · PC 밀도 조정 / 아이콘 보강 */
+/* V7.33 · PC 밀도 조정 / 아이콘 보강 */
 #conditionSetupBlock{margin-top:4px}
 body.trainingMode:not(.trainingSetupEdit) #conditionSetupTitle,
 body.trainingMode:not(.trainingSetupEdit) #conditionSetupBlock,
@@ -557,7 +557,7 @@ body.trainingMode .counts{margin-top:8px}
 .card:hover .recReason,.recSupport:hover .recReason,.cardHero .recReason{display:block;-webkit-line-clamp:unset;overflow:visible}
 .iconAuditNote{font-size:8.5px;color:#aeb7ca;margin-top:4px}
 
-/* V7.32 · 자동 획득 카드 표시 / 스킬 모달 카드 헤더 */
+/* V7.33 · 자동 획득 카드 표시 / 스킬 모달 카드 헤더 */
 .autoRarePanel{margin-top:9px;border:1px solid #36566f;background:#111b25;border-radius:10px;padding:8px}
 .autoRareHead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
 .autoRareHead b{font-size:10px}.autoRareHead .sub{font-size:8.5px}
@@ -577,7 +577,7 @@ body.trainingMode .counts{margin-top:8px}
 @media(max-width:900px){.autoRareList{grid-template-columns:1fr}}
 @media(max-width:720px){.skillModalCardHero{grid-template-columns:78px 1fr}.skillModalCardHero img{width:78px;height:104px}}
 
-/* V7.32 · 자동 획득 compact / 최근 육성 상세 */
+/* V7.33 · 자동 획득 compact / 최근 육성 상세 */
 .autoRarePanel{padding:7px}
 .autoRareHead{margin-bottom:5px}
 .autoRareHeadActions{display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
@@ -609,7 +609,7 @@ body.trainingMode .counts{margin-top:8px}
  .historyDetailDeck{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
-/* V7.32 · 최근 육성 2개 비교 */
+/* V7.33 · 최근 육성 2개 비교 */
 .trainingHistoryCompareBar{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap;margin:7px 0 2px;padding:7px;border:1px solid #3a4960;background:#121923;border-radius:9px}
 .trainingHistoryCard.compareSelected{border-color:#ffd45d;box-shadow:0 0 0 1px rgba(255,212,93,.22) inset;background:#211f18}
 .trainingHistoryCardActions{display:flex;gap:5px;align-items:center;justify-content:space-between;margin-top:7px}
@@ -627,7 +627,7 @@ body.trainingMode .counts{margin-top:8px}
 @media(max-width:720px){.historyCompareGrid{grid-template-columns:92px minmax(0,1fr) minmax(0,1fr)}.historyCompareDeck{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 
-/* V7.32 · 비교 변화 요약 + 공략 단계 동기화 */
+/* V7.33 · 비교 변화 요약 + 공략 단계 동기화 */
 .historyChangeSummary{border:1px solid #4a5a72;background:linear-gradient(180deg,#17202d,#121821);border-radius:10px;padding:9px;margin-top:9px}
 .historyChangeSummaryHead{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
 .historyChangeSummaryHead b{font-size:11px}.historyChangeSummaryHead span{font-size:8.5px;color:#aeb8ca}
@@ -646,7 +646,7 @@ body.trainingMode .counts{margin-top:8px}
 .ramenPhaseTab.currentSync,.legendsPhaseTab.currentSync{box-shadow:0 0 0 2px rgba(255,212,93,.22),0 0 12px rgba(255,212,93,.10)}
 @media(max-width:720px){.trainingPhaseBtn{flex:1 1 78px}.historyChangeChip{font-size:8px}}
 
-/* V7.32 · PC 스킬 카운트 6카드 사이드 레일 */
+/* V7.33 · PC 스킬 카운트 6카드 사이드 레일 */
 @media(min-width:721px){
  body.trainingMode #pendingShortcutList{display:none!important}
  body.trainingMode #ramenScenarioGuide,
@@ -697,12 +697,58 @@ body.trainingMode .skillCountSideRail{display:block}
 @media(max-width:720px){
  .skillCountSideRail{display:none!important}
 }
+
+/* V7.33 · 육성 진행 시각화 */
+body.trainingMode .trainingProgressHead .sub,
+body.trainingMode .autoRareHead .sub{display:none}
+.activeTrainingSetupBar.active{padding:8px 10px}
+.activeTrainingSetupBar>div:first-child{min-width:0;flex:1}
+.activeTrainingSetupBar>div:first-child>b{display:none}
+.activeTrainingSetupInfo{margin-top:0;gap:7px}
+.trainingUmaStatus{display:flex;align-items:center;gap:8px;min-width:180px;margin-right:3px}
+.trainingUmaStatus img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:50% 18%;background:#29313d;border:2px solid #5f846e}
+.trainingUmaStatus .fallback{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#29313d;border:2px solid #5f846e;font-size:10px;font-weight:950}
+.trainingUmaStatusText{min-width:0}.trainingUmaStatusText strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.trainingUmaStatusText span{display:block;font-size:9px;color:#9fb4a7;margin-top:2px}
+.trainingVisualChip{display:flex;align-items:center;gap:5px;border:1px solid #3d4a5c;background:#1a2130;border-radius:999px;padding:5px 8px;min-height:30px;font-size:9px;font-weight:850}
+.trainingVisualChip .miniFace{width:22px;height:22px;border-radius:50%;object-fit:cover;object-position:50% 18%;background:#2b3340}
+.trainingVisualChip.ramen{border-color:#745e2e;background:#2b2518;color:#ffe39a}
+.trainingVisualChip.phase{border-color:#83672b;background:#302817;color:#ffe29a}
+.trainingVisualChip.scenario{border-color:#4d5571;background:#202538}
+.trainingProgressGrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.trainingProgressItem.visual{display:grid;grid-template-columns:auto minmax(0,1fr);gap:9px;align-items:center;min-height:72px;padding:9px}
+.trainingMetricIcon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:#202a38;border:1px solid #405168;overflow:hidden;flex:none}
+.trainingMetricIcon img{width:100%;height:100%;object-fit:contain}
+.trainingMetricIcon.skillStack{display:flex;gap:2px;padding:4px}
+.trainingMetricIcon.skillStack img,.trainingMetricIcon.skillStack .skillIcon,.trainingMetricIcon.skillStack .skillFallback{width:30px;height:30px;flex:0 0 30px}
+.trainingMetricIcon.warning{font-size:25px;font-weight:950;color:#ffd567;border-color:#80652e;background:#302818}
+.trainingMetricIcon.phaseIcon{font-size:20px;font-weight:950;color:#ffe19b;border-color:#79612d;background:#2c2518}
+.trainingMetricIcon.supportStack{width:58px;display:flex;gap:2px;padding:3px}
+.trainingMetricIcon.supportStack img{width:25px;height:40px;object-fit:contain;border-radius:4px;background:#29313d}
+.trainingMetricText{min-width:0}.trainingMetricText b{display:block;font-size:8px;color:#91a5bb;margin-bottom:2px}.trainingMetricText strong{display:block;font-size:17px;line-height:1.15}.trainingMetricText small{display:block;font-size:8px;color:#9faabc;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.conditionChipRow{display:flex;gap:4px;flex-wrap:wrap;margin-top:3px}
+.conditionChip{display:inline-flex;align-items:center;gap:4px;border:1px solid #405066;background:#202838;border-radius:999px;padding:4px 7px;font-size:8px;font-weight:900;color:#dce7f4}
+.conditionChip .dot{width:8px;height:8px;border-radius:50%}
+.conditionChip.ground .dot{background:#67c988}.conditionChip.distance .dot{background:#69bde9}.conditionChip.style .dot{background:#e5ad64}
+.autoRareItem{grid-template-columns:48px 34px minmax(0,1fr) auto;min-height:62px;padding:6px 7px}
+.autoRareItem img.supportThumb{width:48px;height:60px}
+.autoRareItem .skillIcon,.autoRareItem .skillFallback{width:34px;height:34px}
+.autoRareText b{font-size:10px}.autoRareText span{font-size:8.5px}
+.autoRareVisualBadges{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.autoRareVisualBadge{border:1px solid #42627c;background:#193047;border-radius:999px;padding:2px 5px;font-size:7px;font-weight:950;color:#bfe7ff}
+.autoRareVisualBadge.done{border-color:#47765d;background:#183225;color:#baf0cf}
+.autoRareState{padding:4px 6px;border-radius:999px;background:#283347}
+.autoRareItem.done .autoRareState{background:#1e3b2d}
+@media(max-width:1100px){.trainingProgressGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){
+ .trainingUmaStatus img,.trainingUmaStatus .fallback{width:38px;height:38px}
+ .trainingVisualChip{font-size:8px}
+}
 </style>
 </head>
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.32 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.33 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -1751,13 +1797,16 @@ function renderActiveTrainingSetupBar(){
  document.body.classList.toggle('trainingMode',active);
  if(!active){document.body.classList.remove('trainingSetupEdit');return}
  const u=selectedUma(),p1=inheritanceParent(0),p2=inheritanceParent(1),sc=SCENARIOS[state.scenario]||SCENARIOS.none,ramen=scenarioPlanRamenSelected();
- const phase=state.scenario==='tresenken'?({junior:'주니어',classic:'클래식',senior:'시니어',ura:'URA'}[typeof ramenGuidePhase==='string'?ramenGuidePhase:'junior']||'주니어'):'진행 중';
- info.innerHTML='<span class="tag">'+esc(u?.krName||'육성 우마')+'</span>'+
-  '<span class="tag">'+esc(phase)+'</span>'+
-  '<span class="tag">계승 '+esc(p1?.krName||'—')+' / '+esc(p2?.krName||'—')+'</span>'+
-  '<span class="tag">서포트 5 + 렌탈 1</span>'+
-  '<span class="tag">'+esc(sc.kr||sc.name||'시나리오')+'</span>'+
-  (ramen?'<span class="tag">'+esc(ramen.kr||ramen.jp)+'</span>':'');
+ const phaseCfg=trainingGuidePhaseConfig(),phase=phaseCfg.current?Object.fromEntries(phaseCfg.phases)[phaseCfg.current]:'진행 중';
+ const face=x=>x?.image?'<img class="miniFace" src="'+esc(x.image)+'" alt="'+esc(x.krName||'우마')+'" onerror="this.style.opacity=.16">':'';
+ info.innerHTML='<div class="trainingUmaStatus">'+
+   (u?.image?'<img src="'+esc(u.image)+'" alt="'+esc(u.krName||'육성 우마')+'" onerror="this.style.opacity=.16">':'<span class="fallback">UMA</span>')+
+   '<div class="trainingUmaStatusText"><strong>'+esc(u?.krName||'육성 우마')+'</strong><span>육성 진행 중</span></div></div>'+
+  '<span class="trainingVisualChip phase">◆ '+esc(phase)+'</span>'+
+  '<span class="trainingVisualChip">'+face(p1)+face(p2)+'계승 2</span>'+
+  '<span class="trainingVisualChip scenario">▣ '+esc(sc.kr||sc.name||'시나리오')+'</span>'+
+  '<span class="trainingVisualChip">SSR 5 + 렌탈 1</span>'+
+  (ramen?'<span class="trainingVisualChip ramen">'+ramenDishIconHtml(ramen.id,ramen.kr||ramen.jp)+esc(ramen.kr||ramen.jp)+'</span>':'');
  toggle.textContent=document.body.classList.contains('trainingSetupEdit')?'설정 닫기':'설정 변경'
 }
 function toggleTrainingSetupEdit(){
@@ -1928,8 +1977,8 @@ function renderAutomaticRareItems(){
    const skill=skills[0],extra=skills.length>1?' 외 '+(skills.length-1)+'개':'';
    d.innerHTML=(card.image?'<img class="supportThumb" src="'+esc(card.image)+'" alt="'+esc(card.krName||card.jpName||'SSR')+'" onerror="this.style.opacity=.16">':'<span class="supportThumb"></span>')+
     (skill?skillIcon(skill):'<span class="skillFallback">技</span>')+
-    '<span class="autoRareText"><b>'+esc(card.krName||card.jpName||String(card.id))+'</b><span>'+esc(skill?.kr||skill?.jp||'레어 스킬')+esc(extra)+' · '+esc(event.labelKr||event.labelJp||event.label||'자동 이벤트')+'</span></span>'+
-    '<span class="autoRareState">'+(done?'완료 ✓':'예정')+'</span>';
+    '<span class="autoRareText"><b>'+esc(card.krName||card.jpName||String(card.id))+'</b><span>'+esc(skill?.kr||skill?.jp||'레어 스킬')+esc(extra)+'</span><span class="autoRareVisualBadges"><span class="autoRareVisualBadge">AUTO</span><span class="autoRareVisualBadge'+(done?' done':'')+'">'+(done?'체크 완료':'획득 예정')+'</span></span></span>'+
+    '<span class="autoRareState">'+(done?'✓':'AUTO')+'</span>';
    d.onclick=()=>openSkillModal(card.id);box.appendChild(d)
  }
  if(!pendingCount&&!autoRareShowDone&&doneCount){
@@ -1997,6 +2046,17 @@ function trainingPhaseSyncHtml(){
 function bindTrainingPhaseSync(){
  document.querySelectorAll('[data-training-phase]').forEach(b=>b.onclick=()=>setTrainingGuidePhase(b.dataset.trainingPhase,{scrollGuide:true}))
 }
+function dashboardSupportThumbs(){
+ return activeDeckCards().slice(0,3).map(card=>card.image?'<img src="'+esc(card.image)+'" alt="'+esc(card.krName||card.jpName||'SSR')+'" onerror="this.style.opacity=.16">':'').join('')
+}
+function dashboardScenarioSkillIcons(limit=2){
+ const names=[...scenarioRareSkillNames()].slice(0,limit),out=[];
+ for(const name of names){const sk=findSkillByJp(name)||[...runtime.skills.values()].find(x=>(x.kr||'')===name||(x.jp||'')===name);if(sk)out.push(skillIcon(sk))}
+ return out.join('')
+}
+function trainingConditionChipsHtml(){
+ return '<div class="conditionChipRow"><span class="conditionChip ground"><i class="dot"></i>'+esc(groundLabel[state.ground])+'</span><span class="conditionChip distance"><i class="dot"></i>'+esc(distLabel[state.distance])+'</span><span class="conditionChip style"><i class="dot"></i>'+esc(styleLabel[state.style])+'</span></div>'
+}
 function renderTrainingProgressDashboard(){
  const root=$('#trainingProgressDashboard'),grid=$('#trainingProgressGrid'),status=$('#trainingProgressStatus');if(!root||!grid)return;ensureTrainingRuntimeOrder();
  root.classList.toggle('active',!!state.trainingActive);if(!state.trainingActive){renderPendingShortcuts();renderAutomaticRareItems();return;}
@@ -2005,15 +2065,16 @@ function renderTrainingProgressDashboard(){
  const link=scenarioPlanLinkSelected(),ramen=scenarioPlanRamenSelected();
  const phaseCfg=trainingGuidePhaseConfig(),phase=phaseCfg.current?Object.fromEntries(phaseCfg.phases)[phaseCfg.current]:'시나리오 진행';
  if(status)status.textContent=pending?'육성 진행 중 · 미확정 '+pending+'개':'육성 진행 중 ✓';
+ const scenarioIcons=dashboardScenarioSkillIcons(),supportThumbs=dashboardSupportThumbs();
  grid.innerHTML=trainingPhaseSyncHtml()+
-  '<div class="trainingProgressItem"><b>현재 공략 단계</b><strong>'+esc(phase)+'</strong></div>'+
-  '<div class="trainingProgressItem"><b>다음 중요 이벤트</b><strong>'+esc(trainingNextImportantEvent())+'</strong></div>'+
-  '<div class="trainingProgressItem"><b>시니어 9월 계획</b><strong>'+(link?esc(link.kr||link.jp):'미설정')+'</strong></div>'+
-  '<div class="trainingProgressItem"><b>궁극 라멘 계획</b><strong>'+(ramen?esc(ramen.kr||ramen.jp):'미설정')+'</strong></div>'+
-  '<div class="trainingProgressItem"><b>SSR 레어 이벤트</b><strong>'+ds.got+' / '+ds.total+'</strong></div>'+
-  '<div class="trainingProgressItem"><b>시나리오 확정 레어</b><strong>'+scenarioCount+'개</strong></div>'+
-  '<div class="trainingProgressItem"><b>미확정 선택</b><strong>'+pending+'개</strong></div>'+
-  '<div class="trainingProgressItem"><b>현재 조건</b><strong>'+esc(groundLabel[state.ground]+' · '+distLabel[state.distance]+' · '+styleLabel[state.style])+'</strong></div>';
+  '<div class="trainingProgressItem visual"><span class="trainingMetricIcon phaseIcon">'+esc(phase.slice(0,1))+'</span><div class="trainingMetricText"><b>현재 단계</b><strong>'+esc(phase)+'</strong><small>공략 탭과 동기화</small></div></div>'+
+  '<div class="trainingProgressItem visual"><span class="trainingMetricIcon warning">!</span><div class="trainingMetricText"><b>다음 이벤트</b><strong style="font-size:12px">'+esc(trainingNextImportantEvent())+'</strong><small>'+(pending?'미확정 '+pending+'개':'주요 선택 완료')+'</small></div></div>'+
+  '<div class="trainingProgressItem visual"><span class="trainingMetricIcon supportStack">'+supportThumbs+'</span><div class="trainingMetricText"><b>SSR 레어</b><strong>'+ds.got+' / '+ds.total+'</strong><small>현재 6장 이벤트</small></div></div>'+
+  '<div class="trainingProgressItem visual"><span class="trainingMetricIcon skillStack">'+(scenarioIcons||'<span class="skillFallback">技</span>')+'</span><div class="trainingMetricText"><b>시나리오 레어</b><strong>'+scenarioCount+'</strong><small>확정 획득</small></div></div>'+
+  '<div class="trainingProgressItem visual"><span class="trainingMetricIcon warning">'+pending+'</span><div class="trainingMetricText"><b>미확정</b><strong>'+pending+'</strong><small>카드 레일에서 처리</small></div></div>'+
+  '<div class="trainingProgressItem visual"><span class="trainingMetricIcon phaseIcon">◎</span><div class="trainingMetricText"><b>현재 조건</b>'+trainingConditionChipsHtml()+'</div></div>'+
+  '<div class="trainingProgressItem visual"><span class="trainingMetricIcon phaseIcon">9</span><div class="trainingMetricText"><b>시니어 9월</b><strong style="font-size:12px">'+(link?esc(link.kr||link.jp):'미설정')+'</strong><small>계획 선택</small></div></div>'+
+  '<div class="trainingProgressItem visual"><span class="trainingMetricIcon">'+(ramen?ramenDishIconHtml(ramen.id,ramen.kr||ramen.jp):'🍜')+'</span><div class="trainingMetricText"><b>궁극 라멘</b><strong style="font-size:12px">'+(ramen?esc(ramen.kr||ramen.jp):'미설정')+'</strong><small>URA 전 선택</small></div></div>';
  bindTrainingPhaseSync();
  renderPendingShortcuts();
  renderAutomaticRareItems();
@@ -3351,7 +3412,7 @@ function resetActiveTrainingSession(){
  state.trainingActive=false;
  state.currentUmaId=null;
  state.currentUmaConfirmed=false;
- // V7.32: 완료/포기 후에도 부모 우마 2명과 계승 확정 상태는 유지한다.
+ // V7.33: 완료/포기 후에도 부모 우마 2명과 계승 확정 상태는 유지한다.
  state.deckConfirmed=false;
  state.scenarioPlanLinkChoice=null;
  state.scenarioPlanUltimateRamen=null;
@@ -4270,7 +4331,7 @@ function renderV7Planner(){
 }
 
 
-/* V7.32 · 트레센켄 단계별 육성 가이드
+/* V7.33 · 트레센켄 단계별 육성 가이드
    카드 편성별 지역 추천 + 실제 인게임 스탯 아이콘 + 라멘 3종 텍스트 효과 안내 */
 let ramenGuidePhase='junior';
 
