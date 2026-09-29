@@ -31,10 +31,11 @@ jobs:
           from selenium.webdriver.support.ui import Select, WebDriverWait
           from selenium.webdriver.support import expected_conditions as EC
 
+          EXPECTED_BUILD = "V7.70.3"
           TARGETS = [
-              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v7703"),
-              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v7703"),
-              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v7703"),
+              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v7703", True),
+              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v7703", False),
+              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v7703", False),
           ]
 
           def make_driver(width=1440, height=1200):
@@ -155,13 +156,19 @@ jobs:
               if metrics["dockDisplay"] == "none":
                   raise RuntimeError("Mobile dock should be visible at 390px")
 
-          for name, url in TARGETS:
-              print("\n=== TARGET", name, url, "===")
+          for name, url, required in TARGETS:
+              print("\n=== TARGET", name, url, "required=", required, "===")
               d = make_driver()
               try:
                   d.get(url)
                   wait_app(d)
                   print("TITLE:", d.title)
+                  current_build = EXPECTED_BUILD in d.title
+                  if required and not current_build:
+                      raise RuntimeError(f"Required browser target is stale: expected {EXPECTED_BUILD}, got {d.title}")
+                  if not required and not current_build:
+                      print("STALE DEPLOYMENT WARN:", name, "expected", EXPECTED_BUILD, "got", d.title)
+                      continue
                   # V7.9 spectator mode: verify HTTPS screen-share UI/API without invoking the permission dialog.
                   watch_start = d.find_element(By.ID, "watchPilotStart")
                   watch_video = d.find_element(By.ID, "watchPilotVideo")
