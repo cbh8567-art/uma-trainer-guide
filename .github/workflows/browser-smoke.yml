@@ -263,7 +263,12 @@ jobs:
                     panelLeft: panel.getBoundingClientRect().left,
                     rowOverflow: rows.filter(x => x.scrollWidth > x.clientWidth + 1).length,
                     rowCount: rows.length,
-                    dockDisplay: getComputedStyle(document.querySelector('#mobileDock')).display
+                    dockDisplay: getComputedStyle(document.querySelector('#mobileDock')).display,
+                    widest: [...document.querySelectorAll('body *')].map(el => {
+                      const r = el.getBoundingClientRect();
+                      return {tag:el.tagName,id:el.id||'',cls:(el.className&&String(el.className).slice(0,80))||'',left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),scrollWidth:el.scrollWidth};
+                    }).filter(x => x.right > window.innerWidth + 1 || x.width > window.innerWidth + 1)
+                      .sort((a,b)=>Math.max(b.right,b.width)-Math.max(a.right,a.width)).slice(0,12)
                   };
               """)
               print("MOBILE METRICS:", metrics)
