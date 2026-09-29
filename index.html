@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.70.7">
+<meta name="app-build" content="V7.70.8">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.70.7 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.70.8 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -16,6 +16,14 @@ button,input,select{font:inherit}
 .digitalMascotFloating{position:fixed;left:10px;bottom:18px;z-index:24;width:92px;user-select:none;touch-action:none;cursor:grab;filter:drop-shadow(0 8px 14px rgba(0,0,0,.34));will-change:left,top}
 .digitalMascotFloating.dragging{cursor:grabbing;filter:drop-shadow(0 12px 20px rgba(0,0,0,.45))}
 .digitalMascotFloating img{display:block;width:100%;height:auto;pointer-events:none;-webkit-user-drag:none}
+.digitalMascotBubble{position:absolute;left:calc(100% + 8px);bottom:34px;width:220px;max-width:min(220px,55vw);padding:9px 10px;border:1px solid #8d6686;border-radius:12px;background:rgba(31,24,35,.96);color:#ffe9f3;font-size:10px;font-weight:850;line-height:1.48;box-shadow:0 9px 24px rgba(0,0,0,.28);pointer-events:none}
+.digitalMascotBubble::before{content:'';position:absolute;left:-7px;bottom:15px;width:12px;height:12px;background:rgba(31,24,35,.96);border-left:1px solid #8d6686;border-bottom:1px solid #8d6686;transform:rotate(45deg)}
+.digitalMascotFloating.bubbleLeft .digitalMascotBubble{left:auto;right:calc(100% + 8px)}
+.digitalMascotFloating.bubbleLeft .digitalMascotBubble::before{left:auto;right:-7px;border-left:0;border-bottom:0;border-right:1px solid #8d6686;border-top:1px solid #8d6686}
+.digitalMascotBubble .digitalMascotCue{display:block;margin-top:3px;color:#ffd978;font-size:8.5px;font-weight:950}
+.digitalGuideTarget{animation:digitalGuidePulse .65s ease-in-out 0s 3;outline:2px solid #ff91bd!important;outline-offset:3px}
+@keyframes digitalGuidePulse{50%{box-shadow:0 0 0 7px rgba(255,121,174,.16)}}
+@media(max-width:720px){.digitalMascotBubble{width:180px;max-width:58vw;font-size:9px;padding:7px 8px;bottom:27px}}
 @media(max-width:900px){.digitalMascotFloating{width:68px;left:6px;bottom:108px;z-index:29}}
 @media(prefers-reduced-motion:reduce){.digitalMascotFloating{transform:none}}
 .app{max-width:1540px;margin:auto;padding:14px}.top{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.title{font-size:23px;font-weight:950}.sub,.note{font-size:11px;color:var(--muted);line-height:1.55}.toolbar{display:flex;gap:6px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;padding:8px 10px;cursor:pointer}.btn.primary{background:linear-gradient(#ff94b8,#ff72a0);color:#2b101a;border:0;font-weight:900}.btn:disabled{opacity:.45;cursor:default}.serverMode{margin:12px 0 4px;padding:10px 12px;border:1px solid #394158;border-radius:14px;background:linear-gradient(180deg,#1b2030,#151923)}.serverModeHead{display:flex;align-items:center;justify-content:space-between;gap:10px}.serverModeButtons{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:9px 0 7px}.serverTab{border:1px solid #47516a;background:#171c28;color:#d9dfeb;border-radius:11px;padding:10px 12px;font-weight:900;cursor:pointer}.serverTab.active{background:#eef1f6;color:#151822;border-color:#eef1f6}.tabs{display:flex;gap:6px;margin:8px 0 12px;position:sticky;top:0;z-index:15;background:#11141d;padding:7px 0}.tab{border:1px solid var(--line);background:#171b26;color:#cbd1df;border-radius:9px;padding:9px 13px;cursor:pointer}.tab.active{background:#f1f2f6;color:#171922;font-weight:900}.page{display:none}.page.active{display:block}.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;min-width:0}.panel{min-width:0;background:rgba(26,30,41,.98);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 12px 30px rgba(0,0,0,.18)}.panel h2{font-size:16px;margin:0 0 9px}.settings,.guide-settings{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.field{min-width:0}.field label{display:block;font-size:10px;color:var(--muted);margin-bottom:4px}.field input,.field select{width:100%;min-width:0;max-width:100%;background:#121620;border:1px solid var(--line);color:#fff;border-radius:8px;padding:8px}.filters{display:flex;gap:5px;flex-wrap:wrap;margin:7px 0}.filter{border:1px solid var(--line);background:#161a25;color:#c8cfdd;border-radius:999px;padding:6px 9px;font-size:10px;cursor:pointer}.filter.active{background:#eef0f4;color:#171922;font-weight:900}.search{display:grid;grid-template-columns:1fr auto;gap:6px}.search input{background:#121620;border:1px solid var(--line);color:#fff;border-radius:8px;padding:9px}
@@ -1150,10 +1158,10 @@ body.trainingMode .trainingProgressHead .sub,
 </style>
 </head>
 <body>
-<div class="digitalMascotFloating" id="digitalMascotFloating" aria-hidden="true"><img src="./assets/digital-mascot.gif" alt=""></div>
+<div class="digitalMascotFloating" id="digitalMascotFloating" aria-label="디지탄 가이드" role="button" tabindex="0"><div class="digitalMascotBubble" id="digitalMascotBubble" hidden></div><img src="./assets/digital-mascot.gif" alt="디지탄 가이드"></div>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.70.7 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.70.8 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -2396,6 +2404,7 @@ function renderSetupProgress(){
   el.classList.remove('future');el.classList.toggle('done',done);el.classList.toggle('current',!done&&i===firstPending);
   const n=el.querySelector('.n');if(n)n.textContent=done?'✓':String(i+1)
  }
+ scheduleDigitalMascotGuidance()
 }
 function renderDeckSetupSummary(){
  const box=$('#deckSetupSummary');if(!box)return;
@@ -4324,7 +4333,8 @@ function abortTrainingSession(){
  if(!state.trainingActive)return toast('현재 진행 중인 육성이 없습니다.');
  if(!confirm('현재 육성을 포기할까요?\n이번 육성의 스킬 체크·시나리오 선택·진행 기록만 초기화합니다. 보유 SSR·돌파·현재 덱·부모 우마 선택은 유지됩니다.'))return;
  resetActiveTrainingSession();
- toast('육성을 포기했습니다. 새 육성을 준비해 주세요.')
+ toast('육성을 포기했습니다. 새 육성 우마무스메를 선택해 주세요.');
+ requestAnimationFrame(()=>requestAnimationFrame(()=>{if(runtime.characters.length)openUmaPicker('current')}))
 }
 function raceCond(r){return {ground:r.ground,distance:r.distance,style:state.style}}
 
@@ -6438,7 +6448,7 @@ function setSsrDbOpen(open,scroll=false){
  if(open&&scroll)setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),20)
 }
 function toggleSsrDb(){setSsrDbOpen($('#ssrDbBody')?.hidden!==false,true)}
-function renderAll(){renderJpSyncStatus();renderSkillIconAudit();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderDeckConfirmationUi();renderScenarioPlan();renderTrainingStartPanel();renderDeckPresets();renderTrainingHistory()}
+function renderAll(){renderJpSyncStatus();renderSkillIconAudit();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderDeckConfirmationUi();renderScenarioPlan();renderTrainingStartPanel();renderDeckPresets();renderTrainingHistory();scheduleDigitalMascotGuidance()}
 applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;state.scenarioPlanLinkChoice=null;state.scenarioPlanUltimateRamen=null;state.scenarioPlanConfirmed=false;state.trainingActive=false;state.trainingStatCheck={scenario:state.scenario,grade:'junior',month:12,half:'second',stats:{}};save();renderScenarioRareSkillPanel();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderScenarioPlan();renderSetupProgress();renderTrainingStartPanel();toast(v7ScenarioStatCapMeta().label+' 기본 스탯 상한을 적용했습니다.')};
 populateConditionGuideRace();
 $('#conditionGuideRace').value=getGuideRace()?.id||'';
@@ -6482,7 +6492,7 @@ $('#syncBtn').onclick=syncDb;$('#dbRetryBtn').onclick=syncDb;$('#catalogRecommen
 $('#exportBtn').onclick=()=>{if(!runtime.ready)return toast('먼저 DB를 동기화하세요.');downloadJson('umamusume_tracker_db_v4.json',{version:4,generatedAt:new Date().toISOString(),catalog:runtime.catalog,skills:[...runtime.skills.values()],characters:runtime.characters.map(({title,character,krName,image,...rest})=>rest),courses:runtime.courses})};
 $('#exportStateBtn').onclick=()=>downloadJson('umamusume_tracker_mydata_v4.json',state);$('#importDb').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{loadCache(JSON.parse(await f.text()))}catch(x){alert('DB JSON 오류: '+x.message)}};
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$('#'+b.dataset.close).classList.remove('open'));document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});
-document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+t.dataset.page));if(t.dataset.page==='guide')renderGuide();if(t.dataset.page==='info')void renderRacetrackInfo().catch(e=>{console.warn('[V7.70.7] racetrack render failed',e);const body=$('#racetrackInfoBody');if(body)body.innerHTML='<div class="racetrackEmpty">경마장 정보를 불러오지 못했습니다. DB 동기화 후 다시 시도해 주세요.</div>'});renderSkillCountSideRails()});
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+t.dataset.page));if(t.dataset.page==='guide')renderGuide();if(t.dataset.page==='info')void renderRacetrackInfo().catch(e=>{console.warn('[V7.70.8] racetrack render failed',e);const body=$('#racetrackInfoBody');if(body)body.innerHTML='<div class="racetrackEmpty">경마장 정보를 불러오지 못했습니다. DB 동기화 후 다시 시도해 주세요.</div>'});renderSkillCountSideRails()});
 for(const id of ['tierGround','tierDistance','tierStyle'])$('#'+id).onchange=renderTier;$('#tierSearch').oninput=renderTier;$('#tierClear').onclick=()=>{$('#tierSearch').value='';renderTier()};
 $('#tierGround').value=state.ground;$('#tierDistance').value=state.distance;$('#tierStyle').value='all';renderAppServerTabs();setSsrDbOpen(false);
 function setCatalogFilter(t){catType=t;renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);renderCatalog()}
@@ -7138,43 +7148,103 @@ async function bootstrapApp(){
 }
 
 const DIGITAL_MASCOT_POS_KEY='uma_trainer_digital_mascot_pos_v1';
+let digitalMascotGuideAction=null,digitalMascotGuideTimer=0;
+
+function digitalGuideDeckPage(){
+ const tab=document.querySelector('.tab[data-page="deck"]');
+ if(tab&&!tab.classList.contains('active'))tab.click()
+}
+function digitalGuideHighlight(target){
+ const el=typeof target==='string'?$(target):target;if(!el)return;
+ el.scrollIntoView({behavior:'smooth',block:'center'});
+ el.classList.add('digitalGuideTarget');
+ setTimeout(()=>el.classList.remove('digitalGuideTarget'),2100)
+}
+function digitalGuideLater(fn){
+ digitalGuideDeckPage();requestAnimationFrame(()=>requestAnimationFrame(fn))
+}
+function currentDigitalMascotGuidance(){
+ if(!runtime.ready)return {message:'DB를 불러오는 중이에요! 잠시만 기다려 주세요☆',action:null};
+ if(!state.trainingActive){
+  const u=selectedUma();
+  if(!u)return {message:'① 육성 우마무스메가 비어 있어요!',cue:'저를 클릭하면 선택창을 열어요.',action:()=>openUmaPicker('current')};
+  if(!state.currentUmaConfirmed)return {message:'① '+u.krName+'을(를) 아직 확정하지 않았어요!',cue:'클릭하면 확정 버튼으로 이동해요.',action:()=>digitalGuideLater(()=>digitalGuideHighlight('#umaSetupPanel'))};
+  const parents=[inheritanceParent(0),inheritanceParent(1)],missingParent=parents.findIndex(x=>!x);
+  if(missingParent>=0)return {message:'② 계승 부모 '+(missingParent+1)+'을 아직 고르지 않았어요!',cue:'클릭하면 부모 선택창을 열어요.',action:()=>openUmaPicker('inheritance',missingParent)};
+  if(!state.inheritanceConfirmed)return {message:'② 부모 2명은 골랐지만 계승 확정이 남았어요!',cue:'클릭하면 계승 확정으로 이동해요.',action:()=>digitalGuideLater(()=>digitalGuideHighlight('#inheritanceSetupPanel'))};
+  const missingSlot=(state.deck||[]).findIndex(x=>!x);
+  if(missingSlot>=0)return {message:'③ 서포트 '+(missingSlot+1)+'번 슬롯이 비어 있어요!',cue:'클릭하면 빈 슬롯 선택으로 이동해요.',action:()=>digitalGuideLater(()=>{if(typeof openEmptySlotPicker==='function')openEmptySlotPicker(missingSlot);else digitalGuideHighlight('#deck')})};
+  if(!state.deckConfirmed)return {message:'③ 서포트 6장은 준비됐어요. 덱 확정이 남았습니다!',cue:'클릭하면 덱 확정 버튼으로 이동해요.',action:()=>digitalGuideLater(()=>digitalGuideHighlight('#confirmDeckBtn'))};
+  const links=scenarioPlanLinkChoices();
+  if(links.length&&!state.scenarioPlanLinkChoice)return {message:'④ 시나리오 주요 선택을 아직 정하지 않았어요!',cue:'클릭하면 선택지로 이동해요.',action:()=>digitalGuideLater(()=>digitalGuideHighlight('#scenarioPlanPanel'))};
+  if(state.scenario==='tresenken'&&!state.scenarioPlanUltimateRamen)return {message:'④ 목표 궁극 트레센 라멘을 아직 안 골랐어요!',cue:'클릭하면 라멘 선택지로 이동해요.',action:()=>digitalGuideLater(()=>digitalGuideHighlight('#scenarioPlanPanel'))};
+  if(!state.scenarioPlanConfirmed)return {message:'④ 선택은 끝났어요. 시나리오 플랜 확정이 남았습니다!',cue:'클릭하면 확정 버튼으로 이동해요.',action:()=>digitalGuideLater(()=>digitalGuideHighlight('#confirmScenarioPlanBtn'))};
+  return {message:'준비 완료! 이제 육성을 시작할 수 있어요☆',cue:'클릭하면 「육성 시작」으로 이동해요.',action:()=>digitalGuideLater(()=>digitalGuideHighlight('#trainingStartBtn'))}
+ }
+ const pending=pendingChoiceItems();
+ if(pending.length){
+  const item=pending[0];
+  return {message:'육성 중 미확정 선택이 '+pending.length+'개 남아 있어요!\n'+item.title,cue:'클릭하면 첫 미확정 선택으로 이동해요.',action:()=>{
+   digitalGuideDeckPage();requestAnimationFrame(()=>{openPendingChoice(item);const t=item.kind==='support'?null:(item.kind==='ultimateRamen'?'#finishRamenSection':'#finishRamenLinkSection');if(t)digitalGuideHighlight(t)})
+  }}
+ }
+ return {message:'주요 선택은 모두 확인했어요! 육성이 끝났다면 완료 단계로 갈 수 있어요.',cue:'클릭하면 「육성 완료」로 이동해요.',action:()=>digitalGuideLater(()=>digitalGuideHighlight('#dashboardFinishTraining'))}
+}
+function renderDigitalMascotGuidance(){
+ const el=$('#digitalMascotFloating'),bubble=$('#digitalMascotBubble');if(!el||!bubble)return;
+ const g=currentDigitalMascotGuidance();digitalMascotGuideAction=g?.action||null;
+ if(!g?.message){bubble.hidden=true;return}
+ bubble.innerHTML=esc(g.message).replace(/\n/g,'<br>')+(g.cue?'<span class="digitalMascotCue">'+esc(g.cue)+'</span>':'');
+ bubble.hidden=false;
+ const r=el.getBoundingClientRect();el.classList.toggle('bubbleLeft',r.left+r.width/2>window.innerWidth/2)
+}
+function scheduleDigitalMascotGuidance(){
+ clearTimeout(digitalMascotGuideTimer);digitalMascotGuideTimer=setTimeout(renderDigitalMascotGuidance,0)
+}
 function initDigitalMascotDrag(){
  const el=$('#digitalMascotFloating');if(!el)return;
  const clamp=(v,min,max)=>Math.min(Math.max(v,min),Math.max(min,max));
  const apply=(left,top)=>{
   const r=el.getBoundingClientRect(),maxLeft=window.innerWidth-r.width,maxTop=window.innerHeight-r.height;
-  el.style.left=clamp(left,0,maxLeft)+'px';el.style.top=clamp(top,0,maxTop)+'px';el.style.right='auto';el.style.bottom='auto'
+  el.style.left=clamp(left,0,maxLeft)+'px';el.style.top=clamp(top,0,maxTop)+'px';el.style.right='auto';el.style.bottom='auto';
+  el.classList.toggle('bubbleLeft',parseFloat(el.style.left)+r.width/2>window.innerWidth/2)
  };
  try{
   const saved=JSON.parse(localStorage.getItem(DIGITAL_MASCOT_POS_KEY)||'null');
   if(saved&&Number.isFinite(saved.left)&&Number.isFinite(saved.top))apply(saved.left,saved.top)
  }catch(_){}
- let drag=null;
+ let drag=null,suppressGuideClick=false;
  el.addEventListener('pointerdown',e=>{
   if(e.button!==undefined&&e.button!==0)return;
   const r=el.getBoundingClientRect();
-  drag={dx:e.clientX-r.left,dy:e.clientY-r.top};
+  drag={dx:e.clientX-r.left,dy:e.clientY-r.top,startX:e.clientX,startY:e.clientY,moved:false};
   el.classList.add('dragging');
   try{el.setPointerCapture(e.pointerId)}catch(_){}
   e.preventDefault()
  });
  el.addEventListener('pointermove',e=>{
   if(!drag)return;
+  if(Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)>6)drag.moved=true;
   apply(e.clientX-drag.dx,e.clientY-drag.dy);
   e.preventDefault()
  });
  const finish=e=>{
-  if(!drag)return;drag=null;el.classList.remove('dragging');
+  if(!drag)return;const moved=drag.moved;drag=null;el.classList.remove('dragging');suppressGuideClick=moved;
   const r=el.getBoundingClientRect();
   try{localStorage.setItem(DIGITAL_MASCOT_POS_KEY,JSON.stringify({left:Math.round(r.left),top:Math.round(r.top)}))}catch(_){}
   try{el.releasePointerCapture(e.pointerId)}catch(_){}
+  if(moved)setTimeout(()=>{suppressGuideClick=false},80)
  };
  el.addEventListener('pointerup',finish);
  el.addEventListener('pointercancel',finish);
+ el.addEventListener('click',e=>{if(suppressGuideClick)return;e.preventDefault();if(typeof digitalMascotGuideAction==='function')digitalMascotGuideAction()});
+ el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&typeof digitalMascotGuideAction==='function'){e.preventDefault();digitalMascotGuideAction()}});
  window.addEventListener('resize',()=>{
   const r=el.getBoundingClientRect();
-  if(el.style.top)apply(r.left,r.top)
- })
+  if(el.style.top)apply(r.left,r.top);
+  scheduleDigitalMascotGuidance()
+ });
+ scheduleDigitalMascotGuidance()
 }
 
 initRamenScenarioGuide();
