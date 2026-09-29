@@ -1801,7 +1801,7 @@ function canonicalSkill(s){
  const meta=runtime.skills.get(Number(s.id));
  if(!meta)return s;
  const jp=meta.name||s.jp||s.sourceName||'';
- return {...s,jp,kr:koSkill(jp,meta.id),rarity:meta.rarity??s.rarity,iconId:meta.iconId??s.iconId,spCost:Number.isFinite(Number(meta.spCost))?Number(meta.spCost):s.spCost,lowerSkillId:meta.lowerSkillId??s.lowerSkillId,tags:meta.activation?.tags||s.tags||{grounds:[],distances:[],styles:[]}}
+ return {...s,jp,kr:koSkill(jp,meta.id),rarity:meta.rarity??s.rarity,iconId:meta.iconId??s.iconId,spCost:meta.spCost!==null&&meta.spCost!==undefined&&Number.isFinite(Number(meta.spCost))?Number(meta.spCost):s.spCost,lowerSkillId:meta.lowerSkillId??s.lowerSkillId,tags:meta.activation?.tags||s.tags||{grounds:[],distances:[],styles:[]}}
 }
 
 function skillIcon(s){
@@ -4383,10 +4383,10 @@ function applySkillCostMetadata(skills,costRows){
  const byId=new Map();
  for(const row of costRows||[]){
    const id=Number(row?.id);
-   const cost=Number(row?.cost);
+   const cost=typeof row?.cost==='number'?row.cost:null;
    const versions=Array.isArray(row?.versions)?row.versions:[];
    if(Number.isFinite(id)&&Number.isFinite(cost))byId.set(id,{spCost:cost,lowerSkillId:versions.length?Number(versions[0]):null});
-   const gene=row?.gene_version,gid=Number(gene?.id),gcost=Number(gene?.cost);
+   const gene=row?.gene_version,gid=Number(gene?.id),gcost=typeof gene?.cost==='number'?gene.cost:null;
    if(Number.isFinite(gid)&&Number.isFinite(gcost))byId.set(gid,{spCost:gcost,lowerSkillId:null})
  }
  let linked=0;
@@ -4418,7 +4418,7 @@ function skillIconCoverageAudit(){
 function makeSkill(meta,name=null,hintLevel=0){
   if(!meta)return null;
   const jpOriginal=meta.name||name||'';
-  return {id:Number(meta.id),jp:jpOriginal,kr:koSkill(jpOriginal,meta.id),sourceName:name||'',rarity:meta.rarity,iconId:meta.iconId,spCost:Number.isFinite(Number(meta.spCost))?Number(meta.spCost):null,lowerSkillId:meta.lowerSkillId??null,hintLevel,tags:meta.activation?.tags||{grounds:[],distances:[],styles:[]}};
+  return {id:Number(meta.id),jp:jpOriginal,kr:koSkill(jpOriginal,meta.id),sourceName:name||'',rarity:meta.rarity,iconId:meta.iconId,spCost:meta.spCost!==null&&meta.spCost!==undefined&&Number.isFinite(Number(meta.spCost))?Number(meta.spCost):null,lowerSkillId:meta.lowerSkillId??null,hintLevel,tags:meta.activation?.tags||{grounds:[],distances:[],styles:[]}};
 }
 
 function skillFromName(skillMap,name){
@@ -4635,7 +4635,7 @@ function clearObsoleteDbCaches(){
 function compactSkillMeta(s){
  if(!s)return null;
  const tags=s.activation?.tags||s.tags||{grounds:[],distances:[],styles:[]};
- return {id:Number(s.id),name:s.name||s.jp||'',rarity:s.rarity,iconId:s.iconId,spCost:Number.isFinite(Number(s.spCost))?Number(s.spCost):null,lowerSkillId:Number.isFinite(Number(s.lowerSkillId))?Number(s.lowerSkillId):null,activation:{tags}}
+ return {id:Number(s.id),name:s.name||s.jp||'',rarity:s.rarity,iconId:s.iconId,spCost:s.spCost!==null&&s.spCost!==undefined&&Number.isFinite(Number(s.spCost))?Number(s.spCost):null,lowerSkillId:Number.isFinite(Number(s.lowerSkillId))?Number(s.lowerSkillId):null,activation:{tags}}
 }
 function compactSkillRef(s){
  if(!s)return null;
@@ -4661,7 +4661,7 @@ function compactCardMeta(card){
 }
 function buildCompactDbCache(cache){
  return {
-   version:5,cacheMode:'compact',generatedAt:cache.generatedAt||new Date().toISOString(),
+   version:6,cacheMode:'compact',generatedAt:cache.generatedAt||new Date().toISOString(),
    catalog:(cache.catalog||[]).map(compactCardMeta),
    skills:(cache.skills||[]).map(compactSkillMeta).filter(Boolean),
    characters:(cache.characters||[]).map(compactCharacterMeta),
@@ -5077,7 +5077,7 @@ function renderV7GeneralSkills(cond,uma,race){
  const box=$('#v7GeneralSkillRecommend'),status=$('#v7GeneralSkillStatus');if(!box)return;
  if(!runtime.ready){box.innerHTML='<div class="note">SSR/스킬 DB 동기화 후 계산합니다.</div>';if(status)status.textContent='DB 필요';return}
  const deck=activeDeckCards(),rows=v7GeneralSkillPlan(cond,uma,deck,race).slice(0,16);
- const costKnown=rows.filter(row=>Number.isFinite(Number(row?.s?.spCost))).length;
+ const costKnown=rows.filter(row=>row?.s?.spCost!==null&&row?.s?.spCost!==undefined&&Number.isFinite(Number(row.s.spCost))).length;
  if(status)status.textContent=(deck.length?'현재 덱 '+deck.length+'/6 · ':'현재 덱 없음 · ')+'후보 '+rows.length+'개 · SP 원가 '+costKnown+'/'+rows.length;
  if(!rows.length){box.innerHTML='<div class="note">현재 덱/육성 우마/코스 조건에서 추천 가능한 일반 스킬 후보를 찾지 못했습니다.</div>';return}
  box.innerHTML='<div class="v7GeneralSkillList">'+rows.map(row=>{
@@ -5086,7 +5086,7 @@ function renderV7GeneralSkills(cond,uma,race){
    const details=[...row.details].slice(0,2).join(' · ');
    const display=(s.kr&&s.kr!=='한국어 번역 미등록')?s.kr:s.jp;
    const hintLv=Math.max(0,Math.min(5,Math.floor(Number(row.hintLevel)||0))),discount=v7HintDiscountPct(hintLv);
-   const baseCost=Number(s.spCost),expected=v7ExpectedSkillCost(baseCost,hintLv),hasCost=Number.isFinite(baseCost);
+   const hasCost=s.spCost!==null&&s.spCost!==undefined&&Number.isFinite(Number(s.spCost)),baseCost=hasCost?Number(s.spCost):null,expected=hasCost?v7ExpectedSkillCost(baseCost,hintLv):null;
    const costMeta=hasCost?'<span class="v7SkillCost">기본 '+baseCost+'Pt → <strong>'+expected+'Pt</strong></span>':'<span class="v7SkillCost missing">SP 원가 미연결</span>';
    const hintMeta='<div class="v7GeneralSkillMeta"><span class="v7HintEff '+(hintLv?'':'none')+'">힌트 Lv '+hintLv+(hintLv?' · SP -'+discount+'%':' · 할인 없음')+'</span>'+costMeta+'</div>';
    return '<div class="v7GeneralSkill '+r.cls+'">'+skillIcon(s)+'<div class="body"><div class="name">'+esc(display)+'</div><div class="jp">'+esc(s.jp||'')+'</div><div class="reason">'+esc(row.reasons.slice(0,3).join(' · '))+(details?' · '+esc(details):'')+'</div><div class="source">'+sources+'</div>'+hintMeta+'</div><div class="v7GeneralSkillRank">'+r.stars+'<br><span style="font-size:7px">'+r.label+'</span></div></div>'
