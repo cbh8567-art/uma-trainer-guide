@@ -398,11 +398,11 @@ jobs:
                   ultimate_names = ["스페셜 트레센 라멘", "욕심쟁이 트레센 라멘", "주옥의 트레센 라멘"]
                   WebDriverWait(d, 8).until(
                       lambda x: all(
-                          expected in x.find_element(By.ID, "ramenGuideBody").text
+                          expected in (x.find_element(By.ID, "ramenGuideBody").get_attribute("textContent") or "")
                           for expected in ultimate_names
                       )
                   )
-                  ura_text = d.find_element(By.ID, "ramenGuideBody").text
+                  ura_text = d.find_element(By.ID, "ramenGuideBody").get_attribute("textContent") or ""
                   for expected in ultimate_names:
                       if expected not in ura_text:
                           raise RuntimeError(f"Missing ultimate ramen choice: {expected}")
@@ -413,10 +413,10 @@ jobs:
                   effect_lines = ramen_body.find_elements(By.CSS_SELECTOR, ".ramenEffectLine")
                   if len(effect_lines) < 6:
                       raise RuntimeError("Ramen three-choice cards are missing detailed effect text")
-                  if "힌트 Lv+3" not in ramen_body.text:
+                  if "힌트 Lv+3" not in (ramen_body.get_attribute("textContent") or ""):
                       # Current phase may be senior; verify URA once more for corrected hint level.
                       d.execute_script("setTrainingGuidePhase('ura')")
-                      WebDriverWait(d, 8).until(lambda x: "힌트 Lv+3" in x.find_element(By.ID, "ramenGuideBody").text)
+                      WebDriverWait(d, 8).until(lambda x: "힌트 Lv+3" in (x.find_element(By.ID, "ramenGuideBody").get_attribute("textContent") or ""))
                   print("RAMEN TEXT GUIDE PASS:", len(effect_lines))
 
                   # V7.13: recommended SSR art must preserve the source card aspect ratio.
