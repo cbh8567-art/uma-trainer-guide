@@ -362,9 +362,15 @@ jobs:
                   if len(senior_ramen) != 3 or len(stat_icons) == 0:
                       raise RuntimeError("Senior ramen checklist should show 3 regional ramen and stat icons")
                   d.execute_script("document.querySelector('[data-ramen-phase=ura]').click()")
-                  WebDriverWait(d, 8).until(lambda x: len(x.find_elements(By.CSS_SELECTOR, "#ramenGuideBody .ramenThreeItem")) == 3)
+                  ultimate_names = ["스페셜 트레센 라멘", "욕심쟁이 트레센 라멘", "주옥의 트레센 라멘"]
+                  WebDriverWait(d, 8).until(
+                      lambda x: all(
+                          expected in x.find_element(By.ID, "ramenGuideBody").text
+                          for expected in ultimate_names
+                      )
+                  )
                   ura_text = d.find_element(By.ID, "ramenGuideBody").text
-                  for expected in ["스페셜 트레센 라멘", "욕심쟁이 트레센 라멘", "주옥의 트레센 라멘"]:
+                  for expected in ultimate_names:
                       if expected not in ura_text:
                           raise RuntimeError(f"Missing ultimate ramen choice: {expected}")
                   # V7.13: no giant reference screenshot; effect text is carried by the three cards.
