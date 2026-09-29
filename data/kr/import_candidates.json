@@ -1,17 +1,10 @@
 {
   "schemaVersion": 1,
   "updated": "2026-09-29",
-  "generatedAt": "2026-09-29T02:35:43.261Z",
+  "generatedAt": "2026-09-29T02:40:06.726Z",
   "status": "verification_required",
   "characters": [],
-  "supports": [
-    {
-      "id": 30318,
-      "name": "ライスシャワー (SSR)",
-      "status": "verification_required",
-      "reason": "ID is above current KR verified support boundary 30260; verify KR release before promotion."
-    }
-  ],
+  "supports": [],
   "supportMaxId": 30260,
   "notes": [
     "JP changes never auto-promote to KR.",

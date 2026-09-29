@@ -1,60 +1,31 @@
 {
   "schemaVersion": 1,
   "updated": "2026-09-29",
-  "checkedAt": "2026-09-29T02:35:43.261Z",
+  "checkedAt": "2026-09-29T02:40:06.726Z",
   "status": "pass",
   "summary": {
-    "added": 1,
+    "added": 0,
     "removed": 0,
-    "modified": 4
+    "modified": 0
   },
   "collections": {
     "catalog": {
       "count": 560,
-      "previousCount": 559,
-      "changed": true,
+      "previousCount": 560,
+      "changed": false,
       "status": "pass",
       "changes": {
-        "addedCount": 1,
+        "addedCount": 0,
         "removedCount": 0,
-        "modifiedCount": 4,
-        "addedIds": [
-          "30318"
-        ],
+        "modifiedCount": 0,
+        "addedIds": [],
         "removedIds": [],
-        "modifiedIds": [
-          "10085",
-          "30123",
-          "30124",
-          "30125"
-        ]
+        "modifiedIds": []
       },
       "details": {
-        "added": [
-          {
-            "id": "30318",
-            "name": "ライスシャワー (SSR)"
-          }
-        ],
+        "added": [],
         "removed": [],
-        "modified": [
-          {
-            "id": "10085",
-            "name": "サクラローレル (R)"
-          },
-          {
-            "id": "30123",
-            "name": "ナリタブライアン (SSR)"
-          },
-          {
-            "id": "30124",
-            "name": "エアグルーヴ (SSR)"
-          },
-          {
-            "id": "30125",
-            "name": "サクラローレル (SSR)"
-          }
-        ]
+        "modified": []
       }
     },
     "supports": {
