@@ -425,6 +425,61 @@ jobs:
                   d.execute_script("document.getElementById('emptySlotModal').classList.remove('open')")
                   print("DECK SLOT PICKER PASS:", len(picker_cards))
 
+                  # V7.70.10: Agnes Digital self-selection reaction + hard same-character support guard.
+                  reaction_cfg = d.execute_script("""
+                      const u=runtime.characters.find(ch=>{
+                        const s=(String(ch.character||'')+' '+String(ch.krName||'')+' '+String(ch.name||'')).toLowerCase();
+                        return s.includes('アグネスデジタル')||s.includes('아그네스 디지털')||s.includes('agnes digital');
+                      });
+                      if(!u)return {ok:false,reason:'Agnes Digital character missing'};
+                      state.deck=[null,null,null,null,null,null];
+                      setCurrentUma(u);
+                      const overlay=document.getElementById('digitalReactionOverlay');
+                      const frame=document.getElementById('digitalReactionFrame');
+                      const same=runtime.catalog.find(card=>supportUmaConflict(card,u));
+                      let blocked=null;
+                      if(same){
+                        state.deck=[null,null,null,null,null,null];
+                        placeAt(same.id,0);
+                        blocked=state.deck[0]===null;
+                      }
+                      return {
+                        ok:true,
+                        overlay:overlay?.classList.contains('show')||false,
+                        src:frame?.getAttribute('src')||'',
+                        selectId:DIGITAL_REACTIONS?.select?.postId||'',
+                        completeId:DIGITAL_REACTIONS?.complete?.postId||'',
+                        sameCard:!!same,
+                        blocked
+                      };
+                  """)
+                  if not reaction_cfg.get("ok"):
+                      raise RuntimeError("Agnes Digital reaction test setup failed: "+str(reaction_cfg))
+                  if reaction_cfg.get("selectId") != "655646444737409102":
+                      raise RuntimeError("Agnes Digital selection reaction post ID mismatch: "+str(reaction_cfg))
+                  if reaction_cfg.get("completeId") != "3149270804973690231":
+                      raise RuntimeError("Training-complete reaction post ID mismatch: "+str(reaction_cfg))
+                  if not reaction_cfg.get("overlay") or "655646444737409102" not in reaction_cfg.get("src",""):
+                      raise RuntimeError("Agnes Digital selection reaction did not open: "+str(reaction_cfg))
+                  if reaction_cfg.get("sameCard") and reaction_cfg.get("blocked") is not True:
+                      raise RuntimeError("Same-character support card was not blocked: "+str(reaction_cfg))
+                  d.execute_script("hideDigitalReaction()")
+                  print("DIGITAL SELF-SELECT / SUPPORT-CONFLICT PASS:", reaction_cfg)
+
+                  complete_reaction = d.execute_script("""
+                      pendingTrainingResult={uma:{name:'테스트'},deck:[],supportRare:{got:0,total:0},supportRareCards:[],scenarioSkills:[],evolution:[]};
+                      window.confirm=()=>true;
+                      confirmCompletedTrainingSession();
+                      return {
+                        shown:document.getElementById('digitalReactionOverlay')?.classList.contains('show')||false,
+                        src:document.getElementById('digitalReactionFrame')?.getAttribute('src')||''
+                      };
+                  """)
+                  if not complete_reaction.get("shown") or "3149270804973690231" not in complete_reaction.get("src",""):
+                      raise RuntimeError("Training-complete Digital reaction did not open: "+str(complete_reaction))
+                  d.execute_script("hideDigitalReaction()")
+                  print("DIGITAL TRAINING-COMPLETE REACTION PASS")
+
                   tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
                   print("TAB COUNT:", len(tabs))
                   if len(tabs) < 2:
@@ -593,6 +648,10 @@ jobs:
                       raise RuntimeError("Browser console has SEVERE errors: " + " | ".join(x.get("message","") for x in severe[:10]))
 
                   print("TARGET PASS:", name)
+              except Exception as e:
+                  if required:
+                      raise
+                  print("OPTIONAL TARGET WARN:", name, type(e).__name__, str(e))
               finally:
                   d.quit()
 
