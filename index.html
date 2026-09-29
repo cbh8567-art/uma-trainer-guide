@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.66">
-<title>우마무스메 트레이너 가이드 V7.66 WEB</title>
+<meta name="app-build" content="V7.67">
+<title>우마무스메 트레이너 가이드 V7.67 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -663,6 +663,19 @@ body.trainingMode .counts{margin-top:8px}
 @media(max-width:980px){.v7ProgressControls{grid-template-columns:repeat(4,minmax(0,1fr))}.v7PaceSummary{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:720px){.v7ProgressControls{grid-template-columns:repeat(2,minmax(0,1fr))}.v7PaceSummary{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:430px){.v7PaceSummary{grid-template-columns:1fr}}
+/* V7.67 · 단계별 공략창 기준 스탯 */
+.guideStatStrip{margin:8px 0;border:1px solid #5b5131;background:linear-gradient(180deg,#211d14,#171b22);border-radius:9px;padding:8px}
+.guideStatStripHead{display:flex;align-items:flex-start;justify-content:space-between;gap:7px;flex-wrap:wrap}
+.guideStatStripHead b{font-size:9px;color:#ffe29a}.guideStatStripHead span{font-size:7px;color:#9aa8bb}
+.guideStatStripGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin-top:6px}
+.guideStatChip{border:1px solid #38465b;background:#111720;border-radius:7px;padding:5px 4px;text-align:center;min-width:0}
+.guideStatChip .name{display:block;font-size:6px;color:#8f9caf}.guideStatChip strong{display:block;font-size:11px;color:#eef4fb;margin-top:2px}
+.guideStatChip.ahead{border-color:#3d775b;background:#14251d}.guideStatChip.ahead strong{color:#a6dfbb}
+.guideStatChip.warn{border-color:#806b38;background:#282116}.guideStatChip.warn strong{color:#f0d486}
+.guideStatChip.danger{border-color:#824e57;background:#2a181c}.guideStatChip.danger strong{color:#f1aab5}
+.guideStatChip .delta{display:block;font-size:6px;margin-top:2px;color:#aeb8c6}
+.guideStatStripNote{font-size:6.5px;color:#8997aa;line-height:1.4;margin-top:5px}
+@media(max-width:720px){.guideStatStripGrid{grid-template-columns:repeat(5,minmax(54px,1fr));overflow-x:auto}.guideStatChip{padding:5px 3px}}
 /* V7.57 · 일반 흰/초록 스킬 추천 */
 .v7GeneralSkillHead{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap;margin-bottom:6px}
 .v7GeneralSkillList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
@@ -1077,7 +1090,7 @@ body.trainingMode .trainingProgressHead .sub,
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.66 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.67 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -5118,6 +5131,25 @@ function v7ProgressCheckHtml(cond,race){
    ['speed','stamina','power','guts','wit'].map(stat=>'<div class="v7ProgressField"><label>'+names[stat]+'</label><input type="number" min="0" max="3000" step="1" placeholder="현재" value="'+(Number.isFinite(Number(check.stats?.[stat]))?Number(check.stats[stat]):'')+'" data-v7-current-stat="'+stat+'"></div>').join('')+
   '</div>'+result+'</div>'
 }
+function v7GuidePhaseStatHtml(phase){
+ const race=getGuideRace();if(!race)return '';
+ const cond=raceCond(race),data=v7PhaseTargetRows(cond,race),names={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능'};
+ const map={
+  junior:{key:'juniorEnd',label:'주니어 종료 기준'},
+  classic:{key:'classicEnd',label:'클래식 종료 기준'},
+  senior:{key:'seniorSummer',label:'시니어 여름 기준'},
+  ura:{key:'final',label:'최종 목표'}
+ },m=map[phase]||map.junior,row=data.rows.find(x=>x.key===m.key)||data.rows[0];
+ const check=v7TrainingStatCheckState(),phaseGrade=phase==='ura'?'senior':phase,same=check.grade===phaseGrade&&Object.keys(check.stats||{}).length>0;
+ const liveTarget=same?v7TargetAtDate(cond,race,check.grade,check.month,check.half):null;
+ const chips=['speed','stamina','power','guts','wit'].map(stat=>{
+   const current=same&&Number.isFinite(Number(check.stats?.[stat]))?Number(check.stats[stat]):null;
+   const target=same?liveTarget[stat]:row.values[stat],pace=current===null?null:v7PaceStatus(current,target),delta=current===null?null:current-target;
+   return '<div class="guideStatChip '+(pace?.cls||'')+'"><span class="name">'+names[stat]+'</span><strong>'+target+'</strong>'+(current!==null?'<span class="delta">현재 '+current+' · '+(delta>=0?'+':'')+delta+'</span>':'')+'</div>'
+ }).join('');
+ const liveLabel=same?({junior:'주니어',classic:'클래식',senior:'시니어'}[check.grade]+' '+check.month+'월 '+(check.half==='first'?'전반':'후반')+' 입력값 비교'):'V7.66 현재 스탯 입력값과 자동 연동';
+ return '<div class="guideStatStrip"><div class="guideStatStripHead"><b>'+esc(m.label)+' 스탯</b><span>'+esc(liveLabel)+'</span></div><div class="guideStatStripGrid">'+chips+'</div><div class="guideStatStripNote">※ 탭별 운영을 볼 때 빠르게 확인하는 기준선입니다. 세부 시점 목표와 현재 스탯 입력은 추천 스탯 목표의 페이스 체크에서 관리합니다.</div></div>'
+}
 function v7PhaseTargetHtml(cond,race){
  const data=v7PhaseTargetRows(cond,race);
  return '<div class="v7PhasePlan">'+
@@ -5809,6 +5841,7 @@ function renderRamenScenarioGuide(){
    phaseTip=RAMEN_GUIDE_MODE_TIPS?.[ramenGuideMode()]?.[phase]||phaseTip
  }
  body.innerHTML='<div class="ramenProfile"><b>자동 판별 편성: '+esc(profile.label)+'</b><br>'+esc(profile.note)+(phaseTip?'<br><b>'+esc(d.title)+':</b> '+esc(phaseTip):'')+ramenGuideModeHtml(phase,profile)+'</div>'+
+  v7GuidePhaseStatHtml(phase)+
   '<div class="ramenGuideGrid"><div class="ramenGuideCard"><h3>'+esc(d.title)+' 운영</h3>'+
   '<div class="ramenGuideRows"><div class="ramenGuideRow"><b>훈련 우선</b><span>'+esc(d.priority)+'</span></div><div class="ramenGuideRow"><b>특별소스</b><span>'+esc(d.sauce)+'</span></div></div>'+
   '<h3 style="margin-top:8px">편성별 추천 지역</h3><div class="ramenRegions">'+regions.map((x,i)=>ramenRegionHtml(x,phase,i)).join('')+'</div>'+
@@ -5862,7 +5895,7 @@ function renderLegendsScenarioGuide(){
  const route=(guide.routes||[]).find(x=>x.id===legendsGuideRoute)||guide.routes?.[0]||{};
  const hearts=phase==='junior'?(guide.heartPriority?.early||[]):(guide.heartPriority?.top||[]);
  const refs=Array.isArray(guide.officialRefs)?guide.officialRefs:[];
- body.innerHTML='<div class="legendsGuideGrid"><div class="legendsGuideCard"><h3>'+esc(d.title)+' 운영</h3>'+
+ body.innerHTML=v7GuidePhaseStatHtml(phase)+'<div class="legendsGuideGrid"><div class="legendsGuideCard"><h3>'+esc(d.title)+' 운영</h3>'+
    '<div class="legendsGuideRows"><div class="legendsGuideRow"><b>훈련 우선</b><span>'+esc(d.priority||'')+'</span></div><div class="legendsGuideRow"><b>'+esc(route.kr||'현재 루트')+'</b><span>'+esc(route.play||route.summary||'')+'</span></div>'+
    (d.points||[]).map(x=>'<div class="legendsGuideRow"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('')+'</div>'+
    '<h3 style="margin-top:8px">추천 心得</h3><div class="legendsHeartList">'+hearts.map((x,i)=>'<span class="legendsHeart'+(i<4?' top':'')+'">'+esc(x)+'</span>').join('')+'</div>'+
