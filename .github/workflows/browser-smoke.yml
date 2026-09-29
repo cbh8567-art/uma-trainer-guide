@@ -343,6 +343,9 @@ jobs:
                   print("DIGITAL MASCOT DRAG PASS:", before, "->", after)
 
                   # V7.70.8: Digital guidance bubble points to the first missing setup step.
+                  WebDriverWait(d, 25).until(
+                      lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true")
+                  )
                   d.execute_script("""
                       state.currentUmaId=null;
                       state.currentUmaConfirmed=false;
