@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.58">
-<title>우마무스메 트레이너 가이드 V7.58 WEB</title>
+<meta name="app-build" content="V7.59">
+<title>우마무스메 트레이너 가이드 V7.59 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -622,6 +622,9 @@ body.trainingMode .counts{margin-top:8px}
 .v7GeneralSkill .reason{font-size:7.5px;color:#b7c2d1;line-height:1.4;margin-top:4px}
 .v7GeneralSkill .source{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px}
 .v7GeneralSkillRank{font-size:11px;font-weight:950;color:#ffd66f;white-space:nowrap}
+.v7GeneralSkillMeta{display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.v7HintEff{display:inline-flex;align-items:center;border:1px solid #4b6c5b;background:#17261f;color:#a9e0bd;border-radius:999px;padding:2px 5px;font-size:7px;font-weight:900}
+.v7HintEff.none{border-color:#465066;background:#202635;color:#9ca6ba}
 @media(max-width:720px){.v7GeneralSkillList{grid-template-columns:1fr}.v7GeneralSkill{grid-template-columns:auto minmax(0,1fr) auto}}
 
 /* V7.46 · 스킬 모달 카드 헤더 */
@@ -5026,6 +5029,10 @@ function v7GeneralSkillRank(score){
  if(score>=32)return {stars:'★★',label:'추천',cls:'good'};
  return {stars:'★',label:'상황별',cls:'situational'}
 }
+function v7HintDiscountPct(level){
+ const lv=Math.max(0,Math.min(5,Math.floor(Number(level)||0)));
+ return [0,10,20,30,35,40][lv]
+}
 function renderV7GeneralSkills(cond,uma,race){
  const box=$('#v7GeneralSkillRecommend'),status=$('#v7GeneralSkillStatus');if(!box)return;
  if(!runtime.ready){box.innerHTML='<div class="note">SSR/스킬 DB 동기화 후 계산합니다.</div>';if(status)status.textContent='DB 필요';return}
@@ -5037,8 +5044,10 @@ function renderV7GeneralSkills(cond,uma,race){
    const sources=[...row.sources].map(x=>'<span class="tag">'+esc(x)+'</span>').join('');
    const details=[...row.details].slice(0,2).join(' · ');
    const display=(s.kr&&s.kr!=='한국어 번역 미등록')?s.kr:s.jp;
-   return '<div class="v7GeneralSkill '+r.cls+'">'+skillIcon(s)+'<div class="body"><div class="name">'+esc(display)+'</div><div class="jp">'+esc(s.jp||'')+'</div><div class="reason">'+esc(row.reasons.slice(0,3).join(' · '))+(details?' · '+esc(details):'')+'</div><div class="source">'+sources+'</div></div><div class="v7GeneralSkillRank">'+r.stars+'<br><span style="font-size:7px">'+r.label+'</span></div></div>'
- }).join('')+'</div><div class="note" style="margin-top:7px">1차 엔진은 현재 확보 가능한 후보의 조건 적합도와 출처를 평가합니다. SP 비용/힌트 할인 기반 구매 최적화는 데이터 검증 후 별도 단계에서 연결합니다.</div>'
+   const hintLv=Math.max(0,Math.min(5,Math.floor(Number(row.hintLevel)||0))),discount=v7HintDiscountPct(hintLv);
+   const hintMeta='<div class="v7GeneralSkillMeta"><span class="v7HintEff '+(hintLv?'':'none')+'">힌트 Lv '+hintLv+(hintLv?' · SP -'+discount+'%':' · 할인 없음')+'</span></div>';
+   return '<div class="v7GeneralSkill '+r.cls+'">'+skillIcon(s)+'<div class="body"><div class="name">'+esc(display)+'</div><div class="jp">'+esc(s.jp||'')+'</div><div class="reason">'+esc(row.reasons.slice(0,3).join(' · '))+(details?' · '+esc(details):'')+'</div><div class="source">'+sources+'</div>'+hintMeta+'</div><div class="v7GeneralSkillRank">'+r.stars+'<br><span style="font-size:7px">'+r.label+'</span></div></div>'
+ }).join('')+'</div><div class="note" style="margin-top:7px">힌트 Lv에 따른 필요 스킬Pt 할인율을 함께 표시합니다(Lv1 10% · Lv2 20% · Lv3 30% · Lv4 35% · Lv5 40%). 기본 SP 원가까지 연결한 실제 구매 조합 최적화는 스킬 원가 필드 검증 후 다음 단계에서 적용합니다.</div>'
 }
 function v7DeckDeficits(cond,deckCards){
  const plan=v7TypePlan(cond.distance),counts={};
