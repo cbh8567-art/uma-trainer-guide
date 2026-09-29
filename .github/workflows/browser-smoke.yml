@@ -356,6 +356,7 @@ jobs:
                   bubble_text = d.find_element(By.ID, "digitalMascotBubble").get_attribute("textContent") or ""
                   if "육성 우마무스메" not in bubble_text:
                       raise RuntimeError(f"Digital guide should request training Uma first: {bubble_text}")
+                  time.sleep(0.12)
                   d.execute_script("document.getElementById('digitalMascotFloating').click()")
                   WebDriverWait(d, 8).until(lambda x: x.find_element(By.ID, "umaPickerModal").get_attribute("class").find("open") >= 0)
                   d.execute_script("document.getElementById('umaPickerModal').classList.remove('open')")
