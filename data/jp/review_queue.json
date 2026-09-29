@@ -1,9 +1,69 @@
 {
   "schemaVersion": 1,
   "updated": "2026-09-29",
-  "generatedAt": "2026-09-29T02:28:16.399Z",
-  "openCount": 3,
+  "generatedAt": "2026-09-29T02:35:43.261Z",
+  "openCount": 8,
   "items": [
+    {
+      "key": "catalog:added:30318",
+      "collection": "catalog",
+      "changeType": "added",
+      "id": "30318",
+      "name": "ライスシャワー (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-09-29T02:35:43.261Z",
+      "lastSeenAt": "2026-09-29T02:35:43.261Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:modified:10085",
+      "collection": "catalog",
+      "changeType": "modified",
+      "id": "10085",
+      "name": "サクラローレル (R)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-09-29T02:35:43.261Z",
+      "lastSeenAt": "2026-09-29T02:35:43.261Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:modified:30123",
+      "collection": "catalog",
+      "changeType": "modified",
+      "id": "30123",
+      "name": "ナリタブライアン (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-09-29T02:35:43.261Z",
+      "lastSeenAt": "2026-09-29T02:35:43.261Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:modified:30124",
+      "collection": "catalog",
+      "changeType": "modified",
+      "id": "30124",
+      "name": "エアグルーヴ (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-09-29T02:35:43.261Z",
+      "lastSeenAt": "2026-09-29T02:35:43.261Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:modified:30125",
+      "collection": "catalog",
+      "changeType": "modified",
+      "id": "30125",
+      "name": "サクラローレル (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-09-29T02:35:43.261Z",
+      "lastSeenAt": "2026-09-29T02:35:43.261Z",
+      "note": ""
+    },
     {
       "key": "catalog:modified:10082",
       "collection": "catalog",

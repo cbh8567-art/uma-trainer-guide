@@ -2,33 +2,62 @@
   "schemaVersion": 1,
   "updated": "2026-09-29",
   "status": "pass",
-  "checkedAt": "2026-09-29T02:28:16.399Z",
+  "checkedAt": "2026-09-29T02:35:43.261Z",
   "fatal": [],
   "warnings": [],
   "collections": {
     "catalog": {
       "source": "https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json",
-      "count": 559,
-      "contentSha256": "dda6181ee906824b712a30ff7aa8560a7e2596fcd3722210bd5a534028e7bfd2",
+      "count": 560,
+      "contentSha256": "6ddd5d416eae6ae7dd9b9939fa059dec348d946ef08c58ec609bc5b1d2d0f17d",
       "duplicateIds": [],
       "status": "pass",
       "previousCount": 559,
       "removedCount": 0,
       "removedRatio": 0,
       "changes": {
-        "addedCount": 0,
+        "addedCount": 1,
         "removedCount": 0,
-        "modifiedCount": 0,
-        "addedIds": [],
+        "modifiedCount": 4,
+        "addedIds": [
+          "30318"
+        ],
         "removedIds": [],
-        "modifiedIds": []
+        "modifiedIds": [
+          "10085",
+          "30123",
+          "30124",
+          "30125"
+        ]
       },
       "changeDetails": {
-        "added": [],
+        "added": [
+          {
+            "id": "30318",
+            "name": "ライスシャワー (SSR)"
+          }
+        ],
         "removed": [],
-        "modified": []
+        "modified": [
+          {
+            "id": "10085",
+            "name": "サクラローレル (R)"
+          },
+          {
+            "id": "30123",
+            "name": "ナリタブライアン (SSR)"
+          },
+          {
+            "id": "30124",
+            "name": "エアグルーヴ (SSR)"
+          },
+          {
+            "id": "30125",
+            "name": "サクラローレル (SSR)"
+          }
+        ]
       },
-      "changed": false
+      "changed": true
     },
     "supports": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
@@ -158,8 +187,8 @@
     "missingSupportHintSkillIds": []
   },
   "changeTotals": {
-    "added": 0,
+    "added": 1,
     "removed": 0,
-    "modified": 0
+    "modified": 4
   }
 }
