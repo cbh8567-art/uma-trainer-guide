@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.63">
-<title>우마무스메 트레이너 가이드 V7.63 WEB</title>
+<meta name="app-build" content="V7.64">
+<title>우마무스메 트레이너 가이드 V7.64 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -1053,7 +1053,7 @@ body.trainingMode .trainingProgressHead .sub,
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.63 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.64 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -1692,8 +1692,19 @@ let KR_SKILL_ALIASES={
 };
 const LB_MAX=[30,35,40,45,50], LB_INDEX=[6,7,8,9,10];
 const KOREA_SCENARIO_IDS=new Set(['uaf','harvest','mecha','legends','none']);
+const SCENARIO_STAT_CAPS={
+ tresenken:{label:'트레센켄',speed:2150,stamina:1800,power:1700,guts:1700,wit:1800},
+ dreams:{label:'Dreams',speed:2100,stamina:1700,power:1700,guts:1700,wit:1800},
+ onsen:{label:'온천향',speed:1900,stamina:1800,power:1700,guts:1700,wit:1400},
+ island:{label:'무인도',speed:1850,stamina:1700,power:1700,guts:1600,wit:1300},
+ legends:{label:'The Twinkle Legends',speed:1850,stamina:1600,power:1600,guts:1500,wit:1450},
+ mecha:{label:'메카 우마무스메',speed:1750,stamina:1700,power:1500,guts:1300,wit:1300},
+ harvest:{label:'대풍식제',speed:1750,stamina:1000,power:1700,guts:1700,wit:1350},
+ uaf:{label:'U.A.F.',speed:1700,stamina:1500,power:1500,guts:1500,wit:1300},
+ none:{label:'기타',speed:1400,stamina:1400,power:1400,guts:1400,wit:1400}
+};
 const DEFAULT_TRESENKEN_STAT_CAPS={speed:2150,stamina:1800,power:1700,guts:1700,wit:1800};
-const SERVER_PROFILE_FIELDS=['owned','deck','acquired','eventChoice','eventDone','lb','scenario','tresenkenUltimateRamen','tresenkenRmj','ramenGuideMode','ground','distance','style','currentUmaId','currentUmaConfirmed','inheritanceParentIds','inheritanceConfirmed','deckConfirmed','scenarioPlanLinkChoice','scenarioPlanUltimateRamen','scenarioPlanConfirmed','trainingActive','guideRaceId','evolutionPlan','deckPresets','trainingHistory','targetStatOverrides','statCaps'];
+const SERVER_PROFILE_FIELDS=['owned','deck','acquired','eventChoice','eventDone','lb','scenario','tresenkenUltimateRamen','tresenkenRmj','ramenGuideMode','ground','distance','style','currentUmaId','currentUmaConfirmed','inheritanceParentIds','inheritanceConfirmed','deckConfirmed','scenarioPlanLinkChoice','scenarioPlanUltimateRamen','scenarioPlanConfirmed','trainingActive','guideRaceId','evolutionPlan','deckPresets','trainingHistory','targetStatOverrides','statCaps','statCapOverrides'];
 function cloneStateValue(v){return v===undefined?undefined:JSON.parse(JSON.stringify(v))}
 function serverDefaultProfile(server){
  const set=server==='kr'?KOREA_UPCOMING:UPCOMING,r=set.races?.[0]||null;
@@ -1704,7 +1715,7 @@ function serverDefaultProfile(server){
    ground:r?.ground||'turf',distance:r?.distance||'mid',style:'senko',currentUmaId:null,
    currentUmaConfirmed:false,inheritanceParentIds:[null,null],inheritanceConfirmed:false,deckConfirmed:false,
    scenarioPlanLinkChoice:null,scenarioPlanUltimateRamen:null,scenarioPlanConfirmed:false,trainingActive:false,
-   guideRaceId:r?.id||null,evolutionPlan:null,deckPresets:[],trainingHistory:[],targetStatOverrides:{},statCaps:{...DEFAULT_TRESENKEN_STAT_CAPS}
+   guideRaceId:r?.id||null,evolutionPlan:null,deckPresets:[],trainingHistory:[],targetStatOverrides:{},statCaps:null,statCapOverrides:{}
  }
 }
 function normalizeServerProfile(profile,server){
@@ -1730,11 +1741,28 @@ function normalizeServerProfile(profile,server){
  p.deckPresets=Array.isArray(p.deckPresets)?p.deckPresets.slice(0,5):[];
  p.trainingHistory=Array.isArray(p.trainingHistory)?p.trainingHistory.slice(0,5):[];
  p.targetStatOverrides=(p.targetStatOverrides&&typeof p.targetStatOverrides==='object'&&!Array.isArray(p.targetStatOverrides))?p.targetStatOverrides:{};
- const rawCaps=(p.statCaps&&typeof p.statCaps==='object'&&!Array.isArray(p.statCaps))?p.statCaps:{};
- p.statCaps={};
- for(const stat of ['speed','stamina','power','guts','wit']){
-   const v=Number(rawCaps[stat]),fallback=DEFAULT_TRESENKEN_STAT_CAPS[stat];
-   p.statCaps[stat]=Number.isFinite(v)&&v>=1200&&v<=3000?Math.round(v/10)*10:fallback
+ p.statCapOverrides=(p.statCapOverrides&&typeof p.statCapOverrides==='object'&&!Array.isArray(p.statCapOverrides))?p.statCapOverrides:{};
+ const legacyCaps=(p.statCaps&&typeof p.statCaps==='object'&&!Array.isArray(p.statCaps))?p.statCaps:null;
+ if(legacyCaps){
+   const sameAsOldDefault=['speed','stamina','power','guts','wit'].every(stat=>Number(legacyCaps[stat])===DEFAULT_TRESENKEN_STAT_CAPS[stat]);
+   if(!sameAsOldDefault&&!p.statCapOverrides[p.scenario]){
+     const migrated={};
+     for(const stat of ['speed','stamina','power','guts','wit']){
+       const v=Number(legacyCaps[stat]);
+       if(Number.isFinite(v)&&v>=500&&v<=3000)migrated[stat]=Math.round(v/10)*10
+     }
+     if(Object.keys(migrated).length)p.statCapOverrides[p.scenario]=migrated
+   }
+ }
+ p.statCaps=null;
+ for(const [scenario,caps] of Object.entries(p.statCapOverrides)){
+   if(!caps||typeof caps!=='object'||Array.isArray(caps)){delete p.statCapOverrides[scenario];continue}
+   const clean={};
+   for(const stat of ['speed','stamina','power','guts','wit']){
+     const v=Number(caps[stat]);
+     if(Number.isFinite(v)&&v>=500&&v<=3000)clean[stat]=Math.round(v/10)*10
+   }
+   p.statCapOverrides[scenario]=clean
  }
  return p
 }
@@ -4917,11 +4945,15 @@ function v7AutoStatGoal(cond,race){
  for(const k of Object.keys(out))out[k]=Math.max(400,Math.min(1800,Math.round(out[k]/50)*50));
  return out
 }
-function v7ResolvedStatCaps(){
- const raw=state.statCaps||DEFAULT_TRESENKEN_STAT_CAPS,out={};
+function v7ScenarioStatCapMeta(scenario=state.scenario){
+ const key=SCENARIO_STAT_CAPS[scenario]?scenario:'none',base=SCENARIO_STAT_CAPS[key];
+ return {key,label:base.label,base:{speed:base.speed,stamina:base.stamina,power:base.power,guts:base.guts,wit:base.wit}}
+}
+function v7ResolvedStatCaps(scenario=state.scenario){
+ const meta=v7ScenarioStatCapMeta(scenario),raw=state.statCapOverrides?.[meta.key]||{},out={};
  for(const stat of ['speed','stamina','power','guts','wit']){
-   const v=Number(raw?.[stat]),fallback=DEFAULT_TRESENKEN_STAT_CAPS[stat];
-   out[stat]=Number.isFinite(v)&&v>=1200&&v<=3000?Math.round(v/10)*10:fallback
+   const v=Number(raw?.[stat]),fallback=meta.base[stat];
+   out[stat]=Number.isFinite(v)&&v>=500&&v<=3000?Math.round(v/10)*10:fallback
  }
  return out
 }
@@ -4936,8 +4968,8 @@ function v7ResolvedStatGoal(cond,race){
  return {auto,resolved:out,saved,key,caps}
 }
 function v7StatRange(goal,cap){
- const max=Math.max(1200,Number(cap)||3000),g=Math.min(max,Math.max(300,Number(goal)||0));
- return {min:Math.max(300,Math.round((g-200)/50)*50),goal:g,stretch:max}
+ const max=Math.max(300,Number(cap)||3000),g=Math.min(max,Math.max(300,Number(goal)||0));
+ return {min:Math.min(max,Math.max(300,Math.round((g-200)/50)*50)),goal:g,stretch:max}
 }
 function v7PhaseCurveForScenario(scenario){
  const generic={
@@ -5021,11 +5053,11 @@ function v7StatTargetHtml(cond,race){
     '<span class="v7Difficulty '+difficulty.cls+'">'+difficulty.label+'</span>'+(custom?'<div class="v7TargetCustom">사용자 목표 적용 중</div>':'')+
     '<div class="v7TargetWhy">'+esc(x.why)+'</div></div>'
   }).join('')+'</div>'+
-  '<div class="v7CapEditor"><div class="v7CapEditorHead"><div><b>스탯 최대치 설정</b><div class="sub">기본값은 트레센켄 기본 상한입니다. 인자 상한 증가나 다른 시나리오를 사용할 때 직접 바꿀 수 있습니다.</div></div><button type="button" class="mini" id="v7ResetStatCaps">트레센켄 기본값 복원</button></div>'+
-   '<div class="v7CapEditorGrid">'+['speed','stamina','power','guts','wit'].map(stat=>'<div class="v7CapField"><label>'+names[stat]+'</label><input class="v7CapInput" type="number" min="1200" max="3000" step="10" value="'+plan.caps[stat]+'" data-v7-cap="'+stat+'" aria-label="'+names[stat]+' 최대치"></div>').join('')+'</div>'+
-  '</div>'+
+  (()=>{const capMeta=v7ScenarioStatCapMeta(),custom=!!state.statCapOverrides?.[capMeta.key]&&Object.keys(state.statCapOverrides[capMeta.key]||{}).length>0;return '<div class="v7CapEditor"><div class="v7CapEditorHead"><div><b>스탯 최대치 설정 · '+esc(capMeta.label)+'</b><div class="sub">시나리오 기본 상한을 자동 적용합니다. 인자 상한 증가나 실제 게임 표시값이 다르면 여기서 수정하세요.'+(custom?' · 사용자 보정 적용 중':'')+'</div></div><button type="button" class="mini" id="v7ResetStatCaps">'+esc(capMeta.label)+' 기본값 복원</button></div>'+
+   '<div class="v7CapEditorGrid">'+['speed','stamina','power','guts','wit'].map(stat=>'<div class="v7CapField"><label>'+names[stat]+'</label><input class="v7CapInput" type="number" min="500" max="3000" step="10" value="'+plan.caps[stat]+'" data-v7-cap="'+stat+'" aria-label="'+names[stat]+' 최대치"></div>').join('')+'</div>'+
+  '</div>'})()+
   v7PhaseTargetHtml(cond,race)+
-  '<div class="note" style="margin-top:6px">※ 기본 최대치는 트레센켄 기준 2150 / 1800 / 1700 / 1700 / 1800입니다. 직접 변경한 최대치는 서버별로 저장되며 권장 목표와 분기별 목표 계산의 상한으로 사용됩니다.</div>'
+  '<div class="note" style="margin-top:6px">※ 최대치는 선택한 시나리오의 기본 상한을 자동 사용합니다. 직접 변경한 값은 현재 서버의 해당 시나리오에만 저장되며 권장 목표와 분기별 목표 계산의 상한으로 사용됩니다.</div>'
 }
 function bindV7StatTargetControls(cond,race){
  const key=v7TargetPlanKey(cond,race);
@@ -5040,12 +5072,13 @@ function bindV7StatTargetControls(cond,race){
  });
  document.querySelectorAll('#v7StatPriority [data-v7-cap]').forEach(input=>{
   input.onchange=()=>{
-   const stat=input.dataset.v7Cap,v=Math.round(Number(input.value)/10)*10;
-   if(!Number.isFinite(v)||v<1200||v>3000){toast('최대치는 1200~3000 범위로 입력해 주세요.');renderV7Planner();return}
-   state.statCaps={...v7ResolvedStatCaps(),[stat]:v};
+   const stat=input.dataset.v7Cap,v=Math.round(Number(input.value)/10)*10,meta=v7ScenarioStatCapMeta();
+   if(!Number.isFinite(v)||v<500||v>3000){toast('최대치는 500~3000 범위로 입력해 주세요.');renderV7Planner();return}
+   state.statCapOverrides=state.statCapOverrides||{};
+   state.statCapOverrides[meta.key]={...(state.statCapOverrides[meta.key]||{}),[stat]:v};
    const saved=state.targetStatOverrides?.[key];
    if(saved&&Number(saved[stat])>v)state.targetStatOverrides[key]={...saved,[stat]:v};
-   save();renderV7Planner();toast('스탯 최대치를 저장했습니다.')
+   save();renderV7Planner();toast(meta.label+' 최대치를 저장했습니다.')
   }
  });
  const reset=$('#v7ResetStatTargets');
@@ -5055,8 +5088,10 @@ function bindV7StatTargetControls(cond,race){
  };
  const resetCaps=$('#v7ResetStatCaps');
  if(resetCaps)resetCaps.onclick=()=>{
-   state.statCaps={...DEFAULT_TRESENKEN_STAT_CAPS};
-   save();renderV7Planner();toast('최대치를 트레센켄 기본값으로 복원했습니다.')
+   const meta=v7ScenarioStatCapMeta();
+   state.statCapOverrides=state.statCapOverrides||{};
+   delete state.statCapOverrides[meta.key];
+   save();renderV7Planner();toast(meta.label+' 최대치를 시나리오 기본값으로 복원했습니다.')
  }
 }
 function v7AptitudeTargets(cond,race){
@@ -5947,7 +5982,7 @@ function setSsrDbOpen(open,scroll=false){
 }
 function toggleSsrDb(){setSsrDbOpen($('#ssrDbBody')?.hidden!==false,true)}
 function renderAll(){renderJpSyncStatus();renderSkillIconAudit();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderDeckConfirmationUi();renderScenarioPlan();renderTrainingStartPanel();renderDeckPresets();renderTrainingHistory()}
-applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;state.scenarioPlanLinkChoice=null;state.scenarioPlanUltimateRamen=null;state.scenarioPlanConfirmed=false;state.trainingActive=false;save();renderScenarioRareSkillPanel();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderScenarioPlan();renderSetupProgress();renderTrainingStartPanel()};
+applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;state.scenarioPlanLinkChoice=null;state.scenarioPlanUltimateRamen=null;state.scenarioPlanConfirmed=false;state.trainingActive=false;save();renderScenarioRareSkillPanel();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderScenarioPlan();renderSetupProgress();renderTrainingStartPanel();toast(v7ScenarioStatCapMeta().label+' 기본 스탯 상한을 적용했습니다.')};
 populateConditionGuideRace();
 $('#conditionGuideRace').value=getGuideRace()?.id||'';
 $('#conditionGuideRace').onchange=e=>{
