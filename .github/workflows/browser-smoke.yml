@@ -466,16 +466,18 @@ jobs:
                   legends = WebDriverWait(d, 12).until(
                       lambda x: x.find_element(By.ID, "legendsScenarioGuide")
                   )
-                  if not legends.is_displayed():
-                      raise RuntimeError("Twinkle Legends guide is not visible")
+                  # The scenario guide is intentionally CSS-hidden until trainingMode.
+                  # Verify scenario activation + rendered DOM here, not viewport visibility.
+                  if d.execute_script("return arguments[0].hidden", legends):
+                      raise RuntimeError("Twinkle Legends guide remained hidden after selecting Legends")
                   legend_routes = d.find_elements(By.CSS_SELECTOR, "#legendsRouteGrid .legendsRoute")
                   if len(legend_routes) != 3:
                       raise RuntimeError(f"Expected 3 Legends routes, got {len(legend_routes)}")
-                  legend_text = " ".join(x.text for x in legend_routes)
+                  legend_text = " ".join((x.get_attribute("textContent") or "") for x in legend_routes)
                   for expected in ["하이세이코", "스피드 심볼리", "세인트 라이트"]:
                       if expected not in legend_text:
                           raise RuntimeError(f"Missing Legends route: {expected}")
-                  if not d.find_element(By.ID, "legendsGuideBody").text.strip():
+                  if not (d.find_element(By.ID, "legendsGuideBody").get_attribute("textContent") or "").strip():
                       raise RuntimeError("Twinkle Legends guide body is empty")
                   print("LEGENDS GUIDE PASS")
 
