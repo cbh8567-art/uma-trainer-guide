@@ -388,13 +388,13 @@ jobs:
 
                   # V7.12: Tresenken turn checklist shows all 3 ramen choices.
                   select_scenario(d, "tresenken")
-                  d.execute_script("document.querySelector('[data-ramen-phase=senior]').click()")
+                  d.execute_script("setTrainingGuidePhase('senior')")
                   WebDriverWait(d, 8).until(lambda x: len(x.find_elements(By.CSS_SELECTOR, "#ramenGuideBody .ramenThreeItem")) == 3)
                   senior_ramen = d.find_elements(By.CSS_SELECTOR, "#ramenGuideBody .ramenThreeItem")
                   stat_icons = d.find_elements(By.CSS_SELECTOR, "#ramenGuideBody .ramenStatIcon")
                   if len(senior_ramen) != 3 or len(stat_icons) == 0:
                       raise RuntimeError("Senior ramen checklist should show 3 regional ramen and stat icons")
-                  d.execute_script("document.querySelector('[data-ramen-phase=ura]').click()")
+                  d.execute_script("setTrainingGuidePhase('ura')")
                   ultimate_names = ["스페셜 트레센 라멘", "욕심쟁이 트레센 라멘", "주옥의 트레센 라멘"]
                   WebDriverWait(d, 8).until(
                       lambda x: all(
@@ -415,12 +415,12 @@ jobs:
                       raise RuntimeError("Ramen three-choice cards are missing detailed effect text")
                   if "힌트 Lv+3" not in ramen_body.text:
                       # Current phase may be senior; verify URA once more for corrected hint level.
-                      d.execute_script("document.querySelector('[data-ramen-phase=ura]').click()")
+                      d.execute_script("setTrainingGuidePhase('ura')")
                       WebDriverWait(d, 8).until(lambda x: "힌트 Lv+3" in x.find_element(By.ID, "ramenGuideBody").text)
                   print("RAMEN TEXT GUIDE PASS:", len(effect_lines))
 
                   # V7.13: recommended SSR art must preserve the source card aspect ratio.
-                  d.execute_script("document.querySelector('[data-ramen-phase=senior]').click()")
+                  d.execute_script("setTrainingGuidePhase('senior')")
                   rec_imgs = d.find_elements(By.CSS_SELECTOR, ".recSupport img")
                   if rec_imgs:
                       fit = d.execute_script("return getComputedStyle(arguments[0]).objectFit", rec_imgs[0])
