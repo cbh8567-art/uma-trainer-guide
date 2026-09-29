@@ -2450,7 +2450,7 @@ function renderSetupProgress(){
 function renderDeckSetupSummary(){
  const box=$('#deckSetupSummary');if(!box)return;
  const u=selectedUma(),p1=inheritanceParent(0),p2=inheritanceParent(1),rental=state.deck[5]?cardById(state.deck[5]):null;
- const ownCount=state.deck.slice(0,5).filter(Boolean).length,cards=activeDeckCards(),avg=cards.length?cards.reduce((sum,card)=>sum+cardSuitability(card),0)/cards.length:0;
+ const ownCount=state.deck.slice(0,5).filter(Boolean).length,cards=activeDeckCards(),ratedCards=deckSuitabilityCards(),avg=ratedCards.length?ratedCards.reduce((sum,card)=>sum+cardSuitability(card),0)/ratedCards.length:0;
  box.innerHTML=
   '<div class="setupSummaryItem"><b>육성 우마</b><span>'+(u?esc(u.krName)+(state.currentUmaConfirmed?' ✓':' · 미확정'):'미선택')+'</span></div>'+
   '<div class="setupSummaryItem"><b>계승 부모</b><span>'+(p1&&p2?esc(p1.krName)+' / '+esc(p2.krName)+(state.inheritanceConfirmed?' ✓':' · 미확정'):'선택 '+[p1,p2].filter(Boolean).length+'/2')+'</span></div>'+
