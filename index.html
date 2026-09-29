@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.70.8">
+<meta name="app-build" content="V7.70.9">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.70.8 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.70.9 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -1161,7 +1161,7 @@ body.trainingMode .trainingProgressHead .sub,
 <div class="digitalMascotFloating" id="digitalMascotFloating" aria-label="디지탄 가이드" role="button" tabindex="0"><div class="digitalMascotBubble" id="digitalMascotBubble" hidden></div><img src="./assets/digital-mascot.gif" alt="디지탄 가이드"></div>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.70.8 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.70.9 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -1872,7 +1872,7 @@ const SCENARIO_STAT_CAPS={
  none:{label:'기타',speed:1400,stamina:1400,power:1400,guts:1400,wit:1400}
 };
 const DEFAULT_TRESENKEN_STAT_CAPS={speed:2150,stamina:1800,power:1700,guts:1700,wit:1800};
-const SERVER_PROFILE_FIELDS=['owned','deck','acquired','eventChoice','eventDone','lb','scenario','tresenkenUltimateRamen','tresenkenRmj','ramenGuideMode','ground','distance','style','currentUmaId','currentUmaConfirmed','inheritanceParentIds','inheritanceConfirmed','deckConfirmed','scenarioPlanLinkChoice','scenarioPlanUltimateRamen','scenarioPlanConfirmed','trainingActive','guideRaceId','evolutionPlan','deckPresets','trainingHistory','targetStatOverrides','statCaps','statCapOverrides','trainingStatCheck'];
+const SERVER_PROFILE_FIELDS=['owned','deck','acquired','eventChoice','eventDone','lb','scenario','tresenkenUltimateRamen','tresenkenRmj','ramenGuideMode','ground','distance','style','currentUmaId','currentUmaConfirmed','inheritanceParentIds','inheritanceConfirmed','deckConfirmed','scenarioPlanLinkChoice','scenarioPlanUltimateRamen','scenarioPlanConfirmed','trainingActive','guideRaceId','evolutionPlan','deckPresets','trainingHistory','targetStatOverrides','statCaps','statCapOverrides','paceCheckEnabled','trainingStatCheck'];
 function cloneStateValue(v){return v===undefined?undefined:JSON.parse(JSON.stringify(v))}
 function serverDefaultProfile(server){
  const set=server==='kr'?KOREA_UPCOMING:UPCOMING,r=set.races?.[0]||null;
@@ -1883,7 +1883,7 @@ function serverDefaultProfile(server){
    ground:r?.ground||'turf',distance:r?.distance||'mid',style:'senko',currentUmaId:null,
    currentUmaConfirmed:false,inheritanceParentIds:[null,null],inheritanceConfirmed:false,deckConfirmed:false,
    scenarioPlanLinkChoice:null,scenarioPlanUltimateRamen:null,scenarioPlanConfirmed:false,trainingActive:false,
-   guideRaceId:r?.id||null,evolutionPlan:null,deckPresets:[],trainingHistory:[],targetStatOverrides:{},statCaps:null,statCapOverrides:{},trainingStatCheck:{scenario:null,grade:'junior',month:12,half:'second',stats:{}}
+   guideRaceId:r?.id||null,evolutionPlan:null,deckPresets:[],trainingHistory:[],targetStatOverrides:{},statCaps:null,statCapOverrides:{},paceCheckEnabled:false,trainingStatCheck:{scenario:null,grade:'junior',month:12,half:'second',stats:{}}
  }
 }
 function normalizeServerProfile(profile,server){
@@ -2155,7 +2155,7 @@ function renderEmptySlotCards(){
   const box=$('#emptySlotCards');if(!box)return;box.innerHTML='';
   if(!runtime.ready){box.innerHTML='<div class="note">먼저 온라인 DB 동기화 또는 통합 DB JSON 불러오기가 필요합니다.</div>';return}
   const q=norm($('#emptySlotSearch')?.value||''),ownedIds=new Set(state.owned.map(String));
-  let arr=supportCatalogForServer();
+  let arr=supportCatalogForServer().filter(c=>!supportUmaConflict(c));
   if(emptySlotScope==='owned')arr=arr.filter(c=>ownedIds.has(String(c.id)));
   if(emptySlotType!=='전체')arr=arr.filter(c=>c.type===emptySlotType);
   if(q)arr=arr.filter(c=>searchHay(c).includes(q));
@@ -2179,6 +2179,17 @@ function renderEmptySlotCards(){
   if(!arr.length)box.innerHTML='<div class="note">조건에 맞는 SSR이 없습니다.</div>'
 }
 
+
+function supportUmaConflict(card,uma=selectedUma()){
+ if(!card||!uma)return false;
+ const cardJp=norm(cleanOriginalName(card.character||card.jpName||'')),umaJp=norm(cleanOriginalName(uma.character||uma.name||''));
+ const cardKr=norm(card.krName||''),umaKr=norm(uma.krName||'');
+ return (!!cardJp&&!!umaJp&&cardJp===umaJp)|| (!!cardKr&&!!umaKr&&cardKr===umaKr)
+}
+function deckUmaConflicts(uma=selectedUma()){
+ return (state.deck||[]).map((id,index)=>({index,card:id?cardById(id):null})).filter(x=>x.card&&supportUmaConflict(x.card,uma))
+}
+function deckSuitabilityCards(){return activeDeckCards().filter(c=>c&&c.type!=='친구'&&c.type!=='그룹')}
 
 function ensureDeckCardDefaultLb(id){
  const key=String(id);
@@ -2228,7 +2239,7 @@ function saveDeckPreset(){
 }
 function loadDeckPreset(){
  if(state.trainingActive)return toast('육성 진행 중에는 덱 프리셋을 불러올 수 없습니다.');const id=$('#deckPresetSelect')?.value,p=(state.deckPresets||[]).find(x=>x.id===id);if(!p)return toast('불러올 프리셋을 선택해 주세요.');
- const deck=[...(p.deck||[]).slice(0,6),...Array(6).fill(null)].slice(0,6);if(deck.some(cardId=>cardId&&!cardById(cardId)))return toast('현재 DB에 없는 SSR이 포함된 프리셋입니다.');
+ const deck=[...(p.deck||[]).slice(0,6),...Array(6).fill(null)].slice(0,6);if(deck.some(cardId=>cardId&&!cardById(cardId)))return toast('현재 DB에 없는 SSR이 포함된 프리셋입니다.');if(deck.some(cardId=>cardId&&supportUmaConflict(cardById(cardId))))return toast('현재 육성 우마와 같은 캐릭터의 서포트가 포함된 프리셋이라 불러올 수 없습니다.');
  state.deck=deck;for(const [k,v] of Object.entries(p.lb||{}))state.lb[k]=Number(v);invalidateDeckConfirmation();save();renderDeck();renderOwned();renderCatalog();renderGlobalSkills();renderGuide();renderDbGuideRecommendations();renderDeckPresets();toast('덱 프리셋을 불러왔습니다. 편성을 확인한 뒤 다시 확정해 주세요.')
 }
 function deleteDeckPreset(){const id=$('#deckPresetSelect')?.value,p=(state.deckPresets||[]).find(x=>x.id===id);if(!p)return toast('삭제할 프리셋을 선택해 주세요.');if(!confirm('「'+p.name+'」 프리셋을 삭제할까요?'))return;state.deckPresets=(state.deckPresets||[]).filter(x=>x.id!==id);save();renderDeckPresets();toast('덱 프리셋을 삭제했습니다.')}
@@ -2414,7 +2425,7 @@ function renderDeckSetupSummary(){
   '<div class="setupSummaryItem"><b>육성 우마</b><span>'+(u?esc(u.krName)+(state.currentUmaConfirmed?' ✓':' · 미확정'):'미선택')+'</span></div>'+
   '<div class="setupSummaryItem"><b>계승 부모</b><span>'+(p1&&p2?esc(p1.krName)+' / '+esc(p2.krName)+(state.inheritanceConfirmed?' ✓':' · 미확정'):'선택 '+[p1,p2].filter(Boolean).length+'/2')+'</span></div>'+
   '<div class="setupSummaryItem"><b>서포트</b><span>보유 슬롯 '+ownCount+'/5 · 렌탈 '+(rental?'1/1':'0/1')+'</span></div>'+
-  '<div class="setupSummaryItem"><b>덱 추천도</b><span>'+(cards.length?scoreStars(avg)+' '+avg.toFixed(1)+'/5':'편성 필요')+'</span></div>'
+  '<div class="setupSummaryItem"><b>덱 추천도</b><span>'+(ratedCards.length?scoreStars(avg)+' '+avg.toFixed(1)+'/5 · 친구/그룹 제외':'평가 대상 카드 없음')+'</span></div>'
 }
 function renderDeckConfirmationUi(){
  const btn=$('#confirmDeckBtn'),status=$('#deckConfirmStatus'),rec=$('#deckGuideRecommendBox'),guideBox=$('#guideSupportsBox');
@@ -2889,10 +2900,12 @@ function setCurrentUma(c){
  if(c&&!isUmaVisibleForServer(c))return toast('현재 서버에는 아직 구현되지 않은 육성 우마무스메입니다.');
  const prev=state.currentUmaId;
  state.currentUmaId=c?c.id:null;
+ let removedConflict=0;
  if(Number(prev)!==Number(state.currentUmaId)){
    state.currentUmaConfirmed=false;state.inheritanceConfirmed=false;state.deckConfirmed=false;state.scenarioPlanConfirmed=false;state.trainingActive=false;
+   if(c)for(let i=0;i<state.deck.length;i++){const card=state.deck[i]?cardById(state.deck[i]):null;if(card&&supportUmaConflict(card,c)){state.deck[i]=null;removedConflict++}}
  }
- save();renderConditionUmaSelector();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderGuide();renderTier();renderDbGuideRecommendations();renderV7Planner();renderDeckConfirmationUi()
+ save();renderConditionUmaSelector();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderGuide();renderTier();renderDbGuideRecommendations();renderV7Planner();renderDeck();renderDeckConfirmationUi();if(removedConflict)toast('같은 캐릭터 서포트 '+removedConflict+'장을 덱에서 자동 해제했습니다.')
 }
 function confirmCurrentUma(){
  const u=selectedUma();if(!u)return toast('먼저 육성 우마무스메를 선택해 주세요.');
@@ -4473,7 +4486,7 @@ function activeDeckCards(){
 function guideSupportCatalog(){
  return supportCatalogForServer()
 }
-function supportRecommend(cond){return guideSupportCatalog().map(c=>({c,score:cardSuitability(c,cond,state.owned.map(String).includes(String(c.id))?null:4)})).sort((a,b)=>b.score-a.score).slice(0,10)}
+function supportRecommend(cond){const uma=selectedUma();return guideSupportCatalog().filter(c=>!uma||!supportUmaConflict(c,uma)).map(c=>({c,score:cardSuitability(c,cond,state.owned.map(String).includes(String(c.id))?null:4)})).sort((a,b)=>b.score-a.score).slice(0,10)}
 
 
 function sameUmaSupport(card,uma){
@@ -4905,6 +4918,8 @@ let SUPPORT_OVERRIDES={
  30314:{title:'わたしときみの交換こ♪',jpName:'[わたしときみの交換こ♪]ハルウララ',eventSource:'Game8 / VIP Wiki 금스킬 2종 확정 검증',eventSourceUrl:'https://game8.jp/umamusume/372354',rareEvents:[{id:'verified_30314_result',label:'레어스킬 2종 획득',selection:'auto',note:'공개 공략 데이터 기준 チャート急上昇！・開けろ風穴！ 2종 확정',choices:[{id:'done',label:'획득',skills:[{skillId:201671,hintLevel:1},{skillId:204661,hintLevel:1}]}]}]},
  30315:{title:'ちょいワルヒーロー、見参！',jpName:'[ちょいワルヒーロー、見参！]ビコーペガサス',eventSource:'우마무스메 라보 이벤트 분기 검증',eventSourceUrl:'https://umamusumelabo.com/chara_support/ssr-bikopegasus-konjou',rareEvents:[{id:'verified_30315_final',label:'心に愛と使命を、街には平和を',selection:'single',note:'堅忍果決 고정 + 気骨稜稜 또는 初嵐 선택',choices:[{id:'kikotsu',label:'さすが警察官の子どもたちだな',skills:[{skillId:204671,hintLevel:1},{skillId:202751,hintLevel:1}]},{id:'hatsuarashi',label:'住民の平和を守ったんだ。大したものだよ',skills:[{skillId:204671,hintLevel:1},{skillId:200194,hintLevel:1}]}]}]},
  30317:{title:'行き先はあたたかな場所',jpName:'[行き先はあたたかな場所]マチカネタンホイザ',eventSource:'Game8 / Kamigame 금스킬 동시 획득 검증',eventSourceUrl:'https://game8.jp/umamusume/815144',rareEvents:[{id:'verified_30317_result',label:'레어스킬 동시 획득',selection:'auto',note:'공개 공략 데이터 기준 突撃魂・励声一番 2개 동시 획득',choices:[{id:'done',label:'획득',skills:[{skillId:202621,hintLevel:1},{skillId:204711,hintLevel:1}]}]}]},
+
+ 30318:{title:'めぐるぐるぐるトレセン日和',jpName:'[めぐるぐるぐるトレセン日和]ライスシャワー',eventSource:'GameWith / GameTora 2026-09-27 배포 SSR 검증',eventSourceUrl:'https://gamewith.jp/uma-musume/article/show/578814',rareEvents:[]},
 
  30292:{title:'響け、二人の凱歌',jpName:'[響け、二人の凱歌]マルシュロレーヌ',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30292/event',rareEvents:[{id:'verified_30292_final',label:'重なる『愛』',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:203611,hintLevel:1},{skillId:202301,hintLevel:1}]}]}]},
  30293:{title:'白に至る純真',jpName:'[白に至る純真]デアリングタクト',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30293/event',rareEvents:[{id:'verified_30293_final',label:'シンデレラの行く末',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:203791,hintLevel:1},{skillId:204051,hintLevel:1}]}]}]},
@@ -6492,7 +6507,7 @@ $('#syncBtn').onclick=syncDb;$('#dbRetryBtn').onclick=syncDb;$('#catalogRecommen
 $('#exportBtn').onclick=()=>{if(!runtime.ready)return toast('먼저 DB를 동기화하세요.');downloadJson('umamusume_tracker_db_v4.json',{version:4,generatedAt:new Date().toISOString(),catalog:runtime.catalog,skills:[...runtime.skills.values()],characters:runtime.characters.map(({title,character,krName,image,...rest})=>rest),courses:runtime.courses})};
 $('#exportStateBtn').onclick=()=>downloadJson('umamusume_tracker_mydata_v4.json',state);$('#importDb').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{loadCache(JSON.parse(await f.text()))}catch(x){alert('DB JSON 오류: '+x.message)}};
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$('#'+b.dataset.close).classList.remove('open'));document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});
-document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+t.dataset.page));if(t.dataset.page==='guide')renderGuide();if(t.dataset.page==='info')void renderRacetrackInfo().catch(e=>{console.warn('[V7.70.8] racetrack render failed',e);const body=$('#racetrackInfoBody');if(body)body.innerHTML='<div class="racetrackEmpty">경마장 정보를 불러오지 못했습니다. DB 동기화 후 다시 시도해 주세요.</div>'});renderSkillCountSideRails()});
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+t.dataset.page));if(t.dataset.page==='guide')renderGuide();if(t.dataset.page==='info')void renderRacetrackInfo().catch(e=>{console.warn('[V7.70.9] racetrack render failed',e);const body=$('#racetrackInfoBody');if(body)body.innerHTML='<div class="racetrackEmpty">경마장 정보를 불러오지 못했습니다. DB 동기화 후 다시 시도해 주세요.</div>'});renderSkillCountSideRails()});
 for(const id of ['tierGround','tierDistance','tierStyle'])$('#'+id).onchange=renderTier;$('#tierSearch').oninput=renderTier;$('#tierClear').onclick=()=>{$('#tierSearch').value='';renderTier()};
 $('#tierGround').value=state.ground;$('#tierDistance').value=state.distance;$('#tierStyle').value='all';renderAppServerTabs();setSsrDbOpen(false);
 function setCatalogFilter(t){catType=t;renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);renderCatalog()}
