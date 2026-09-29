@@ -18,7 +18,7 @@ ok(index.includes("gametora.com/images/umamusume/skill_icons/utx_ico_skill_"),"G
 ok(index.includes("30305")&&index.includes("いつでも、毎秒、その時だ"),"Tazuna invariant missing");
 ok(index.includes("./data/jp/system_status.json"),"system_status loader missing");
 ok(index.includes("./data/jp/scenario_watch.json"),"scenario_watch loader missing");
-ok(/<meta name="app-build" content="V7\.\d+">/.test(index),"V7.x app build marker missing");
+ok(/<meta name="app-build" content="V7\.\d+(?:\.\d+)?">/.test(index),"V7.x app build marker missing");
 ok(index.includes('id="dbLoadPanel"')&&index.includes('id="dbRetryBtn"'),"DB loading/retry UI missing");
 const meta=await read("data/kr/server_meta.json");
 ok(Number(meta.supportMaxId)===30260,"KR supportMaxId must stay 30260");

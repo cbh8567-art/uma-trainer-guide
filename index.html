@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.69.1">
-<title>우마무스메 트레이너 가이드 V7.69.1 WEB</title>
+<meta name="app-build" content="V7.70.3">
+<title>우마무스메 트레이너 가이드 V7.70.3 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -694,7 +694,43 @@ body.trainingMode .counts{margin-top:8px}
 .v7SkillCost{display:inline-flex;align-items:center;border:1px solid #5b4f31;background:#251f15;color:#f3d58b;border-radius:999px;padding:2px 5px;font-size:7px;font-weight:900}
 .v7SkillCost strong{color:#fff0b6;margin-left:3px}.v7SkillCost.missing{border-color:#465066;background:#202635;color:#9ca6ba}
 
-/* V7.69 · 스킬 추천 1픽 결정 + 근거 표시 */
+/* V7.70 · 경마장 정보 탭 */
+.racetrackInfoHead{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.racetrackSourceNote{margin-top:7px;border:1px solid #44546a;background:#141c27;border-radius:9px;padding:8px;font-size:8.5px;color:#aebbd0;line-height:1.5}
+.racetrackMascot{display:grid;grid-template-columns:116px minmax(0,1fr);gap:10px;align-items:center;margin-top:9px;border:1px solid #6b4b68;background:linear-gradient(135deg,#241923,#17202a);border-radius:12px;padding:8px 10px;overflow:hidden}
+.racetrackMascotArt{width:116px;height:100px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.racetrackMascotArt img{display:block;width:104px;height:104px;object-fit:contain;filter:drop-shadow(0 5px 10px rgba(0,0,0,.28))}
+.racetrackMascotArt.imageMissing::after{content:'DIGITAN';display:flex;align-items:center;justify-content:center;width:86px;height:86px;border:1px dashed #865f83;border-radius:50%;font-size:9px;font-weight:950;color:#d8a9d2}
+.racetrackMascotTalk{position:relative;border:1px solid #4b5368;background:#141a24;border-radius:11px;padding:9px 11px;font-size:9px;line-height:1.55;color:#d9e0eb}
+.racetrackMascotTalk::before{content:'';position:absolute;left:-8px;top:28px;border-width:7px 8px 7px 0;border-style:solid;border-color:transparent #4b5368 transparent transparent}
+.racetrackMascotTalk::after{content:'';position:absolute;left:-6px;top:29px;border-width:6px 7px 6px 0;border-style:solid;border-color:transparent #141a24 transparent transparent}
+.racetrackMascotName{font-size:9px;font-weight:950;color:#ffafd1;margin-bottom:3px}
+.racetrackMascotTalk a{display:inline-block;margin-top:5px;font-size:7.5px;color:#9fc8f4;text-decoration:none}
+
+.racetrackToolbar{display:grid;grid-template-columns:1fr 2fr;gap:7px;margin-top:10px}
+.racetrackHero{border:1px solid #3f5067;background:linear-gradient(180deg,#17202c,#141a23);border-radius:11px;padding:10px;margin-top:9px}
+.racetrackHeroTop{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.racetrackHero h3{margin:0;font-size:15px}.racetrackHero .jpTrack{font-size:8px;color:#9ba9bc;margin-top:2px}
+.racetrackChips{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px}.racetrackChip{border:1px solid #43516a;background:#1b2330;border-radius:999px;padding:3px 6px;font-size:8px;color:#cbd5e3}
+.racetrackCourses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:9px}
+.racetrackCourseCard{border:1px solid #354357;background:#151c26;color:#eef2f7;border-radius:9px;padding:7px;min-width:0;text-align:left;cursor:pointer}
+.racetrackCourseCard.active{border-color:#d1a84e;background:#272116}.racetrackCourseCard b{display:block;font-size:9px}.racetrackCourseCard span{display:block;font-size:8px;color:#aeb9c9;margin-top:2px}
+.racetrackDetail{border:1px solid #3d4a60;background:#131923;border-radius:10px;padding:9px;margin-top:9px}
+.racetrackDetailHead{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.racetrackDetailGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:8px}
+.racetrackDetailBox{border:1px solid #354155;background:#171d27;border-radius:8px;padding:7px;min-width:0}
+.racetrackDetailBox b{font-size:9px}.racetrackDetailRows{font-size:8px;color:#b7c1d0;line-height:1.65;margin-top:4px}
+.racetrackTimeline{margin-top:8px;border:1px solid #344257;background:#111720;border-radius:8px;padding:7px}
+.racetrackTimelineBar{display:flex;height:18px;overflow:hidden;border-radius:5px;border:1px solid #3b465b}
+.racetrackTimelineBar span{display:flex;align-items:center;justify-content:center;min-width:0;font-size:6.5px;color:#eff4fa;overflow:hidden;white-space:nowrap}
+.racetrackTimelineBar .early{background:#33475d}.racetrackTimelineBar .mid{background:#3f5b50}.racetrackTimelineBar .late{background:#6d5d3a}.racetrackTimelineBar .last{background:#70445a}
+.racetrackTimelineScale{display:flex;justify-content:space-between;font-size:7px;color:#8997aa;margin-top:3px}
+.racetrackCurrent{border:1px solid #6a5d34;background:#242015;border-radius:9px;padding:8px;margin-top:9px;font-size:8.5px;line-height:1.5;color:#e5d6a7}
+.racetrackEmpty{border:1px dashed #465267;border-radius:9px;padding:12px;margin-top:9px;color:#9eabba;font-size:9px;line-height:1.55}
+@media(max-width:900px){.racetrackCourses{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.racetrackToolbar,.racetrackDetailGrid{grid-template-columns:1fr}.racetrackCourses{grid-template-columns:1fr}.racetrackInfoHead .btn{width:100%;text-align:center}.racetrackMascot{grid-template-columns:82px minmax(0,1fr);gap:7px;padding:7px}.racetrackMascotArt{width:82px;height:78px}.racetrackMascotArt img{width:78px;height:78px}.racetrackMascotTalk{padding:8px;font-size:8px}}
+
+/* V7.70 · 스킬 추천 1픽 결정 + 근거 표시 */
 .v769Decision{border:1px solid #7d6740;background:linear-gradient(180deg,#252016,#191c25);border-radius:10px;padding:9px;margin:0 0 7px}
 .v769Decision.tie{border-color:#4f627d;background:linear-gradient(180deg,#182330,#171b25)}
 .v769Decision .headline{font-size:10px;font-weight:950;line-height:1.45}
@@ -1108,7 +1144,7 @@ body.trainingMode .trainingProgressHead .sub,
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.69 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.70.3 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -1133,6 +1169,7 @@ body.trainingMode .trainingProgressHead .sub,
   <button class="tab active" data-page="deck">덱 / 스킬</button>
   <button class="tab" data-page="guide">트레이너 가이드</button>
   <button class="tab" data-page="tier">육성 우마무스메 티어</button>
+  <button class="tab" data-page="info">정보</button>
  </div>
 
  <section class="page active" id="page-deck">
@@ -1506,6 +1543,40 @@ body.trainingMode .trainingProgressHead .sub,
    <div id="tierGrid"></div><div class="note" id="tierSource" style="margin-top:8px"></div>
   </div>
  </section>
+
+ <section class="page" id="page-info">
+  <div class="panel">
+   <div class="racetrackInfoHead">
+    <div>
+     <h2 style="margin:0">경마장 정보</h2>
+     <div class="sub">경마장별 코스·거리·바장·방향을 한눈에 보고, 현재 챔미/가이드 코스는 자동으로 찾아줍니다.</div>
+    </div>
+    <a class="btn" id="racetrackGameToraList" href="https://gametora.com/ko/umamusume/racetracks" target="_blank" rel="noopener">GameTora 경마장 목록 ↗</a>
+   </div>
+   <div class="racetrackSourceNote">GameTora는 우마무스메의 비공식 팬 데이터베이스입니다. 상세 구간·코너·경사·스퍼트 정보의 출처 링크를 함께 표시합니다.</div>
+   <div class="racetrackMascot">
+    <div class="racetrackMascotArt">
+     <!-- Agnes Digital profile asset mirrored by GameTora; underlying game materials © Cygames, Inc. -->
+     <img src="https://media.gametora.com/umamusume/characters/profile/1019.png"
+          alt="아그네스 디지털 치비 SD"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          onerror="this.style.display='none';this.parentElement.classList.add('imageMissing')">
+    </div>
+    <div class="racetrackMascotTalk">
+     <div class="racetrackMascotName">디지탄 코스 체크</div>
+     <div id="racetrackMascotText">두후후~ 경마장을 고르면 코너·직선·경사 포인트를 같이 확인해 드립니다!</div>
+     <a href="https://gametora.com/ko/umamusume/characters/agnes-digital" target="_blank" rel="noopener">아그네스 디지털 출처 ↗</a>
+    </div>
+   </div>
+   <div class="racetrackToolbar">
+    <div class="field"><label>경마장</label><select id="racetrackPlace"></select></div>
+    <div class="field"><label>코스</label><select id="racetrackCourse"></select></div>
+   </div>
+   <div id="racetrackCurrentRace"></div>
+   <div id="racetrackInfoBody"></div>
+  </div>
+ </section>
 </div>
 
 <div class="mobileDock" id="mobileDock"></div><div class="toast" id="toast"></div>
@@ -1703,6 +1774,31 @@ const STATE_KEY='uma_tracker_v4_state', CACHE_KEY='uma_trainer_v531_db_cache', L
 const TYPES=['전체','스피드','스태미나','파워','근성','지능','친구','그룹'];
 const typeMap={Speed:'스피드',Stamina:'스태미나',Power:'파워',Guts:'근성',Wit:'지능',Friend:'친구',Pal:'친구',Group:'그룹',speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',friend:'친구',group:'그룹'};
 const distLabel={short:'단거리',mile:'마일',mid:'중거리',long:'장거리'}, styleLabel={nige:'도주',senko:'선행',sashi:'선입',oikomi:'추입'}, groundLabel={turf:'잔디',dirt:'더트'};
+const RACETRACK_META={
+ '札幌':{kr:'삿포로',slug:'sapporo'},'函館':{kr:'하코다테',slug:'hakodate'},'新潟':{kr:'니가타',slug:'niigata'},'福島':{kr:'후쿠시마',slug:'fukushima'},
+ '中山':{kr:'나카야마',slug:'nakayama'},'東京':{kr:'도쿄',slug:'tokyo'},'中京':{kr:'주쿄',slug:'chukyo'},'京都':{kr:'교토',slug:'kyoto'},
+ '阪神':{kr:'한신',slug:'hanshin'},'小倉':{kr:'고쿠라',slug:'kokura'},'大井':{kr:'오이',slug:'ooi'},'ロンシャン':{kr:'롱샹',slug:'longchamp'},
+ '川崎':{kr:'가와사키',slug:'kawasaki'},'船橋':{kr:'후나바시',slug:'funabashi'},'盛岡':{kr:'모리오카',slug:'morioka'},
+ 'サンタアニタパーク':{kr:'산타 아니타 파크',slug:'santa_anita'},'デルマー':{kr:'델마',slug:'del_mar'}
+};
+const RACETRACK_DETAIL_SNAPSHOT={
+ '東京|2400|芝':{
+  checked:'2026-09-29',source:'GameTora',sourceUrl:'https://gametora.com/ko/umamusume/racetracks/tokyo',
+  phases:[['초반',0,400,'early'],['중반',400,1600,'mid'],['종반',1600,2000,'late'],['라스트 스퍼트',2000,2400,'last']],
+  corners:[['1코너',325,575],['2코너',575,900],['3코너',1350,1625],['4코너',1625,1875]],
+  straights:[['직선 1',0,325],['직선 2',900,1350],['직선 3',1875,2400]],
+  slopes:[['오르막',0,40,'+1.5'],['오르막',1125,1200,'+2'],['내리막',1250,1500,'-1.5'],['오르막',1950,2100,'+1.5']],
+  positionKeep:[0,1000],spurt:{start:1600,where:'코너'},thresholds:'없음'
+ },
+ 'ロンシャン|2400|芝':{
+  checked:'2026-09-29',source:'GameTora',sourceUrl:'https://gametora.com/ko/umamusume/racetracks/longchamp',
+  phases:[['초반',0,400,'early'],['중반',400,1600,'mid'],['종반',1600,2000,'late'],['라스트 스퍼트',2000,2400,'last']],
+  corners:[['3코너',800,1200],['4코너',1200,1600]],
+  straights:[['직선 1',0,798],['직선 2',1600,2399]],
+  slopes:[],
+  positionKeep:[0,1000],spurt:{start:1600,where:'최종 직선'},thresholds:'없음'
+ }
+};
 let INVEN_CHAR_ALIASES={
  'グラスワンダー':'그래스 원더','ヒシアマゾン':'히시 아마존','エルコンドルパサー':'엘 콘도르 파사','マンハッタンカフェ':'맨하탄 카페',
  'ヒシアケボノ':'히시 아케보노','ユキノビジン':'유키노 비진','アグネスタキオン':'아그네스 타키온','アドマイヤベガ':'어드마이어 베가',
@@ -3535,7 +3631,7 @@ function renderScenarioEvolution(cond){
     b.appendChild(row)
   });
   const n=document.createElement('div');n.className='note';n.style.marginTop='7px';
-  n.innerHTML=`${esc(sc.kr)}에서는 한 번의 육성에서 시나리오 진화를 최대 <b>${sc.maxEvolution}개</b> 선택합니다. V7.69부터 추천 슬롯을 같은 표시로 묶지 않고 1순위→2순위로 구분합니다.${sc.sourceUrl?` <a href="${sc.sourceUrl}" target="_blank" rel="noopener" style="color:#ff9fc2">시나리오 진화 출처 ↗</a>`:''}${sc.krSourceUrl?` · <a href="${sc.krSourceUrl}" target="_blank" rel="noopener" style="color:#70c5f4">한국어 DB(Inven) ↗</a>`:''}`;
+  n.innerHTML=`${esc(sc.kr)}에서는 한 번의 육성에서 시나리오 진화를 최대 <b>${sc.maxEvolution}개</b> 선택합니다. V7.70부터 추천 슬롯을 같은 표시로 묶지 않고 1순위→2순위로 구분합니다.${sc.sourceUrl?` <a href="${sc.sourceUrl}" target="_blank" rel="noopener" style="color:#ff9fc2">시나리오 진화 출처 ↗</a>`:''}${sc.krSourceUrl?` · <a href="${sc.krSourceUrl}" target="_blank" rel="noopener" style="color:#70c5f4">한국어 DB(Inven) ↗</a>`:''}`;
   b.appendChild(n)
 }
 
@@ -4497,6 +4593,87 @@ function renderTier(){
    $('#tierSource').textContent=`스냅샷 ${TIER_DATA.snapshotDate} · 출처: Game8 · 현재 선택 육성 우마무스메는 금색 테두리로 표시`
  }
 }
+let racetrackInfoPlace=null,racetrackInfoCourseId=null,racetrackInfoLoading=false;
+function racetrackKr(place){return RACETRACK_META[place]?.kr||place||'미정'}
+function racetrackGroundKr(v){return v==='芝'?'잔디':v==='ダート'?'더트':v||'미정'}
+function racetrackDistKr(v){return {'短距離':'단거리','マイル':'마일','中距離':'중거리','長距離':'장거리'}[v]||v||'미정'}
+function racetrackDetailKey(course){return course?`${course.place}|${Number(course.distance)}|${course.ground}`:''}
+function racetrackSourceUrl(place){const slug=RACETRACK_META[place]?.slug;return slug?`https://gametora.com/ko/umamusume/racetracks/${slug}`:'https://gametora.com/ko/umamusume/racetracks'}
+function matchGuideCourse(courses){
+ const r=getGuideRace();if(!r)return null;
+ const jpPlace=Object.keys(RACETRACK_META).find(k=>RACETRACK_META[k].kr===r.placeKr)||r.place||null;
+ if(!jpPlace)return null;
+ const g=r.ground==='dirt'?'ダート':'芝';
+ return courses.find(x=>x.place===jpPlace&&Number(x.distance)===Number(r.meters)&&x.ground===g)||courses.find(x=>x.place===jpPlace&&Number(x.distance)===Number(r.meters))||null
+}
+function racetrackRowsHtml(rows){return rows.length?rows.map(x=>`<div>${esc(x[0])} · ${x[1]}m → ${x[2]}m${x[3]?` · ${esc(x[3])}`:''}</div>`).join(''):'<div>등록된 구간 없음</div>'}
+function racetrackTimelineHtml(detail,distance){
+ if(!detail?.phases?.length||!distance)return '';
+ return `<div class="racetrackTimeline"><b style="font-size:8px">레이스 구간</b><div class="racetrackTimelineBar">${detail.phases.map(x=>`<span class="${x[3]}" style="width:${Math.max(1,(x[2]-x[1])/distance*100)}%">${esc(x[0])}</span>`).join('')}</div><div class="racetrackTimelineScale"><span>0m</span><span>${Math.round(distance/2)}m</span><span>${distance}m</span></div></div>`
+}
+async function ensureRacetrackCourses(){
+ if(runtime.courses?.length)return true;
+ if(racetrackInfoLoading)return false;
+ racetrackInfoLoading=true;
+ const body=$('#racetrackInfoBody');if(body)body.innerHTML='<div class="racetrackEmpty">경마장 코스 데이터를 불러오는 중입니다…</div>';
+ try{
+   const data=await fetchJson(CONFIG.sources.courses);
+   runtime.courses=Array.isArray(data?.courses)?data.courses:[];
+   if(runtime.courses.length){
+     try{storeDbCacheSafely({catalog:runtime.catalog,skills:[...runtime.skills.values()],characters:runtime.characters,courses:runtime.courses})}catch(_){}
+     return true
+   }
+ }catch(e){console.warn('[V7.70] racetrack courses load failed',e)}
+ finally{racetrackInfoLoading=false}
+ return false
+}
+async function renderRacetrackInfo(){
+ const placeSel=$('#racetrackPlace'),courseSel=$('#racetrackCourse'),body=$('#racetrackInfoBody'),current=$('#racetrackCurrentRace');
+ if(!placeSel||!courseSel||!body)return;
+ if(!runtime.courses?.length){const ok=await ensureRacetrackCourses();if(!ok){body.innerHTML='<div class="racetrackEmpty">경마장 코스 DB를 불러오지 못했습니다. 온라인 DB 동기화 후 다시 열어 주세요.</div>';return}}
+ const courses=(runtime.courses||[]).filter(x=>x&&x.place&&Number(x.distance)>0);
+ const places=[...new Set(courses.map(x=>x.place))].sort((a,b)=>(RACETRACK_META[a]?.kr||a).localeCompare(RACETRACK_META[b]?.kr||b,'ko'));
+ const guideMatch=matchGuideCourse(courses);
+ if(!racetrackInfoPlace||!places.includes(racetrackInfoPlace))racetrackInfoPlace=guideMatch?.place||places[0]||null;
+ const placeCourses=courses.filter(x=>x.place===racetrackInfoPlace).sort((a,b)=>Number(a.distance)-Number(b.distance)||String(a.ground).localeCompare(String(b.ground)));
+ if(!placeCourses.some(x=>Number(x.id)===Number(racetrackInfoCourseId)))racetrackInfoCourseId=(guideMatch?.place===racetrackInfoPlace?guideMatch?.id:null)||placeCourses[0]?.id||null;
+ const course=placeCourses.find(x=>Number(x.id)===Number(racetrackInfoCourseId))||placeCourses[0]||null;
+ placeSel.innerHTML=places.map(p=>`<option value="${esc(p)}" ${p===racetrackInfoPlace?'selected':''}>${esc(racetrackKr(p))} · ${esc(p)}</option>`).join('');
+ courseSel.innerHTML=placeCourses.map(x=>`<option value="${Number(x.id)}" ${Number(x.id)===Number(course?.id)?'selected':''}>${Number(x.distance)}m · ${esc(racetrackGroundKr(x.ground))} · ${esc(racetrackDistKr(x.distClass))}${x.turn?` · ${esc(x.turn)}회전`:''}</option>`).join('');
+ placeSel.onchange=()=>{racetrackInfoPlace=placeSel.value;racetrackInfoCourseId=null;renderRacetrackInfo()};
+ courseSel.onchange=()=>{racetrackInfoCourseId=Number(courseSel.value);renderRacetrackInfo()};
+ const race=getGuideRace();
+ if(current){
+   if(race&&guideMatch){
+     current.innerHTML=`<div class="racetrackCurrent"><b>현재 가이드 레이스 자동 매칭:</b> ${esc(race.eventKr)} · ${esc(race.placeKr||racetrackKr(guideMatch.place))} ${Number(race.meters)||guideMatch.distance}m · ${groundLabel[race.ground]||racetrackGroundKr(guideMatch.ground)} <button type="button" class="mini" id="racetrackJumpCurrent">이 코스 보기</button></div>`;
+     const jump=$('#racetrackJumpCurrent');if(jump)jump.onclick=()=>{racetrackInfoPlace=guideMatch.place;racetrackInfoCourseId=guideMatch.id;renderRacetrackInfo()}
+   }else current.innerHTML='';
+ }
+ if(!course){body.innerHTML='<div class="racetrackEmpty">선택한 경마장에 표시할 코스가 없습니다.</div>';return}
+ const meta=RACETRACK_META[course.place]||{kr:course.place},sourceUrl=racetrackSourceUrl(course.place),detail=RACETRACK_DETAIL_SNAPSHOT[racetrackDetailKey(course)];
+ const mascotText=$('#racetrackMascotText');
+ if(mascotText){
+   const base=`${racetrackKr(course.place)} ${Number(course.distance)}m · ${racetrackGroundKr(course.ground)} · ${course.turn||'방향 미정'}회전`;
+   mascotText.textContent=detail?.spurt?.start
+     ?`두후후~ ${base}! 종반 기준은 ${detail.spurt.start}m이고, ${detail.spurt.where}에서 승부 구간이 시작됩니다. 경사·코너도 아래에서 같이 체크하세요!`
+     :`두후후~ ${base}! 기본 코스 정보는 확인됐습니다. 상세 코너·경사 스냅샷이 추가되면 스킬 1픽 판단에도 바로 연결할 수 있어요!`;
+ }
+ const turf=placeCourses.filter(x=>x.ground==='芝').length,dirt=placeCourses.filter(x=>x.ground==='ダート').length;
+ const detailHtml=detail?`<div class="racetrackDetail">
+   <div class="racetrackDetailHead"><div><b>상세 구간 스냅샷</b><div class="sub">GameTora 확인 ${esc(detail.checked)} · 스킬 추천 엔진 연결 전 정보 표시 단계</div></div><a class="mini" href="${esc(detail.sourceUrl)}" target="_blank" rel="noopener">원문 상세 ↗</a></div>
+   ${racetrackTimelineHtml(detail,Number(course.distance))}
+   <div class="racetrackDetailGrid">
+    <div class="racetrackDetailBox"><b>코너</b><div class="racetrackDetailRows">${racetrackRowsHtml(detail.corners)}</div></div>
+    <div class="racetrackDetailBox"><b>직선</b><div class="racetrackDetailRows">${racetrackRowsHtml(detail.straights)}</div></div>
+    <div class="racetrackDetailBox"><b>경사</b><div class="racetrackDetailRows">${detail.slopes.length?racetrackRowsHtml(detail.slopes):'<div>GameTora 표기상 별도 경사 구간 없음</div>'}</div></div>
+    <div class="racetrackDetailBox"><b>기타</b><div class="racetrackDetailRows"><div>포지션 킵: ${detail.positionKeep[0]}m → ${detail.positionKeep[1]}m</div><div>종반/스퍼트 진입 기준: ${detail.spurt.start}m · ${esc(detail.spurt.where)}</div><div>스탯 임계치: ${esc(detail.thresholds)}</div></div></div>
+   </div>
+  </div>`:`<div class="racetrackEmpty">이 코스의 상세 코너·경사·스퍼트 구간은 아직 앱 내부 스냅샷으로 가져오지 않았습니다. 기본 코스 정보는 표시하며, GameTora 원문에서 상세 구간을 바로 확인할 수 있습니다. 다음 단계에서 이 데이터를 스킬 1픽 엔진에 연결합니다.</div>`;
+ body.innerHTML=`<div class="racetrackHero"><div class="racetrackHeroTop"><div><h3>${esc(meta.kr)} 경기장</h3><div class="jpTrack">${esc(course.place)} · 코스 ${placeCourses.length}개</div></div><a class="btn" href="${esc(sourceUrl)}" target="_blank" rel="noopener">GameTora 상세 ↗</a></div>
+  <div class="racetrackChips"><span class="racetrackChip">잔디 ${turf}코스</span><span class="racetrackChip">더트 ${dirt}코스</span><span class="racetrackChip">선택 ${Number(course.distance)}m</span><span class="racetrackChip">${esc(racetrackDistKr(course.distClass))}</span><span class="racetrackChip">${esc(racetrackGroundKr(course.ground))}</span><span class="racetrackChip">${esc(course.turn||'방향 미정')}</span></div>
+  <div class="racetrackCourses">${placeCourses.map(x=>`<button type="button" class="racetrackCourseCard ${Number(x.id)===Number(course.id)?'active':''}" data-course-id="${Number(x.id)}"><b>${Number(x.distance)}m · ${esc(racetrackGroundKr(x.ground))}</b><span>${esc(racetrackDistKr(x.distClass))} · ${esc(x.turn||'방향 미정')}회전</span></button>`).join('')}</div></div>${detailHtml}`;
+ body.querySelectorAll('[data-course-id]').forEach(btn=>btn.onclick=()=>{racetrackInfoCourseId=Number(btn.dataset.courseId);renderRacetrackInfo()})
+}
 async function fetchJson(url){const candidates=[url];if(url.includes('raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/'))candidates.push('https://cdn.jsdelivr.net/gh/Tsuyuchan-jp/umamusume-data@main/'+url.split('/main/')[1]);if(url.includes('raw.githubusercontent.com/daftuyda/UmaTools/main/'))candidates.push('https://cdn.jsdelivr.net/gh/daftuyda/UmaTools@main/'+url.split('/main/')[1]);let last;for(const u of candidates){try{const r=await fetch(u,{cache:'no-store',mode:'cors'});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json()}catch(e){last=e}}throw last||new Error('download failed')}
 const RUNTIME_SKILL_ICON_FAILURES=new Map();
 let skillIconAuditRaf=0;
@@ -4839,7 +5016,7 @@ function buildCompactDbCache(cache){
    catalog:(cache.catalog||[]).map(compactCardMeta),
    skills:(cache.skills||[]).map(compactSkillMeta).filter(Boolean),
    characters:(cache.characters||[]).map(compactCharacterMeta),
-   courses:[]
+   courses:(cache.courses||[]).map(x=>({id:Number(x.id),name:x.name||'',place:x.place||'',distance:Number(x.distance)||0,distClass:x.distClass||'',turn:x.turn||'',ground:x.ground||''}))
  }
 }
 function storeDbCacheSafely(cache){
@@ -5506,7 +5683,7 @@ function renderV7GeneralSkills(cond,uma,race){
    const hintMeta='<div class="v7GeneralSkillMeta"><span class="v7HintEff '+(hintLv?'':'none')+'">힌트 Lv '+hintLv+(hintLv?' · SP -'+discount+'%':' · 할인 없음')+'</span>'+costMeta+'</div>';
    const pickBadge=decision.tied&&index<2?'<span class="v769PickBadge tie">동급</span>':index===0?'<span class="v769PickBadge">1픽</span>':index===1?'<span class="v769PickBadge second">2순위</span>':'';
    return '<div class="v7GeneralSkill '+r.cls+'">'+skillIcon(s)+'<div class="body"><div class="name">'+esc(display)+'</div><div class="jp">'+esc(s.jp||'')+'</div><div class="reason">'+esc(row.reasons.slice(0,2).join(' · '))+(row.decisionReasons.length?' · '+esc(row.decisionReasons.slice(0,2).join(' · ')):'')+(details?' · '+esc(details):'')+'</div><div class="source">'+sources+'</div>'+hintMeta+'</div><div class="v7GeneralSkillRank">'+r.stars+'<br>'+pickBadge+'</div></div>'
- }).join('')+'</div><div class="note" style="margin-top:7px">V7.69는 코스/거리/각질 적합도, 획득 경로, 힌트 할인과 예상 SP를 다시 비교해 1픽과 2순위를 구분합니다. 근거가 사실상 같은 경우에만 ‘둘 다 유효’로 남깁니다. 스킬 효과량·발동 구간의 정밀 데이터 계약과 보유 SP 전체 구매 조합 최적화는 다음 단계에서 연결합니다.</div>'
+ }).join('')+'</div><div class="note" style="margin-top:7px">V7.70는 코스/거리/각질 적합도, 획득 경로, 힌트 할인과 예상 SP를 다시 비교해 1픽과 2순위를 구분합니다. 근거가 사실상 같은 경우에만 ‘둘 다 유효’로 남깁니다. 스킬 효과량·발동 구간의 정밀 데이터 계약과 보유 SP 전체 구매 조합 최적화는 다음 단계에서 연결합니다.</div>'
 }
 
 function v7DeckDeficits(cond,deckCards){
@@ -6296,7 +6473,7 @@ $('#syncBtn').onclick=syncDb;$('#dbRetryBtn').onclick=syncDb;$('#catalogRecommen
 $('#exportBtn').onclick=()=>{if(!runtime.ready)return toast('먼저 DB를 동기화하세요.');downloadJson('umamusume_tracker_db_v4.json',{version:4,generatedAt:new Date().toISOString(),catalog:runtime.catalog,skills:[...runtime.skills.values()],characters:runtime.characters.map(({title,character,krName,image,...rest})=>rest),courses:runtime.courses})};
 $('#exportStateBtn').onclick=()=>downloadJson('umamusume_tracker_mydata_v4.json',state);$('#importDb').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{loadCache(JSON.parse(await f.text()))}catch(x){alert('DB JSON 오류: '+x.message)}};
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$('#'+b.dataset.close).classList.remove('open'));document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});
-document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+t.dataset.page));if(t.dataset.page==='guide')renderGuide();renderSkillCountSideRails()});
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+t.dataset.page));if(t.dataset.page==='guide')renderGuide();if(t.dataset.page==='info')void renderRacetrackInfo().catch(e=>{console.warn('[V7.70.3] racetrack render failed',e);const body=$('#racetrackInfoBody');if(body)body.innerHTML='<div class="racetrackEmpty">경마장 정보를 불러오지 못했습니다. DB 동기화 후 다시 시도해 주세요.</div>'});renderSkillCountSideRails()});
 for(const id of ['tierGround','tierDistance','tierStyle'])$('#'+id).onchange=renderTier;$('#tierSearch').oninput=renderTier;$('#tierClear').onclick=()=>{$('#tierSearch').value='';renderTier()};
 $('#tierGround').value=state.ground;$('#tierDistance').value=state.distance;$('#tierStyle').value='all';renderAppServerTabs();setSsrDbOpen(false);
 function setCatalogFilter(t){catType=t;renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);renderCatalog()}

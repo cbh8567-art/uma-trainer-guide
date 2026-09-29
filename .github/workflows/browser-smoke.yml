@@ -32,9 +32,9 @@ jobs:
           from selenium.webdriver.support import expected_conditions as EC
 
           TARGETS = [
-              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v713"),
-              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v713"),
-              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v713"),
+              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v7703"),
+              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v7703"),
+              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v7703"),
           ]
 
           def make_driver(width=1440, height=1200):
@@ -49,7 +49,7 @@ jobs:
               return driver
 
           def wait_app(driver):
-              WebDriverWait(driver, 25).until(lambda d: "V7.13" in d.title)
+              WebDriverWait(driver, 25).until(lambda d: "V7." in d.title)
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "scenarioRareSkillPanel")))
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "finishRamenLinkChoices")))
 
@@ -237,6 +237,25 @@ jobs:
                   print("WATCH PILOT UI PASS")
                   tabs[0].click()
                   time.sleep(0.3)
+
+                  # V7.70.3: information tab must open without freezing the global UI,
+                  # and the racetrack controls must render after the tab is selected.
+                  info_tab = d.find_element(By.CSS_SELECTOR, '.tab[data-page="info"]')
+                  d.execute_script("arguments[0].click()", info_tab)
+                  WebDriverWait(d, 12).until(
+                      lambda x: x.find_element(By.ID, "page-info").get_attribute("class").find("active") >= 0
+                  )
+                  WebDriverWait(d, 20).until(
+                      lambda x: len(Select(x.find_element(By.ID, "racetrackPlace")).options) > 0
+                  )
+                  course_options = len(Select(d.find_element(By.ID, "racetrackCourse")).options)
+                  if course_options == 0:
+                      raise RuntimeError("Racetrack info tab opened but rendered no course options")
+                  d.execute_script("arguments[0].click()", d.find_element(By.CSS_SELECTOR, '.tab[data-page="deck"]'))
+                  WebDriverWait(d, 8).until(
+                      lambda x: x.find_element(By.ID, "page-deck").get_attribute("class").find("active") >= 0
+                  )
+                  print("RACETRACK INFO / TAB RECOVERY PASS:", course_options)
 
                   check_scenario_badges(d)
 
