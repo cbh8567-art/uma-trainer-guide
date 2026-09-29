@@ -20,7 +20,7 @@ jobs:
       - name: Install Selenium
         run: python -m pip install --quiet selenium
 
-      - name: P0 V7.70.6 startup and controls smoke
+      - name: P0 V7.70.7 startup and controls smoke
         shell: bash
         run: |
           set -o pipefail
@@ -42,7 +42,7 @@ jobs:
           d.set_window_size(1440, 1200)
           try:
               d.get(url)
-              WebDriverWait(d, 25).until(lambda x: "V7.70.6" in x.title)
+              WebDriverWait(d, 25).until(lambda x: "V7.70.7" in x.title)
               WebDriverWait(d, 25).until(EC.presence_of_element_located((By.ID, "page-deck")))
 
               tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
@@ -134,7 +134,7 @@ jobs:
                   raise RuntimeError("P0 browser console has severe JS errors: " + " | ".join(
                       x.get("message", "") for x in js_severe[:10]
                   ))
-              print("P0 V7.70.6 BROWSER PASS")
+              print("P0 V7.70.7 BROWSER PASS")
           finally:
               d.quit()
           PY
@@ -151,11 +151,11 @@ jobs:
           from selenium.webdriver.support.ui import Select, WebDriverWait
           from selenium.webdriver.support import expected_conditions as EC
 
-          EXPECTED_BUILD = "V7.70.6"
+          EXPECTED_BUILD = "V7.70.7"
           TARGETS = [
-              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v7706", True),
-              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v7706", False),
-              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v7706", False),
+              ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v7707", True),
+              ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v7707", False),
+              ("vercel-main", "https://uma-trainer-guide.vercel.app/?smoke=v7707", False),
           ]
 
           def make_driver(width=1440, height=1200):
@@ -304,7 +304,7 @@ jobs:
                       raise RuntimeError("getDisplayMedia is unavailable on deployed HTTPS target")
                   print("WATCH PILOT DOM/API PASS")
 
-                  # V7.70.6: animated Agnes Digital mascot + favicon asset.
+                  # V7.70.7: animated Agnes Digital mascot + favicon asset.
                   mascot = d.find_element(By.ID, "digitalMascotFloating")
                   mascot_img = mascot.find_element(By.TAG_NAME, "img")
                   mascot_src = mascot_img.get_attribute("src") or ""
@@ -319,6 +319,28 @@ jobs:
                   if not any("assets/digital-mascot.gif" in href for href in favicon_hrefs):
                       raise RuntimeError(f"Digital favicon missing: {favicon_hrefs}")
                   print("DIGITAL MASCOT / FAVICON PASS")
+
+                  # V7.70.7: mascot can be dragged and stores its position.
+                  before = d.execute_script("""
+                      const e=document.getElementById('digitalMascotFloating'),r=e.getBoundingClientRect();
+                      return {left:r.left,top:r.top};
+                  """)
+                  d.execute_script("""
+                      const e=document.getElementById('digitalMascotFloating'),r=e.getBoundingClientRect();
+                      const id=77;
+                      e.dispatchEvent(new PointerEvent('pointerdown',{pointerId:id,pointerType:'mouse',button:0,clientX:r.left+10,clientY:r.top+10,bubbles:true}));
+                      e.dispatchEvent(new PointerEvent('pointermove',{pointerId:id,pointerType:'mouse',button:0,clientX:r.left+70,clientY:r.top+55,bubbles:true}));
+                      e.dispatchEvent(new PointerEvent('pointerup',{pointerId:id,pointerType:'mouse',button:0,clientX:r.left+70,clientY:r.top+55,bubbles:true}));
+                  """)
+                  after = d.execute_script("""
+                      const e=document.getElementById('digitalMascotFloating'),r=e.getBoundingClientRect();
+                      return {left:r.left,top:r.top,saved:localStorage.getItem('uma_trainer_digital_mascot_pos_v1')};
+                  """)
+                  if abs(after["left"]-before["left"]) < 20 and abs(after["top"]-before["top"]) < 20:
+                      raise RuntimeError(f"Digital mascot drag did not move: before={before}, after={after}")
+                  if not after["saved"]:
+                      raise RuntimeError("Digital mascot position was not persisted")
+                  print("DIGITAL MASCOT DRAG PASS:", before, "->", after)
 
                   # V7.11: compact SSR DB and deck-first card picker.
                   db_body = d.find_element(By.ID, "ssrDbBody")
@@ -386,7 +408,7 @@ jobs:
                   tabs[0].click()
                   time.sleep(0.3)
 
-                  # V7.70.6: information tab must open without freezing the global UI,
+                  # V7.70.7: information tab must open without freezing the global UI,
                   # and the racetrack controls must render after the tab is selected.
                   info_tab = d.find_element(By.CSS_SELECTOR, '.tab[data-page="info"]')
                   d.execute_script("arguments[0].click()", info_tab)
