@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.70.10">
+<meta name="app-build" content="V7.70.11">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.70.10 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.70.11 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -1176,7 +1176,7 @@ body.trainingMode .trainingProgressHead .sub,
 </div>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.70.10 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.70.11 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -4686,7 +4686,7 @@ async function ensureRacetrackCourses(){
  const body=$('#racetrackInfoBody');if(body)body.innerHTML='<div class="racetrackEmpty">경마장 코스 데이터를 불러오는 중입니다…</div>';
  try{
    const data=await fetchJson(CONFIG.sources.courses);
-   runtime.courses=Array.isArray(data?.courses)?data.courses:[];
+   runtime.courses=normalizeCoursesPayload(data);
    if(runtime.courses.length){
      try{storeDbCacheSafely({catalog:runtime.catalog,skills:[...runtime.skills.values()],characters:runtime.characters,courses:runtime.courses})}catch(_){}
      return true
@@ -5080,13 +5080,20 @@ function compactCardMeta(card){
    eventSkillSource:card.eventSkillSource||'',eventSkillSourceUrl:card.eventSkillSourceUrl||''
  }
 }
+function normalizeCoursesPayload(value){
+ if(Array.isArray(value))return value;
+ if(Array.isArray(value?.courses))return value.courses;
+ if(Array.isArray(value?.data))return value.data;
+ return []
+}
 function buildCompactDbCache(cache){
+ const courses=normalizeCoursesPayload(cache?.courses);
  return {
    version:6,cacheMode:'compact',generatedAt:cache.generatedAt||new Date().toISOString(),
    catalog:(cache.catalog||[]).map(compactCardMeta),
    skills:(cache.skills||[]).map(compactSkillMeta).filter(Boolean),
    characters:(cache.characters||[]).map(compactCharacterMeta),
-   courses:(cache.courses||[]).map(x=>({id:Number(x.id),name:x.name||'',place:x.place||'',distance:Number(x.distance)||0,distClass:x.distClass||'',turn:x.turn||'',ground:x.ground||''}))
+   courses:courses.map(x=>({id:Number(x.id),name:x.name||'',place:x.place||'',distance:Number(x.distance)||0,distClass:x.distClass||'',turn:x.turn||'',ground:x.ground||''}))
  }
 }
 function storeDbCacheSafely(cache){
@@ -5124,10 +5131,10 @@ function setDbLoadState(mode,title,detail=''){
  $('#dbLoadDetail').textContent=detail;
  retry.hidden=mode!=='error'
 }
-async function syncDb(){const st=$('#dbStatus'),btn=$('#syncBtn');btn.disabled=true;st.textContent='동기화 중…';setDbLoadState('loading','온라인 DB 불러오는 중…','카드·스킬·캐릭터·레이스·스킬Pt 원가 데이터를 한 번에 확인하고 있습니다.');try{const u=CONFIG.sources;const [catRaw,supports,events,skills,characters,courses,skillCosts]=await Promise.all([fetchJson(u.catalog),fetchJson(u.supports),fetchJson(u.events),fetchJson(u.skills),fetchJson(u.characters),fetchJson(u.courses),fetchJson(u.skillCosts).catch(()=>[])]);const costAudit=applySkillCostMetadata(skills,skillCosts);applySkillIconOverrides(skills);const skillMap=new Map(skills.map(s=>[Number(s.id),s]));const priMap=new Map(supports.map(s=>[Number(s.id),s]));const evByTitle=new Map(),evBySupportId=new Map();for(const e of events.events||[]){if(!evByTitle.has(e.supportNameMatch))evByTitle.set(e.supportNameMatch,[]);evByTitle.get(e.supportNameMatch).push(e);const mm=String(e.id||'').match(/^evt_(\d+)_/);if(mm){const sid=Number(mm[1]);if(!evBySupportId.has(sid))evBySupportId.set(sid,[]);evBySupportId.get(sid).push(e)}}function allEventSkills(supportId,title){const source=evBySupportId.get(Number(supportId))||evByTitle.get(title)||[],m=new Map();for(const e of source){const groups=e.choices?e.choices.map(ch=>ch.skills||[]):[e.skills||[]];for(const group of groups)for(const x of group){const meta=skillMap.get(Number(x.skillId));if(!meta)continue;const sk=makeSkill(meta,x.skillName,x.hintLevel);if(sk)m.set(String(sk.id),sk)}}return [...m.values()]};function rareEvents(supportId,title){const source=evBySupportId.get(Number(supportId))||evByTitle.get(title)||[];const out=[];for(const e of source){let choices=[];if(e.choices)choices=e.choices.map(ch=>({id:ch.id,label:ch.label,labelKr:ch.labelKr||'',labelJp:ch.labelJp||'',skills:(ch.skills||[]).map(x=>{const m=skillMap.get(Number(x.skillId));if(!m||Number(m.rarity)!==2)return null;return makeSkill(m,x.skillName,x.hintLevel)}).filter(Boolean)}));else if(e.skills)choices=[{id:e.id+'_auto',label:'자동/단일 획득',skills:(e.skills||[]).map(x=>{const m=skillMap.get(Number(x.skillId));if(!m||Number(m.rarity)!==2)return null;return makeSkill(m,x.skillName,x.hintLevel)}).filter(Boolean)}];if(choices.some(x=>x.skills.length))out.push({id:e.id,label:e.label,labelKr:e.labelKr||'',labelJp:e.labelJp||'',selection:e.selection||'auto',choices})}return out}const raw=Array.isArray(catRaw)?catRaw:(catRaw.supports||catRaw.data||[]),best=new Map();for(const r of raw){if(r.SupportRarity&&r.SupportRarity!=='SSR')continue;const id=Number(r.SupportId||r.id);if(!id)continue;const prev=best.get(id);if(!prev||r.SupportServer==='jp')best.set(id,r)}const cards=[];for(const [id,r] of best){const p=priMap.get(id),parsed=parseName(r.SupportNameJP||r.SupportName||p?.name||''),title=p?.title||parsed.title,character=p?.characterName||parsed.character;cards.push({id,title,character,jpName:p?.name||(r.SupportNameJP||r.SupportName||''),englishName:r.SupportName||'',krName:koChar(character),type:normalizeType(p?.type||r.SupportType),image:supportPrimaryImageUrl(id),imageFallbacks:supportImageFallbacks(id),supportEffects:r.SupportEffects||[],supportUnique:r.SupportUnique||null,hints:(r.SupportHints||[]).map(h=>makeSkill(skillMap.get(Number(h.SkillId)),h.Name,h.HintLevel)).filter(Boolean),eventSkillsAll:allEventSkills(id,title),rareEvents:rareEvents(id,title),catalogSource:p?'Tsuyuchan+UmaTools':'UmaTools fallback'})}for(const p of supports){if(!cards.some(c=>Number(c.id)===Number(p.id))){const character=p.characterName;cards.push({id:p.id,title:p.title,character,jpName:p.name,englishName:'',krName:koChar(character),type:normalizeType(p.type),image:supportPrimaryImageUrl(p.id),imageFallbacks:supportImageFallbacks(p.id),supportEffects:[],supportUnique:null,hints:(p.hintSkillIds||[]).map(i=>makeSkill(skillMap.get(Number(i)))).filter(Boolean),eventSkillsAll:allEventSkills(p.id,p.title),rareEvents:rareEvents(p.id,p.title),catalogSource:'Tsuyuchan'})}}
+async function syncDb(){const st=$('#dbStatus'),btn=$('#syncBtn');btn.disabled=true;st.textContent='동기화 중…';setDbLoadState('loading','온라인 DB 불러오는 중…','카드·스킬·캐릭터·레이스·스킬Pt 원가 데이터를 한 번에 확인하고 있습니다.');try{const u=CONFIG.sources;const [catRaw,supports,events,skills,characters,coursesRaw,skillCosts]=await Promise.all([fetchJson(u.catalog),fetchJson(u.supports),fetchJson(u.events),fetchJson(u.skills),fetchJson(u.characters),fetchJson(u.courses),fetchJson(u.skillCosts).catch(()=>[])]);const courses=normalizeCoursesPayload(coursesRaw);const costAudit=applySkillCostMetadata(skills,skillCosts);applySkillIconOverrides(skills);const skillMap=new Map(skills.map(s=>[Number(s.id),s]));const priMap=new Map(supports.map(s=>[Number(s.id),s]));const evByTitle=new Map(),evBySupportId=new Map();for(const e of events.events||[]){if(!evByTitle.has(e.supportNameMatch))evByTitle.set(e.supportNameMatch,[]);evByTitle.get(e.supportNameMatch).push(e);const mm=String(e.id||'').match(/^evt_(\d+)_/);if(mm){const sid=Number(mm[1]);if(!evBySupportId.has(sid))evBySupportId.set(sid,[]);evBySupportId.get(sid).push(e)}}function allEventSkills(supportId,title){const source=evBySupportId.get(Number(supportId))||evByTitle.get(title)||[],m=new Map();for(const e of source){const groups=e.choices?e.choices.map(ch=>ch.skills||[]):[e.skills||[]];for(const group of groups)for(const x of group){const meta=skillMap.get(Number(x.skillId));if(!meta)continue;const sk=makeSkill(meta,x.skillName,x.hintLevel);if(sk)m.set(String(sk.id),sk)}}return [...m.values()]};function rareEvents(supportId,title){const source=evBySupportId.get(Number(supportId))||evByTitle.get(title)||[];const out=[];for(const e of source){let choices=[];if(e.choices)choices=e.choices.map(ch=>({id:ch.id,label:ch.label,labelKr:ch.labelKr||'',labelJp:ch.labelJp||'',skills:(ch.skills||[]).map(x=>{const m=skillMap.get(Number(x.skillId));if(!m||Number(m.rarity)!==2)return null;return makeSkill(m,x.skillName,x.hintLevel)}).filter(Boolean)}));else if(e.skills)choices=[{id:e.id+'_auto',label:'자동/단일 획득',skills:(e.skills||[]).map(x=>{const m=skillMap.get(Number(x.skillId));if(!m||Number(m.rarity)!==2)return null;return makeSkill(m,x.skillName,x.hintLevel)}).filter(Boolean)}];if(choices.some(x=>x.skills.length))out.push({id:e.id,label:e.label,labelKr:e.labelKr||'',labelJp:e.labelJp||'',selection:e.selection||'auto',choices})}return out}const raw=Array.isArray(catRaw)?catRaw:(catRaw.supports||catRaw.data||[]),best=new Map();for(const r of raw){if(r.SupportRarity&&r.SupportRarity!=='SSR')continue;const id=Number(r.SupportId||r.id);if(!id)continue;const prev=best.get(id);if(!prev||r.SupportServer==='jp')best.set(id,r)}const cards=[];for(const [id,r] of best){const p=priMap.get(id),parsed=parseName(r.SupportNameJP||r.SupportName||p?.name||''),title=p?.title||parsed.title,character=p?.characterName||parsed.character;cards.push({id,title,character,jpName:p?.name||(r.SupportNameJP||r.SupportName||''),englishName:r.SupportName||'',krName:koChar(character),type:normalizeType(p?.type||r.SupportType),image:supportPrimaryImageUrl(id),imageFallbacks:supportImageFallbacks(id),supportEffects:r.SupportEffects||[],supportUnique:r.SupportUnique||null,hints:(r.SupportHints||[]).map(h=>makeSkill(skillMap.get(Number(h.SkillId)),h.Name,h.HintLevel)).filter(Boolean),eventSkillsAll:allEventSkills(id,title),rareEvents:rareEvents(id,title),catalogSource:p?'Tsuyuchan+UmaTools':'UmaTools fallback'})}for(const p of supports){if(!cards.some(c=>Number(c.id)===Number(p.id))){const character=p.characterName;cards.push({id:p.id,title:p.title,character,jpName:p.name,englishName:'',krName:koChar(character),type:normalizeType(p.type),image:supportPrimaryImageUrl(p.id),imageFallbacks:supportImageFallbacks(p.id),supportEffects:[],supportUnique:null,hints:(p.hintSkillIds||[]).map(i=>makeSkill(skillMap.get(Number(i)))).filter(Boolean),eventSkillsAll:allEventSkills(p.id,p.title),rareEvents:rareEvents(p.id,p.title),catalogSource:'Tsuyuchan'})}}
 if(!cards.some(c=>Number(c.id)===30318)){
  const riceGold=makeSkill(skillMap.get(201323),'勇迅円刃',1);
- cards.push({id:30318,title:'めぐるぐるぐるトレセン日和',character:'ライスシャワー',jpName:'[めぐるぐるぐるトレセン日和]ライスシャワー',englishName:'',krName:'라이스 샤워',type:'근성',image:supportPrimaryImageUrl(30318),imageFallbacks:supportImageFallbacks(30318),supportEffects:[],supportUnique:null,hints:[],eventSkillsAll:riceGold?[riceGold]:[],rareEvents:[],catalogSource:'V7.70.10 verified fallback'})
+ cards.push({id:30318,title:'めぐるぐるぐるトレセン日和',character:'ライスシャワー',jpName:'[めぐるぐるぐるトレセン日和]ライスシャワー',englishName:'',krName:'라이스 샤워',type:'근성',image:supportPrimaryImageUrl(30318),imageFallbacks:supportImageFallbacks(30318),supportEffects:[],supportUnique:null,hints:[],eventSkillsAll:riceGold?[riceGold]:[],rareEvents:[],catalogSource:'V7.70.11 verified fallback'})
 }
 applyFriendEventSupplements(applySupportRareSkillIndex(applyFriendSkillSupplements(applySupportOverrides(cards,skillMap),skillMap),skillMap),skillMap);cards.sort((a,b)=>b.id-a.id);const rareAudit=supportRareCoverageAudit(cards);runtime={catalog:cards,byId:new Map(cards.map(c=>[Number(c.id),c])),skills:skillMap,characters:characters.map(parseCharacter),courses,ready:true};const cache={version:6,generatedAt:new Date().toISOString(),catalog:cards,skills,characters,courses};const cacheResult=storeDbCacheSafely(cache);st.textContent=`SSR ${cards.length}장 · 이벤트 레어스킬 ${rareAudit.coveredCards}/${rareAudit.expectedCards}장 · SP 원가 ${costAudit.linked}스킬 · 카운터 누락 ${rareAudit.missingCards.length}장 · ${cacheResult.saved?'경량 캐시 저장':'캐시 저장 생략'}`;renderAll();setDbLoadState('ready','DB 준비 완료',`SSR ${cards.length}장 · SP 원가 ${costAudit.linked}스킬을 포함한 최신 데이터를 사용할 수 있습니다.`);if(!cacheResult.saved)toast('DB 동기화 성공 · 브라우저 저장공간 부족으로 캐시는 저장하지 않았습니다.')}catch(e){st.textContent='동기화 실패';setDbLoadState('error','온라인 DB를 불러오지 못했습니다.','인터넷 연결을 확인한 뒤 「다시 시도」를 눌러 주세요. 저장한 통합 DB JSON도 사용할 수 있습니다.');toast('온라인 DB 동기화 실패: '+e.message)}finally{btn.disabled=false}}
 function normalizeCachedCatalog(catalog,skillMap){
@@ -5151,9 +5158,9 @@ function loadCache(o){
  if(!o?.catalog)throw new Error('catalog 필드 없음');
  const skills=o.skills||[];applySkillIconOverrides(skills);const skillMap=new Map(skills.map(s=>[Number(s.id),s]));
  const catalog=applyFriendEventSupplements(applySupportRareSkillIndex(applyFriendSkillSupplements(applySupportOverrides(normalizeCachedCatalog(o.catalog,skillMap),skillMap),skillMap),skillMap),skillMap);
- const rareAudit=supportRareCoverageAudit(catalog);
- runtime={catalog,byId:new Map(catalog.map(c=>[Number(c.id),c])),skills:skillMap,characters:(o.characters||[]).map(c=>c.character?c:parseCharacter(c)),courses:o.courses||[],ready:true};
- const cacheResult=storeDbCacheSafely({...o,catalog,skills,characters:o.characters||[],courses:o.courses||[]});
+ const rareAudit=supportRareCoverageAudit(catalog),courses=normalizeCoursesPayload(o.courses);
+ runtime={catalog,byId:new Map(catalog.map(c=>[Number(c.id),c])),skills:skillMap,characters:(o.characters||[]).map(c=>c.character?c:parseCharacter(c)),courses,ready:true};
+ const cacheResult=storeDbCacheSafely({...o,catalog,skills,characters:o.characters||[],courses});
  $('#dbStatus').textContent=`저장 DB ${runtime.catalog.length}장 · 이벤트 레어스킬 ${rareAudit.coveredCards}/${rareAudit.expectedCards}장 · 카운터 누락 ${rareAudit.missingCards.length}장 · ${cacheResult.saved?'경량 캐시':'메모리 모드'}`;
  setDbLoadState('ready','저장된 DB 준비 완료',`SSR ${runtime.catalog.length}장을 바로 사용할 수 있습니다.`);
  renderAll()
@@ -6540,7 +6547,7 @@ $('#syncBtn').onclick=syncDb;$('#dbRetryBtn').onclick=syncDb;$('#catalogRecommen
 $('#exportBtn').onclick=()=>{if(!runtime.ready)return toast('먼저 DB를 동기화하세요.');downloadJson('umamusume_tracker_db_v4.json',{version:4,generatedAt:new Date().toISOString(),catalog:runtime.catalog,skills:[...runtime.skills.values()],characters:runtime.characters.map(({title,character,krName,image,...rest})=>rest),courses:runtime.courses})};
 $('#exportStateBtn').onclick=()=>downloadJson('umamusume_tracker_mydata_v4.json',state);$('#importDb').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{loadCache(JSON.parse(await f.text()))}catch(x){alert('DB JSON 오류: '+x.message)}};
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$('#'+b.dataset.close).classList.remove('open'));document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});
-document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+t.dataset.page));if(t.dataset.page==='guide')renderGuide();if(t.dataset.page==='info')void renderRacetrackInfo().catch(e=>{console.warn('[V7.70.10] racetrack render failed',e);const body=$('#racetrackInfoBody');if(body)body.innerHTML='<div class="racetrackEmpty">경마장 정보를 불러오지 못했습니다. DB 동기화 후 다시 시도해 주세요.</div>'});renderSkillCountSideRails()});
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+t.dataset.page));if(t.dataset.page==='guide')renderGuide();if(t.dataset.page==='info')void renderRacetrackInfo().catch(e=>{console.warn('[V7.70.11] racetrack render failed',e);const body=$('#racetrackInfoBody');if(body)body.innerHTML='<div class="racetrackEmpty">경마장 정보를 불러오지 못했습니다. DB 동기화 후 다시 시도해 주세요.</div>'});renderSkillCountSideRails()});
 for(const id of ['tierGround','tierDistance','tierStyle'])$('#'+id).onchange=renderTier;$('#tierSearch').oninput=renderTier;$('#tierClear').onclick=()=>{$('#tierSearch').value='';renderTier()};
 $('#tierGround').value=state.ground;$('#tierDistance').value=state.distance;$('#tierStyle').value='all';renderAppServerTabs();setSsrDbOpen(false);
 function setCatalogFilter(t){catType=t;renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);renderCatalog()}
