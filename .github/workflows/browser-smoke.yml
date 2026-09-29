@@ -20,6 +20,92 @@ jobs:
       - name: Install Selenium
         run: python -m pip install --quiet selenium
 
+      - name: P0 V7.70.3 startup and controls smoke
+        shell: bash
+        run: |
+          python - <<'PY'
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.support.ui import Select, WebDriverWait
+          from selenium.webdriver.support import expected_conditions as EC
+
+          url = "https://cbh8567-art.github.io/uma-trainer-guide/?p0=v7703"
+          opts = Options()
+          opts.add_argument("--headless=new")
+          opts.add_argument("--no-sandbox")
+          opts.add_argument("--disable-gpu")
+          opts.add_argument("--window-size=1440,1200")
+          opts.set_capability("goog:loggingPrefs", {"browser":"ALL"})
+          d = webdriver.Chrome(options=opts)
+          d.set_window_size(1440, 1200)
+          try:
+              d.get(url)
+              WebDriverWait(d, 25).until(lambda x: "V7.70.3" in x.title)
+              WebDriverWait(d, 25).until(EC.presence_of_element_located((By.ID, "page-deck")))
+
+              tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
+              names = [x.get_attribute("data-page") for x in tabs]
+              print("P0 TAB NAMES:", names)
+              for expected in ["deck", "guide", "tier", "info"]:
+                  if expected not in names:
+                      raise RuntimeError(f"Missing navigation tab: {expected}; got {names}")
+
+              def click_tab(name):
+                  tab = d.find_element(By.CSS_SELECTOR, f'.tab[data-page="{name}"]')
+                  d.execute_script("arguments[0].click()", tab)
+                  WebDriverWait(d, 10).until(
+                      lambda x: "active" in x.find_element(By.ID, f"page-{name}").get_attribute("class").split()
+                  )
+                  print("P0 TAB PASS:", name)
+
+              click_tab("guide")
+              click_tab("tier")
+              click_tab("info")
+
+              WebDriverWait(d, 25).until(
+                  lambda x: len(Select(x.find_element(By.ID, "racetrackPlace")).options) > 0
+              )
+              places = Select(d.find_element(By.ID, "racetrackPlace"))
+              courses = Select(d.find_element(By.ID, "racetrackCourse"))
+              if len(courses.options) == 0:
+                  raise RuntimeError("Racetrack course selector is empty")
+              print("P0 RACETRACK PASS:", len(places.options), "places,", len(courses.options), "courses")
+
+              cards = d.find_elements(By.CSS_SELECTOR, "#racetrackInfoBody [data-course-id]")
+              if not cards:
+                  raise RuntimeError("Racetrack course cards were not rendered")
+              d.execute_script("arguments[0].click()", cards[0])
+              WebDriverWait(d, 8).until(
+                  lambda x: len(x.find_elements(By.CSS_SELECTOR, "#racetrackInfoBody [data-course-id]")) > 0
+              )
+              print("P0 RACETRACK CARD PASS")
+
+              click_tab("deck")
+              toggle = d.find_element(By.ID, "toggleSsrDb")
+              d.execute_script("arguments[0].click()", toggle)
+              WebDriverWait(d, 8).until(lambda x: x.find_element(By.ID, "ssrDbBody").is_displayed())
+              d.execute_script("arguments[0].click()", toggle)
+              WebDriverWait(d, 8).until(lambda x: not x.find_element(By.ID, "ssrDbBody").is_displayed())
+              print("P0 SSR DB TOGGLE PASS")
+
+              logs = d.get_log("browser")
+              js_severe = [
+                  x for x in logs
+                  if x.get("level") == "SEVERE"
+                  and ("Uncaught" in x.get("message", "") or "javascript" in x.get("message", "").lower())
+              ]
+              for x in logs:
+                  print("P0 BROWSER:", x.get("level"), x.get("message"))
+              if js_severe:
+                  raise RuntimeError("P0 browser console has severe JS errors: " + " | ".join(
+                      x.get("message", "") for x in js_severe[:10]
+                  ))
+              print("P0 V7.70.3 BROWSER PASS")
+          finally:
+              d.quit()
+          PY
+
       - name: Browser interaction smoke test
         shell: bash
         run: |
