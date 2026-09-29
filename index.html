@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.61">
-<title>우마무스메 트레이너 가이드 V7.61 WEB</title>
+<meta name="app-build" content="V7.62">
+<title>우마무스메 트레이너 가이드 V7.62 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -616,6 +616,20 @@ body.trainingMode .counts{margin-top:8px}
 @media(max-width:900px){.v7TargetGrid.numeric{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:720px){.v7TargetGrid.numeric{grid-template-columns:repeat(2,minmax(0,1fr))}.v7StatNumbers{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:430px){.v7TargetGrid.numeric{grid-template-columns:1fr}}
+/* V7.62 · 분기별 목표 진행표 */
+.v7PhasePlan{margin-top:9px;border-top:1px solid #3a4254;padding-top:8px}
+.v7PhasePlanHead{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.v7PhasePlanHead b{font-size:10px;color:#ffe091}
+.v7PhasePlanWrap{overflow-x:auto;margin-top:6px}
+.v7PhaseTable{width:100%;min-width:640px;border-collapse:separate;border-spacing:4px;font-size:8px}
+.v7PhaseTable th,.v7PhaseTable td{border:1px solid #344155;background:#111720;border-radius:6px;padding:6px 7px;text-align:center;white-space:nowrap}
+.v7PhaseTable th{background:#182130;color:#9faec2;font-weight:900}
+.v7PhaseTable th:first-child,.v7PhaseTable td:first-child{text-align:left;position:sticky;left:0;z-index:1;background:#171e29}
+.v7PhaseTable tr.final td{border-color:#8b6d2f;background:#2a2417;color:#ffe39a;font-weight:900}
+.v7PhaseTable .phaseMain{display:block;font-size:9px;font-weight:950;color:#e8eef8}
+.v7PhaseTable .phaseSub{display:block;font-size:6.5px;color:#8e9bad;margin-top:2px}
+.v7PhaseSource{margin-top:5px;font-size:7px;color:#8796ab;line-height:1.45}
+@media(max-width:720px){.v7PhasePlan{margin-top:7px}.v7PhaseTable{min-width:600px}}
 /* V7.57 · 일반 흰/초록 스킬 추천 */
 .v7GeneralSkillHead{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap;margin-bottom:6px}
 .v7GeneralSkillList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
@@ -1030,7 +1044,7 @@ body.trainingMode .trainingProgressHead .sub,
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.61 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.62 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -4900,6 +4914,60 @@ function v7StatRange(goal){
  const g=Math.max(300,Number(goal)||0);
  return {min:Math.max(300,Math.round((g-200)/50)*50),goal:g,stretch:Math.min(2000,Math.round((g+100)/50)*50)}
 }
+function v7PhaseCurveForScenario(scenario){
+ const generic={
+  juniorEnd:{speed:.28,stamina:.30,power:.30,guts:.30,wit:.32},
+  classicSummer:{speed:.46,stamina:.48,power:.48,guts:.48,wit:.50},
+  classicEnd:{speed:.68,stamina:.70,power:.70,guts:.70,wit:.72},
+  seniorSummer:{speed:.88,stamina:.90,power:.90,guts:.90,wit:.90},
+  final:{speed:1,stamina:1,power:1,guts:1,wit:1}
+ };
+ if(scenario!=='tresenken')return {curve:generic,label:'범용 성장 곡선',source:'시나리오 전용 곡선 미연결'};
+ return {
+  label:'트레센켄 공략형 성장 곡선',
+  source:'Game8: 클래식에서 이미 키운 능력치는 약 7할까지 확보하고 시니어에서 부족 스탯 보정 · 최신 육성론: 클래식은 스피드 외 능력치 우선, 시니어에서 스피드 마무리 · 우마무스메 라보: 주니어 자원 일부를 클래식으로 이월',
+  curve:{
+   juniorEnd:{speed:.24,stamina:.28,power:.28,guts:.29,wit:.31},
+   classicSummer:{speed:.38,stamina:.46,power:.46,guts:.47,wit:.50},
+   classicEnd:{speed:.56,stamina:.70,power:.70,guts:.70,wit:.72},
+   seniorSummer:{speed:.84,stamina:.90,power:.90,guts:.90,wit:.91},
+   final:{speed:1,stamina:1,power:1,guts:1,wit:1}
+  }
+ }
+}
+function v7PhaseTargetRows(cond,race){
+ const plan=v7ResolvedStatGoal(cond,race),meta=v7PhaseCurveForScenario(state.scenario),names=[
+  {key:'juniorEnd',label:'주니어 종료',sub:'12월 후반 기준'},
+  {key:'classicSummer',label:'클래식 여름',sub:'6월 후반 전후'},
+  {key:'classicEnd',label:'클래식 종료',sub:'12월 후반 기준'},
+  {key:'seniorSummer',label:'시니어 여름',sub:'6월 후반 전후'},
+  {key:'final',label:'최종 목표',sub:'육성 종료'}
+ ];
+ const roundTarget=v=>Math.max(100,Math.round(Number(v||0)/50)*50);
+ return {meta,rows:names.map(p=>{
+  const ratio=meta.curve[p.key]||meta.curve.final;
+  return {
+   ...p,
+   values:{
+    speed:roundTarget(plan.resolved.speed*ratio.speed),
+    stamina:roundTarget(plan.resolved.stamina*ratio.stamina),
+    power:roundTarget(plan.resolved.power*ratio.power),
+    guts:roundTarget(plan.resolved.guts*ratio.guts),
+    wit:roundTarget(plan.resolved.wit*ratio.wit)
+   }
+  }
+ })}
+}
+function v7PhaseTargetHtml(cond,race){
+ const data=v7PhaseTargetRows(cond,race);
+ return '<div class="v7PhasePlan">'+
+  '<div class="v7PhasePlanHead"><div><b>분기별 목표 진행표</b><div class="sub">최종 권장 목표를 현재 시나리오의 성장 흐름에 맞춰 역산한 페이스 체크입니다.</div></div><span class="status">'+esc(data.meta.label)+'</span></div>'+
+  '<div class="v7PhasePlanWrap"><table class="v7PhaseTable"><thead><tr><th>시점</th><th>스피드</th><th>스태미나</th><th>파워</th><th>근성</th><th>지능</th></tr></thead><tbody>'+
+   data.rows.map(r=>'<tr class="'+(r.key==='final'?'final':'')+'"><td><span class="phaseMain">'+esc(r.label)+'</span><span class="phaseSub">'+esc(r.sub)+'</span></td><td>'+r.values.speed+'</td><td>'+r.values.stamina+'</td><td>'+r.values.power+'</td><td>'+r.values.guts+'</td><td>'+r.values.wit+'</td></tr>').join('')+
+  '</tbody></table></div>'+
+  '<div class="v7PhaseSource">※ '+esc(data.meta.source)+' · 이 표는 공략의 운영 원칙을 수치화한 페이스 가이드이며 공식 고정 기준은 아닙니다.</div>'+
+ '</div>'
+}
 function v7StatDifficulty(stat,goal,deck){
  const typeMapStat={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능'},type=typeMapStat[stat];
  const count=(deck||[]).filter(c=>c?.type===type).length;
@@ -4928,6 +4996,7 @@ function v7StatTargetHtml(cond,race){
     '<span class="v7Difficulty '+difficulty.cls+'">'+difficulty.label+'</span>'+(custom?'<div class="v7TargetCustom">사용자 목표 적용 중</div>':'')+
     '<div class="v7TargetWhy">'+esc(x.why)+'</div></div>'
   }).join('')+'</div>'+
+  v7PhaseTargetHtml(cond,race)+
   '<div class="note" style="margin-top:6px">※ 숫자는 현재 거리·실제 거리(m)·각질·플랜 유형을 반영한 육성 계획용 휴리스틱입니다. 「상한권」은 게임의 시스템 상한을 뜻하지 않습니다. 회복량·인자·시나리오별 실제 상한 정밀 계산은 후속 단계에서 보정합니다.</div>'
 }
 function bindV7StatTargetControls(cond,race){
