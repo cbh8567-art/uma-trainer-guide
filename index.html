@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.68">
-<title>우마무스메 트레이너 가이드 V7.68 WEB</title>
+<meta name="app-build" content="V7.69">
+<title>우마무스메 트레이너 가이드 V7.69 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -693,7 +693,25 @@ body.trainingMode .counts{margin-top:8px}
 .v7HintEff.none{border-color:#465066;background:#202635;color:#9ca6ba}
 .v7SkillCost{display:inline-flex;align-items:center;border:1px solid #5b4f31;background:#251f15;color:#f3d58b;border-radius:999px;padding:2px 5px;font-size:7px;font-weight:900}
 .v7SkillCost strong{color:#fff0b6;margin-left:3px}.v7SkillCost.missing{border-color:#465066;background:#202635;color:#9ca6ba}
-@media(max-width:720px){.v7GeneralSkillList{grid-template-columns:1fr}.v7GeneralSkill{grid-template-columns:auto minmax(0,1fr) auto}}
+
+/* V7.69 · 스킬 추천 1픽 결정 + 근거 표시 */
+.v769Decision{border:1px solid #7d6740;background:linear-gradient(180deg,#252016,#191c25);border-radius:10px;padding:9px;margin:0 0 7px}
+.v769Decision.tie{border-color:#4f627d;background:linear-gradient(180deg,#182330,#171b25)}
+.v769Decision .headline{font-size:10px;font-weight:950;line-height:1.45}
+.v769Decision .headline strong{color:#ffe4a0}
+.v769Decision.tie .headline strong{color:#b9d9ff}
+.v769Decision .why{font-size:8px;color:#bac4d3;line-height:1.5;margin-top:4px}
+.v769PickBadge{display:inline-flex;align-items:center;justify-content:center;border:1px solid #8c6c2d;background:#302613;color:#ffe29a;border-radius:999px;padding:2px 5px;font-size:7px;font-weight:950;white-space:nowrap;margin-top:3px}
+.v769PickBadge.second{border-color:#51657e;background:#182331;color:#bbd8f6}
+.v769PickBadge.tie{border-color:#665a7d;background:#241d30;color:#d8c9f1}
+.v769EvoDecision{font-size:8px;line-height:1.5;color:#c3ccda;padding:6px 8px;border-bottom:1px solid #3d3340;background:#1b1820}
+.v769EvoDecision b{color:#ffd7e8}
+.pinkRow.v769First{box-shadow:inset 3px 0 #ff79ae;background:linear-gradient(90deg,rgba(255,102,166,.14),rgba(255,102,166,.03))}
+.pinkRow.v769Second{box-shadow:inset 3px 0 #6e86a5}
+.scenarioEvo.v769First{border-color:#c05a88;background:linear-gradient(90deg,#321e2c,#191d29)}
+.scenarioEvo.v769Second{border-color:#60748f;background:linear-gradient(90deg,#1c2633,#191d29)}
+.v769Reason{font-size:8px;color:#b9c3d1;line-height:1.45;margin-top:4px}
+@media(max-width:720px){.v7GeneralSkillList{grid-template-columns:1fr}.v7GeneralSkill{grid-template-columns:auto minmax(0,1fr) auto}.v769Decision{padding:8px}}
 
 /* V7.46 · 스킬 모달 카드 헤더 */
 .skillModalCardHero{display:grid;grid-template-columns:104px 1fr;gap:12px;align-items:center;border:1px solid #3b465d;background:#131924;border-radius:11px;padding:9px;margin:0 0 10px}
@@ -1090,7 +1108,7 @@ body.trainingMode .trainingProgressHead .sub,
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.68 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.69 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -3371,6 +3389,25 @@ function characterEvolutionCandidates(uma,cond){
  }
  return out.sort((a,b)=>a.slot-b.slot||b.score-a.score||a.variant-b.variant)
 }
+function v769EvolutionEvidence(x,cond){
+ const fit=skillConditionScore(x.evo,cond),t=x.evo?.tags||{},reasons=[];
+ const explicit=(t.grounds?.length?1:0)+(t.distances?.length?1:0)+(t.styles?.length?1:0);
+ let decisionScore=Number(x.score||0)*100;
+ if(fit===3){decisionScore+=30;reasons.push('현재 바장·거리·각질 조건에 직접 적합')}
+ else if(fit===2){decisionScore+=12;reasons.push('조건 제한이 적은 범용 진화')}
+ else reasons.push('현재 조건과 일부 불일치');
+ if(explicit>=2){decisionScore+=3;reasons.push('조건 태그가 구체적으로 일치')}
+ if(x.available){decisionScore+=4;reasons.push('원본 레어 스킬 확보 확인')}
+ else if(x.fromScenario){decisionScore+=2;reasons.push('시나리오 진행으로 원본 확보 가능')}
+ else reasons.push('원본 레어 스킬 확보 확인 필요');
+ return {...x,decisionScore,decisionReasons:[...new Set(reasons)]}
+}
+function v769EvolutionDecision(items,cond){
+ const ranked=items.map(x=>v769EvolutionEvidence(x,cond)).sort((a,b)=>b.decisionScore-a.decisionScore||a.variant-b.variant);
+ const top=ranked[0]||null,second=ranked[1]||null;
+ const tied=!!(top&&second&&Math.abs(top.decisionScore-second.decisionScore)<2);
+ return {ranked,top,second,tied}
+}
 function renderEvolutionRecommendations(cond){
   const b=$('#evolutionSkills');if(!b)return;b.innerHTML='';
   const u=selectedUma();
@@ -3393,26 +3430,39 @@ function renderEvolutionRecommendations(cond){
   }
   const groups=new Map();
   for(const x of arr){if(!groups.has(x.slot))groups.set(x.slot,[]);groups.get(x.slot).push(x)}
-  for(const [slot,items] of groups){
-    items.sort((a,b)=>b.score-a.score||a.variant-b.variant);
-    const best=items[0]?.score??0,base=items[0]?.base,lv=items[0]?.awakeningLevel;
+  for(const [slot,rawItems] of groups){
+    const decision=v769EvolutionDecision(rawItems,cond),items=decision.ranked;
+    const base=items[0]?.base,lv=items[0]?.awakeningLevel;
     const g=document.createElement('div');g.className='evoGroup';
-    g.innerHTML=`<div class="evoGroupHead"><div class="base">${base?`${esc(base.jp)} → 핑크 진화`:`진화 슬롯 ${slot}`}</div><div class="lv">${lv?`각성 Lv${lv}`:'원본 금스킬 연결 확인 필요'} · 후보 ${items.length}개</div></div><div data-evo-rows></div>`;
+    const topName=decision.top?(decision.top.evo.kr&&decision.top.evo.kr!=='한국어 번역 미등록'?decision.top.evo.kr:decision.top.evo.jp):'';
+    const decisionText=items.length===1
+      ?`<b>자동 선택:</b> 후보가 1개뿐입니다.`
+      :decision.tied
+        ?`<b>동급 판정:</b> 현재 DB의 조건·획득 근거만으로는 두 분기의 우열을 확정할 수 없습니다.`
+        :`<b>1순위:</b> ${esc(topName)} · 현재 조건/원본 확보 근거가 더 강합니다.`;
+    g.innerHTML=`<div class="evoGroupHead"><div class="base">${base?`${esc(base.jp)} → 핑크 진화`:`진화 슬롯 ${slot}`}</div><div class="lv">${lv?`각성 Lv${lv}`:'원본 금스킬 연결 확인 필요'} · 후보 ${items.length}개</div></div><div class="v769EvoDecision">${decisionText}</div><div data-evo-rows></div>`;
     const rows=g.querySelector('[data-evo-rows]');
-    for(const x of items){
-      const bestHere=x.score===best,row=document.createElement('div');
-      row.className='pinkRow'+(bestHere?' best':'');
+    items.forEach((x,index)=>{
+      const isFirst=index===0&&!decision.tied,isSecond=index===1&&!decision.tied;
+      const tiedTop=decision.tied&&decision.top&&Math.abs(x.decisionScore-decision.top.decisionScore)<2;
+      const row=document.createElement('div');
+      row.className='pinkRow'+(isFirst?' best v769First':isSecond?' v769Second':tiedTop?' best':'');
       const rank=evolutionMatchText(x.evo,cond,x.score);
+      const badge=items.length===1?'<span class="v769PickBadge">자동 선택</span>'
+        :tiedTop?'<span class="v769PickBadge tie">동급</span>'
+        :isFirst?'<span class="v769PickBadge">1픽 · 이걸 우선</span>'
+        :isSecond?'<span class="v769PickBadge second">2순위</span>':'';
       row.innerHTML=`${skillIcon(x.evo)}
         <div>
           <div class="jp">${esc(x.evo.jp)} <span class="pinkBadge">핑크</span>${items.length>1?` <span class="tag">분기 ${x.variant}</span>`:''}</div>
           <div class="kr">${esc(x.evo.kr||koSkill(x.evo.jp))}</div>
           <div class="evoTags">${evolutionTagHtml(x.evo)}</div>
           <div class="scenarioFrom">${base?`진화 전: ${esc(base.jp)}`:'진화 전 금스킬 매핑 미확정'}</div>
+          <div class="v769Reason">${esc(x.decisionReasons.join(' · '))}</div>
         </div>
-        <div class="evoScore"><div class="evoStars">${'★'.repeat(x.score)}${'☆'.repeat(5-x.score)}</div>${bestHere?`<span class="scenarioRec">${rank}</span>`:rank}</div>`;
+        <div class="evoScore"><div class="evoStars">${'★'.repeat(x.score)}${'☆'.repeat(5-x.score)}</div>${badge}<div style="margin-top:3px">${esc(rank)}</div></div>`;
       rows.appendChild(row)
-    }
+    });
     b.appendChild(g)
   }
 }
@@ -3430,6 +3480,18 @@ function scenarioEvolutionScore(x,cond){
   score+=Number(x.guideBoost||0);
   return Math.max(0,Math.min(5,score))
 }
+function v769ScenarioEvidence(x,cond){
+ const fit=x.sk?skillConditionScore(x.sk,cond):manualScenarioFit(x,cond),reasons=[];
+ let decisionScore=Number(x.score||0)*100;
+ if(x.available){decisionScore+=20;reasons.push('원본 레어 스킬 확보/조건 충족')}
+ else if(x.fromScenario){decisionScore+=10;reasons.push('시나리오 진행 획득 경로 있음')}
+ else reasons.push('원본 레어 스킬 확보 필요');
+ if(fit===3){decisionScore+=20;reasons.push('현재 바장·거리·각질에 직접 적합')}
+ else if(fit===2){decisionScore+=8;reasons.push('범용성이 높은 후보')}
+ else reasons.push('현재 조건과 일부 불일치');
+ if(Number(x.guideBoost||0)>0){decisionScore+=Number(x.guideBoost||0)*5;reasons.push('시나리오 가이드 우선도 반영')}
+ return {...x,decisionScore,decisionReasons:[...new Set(reasons)]}
+}
 function renderScenarioEvolution(cond){
   const b=$('#scenarioEvolutionSkills');if(!b)return;b.innerHTML='';
   const sc=SCENARIOS[state.scenario]||SCENARIOS.none;
@@ -3440,13 +3502,18 @@ function renderScenarioEvolution(cond){
   }
   const arr=sc.evolutions.map(x=>{
     const sk=findSkillByJp(x.to),status=evolutionBaseStatus(x.from),req=scenarioEvolutionRequirementStatus(x);
-    return {...x,sk,...status,scenarioConditionMet:req.met,scenarioConditionLabel:req.label,available:status.available&&req.met,score:scenarioEvolutionScore(x,cond)}
-  }).sort((a,b)=>(b.score+(b.available?.25:0))-(a.score+(a.available?.25:0)));
+    return v769ScenarioEvidence({...x,sk,...status,scenarioConditionMet:req.met,scenarioConditionLabel:req.label,available:status.available&&req.met,score:scenarioEvolutionScore(x,cond)},cond)
+  }).sort((a,b)=>b.decisionScore-a.decisionScore||String(a.to).localeCompare(String(b.to)));
   const recommended=arr.filter(x=>x.score>=2.5).slice(0,sc.maxEvolution);
-  const recSet=new Set(recommended.map(x=>x.to));
+  const recRank=new Map(recommended.map((x,i)=>[x.to,i+1]));
+  if(recommended.length){
+    const d=document.createElement('div');d.className='v769Decision';
+    d.innerHTML=`<div class="headline"><strong>시나리오 진화 선택 순서:</strong> ${recommended.map((x,i)=>`${i+1}순위 ${esc(x.sk?.kr&&x.sk.kr!=='한국어 번역 미등록'?x.sk.kr:x.to)}`).join(' → ')}</div><div class="why">최대 선택 수 안에서 현재 조건 적합도 · 원본 확보 여부 · 시나리오 가이드 우선도를 순서대로 비교합니다.</div>`;
+    b.appendChild(d)
+  }
   arr.forEach((x)=>{
-    const row=document.createElement('div');
-    row.className='scenarioEvo'+(recSet.has(x.to)?' bestPick':'');
+    const rankNo=recRank.get(x.to)||0,row=document.createElement('div');
+    row.className='scenarioEvo'+(rankNo===1?' bestPick v769First':rankNo===2?' bestPick v769Second':'');
     const avail=x.fromDeck
       ?'<span class="availYes">현재 선택한 레어 스킬 확인 ✓</span>'
       :x.fromUma
@@ -3455,18 +3522,20 @@ function renderScenarioEvolution(cond){
           ?'<span class="availScenario">시나리오 진행 획득 가능 ✓</span>'
           :'<span class="availNo">원본 레어 스킬 없음</span>';
     const star=Math.max(1,Math.round(x.score));
+    const rankBadge=rankNo===1?'<span class="v769PickBadge">1순위</span>':rankNo===2?'<span class="v769PickBadge second">2순위</span>':'';
     row.innerHTML=`${x.sk?skillIcon(x.sk):'<span class="skillFallback">進</span>'}
       <div>
         <div class="jp">${esc(x.to)} <span class="pinkBadge">시나리오 핑크</span></div>
         <div class="kr">${x.sk?esc(x.sk.kr||koSkill(x.to)):esc(koSkill(x.to))}</div>
         <div class="evoTags">${x.sk?evolutionTagHtml(x.sk):evolutionTagHtml({tags:{grounds:x.grounds||[],distances:x.distances||[],styles:x.styles||[]}})}</div>
         <div class="scenarioFrom">${esc(x.from)} → 진화 · ${avail}${x.requirementText?` · 조건: ${esc(x.requirementText)}`:''}${x.note?` · ${esc(x.note)}`:''}</div>
+        <div class="v769Reason">${esc(x.decisionReasons.join(' · '))}</div>
       </div>
-      <div class="evoScore"><div class="evoStars">${'★'.repeat(star)}${'☆'.repeat(5-star)}</div>${recSet.has(x.to)?'<span class="scenarioRec">추천 슬롯</span>':''}</div>`;
+      <div class="evoScore"><div class="evoStars">${'★'.repeat(star)}${'☆'.repeat(5-star)}</div>${rankBadge}</div>`;
     b.appendChild(row)
   });
   const n=document.createElement('div');n.className='note';n.style.marginTop='7px';
-  n.innerHTML=`${esc(sc.kr)}에서는 한 번의 육성에서 시나리오 진화를 최대 <b>${sc.maxEvolution}개</b> 선택합니다. 추천은 현재 바장/거리/각질과 원본 스킬 확보 여부를 함께 봅니다.${sc.sourceUrl?` <a href="${sc.sourceUrl}" target="_blank" rel="noopener" style="color:#ff9fc2">시나리오 진화 출처 ↗</a>`:''}${sc.krSourceUrl?` · <a href="${sc.krSourceUrl}" target="_blank" rel="noopener" style="color:#70c5f4">한국어 DB(Inven) ↗</a>`:''}`;
+  n.innerHTML=`${esc(sc.kr)}에서는 한 번의 육성에서 시나리오 진화를 최대 <b>${sc.maxEvolution}개</b> 선택합니다. V7.69부터 추천 슬롯을 같은 표시로 묶지 않고 1순위→2순위로 구분합니다.${sc.sourceUrl?` <a href="${sc.sourceUrl}" target="_blank" rel="noopener" style="color:#ff9fc2">시나리오 진화 출처 ↗</a>`:''}${sc.krSourceUrl?` · <a href="${sc.krSourceUrl}" target="_blank" rel="noopener" style="color:#70c5f4">한국어 DB(Inven) ↗</a>`:''}`;
   b.appendChild(n)
 }
 
@@ -5384,25 +5453,62 @@ function v7ExpectedSkillCost(baseCost,hintLevel){
  const discount=v7HintDiscountPct(hintLevel)/100;
  return Math.max(0,Math.floor(base*(1-discount)+1e-9))
 }
+function v769GeneralSkillEvidence(row,cond,race){
+ const fit=skillConditionScore(row.s,cond),hintLv=Math.max(0,Math.min(5,Math.floor(Number(row.hintLevel)||0)));
+ const discount=v7HintDiscountPct(hintLv);
+ const hasCost=row.s?.spCost!==null&&row.s?.spCost!==undefined&&Number.isFinite(Number(row.s.spCost));
+ const expected=hasCost?v7ExpectedSkillCost(Number(row.s.spCost),hintLv):null;
+ let decisionScore=Number(row.score||0),reasons=[];
+ if(row.courseExact){decisionScore+=5;reasons.push('이번 레이스 코스 조건과 직접 일치')}
+ if(fit===3){decisionScore+=4;reasons.push('거리·각질·바장 조건 직접 적합')}
+ else if(fit===2){decisionScore+=1.5;reasons.push('조건 제한이 적은 범용 스킬')}
+ if(discount>0){decisionScore+=Math.min(4,discount/10);reasons.push(`힌트 Lv ${hintLv}로 SP ${discount}% 할인`)}
+ if(expected!==null){
+   const eff=Math.max(0,Math.min(4,(260-expected)/45));
+   decisionScore+=eff;
+   reasons.push(`예상 ${expected}Pt`)
+ }
+ if(row.sources.has('육성 우마 각성')){decisionScore+=2;reasons.push('육성 우마 각성 경로 보유')}
+ if(row.sources.size>1){decisionScore+=1;reasons.push(`획득 경로 ${row.sources.size}개`)}
+ const kind=v7PlanKind(race);
+ if(row.courseExact&&(kind==='champions'||kind==='loh')){decisionScore+=2;reasons.push('대인전 코스 특화 우선')}
+ return {...row,fit,expectedCost:expected,decisionScore,decisionReasons:[...new Set(reasons)]}
+}
+function v769GeneralSkillDecision(rows,cond,race){
+ const ranked=rows.map(row=>v769GeneralSkillEvidence(row,cond,race))
+  .sort((a,b)=>b.decisionScore-a.decisionScore||b.score-a.score||Number(a.expectedCost??9999)-Number(b.expectedCost??9999)||Number(a.s.id)-Number(b.s.id));
+ const top=ranked[0]||null,second=ranked[1]||null;
+ const gap=top&&second?top.decisionScore-second.decisionScore:Infinity;
+ const tied=!!(top&&second&&gap<2&&top.courseExact===second.courseExact&&top.fit===second.fit);
+ return {ranked,top,second,gap,tied}
+}
 function renderV7GeneralSkills(cond,uma,race){
  const box=$('#v7GeneralSkillRecommend'),status=$('#v7GeneralSkillStatus');if(!box)return;
  if(!runtime.ready){box.innerHTML='<div class="note">SSR/스킬 DB 동기화 후 계산합니다.</div>';if(status)status.textContent='DB 필요';return}
- const deck=activeDeckCards(),rows=v7GeneralSkillPlan(cond,uma,deck,race).slice(0,16);
+ const deck=activeDeckCards(),baseRows=v7GeneralSkillPlan(cond,uma,deck,race),decision=v769GeneralSkillDecision(baseRows,cond,race),rows=decision.ranked.slice(0,16);
  const costKnown=rows.filter(row=>row?.s?.spCost!==null&&row?.s?.spCost!==undefined&&Number.isFinite(Number(row.s.spCost))).length;
  if(status)status.textContent=(deck.length?'현재 덱 '+deck.length+'/6 · ':'현재 덱 없음 · ')+'후보 '+rows.length+'개 · SP 원가 '+costKnown+'/'+rows.length;
  if(!rows.length){box.innerHTML='<div class="note">현재 덱/육성 우마/코스 조건에서 추천 가능한 일반 스킬 후보를 찾지 못했습니다.</div>';return}
- box.innerHTML='<div class="v7GeneralSkillList">'+rows.map(row=>{
+ const displayName=row=>(row.s.kr&&row.s.kr!=='한국어 번역 미등록')?row.s.kr:row.s.jp;
+ const decisionHtml=decision.top
+   ?decision.tied
+     ?'<div class="v769Decision tie"><div class="headline"><strong>둘 다 유효:</strong> '+esc(displayName(decision.top))+' / '+esc(displayName(decision.second))+'</div><div class="why">현재 코스 적합도와 확인 가능한 SP·획득 근거가 사실상 동급입니다. 효과량/발동 구간 데이터가 추가되면 자동으로 한쪽을 더 강하게 고를 수 있습니다.</div></div>'
+     :'<div class="v769Decision"><div class="headline"><strong>지금 1픽:</strong> '+esc(displayName(decision.top))+' — 이걸 먼저 찍으세요.</div><div class="why">'+esc(decision.top.decisionReasons.slice(0,4).join(' · '))+(decision.second?' · 2순위 '+esc(displayName(decision.second))+'보다 판단 점수 +'+Math.max(0,decision.gap).toFixed(1):'')+'</div></div>'
+   :'';
+ box.innerHTML=decisionHtml+'<div class="v7GeneralSkillList">'+rows.map((row,index)=>{
    const r=v7GeneralSkillRank(row.score),s=row.s;
    const sources=[...row.sources].map(x=>'<span class="tag">'+esc(x)+'</span>').join('');
    const details=[...row.details].slice(0,2).join(' · ');
-   const display=(s.kr&&s.kr!=='한국어 번역 미등록')?s.kr:s.jp;
+   const display=displayName(row);
    const hintLv=Math.max(0,Math.min(5,Math.floor(Number(row.hintLevel)||0))),discount=v7HintDiscountPct(hintLv);
    const hasCost=s.spCost!==null&&s.spCost!==undefined&&Number.isFinite(Number(s.spCost)),baseCost=hasCost?Number(s.spCost):null,expected=hasCost?v7ExpectedSkillCost(baseCost,hintLv):null;
    const costMeta=hasCost?'<span class="v7SkillCost">기본 '+baseCost+'Pt → <strong>'+expected+'Pt</strong></span>':'<span class="v7SkillCost missing">SP 원가 미연결</span>';
    const hintMeta='<div class="v7GeneralSkillMeta"><span class="v7HintEff '+(hintLv?'':'none')+'">힌트 Lv '+hintLv+(hintLv?' · SP -'+discount+'%':' · 할인 없음')+'</span>'+costMeta+'</div>';
-   return '<div class="v7GeneralSkill '+r.cls+'">'+skillIcon(s)+'<div class="body"><div class="name">'+esc(display)+'</div><div class="jp">'+esc(s.jp||'')+'</div><div class="reason">'+esc(row.reasons.slice(0,3).join(' · '))+(details?' · '+esc(details):'')+'</div><div class="source">'+sources+'</div>'+hintMeta+'</div><div class="v7GeneralSkillRank">'+r.stars+'<br><span style="font-size:7px">'+r.label+'</span></div></div>'
- }).join('')+'</div><div class="note" style="margin-top:7px">UmaTools skills_all.json의 cost 원가와 현재 힌트 Lv를 연결해 예상 필요 스킬Pt를 계산합니다. 계산은 원가×(1-할인율)을 소수점 아래 버림 처리합니다. 현재 단계는 개별 스킬 예상가까지이며, 보유 SP 안에서의 구매 조합 최적화는 다음 단계에서 연결합니다.</div>'
+   const pickBadge=decision.tied&&index<2?'<span class="v769PickBadge tie">동급</span>':index===0?'<span class="v769PickBadge">1픽</span>':index===1?'<span class="v769PickBadge second">2순위</span>':'';
+   return '<div class="v7GeneralSkill '+r.cls+'">'+skillIcon(s)+'<div class="body"><div class="name">'+esc(display)+'</div><div class="jp">'+esc(s.jp||'')+'</div><div class="reason">'+esc(row.reasons.slice(0,2).join(' · '))+(row.decisionReasons.length?' · '+esc(row.decisionReasons.slice(0,2).join(' · ')):'')+(details?' · '+esc(details):'')+'</div><div class="source">'+sources+'</div>'+hintMeta+'</div><div class="v7GeneralSkillRank">'+r.stars+'<br>'+pickBadge+'</div></div>'
+ }).join('')+'</div><div class="note" style="margin-top:7px">V7.69는 코스/거리/각질 적합도, 획득 경로, 힌트 할인과 예상 SP를 다시 비교해 1픽과 2순위를 구분합니다. 근거가 사실상 같은 경우에만 ‘둘 다 유효’로 남깁니다. 스킬 효과량·발동 구간의 정밀 데이터 계약과 보유 SP 전체 구매 조합 최적화는 다음 단계에서 연결합니다.</div>'
 }
+
 function v7DeckDeficits(cond,deckCards){
  const plan=v7TypePlan(cond.distance),counts={};
  for(const c of deckCards)counts[c.type]=(counts[c.type]||0)+1;
