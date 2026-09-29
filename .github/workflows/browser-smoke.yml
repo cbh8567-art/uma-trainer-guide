@@ -23,7 +23,8 @@ jobs:
       - name: P0 V7.70.3 startup and controls smoke
         shell: bash
         run: |
-          python - <<'PY'
+          set -o pipefail
+          python - <<'PY' 2>&1 | tee p0-smoke.log
           from selenium import webdriver
           from selenium.webdriver.chrome.options import Options
           from selenium.webdriver.common.by import By
@@ -88,6 +89,38 @@ jobs:
               d.execute_script("arguments[0].click()", toggle)
               WebDriverWait(d, 8).until(lambda x: not x.find_element(By.ID, "ssrDbBody").is_displayed())
               print("P0 SSR DB TOGGLE PASS")
+
+              scenario = d.find_element(By.ID, "scenario")
+              Select(scenario).select_by_value("tresenken")
+              d.execute_script("arguments[0].dispatchEvent(new Event('change', {bubbles:true}));", scenario)
+              WebDriverWait(d, 10).until(
+                  lambda x: x.find_element(By.ID, "ramenScenarioGuide").is_displayed()
+              )
+              ramen_diag = d.execute_script("""
+                  try {
+                    setTrainingGuidePhase('ura');
+                    return {
+                      ok: true,
+                      phase: ramenGuidePhase,
+                      active: [...document.querySelectorAll('[data-ramen-phase].active')].map(x => x.dataset.ramenPhase),
+                      body: document.getElementById('ramenGuideBody')?.innerText?.slice(0, 1600) || ''
+                    };
+                  } catch (e) {
+                    return {
+                      ok: false,
+                      phase: (typeof ramenGuidePhase !== 'undefined' ? ramenGuidePhase : 'unavailable'),
+                      name: e?.name || '',
+                      message: e?.message || String(e),
+                      stack: e?.stack || ''
+                    };
+                  }
+              """)
+              print("P0 RAMEN DIAG:", ramen_diag)
+              if not ramen_diag.get("ok"):
+                  raise RuntimeError("URA ramen render exception: " + str(ramen_diag))
+              for expected in ["스페셜 트레센 라멘", "욕심쟁이 트레센 라멘", "주옥의 트레센 라멘"]:
+                  if expected not in ramen_diag.get("body", ""):
+                      raise RuntimeError("URA ramen render missing choice after direct phase switch: " + expected)
 
               logs = d.get_log("browser")
               js_severe = [
@@ -487,5 +520,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: browser-smoke-log
-          path: browser-smoke.log
+          path: |
+            p0-smoke.log
+            browser-smoke.log
           if-no-files-found: ignore
