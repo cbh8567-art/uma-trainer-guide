@@ -109,7 +109,8 @@ jobs:
       - name: Browser interaction smoke test
         shell: bash
         run: |
-          python - <<'PY'
+          set -o pipefail
+          python - <<'PY' 2>&1 | tee browser-smoke.log
           import time
           from selenium import webdriver
           from selenium.webdriver.chrome.options import Options
@@ -474,3 +475,11 @@ jobs:
 
           print("Deployed browser interaction smoke PASS")
           PY
+
+      - name: Upload browser smoke log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-smoke-log
+          path: browser-smoke.log
+          if-no-files-found: ignore
