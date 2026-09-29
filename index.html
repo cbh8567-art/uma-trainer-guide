@@ -45,7 +45,8 @@ button,input,select{font:inherit}
 .supportOfficialRarity,.supportOfficialType{position:absolute;z-index:4;pointer-events:none;object-fit:contain!important;background:transparent!important;border-radius:0!important}
 .supportOfficialRarity{left:5px;top:5px;width:48px!important;height:auto!important;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55))}
 .supportOfficialType{right:5px;top:31px;width:40px!important;height:40px!important;filter:drop-shadow(0 2px 3px rgba(0,0,0,.55))}
-@media(max-width:900px){.supportOfficialRarity{width:42px!important}.supportOfficialType{width:35px!important;height:35px!important;top:29px}}.deckname{font-size:11px;font-weight:900;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}.deckjp{font-size:9.5px;color:#9ea7bb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.deckactions{display:grid;grid-template-columns:1fr 1fr auto;gap:4px;margin-top:5px}.mini{border:1px solid var(--line);background:#292e3d;color:#fff;border-radius:7px;padding:5px 6px;font-size:9px;cursor:pointer}.mini.gold{border-color:#665722;background:#382f17;color:#ffe492}.mini.red{color:#ffb2b9}.typeSummary{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.typeChip{display:flex;gap:5px;align-items:center;border:1px solid var(--line);background:#171b26;border-radius:999px;padding:5px 7px;font-size:10px}.dot{width:12px;height:12px;border-radius:50%}.speed{background:#5ebff3}.stamina{background:#ea7078}.power{background:#f4a43f}.guts{background:#e76fa9}.wit{background:#5bc99d}.friend{background:#f0b348}.group{background:#9c86e0}
+@media(max-width:900px){.supportOfficialRarity{width:42px!important}.supportOfficialType{width:35px!important;height:35px!important;top:29px}}.deckname{font-size:11px;font-weight:900;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}.deckjp{font-size:9.5px;color:#9ea7bb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.deckactions{display:grid;grid-template-columns:1fr 1fr auto;gap:4px;margin-top:5px}.mini{border:1px solid var(--line);background:#292e3d;color:#fff;border-radius:7px;padding:5px 6px;font-size:9px;cursor:pointer}.mini.gold{border-color:#665722;background:#382f17;color:#ffe492}.mini.red{color:#ffb2b9}.statIconLabel{display:inline-flex;align-items:center;gap:4px}.statIconImg{width:18px!important;height:18px!important;object-fit:contain!important;border-radius:0!important;background:transparent!important}.trainingSupportType .statIconImg{width:20px!important;height:20px!important}.v7PaceToggle{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;border:1px dashed #465168;background:#121824;border-radius:10px}
+.typeSummary{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.typeChip{display:flex;gap:5px;align-items:center;border:1px solid var(--line);background:#171b26;border-radius:999px;padding:5px 7px;font-size:10px}.dot{width:12px;height:12px;border-radius:50%}.speed{background:#5ebff3}.stamina{background:#ea7078}.power{background:#f4a43f}.guts{background:#e76fa9}.wit{background:#5bc99d}.friend{background:#f0b348}.group{background:#9c86e0}
 .counts{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}.countbox{background:#121620;border:1px solid var(--line);border-radius:10px;padding:9px}.big{font-size:27px;font-weight:950;color:var(--gold)}
 .skillList{display:grid;gap:6px;max-height:390px;overflow:auto}.skillRow{display:grid;grid-template-columns:auto auto 1fr auto;gap:7px;align-items:center;background:#151925;border:1px solid #30374a;border-radius:9px;padding:7px}.skillIcon,.skillFallback{width:35px;height:35px;border-radius:8px;object-fit:contain;background:#2a2f3e}.skillFallback{display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:950;border:1px solid #5f5127}.skillFallback.missingIcon{color:#9ca6ba;border-color:#465066;background:#202635}.skillRow input{width:18px;height:18px;accent-color:var(--pink)}.jp{font-size:11px;font-weight:850}.kr{font-size:10px;color:#c0c7d7}.tags{display:flex;gap:3px;flex-wrap:wrap;margin-top:3px}.tag{font-size:9px;background:#292e3d;color:#bcc4d5;padding:2px 5px;border-radius:99px}.stars{color:var(--gold);white-space:nowrap;font-weight:950}.dim{color:#747d92}
 .catalog,.owned,.umaResults,.recommendCards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;max-height:390px;overflow:auto}.card{display:grid;grid-template-columns:62px 1fr;gap:7px;background:#151925;border:1px solid #30374a;border-radius:10px;padding:6px;min-width:0}.card[draggable=true]{cursor:grab}.card img{width:62px;height:auto;aspect-ratio:auto;object-fit:contain;align-self:start;border-radius:7px;background:#292e3d}.cardName{font-size:11px;font-weight:900}.cardJp{font-size:9.5px;color:#aeb6c9;line-height:1.35}.actions{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}.status{font-size:10px;color:var(--muted)}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}
@@ -2348,7 +2349,11 @@ function trainingSupportBreakdown(){
  return parts
 }
 function trainingSupportBreakdownHtml(){
- return '<span class="trainingSupportBreakdown">'+trainingSupportBreakdown().map(x=>'<span class="trainingSupportType '+typeClass(x.type)+(x.rental?' rental':'')+'">'+esc(x.label)+'</span>').join('')+'</span>'
+ return '<span class="trainingSupportBreakdown">'+trainingSupportBreakdown().map(x=>{
+  const count=(String(x.label).match(/(\d+)$/)||[])[1]||'1',key={스피드:'speed',스태미나:'stamina',파워:'power',근성:'guts',지능:'wit'}[x.type]||'';
+  const visual=key?statIconHtml(key,''):esc(x.type);
+  return '<span class="trainingSupportType '+typeClass(x.type)+(x.rental?' rental':'')+'" title="'+esc(x.label)+'">'+(x.rental?'렌탈 ':'')+visual+' <b>'+count+'</b></span>'
+ }).join('')+'</span>'
 }
 function trainingGuideCompactLabel(){
  const r=getGuideRace(),server=state.guideServer==='kr'?'한국':'일본',kind=r?.kind==='masters'?'마챌':'대인전';
@@ -2481,6 +2486,11 @@ function supportBwikiTypeIconUrl(type){
   group:'团队图标.png'
  };
  return supportBwikiAssetUrl(map[typeClass(type)]||'')
+}
+function statTypeForKey(stat){return {speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능'}[stat]||stat}
+function statIconHtml(stat,label=''){
+ const src=supportBwikiTypeIconUrl(statTypeForKey(stat));
+ return '<span class="statIconLabel">'+(src?'<img class="statIconImg" src="'+esc(src)+'" alt="">':'')+(label?'<span>'+esc(label)+'</span>':'')+'</span>'
 }
 function syncSupportImageDecor(img){
  const thumb=img?.closest?.('.thumb');if(!thumb)return;
@@ -5388,29 +5398,25 @@ function v7PaceStatus(current,target){
  if(ratio>=.85)return {label:'약간 부족',cls:'warn'};
  return {label:'많이 부족',cls:'danger'}
 }
+function v7PaceResultHtml(cond,race){
+ const names={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능'},check=v7TrainingStatCheckState(),target=v7TargetAtDate(cond,race,check.grade,check.month,check.half);
+ const entered=['speed','stamina','power','guts','wit'].filter(stat=>Number.isFinite(Number(check.stats?.[stat])));
+ if(!entered.length)return '<div class="v7PaceEmpty">현재 능력치를 입력하면 이 시점의 목표치와 비교합니다.</div>';
+ const cards=['speed','stamina','power','guts','wit'].map(stat=>{const has=Number.isFinite(Number(check.stats?.[stat])),cur=has?Number(check.stats[stat]):null,tar=target[stat],pace=has?v7PaceStatus(cur,tar):null,gap=has?cur-tar:null;return '<div class="v7PaceCard '+(pace?.cls||'')+'"><span class="name">'+statIconHtml(stat,names[stat])+'</span><div class="main">'+(has?cur:'—')+' / '+tar+'</div><div class="sub">'+(pace?pace.label+' · '+(gap>=0?'+':'')+gap:'현재값 미입력')+'</div></div>'}).join('');
+ const priority=entered.map(stat=>({stat,gap:Number(check.stats[stat])-target[stat]})).filter(x=>x.gap<0).sort((a,b)=>a.gap-b.gap);
+ return '<div class="v7PaceSummary">'+cards+'</div>'+(priority.length?'<div class="v7PacePriority"><b>현재 보강 우선순위</b> · '+priority.slice(0,3).map((x,i)=>(i+1)+'. '+names[x.stat]+' '+Math.abs(x.gap)+' 부족').join(' · ')+'</div>':'<div class="v7PacePriority"><b>현재 입력 기준</b> · 모든 입력 스탯이 목표선 이상입니다.</div>')
+}
+function refreshV7PaceResult(cond,race){const box=$('#v7PaceResult');if(box)box.innerHTML=v7PaceResultHtml(cond,race)}
 function v7ProgressCheckHtml(cond,race){
  const names={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능'},check=v7TrainingStatCheckState();
- const target=v7TargetAtDate(cond,race,check.grade,check.month,check.half);
- const entered=['speed','stamina','power','guts','wit'].filter(stat=>Number.isFinite(Number(check.stats?.[stat])));
+ if(!state.paceCheckEnabled)return '<div class="v7ProgressCheck"><div class="v7PaceToggle"><div><b>현재 육성 페이스 체크 · 선택 기능</b><div class="sub">사용하지 않아도 육성 진행 조건에는 영향을 주지 않습니다.</div></div><button type="button" class="mini" id="v7EnablePaceCheck">사용</button></div></div>';
  const gradeLabel={junior:'주니어',classic:'클래식',senior:'시니어',ura:'URA / 최종'}[check.grade],halfLabel=check.half==='first'?'전반':'후반',dateLabel=check.grade==='ura'?'URA / 최종':gradeLabel+' '+check.month+'월 '+halfLabel;
- let result='';
- if(entered.length){
-  const cards=['speed','stamina','power','guts','wit'].map(stat=>{
-   const has=Number.isFinite(Number(check.stats?.[stat])),cur=has?Number(check.stats[stat]):null,tar=target[stat],pace=has?v7PaceStatus(cur,tar):null,gap=has?cur-tar:null;
-   return '<div class="v7PaceCard '+(pace?.cls||'')+'"><span class="name">'+names[stat]+'</span><div class="main">'+(has?cur:'—')+' / '+tar+'</div><div class="sub">'+(pace?pace.label+' · '+(gap>=0?'+':'')+gap:'현재값 미입력')+'</div></div>'
-  }).join('');
-  const priority=entered.map(stat=>({stat,gap:Number(check.stats[stat])-target[stat],target:target[stat]})).filter(x=>x.gap<0).sort((a,b)=>a.gap-b.gap);
-  result='<div class="v7PaceSummary">'+cards+'</div>'+
-   (priority.length?'<div class="v7PacePriority"><b>현재 보강 우선순위</b> · '+priority.slice(0,3).map((x,i)=>(i+1)+'. '+names[x.stat]+' '+Math.abs(x.gap)+' 부족').join(' · ')+'<br><span>※ V7.66은 부족량 기준입니다. 실제 어떤 훈련을 누를지는 훈련 상승량 계산기를 붙인 뒤 보조 상승까지 함께 판단합니다.</span></div>':'<div class="v7PacePriority"><b>현재 입력 기준</b> · 모든 입력 스탯이 이 시점 목표선 이상입니다.</div>');
- }else result='<div class="v7PaceEmpty">현재 능력치를 입력하면 이 시점의 목표치와 비교해 부족량을 표시합니다.</div>';
- return '<div class="v7ProgressCheck">'+
-  '<div class="v7ProgressCheckHead"><div><b>현재 육성 페이스 체크</b><div class="sub">현재 시점과 인게임 능력치를 입력하면 분기 목표 곡선과 즉시 비교합니다.</div></div><span class="status">'+esc(dateLabel)+'</span></div>'+
-  '<div class="v7ProgressControls">'+
-   '<div class="v7ProgressField"><label>학년</label><select data-v7-check="grade"><option value="junior" '+(check.grade==='junior'?'selected':'')+'>주니어</option><option value="classic" '+(check.grade==='classic'?'selected':'')+'>클래식</option><option value="senior" '+(check.grade==='senior'?'selected':'')+'>시니어</option><option value="ura" '+(check.grade==='ura'?'selected':'')+'>URA / 최종</option></select></div>'+
-   '<div class="v7ProgressField"><label>월</label><select data-v7-check="month" '+(check.grade==='ura'?'disabled':'')+'>'+Array.from({length:12},(_,i)=>'<option value="'+(i+1)+'" '+(check.month===i+1?'selected':'')+'>'+(i+1)+'월</option>').join('')+'</select></div>'+
-   '<div class="v7ProgressField"><label>시기</label><select data-v7-check="half" '+(check.grade==='ura'?'disabled':'')+'><option value="first" '+(check.half==='first'?'selected':'')+'>전반</option><option value="second" '+(check.half==='second'?'selected':'')+'>후반</option></select></div>'+
-   ['speed','stamina','power','guts','wit'].map(stat=>'<div class="v7ProgressField"><label>'+names[stat]+'</label><input type="number" min="0" max="3000" step="1" placeholder="현재" value="'+(Number.isFinite(Number(check.stats?.[stat]))?Number(check.stats[stat]):'')+'" data-v7-current-stat="'+stat+'"></div>').join('')+
-  '</div>'+result+'</div>'
+ return '<div class="v7ProgressCheck"><div class="v7ProgressCheckHead"><div><b>현재 육성 페이스 체크</b><div class="sub">선택 기능 · 숫자 입력은 Tab으로 스피드 → 스태미나 → 파워 → 근성 → 지능 순서 이동합니다.</div></div><div><span class="status">'+esc(dateLabel)+'</span> <button type="button" class="mini" id="v7DisablePaceCheck">끄기</button></div></div>'+
+ '<div class="v7ProgressControls"><div class="v7ProgressField"><label>학년</label><select data-v7-check="grade"><option value="junior" '+(check.grade==='junior'?'selected':'')+'>주니어</option><option value="classic" '+(check.grade==='classic'?'selected':'')+'>클래식</option><option value="senior" '+(check.grade==='senior'?'selected':'')+'>시니어</option><option value="ura" '+(check.grade==='ura'?'selected':'')+'>URA / 최종</option></select></div>'+
+ '<div class="v7ProgressField"><label>월</label><select data-v7-check="month" '+(check.grade==='ura'?'disabled':'')+'>'+Array.from({length:12},(_,i)=>'<option value="'+(i+1)+'" '+(check.month===i+1?'selected':'')+'>'+(i+1)+'월</option>').join('')+'</select></div>'+
+ '<div class="v7ProgressField"><label>시기</label><select data-v7-check="half" '+(check.grade==='ura'?'disabled':'')+'><option value="first" '+(check.half==='first'?'selected':'')+'>전반</option><option value="second" '+(check.half==='second'?'selected':'')+'>후반</option></select></div>'+
+ ['speed','stamina','power','guts','wit'].map((stat,i)=>'<div class="v7ProgressField"><label>'+statIconHtml(stat,names[stat])+'</label><input type="number" inputmode="numeric" min="0" max="3000" step="1" placeholder="현재" value="'+(Number.isFinite(Number(check.stats?.[stat]))?Number(check.stats[stat]):'')+'" data-v7-current-stat="'+stat+'" tabindex="'+(20+i)+'"></div>').join('')+
+ '</div><div id="v7PaceResult">'+v7PaceResultHtml(cond,race)+'</div></div>'
 }
 function v7GuidePhaseStatHtml(phase){
  const race=getGuideRace();if(!race)return '';
@@ -5463,7 +5469,7 @@ function v7StatTargetHtml(cond,race){
   '<div class="v7TargetGrid numeric">'+rows.map(x=>{
    const range=v7StatRange(plan.resolved[x.key],plan.caps[x.key]),difficulty=v7StatDifficulty(x.key,range.goal,deck);
    const custom=Number(plan.saved?.[x.key])===range.goal;
-   return '<div class="v7StatTarget numeric priority'+x.score+'"><span class="name">'+names[x.key]+'</span><span class="level">'+x.label+'</span>'+
+   return '<div class="v7StatTarget numeric priority'+x.score+'"><span class="name">'+statIconHtml(x.key,names[x.key])+'</span><span class="level">'+x.label+'</span>'+
     '<div class="v7StatNumbers"><div class="v7StatNum"><span>최소</span><b>'+range.min+'</b></div>'+
     '<div class="v7StatNum goal"><span>권장</span><input class="v7StatGoalInput" type="number" min="300" max="'+range.stretch+'" step="10" value="'+range.goal+'" data-v7-stat="'+x.key+'" aria-label="'+names[x.key]+' 권장 목표"></div>'+
     '<div class="v7StatNum"><span>최대치</span><b>'+range.stretch+'</b></div></div>'+
@@ -5471,13 +5477,16 @@ function v7StatTargetHtml(cond,race){
     '<div class="v7TargetWhy">'+esc(x.why)+'</div></div>'
   }).join('')+'</div>'+
   (()=>{const capMeta=v7ScenarioStatCapMeta(),custom=!!state.statCapOverrides?.[capMeta.key]&&Object.keys(state.statCapOverrides[capMeta.key]||{}).length>0;return '<div class="v7CapEditor"><div class="v7CapEditorHead"><div><b>스탯 최대치 설정 · '+esc(capMeta.label)+'</b><div class="sub">시나리오 기본 상한을 자동 적용합니다. 인자 상한 증가나 실제 게임 표시값이 다르면 여기서 수정하세요.'+(custom?' · 사용자 보정 적용 중':'')+'</div></div><button type="button" class="mini" id="v7ResetStatCaps">'+esc(capMeta.label)+' 기본값 복원</button></div>'+
-   '<div class="v7CapEditorGrid">'+['speed','stamina','power','guts','wit'].map(stat=>'<div class="v7CapField"><label>'+names[stat]+'</label><input class="v7CapInput" type="number" min="500" max="3000" step="10" value="'+plan.caps[stat]+'" data-v7-cap="'+stat+'" aria-label="'+names[stat]+' 최대치"></div>').join('')+'</div>'+
+   '<div class="v7CapEditorGrid">'+['speed','stamina','power','guts','wit'].map(stat=>'<div class="v7CapField"><label>'+statIconHtml(stat,names[stat])+'</label><input class="v7CapInput" type="number" min="500" max="3000" step="10" value="'+plan.caps[stat]+'" data-v7-cap="'+stat+'" aria-label="'+names[stat]+' 최대치"></div>').join('')+'</div>'+
   '</div>'})()+
   v7PhaseTargetHtml(cond,race)+
   '<div class="note" style="margin-top:6px">※ 최대치는 선택한 시나리오의 기본 상한을 자동 사용합니다. 직접 변경한 값은 현재 서버의 해당 시나리오에만 저장되며 권장 목표와 분기별 목표 계산의 상한으로 사용됩니다.</div>'
 }
 function bindV7StatTargetControls(cond,race){
  const key=v7TargetPlanKey(cond,race);
+ const paceOn=$('#v7EnablePaceCheck'),paceOff=$('#v7DisablePaceCheck');
+ if(paceOn)paceOn.onclick=()=>{state.paceCheckEnabled=true;save();renderV7Planner()};
+ if(paceOff)paceOff.onclick=()=>{state.paceCheckEnabled=false;save();renderV7Planner()};
  document.querySelectorAll('#v7StatPriority [data-v7-stat]').forEach(input=>{
   input.onchange=()=>{
    const stat=input.dataset.v7Stat,v=Math.round(Number(input.value)/10)*10,cap=v7ResolvedStatCaps()[stat];
@@ -5517,17 +5526,10 @@ function bindV7StatTargetControls(cond,race){
   }
  });
  document.querySelectorAll('#v7StatPriority [data-v7-current-stat]').forEach(input=>{
-  input.onchange=()=>{
-   const prev=v7TrainingStatCheckState(),stat=input.dataset.v7CurrentStat,raw=String(input.value||'').trim();
-   const stats={...prev.stats};
-   if(!raw)delete stats[stat];
-   else{
-    const v=Math.round(Number(raw));
-    if(!Number.isFinite(v)||v<0||v>3000){toast('현재 스탯은 0~3000 범위로 입력해 주세요.');renderV7Planner();return}
-    stats[stat]=v
-   }
-   state.trainingStatCheck={scenario:state.scenario,grade:prev.grade,month:prev.month,half:prev.half,stats};
-   save();renderV7Planner()
+  input.oninput=()=>{
+   const prev=v7TrainingStatCheckState(),stat=input.dataset.v7CurrentStat,raw=String(input.value||'').trim(),stats={...prev.stats};
+   if(!raw)delete stats[stat];else{const v=Math.round(Number(raw));if(!Number.isFinite(v)||v<0||v>3000)return;stats[stat]=v}
+   state.trainingStatCheck={scenario:state.scenario,grade:prev.grade,month:prev.month,half:prev.half,stats};save();refreshV7PaceResult(cond,race)
   }
  });
  const resetCaps=$('#v7ResetStatCaps');
