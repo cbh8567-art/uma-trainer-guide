@@ -94,7 +94,7 @@ jobs:
               Select(scenario).select_by_value("tresenken")
               d.execute_script("arguments[0].dispatchEvent(new Event('change', {bubbles:true}));", scenario)
               WebDriverWait(d, 10).until(
-                  lambda x: x.find_element(By.ID, "ramenScenarioGuide").is_displayed()
+                  lambda x: not x.find_element(By.ID, "ramenScenarioGuide").get_property("hidden")
               )
               ramen_diag = d.execute_script("""
                   try {
