@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.59">
-<title>우마무스메 트레이너 가이드 V7.59 WEB</title>
+<meta name="app-build" content="V7.60">
+<title>우마무스메 트레이너 가이드 V7.60 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -493,6 +493,12 @@ body{font-size:14px;line-height:1.5}
 .activeTrainingSetupBar.active{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .activeTrainingSetupInfo{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:5px}
 .activeTrainingSetupInfo .tag{font-size:10px}
+.trainingStatTargetBox{display:none;border:1px solid #6e5a25;background:linear-gradient(180deg,#211d14,#171b24);border-radius:12px;padding:10px;margin:-2px 0 10px}
+body.trainingMode .trainingStatTargetBox{display:block}
+.trainingStatTargetHead{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:7px}
+.trainingStatTargetHead h2{margin:0;font-size:14px;color:#ffe091}
+.trainingStatTargetHead .sub{margin-top:2px}
+@media(max-width:720px){.trainingStatTargetBox{padding:8px}.trainingStatTargetHead h2{font-size:13px}}
 body.trainingMode #setupProgress,
 body.trainingMode #umaSetupPanel,
 body.trainingMode #inheritanceSetupPanel,
@@ -1022,7 +1028,7 @@ body.trainingMode .trainingProgressHead .sub,
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.58 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.60 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -1058,6 +1064,16 @@ body.trainingMode .trainingProgressHead .sub,
         <div class="activeTrainingSetupInfo" id="activeTrainingSetupInfo"></div>
       </div>
       <button type="button" class="btn" id="toggleTrainingSetupEdit">설정 변경</button>
+    </div>
+    <div class="trainingStatTargetBox" id="trainingStatTargetBox">
+      <div class="trainingStatTargetHead">
+        <div>
+          <h2>추천 스탯 목표</h2>
+          <div class="sub">현재 육성 레이스 · 거리 · 각질 · 덱 기준 목표치입니다. 육성 중 인게임 스탯과 바로 비교하세요.</div>
+        </div>
+        <span class="status">육성 목표 HUD</span>
+      </div>
+      <div id="v7StatPriority"></div>
     </div>
     <div class="setupProgress" id="setupProgress">
       <div class="setupProgressStep" data-setup-progress="uma"><div><span class="n">1</span><span class="t">육성 우마</span></div><div class="s">선택/확정</div></div>
@@ -1349,13 +1365,9 @@ body.trainingMode .trainingProgressHead .sub,
     <span class="status" id="v7PlannerTrust">판정 준비 중</span>
    </div>
    <div class="guideGrid">
-    <div class="guideBox">
+    <div class="guideBox" style="grid-column:1/-1">
      <h2>챔미 준비 요약</h2>
      <div id="v7RaceSummary" class="note"></div>
-    </div>
-    <div class="guideBox">
-     <h2>추천 스탯 목표</h2>
-     <div id="v7StatPriority"></div>
     </div>
     <div class="guideBox" style="grid-column:1/-1">
      <div class="sectionHead" style="margin-top:0">
