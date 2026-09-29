@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T05:33:54.984Z",
+  "generatedAt": "2026-09-29T06:22:31.896Z",
   "status": "pass",
-  "gitSha": "ee7cf2422c49c19cbbb2b337ebbd08059652d9fa",
+  "gitSha": "dccd84a00d3fe87bf1b0701c711f7fca2f15aa1e",
   "event": "push",
   "sync": {
     "exitCode": 0,
@@ -14,7 +14,7 @@
   },
   "impact": {
     "level": "high",
-    "changedCount": 3,
+    "changedCount": 1,
     "fullTest": true,
     "deploySmoke": true
   },

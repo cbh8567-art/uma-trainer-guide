@@ -1,26 +1,20 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T05:33:53.598Z",
+  "generatedAt": "2026-09-29T06:22:29.665Z",
   "event": "push",
-  "sha": "ee7cf2422c49c19cbbb2b337ebbd08059652d9fa",
+  "sha": "dccd84a00d3fe87bf1b0701c711f7fca2f15aa1e",
   "changedFiles": [
-    ".github/workflows/browser-smoke.yml",
-    "index.html",
-    "scripts/test-v6-integrity.mjs"
+    "index.html"
   ],
   "categories": {
     "app": [
       "index.html"
     ],
-    "pipeline": [
-      "scripts/test-v6-integrity.mjs"
-    ],
+    "pipeline": [],
     "jpData": [],
     "krData": [],
     "commonData": [],
-    "other": [
-      ".github/workflows/browser-smoke.yml"
-    ]
+    "other": []
   },
   "impactLevel": "high",
   "fullTest": true,
