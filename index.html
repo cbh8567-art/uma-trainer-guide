@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.67">
-<title>우마무스메 트레이너 가이드 V7.67 WEB</title>
+<meta name="app-build" content="V7.68">
+<title>우마무스메 트레이너 가이드 V7.68 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -1090,7 +1090,7 @@ body.trainingMode .trainingProgressHead .sub,
 <body>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.67 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.68 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -1802,7 +1802,7 @@ function normalizeServerProfile(profile,server){
    p.statCapOverrides[scenario]=clean
  }
  const rawCheck=(p.trainingStatCheck&&typeof p.trainingStatCheck==='object'&&!Array.isArray(p.trainingStatCheck))?p.trainingStatCheck:{};
- const grade=['junior','classic','senior'].includes(rawCheck.grade)?rawCheck.grade:'junior';
+ const grade=['junior','classic','senior','ura'].includes(rawCheck.grade)?rawCheck.grade:'junior';
  const month=Math.max(1,Math.min(12,Math.floor(Number(rawCheck.month)||12)));
  const half=rawCheck.half==='first'?'first':'second';
  const stats={};
@@ -5063,6 +5063,7 @@ function v7PhaseTargetRows(cond,race){
  })}
 }
 function v7TrainingDateIndex(grade,month,half){
+ if(grade==='ura')return 71;
  const gy={junior:0,classic:1,senior:2}[grade]??0;
  const m=Math.max(1,Math.min(12,Math.floor(Number(month)||1)));
  return gy*24+(m-1)*2+(half==='second'?1:0)
@@ -5092,7 +5093,7 @@ function v7TargetAtDate(cond,race,grade,month,half){
 function v7TrainingStatCheckState(){
  const raw=state.trainingStatCheck||{},sameScenario=raw.scenario===state.scenario;
  return {
-  grade:['junior','classic','senior'].includes(raw.grade)?raw.grade:'junior',
+  grade:['junior','classic','senior','ura'].includes(raw.grade)?raw.grade:'junior',
   month:Math.max(1,Math.min(12,Math.floor(Number(raw.month)||12))),
   half:raw.half==='first'?'first':'second',
   stats:sameScenario&&(raw.stats&&typeof raw.stats==='object')?raw.stats:{}
@@ -5111,7 +5112,7 @@ function v7ProgressCheckHtml(cond,race){
  const names={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능'},check=v7TrainingStatCheckState();
  const target=v7TargetAtDate(cond,race,check.grade,check.month,check.half);
  const entered=['speed','stamina','power','guts','wit'].filter(stat=>Number.isFinite(Number(check.stats?.[stat])));
- const gradeLabel={junior:'주니어',classic:'클래식',senior:'시니어'}[check.grade],halfLabel=check.half==='first'?'전반':'후반';
+ const gradeLabel={junior:'주니어',classic:'클래식',senior:'시니어',ura:'URA / 최종'}[check.grade],halfLabel=check.half==='first'?'전반':'후반',dateLabel=check.grade==='ura'?'URA / 최종':gradeLabel+' '+check.month+'월 '+halfLabel;
  let result='';
  if(entered.length){
   const cards=['speed','stamina','power','guts','wit'].map(stat=>{
@@ -5123,11 +5124,11 @@ function v7ProgressCheckHtml(cond,race){
    (priority.length?'<div class="v7PacePriority"><b>현재 보강 우선순위</b> · '+priority.slice(0,3).map((x,i)=>(i+1)+'. '+names[x.stat]+' '+Math.abs(x.gap)+' 부족').join(' · ')+'<br><span>※ V7.66은 부족량 기준입니다. 실제 어떤 훈련을 누를지는 훈련 상승량 계산기를 붙인 뒤 보조 상승까지 함께 판단합니다.</span></div>':'<div class="v7PacePriority"><b>현재 입력 기준</b> · 모든 입력 스탯이 이 시점 목표선 이상입니다.</div>');
  }else result='<div class="v7PaceEmpty">현재 능력치를 입력하면 이 시점의 목표치와 비교해 부족량을 표시합니다.</div>';
  return '<div class="v7ProgressCheck">'+
-  '<div class="v7ProgressCheckHead"><div><b>현재 육성 페이스 체크</b><div class="sub">현재 시점과 인게임 능력치를 입력하면 분기 목표 곡선과 즉시 비교합니다.</div></div><span class="status">'+esc(gradeLabel+' '+check.month+'월 '+halfLabel)+'</span></div>'+
+  '<div class="v7ProgressCheckHead"><div><b>현재 육성 페이스 체크</b><div class="sub">현재 시점과 인게임 능력치를 입력하면 분기 목표 곡선과 즉시 비교합니다.</div></div><span class="status">'+esc(dateLabel)+'</span></div>'+
   '<div class="v7ProgressControls">'+
-   '<div class="v7ProgressField"><label>학년</label><select data-v7-check="grade"><option value="junior" '+(check.grade==='junior'?'selected':'')+'>주니어</option><option value="classic" '+(check.grade==='classic'?'selected':'')+'>클래식</option><option value="senior" '+(check.grade==='senior'?'selected':'')+'>시니어</option></select></div>'+
-   '<div class="v7ProgressField"><label>월</label><select data-v7-check="month">'+Array.from({length:12},(_,i)=>'<option value="'+(i+1)+'" '+(check.month===i+1?'selected':'')+'>'+(i+1)+'월</option>').join('')+'</select></div>'+
-   '<div class="v7ProgressField"><label>시기</label><select data-v7-check="half"><option value="first" '+(check.half==='first'?'selected':'')+'>전반</option><option value="second" '+(check.half==='second'?'selected':'')+'>후반</option></select></div>'+
+   '<div class="v7ProgressField"><label>학년</label><select data-v7-check="grade"><option value="junior" '+(check.grade==='junior'?'selected':'')+'>주니어</option><option value="classic" '+(check.grade==='classic'?'selected':'')+'>클래식</option><option value="senior" '+(check.grade==='senior'?'selected':'')+'>시니어</option><option value="ura" '+(check.grade==='ura'?'selected':'')+'>URA / 최종</option></select></div>'+
+   '<div class="v7ProgressField"><label>월</label><select data-v7-check="month" '+(check.grade==='ura'?'disabled':'')+'>'+Array.from({length:12},(_,i)=>'<option value="'+(i+1)+'" '+(check.month===i+1?'selected':'')+'>'+(i+1)+'월</option>').join('')+'</select></div>'+
+   '<div class="v7ProgressField"><label>시기</label><select data-v7-check="half" '+(check.grade==='ura'?'disabled':'')+'><option value="first" '+(check.half==='first'?'selected':'')+'>전반</option><option value="second" '+(check.half==='second'?'selected':'')+'>후반</option></select></div>'+
    ['speed','stamina','power','guts','wit'].map(stat=>'<div class="v7ProgressField"><label>'+names[stat]+'</label><input type="number" min="0" max="3000" step="1" placeholder="현재" value="'+(Number.isFinite(Number(check.stats?.[stat]))?Number(check.stats[stat]):'')+'" data-v7-current-stat="'+stat+'"></div>').join('')+
   '</div>'+result+'</div>'
 }
@@ -5140,14 +5141,14 @@ function v7GuidePhaseStatHtml(phase){
   senior:{key:'seniorSummer',label:'시니어 여름 기준'},
   ura:{key:'final',label:'최종 목표'}
  },m=map[phase]||map.junior,row=data.rows.find(x=>x.key===m.key)||data.rows[0];
- const check=v7TrainingStatCheckState(),phaseGrade=phase==='ura'?'senior':phase,same=check.grade===phaseGrade&&Object.keys(check.stats||{}).length>0;
+ const check=v7TrainingStatCheckState(),phaseGrade=phase==='ura'?'ura':phase,same=check.grade===phaseGrade&&Object.keys(check.stats||{}).length>0;
  const liveTarget=same?v7TargetAtDate(cond,race,check.grade,check.month,check.half):null;
  const chips=['speed','stamina','power','guts','wit'].map(stat=>{
    const current=same&&Number.isFinite(Number(check.stats?.[stat]))?Number(check.stats[stat]):null;
    const target=same?liveTarget[stat]:row.values[stat],pace=current===null?null:v7PaceStatus(current,target),delta=current===null?null:current-target;
    return '<div class="guideStatChip '+(pace?.cls||'')+'"><span class="name">'+names[stat]+'</span><strong>'+target+'</strong>'+(current!==null?'<span class="delta">현재 '+current+' · '+(delta>=0?'+':'')+delta+'</span>':'')+'</div>'
  }).join('');
- const liveLabel=same?({junior:'주니어',classic:'클래식',senior:'시니어'}[check.grade]+' '+check.month+'월 '+(check.half==='first'?'전반':'후반')+' 입력값 비교'):'V7.66 현재 스탯 입력값과 자동 연동';
+ const liveLabel=same?(check.grade==='ura'?'URA / 최종 입력값 비교':({junior:'주니어',classic:'클래식',senior:'시니어'}[check.grade]+' '+check.month+'월 '+(check.half==='first'?'전반':'후반')+' 입력값 비교')):'현재 스탯 입력값과 자동 연동';
  return '<div class="guideStatStrip"><div class="guideStatStripHead"><b>'+esc(m.label)+' 스탯</b><span>'+esc(liveLabel)+'</span></div><div class="guideStatStripGrid">'+chips+'</div><div class="guideStatStripNote">※ 탭별 운영을 볼 때 빠르게 확인하는 기준선입니다. 세부 시점 목표와 현재 스탯 입력은 추천 스탯 목표의 페이스 체크에서 관리합니다.</div></div>'
 }
 function v7PhaseTargetHtml(cond,race){
@@ -5226,7 +5227,10 @@ function bindV7StatTargetControls(cond,race){
   el.onchange=()=>{
    const prev=v7TrainingStatCheckState(),field=el.dataset.v7Check;
    state.trainingStatCheck={scenario:state.scenario,grade:prev.grade,month:prev.month,half:prev.half,stats:{...prev.stats}};
-   if(field==='grade')state.trainingStatCheck.grade=el.value;
+   if(field==='grade'){
+     state.trainingStatCheck.grade=el.value;
+     if(el.value==='ura'){state.trainingStatCheck.month=12;state.trainingStatCheck.half='second'}
+   }
    else if(field==='month')state.trainingStatCheck.month=Math.max(1,Math.min(12,Math.floor(Number(el.value)||1)));
    else if(field==='half')state.trainingStatCheck.half=el.value==='first'?'first':'second';
    save();renderV7Planner()
