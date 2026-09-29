@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.70">
-<title>우마무스메 트레이너 가이드 V7.70 WEB</title>
+<meta name="app-build" content="V7.70.1">
+<title>우마무스메 트레이너 가이드 V7.70.1 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -697,6 +697,16 @@ body.trainingMode .counts{margin-top:8px}
 /* V7.70 · 경마장 정보 탭 */
 .racetrackInfoHead{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .racetrackSourceNote{margin-top:7px;border:1px solid #44546a;background:#141c27;border-radius:9px;padding:8px;font-size:8.5px;color:#aebbd0;line-height:1.5}
+.racetrackMascot{display:grid;grid-template-columns:116px minmax(0,1fr);gap:10px;align-items:center;margin-top:9px;border:1px solid #6b4b68;background:linear-gradient(135deg,#241923,#17202a);border-radius:12px;padding:8px 10px;overflow:hidden}
+.racetrackMascotArt{width:116px;height:100px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.racetrackMascotArt img{display:block;width:104px;height:104px;object-fit:contain;filter:drop-shadow(0 5px 10px rgba(0,0,0,.28))}
+.racetrackMascotArt.imageMissing::after{content:'DIGITAN';display:flex;align-items:center;justify-content:center;width:86px;height:86px;border:1px dashed #865f83;border-radius:50%;font-size:9px;font-weight:950;color:#d8a9d2}
+.racetrackMascotTalk{position:relative;border:1px solid #4b5368;background:#141a24;border-radius:11px;padding:9px 11px;font-size:9px;line-height:1.55;color:#d9e0eb}
+.racetrackMascotTalk::before{content:'';position:absolute;left:-8px;top:28px;border-width:7px 8px 7px 0;border-style:solid;border-color:transparent #4b5368 transparent transparent}
+.racetrackMascotTalk::after{content:'';position:absolute;left:-6px;top:29px;border-width:6px 7px 6px 0;border-style:solid;border-color:transparent #141a24 transparent transparent}
+.racetrackMascotName{font-size:9px;font-weight:950;color:#ffafd1;margin-bottom:3px}
+.racetrackMascotTalk a{display:inline-block;margin-top:5px;font-size:7.5px;color:#9fc8f4;text-decoration:none}
+
 .racetrackToolbar{display:grid;grid-template-columns:1fr 2fr;gap:7px;margin-top:10px}
 .racetrackHero{border:1px solid #3f5067;background:linear-gradient(180deg,#17202c,#141a23);border-radius:11px;padding:10px;margin-top:9px}
 .racetrackHeroTop{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap}
@@ -718,7 +728,7 @@ body.trainingMode .counts{margin-top:8px}
 .racetrackCurrent{border:1px solid #6a5d34;background:#242015;border-radius:9px;padding:8px;margin-top:9px;font-size:8.5px;line-height:1.5;color:#e5d6a7}
 .racetrackEmpty{border:1px dashed #465267;border-radius:9px;padding:12px;margin-top:9px;color:#9eabba;font-size:9px;line-height:1.55}
 @media(max-width:900px){.racetrackCourses{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:720px){.racetrackToolbar,.racetrackDetailGrid{grid-template-columns:1fr}.racetrackCourses{grid-template-columns:1fr}.racetrackInfoHead .btn{width:100%;text-align:center}}
+@media(max-width:720px){.racetrackToolbar,.racetrackDetailGrid{grid-template-columns:1fr}.racetrackCourses{grid-template-columns:1fr}.racetrackInfoHead .btn{width:100%;text-align:center}.racetrackMascot{grid-template-columns:82px minmax(0,1fr);gap:7px;padding:7px}.racetrackMascotArt{width:82px;height:78px}.racetrackMascotArt img{width:78px;height:78px}.racetrackMascotTalk{padding:8px;font-size:8px}}
 
 /* V7.70 · 스킬 추천 1픽 결정 + 근거 표시 */
 .v769Decision{border:1px solid #7d6740;background:linear-gradient(180deg,#252016,#191c25);border-radius:10px;padding:9px;margin:0 0 7px}
@@ -1544,6 +1554,21 @@ body.trainingMode .trainingProgressHead .sub,
     <a class="btn" id="racetrackGameToraList" href="https://gametora.com/ko/umamusume/racetracks" target="_blank" rel="noopener">GameTora 경마장 목록 ↗</a>
    </div>
    <div class="racetrackSourceNote">GameTora는 우마무스메의 비공식 팬 데이터베이스입니다. 상세 구간·코너·경사·스퍼트 정보의 출처 링크를 함께 표시합니다.</div>
+   <div class="racetrackMascot">
+    <div class="racetrackMascotArt">
+     <!-- Agnes Digital profile asset mirrored by GameTora; underlying game materials © Cygames, Inc. -->
+     <img src="https://media.gametora.com/umamusume/characters/profile/1019.png"
+          alt="아그네스 디지털 치비 SD"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          onerror="this.style.display='none';this.parentElement.classList.add('imageMissing')">
+    </div>
+    <div class="racetrackMascotTalk">
+     <div class="racetrackMascotName">디지탄 코스 체크</div>
+     <div id="racetrackMascotText">두후후~ 경마장을 고르면 코너·직선·경사 포인트를 같이 확인해 드립니다!</div>
+     <a href="https://gametora.com/ko/umamusume/characters/agnes-digital" target="_blank" rel="noopener">아그네스 디지털 출처 ↗</a>
+    </div>
+   </div>
    <div class="racetrackToolbar">
     <div class="field"><label>경마장</label><select id="racetrackPlace"></select></div>
     <div class="field"><label>코스</label><select id="racetrackCourse"></select></div>
@@ -4626,6 +4651,13 @@ async function renderRacetrackInfo(){
  }
  if(!course){body.innerHTML='<div class="racetrackEmpty">선택한 경마장에 표시할 코스가 없습니다.</div>';return}
  const meta=RACETRACK_META[course.place]||{kr:course.place},sourceUrl=racetrackSourceUrl(course.place),detail=RACETRACK_DETAIL_SNAPSHOT[racetrackDetailKey(course)];
+ const mascotText=$('#racetrackMascotText');
+ if(mascotText){
+   const base=`${racetrackKr(course.place)} ${Number(course.distance)}m · ${racetrackGroundKr(course.ground)} · ${course.turn||'방향 미정'}회전`;
+   mascotText.textContent=detail?.spurt?.start
+     ?`두후후~ ${base}! 종반 기준은 ${detail.spurt.start}m이고, ${detail.spurt.where}에서 승부 구간이 시작됩니다. 경사·코너도 아래에서 같이 체크하세요!`
+     :`두후후~ ${base}! 기본 코스 정보는 확인됐습니다. 상세 코너·경사 스냅샷이 추가되면 스킬 1픽 판단에도 바로 연결할 수 있어요!`;
+ }
  const turf=placeCourses.filter(x=>x.ground==='芝').length,dirt=placeCourses.filter(x=>x.ground==='ダート').length;
  const detailHtml=detail?`<div class="racetrackDetail">
    <div class="racetrackDetailHead"><div><b>상세 구간 스냅샷</b><div class="sub">GameTora 확인 ${esc(detail.checked)} · 스킬 추천 엔진 연결 전 정보 표시 단계</div></div><a class="mini" href="${esc(detail.sourceUrl)}" target="_blank" rel="noopener">원문 상세 ↗</a></div>
