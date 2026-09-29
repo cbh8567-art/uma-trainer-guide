@@ -459,6 +459,10 @@ jobs:
 
                   # V7.8: Twinkle Legends guide renders with all three in-game legend routes.
                   select_scenario(d, "legends")
+                  d.execute_script("arguments[0].click()", d.find_element(By.CSS_SELECTOR, '.tab[data-page="guide"]'))
+                  WebDriverWait(d, 8).until(
+                      lambda x: x.find_element(By.ID, "page-guide").get_attribute("class").find("active") >= 0
+                  )
                   legends = WebDriverWait(d, 12).until(
                       lambda x: x.find_element(By.ID, "legendsScenarioGuide")
                   )
