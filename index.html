@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.70.1">
-<title>우마무스메 트레이너 가이드 V7.70.1 WEB</title>
+<meta name="app-build" content="V7.70.2">
+<title>우마무스메 트레이너 가이드 V7.70.2 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -1968,7 +1968,7 @@ function syncActiveServerProfile(){
  state.serverProfiles[server]=normalizeServerProfile(p,server);
  state.guideRaceIds={...(state.guideRaceIds||{}),[server]:state.guideRaceId};
 }
-let runtime={catalog:[],byId:new Map(),skills:new Map(),characters:[],courses:(cache.courses||[]).map(x=>({id:Number(x.id),name:x.name||'',place:x.place||'',distance:Number(x.distance)||0,distClass:x.distClass||'',turn:x.turn||'',ground:x.ground||''})),ready:false};let catType='전체',ownedType='전체',emptySlotType='전체',emptySlotTarget=0,emptySlotScope='recommend',catalogRecommendSort=false;
+let runtime={catalog:[],byId:new Map(),skills:new Map(),characters:[],courses:[],ready:false};let catType='전체',ownedType='전체',emptySlotType='전체',emptySlotTarget=0,emptySlotScope='recommend',catalogRecommendSort=false;
 let umaPickerMode='current',inheritancePickerTarget=0;
 
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -5016,7 +5016,7 @@ function buildCompactDbCache(cache){
    catalog:(cache.catalog||[]).map(compactCardMeta),
    skills:(cache.skills||[]).map(compactSkillMeta).filter(Boolean),
    characters:(cache.characters||[]).map(compactCharacterMeta),
-   courses:[]
+   courses:(cache.courses||[]).map(x=>({id:Number(x.id),name:x.name||'',place:x.place||'',distance:Number(x.distance)||0,distClass:x.distClass||'',turn:x.turn||'',ground:x.ground||''}))
  }
 }
 function storeDbCacheSafely(cache){
