@@ -20,7 +20,7 @@ jobs:
       - name: Install Selenium
         run: python -m pip install --quiet selenium
 
-      - name: P0 V7.70.8 startup and controls smoke
+      - name: P0 V7.70.10 startup and controls smoke
         shell: bash
         run: |
           set -o pipefail
@@ -42,7 +42,7 @@ jobs:
           d.set_window_size(1440, 1200)
           try:
               d.get(url)
-              WebDriverWait(d, 25).until(lambda x: "V7.70.8" in x.title)
+              WebDriverWait(d, 25).until(lambda x: "V7.70.10" in x.title)
               WebDriverWait(d, 25).until(EC.presence_of_element_located((By.ID, "page-deck")))
 
               tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
@@ -134,7 +134,7 @@ jobs:
                   raise RuntimeError("P0 browser console has severe JS errors: " + " | ".join(
                       x.get("message", "") for x in js_severe[:10]
                   ))
-              print("P0 V7.70.8 BROWSER PASS")
+              print("P0 V7.70.10 BROWSER PASS")
           finally:
               d.quit()
           PY
@@ -151,7 +151,7 @@ jobs:
           from selenium.webdriver.support.ui import Select, WebDriverWait
           from selenium.webdriver.support import expected_conditions as EC
 
-          EXPECTED_BUILD = "V7.70.8"
+          EXPECTED_BUILD = "V7.70.10"
           TARGETS = [
               ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v7708", True),
               ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v7708", False),
@@ -304,7 +304,7 @@ jobs:
                       raise RuntimeError("getDisplayMedia is unavailable on deployed HTTPS target")
                   print("WATCH PILOT DOM/API PASS")
 
-                  # V7.70.8: animated Agnes Digital mascot + favicon asset.
+                  # V7.70.10: animated Agnes Digital mascot + favicon asset.
                   mascot = d.find_element(By.ID, "digitalMascotFloating")
                   mascot_img = mascot.find_element(By.TAG_NAME, "img")
                   mascot_src = mascot_img.get_attribute("src") or ""
@@ -320,7 +320,7 @@ jobs:
                       raise RuntimeError(f"Digital favicon missing: {favicon_hrefs}")
                   print("DIGITAL MASCOT / FAVICON PASS")
 
-                  # V7.70.8: mascot can be dragged and stores its position.
+                  # V7.70.10: mascot can be dragged and stores its position.
                   before = d.execute_script("""
                       const e=document.getElementById('digitalMascotFloating'),r=e.getBoundingClientRect();
                       return {left:r.left,top:r.top};
@@ -342,7 +342,7 @@ jobs:
                       raise RuntimeError("Digital mascot position was not persisted")
                   print("DIGITAL MASCOT DRAG PASS:", before, "->", after)
 
-                  # V7.70.8: Digital guidance bubble points to the first missing setup step.
+                  # V7.70.10: Digital guidance bubble points to the first missing setup step.
                   WebDriverWait(d, 25).until(
                       lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true")
                   )
@@ -365,7 +365,7 @@ jobs:
                   d.execute_script("document.getElementById('umaPickerModal').classList.remove('open')")
                   print("DIGITAL STEP NAVIGATOR PASS:", bubble_text)
 
-                  # V7.70.8 regression: aborting a live training session reopens the Uma picker.
+                  # V7.70.10 regression: aborting a live training session reopens the Uma picker.
                   d.execute_script("""
                       state.trainingActive=true;
                       window.confirm=()=>true;
@@ -443,7 +443,7 @@ jobs:
                   tabs[0].click()
                   time.sleep(0.3)
 
-                  # V7.70.8: information tab must open without freezing the global UI,
+                  # V7.70.10: information tab must open without freezing the global UI,
                   # and the racetrack controls must render after the tab is selected.
                   info_tab = d.find_element(By.CSS_SELECTOR, '.tab[data-page="info"]')
                   d.execute_script("arguments[0].click()", info_tab)
