@@ -7832,6 +7832,97 @@
     }
   },
   {
+    "id": 120171,
+    "name": "Cascading Might",
+    "baseSp": 0,
+    "rarity": 5,
+    "groupId": 12017,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [
+            "turf"
+          ],
+          "distances": [],
+          "styles": [
+            "senko"
+          ]
+        },
+        {
+          "grounds": [
+            "turf"
+          ],
+          "distances": [],
+          "styles": [
+            "sashi"
+          ]
+        },
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "senko"
+          ]
+        },
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "sashi"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [
+          "turf"
+        ],
+        "distances": [],
+        "styles": [
+          "senko",
+          "sashi"
+        ]
+      }
+    }
+  },
+  {
+    "id": 120181,
+    "name": "Shadow Ancestress",
+    "baseSp": 0,
+    "rarity": 5,
+    "groupId": 12018,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": []
+        },
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mid"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
     "id": 120201,
     "name": "海風にまったり身を任せ",
     "baseSp": 0,
@@ -33394,6 +33485,101 @@
     }
   },
   {
+    "id": 204721,
+    "name": "一往直前",
+    "baseSp": 160,
+    "rarity": 2,
+    "groupId": 20472,
+    "groupRate": 2,
+    "iconId": 0,
+    "lowerSkillId": 204722,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mid"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 204722,
+    "name": "怯むことなく",
+    "baseSp": 160,
+    "rarity": 1,
+    "groupId": 20472,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": 204721,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mid"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 204792,
+    "name": "遊び心",
+    "baseSp": 180,
+    "rarity": 1,
+    "groupId": 20479,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": []
+        },
+        {
+          "grounds": [],
+          "distances": [
+            "long"
+          ],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mid",
+          "long"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
     "id": 210011,
     "name": "アオハル燃焼・速",
     "baseSp": 200,
@@ -43535,6 +43721,68 @@
     }
   },
   {
+    "id": 920171,
+    "name": "Cascading Might",
+    "baseSp": 200,
+    "rarity": 1,
+    "groupId": 92017,
+    "groupRate": 2,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "senko"
+          ]
+        },
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "sashi"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": [
+          "senko",
+          "sashi"
+        ]
+      }
+    }
+  },
+  {
+    "id": 920181,
+    "name": "Shadow Ancestress",
+    "baseSp": 200,
+    "rarity": 1,
+    "groupId": 92018,
+    "groupRate": 2,
+    "iconId": 20011,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
     "id": 920201,
     "name": "海風にまったり身を任せ",
     "baseSp": 200,
@@ -47379,6 +47627,39 @@
     }
   },
   {
+    "id": 101301311,
+    "name": "名優、昇るは天の果て",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 10130131,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "long"
+          ],
+          "styles": [
+            "senko"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "long"
+        ],
+        "styles": [
+          "senko"
+        ]
+      }
+    }
+  },
+  {
     "id": 101302111,
     "name": "アクティブレスト",
     "baseSp": 0,
@@ -48075,6 +48356,109 @@
     }
   },
   {
+    "id": 101703111,
+    "name": "大望は煌めきとなりて",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 10170311,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": []
+        },
+        {
+          "grounds": [],
+          "distances": [
+            "long"
+          ],
+          "styles": []
+        },
+        {
+          "grounds": [
+            "turf"
+          ],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [
+          "turf"
+        ],
+        "distances": [
+          "mid",
+          "long"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 101703211,
+    "name": "熱烈峻厳",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 10170321,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [
+            "turf"
+          ],
+          "distances": [],
+          "styles": [
+            "senko"
+          ]
+        },
+        {
+          "grounds": [
+            "turf"
+          ],
+          "distances": [],
+          "styles": [
+            "sashi"
+          ]
+        },
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "senko"
+          ]
+        },
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "sashi"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [
+          "turf"
+        ],
+        "distances": [],
+        "styles": [
+          "senko",
+          "sashi"
+        ]
+      }
+    }
+  },
+  {
     "id": 101801111,
     "name": "女帝の権謀",
     "baseSp": 0,
@@ -48219,6 +48603,72 @@
           "mile"
         ],
         "styles": []
+      }
+    }
+  },
+  {
+    "id": 101803111,
+    "name": "“標”に足るために",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 10180311,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": [
+            "senko"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mid"
+        ],
+        "styles": [
+          "senko"
+        ]
+      }
+    }
+  },
+  {
+    "id": 101803211,
+    "name": "崇高のアマラントス",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 10180321,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": [
+            "senko"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mid"
+        ],
+        "styles": [
+          "senko"
+        ]
       }
     }
   },
@@ -61334,6 +61784,31 @@
     "groupId": 11060211,
     "groupRate": 1,
     "iconId": 20016,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 110602121,
+    "name": "ミラクル、起きるかも？",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 11060212,
+    "groupRate": 1,
+    "iconId": 0,
     "lowerSkillId": null,
     "upperSkillId": null,
     "activation": {

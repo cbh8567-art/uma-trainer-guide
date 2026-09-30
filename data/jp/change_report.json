@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "updated": "2026-09-30",
-  "checkedAt": "2026-09-30T00:19:46.506Z",
+  "checkedAt": "2026-09-30T18:50:23.668Z",
   "status": "pass",
   "summary": {
-    "added": 0,
+    "added": 19,
     "removed": 0,
-    "modified": 0
+    "modified": 1
   },
   "collections": {
     "catalog": {
@@ -29,79 +29,189 @@
       }
     },
     "supports": {
-      "count": 43,
+      "count": 45,
       "previousCount": 43,
-      "changed": false,
+      "changed": true,
       "status": "pass",
       "changes": {
-        "addedCount": 0,
+        "addedCount": 2,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [],
+        "addedIds": [
+          "30319",
+          "30320"
+        ],
         "removedIds": [],
         "modifiedIds": []
       },
       "details": {
-        "added": [],
+        "added": [
+          {
+            "id": "30319",
+            "name": "[晩餐]ナリタブライアン"
+          },
+          {
+            "id": "30320",
+            "name": "[冷凜なるビスクドール]アドマイヤグルーヴ"
+          }
+        ],
         "removed": [],
         "modified": []
       }
     },
     "events": {
-      "count": 120,
+      "count": 122,
       "previousCount": 120,
-      "changed": false,
+      "changed": true,
       "status": "pass",
       "changes": {
-        "addedCount": 0,
+        "addedCount": 2,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [],
+        "addedIds": [
+          "evt_30319_801016002",
+          "evt_30320_801118002"
+        ],
         "removedIds": [],
         "modifiedIds": []
       },
       "details": {
-        "added": [],
+        "added": [
+          {
+            "id": "evt_30319_801016002",
+            "name": "賢さブライアン 孤狼"
+          },
+          {
+            "id": "evt_30320_801118002",
+            "name": "賢さビスク ひとりが好きなクラスメイトさん"
+          }
+        ],
         "removed": [],
         "modified": []
       }
     },
     "skills": {
-      "count": 2181,
+      "count": 2194,
       "previousCount": 2181,
-      "changed": false,
+      "changed": true,
       "status": "pass",
       "changes": {
-        "addedCount": 0,
+        "addedCount": 13,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [],
+        "addedIds": [
+          "120171",
+          "120181",
+          "204721",
+          "204722",
+          "204792",
+          "920171",
+          "920181",
+          "101301311",
+          "101703111",
+          "101703211",
+          "101803111",
+          "101803211",
+          "110602121"
+        ],
         "removedIds": [],
         "modifiedIds": []
       },
       "details": {
-        "added": [],
+        "added": [
+          {
+            "id": "120171",
+            "name": "Cascading Might"
+          },
+          {
+            "id": "120181",
+            "name": "Shadow Ancestress"
+          },
+          {
+            "id": "204721",
+            "name": "一往直前"
+          },
+          {
+            "id": "204722",
+            "name": "怯むことなく"
+          },
+          {
+            "id": "204792",
+            "name": "遊び心"
+          },
+          {
+            "id": "920171",
+            "name": "Cascading Might"
+          },
+          {
+            "id": "920181",
+            "name": "Shadow Ancestress"
+          },
+          {
+            "id": "101301311",
+            "name": "名優、昇るは天の果て"
+          },
+          {
+            "id": "101703111",
+            "name": "大望は煌めきとなりて"
+          },
+          {
+            "id": "101703211",
+            "name": "熱烈峻厳"
+          },
+          {
+            "id": "101803111",
+            "name": "“標”に足るために"
+          },
+          {
+            "id": "101803211",
+            "name": "崇高のアマラントス"
+          },
+          {
+            "id": "110602121",
+            "name": "ミラクル、起きるかも？"
+          }
+        ],
         "removed": [],
         "modified": []
       }
     },
     "characters": {
-      "count": 268,
+      "count": 270,
       "previousCount": 268,
-      "changed": false,
+      "changed": true,
       "status": "pass",
       "changes": {
-        "addedCount": 0,
+        "addedCount": 2,
         "removedCount": 0,
-        "modifiedCount": 0,
-        "addedIds": [],
+        "modifiedCount": 1,
+        "addedIds": [
+          "101703",
+          "101803"
+        ],
         "removedIds": [],
-        "modifiedIds": []
+        "modifiedIds": [
+          "101301"
+        ]
       },
       "details": {
-        "added": [],
+        "added": [
+          {
+            "id": "101703",
+            "name": "[Adamant Sovereign]シンボリルドルフ"
+          },
+          {
+            "id": "101803",
+            "name": "[悠久なるヘカテイア]エアグルーヴ"
+          }
+        ],
         "removed": [],
-        "modified": []
+        "modified": [
+          {
+            "id": "101301",
+            "name": "[エレガンス・ライン]メジロマックイーン"
+          }
+        ]
       }
     },
     "courses": {

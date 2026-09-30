@@ -1,9 +1,22 @@
 {
   "schemaVersion": 1,
   "updated": "2026-09-30",
-  "generatedAt": "2026-09-30T00:19:46.506Z",
+  "generatedAt": "2026-09-30T18:50:23.668Z",
   "status": "verification_required",
-  "characters": [],
+  "characters": [
+    {
+      "id": 101703,
+      "name": "[Adamant Sovereign]シンボリルドルフ",
+      "status": "verification_required",
+      "reason": "New JP character card is not in KR uma allowlist."
+    },
+    {
+      "id": 101803,
+      "name": "[悠久なるヘカテイア]エアグルーヴ",
+      "status": "verification_required",
+      "reason": "New JP character card is not in KR uma allowlist."
+    }
+  ],
   "supports": [],
   "supportMaxId": 30260,
   "notes": [

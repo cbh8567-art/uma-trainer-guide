@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "updated": "2026-09-30",
-  "generatedAt": "2026-09-30T00:19:46.506Z",
+  "generatedAt": "2026-09-30T18:50:23.668Z",
   "collections": {
     "catalog": {
       "source": "https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json",
@@ -11,32 +11,32 @@
     },
     "supports": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
-      "count": 43,
-      "contentSha256": "9f3c215963b5aa48e33cd4c4e35ae4066edae831778275f0f07260e4452440ee",
+      "count": 45,
+      "contentSha256": "7b6e119a007a64bc494ba5b65dada7700c856993f02dba35319bc0d8aa437f5b",
       "status": "pass"
     },
     "events": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/events.json",
-      "count": 120,
-      "contentSha256": "3f9fa5b115f4335b36acc0a223d7a00267e6e90244d27ce0ca3588fe72a5570c",
+      "count": 122,
+      "contentSha256": "6f292cdb506634bde1e4415f72f1f23507639b4135b36aadc26e6cb68c7b97eb",
       "status": "pass"
     },
     "skills": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/skills.json",
-      "count": 2181,
-      "contentSha256": "d0d0688b70e3557ba4ce107f00fb210b24203daac1bc319b2b7816f7a6789605",
+      "count": 2194,
+      "contentSha256": "11bf7aa86d611047f5052b48059cf77d6aa9b4a7ad8e25ba2f7f901dcd267e62",
       "status": "pass"
     },
     "characters": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/characters.json",
-      "count": 268,
-      "contentSha256": "a2f6e36691702ad485e787930eeb39917a721f83a2e7f420353575c422481050",
+      "count": 270,
+      "contentSha256": "274db001271d4efe201bf52cc8b47357727894ade85df7099093e854aeb8bdfa",
       "status": "pass"
     },
     "courses": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/courses.json",
       "count": 140,
-      "contentSha256": "0029b65134d7d92f4ca435767eff2931dbc706cd15941845fe5046151ac86c6d",
+      "contentSha256": "44319688cc197c894abeb065ef7b575b75320a27821dc6309b0797916ef986d9",
       "status": "pass"
     }
   }
