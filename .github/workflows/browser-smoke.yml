@@ -20,7 +20,7 @@ jobs:
       - name: Install Selenium
         run: python -m pip install --quiet selenium
 
-      - name: P0 V7.70.11 startup and controls smoke
+      - name: P0 V7.70.12 startup and controls smoke
         shell: bash
         run: |
           set -o pipefail
@@ -42,7 +42,7 @@ jobs:
           d.set_window_size(1440, 1200)
           try:
               d.get(url)
-              WebDriverWait(d, 25).until(lambda x: "V7.70.11" in x.title)
+              WebDriverWait(d, 25).until(lambda x: "V7.70.12" in x.title)
               WebDriverWait(d, 25).until(EC.presence_of_element_located((By.ID, "page-deck")))
 
               tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
@@ -134,7 +134,7 @@ jobs:
                   raise RuntimeError("P0 browser console has severe JS errors: " + " | ".join(
                       x.get("message", "") for x in js_severe[:10]
                   ))
-              print("P0 V7.70.11 BROWSER PASS")
+              print("P0 V7.70.12 BROWSER PASS")
           finally:
               d.quit()
           PY
@@ -151,7 +151,7 @@ jobs:
           from selenium.webdriver.support.ui import Select, WebDriverWait
           from selenium.webdriver.support import expected_conditions as EC
 
-          EXPECTED_BUILD = "V7.70.11"
+          EXPECTED_BUILD = "V7.70.12"
           TARGETS = [
               ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v7708", True),
               ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v7708", False),
@@ -304,7 +304,7 @@ jobs:
                       raise RuntimeError("getDisplayMedia is unavailable on deployed HTTPS target")
                   print("WATCH PILOT DOM/API PASS")
 
-                  # V7.70.11: animated Agnes Digital mascot + favicon asset.
+                  # V7.70.12: animated Agnes Digital mascot + favicon asset.
                   mascot = d.find_element(By.ID, "digitalMascotFloating")
                   mascot_img = mascot.find_element(By.TAG_NAME, "img")
                   mascot_src = mascot_img.get_attribute("src") or ""
@@ -320,7 +320,7 @@ jobs:
                       raise RuntimeError(f"Digital favicon missing: {favicon_hrefs}")
                   print("DIGITAL MASCOT / FAVICON PASS")
 
-                  # V7.70.11: mascot can be dragged and stores its position.
+                  # V7.70.12: mascot can be dragged and stores its position.
                   before = d.execute_script("""
                       const e=document.getElementById('digitalMascotFloating'),r=e.getBoundingClientRect();
                       return {left:r.left,top:r.top};
@@ -342,7 +342,7 @@ jobs:
                       raise RuntimeError("Digital mascot position was not persisted")
                   print("DIGITAL MASCOT DRAG PASS:", before, "->", after)
 
-                  # V7.70.11: Digital guidance bubble points to the first missing setup step.
+                  # V7.70.12: Digital guidance bubble points to the first missing setup step.
                   WebDriverWait(d, 25).until(
                       lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true")
                   )
@@ -365,7 +365,7 @@ jobs:
                   d.execute_script("document.getElementById('umaPickerModal').classList.remove('open')")
                   print("DIGITAL STEP NAVIGATOR PASS:", bubble_text)
 
-                  # V7.70.11 regression: aborting a live training session reopens the Uma picker.
+                  # V7.70.12 regression: aborting a live training session reopens the Uma picker.
                   d.execute_script("""
                       state.trainingActive=true;
                       window.confirm=()=>true;
@@ -399,6 +399,38 @@ jobs:
                       raise RuntimeError(f"Expected 3 deck picker scopes, got {len(scopes)}")
                   print("SSR COMPACT UI PASS")
 
+                  # V7.70.12: Friend/Group supports keep card functionality but show no recommendation rating UI.
+                  friend_group = d.execute_script("""
+                      const card=runtime.catalog.find(c=>c.type==='친구'||c.type==='그룹');
+                      if(!card)return {ok:false,reason:'no friend/group support in catalog'};
+                      catType=card.type;
+                      renderCatalog();
+                      const node=[...document.querySelectorAll('#catalog .card')].find(x=>x.textContent.includes(card.krName));
+                      if(!node)return {ok:false,reason:'friend/group card not rendered',type:card.type,name:card.krName};
+                      const rec=node.querySelector('.recInline');
+                      const badge=node.querySelector('.scenarioRec');
+                      openCardInfo(card.id);
+                      const detail=document.querySelector('#cardInfo .supportRecommendationDetail');
+                      return {
+                        ok:true,
+                        type:card.type,
+                        name:card.krName,
+                        cls:node.classList.contains('noSupportRecommendation'),
+                        recDisplay:rec?getComputedStyle(rec).display:null,
+                        badgeDisplay:badge?getComputedStyle(badge).display:null,
+                        infoClass:document.getElementById('cardInfo')?.classList.contains('noSupportRecommendation')||false,
+                        detailDisplay:detail?getComputedStyle(detail).display:null
+                      };
+                  """)
+                  if not friend_group.get("ok"):
+                      raise RuntimeError("Friend/Group recommendation test setup failed: "+str(friend_group))
+                  if not friend_group.get("cls") or friend_group.get("recDisplay") != "none":
+                      raise RuntimeError("Friend/Group recommendation rating is still visible: "+str(friend_group))
+                  if not friend_group.get("infoClass") or friend_group.get("detailDisplay") != "none":
+                      raise RuntimeError("Friend/Group card detail recommendation is still visible: "+str(friend_group))
+                  d.execute_script("document.getElementById('cardInfoModal')?.classList.remove('open'); catType='전체'; renderCatalog();")
+                  print("FRIEND/GROUP RECOMMENDATION HIDDEN PASS:", friend_group)
+
                   # V7.11: direct deck-slot picker should open and expose all three scopes.
                   WebDriverWait(d, 25).until(
                       lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true")
@@ -425,7 +457,7 @@ jobs:
                   d.execute_script("document.getElementById('emptySlotModal').classList.remove('open')")
                   print("DECK SLOT PICKER PASS:", len(picker_cards))
 
-                  # V7.70.11: Agnes Digital self-selection reaction + hard same-character support guard.
+                  # V7.70.12: Agnes Digital self-selection reaction + hard same-character support guard.
                   reaction_cfg = d.execute_script("""
                       const u=runtime.characters.find(ch=>{
                         const s=(String(ch.character||'')+' '+String(ch.krName||'')+' '+String(ch.name||'')).toLowerCase();
@@ -480,7 +512,7 @@ jobs:
                   d.execute_script("hideDigitalReaction()")
                   print("DIGITAL TRAINING-COMPLETE REACTION PASS")
 
-                  # V7.70.11: courses source/cache accepts the live object payload {courses:[...]} as well as arrays.
+                  # V7.70.12: courses source/cache accepts the live object payload {courses:[...]} as well as arrays.
                   course_norm = d.execute_script("""
                       const sample={courses:[{id:1,name:'테스트',place:'東京',distance:2400,distClass:'中距離',turn:'左',ground:'芝'}]};
                       const a=normalizeCoursesPayload(sample);
@@ -510,7 +542,7 @@ jobs:
                   tabs[0].click()
                   time.sleep(0.3)
 
-                  # V7.70.11: information tab must open without freezing the global UI,
+                  # V7.70.12: information tab must open without freezing the global UI,
                   # and the racetrack controls must render after the tab is selected.
                   info_tab = d.find_element(By.CSS_SELECTOR, '.tab[data-page="info"]')
                   d.execute_script("arguments[0].click()", info_tab)
