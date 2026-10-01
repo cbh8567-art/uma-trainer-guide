@@ -4,6 +4,110 @@
   "limit": 20,
   "runs": [
     {
+      "checkedAt": "2026-10-01T18:49:45.737Z",
+      "status": "fatal",
+      "activeMode": "snapshot",
+      "message": "Validation failed. Existing current snapshots were kept.",
+      "collections": {
+        "catalog": {
+          "count": 563,
+          "previousCount": 560,
+          "removedCount": 0,
+          "changed": true,
+          "status": "pass",
+          "changes": {
+            "addedCount": 3,
+            "removedCount": 0,
+            "modifiedCount": 0,
+            "addedIds": [
+              "30319",
+              "30320",
+              "30321"
+            ],
+            "removedIds": [],
+            "modifiedIds": []
+          }
+        },
+        "supports": {
+          "count": 45,
+          "previousCount": 46,
+          "removedCount": 1,
+          "changed": true,
+          "status": "fatal",
+          "changes": {
+            "addedCount": 0,
+            "removedCount": 1,
+            "modifiedCount": 0,
+            "addedIds": [],
+            "removedIds": [
+              "30321"
+            ],
+            "modifiedIds": []
+          }
+        },
+        "events": {
+          "count": 122,
+          "previousCount": 122,
+          "removedCount": 0,
+          "changed": false,
+          "status": "pass",
+          "changes": {
+            "addedCount": 0,
+            "removedCount": 0,
+            "modifiedCount": 0,
+            "addedIds": [],
+            "removedIds": [],
+            "modifiedIds": []
+          }
+        },
+        "skills": {
+          "count": 2194,
+          "previousCount": 2194,
+          "removedCount": 0,
+          "changed": false,
+          "status": "pass",
+          "changes": {
+            "addedCount": 0,
+            "removedCount": 0,
+            "modifiedCount": 0,
+            "addedIds": [],
+            "removedIds": [],
+            "modifiedIds": []
+          }
+        },
+        "characters": {
+          "count": 270,
+          "previousCount": 270,
+          "removedCount": 0,
+          "changed": false,
+          "status": "pass",
+          "changes": {
+            "addedCount": 0,
+            "removedCount": 0,
+            "modifiedCount": 0,
+            "addedIds": [],
+            "removedIds": [],
+            "modifiedIds": []
+          }
+        },
+        "courses": {
+          "count": 140,
+          "previousCount": 140,
+          "removedCount": 0,
+          "changed": false,
+          "status": "pass",
+          "changes": {
+            "addedCount": 0,
+            "removedCount": 0,
+            "modifiedCount": 0,
+            "addedIds": [],
+            "removedIds": [],
+            "modifiedIds": []
+          }
+        }
+      }
+    },
+    {
       "checkedAt": "2026-10-01T02:51:29.169Z",
       "status": "fatal",
       "activeMode": "snapshot",
@@ -1806,104 +1910,6 @@
     },
     {
       "checkedAt": "2026-09-29T04:43:43.556Z",
-      "status": "pass",
-      "activeMode": "snapshot",
-      "message": "Validated snapshots promoted atomically.",
-      "collections": {
-        "catalog": {
-          "count": 560,
-          "previousCount": 560,
-          "removedCount": 0,
-          "changed": false,
-          "status": "pass",
-          "changes": {
-            "addedCount": 0,
-            "removedCount": 0,
-            "modifiedCount": 0,
-            "addedIds": [],
-            "removedIds": [],
-            "modifiedIds": []
-          }
-        },
-        "supports": {
-          "count": 43,
-          "previousCount": 43,
-          "removedCount": 0,
-          "changed": false,
-          "status": "pass",
-          "changes": {
-            "addedCount": 0,
-            "removedCount": 0,
-            "modifiedCount": 0,
-            "addedIds": [],
-            "removedIds": [],
-            "modifiedIds": []
-          }
-        },
-        "events": {
-          "count": 120,
-          "previousCount": 120,
-          "removedCount": 0,
-          "changed": false,
-          "status": "pass",
-          "changes": {
-            "addedCount": 0,
-            "removedCount": 0,
-            "modifiedCount": 0,
-            "addedIds": [],
-            "removedIds": [],
-            "modifiedIds": []
-          }
-        },
-        "skills": {
-          "count": 2181,
-          "previousCount": 2181,
-          "removedCount": 0,
-          "changed": false,
-          "status": "pass",
-          "changes": {
-            "addedCount": 0,
-            "removedCount": 0,
-            "modifiedCount": 0,
-            "addedIds": [],
-            "removedIds": [],
-            "modifiedIds": []
-          }
-        },
-        "characters": {
-          "count": 268,
-          "previousCount": 268,
-          "removedCount": 0,
-          "changed": false,
-          "status": "pass",
-          "changes": {
-            "addedCount": 0,
-            "removedCount": 0,
-            "modifiedCount": 0,
-            "addedIds": [],
-            "removedIds": [],
-            "modifiedIds": []
-          }
-        },
-        "courses": {
-          "count": 140,
-          "previousCount": 140,
-          "removedCount": 0,
-          "changed": false,
-          "status": "pass",
-          "changes": {
-            "addedCount": 0,
-            "removedCount": 0,
-            "modifiedCount": 0,
-            "addedIds": [],
-            "removedIds": [],
-            "modifiedIds": []
-          }
-        }
-      }
-    },
-    {
-      "checkedAt": "2026-09-29T03:33:59.505Z",
       "status": "pass",
       "activeMode": "snapshot",
       "message": "Validated snapshots promoted atomically.",
