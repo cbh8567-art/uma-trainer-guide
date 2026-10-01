@@ -20,7 +20,7 @@ jobs:
       - name: Install Selenium
         run: python -m pip install --quiet selenium
 
-      - name: P0 V7.70.12 startup and controls smoke
+      - name: P0 current-build startup and controls smoke
         shell: bash
         run: |
           set -o pipefail
@@ -30,8 +30,15 @@ jobs:
           from selenium.webdriver.common.by import By
           from selenium.webdriver.support.ui import Select, WebDriverWait
           from selenium.webdriver.support import expected_conditions as EC
+          import os, re, urllib.request
 
-          url = "https://cbh8567-art.github.io/uma-trainer-guide/?p0=v7703"
+          sha = os.environ.get("GITHUB_SHA", "main")
+          raw = urllib.request.urlopen(f"https://raw.githubusercontent.com/cbh8567-art/uma-trainer-guide/{sha}/index.html", timeout=20).read().decode("utf-8")
+          match = re.search(r'<meta name="app-build" content="([^"]+)"', raw)
+          if not match:
+              raise RuntimeError("Could not read app-build from pushed index.html")
+          expected_build = match.group(1)
+          url = "https://cbh8567-art.github.io/uma-trainer-guide/?p0=current"
           opts = Options()
           opts.add_argument("--headless=new")
           opts.add_argument("--no-sandbox")
@@ -42,7 +49,7 @@ jobs:
           d.set_window_size(1440, 1200)
           try:
               d.get(url)
-              WebDriverWait(d, 25).until(lambda x: "V7.70.12" in x.title)
+              WebDriverWait(d, 25).until(lambda x: expected_build in x.title)
               WebDriverWait(d, 25).until(EC.presence_of_element_located((By.ID, "page-deck")))
 
               tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
@@ -134,7 +141,7 @@ jobs:
                   raise RuntimeError("P0 browser console has severe JS errors: " + " | ".join(
                       x.get("message", "") for x in js_severe[:10]
                   ))
-              print("P0 V7.70.12 BROWSER PASS")
+              print("P0", expected_build, "BROWSER PASS")
           finally:
               d.quit()
           PY
@@ -150,8 +157,14 @@ jobs:
           from selenium.webdriver.common.by import By
           from selenium.webdriver.support.ui import Select, WebDriverWait
           from selenium.webdriver.support import expected_conditions as EC
+          import os, re, urllib.request
 
-          EXPECTED_BUILD = "V7.70.12"
+          sha = os.environ.get("GITHUB_SHA", "main")
+          raw = urllib.request.urlopen(f"https://raw.githubusercontent.com/cbh8567-art/uma-trainer-guide/{sha}/index.html", timeout=20).read().decode("utf-8")
+          match = re.search(r'<meta name="app-build" content="([^"]+)"', raw)
+          if not match:
+              raise RuntimeError("Could not read app-build from pushed index.html")
+          EXPECTED_BUILD = match.group(1)
           TARGETS = [
               ("pages", "https://cbh8567-art.github.io/uma-trainer-guide/?smoke=v7708", True),
               ("vercel-b3st", "https://uma-trainer-guide-b3st.vercel.app/?smoke=v7708", False),
@@ -304,7 +317,7 @@ jobs:
                       raise RuntimeError("getDisplayMedia is unavailable on deployed HTTPS target")
                   print("WATCH PILOT DOM/API PASS")
 
-                  # V7.70.12: animated Agnes Digital mascot + favicon asset.
+                  # Current build: animated Agnes Digital mascot + favicon asset.
                   mascot = d.find_element(By.ID, "digitalMascotFloating")
                   mascot_img = mascot.find_element(By.TAG_NAME, "img")
                   mascot_src = mascot_img.get_attribute("src") or ""
@@ -320,7 +333,7 @@ jobs:
                       raise RuntimeError(f"Digital favicon missing: {favicon_hrefs}")
                   print("DIGITAL MASCOT / FAVICON PASS")
 
-                  # V7.70.12: mascot can be dragged and stores its position.
+                  # Current build: mascot can be dragged and stores its position.
                   before = d.execute_script("""
                       const e=document.getElementById('digitalMascotFloating'),r=e.getBoundingClientRect();
                       return {left:r.left,top:r.top};
@@ -342,7 +355,7 @@ jobs:
                       raise RuntimeError("Digital mascot position was not persisted")
                   print("DIGITAL MASCOT DRAG PASS:", before, "->", after)
 
-                  # V7.70.12: Digital guidance bubble points to the first missing setup step.
+                  # Current build: Digital guidance bubble points to the first missing setup step.
                   WebDriverWait(d, 25).until(
                       lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true")
                   )
@@ -399,7 +412,7 @@ jobs:
                       raise RuntimeError(f"Expected 3 deck picker scopes, got {len(scopes)}")
                   print("SSR COMPACT UI PASS")
 
-                  # V7.70.12: Friend/Group supports keep card functionality but show no recommendation rating UI.
+                  # Current build: Friend/Group supports keep card functionality but show no recommendation rating UI.
                   friend_group = d.execute_script("""
                       const card=runtime.catalog.find(c=>c.type==='친구'||c.type==='그룹');
                       if(!card)return {ok:false,reason:'no friend/group support in catalog'};
@@ -457,7 +470,7 @@ jobs:
                   d.execute_script("document.getElementById('emptySlotModal').classList.remove('open')")
                   print("DECK SLOT PICKER PASS:", len(picker_cards))
 
-                  # V7.70.12: Agnes Digital self-selection reaction + hard same-character support guard.
+                  # Current build: Agnes Digital self-selection reaction + hard same-character support guard.
                   reaction_cfg = d.execute_script("""
                       const u=runtime.characters.find(ch=>{
                         const s=(String(ch.character||'')+' '+String(ch.krName||'')+' '+String(ch.name||'')).toLowerCase();
@@ -512,7 +525,7 @@ jobs:
                   d.execute_script("hideDigitalReaction()")
                   print("DIGITAL TRAINING-COMPLETE REACTION PASS")
 
-                  # V7.70.12: courses source/cache accepts the live object payload {courses:[...]} as well as arrays.
+                  # Current build: courses source/cache accepts the live object payload {courses:[...]} as well as arrays.
                   course_norm = d.execute_script("""
                       const sample={courses:[{id:1,name:'테스트',place:'東京',distance:2400,distClass:'中距離',turn:'左',ground:'芝'}]};
                       const a=normalizeCoursesPayload(sample);
@@ -542,7 +555,7 @@ jobs:
                   tabs[0].click()
                   time.sleep(0.3)
 
-                  # V7.70.12: information tab must open without freezing the global UI,
+                  # Current build: information tab must open without freezing the global UI,
                   # and the racetrack controls must render after the tab is selected.
                   info_tab = d.find_element(By.CSS_SELECTOR, '.tab[data-page="info"]')
                   d.execute_script("arguments[0].click()", info_tab)
