@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-10-01",
+  "server": "jp",
+  "event": {
+    "id": "jp_masters_2026_07_30",
+    "nameKr": "마스터즈 챌린지",
+    "nameJp": "マスターズチャレンジ",
+    "period": "2026-07-30 12:00 ~ 2026-10-26 11:59",
+    "officialSource": "우마무스메 프리티 더비 일본 공식 포털",
+    "officialUrl": "https://umamusume.jp/news?p=2&t=game",
+    "referenceSource": "GameWith 마스터즈 챌린지 공략 (2026-08-10 갱신)",
+    "referenceUrl": "https://gamewith.jp/uma-musume/article/show/431722",
+    "rules": [
+      "각 레이스는 LEVEL 1~3으로 구성되며 1착 시 다음 LEVEL이 해방됩니다.",
+      "같은 전당 입성 우마무스메는 각 레이스·각 LEVEL마다 승패와 관계없이 최대 3회 출전할 수 있습니다.",
+      "강적과 같은 이름의 우마무스메를 출전시키면 해당 강적이 레이스에서 빠져 상대 수를 줄일 수 있습니다.",
+      "LEVEL2까지 클리어하면 레이스별로 무지개 결정 조각 1개를 획득할 수 있습니다."
+    ],
+    "commonTips": [
+      "한 번만 1착하면 되므로 안정성보다 유효 가속과 종반 폭발력이 높은 육성을 우선합니다.",
+      "3회 출전 제한 때문에 같은 개체로 반복 리트라이하기보다 코스별 후보를 2~3명 준비하는 편이 안전합니다.",
+      "LEVEL3이 막히면 우선 LEVEL2 보상 회수부터 끝낸 뒤 전용 육성으로 다시 도전합니다."
+    ]
+  },
+  "races": [
+    {
+      "id": "jp_masters_2026_swan",
+      "kind": "masters",
+      "status": "개최 중",
+      "date": "~ 2026-10-26",
+      "event": "スワンステークス",
+      "eventKr": "마스터즈 챌린지 · 스완 스테이크스",
+      "raceKr": "스완 스테이크스",
+      "place": "阪神",
+      "placeKr": "한신",
+      "ground": "turf",
+      "distance": "short",
+      "meters": 1400,
+      "turn": "right",
+      "course": "inner",
+      "season": "autumn",
+      "weather": "cloudy",
+      "condition": "good",
+      "time": "day",
+      "levelGroup": "LEVEL 1~3",
+      "recommendedStyles": [
+        "senko",
+        "sashi"
+      ],
+      "recommendedUma": [
+        "타이키 셔틀",
+        "아스톤 마짱(밸런타인)",
+        "뱀부 메모리(신의상)",
+        "케이에스 미라클",
+        "듀랜달",
+        "그랑 알레그리아",
+        "빌리브",
+        "히시 아케보노(할로윈)",
+        "사쿠라 바쿠신 오(댄스)"
+      ],
+      "keySkills": [
+        "단거리 유효 종반 가속",
+        "종반 직선 속도",
+        "추월/추격에 유리한 중반 속도"
+      ],
+      "guideTips": [
+        "선행·선입이 추월과 추격비교를 노리기 쉬워 공략 난도가 낮습니다.",
+        "도주는 안정적이지만 한 번의 폭발력이 부족할 수 있어 카드/스킬 풀이 충분할 때 권장합니다."
+      ]
+    },
+    {
+      "id": "jp_masters_2026_mainichi",
+      "kind": "masters",
+      "status": "개최 중",
+      "date": "~ 2026-10-26",
+      "event": "毎日王冠",
+      "eventKr": "마스터즈 챌린지 · 마이니치 왕관",
+      "raceKr": "마이니치 왕관",
+      "place": "東京",
+      "placeKr": "도쿄",
+      "ground": "turf",
+      "distance": "mile",
+      "meters": 1800,
+      "turn": "left",
+      "season": "autumn",
+      "weather": "sunny",
+      "condition": "good",
+      "time": "day",
+      "levelGroup": "LEVEL 1~3",
+      "recommendedUma": [
+        "사일런스 스즈카",
+        "다이이치 루비(댄스)",
+        "노스 플라이트",
+        "버블검 펠로",
+        "그랑 알레그리아",
+        "스틸 인 러브",
+        "타이키 셔틀(밸런타인)",
+        "아몬드 아이",
+        "노스 플라이트(댄스)"
+      ],
+      "keySkills": [
+        "ハイボルテージ(하이 볼티지) — 도주/선행",
+        "電光石火(전광석화) — 선입/추입",
+        "마일 중반 속도",
+        "도쿄/좌회전/가을 계열 녹색 스킬"
+      ],
+      "guideTips": [
+        "1800m 마일 취급 코스라 각질에 맞는 마일 전용 종반 가속을 확실히 준비하는 것이 핵심입니다."
+      ]
+    },
+    {
+      "id": "jp_masters_2026_satsuki",
+      "kind": "masters",
+      "status": "개최 중",
+      "date": "~ 2026-10-26",
+      "event": "皐月賞",
+      "eventKr": "마스터즈 챌린지 · 사츠키상",
+      "raceKr": "사츠키상",
+      "place": "中山",
+      "placeKr": "나카야마",
+      "ground": "turf",
+      "distance": "mid",
+      "meters": 2000,
+      "turn": "right",
+      "course": "inner",
+      "season": "spring",
+      "weather": "sunny",
+      "condition": "good",
+      "time": "day",
+      "levelGroup": "LEVEL 1~3",
+      "recommendedUma": [
+        "메지로 라이언",
+        "아그네스 타키온(수영복)",
+        "오르페브르",
+        "스틸 인 러브",
+        "스테이 골드",
+        "아몬드 아이",
+        "어드마이어 그루브",
+        "룰러십",
+        "세이운 스카이(수영복)"
+      ],
+      "keySkills": [
+        "중거리 유효 종반 가속",
+        "나카야마/우회전/봄 계열 녹색 스킬",
+        "중반 위치 싸움용 속도 스킬"
+      ],
+      "guideTips": [
+        "선택 가능한 우마가 넓은 코스입니다. 계승/서포트에서 유효 가속을 충분히 못 챙긴다면 자체 가속 수단을 가진 우마를 우선합니다."
+      ]
+    },
+    {
+      "id": "jp_masters_2026_arima",
+      "kind": "masters",
+      "status": "개최 중",
+      "date": "~ 2026-10-26",
+      "event": "有馬記念",
+      "eventKr": "마스터즈 챌린지 · 아리마 기념",
+      "raceKr": "아리마 기념",
+      "place": "中山",
+      "placeKr": "나카야마",
+      "ground": "turf",
+      "distance": "long",
+      "meters": 2500,
+      "turn": "right",
+      "course": "inner",
+      "season": "winter",
+      "weather": "sunny",
+      "condition": "good",
+      "time": "day",
+      "levelGroup": "LEVEL 1~3",
+      "recommendedStyles": [
+        "senko",
+        "sashi",
+        "oikomi"
+      ],
+      "recommendedUma": [
+        "심볼리 루돌프",
+        "나리타 브라이언(신의상)",
+        "마야노 탑건(할로윈)",
+        "비와 하야히데(메카)",
+        "슈발 그랑(수영복)",
+        "오구리 캡(신의상)",
+        "스테이 골드",
+        "맨해튼 카페(신부)",
+        "나리타 탑로드(라멘)"
+      ],
+      "keySkills": [
+        "怪物(괴물) — 선행",
+        "迫る影(다가오는 그림자) — 추입",
+        "안정적인 회복 스킬",
+        "장거리 중반 속도"
+      ],
+      "guideTips": [
+        "선행·선입·추입의 완성도가 높습니다. 2500m라 회복을 빼고 속도만 올리는 구성은 불안정하므로 스태미나/회복을 먼저 안정화합니다."
+      ]
+    },
+    {
+      "id": "jp_masters_2026_teio",
+      "kind": "masters",
+      "status": "개최 중",
+      "date": "~ 2026-10-26",
+      "event": "帝王賞",
+      "eventKr": "마스터즈 챌린지 · 제왕상",
+      "raceKr": "제왕상",
+      "place": "大井",
+      "placeKr": "오이",
+      "ground": "dirt",
+      "distance": "mid",
+      "meters": 2000,
+      "turn": "right",
+      "season": "spring",
+      "weather": "cloudy",
+      "condition": "bad",
+      "time": "night",
+      "levelGroup": "LEVEL 1~3",
+      "recommendedUma": [
+        "오구리 캡",
+        "오구리 캡(크리스마스)",
+        "코파노 리키",
+        "홋코 타루마에",
+        "홋코 타루마에(수영복)",
+        "스마트 팔콘(퍼레이드)",
+        "에스포와르 시티",
+        "트랜센드(온천)",
+        "빅투아르 피사"
+      ],
+      "keySkills": [
+        "더트 적성 A 이상 권장",
+        "코너에서 발동하는 유효 가속",
+        "중거리 중반 속도",
+        "도악/우회전 계열 녹색 스킬"
+      ],
+      "guideTips": [
+        "보유 더트 우마 풀이 좁은 레이스입니다. 억지 개조보다 기본 더트 적성이 높은 우마에 코너 가속을 집중하는 편이 효율적입니다."
+      ]
+    }
+  ]
+}
