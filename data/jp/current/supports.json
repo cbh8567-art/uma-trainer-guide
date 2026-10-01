@@ -1154,5 +1154,18 @@
     ],
     "hintLevelUpMax": 0,
     "eventIds": []
+  },
+  {
+    "id": 30321,
+    "name": "[“最強”なる眷属]ドゥラメンテ",
+    "title": "“最強”なる眷属",
+    "characterName": "ドゥラメンテ",
+    "characterId": 1108,
+    "rarity": "SSR",
+    "commandId": 102,
+    "type": "power",
+    "hintSkillIds": [],
+    "hintLevelUpMax": 0,
+    "eventIds": []
   }
 ]
