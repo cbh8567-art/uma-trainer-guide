@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "updated": "2026-10-01",
-  "generatedAt": "2026-10-01T02:39:55.024Z",
+  "generatedAt": "2026-10-01T02:51:29.169Z",
   "openCount": 32,
   "items": [
     {
@@ -13,7 +13,7 @@
       "priority": "critical",
       "status": "open",
       "firstSeenAt": "2026-10-01T02:39:55.024Z",
-      "lastSeenAt": "2026-10-01T02:39:55.024Z",
+      "lastSeenAt": "2026-10-01T02:51:29.169Z",
       "note": ""
     },
     {
@@ -25,7 +25,7 @@
       "priority": "high",
       "status": "open",
       "firstSeenAt": "2026-10-01T02:39:55.024Z",
-      "lastSeenAt": "2026-10-01T02:39:55.024Z",
+      "lastSeenAt": "2026-10-01T02:51:29.169Z",
       "note": ""
     },
     {
@@ -37,7 +37,7 @@
       "priority": "high",
       "status": "open",
       "firstSeenAt": "2026-10-01T02:39:55.024Z",
-      "lastSeenAt": "2026-10-01T02:39:55.024Z",
+      "lastSeenAt": "2026-10-01T02:51:29.169Z",
       "note": ""
     },
     {
@@ -49,7 +49,7 @@
       "priority": "high",
       "status": "open",
       "firstSeenAt": "2026-10-01T02:39:55.024Z",
-      "lastSeenAt": "2026-10-01T02:39:55.024Z",
+      "lastSeenAt": "2026-10-01T02:51:29.169Z",
       "note": ""
     },
     {
