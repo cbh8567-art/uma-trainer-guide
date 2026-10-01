@@ -1,23 +1,29 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-30",
-  "generatedAt": "2026-09-30T18:50:23.668Z",
-  "status": "verification_required",
-  "characters": [
+  "updated": "2026-10-01",
+  "generatedAt": "2026-10-01T02:39:55.024Z",
+  "status": "blocked",
+  "characters": [],
+  "supports": [
     {
-      "id": 101703,
-      "name": "[Adamant Sovereign]シンボリルドルフ",
+      "id": 30319,
+      "name": "ナリタブライアン (SSR)",
       "status": "verification_required",
-      "reason": "New JP character card is not in KR uma allowlist."
+      "reason": "ID is above current KR verified support boundary 30260; verify KR release before promotion."
     },
     {
-      "id": 101803,
-      "name": "[悠久なるヘカテイア]エアグルーヴ",
+      "id": 30320,
+      "name": "アドマイヤグルーヴ (SSR)",
       "status": "verification_required",
-      "reason": "New JP character card is not in KR uma allowlist."
+      "reason": "ID is above current KR verified support boundary 30260; verify KR release before promotion."
+    },
+    {
+      "id": 30321,
+      "name": "ドゥラメンテ (SSR)",
+      "status": "verification_required",
+      "reason": "ID is above current KR verified support boundary 30260; verify KR release before promotion."
     }
   ],
-  "supports": [],
   "supportMaxId": 30260,
   "notes": [
     "JP changes never auto-promote to KR.",

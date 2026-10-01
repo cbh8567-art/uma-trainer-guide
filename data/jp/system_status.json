@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-30",
-  "generatedAt": "2026-09-30T18:50:23.668Z",
-  "status": "pass",
+  "updated": "2026-10-01",
+  "generatedAt": "2026-10-01T02:39:55.024Z",
+  "status": "fatal",
   "snapshotReady": true,
   "sourceHealth": "pass",
-  "validation": "pass",
-  "openReviewItems": 28,
-  "krCandidateCharacters": 2,
-  "krCandidateSupports": 0,
+  "validation": "fatal",
+  "openReviewItems": 32,
+  "krCandidateCharacters": 0,
+  "krCandidateSupports": 3,
   "scenarioWatch": "verification_required",
   "changeTotals": {
-    "added": 19,
-    "removed": 0,
-    "modified": 1
+    "added": 3,
+    "removed": 1,
+    "modified": 0
   }
 }

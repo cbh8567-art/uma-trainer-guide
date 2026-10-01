@@ -1,9 +1,57 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-30",
-  "generatedAt": "2026-09-30T18:50:23.668Z",
-  "openCount": 28,
+  "updated": "2026-10-01",
+  "generatedAt": "2026-10-01T02:39:55.024Z",
+  "openCount": 32,
   "items": [
+    {
+      "key": "supports:removed:30321",
+      "collection": "supports",
+      "changeType": "removed",
+      "id": "30321",
+      "name": "[“最強”なる眷属]ドゥラメンテ",
+      "priority": "critical",
+      "status": "open",
+      "firstSeenAt": "2026-10-01T02:39:55.024Z",
+      "lastSeenAt": "2026-10-01T02:39:55.024Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:added:30319",
+      "collection": "catalog",
+      "changeType": "added",
+      "id": "30319",
+      "name": "ナリタブライアン (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-10-01T02:39:55.024Z",
+      "lastSeenAt": "2026-10-01T02:39:55.024Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:added:30320",
+      "collection": "catalog",
+      "changeType": "added",
+      "id": "30320",
+      "name": "アドマイヤグルーヴ (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-10-01T02:39:55.024Z",
+      "lastSeenAt": "2026-10-01T02:39:55.024Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:added:30321",
+      "collection": "catalog",
+      "changeType": "added",
+      "id": "30321",
+      "name": "ドゥラメンテ (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-10-01T02:39:55.024Z",
+      "lastSeenAt": "2026-10-01T02:39:55.024Z",
+      "note": ""
+    },
     {
       "key": "characters:added:101703",
       "collection": "characters",
