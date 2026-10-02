@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-01",
-  "generatedAt": "2026-10-01T18:49:45.737Z",
+  "updated": "2026-10-02",
+  "generatedAt": "2026-10-02T00:37:28.902Z",
   "collections": {
     "catalog": {
       "source": "https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json",
@@ -19,7 +19,7 @@
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/events.json",
       "count": 122,
       "contentSha256": "6f292cdb506634bde1e4415f72f1f23507639b4135b36aadc26e6cb68c7b97eb",
-      "status": "pass"
+      "status": "fatal"
     },
     "skills": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/skills.json",

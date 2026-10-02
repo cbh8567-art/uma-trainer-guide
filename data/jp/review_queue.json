@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-01",
-  "generatedAt": "2026-10-01T18:49:45.737Z",
-  "openCount": 32,
+  "updated": "2026-10-02",
+  "generatedAt": "2026-10-02T00:37:28.902Z",
+  "openCount": 35,
   "items": [
     {
       "key": "supports:removed:30321",
@@ -13,7 +13,43 @@
       "priority": "critical",
       "status": "open",
       "firstSeenAt": "2026-10-01T02:39:55.024Z",
-      "lastSeenAt": "2026-10-01T18:49:45.737Z",
+      "lastSeenAt": "2026-10-02T00:37:28.902Z",
+      "note": ""
+    },
+    {
+      "key": "events:removed:evt_30319_verified_final",
+      "collection": "events",
+      "changeType": "removed",
+      "id": "evt_30319_verified_final",
+      "name": "生徒会副会長の\"未来\"",
+      "priority": "critical",
+      "status": "open",
+      "firstSeenAt": "2026-10-02T00:37:28.902Z",
+      "lastSeenAt": "2026-10-02T00:37:28.902Z",
+      "note": ""
+    },
+    {
+      "key": "events:removed:evt_30320_verified_final",
+      "collection": "events",
+      "changeType": "removed",
+      "id": "evt_30320_verified_final",
+      "name": "연속 이벤트 최종",
+      "priority": "critical",
+      "status": "open",
+      "firstSeenAt": "2026-10-02T00:37:28.902Z",
+      "lastSeenAt": "2026-10-02T00:37:28.902Z",
+      "note": ""
+    },
+    {
+      "key": "events:removed:evt_30321_verified_final",
+      "collection": "events",
+      "changeType": "removed",
+      "id": "evt_30321_verified_final",
+      "name": "이벤트 레어스킬 획득",
+      "priority": "critical",
+      "status": "open",
+      "firstSeenAt": "2026-10-02T00:37:28.902Z",
+      "lastSeenAt": "2026-10-02T00:37:28.902Z",
       "note": ""
     },
     {
@@ -25,7 +61,7 @@
       "priority": "high",
       "status": "open",
       "firstSeenAt": "2026-10-01T02:39:55.024Z",
-      "lastSeenAt": "2026-10-01T18:49:45.737Z",
+      "lastSeenAt": "2026-10-02T00:37:28.902Z",
       "note": ""
     },
     {
@@ -37,7 +73,7 @@
       "priority": "high",
       "status": "open",
       "firstSeenAt": "2026-10-01T02:39:55.024Z",
-      "lastSeenAt": "2026-10-01T18:49:45.737Z",
+      "lastSeenAt": "2026-10-02T00:37:28.902Z",
       "note": ""
     },
     {
@@ -49,7 +85,7 @@
       "priority": "high",
       "status": "open",
       "firstSeenAt": "2026-10-01T02:39:55.024Z",
-      "lastSeenAt": "2026-10-01T18:49:45.737Z",
+      "lastSeenAt": "2026-10-02T00:37:28.902Z",
       "note": ""
     },
     {

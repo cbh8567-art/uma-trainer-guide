@@ -1,22 +1,27 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-01T18:49:45.572Z",
-  "event": "schedule",
-  "sha": "ba55273877e1a66523bac0b5c1c1c31fccc0f558",
+  "generatedAt": "2026-10-02T00:37:28.838Z",
+  "event": "push",
+  "sha": "cd12aaf0b1bad8e103473aaeacfd70e90f250efe",
   "changedFiles": [
-    ".github/workflows/browser-smoke.yml"
+    "data/jp/current/events.json",
+    "data/jp/current/supports.json",
+    "index.html"
   ],
   "categories": {
-    "app": [],
+    "app": [
+      "index.html"
+    ],
     "pipeline": [],
-    "jpData": [],
+    "jpData": [
+      "data/jp/current/events.json",
+      "data/jp/current/supports.json"
+    ],
     "krData": [],
     "commonData": [],
-    "other": [
-      ".github/workflows/browser-smoke.yml"
-    ]
+    "other": []
   },
-  "impactLevel": "low",
-  "fullTest": false,
-  "deploySmoke": false
+  "impactLevel": "high",
+  "fullTest": true,
+  "deploySmoke": true
 }

@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-01",
-  "checkedAt": "2026-10-01T18:49:45.737Z",
+  "updated": "2026-10-02",
+  "checkedAt": "2026-10-02T00:37:28.902Z",
   "status": "fatal",
   "summary": {
     "added": 3,
-    "removed": 1,
+    "removed": 4,
     "modified": 0
   },
   "collections": {
@@ -73,20 +73,37 @@
     },
     "events": {
       "count": 122,
-      "previousCount": 122,
-      "changed": false,
-      "status": "pass",
+      "previousCount": 125,
+      "changed": true,
+      "status": "fatal",
       "changes": {
         "addedCount": 0,
-        "removedCount": 0,
+        "removedCount": 3,
         "modifiedCount": 0,
         "addedIds": [],
-        "removedIds": [],
+        "removedIds": [
+          "evt_30319_verified_final",
+          "evt_30320_verified_final",
+          "evt_30321_verified_final"
+        ],
         "modifiedIds": []
       },
       "details": {
         "added": [],
-        "removed": [],
+        "removed": [
+          {
+            "id": "evt_30319_verified_final",
+            "name": "生徒会副会長の\"未来\""
+          },
+          {
+            "id": "evt_30320_verified_final",
+            "name": "연속 이벤트 최종"
+          },
+          {
+            "id": "evt_30321_verified_final",
+            "name": "이벤트 레어스킬 획득"
+          }
+        ],
         "modified": []
       }
     },

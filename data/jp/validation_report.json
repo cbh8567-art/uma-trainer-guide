@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-01",
+  "updated": "2026-10-02",
   "status": "fatal",
-  "checkedAt": "2026-10-01T18:49:45.737Z",
+  "checkedAt": "2026-10-02T00:37:28.902Z",
   "fatal": [
-    "supports: mass deletion guard (1/46, 2.17%)"
+    "supports: mass deletion guard (1/46, 2.17%)",
+    "events: mass deletion guard (3/125, 2.40%)"
   ],
   "warnings": [],
   "collections": {
@@ -85,24 +86,41 @@
       "count": 122,
       "contentSha256": "6f292cdb506634bde1e4415f72f1f23507639b4135b36aadc26e6cb68c7b97eb",
       "duplicateIds": [],
-      "status": "pass",
-      "previousCount": 122,
-      "removedCount": 0,
-      "removedRatio": 0,
+      "status": "fatal",
+      "previousCount": 125,
+      "removedCount": 3,
+      "removedRatio": 0.024,
       "changes": {
         "addedCount": 0,
-        "removedCount": 0,
+        "removedCount": 3,
         "modifiedCount": 0,
         "addedIds": [],
-        "removedIds": [],
+        "removedIds": [
+          "evt_30319_verified_final",
+          "evt_30320_verified_final",
+          "evt_30321_verified_final"
+        ],
         "modifiedIds": []
       },
       "changeDetails": {
         "added": [],
-        "removed": [],
+        "removed": [
+          {
+            "id": "evt_30319_verified_final",
+            "name": "生徒会副会長の\"未来\""
+          },
+          {
+            "id": "evt_30320_verified_final",
+            "name": "연속 이벤트 최종"
+          },
+          {
+            "id": "evt_30321_verified_final",
+            "name": "이벤트 레어스킬 획득"
+          }
+        ],
         "modified": []
       },
-      "changed": false
+      "changed": true
     },
     "skills": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/skills.json",
