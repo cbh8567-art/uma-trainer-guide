@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-02T11:17:07.736Z",
+  "generatedAt": "2026-10-02T14:39:33.105Z",
   "event": "push",
-  "sha": "ebe97d271a5e36defee2bc173283c73bb4a796a3",
+  "sha": "265c5f13f0ab76d61c349417239c988ef6e7cbd3",
   "changedFiles": [
-    "data/common/support_overrides.json"
+    "index.html"
   ],
   "categories": {
-    "app": [],
+    "app": [
+      "index.html"
+    ],
     "pipeline": [],
     "jpData": [],
     "krData": [],
-    "commonData": [
-      "data/common/support_overrides.json"
-    ],
+    "commonData": [],
     "other": []
   },
-  "impactLevel": "medium",
+  "impactLevel": "high",
   "fullTest": true,
-  "deploySmoke": false
+  "deploySmoke": true
 }
