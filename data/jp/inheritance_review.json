@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-10-02",
+  "scope": "jp",
+  "rubricVersion": "inheritance-v1",
+  "note": "트레이너 가이드 자체 엔진 점수와 외부 공략 비교를 분리해 검수하기 위한 레지스트리. entries의 score/adjustment/status/note는 사람 검수 후 채운다.",
+  "statuses": [
+    "unreviewed",
+    "comparing",
+    "reviewed"
+  ],
+  "entries": {}
+}
