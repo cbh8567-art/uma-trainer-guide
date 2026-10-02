@@ -489,7 +489,112 @@
           "title": "트레센섬의 권유 선택",
           "text": "편성/육성 중인 링크 캐릭터를 선택하면 대응 금스킬, 아니면 하위 스킬이 되는지 확인한다."
         }
-      ]
+      ],
+      "constructionGuide": {
+        "version": "jp-highlander-game8-v1",
+        "source": "Game8",
+        "sourceUrl": "https://game8.jp/umamusume/701156",
+        "imageNote": "Game8가 게재한 인게임 건설 계획 캡처를 원본 비율로 표시",
+        "routes": {
+          "speed": "本能全開",
+          "stamina": "本能全開",
+          "power": "熟練技巧",
+          "guts": "熟練技巧"
+        },
+        "plans": [
+          {
+            "id": "build1",
+            "order": 1,
+            "when": "육성 시작 3턴째 · 첫 건설 계획",
+            "image": "https://img.game8.jp/11514309/0cbb1dffeea274aedefb8e64e1eb20b2.jpeg/original",
+            "levels": {
+              "speed": 1,
+              "stamina": 1,
+              "power": 1,
+              "guts": 1,
+              "wit": 0,
+              "beach": 0
+            },
+            "note": "스피드·스태미나·파워·근성을 먼저 개방. 지능과 해변의 집은 아직 보류."
+          },
+          {
+            "id": "build2",
+            "order": 2,
+            "when": "메이크 데뷔 후 · 2회차",
+            "image": "https://img.game8.jp/11514415/364a31ac2fc6628a87bc52740ca51925.jpeg/original",
+            "levels": {
+              "speed": 2,
+              "stamina": 2,
+              "power": 1,
+              "guts": 1,
+              "wit": 1,
+              "beach": 1
+            },
+            "note": "스피드·스태미나를 Lv2로, 지능과 해변의 집을 Lv1로 추가."
+          },
+          {
+            "id": "build3",
+            "order": 3,
+            "when": "주니어급 12월 · 3회차",
+            "image": "https://img.game8.jp/11506266/adf3437e1abd08dd67bb783090c1235c.jpeg/original",
+            "levels": {
+              "speed": 3,
+              "stamina": 3,
+              "power": 2,
+              "guts": 2,
+              "wit": 1,
+              "beach": 1
+            },
+            "routes": {
+              "speed": "本能全開",
+              "stamina": "本能全開"
+            },
+            "note": "스피드·스태미나는 Lv3에서 본능전개(本能全開) 루트."
+          },
+          {
+            "id": "build4",
+            "order": 4,
+            "when": "클래식급 6월 · 4회차",
+            "image": "https://img.game8.jp/11506266/adf3437e1abd08dd67bb783090c1235c.jpeg/original",
+            "levels": {
+              "speed": 4,
+              "stamina": 4,
+              "power": 3,
+              "guts": 3,
+              "wit": 1,
+              "beach": 1
+            },
+            "routes": {
+              "speed": "本能全開",
+              "stamina": "本能全開",
+              "power": "熟練技巧",
+              "guts": "熟練技巧"
+            },
+            "note": "스피드·스태미나는 본능전개 유지, 파워·근성은 숙련기교(熟練技巧)로 Lv3."
+          },
+          {
+            "id": "build5",
+            "order": 5,
+            "when": "클래식급 12월 · 5회차",
+            "image": "https://img.game8.jp/11506306/f0ddf0e7d4c903d65c46cd41e35ff4b2.jpeg/original",
+            "levels": {
+              "speed": 5,
+              "stamina": 5,
+              "power": 4,
+              "guts": 4,
+              "wit": 1,
+              "beach": 1
+            },
+            "routes": {
+              "speed": "本能全開",
+              "stamina": "本能全開",
+              "power": "熟練技巧",
+              "guts": "熟練技巧"
+            },
+            "note": "최종 기본형. 상한에서 더 먼 스탯을 왼쪽 우선으로 배치해 순서를 조정."
+          }
+        ]
+      }
     },
     "legends": {
       "name": "The Twinkle Legends",
