@@ -46,8 +46,7 @@
     "[As if Guided] エフフォーリア",
     "[行き先はあたたかな場所] マチカネタンホイザ",
     "[晩餐] ナリタブライアン",
-    "[冷凜なるビスクドール] アドマイヤグルーヴ",
-    "[“最強”なる眷属] ドゥラメンテ"
+    "[冷凜なるビスクドール] アドマイヤグルーヴ"
   ],
   "events": [
     {
@@ -2454,8 +2453,16 @@
       "label": "生徒会副会長の\"未来\"",
       "selection": "auto",
       "skills": [
-        {"skillName": "アンストッパブル", "hintLevel": 1, "skillId": 202371},
-        {"skillName": "ぶっちぎり！", "hintLevel": 2, "skillId": 204151}
+        {
+          "skillName": "アンストッパブル",
+          "hintLevel": 1,
+          "skillId": 202371
+        },
+        {
+          "skillName": "ぶっちぎり！",
+          "hintLevel": 2,
+          "skillId": 204151
+        }
       ]
     },
     {
@@ -2464,8 +2471,16 @@
       "label": "연속 이벤트 최종",
       "selection": "auto",
       "skills": [
-        {"skillName": "解き放つ情念", "hintLevel": 1, "skillId": 203801},
-        {"skillName": "一往直前", "hintLevel": 1, "skillId": 204721}
+        {
+          "skillName": "解き放つ情念",
+          "hintLevel": 1,
+          "skillId": 203801
+        },
+        {
+          "skillName": "一往直前",
+          "hintLevel": 1,
+          "skillId": 204721
+        }
       ]
     },
     {
@@ -2474,7 +2489,11 @@
       "label": "이벤트 레어스킬 획득",
       "selection": "auto",
       "skills": [
-        {"skillName": "月影円刃", "hintLevel": 1, "skillId": 201463}
+        {
+          "skillName": "月影円刃",
+          "hintLevel": 1,
+          "skillId": 201463
+        }
       ]
     }
   ],
@@ -2703,11 +2722,6 @@
       "id": 30320,
       "title": "冷凜なるビスクドール",
       "name": "[冷凜なるビスクドール]アドマイヤグルーヴ"
-    },
-    {
-      "id": 30321,
-      "title": "“最強”なる眷属",
-      "name": "[“最強”なる眷属]ドゥラメンテ"
     }
   ],
   "prioritySupportIds": [
@@ -2755,7 +2769,6 @@
     30311,
     30317,
     30319,
-    30320,
-    30321
+    30320
   ]
 }

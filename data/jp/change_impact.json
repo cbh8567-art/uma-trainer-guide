@@ -1,27 +1,22 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-02T00:37:28.838Z",
+  "generatedAt": "2026-10-02T06:30:01.953Z",
   "event": "push",
-  "sha": "cd12aaf0b1bad8e103473aaeacfd70e90f250efe",
+  "sha": "204d792e4f929f976c8449ddaab1adfe4f64028c",
   "changedFiles": [
-    "data/jp/current/events.json",
-    "data/jp/current/supports.json",
-    "index.html"
+    "scripts/sync-jp-data.mjs"
   ],
   "categories": {
-    "app": [
-      "index.html"
+    "app": [],
+    "pipeline": [
+      "scripts/sync-jp-data.mjs"
     ],
-    "pipeline": [],
-    "jpData": [
-      "data/jp/current/events.json",
-      "data/jp/current/supports.json"
-    ],
+    "jpData": [],
     "krData": [],
     "commonData": [],
     "other": []
   },
   "impactLevel": "high",
   "fullTest": true,
-  "deploySmoke": true
+  "deploySmoke": false
 }

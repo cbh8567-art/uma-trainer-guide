@@ -1,12 +1,9 @@
 {
   "schemaVersion": 1,
   "updated": "2026-10-02",
-  "status": "fatal",
-  "checkedAt": "2026-10-02T00:37:28.902Z",
-  "fatal": [
-    "supports: mass deletion guard (1/46, 2.17%)",
-    "events: mass deletion guard (3/125, 2.40%)"
-  ],
+  "status": "pass",
+  "checkedAt": "2026-10-02T06:30:02.021Z",
+  "fatal": [],
   "warnings": [],
   "collections": {
     "catalog": {
@@ -55,72 +52,48 @@
       "count": 45,
       "contentSha256": "7b6e119a007a64bc494ba5b65dada7700c856993f02dba35319bc0d8aa437f5b",
       "duplicateIds": [],
-      "status": "fatal",
+      "status": "pass",
       "previousCount": 46,
-      "removedCount": 1,
-      "removedRatio": 0.021739130434782608,
+      "removedCount": 0,
+      "removedRatio": 0,
       "changes": {
         "addedCount": 0,
-        "removedCount": 1,
+        "removedCount": 0,
         "modifiedCount": 0,
         "addedIds": [],
-        "removedIds": [
-          "30321"
-        ],
+        "removedIds": [],
         "modifiedIds": []
       },
       "changeDetails": {
         "added": [],
-        "removed": [
-          {
-            "id": "30321",
-            "name": "[“最強”なる眷属]ドゥラメンテ"
-          }
-        ],
+        "removed": [],
         "modified": []
       },
-      "changed": true
+      "changed": false
     },
     "events": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/events.json",
       "count": 122,
       "contentSha256": "6f292cdb506634bde1e4415f72f1f23507639b4135b36aadc26e6cb68c7b97eb",
       "duplicateIds": [],
-      "status": "fatal",
+      "status": "pass",
       "previousCount": 125,
-      "removedCount": 3,
-      "removedRatio": 0.024,
+      "removedCount": 0,
+      "removedRatio": 0,
       "changes": {
         "addedCount": 0,
-        "removedCount": 3,
+        "removedCount": 0,
         "modifiedCount": 0,
         "addedIds": [],
-        "removedIds": [
-          "evt_30319_verified_final",
-          "evt_30320_verified_final",
-          "evt_30321_verified_final"
-        ],
+        "removedIds": [],
         "modifiedIds": []
       },
       "changeDetails": {
         "added": [],
-        "removed": [
-          {
-            "id": "evt_30319_verified_final",
-            "name": "生徒会副会長の\"未来\""
-          },
-          {
-            "id": "evt_30320_verified_final",
-            "name": "연속 이벤트 최종"
-          },
-          {
-            "id": "evt_30321_verified_final",
-            "name": "이벤트 레어스킬 획득"
-          }
-        ],
+        "removed": [],
         "modified": []
       },
-      "changed": true
+      "changed": false
     },
     "skills": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/skills.json",
@@ -200,5 +173,10 @@
     "missingEventSkillIds": [],
     "missingSupportHintSkillCount": 0,
     "missingSupportHintSkillIds": []
+  },
+  "changeTotals": {
+    "added": 3,
+    "removed": 0,
+    "modified": 0
   }
 }

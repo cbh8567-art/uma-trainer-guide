@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "updated": "2026-10-02",
-  "checkedAt": "2026-10-02T00:37:28.902Z",
-  "status": "fatal",
+  "checkedAt": "2026-10-02T06:30:02.021Z",
+  "status": "pass",
   "summary": {
     "added": 3,
-    "removed": 4,
+    "removed": 0,
     "modified": 0
   },
   "collections": {
@@ -48,62 +48,38 @@
     "supports": {
       "count": 45,
       "previousCount": 46,
-      "changed": true,
-      "status": "fatal",
+      "changed": false,
+      "status": "pass",
       "changes": {
         "addedCount": 0,
-        "removedCount": 1,
+        "removedCount": 0,
         "modifiedCount": 0,
         "addedIds": [],
-        "removedIds": [
-          "30321"
-        ],
+        "removedIds": [],
         "modifiedIds": []
       },
       "details": {
         "added": [],
-        "removed": [
-          {
-            "id": "30321",
-            "name": "[“最強”なる眷属]ドゥラメンテ"
-          }
-        ],
+        "removed": [],
         "modified": []
       }
     },
     "events": {
       "count": 122,
       "previousCount": 125,
-      "changed": true,
-      "status": "fatal",
+      "changed": false,
+      "status": "pass",
       "changes": {
         "addedCount": 0,
-        "removedCount": 3,
+        "removedCount": 0,
         "modifiedCount": 0,
         "addedIds": [],
-        "removedIds": [
-          "evt_30319_verified_final",
-          "evt_30320_verified_final",
-          "evt_30321_verified_final"
-        ],
+        "removedIds": [],
         "modifiedIds": []
       },
       "details": {
         "added": [],
-        "removed": [
-          {
-            "id": "evt_30319_verified_final",
-            "name": "生徒会副会長の\"未来\""
-          },
-          {
-            "id": "evt_30320_verified_final",
-            "name": "연속 이벤트 최종"
-          },
-          {
-            "id": "evt_30321_verified_final",
-            "name": "이벤트 레어스킬 획득"
-          }
-        ],
+        "removed": [],
         "modified": []
       }
     },

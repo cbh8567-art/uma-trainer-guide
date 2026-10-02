@@ -1,29 +1,25 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-02T00:37:30.861Z",
-  "status": "failure",
-  "gitSha": "cd12aaf0b1bad8e103473aaeacfd70e90f250efe",
+  "generatedAt": "2026-10-02T06:30:03.685Z",
+  "status": "pass",
+  "gitSha": "204d792e4f929f976c8449ddaab1adfe4f64028c",
   "event": "push",
   "sync": {
-    "exitCode": 2,
-    "status": "fatal"
+    "exitCode": 0,
+    "status": "pass"
   },
   "tests": {
     "integrity": "success",
-    "deploySmoke": "success"
+    "deploySmoke": "skipped"
   },
   "impact": {
     "level": "high",
-    "changedCount": 3,
+    "changedCount": 1,
     "fullTest": true,
-    "deploySmoke": true
+    "deploySmoke": false
   },
   "sourceHealth": "pass",
-  "failures": [
-    "JP sync exit code 2",
-    "supports: mass deletion guard (1/46, 2.17%)",
-    "events: mass deletion guard (3/125, 2.40%)"
-  ],
+  "failures": [],
   "warnings": [],
   "failedSources": []
 }

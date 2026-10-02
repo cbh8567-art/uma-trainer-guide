@@ -1,10 +1,15 @@
 {
   "schemaVersion": 1,
   "updated": "2026-10-02",
-  "status": "fatal",
+  "status": "pass",
   "snapshotReady": true,
-  "lastSuccessfulSync": "2026-09-30T18:50:23.668Z",
-  "lastAttempt": "2026-10-02T00:37:28.902Z",
+  "lastSuccessfulSync": "2026-10-02T06:30:02.021Z",
+  "lastAttempt": "2026-10-02T06:30:02.021Z",
   "activeMode": "snapshot",
-  "message": "Validation failed. Existing current snapshots were kept."
+  "message": "Validated snapshots promoted atomically.",
+  "changeTotals": {
+    "added": 3,
+    "removed": 0,
+    "modified": 0
+  }
 }
