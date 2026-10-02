@@ -1164,7 +1164,16 @@
     "rarity": "SSR",
     "commandId": 102,
     "type": "power",
-    "hintSkillIds": [],
+    "hintSkillIds": [
+      200512,
+      201492,
+      202382,
+      202882,
+      202922,
+      203152,
+      203752,
+      204182
+    ],
     "hintLevelUpMax": 0,
     "eventIds": []
   }
