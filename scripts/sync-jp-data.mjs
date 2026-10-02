@@ -14,6 +14,36 @@ const writeJson = async (p, v) => {
 const sha256 = (s) => crypto.createHash("sha256").update(s).digest("hex");
 const now = () => new Date().toISOString();
 
+function mergePreservedSnapshotRecords(name, nextData, previousData, preserveIds = []) {
+  const wanted = new Set((preserveIds || []).map(String));
+  if (!wanted.size) return nextData;
+  const previousRecords = extractRecords(name, previousData);
+  const nextRecords = extractRecords(name, nextData);
+  const nextIds = new Set(nextRecords.map((r, i) => canonicalId(name, r, i)));
+  const preserved = previousRecords.filter((r, i) => {
+    const id = canonicalId(name, r, i);
+    return wanted.has(id) && !nextIds.has(id);
+  });
+  if (!preserved.length) return nextData;
+
+  if (name === "events") {
+    const base = nextData && typeof nextData === "object" ? structuredClone(nextData) : { events: [] };
+    base.events = [...(Array.isArray(base.events) ? base.events : []), ...preserved];
+    return base;
+  }
+  if (name === "supports" || name === "skills" || name === "characters") {
+    return [...(Array.isArray(nextData) ? nextData : []), ...preserved];
+  }
+  if (name === "catalog") {
+    if (Array.isArray(nextData)) return [...nextData, ...preserved];
+    const base = nextData && typeof nextData === "object" ? structuredClone(nextData) : {};
+    if (Array.isArray(base.supports)) base.supports = [...base.supports, ...preserved];
+    else if (Array.isArray(base.data)) base.data = [...base.data, ...preserved];
+    return base;
+  }
+  return nextData;
+}
+
 function extractRecords(name, data) {
   if (name === "catalog") {
     if (Array.isArray(data)) return data;
@@ -512,6 +542,14 @@ try {
     try {
       const previousRaw = await fs.readFile(currentPath, "utf8");
       const previousData = JSON.parse(previousRaw);
+      data = mergePreservedSnapshotRecords(
+        name,
+        data,
+        previousData,
+        policy.preserveSnapshotRecords?.[name] || []
+      );
+      const recordsAfterPreserve = extractRecords(name, data);
+      records.splice(0, records.length, ...recordsAfterPreserve);
       const previousRecords = extractRecords(name, previousData);
       const previousCount = previousRecords.length;
       const removed = Math.max(0, previousCount - records.length);
