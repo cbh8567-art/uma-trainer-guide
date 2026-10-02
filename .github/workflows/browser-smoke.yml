@@ -444,6 +444,37 @@ jobs:
                   d.execute_script("document.getElementById('cardInfoModal')?.classList.remove('open'); catType='전체'; renderCatalog();")
                   print("FRIEND/GROUP RECOMMENDATION HIDDEN PASS:", friend_group)
 
+                  # V7.71.0: inheritance suitability engine is independent from the external comparison snapshot.
+                  inheritance_v1 = d.execute_script("""
+                      const cond={ground:'turf',distance:'mid',style:'sashi'};
+                      const rows=v7InheritancePlan(cond,{meters:2400});
+                      const row=rows[0];
+                      if(!row)return {ok:false,reason:'no inheritance rows'};
+                      const engine=inheritanceEngineAssessment(row,cond);
+                      const external=inheritanceExternalKinds(row.skillId,cond);
+                      const review=inheritanceReviewEntry(row.skillId);
+                      return {
+                        ok:true,
+                        score:engine.score,
+                        stars:engine.stars,
+                        confidence:engine.confidence,
+                        reasons:engine.reasons,
+                        external,
+                        reviewStatus:review.status||'unreviewed',
+                        registryLoaded:!!JP_INHERITANCE_REVIEW,
+                        hasEngineFn:typeof inheritanceEngineAssessment==='function'
+                      };
+                  """)
+                  if not inheritance_v1.get("ok"):
+                      raise RuntimeError("Inheritance V1 setup failed: "+str(inheritance_v1))
+                  if not inheritance_v1.get("hasEngineFn") or not inheritance_v1.get("registryLoaded"):
+                      raise RuntimeError("Inheritance V1 engine/review registry missing: "+str(inheritance_v1))
+                  if not (1 <= float(inheritance_v1.get("score",0)) <= 5):
+                      raise RuntimeError("Inheritance V1 score out of range: "+str(inheritance_v1))
+                  if inheritance_v1.get("reviewStatus") not in ["unreviewed","comparing","reviewed"]:
+                      raise RuntimeError("Inheritance V1 review status invalid: "+str(inheritance_v1))
+                  print("INHERITANCE V1 ENGINE PASS:", inheritance_v1)
+
                   # V7.11: direct deck-slot picker should open and expose all three scopes.
                   WebDriverWait(d, 25).until(
                       lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true")
