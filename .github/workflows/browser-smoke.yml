@@ -609,6 +609,45 @@ jobs:
                       raise RuntimeError("JP Island step 5 navigation/image failed: "+str(island_build_interactive))
                   print("JP ISLAND CONSTRUCTION INTERACTIVE PASS:", island_build_interactive)
 
+                  island_costs = d.execute_script("""
+                      const oldScenario=state.scenario,oldGuideServer=state.guideServer,oldConfirmed=state.deckConfirmed;
+                      try {
+                        state.scenario='island';state.guideServer='jp';state.deckConfirmed=true;renderScenarioPlan();
+                        const g=SCENARIOS.island;
+                        const high=g?.tuckerConstructionCosts?.rows?.find(x=>x.id==='high');
+                        const low=g?.tuckerConstructionCosts?.rows?.find(x=>x.id==='low');
+                        const none=g?.tuckerConstructionCosts?.rows?.find(x=>x.id==='none');
+                        const body=document.getElementById('scenarioPlanBody')?.innerText||'';
+                        return {
+                          high:high?.costs||[],
+                          low:low?.costs||[],
+                          none:none?.costs||[],
+                          highSlots:high?.slots||[],
+                          facilities:(g?.facilityEffectGuide?.facilities||[]).map(x=>x.kr),
+                          bodyHasCosts:body.includes('터커 브라인 · 건설 코스트')&&body.includes('400')&&body.includes('800'),
+                          bodyHasFacilities:body.includes('시설 효과 · 현재판 검증 요약')&&body.includes('해변의 집'),
+                          warning:g?.facilityEffectGuide?.warning||''
+                        };
+                      } finally {
+                        state.scenario=oldScenario;state.guideServer=oldGuideServer;state.deckConfirmed=oldConfirmed;renderScenarioPlan();
+                      }
+                  """)
+                  if island_costs.get("high") != [400,500,600,600,800]:
+                      raise RuntimeError("JP Island Tucker 3LB+ costs mismatch: "+str(island_costs))
+                  if island_costs.get("low") != [300,400,500,500,700]:
+                      raise RuntimeError("JP Island Tucker <=2LB costs mismatch: "+str(island_costs))
+                  if island_costs.get("none") != [300,300,400,400,600]:
+                      raise RuntimeError("JP Island no-Tucker costs mismatch: "+str(island_costs))
+                  if island_costs.get("highSlots") != [4,5,6,6,8]:
+                      raise RuntimeError("JP Island Tucker slot conversion mismatch: "+str(island_costs))
+                  if len(island_costs.get("facilities") or []) != 6:
+                      raise RuntimeError("JP Island facility summary should include six facilities: "+str(island_costs))
+                  if not island_costs.get("bodyHasCosts") or not island_costs.get("bodyHasFacilities"):
+                      raise RuntimeError("JP Island Tucker/facility UI missing: "+str(island_costs))
+                  if "밸런스 조정 전" not in island_costs.get("warning",""):
+                      raise RuntimeError("JP Island outdated numeric-table warning missing: "+str(island_costs))
+                  print("JP ISLAND TUCKER COST / FACILITY SUMMARY PASS:", island_costs)
+
                   # V7.11: direct deck-slot picker should open and expose all three scopes.
                   WebDriverWait(d, 25).until(
                       lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true")
