@@ -648,6 +648,34 @@ jobs:
                       raise RuntimeError("JP Island outdated numeric-table warning missing: "+str(island_costs))
                   print("JP ISLAND TUCKER COST / FACILITY SUMMARY PASS:", island_costs)
 
+                  tucker_card = d.execute_script("""
+                      const c=cardById(30257);
+                      if(!c)return {ok:false,reason:'card 30257 missing'};
+                      const e=(c.rareEvents||[]).find(x=>x.id==='ut_30257_sakebe');
+                      return {
+                        ok:true,
+                        krName:c.krName,
+                        jpName:c.jpName,
+                        title:c.title,
+                        eventLabel:e?.label||'',
+                        eventLabelKr:e?.labelKr||'',
+                        eventNote:e?.note||'',
+                        skills:(c.eventSkillsAll||[]).map(x=>x.jp)
+                      };
+                  """)
+                  if not tucker_card.get("ok"):
+                      raise RuntimeError("Tucker Bryne card missing: "+str(tucker_card))
+                  if tucker_card.get("krName") != "터커 브라인":
+                      raise RuntimeError("Tucker Bryne Korean name mismatch: "+str(tucker_card))
+                  if "本能は吼えているか！？" not in tucker_card.get("jpName",""):
+                      raise RuntimeError("Tucker Bryne JP card title mismatch: "+str(tucker_card))
+                  if tucker_card.get("eventLabel") != "叫べ！響け！":
+                      raise RuntimeError("Tucker Bryne final event label mismatch: "+str(tucker_card))
+                  note=tucker_card.get("eventNote","")
+                  if "패스파인더" not in note or "+120" not in note:
+                      raise RuntimeError("Tucker Bryne final event text incomplete: "+str(tucker_card))
+                  print("TUCKER BRYNE CARD TEXT PASS:", tucker_card)
+
                   # V7.11: direct deck-slot picker should open and expose all three scopes.
                   WebDriverWait(d, 25).until(
                       lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true")
