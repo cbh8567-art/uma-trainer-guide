@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-10-02",
+  "scope": "jp",
+  "engineVersion": "inheritance-v1.1",
+  "note": "계승 고유기 적합도 엔진의 검증된 효과/발동 메타데이터 레이어. 추측값은 넣지 않고, 검증 완료된 항목만 entries에 추가한다.",
+  "fields": {
+    "effectType": "speed|acceleration|hybrid|recovery|position|other",
+    "phase": "start|early|mid|late|final_corner|final_straight|other",
+    "trigger": "검증된 발동 조건 요약",
+    "inheritedEffect": "계승 시 효과 요약",
+    "courseNotes": "특정 코스/거리 유효성 메모",
+    "status": "verified|manual|verification_required",
+    "source": "검증 출처"
+  },
+  "entries": {}
+}
