@@ -1,46 +1,29 @@
 {
   "schemaVersion": 1,
   "updated": "2026-10-02",
-  "checkedAt": "2026-10-02T06:30:02.021Z",
+  "checkedAt": "2026-10-02T06:33:15.795Z",
   "status": "pass",
   "summary": {
-    "added": 3,
+    "added": 0,
     "removed": 0,
     "modified": 0
   },
   "collections": {
     "catalog": {
       "count": 563,
-      "previousCount": 560,
-      "changed": true,
+      "previousCount": 563,
+      "changed": false,
       "status": "pass",
       "changes": {
-        "addedCount": 3,
+        "addedCount": 0,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [
-          "30319",
-          "30320",
-          "30321"
-        ],
+        "addedIds": [],
         "removedIds": [],
         "modifiedIds": []
       },
       "details": {
-        "added": [
-          {
-            "id": "30319",
-            "name": "ナリタブライアン (SSR)"
-          },
-          {
-            "id": "30320",
-            "name": "アドマイヤグルーヴ (SSR)"
-          },
-          {
-            "id": "30321",
-            "name": "ドゥラメンテ (SSR)"
-          }
-        ],
+        "added": [],
         "removed": [],
         "modified": []
       }

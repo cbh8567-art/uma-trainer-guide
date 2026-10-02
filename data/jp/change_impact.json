@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-02T06:30:01.953Z",
+  "generatedAt": "2026-10-02T06:33:15.745Z",
   "event": "push",
-  "sha": "204d792e4f929f976c8449ddaab1adfe4f64028c",
+  "sha": "15158b32251526ad93ea3388457d49b7094f5c34",
   "changedFiles": [
-    "scripts/sync-jp-data.mjs"
+    "index.html"
   ],
   "categories": {
-    "app": [],
-    "pipeline": [
-      "scripts/sync-jp-data.mjs"
+    "app": [
+      "index.html"
     ],
+    "pipeline": [],
     "jpData": [],
     "krData": [],
     "commonData": [],
@@ -18,5 +18,5 @@
   },
   "impactLevel": "high",
   "fullTest": true,
-  "deploySmoke": false
+  "deploySmoke": true
 }
