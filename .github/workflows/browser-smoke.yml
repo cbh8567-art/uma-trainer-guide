@@ -475,6 +475,28 @@ jobs:
                       raise RuntimeError("Inheritance V1 review status invalid: "+str(inheritance_v1))
                   print("INHERITANCE V1 ENGINE PASS:", inheritance_v1)
 
+                  inheritance_v11 = d.execute_script("""
+                      const summary=inheritanceReviewSummary();
+                      const sample=v7InheritancePlan({ground:'turf',distance:'mid',style:'sashi'},{meters:2400})[0];
+                      const effect=sample?inheritanceEffectEntry(sample.skillId):null;
+                      return {
+                        effectsLoaded:!!JP_INHERITANCE_EFFECTS,
+                        engineVersion:JP_INHERITANCE_EFFECTS?.engineVersion||null,
+                        summary,
+                        effect:effect||null
+                      };
+                  """)
+                  if not inheritance_v11.get("effectsLoaded"):
+                      raise RuntimeError("Inheritance V1.1 effect metadata registry missing: "+str(inheritance_v11))
+                  if inheritance_v11.get("engineVersion") != "inheritance-v1.1":
+                      raise RuntimeError("Inheritance V1.1 engine version mismatch: "+str(inheritance_v11))
+                  summary=inheritance_v11.get("summary") or {}
+                  if int(summary.get("total",0)) <= 0:
+                      raise RuntimeError("Inheritance review summary is empty: "+str(inheritance_v11))
+                  if int(summary.get("reviewed",0))+int(summary.get("comparing",0))+int(summary.get("unreviewed",0)) != int(summary.get("total",0)):
+                      raise RuntimeError("Inheritance review summary counts mismatch: "+str(inheritance_v11))
+                  print("INHERITANCE V1.1 METADATA / REVIEW SUMMARY PASS:", inheritance_v11)
+
                   # V7.11: direct deck-slot picker should open and expose all three scopes.
                   WebDriverWait(d, 25).until(
                       lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true")
