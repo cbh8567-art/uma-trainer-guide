@@ -594,6 +594,126 @@
             "note": "최종 기본형. 상한에서 더 먼 스탯을 왼쪽 우선으로 배치해 순서를 조정."
           }
         ]
+      },
+      "tuckerConstructionCosts": {
+        "source": "Uma Musume official support / Game8",
+        "officialUrl": "https://support.umamusume.jp/faq/",
+        "game8Url": "https://game8.jp/umamusume/700422",
+        "rows": [
+          {
+            "id": "none",
+            "label": "터커 미편성",
+            "levels": "미편성",
+            "costs": [
+              300,
+              300,
+              400,
+              400,
+              600
+            ],
+            "slots": [
+              3,
+              3,
+              4,
+              4,
+              6
+            ]
+          },
+          {
+            "id": "low",
+            "label": "R 또는 SSR 0~2돌",
+            "levels": "SSR Lv40 이하",
+            "costs": [
+              300,
+              400,
+              500,
+              500,
+              700
+            ],
+            "slots": [
+              3,
+              4,
+              5,
+              5,
+              7
+            ]
+          },
+          {
+            "id": "high",
+            "label": "SSR 3돌 이상",
+            "levels": "SSR Lv41~50",
+            "costs": [
+              400,
+              500,
+              600,
+              600,
+              800
+            ],
+            "slots": [
+              4,
+              5,
+              6,
+              6,
+              8
+            ],
+            "recommended": true
+          }
+        ],
+        "note": "SSR 3돌 이상부터 건설 가능 코스트가 최대치. 100 cost = 1마스."
+      },
+      "facilityEffectGuide": {
+        "source": "Game8 current balance notes",
+        "sourceUrl": "https://game8.jp/umamusume/700415",
+        "status": "current-summary",
+        "warning": "GameWith 상세 Lv별 수치표는 밸런스 조정 전 표기이므로 현재판 정밀 수치로 사용하지 않음.",
+        "facilities": [
+          {
+            "id": "speed",
+            "kr": "스피드",
+            "role": "스피드 훈련/섬트레 강화",
+            "route": "Lv5 목표면 본능전개 우선",
+            "verified": true
+          },
+          {
+            "id": "stamina",
+            "kr": "스태미나",
+            "role": "스태미나 훈련/섬트레 강화",
+            "route": "하이랜더 기본형에서 본능전개",
+            "verified": true
+          },
+          {
+            "id": "power",
+            "kr": "파워",
+            "role": "파워 훈련/섬트레 강화",
+            "route": "기본 건설안은 숙련기교",
+            "verified": true
+          },
+          {
+            "id": "guts",
+            "kr": "근성",
+            "role": "근성 훈련/섬트레 강화",
+            "route": "기본 건설안은 숙련기교",
+            "verified": true
+          },
+          {
+            "id": "wit",
+            "kr": "지능",
+            "role": "지능 훈련/섬트레 강화",
+            "route": "기본 건설안은 Lv1 유지",
+            "verified": true
+          },
+          {
+            "id": "beach",
+            "kr": "해변의 집",
+            "role": "복수 시설 우정 발생 시 시설 수에 따라 훈련 효과 상승",
+            "route": "기본 건설안은 Lv1 유지",
+            "verified": true
+          }
+        ],
+        "routeNotes": {
+          "instinct": "본능전개: 스탯 성장 성능 중심. Lv5까지 올릴 주력 시설에 우선.",
+          "technique": "숙련기교: 힌트 발생/힌트 이벤트 활용 중심. 보조 시설에 활용."
+        }
       }
     },
     "legends": {
