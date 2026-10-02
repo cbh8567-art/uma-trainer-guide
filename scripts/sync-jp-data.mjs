@@ -14,6 +14,7 @@ const writeJson = async (p, v) => {
 const sha256 = (s) => crypto.createHash("sha256").update(s).digest("hex");
 const now = () => new Date().toISOString();
 
+// Preserve explicitly reviewed local overlays while keeping mass-deletion protection strict.
 function mergePreservedSnapshotRecords(name, nextData, previousData, preserveIds = []) {
   const wanted = new Set((preserveIds || []).map(String));
   if (!wanted.size) return nextData;
