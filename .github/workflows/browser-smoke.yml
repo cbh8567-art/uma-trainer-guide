@@ -538,52 +538,76 @@ jobs:
                       raise RuntimeError("JP Island guide did not render in scenario plan: "+str(island_v1))
                   print("JP ISLAND HIGHLANDER V1 PASS:", island_v1)
 
-                  island_build_images = d.execute_async_script("""
+                  island_build_interactive = d.execute_async_script("""
                       const done=arguments[arguments.length-1];
                       const oldScenario=state.scenario,oldGuideServer=state.guideServer,oldConfirmed=state.deckConfirmed;
+                      const oldStep=state.islandBuildStep,oldDone=JSON.parse(JSON.stringify(state.islandBuildDone||{}));
                       state.scenario='island';
                       state.guideServer='jp';
                       state.deckConfirmed=true;
+                      state.islandBuildStep=1;
+                      state.islandBuildDone={};
                       renderScenarioPlan();
-                      const imgs=[...document.querySelectorAll('.islandBuildImage')];
-                      imgs.forEach(img=>{img.loading='eager'; img.scrollIntoView({block:'center'});});
-                      const finish=()=>{
-                        const info=imgs.map(img=>({
-                          src:img.currentSrc||img.src,
-                          naturalWidth:img.naturalWidth,
-                          naturalHeight:img.naturalHeight,
-                          display:getComputedStyle(img).display,
-                          fit:getComputedStyle(img).objectFit
-                        }));
-                        const cards=document.querySelectorAll('[data-island-build]').length;
-                        const body=document.getElementById('scenarioPlanBody')?.innerText||'';
-                        state.scenario=oldScenario;
-                        state.guideServer=oldGuideServer;
-                        state.deckConfirmed=oldConfirmed;
-                        renderScenarioPlan();
-                        done({cards,images:info,bodyHasConstruction:body.includes('건설 계획 · 인게임 이미지 기준')});
+                      const waitImage=(cb)=>{
+                        const img=document.querySelector('.islandBuildImage');
+                        if(img){img.loading='eager';img.scrollIntoView({block:'center'});}
+                        const deadline=Date.now()+12000;
+                        const timer=setInterval(()=>{
+                          const current=document.querySelector('.islandBuildImage');
+                          if((current&&current.complete&&current.naturalWidth>0)||Date.now()>deadline){
+                            clearInterval(timer);cb(current);
+                          }
+                        },250);
                       };
-                      if(imgs.length===5&&imgs.every(img=>img.complete&&img.naturalWidth>0))return finish();
-                      const deadline=Date.now()+12000;
-                      const timer=setInterval(()=>{
-                        if(imgs.every(img=>img.complete&&img.naturalWidth>0)||Date.now()>deadline){
-                          clearInterval(timer);finish();
-                        }
-                      },250);
+                      waitImage(firstImg=>{
+                        const before={
+                          cards:document.querySelectorAll('[data-island-build]').length,
+                          nav:document.querySelectorAll('[data-island-build-step]').length,
+                          step:state.islandBuildStep,
+                          image:firstImg?{w:firstImg.naturalWidth,h:firstImg.naturalHeight,fit:getComputedStyle(firstImg).objectFit}:null,
+                          body:document.getElementById('scenarioPlanBody')?.innerText||''
+                        };
+                        toggleIslandBuildDone('build1');
+                        const afterFirst={
+                          step:state.islandBuildStep,
+                          build1:!!state.islandBuildDone?.build1,
+                          body:document.getElementById('scenarioPlanBody')?.innerText||''
+                        };
+                        setIslandBuildStep(5);
+                        waitImage(lastImg=>{
+                          const afterLast={
+                            step:state.islandBuildStep,
+                            image:lastImg?{w:lastImg.naturalWidth,h:lastImg.naturalHeight,fit:getComputedStyle(lastImg).objectFit}:null,
+                            body:document.getElementById('scenarioPlanBody')?.innerText||''
+                          };
+                          state.scenario=oldScenario;
+                          state.guideServer=oldGuideServer;
+                          state.deckConfirmed=oldConfirmed;
+                          state.islandBuildStep=oldStep;
+                          state.islandBuildDone=oldDone;
+                          renderScenarioPlan();
+                          done({before,afterFirst,afterLast});
+                        });
+                      });
                   """)
-                  if int(island_build_images.get("cards",0)) != 5:
-                      raise RuntimeError("JP Island construction card count mismatch: "+str(island_build_images))
-                  if not island_build_images.get("bodyHasConstruction"):
-                      raise RuntimeError("JP Island construction section missing: "+str(island_build_images))
-                  images=island_build_images.get("images") or []
-                  if len(images) != 5:
-                      raise RuntimeError("JP Island construction image count mismatch: "+str(island_build_images))
-                  for image in images:
-                      if int(image.get("naturalWidth",0)) <= 0 or int(image.get("naturalHeight",0)) <= 0:
-                          raise RuntimeError("JP Island construction image failed to load: "+str(island_build_images))
-                      if image.get("fit") != "contain":
-                          raise RuntimeError("JP Island construction image ratio mode should be contain: "+str(island_build_images))
-                  print("JP ISLAND CONSTRUCTION IMAGE PASS:", island_build_images)
+                  before=island_build_interactive.get("before") or {}
+                  after_first=island_build_interactive.get("afterFirst") or {}
+                  after_last=island_build_interactive.get("afterLast") or {}
+                  if int(before.get("cards",0)) != 1:
+                      raise RuntimeError("JP Island should render one focused construction card: "+str(island_build_interactive))
+                  if int(before.get("nav",0)) < 5:
+                      raise RuntimeError("JP Island construction step navigation missing: "+str(island_build_interactive))
+                  image=before.get("image") or {}
+                  if int(image.get("w",0)) <= 0 or int(image.get("h",0)) <= 0 or image.get("fit") != "contain":
+                      raise RuntimeError("JP Island focused construction image failed: "+str(island_build_interactive))
+                  if int(after_first.get("step",0)) != 2 or not after_first.get("build1"):
+                      raise RuntimeError("JP Island build completion did not advance to step 2: "+str(island_build_interactive))
+                  if "진행 1 / 5" not in after_first.get("body",""):
+                      raise RuntimeError("JP Island build progress summary missing after completion: "+str(island_build_interactive))
+                  last_image=after_last.get("image") or {}
+                  if int(after_last.get("step",0)) != 5 or int(last_image.get("w",0)) <= 0 or int(last_image.get("h",0)) <= 0:
+                      raise RuntimeError("JP Island step 5 navigation/image failed: "+str(island_build_interactive))
+                  print("JP ISLAND CONSTRUCTION INTERACTIVE PASS:", island_build_interactive)
 
                   # V7.11: direct deck-slot picker should open and expose all three scopes.
                   WebDriverWait(d, 25).until(
