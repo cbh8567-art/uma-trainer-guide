@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-23",
+  "updated": "2026-10-02",
   "overrides": {
     "30152": {
       "title": "All'alba vincerò!",
@@ -1177,6 +1177,34 @@
                 {
                   "skillId": 203661,
                   "hintLevel": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "30257": {
+      "title": "本能は吼えているか！？",
+      "jpName": "[本能は吼えているか！？]タッカーブライン",
+      "krName": "터커 브라인",
+      "eventSource": "U-tools / Game8 / GameWith 검증",
+      "eventSourceUrl": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30257/event",
+      "rareEvents": [
+        {
+          "id": "ut_30257_sakebe",
+          "label": "叫べ！響け！",
+          "labelKr": "외쳐라! 울려 퍼져라!",
+          "selection": "auto",
+          "note": "외출 5회차 · 체력 회복 / 의욕 상승 / 파워 상승 / 패스파인더 힌트 Lv+3 / 다음 턴 편성 서포트 특기율 +120",
+          "choices": [
+            {
+              "id": "done",
+              "label": "패스파인더 획득",
+              "skills": [
+                {
+                  "skillId": 203651,
+                  "hintLevel": 3
                 }
               ]
             }
