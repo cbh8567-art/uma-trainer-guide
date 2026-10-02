@@ -648,6 +648,51 @@ jobs:
                       raise RuntimeError("JP Island outdated numeric-table warning missing: "+str(island_costs))
                   print("JP ISLAND TUCKER COST / FACILITY SUMMARY PASS:", island_costs)
 
+                  island_live_guidance = d.execute_script("""
+                      const oldScenario=state.scenario,oldGuideServer=state.guideServer,oldDeck=[...(state.deck||[])],oldConfirmed=state.deckConfirmed;
+                      const oldStep=state.islandBuildStep,oldLb=JSON.parse(JSON.stringify(state.lb||{})),oldCheck=JSON.parse(JSON.stringify(state.trainingStatCheck||{}));
+                      try {
+                        state.scenario='island';state.guideServer='jp';state.deckConfirmed=true;state.islandBuildStep=5;
+                        const types=['스피드','스태미나','파워','근성','지능'];
+                        const picks=types.map(t=>runtime.catalog.find(c=>normalizeType(c.type)===t)).filter(Boolean);
+                        const tucker=cardById(30257);
+                        if(picks.length!==5||!tucker)return {ok:false,picks:picks.length,tucker:!!tucker};
+                        state.deck=[...picks.map(c=>c.id),tucker.id];
+                        state.lb[String(tucker.id)]=2;
+                        state.trainingStatCheck={scenario:'island',grade:'classic',month:12,half:'second',stats:{speed:1700,stamina:1000,power:1300,guts:1400,wit:1100}};
+                        renderScenarioPlan();
+                        const lowBody=document.getElementById('scenarioPlanBody')?.innerText||'';
+                        const lowAssess=islandDeckAssessment(),lowTier=islandTuckerConstructionTier(lowAssess),priority=islandStatPriority();
+                        state.lb[String(tucker.id)]=4;
+                        renderScenarioPlan();
+                        const highBody=document.getElementById('scenarioPlanBody')?.innerText||'';
+                        return {
+                          ok:true,
+                          lowLb:lowAssess.tuckerLb,
+                          lowTier:lowTier?.id||null,
+                          priority:(priority.values||[]).map(x=>({stat:x.stat,gap:x.gap})),
+                          lowHas:lowBody.includes('터커 2돌')&&lowBody.includes('700 cost / 7마스'),
+                          highHas:highBody.includes('터커 풀돌')&&highBody.includes('800 cost / 8마스'),
+                          priorityHas:lowBody.includes('1. 스태미나 · 상한까지 700')&&lowBody.includes('2. 파워 · 상한까지 400'),
+                          ticketHas:lowBody.includes('섬트레권 사용 체크')&&lowBody.includes('여름합숙')&&lowBody.includes('1장까지')
+                        };
+                      } finally {
+                        state.scenario=oldScenario;state.guideServer=oldGuideServer;state.deck=oldDeck;state.deckConfirmed=oldConfirmed;
+                        state.islandBuildStep=oldStep;state.lb=oldLb;state.trainingStatCheck=oldCheck;renderScenarioPlan();
+                      }
+                  """)
+                  if not island_live_guidance.get("ok"):
+                      raise RuntimeError("JP Island live guidance setup failed: "+str(island_live_guidance))
+                  if island_live_guidance.get("lowLb") != 2 or island_live_guidance.get("lowTier") != "low":
+                      raise RuntimeError("JP Island Tucker LB tier detection failed: "+str(island_live_guidance))
+                  if not island_live_guidance.get("lowHas") or not island_live_guidance.get("highHas"):
+                      raise RuntimeError("JP Island active construction limit UI failed: "+str(island_live_guidance))
+                  if not island_live_guidance.get("priorityHas"):
+                      raise RuntimeError("JP Island stat-gap priority guidance failed: "+str(island_live_guidance))
+                  if not island_live_guidance.get("ticketHas"):
+                      raise RuntimeError("JP Island ticket reminder rules missing: "+str(island_live_guidance))
+                  print("JP ISLAND LIVE TUCKER / PRIORITY / TICKET PASS:", island_live_guidance)
+
                   tucker_card = d.execute_script("""
                       const c=cardById(30257);
                       if(!c)return {ok:false,reason:'card 30257 missing'};
