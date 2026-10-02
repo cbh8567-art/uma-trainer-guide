@@ -497,6 +497,47 @@ jobs:
                       raise RuntimeError("Inheritance review summary counts mismatch: "+str(inheritance_v11))
                   print("INHERITANCE V1.1 METADATA / REVIEW SUMMARY PASS:", inheritance_v11)
 
+                  island_v1 = d.execute_script("""
+                      const oldScenario=state.scenario,oldGuideServer=state.guideServer,oldDeck=[...(state.deck||[])],oldConfirmed=state.deckConfirmed;
+                      try {
+                        state.scenario='island';
+                        state.guideServer='jp';
+                        state.deckConfirmed=true;
+                        const types=['스피드','스태미나','파워','근성','지능'];
+                        const picks=types.map(t=>runtime.catalog.find(c=>normalizeType(c.type)===t)).filter(Boolean);
+                        const tucker=cardById(30257)||runtime.catalog.find(c=>normalizeType(c.type)==='친구'&&norm((c.character||'')+' '+(c.jpName||'')+' '+(c.krName||'')).includes(norm('タッカーブライン')));
+                        if(picks.length!==5||!tucker)return {ok:false,picks:picks.length,tucker:!!tucker};
+                        state.deck=[...picks.map(c=>c.id),tucker.id];
+                        const assess=islandDeckAssessment();
+                        renderScenarioPlan();
+                        const body=document.getElementById('scenarioPlanBody')?.innerText||'';
+                        return {
+                          ok:true,
+                          exact:assess.exact111111,
+                          tucker:assess.tucker,
+                          summary:assess.summary,
+                          guideVersion:SCENARIOS.island?.guideVersion||null,
+                          guideCount:(SCENARIOS.island?.coreGuide||[]).length,
+                          bodyHasGuide:body.includes('JP 무인도 초기 공략 V1')&&body.includes('111111')&&body.includes('터커 브라인')
+                        };
+                      } finally {
+                        state.scenario=oldScenario;
+                        state.guideServer=oldGuideServer;
+                        state.deck=oldDeck;
+                        state.deckConfirmed=oldConfirmed;
+                        renderScenarioPlan();
+                      }
+                  """)
+                  if not island_v1.get("ok"):
+                      raise RuntimeError("JP Island V1 setup failed: "+str(island_v1))
+                  if not island_v1.get("exact") or not island_v1.get("tucker"):
+                      raise RuntimeError("JP Island 111111/Tucker assessment failed: "+str(island_v1))
+                  if island_v1.get("guideVersion") != "jp-island-v1" or int(island_v1.get("guideCount",0)) < 6:
+                      raise RuntimeError("JP Island guide data missing: "+str(island_v1))
+                  if not island_v1.get("bodyHasGuide"):
+                      raise RuntimeError("JP Island guide did not render in scenario plan: "+str(island_v1))
+                  print("JP ISLAND HIGHLANDER V1 PASS:", island_v1)
+
                   # V7.11: direct deck-slot picker should open and expose all three scopes.
                   WebDriverWait(d, 25).until(
                       lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true")
