@@ -538,6 +538,53 @@ jobs:
                       raise RuntimeError("JP Island guide did not render in scenario plan: "+str(island_v1))
                   print("JP ISLAND HIGHLANDER V1 PASS:", island_v1)
 
+                  island_build_images = d.execute_async_script("""
+                      const done=arguments[arguments.length-1];
+                      const oldScenario=state.scenario,oldGuideServer=state.guideServer,oldConfirmed=state.deckConfirmed;
+                      state.scenario='island';
+                      state.guideServer='jp';
+                      state.deckConfirmed=true;
+                      renderScenarioPlan();
+                      const imgs=[...document.querySelectorAll('.islandBuildImage')];
+                      imgs.forEach(img=>{img.loading='eager'; img.scrollIntoView({block:'center'});});
+                      const finish=()=>{
+                        const info=imgs.map(img=>({
+                          src:img.currentSrc||img.src,
+                          naturalWidth:img.naturalWidth,
+                          naturalHeight:img.naturalHeight,
+                          display:getComputedStyle(img).display,
+                          fit:getComputedStyle(img).objectFit
+                        }));
+                        const cards=document.querySelectorAll('[data-island-build]').length;
+                        const body=document.getElementById('scenarioPlanBody')?.innerText||'';
+                        state.scenario=oldScenario;
+                        state.guideServer=oldGuideServer;
+                        state.deckConfirmed=oldConfirmed;
+                        renderScenarioPlan();
+                        done({cards,images:info,bodyHasConstruction:body.includes('건설 계획 · 인게임 이미지 기준')});
+                      };
+                      if(imgs.length===5&&imgs.every(img=>img.complete&&img.naturalWidth>0))return finish();
+                      const deadline=Date.now()+12000;
+                      const timer=setInterval(()=>{
+                        if(imgs.every(img=>img.complete&&img.naturalWidth>0)||Date.now()>deadline){
+                          clearInterval(timer);finish();
+                        }
+                      },250);
+                  """)
+                  if int(island_build_images.get("cards",0)) != 5:
+                      raise RuntimeError("JP Island construction card count mismatch: "+str(island_build_images))
+                  if not island_build_images.get("bodyHasConstruction"):
+                      raise RuntimeError("JP Island construction section missing: "+str(island_build_images))
+                  images=island_build_images.get("images") or []
+                  if len(images) != 5:
+                      raise RuntimeError("JP Island construction image count mismatch: "+str(island_build_images))
+                  for image in images:
+                      if int(image.get("naturalWidth",0)) <= 0 or int(image.get("naturalHeight",0)) <= 0:
+                          raise RuntimeError("JP Island construction image failed to load: "+str(island_build_images))
+                      if image.get("fit") != "contain":
+                          raise RuntimeError("JP Island construction image ratio mode should be contain: "+str(island_build_images))
+                  print("JP ISLAND CONSTRUCTION IMAGE PASS:", island_build_images)
+
                   # V7.11: direct deck-slot picker should open and expose all three scopes.
                   WebDriverWait(d, 25).until(
                       lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true")
