@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.72.4">
+<meta name="app-build" content="V7.73.0">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.72.4 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.73.0 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -508,7 +508,8 @@ body{font-size:14px;line-height:1.5}
 .islandCostBox,.islandFacilityBox{margin-top:9px;border:1px solid #3b4d61;background:#111822;border-radius:10px;padding:8px}
 .islandCostGrid{display:grid;grid-template-columns:1.25fr repeat(5,minmax(54px,1fr));gap:4px;margin-top:7px;align-items:center}
 .islandCostCell{border:1px solid #2f3d50;background:#151c26;border-radius:7px;padding:6px 4px;font-size:9px;text-align:center}
-.islandCostCell.head{font-weight:900;color:#dce5f4}.islandCostCell.recommended{border-color:#47765d;color:#9fe3bd}
+.islandCostCell.head{font-weight:900;color:#dce5f4}.islandCostCell.recommended{border-color:#47765d;color:#9fe3bd}.islandCostCell.current{outline:2px solid #d0a653;outline-offset:1px;background:#231f15;color:#ffe39a}
+.islandLiveGuide{margin-top:7px;border:1px solid #45566d;background:#121a25;border-radius:9px;padding:8px;font-size:9px;line-height:1.55}.islandLiveGuide.good{border-color:#47765d;background:#132019}.islandLiveGuide.warn{border-color:#8a6540;background:#241b13}.islandLiveGuide b{font-size:10px}.islandPriorityRow{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}.islandPriorityRow .tag{font-size:9px}.islandTicketGuide{margin-top:9px;border:1px solid #48546a;background:#121925;border-radius:10px;padding:8px}.islandTicketGuide b{font-size:10px}.islandTicketGuide .sub{font-size:9px;line-height:1.55}
 .islandFacilityGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:7px}
 .islandFacilityItem{border:1px solid #303e50;background:#151c26;border-radius:8px;padding:7px}
 .islandFacilityItem b{font-size:10px}.islandFacilityItem .sub{font-size:9px;line-height:1.45}
@@ -2367,8 +2368,24 @@ function islandDeckAssessment(){
  const exact111111=cards.length===required.length&&required.every(t=>Number(counts.get(t)||0)===1);
  const friend=cards.find(card=>normalizeType(card.type)==='친구')||null,target=norm(guide.friendCharacter||'タッカーブライン');
  const tucker=!!(friend&&[friend.character,friend.jpName,friend.krName,friend.title].some(v=>norm(v||'').includes(target)));
+ const tuckerLb=tucker?Math.max(0,Math.min(4,Number(state.lb?.[String(friend.id)]??4))):null;
  const summary=required.map(t=>t+' '+Number(counts.get(t)||0)).join(' / ');
- return {cards,counts,exact111111,friend,tucker,summary}
+ return {cards,counts,exact111111,friend,tucker,tuckerLb,summary}
+}
+function islandTuckerConstructionTier(assess=islandDeckAssessment()){
+ const rows=SCENARIOS.island?.tuckerConstructionCosts?.rows||[];
+ const id=!assess?.tucker?'none':Number(assess.tuckerLb)>=3?'high':'low';
+ return rows.find(x=>x.id===id)||null
+}
+function islandStatPriority(){
+ const cap=effectiveStatCaps?.('island')||SCENARIO_STAT_CAPS.island||{};
+ const raw=state.trainingStatCheck?.stats||{},names={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성'};
+ const values=['speed','stamina','power','guts'].map(stat=>{
+   const current=Number(raw[stat]),max=Number(cap[stat]);
+   return {stat,label:names[stat],current:Number.isFinite(current)?current:null,max:Number.isFinite(max)?max:null,gap:Number.isFinite(current)&&Number.isFinite(max)?Math.max(0,max-current):null}
+ });
+ const complete=values.every(x=>x.gap!==null);
+ return {complete,values:complete?values.sort((a,b)=>b.gap-a.gap):values}
 }
 function setIslandBuildStep(step){
  state.islandBuildStep=Math.max(1,Math.min(5,Math.floor(Number(step)||1)));
@@ -2433,7 +2450,7 @@ function renderScenarioPlan(){
  status.textContent=!enabled?'서포트 덱 확정 필요':state.scenarioPlanConfirmed?'플랜 확정 ✓':scenarioPlanReady()?'확정 가능':'주요 선택 필요';
  let html='<div class="note" style="margin-top:7px"><b>'+esc(sc.kr||sc.name||'현재 시나리오')+'</b> · '+(state.trainingActive?'육성 진행 중에도 계획 변경 가능':'육성 시작 전 주요 선택을 미리 지정')+'</div>';
  if(state.scenario==='island'&&state.guideServer==='jp'){
-   const assess=islandDeckAssessment(),deckGuide=sc.recommendedDeck||{},checks=sc.coreGuide||[];
+   const assess=islandDeckAssessment(),deckGuide=sc.recommendedDeck||{},checks=sc.coreGuide||[],currentTuckerTier=islandTuckerConstructionTier(assess);
    html+='<div class="islandGuideBox"><div class="islandGuideHead"><div><b>JP 무인도 초기 공략 V1</b><div class="sub">기본 덱은 '+esc(deckGuide.name||'하이랜더 111111')+' · 스피드/스태미나/파워/근성/지능/친구 각 1장</div></div><span class="status">'+esc(sc.guideVersion||'jp-island-v1')+'</span></div>';
    html+='<div class="islandGuideStatus"><span class="tag '+(assess.exact111111?'good':'warn')+'">'+(assess.exact111111?'111111 일치 ✓':'현재 덱 조정 필요')+'</span><span class="tag '+(assess.tucker?'good':'warn')+'">'+(assess.tucker?'터커 브라인 편성 ✓':'친구 슬롯: 터커 브라인 권장')+'</span><span class="tag">'+esc(assess.summary||'덱 미편성')+'</span></div>';
    html+='<div class="sub" style="margin-top:6px">'+esc(deckGuide.note||'')+'</div>';
@@ -2443,10 +2460,12 @@ function renderScenarioPlan(){
      html+='<div class="islandCostBox"><div class="islandBuildHead"><div><b>터커 브라인 · 건설 코스트</b><div class="sub">100 cost = 1마스 · 3돌 이상부터 최대치</div></div><span class="status">공식 FAQ + Game8 일치</span></div><div class="islandCostGrid">';
      html+='<div class="islandCostCell head">편성</div>'+[1,2,3,4,5].map(n=>'<div class="islandCostCell head">'+n+'회</div>').join('');
      for(const row of costGuide.rows){
-       html+='<div class="islandCostCell '+(row.recommended?'recommended':'')+'"><b>'+esc(row.label)+'</b><br>'+esc(row.levels)+'</div>';
-       row.costs.forEach((v,i)=>{html+='<div class="islandCostCell '+(row.recommended?'recommended':'')+'">'+esc(v)+'<br><span class="sub">'+esc(row.slots?.[i]||Math.floor(v/100))+'마스</span></div>'});
+       const current=row.id===currentTuckerTier?.id,cls=(row.recommended?'recommended ':'')+(current?'current':'');
+       html+='<div class="islandCostCell '+cls+'"><b>'+esc(row.label)+(current?' · 현재':'')+'</b><br>'+esc(row.levels)+'</div>';
+       row.costs.forEach((v,i)=>{html+='<div class="islandCostCell '+cls+'">'+esc(v)+'<br><span class="sub">'+esc(row.slots?.[i]||Math.floor(v/100))+'마스</span></div>'});
      }
-     html+='</div><div class="sub" style="margin-top:6px">'+esc(costGuide.note||'')+'</div></div>';
+     const lbText=assess.tucker?(Number(assess.tuckerLb)>=4?'풀돌':assess.tuckerLb+'돌'):'미편성';
+     html+='</div><div class="islandLiveGuide '+(currentTuckerTier?.id==='high'?'good':'warn')+'"><b>현재 덱: 터커 '+esc(lbText)+'</b> · '+(currentTuckerTier?.id==='high'?'3돌 이상 최대 건설 한도 적용 ✓':'건설 한도가 최대치보다 낮습니다. 3돌 이상 터커 렌탈/편성을 권장합니다.')+'</div><div class="sub" style="margin-top:6px">'+esc(costGuide.note||'')+'</div></div>';
    }
    const facilityGuide=sc.facilityEffectGuide;
    if(facilityGuide?.facilities?.length){
@@ -2456,6 +2475,7 @@ function renderScenarioPlan(){
      }
      html+='</div><div class="islandBuildRoute">'+esc(facilityGuide.routeNotes?.instinct||'')+'<br>'+esc(facilityGuide.routeNotes?.technique||'')+'</div><div class="islandVerifyNote">'+esc(facilityGuide.warning||'')+'</div></div>';
    }
+   html+='<div class="islandTicketGuide"><b>섬트레권 사용 체크</b><div class="sub">보유는 1장까지 · 다음 권을 받으면 기존 권이 덮어써져 사라질 수 있음 · 클래식/시니어 여름합숙 진입 때도 남은 권이 소멸하므로 합숙 전에 사용. 4~5명이 모인 훈련은 스킬Pt가 넘칠 수 있어 일반 훈련이 더 나을 수 있습니다.</div></div>';
    const construction=sc.constructionGuide,plans=construction?.plans||[];
    if(plans.length){
      const statNames={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',beach:'해변의 집'};
@@ -2466,8 +2486,10 @@ function renderScenarioPlan(){
      if(activePlan){
        const p=activePlan,levels=Object.entries(p.levels||{}).map(([k,v])=>'<span class="tag">'+esc(statNames[k]||k)+' '+(Number(v)>0?'Lv'+Number(v):'—')+'</span>').join('');
        const routes=Object.entries(p.routes||{}).map(([k,v])=>esc(statNames[k]||k)+' '+esc(v)).join(' · ');
-       const done=!!state.islandBuildDone?.[p.id];
-       html+='<div class="islandBuildCard focus" data-island-build="'+esc(p.id)+'"><div class="islandBuildCardHead"><b>'+esc(p.order)+'회차 · '+esc(p.when)+'</b><span class="status">'+(done?'완료 ✓':esc(construction.version||''))+'</span></div><div class="islandBuildImageWrap"><img class="islandBuildImage" src="'+esc(p.image)+'" alt="'+esc(p.order+'회차 무인도 건설 계획 인게임 이미지')+'" loading="eager" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><div class="islandBuildImageMissing">건설 이미지 로드 실패 · 아래 레벨 표를 기준으로 확인해 주세요.</div></div><div class="islandBuildLevels">'+levels+'</div>'+(routes?'<div class="islandBuildRoute">분기: '+routes+'</div>':'')+'<div class="sub" style="margin-top:5px">'+esc(p.note||'')+'</div><div class="islandBuildActions"><button type="button" class="btn '+(done?'':'primary')+'" data-island-build-done="'+esc(p.id)+'">'+(done?'완료 취소':'이 건설 완료 ✓')+'</button>'+(activeOrder>1?'<button type="button" class="mini" data-island-build-step="'+(activeOrder-1)+'">← 이전</button>':'')+(activeOrder<plans.length?'<button type="button" class="mini" data-island-build-step="'+(activeOrder+1)+'">다음 →</button>':'')+'</div></div>';
+       const done=!!state.islandBuildDone?.[p.id],tier=currentTuckerTier,costIndex=Math.max(0,Math.min(4,Number(p.order)-1)),currentCost=tier?.costs?.[costIndex],currentSlots=tier?.slots?.[costIndex],priority=islandStatPriority();
+       const costHelp=currentCost?'<div class="islandLiveGuide '+(tier?.id==='high'?'good':'warn')+'"><b>현재 터커 기준 '+esc(p.order)+'회차 한도</b> · '+esc(currentCost)+' cost / '+esc(currentSlots||Math.floor(currentCost/100))+'마스</div>':'';
+       const priorityHelp=Number(p.order)>=4?(priority.complete?'<div class="islandLiveGuide"><b>현재 스탯 기준 왼쪽 우선 배치</b><div class="islandPriorityRow">'+priority.values.map((x,i)=>'<span class="tag">'+(i+1)+'. '+esc(x.label)+' · 상한까지 '+esc(x.gap)+'</span>').join('')+'</div><div class="sub">상한에서 더 먼 스탯을 왼쪽에 두는 Game8 기준 보조입니다. 자동으로 건설 순서를 바꾸지는 않습니다.</div></div>':'<div class="islandLiveGuide warn"><b>4~5회차 배치 보조</b> · 육성 진행의 스탯 체크에 현재 수치를 입력하면 상한에서 먼 순서대로 왼쪽 우선 배치를 계산합니다.</div>'):'';
+       html+='<div class="islandBuildCard focus" data-island-build="'+esc(p.id)+'"><div class="islandBuildCardHead"><b>'+esc(p.order)+'회차 · '+esc(p.when)+'</b><span class="status">'+(done?'완료 ✓':esc(construction.version||''))+'</span></div><div class="islandBuildImageWrap"><img class="islandBuildImage" src="'+esc(p.image)+'" alt="'+esc(p.order+'회차 무인도 건설 계획 인게임 이미지')+'" loading="eager" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><div class="islandBuildImageMissing">건설 이미지 로드 실패 · 아래 레벨 표를 기준으로 확인해 주세요.</div></div><div class="islandBuildLevels">'+levels+'</div>'+costHelp+priorityHelp+(routes?'<div class="islandBuildRoute">분기: '+routes+'</div>':'')+'<div class="sub" style="margin-top:5px">'+esc(p.note||'')+'</div><div class="islandBuildActions"><button type="button" class="btn '+(done?'':'primary')+'" data-island-build-done="'+esc(p.id)+'">'+(done?'완료 취소':'이 건설 완료 ✓')+'</button>'+(activeOrder>1?'<button type="button" class="mini" data-island-build-step="'+(activeOrder-1)+'">← 이전</button>':'')+(activeOrder<plans.length?'<button type="button" class="mini" data-island-build-step="'+(activeOrder+1)+'">다음 →</button>':'')+'</div></div>';
      }
      html+='</div></div>';
    }
