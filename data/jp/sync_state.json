@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-02",
+  "updated": "2026-10-04",
   "status": "pass",
   "snapshotReady": true,
-  "lastSuccessfulSync": "2026-10-02T18:49:20.310Z",
-  "lastAttempt": "2026-10-02T18:49:20.310Z",
+  "lastSuccessfulSync": "2026-10-04T00:25:09.769Z",
+  "lastAttempt": "2026-10-04T00:25:09.769Z",
   "activeMode": "snapshot",
   "message": "Validated snapshots promoted atomically.",
   "changeTotals": {
