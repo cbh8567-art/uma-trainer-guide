@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-04",
-  "generatedAt": "2026-10-04T21:19:53.628Z",
+  "updated": "2026-10-05",
+  "generatedAt": "2026-10-05T18:52:20.210Z",
   "collections": {
     "catalog": {
       "count": 563,
@@ -58,13 +58,13 @@
       ]
     },
     "events": {
-      "count": 125,
+      "count": 129,
       "minId": null,
       "maxId": null,
       "sampleLatest": [
         {
-          "id": "evt_30319_801016002",
-          "name": "賢さブライアン 孤狼"
+          "id": "evt_30320_830320003",
+          "name": "賢さビスク ひそやかな温もり"
         },
         {
           "id": "evt_30320_801118002",

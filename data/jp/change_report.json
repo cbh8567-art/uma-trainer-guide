@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-04",
-  "checkedAt": "2026-10-04T21:19:53.628Z",
+  "updated": "2026-10-05",
+  "checkedAt": "2026-10-05T18:52:20.210Z",
   "status": "pass",
   "summary": {
-    "added": 0,
+    "added": 4,
     "removed": 0,
     "modified": 0
   },
@@ -48,20 +48,42 @@
       }
     },
     "events": {
-      "count": 122,
+      "count": 126,
       "previousCount": 125,
-      "changed": false,
+      "changed": true,
       "status": "pass",
       "changes": {
-        "addedCount": 0,
+        "addedCount": 4,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [],
+        "addedIds": [
+          "evt_30319_830319003",
+          "evt_30319_830319002",
+          "evt_30320_830320002",
+          "evt_30320_830320003"
+        ],
         "removedIds": [],
         "modifiedIds": []
       },
       "details": {
-        "added": [],
+        "added": [
+          {
+            "id": "evt_30319_830319003",
+            "name": "賢さブライアン 生徒会副会長の“未来”"
+          },
+          {
+            "id": "evt_30319_830319002",
+            "name": "賢さブライアン 生徒会副会長の根源"
+          },
+          {
+            "id": "evt_30320_830320002",
+            "name": "賢さビスク 不器用コミュニケーション"
+          },
+          {
+            "id": "evt_30320_830320003",
+            "name": "賢さビスク ひそやかな温もり"
+          }
+        ],
         "removed": [],
         "modified": []
       }

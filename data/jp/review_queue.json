@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-04",
-  "generatedAt": "2026-10-04T21:19:53.628Z",
-  "openCount": 35,
+  "updated": "2026-10-05",
+  "generatedAt": "2026-10-05T18:52:20.210Z",
+  "openCount": 39,
   "items": [
     {
       "key": "supports:removed:30321",
@@ -218,6 +218,54 @@
       "status": "open",
       "firstSeenAt": "2026-09-24T18:46:01.900Z",
       "lastSeenAt": "2026-09-24T18:46:01.900Z",
+      "note": ""
+    },
+    {
+      "key": "events:added:evt_30319_830319003",
+      "collection": "events",
+      "changeType": "added",
+      "id": "evt_30319_830319003",
+      "name": "賢さブライアン 生徒会副会長の“未来”",
+      "priority": "medium",
+      "status": "open",
+      "firstSeenAt": "2026-10-05T18:52:20.210Z",
+      "lastSeenAt": "2026-10-05T18:52:20.210Z",
+      "note": ""
+    },
+    {
+      "key": "events:added:evt_30319_830319002",
+      "collection": "events",
+      "changeType": "added",
+      "id": "evt_30319_830319002",
+      "name": "賢さブライアン 生徒会副会長の根源",
+      "priority": "medium",
+      "status": "open",
+      "firstSeenAt": "2026-10-05T18:52:20.210Z",
+      "lastSeenAt": "2026-10-05T18:52:20.210Z",
+      "note": ""
+    },
+    {
+      "key": "events:added:evt_30320_830320002",
+      "collection": "events",
+      "changeType": "added",
+      "id": "evt_30320_830320002",
+      "name": "賢さビスク 不器用コミュニケーション",
+      "priority": "medium",
+      "status": "open",
+      "firstSeenAt": "2026-10-05T18:52:20.210Z",
+      "lastSeenAt": "2026-10-05T18:52:20.210Z",
+      "note": ""
+    },
+    {
+      "key": "events:added:evt_30320_830320003",
+      "collection": "events",
+      "changeType": "added",
+      "id": "evt_30320_830320003",
+      "name": "賢さビスク ひそやかな温もり",
+      "priority": "medium",
+      "status": "open",
+      "firstSeenAt": "2026-10-05T18:52:20.210Z",
+      "lastSeenAt": "2026-10-05T18:52:20.210Z",
       "note": ""
     },
     {

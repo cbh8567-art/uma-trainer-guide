@@ -2202,6 +2202,50 @@
       "selection": "single"
     },
     {
+      "id": "evt_30319_801016002",
+      "supportNameMatch": "晩餐",
+      "label": "賢さブライアン 孤狼",
+      "selection": "auto",
+      "skills": [
+        {
+          "skillName": "一匹狼",
+          "hintLevel": 1,
+          "skillId": 201641
+        }
+      ]
+    },
+    {
+      "id": "evt_30319_830319003",
+      "supportNameMatch": "晩餐",
+      "label": "賢さブライアン 生徒会副会長の“未来”",
+      "selection": "auto",
+      "skills": [
+        {
+          "skillName": "アンストッパブル",
+          "hintLevel": 1,
+          "skillId": 202371
+        },
+        {
+          "skillName": "ぶっちぎり！",
+          "hintLevel": 2,
+          "skillId": 204151
+        }
+      ]
+    },
+    {
+      "id": "evt_30319_830319002",
+      "supportNameMatch": "晩餐",
+      "label": "賢さブライアン 生徒会副会長の根源",
+      "selection": "auto",
+      "skills": [
+        {
+          "skillName": "憂いなし",
+          "hintLevel": 1,
+          "skillId": 204412
+        }
+      ]
+    },
+    {
       "id": "evt_30265_801118002",
       "supportNameMatch": "氷結晶の静域",
       "label": "スピアドマイヤ ひとりが好きなクラスメイトさん",
@@ -2422,15 +2466,33 @@
       ]
     },
     {
-      "id": "evt_30319_801016002",
-      "supportNameMatch": "晩餐",
-      "label": "賢さブライアン 孤狼",
+      "id": "evt_30320_830320002",
+      "supportNameMatch": "冷凜なるビスクドール",
+      "label": "賢さビスク 不器用コミュニケーション",
       "selection": "auto",
       "skills": [
         {
-          "skillName": "一匹狼",
+          "skillName": "スリップストリーム",
           "hintLevel": 1,
-          "skillId": 201641
+          "skillId": 201651
+        }
+      ]
+    },
+    {
+      "id": "evt_30320_830320003",
+      "supportNameMatch": "冷凜なるビスクドール",
+      "label": "賢さビスク ひそやかな温もり",
+      "selection": "auto",
+      "skills": [
+        {
+          "skillName": "解き放つ情念",
+          "hintLevel": 2,
+          "skillId": 203801
+        },
+        {
+          "skillName": "一往直前",
+          "hintLevel": 1,
+          "skillId": 204721
         }
       ]
     },

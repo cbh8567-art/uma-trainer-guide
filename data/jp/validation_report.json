@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-04",
+  "updated": "2026-10-05",
   "status": "pass",
-  "checkedAt": "2026-10-04T21:19:53.628Z",
+  "checkedAt": "2026-10-05T18:52:20.210Z",
   "fatal": [],
   "warnings": [],
   "collections": {
@@ -56,27 +56,49 @@
     },
     "events": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/events.json",
-      "count": 122,
-      "contentSha256": "6f292cdb506634bde1e4415f72f1f23507639b4135b36aadc26e6cb68c7b97eb",
+      "count": 126,
+      "contentSha256": "ac3febaad945b4046a137ff6d1d650b6b6def9ae02a891be936e30735956bfd4",
       "duplicateIds": [],
       "status": "pass",
       "previousCount": 125,
       "removedCount": 0,
       "removedRatio": 0,
       "changes": {
-        "addedCount": 0,
+        "addedCount": 4,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [],
+        "addedIds": [
+          "evt_30319_830319003",
+          "evt_30319_830319002",
+          "evt_30320_830320002",
+          "evt_30320_830320003"
+        ],
         "removedIds": [],
         "modifiedIds": []
       },
       "changeDetails": {
-        "added": [],
+        "added": [
+          {
+            "id": "evt_30319_830319003",
+            "name": "賢さブライアン 生徒会副会長の“未来”"
+          },
+          {
+            "id": "evt_30319_830319002",
+            "name": "賢さブライアン 生徒会副会長の根源"
+          },
+          {
+            "id": "evt_30320_830320002",
+            "name": "賢さビスク 不器用コミュニケーション"
+          },
+          {
+            "id": "evt_30320_830320003",
+            "name": "賢さビスク ひそやかな温もり"
+          }
+        ],
         "removed": [],
         "modified": []
       },
-      "changed": false
+      "changed": true
     },
     "skills": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/skills.json",
@@ -158,7 +180,7 @@
     "missingSupportHintSkillIds": []
   },
   "changeTotals": {
-    "added": 0,
+    "added": 4,
     "removed": 0,
     "modified": 0
   }
