@@ -693,6 +693,61 @@ jobs:
                       raise RuntimeError("JP Island ticket reminder rules missing: "+str(island_live_guidance))
                   print("JP ISLAND LIVE TUCKER / PRIORITY / TICKET PASS:", island_live_guidance)
 
+                  island_v740 = d.execute_script("""
+                      const oldScenario=state.scenario,oldGuideServer=state.guideServer,oldConfirmed=state.deckConfirmed;
+                      const oldStep=state.islandBuildStep,oldDone=JSON.parse(JSON.stringify(state.islandBuildDone||{}));
+                      const oldGuideDone=JSON.parse(JSON.stringify(state.islandGuideDone||{})),oldCheck=JSON.parse(JSON.stringify(state.trainingStatCheck||{}));
+                      try {
+                        state.scenario='island';state.guideServer='jp';state.deckConfirmed=true;
+                        state.islandBuildDone={};state.islandGuideDone={};state.islandBuildStep=1;
+                        state.trainingStatCheck={scenario:'island',grade:'classic',month:12,half:'second',stats:{speed:1700,stamina:1000,power:1300,guts:1400,wit:1100}};
+                        renderScenarioPlan();
+                        const firstBody=document.getElementById('scenarioPlanBody')?.innerText||'';
+                        const firstOrder=islandBuildPlacementOrder((SCENARIOS.island?.constructionGuide?.plans||[]).find(x=>x.id==='build1'));
+                        const timeline=islandTimelineItems();
+                        setIslandBuildStep(4);
+                        const fourthBody=document.getElementById('scenarioPlanBody')?.innerText||'';
+                        const fourthPlan=(SCENARIOS.island?.constructionGuide?.plans||[]).find(x=>x.id==='build4');
+                        const fourthOrder=islandBuildPlacementOrder(fourthPlan);
+                        toggleIslandGuideDone('classicTicket');
+                        const afterTicket=document.getElementById('scenarioPlanBody')?.innerText||'';
+                        toggleIslandGuideDone('build1');
+                        const afterBuild={
+                          done:!!state.islandBuildDone?.build1,
+                          step:state.islandBuildStep,
+                          body:document.getElementById('scenarioPlanBody')?.innerText||''
+                        };
+                        return {
+                          timelineCount:timeline.length,
+                          firstOrder,
+                          fourthOrder,
+                          firstHas:firstBody.includes('왼쪽부터 배치')&&firstBody.includes('스피드')&&firstBody.includes('스태미나')&&firstBody.includes('근성')&&firstBody.includes('파워'),
+                          fourthHas:fourthBody.includes('현재 스탯 기준 왼쪽 우선 배치')&&fourthBody.includes('스태미나')&&fourthBody.includes('파워'),
+                          ticketFixed:firstBody.includes('시니어급 합숙에서는 소멸하지 않아 최대 3장')&&!firstBody.includes('클래식/시니어 여름합숙 진입 때도'),
+                          ticketDone:!!state.islandGuideDone?.classicTicket&&afterTicket.includes('1 / 9 완료'),
+                          afterBuild
+                        };
+                      } finally {
+                        state.scenario=oldScenario;state.guideServer=oldGuideServer;state.deckConfirmed=oldConfirmed;
+                        state.islandBuildStep=oldStep;state.islandBuildDone=oldDone;state.islandGuideDone=oldGuideDone;state.trainingStatCheck=oldCheck;
+                        renderScenarioPlan();
+                      }
+                  """)
+                  if island_v740.get("timelineCount") != 9:
+                      raise RuntimeError("JP Island V7.74 timeline count mismatch: "+str(island_v740))
+                  if island_v740.get("firstOrder") != ["speed","stamina","guts","power"]:
+                      raise RuntimeError("JP Island V7.74 first placement order mismatch: "+str(island_v740))
+                  if island_v740.get("fourthOrder") != ["stamina","power","guts","speed"]:
+                      raise RuntimeError("JP Island V7.74 dynamic fourth order mismatch: "+str(island_v740))
+                  if not island_v740.get("firstHas") or not island_v740.get("fourthHas"):
+                      raise RuntimeError("JP Island V7.74 placement UI missing: "+str(island_v740))
+                  if not island_v740.get("ticketFixed") or not island_v740.get("ticketDone"):
+                      raise RuntimeError("JP Island V7.74 ticket rule/check state failed: "+str(island_v740))
+                  after_build=island_v740.get("afterBuild") or {}
+                  if not after_build.get("done") or int(after_build.get("step",0)) != 2:
+                      raise RuntimeError("JP Island timeline build linkage failed: "+str(island_v740))
+                  print("JP ISLAND V7.74 PLACEMENT / TURN CHECK PASS:", island_v740)
+
                   tucker_card = d.execute_script("""
                       const c=cardById(30257);
                       if(!c)return {ok:false,reason:'card 30257 missing'};
