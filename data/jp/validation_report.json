@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-05",
+  "updated": "2026-10-06",
   "status": "pass",
-  "checkedAt": "2026-10-05T18:52:20.210Z",
+  "checkedAt": "2026-10-06T10:13:29.689Z",
   "fatal": [],
   "warnings": [],
   "collections": {
@@ -60,45 +60,23 @@
       "contentSha256": "ac3febaad945b4046a137ff6d1d650b6b6def9ae02a891be936e30735956bfd4",
       "duplicateIds": [],
       "status": "pass",
-      "previousCount": 125,
+      "previousCount": 129,
       "removedCount": 0,
       "removedRatio": 0,
       "changes": {
-        "addedCount": 4,
+        "addedCount": 0,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [
-          "evt_30319_830319003",
-          "evt_30319_830319002",
-          "evt_30320_830320002",
-          "evt_30320_830320003"
-        ],
+        "addedIds": [],
         "removedIds": [],
         "modifiedIds": []
       },
       "changeDetails": {
-        "added": [
-          {
-            "id": "evt_30319_830319003",
-            "name": "賢さブライアン 生徒会副会長の“未来”"
-          },
-          {
-            "id": "evt_30319_830319002",
-            "name": "賢さブライアン 生徒会副会長の根源"
-          },
-          {
-            "id": "evt_30320_830320002",
-            "name": "賢さビスク 不器用コミュニケーション"
-          },
-          {
-            "id": "evt_30320_830320003",
-            "name": "賢さビスク ひそやかな温もり"
-          }
-        ],
+        "added": [],
         "removed": [],
         "modified": []
       },
-      "changed": true
+      "changed": false
     },
     "skills": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/skills.json",
@@ -180,7 +158,7 @@
     "missingSupportHintSkillIds": []
   },
   "changeTotals": {
-    "added": 4,
+    "added": 0,
     "removed": 0,
     "modified": 0
   }

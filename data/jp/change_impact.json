@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-05T18:52:20.167Z",
-  "event": "schedule",
-  "sha": "e2309d4bb7c4f33f075cbaae495b717604bd584f",
+  "generatedAt": "2026-10-06T10:13:29.628Z",
+  "event": "push",
+  "sha": "ad4ad3f5ae6ad8c6dabbccf909982e5abea5d5d9",
   "changedFiles": [
-    "data/kr/upcoming.json"
+    "data/common/scenarios.json"
   ],
   "categories": {
     "app": [],
     "pipeline": [],
     "jpData": [],
-    "krData": [
-      "data/kr/upcoming.json"
+    "krData": [],
+    "commonData": [
+      "data/common/scenarios.json"
     ],
-    "commonData": [],
     "other": []
   },
   "impactLevel": "medium",
