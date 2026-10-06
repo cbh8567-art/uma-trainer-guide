@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-02",
+  "updated": "2026-10-06",
   "scenarios": {
     "tresenken": {
       "name": "らっしゃい！トレセン軒！",
@@ -515,7 +515,13 @@
               "wit": 0,
               "beach": 0
             },
-            "note": "스피드·스태미나·파워·근성을 먼저 개방. 지능과 해변의 집은 아직 보류."
+            "note": "스피드·스태미나·파워·근성을 먼저 개방. 지능과 해변의 집은 아직 보류.",
+            "placementOrder": [
+              "speed",
+              "stamina",
+              "guts",
+              "power"
+            ]
           },
           {
             "id": "build2",
@@ -530,7 +536,13 @@
               "wit": 1,
               "beach": 1
             },
-            "note": "스피드·스태미나를 Lv2로, 지능과 해변의 집을 Lv1로 추가."
+            "note": "스피드·스태미나를 Lv2로, 지능과 해변의 집을 Lv1로 추가.",
+            "placementOrder": [
+              "beach",
+              "speed",
+              "stamina",
+              "wit"
+            ]
           },
           {
             "id": "build3",
@@ -549,7 +561,13 @@
               "speed": "本能全開",
               "stamina": "本能全開"
             },
-            "note": "스피드·스태미나는 Lv3에서 본능전개(本能全開) 루트."
+            "note": "스피드·스태미나는 Lv3에서 본능전개(本能全開) 루트.",
+            "placementOrder": [
+              "speed",
+              "guts",
+              "stamina",
+              "power"
+            ]
           },
           {
             "id": "build4",
@@ -570,7 +588,14 @@
               "power": "熟練技巧",
               "guts": "熟練技巧"
             },
-            "note": "스피드·스태미나는 본능전개 유지, 파워·근성은 숙련기교(熟練技巧)로 Lv3."
+            "note": "스피드·스태미나는 본능전개 유지, 파워·근성은 숙련기교(熟練技巧)로 Lv3.",
+            "placementOrder": [
+              "speed",
+              "guts",
+              "stamina",
+              "power"
+            ],
+            "dynamicOrder": true
           },
           {
             "id": "build5",
@@ -591,7 +616,14 @@
               "power": "熟練技巧",
               "guts": "熟練技巧"
             },
-            "note": "최종 기본형. 상한에서 더 먼 스탯을 왼쪽 우선으로 배치해 순서를 조정."
+            "note": "최종 기본형. 상한에서 더 먼 스탯을 왼쪽 우선으로 배치해 순서를 조정.",
+            "placementOrder": [
+              "speed",
+              "guts",
+              "stamina",
+              "power"
+            ],
+            "dynamicOrder": true
           }
         ]
       },
@@ -714,6 +746,82 @@
           "instinct": "본능전개: 스탯 성장 성능 중심. Lv5까지 올릴 주력 시설에 우선.",
           "technique": "숙련기교: 힌트 발생/힌트 이벤트 활용 중심. 보조 시설에 활용."
         }
+      },
+      "operationTimeline": {
+        "version": "jp-island-turn-check-v1",
+        "source": "Game8",
+        "sourceUrl": "https://game8.jp/umamusume/700415",
+        "ticketSourceUrl": "https://game8.jp/umamusume/701660",
+        "checkpoints": [
+          {
+            "id": "build1",
+            "when": "육성 시작 3턴째",
+            "title": "1회차 건설",
+            "text": "스피드 → 스태미나 → 근성 → 파워 순으로 첫 시설을 배치.",
+            "kind": "build",
+            "buildId": "build1"
+          },
+          {
+            "id": "build2",
+            "when": "메이크 데뷔 직후",
+            "title": "2회차 건설",
+            "text": "해변의 집 → 스피드 → 스태미나 → 지능. 해변의 집은 이후 Lv1 유지.",
+            "kind": "build",
+            "buildId": "build2"
+          },
+          {
+            "id": "build3",
+            "when": "주니어급 12월",
+            "title": "3회차 건설",
+            "text": "스피드 → 근성 → 스태미나 → 파워. 스피드·스태미나는 본능전개 루트.",
+            "kind": "build",
+            "buildId": "build3"
+          },
+          {
+            "id": "classicTicket",
+            "when": "클래식급 여름합숙 전",
+            "title": "섬트레권 소멸 주의",
+            "text": "클래식급 합숙 진입 전 남은 섬트레권은 사용. 기본 보유 상한은 1장.",
+            "kind": "ticket"
+          },
+          {
+            "id": "build4",
+            "when": "클래식급 6월",
+            "title": "4회차 건설",
+            "text": "스피드·스태미나·파워·근성을 강화. 현재 상한에서 더 먼 스탯을 왼쪽 우선.",
+            "kind": "build",
+            "buildId": "build4"
+          },
+          {
+            "id": "build5",
+            "when": "클래식급 12월",
+            "title": "5회차 건설",
+            "text": "최종 기본형. 상한에서 더 먼 스탯을 왼쪽부터 배치해 마감.",
+            "kind": "build",
+            "buildId": "build5"
+          },
+          {
+            "id": "seniorTickets",
+            "when": "시니어급 여름합숙",
+            "title": "섬트레권 저장 가능",
+            "text": "시니어급 합숙 진입 때는 섬트레권이 소멸하지 않아 최대 3장까지 모아 연속 사용 가능.",
+            "kind": "ticket"
+          },
+          {
+            "id": "seniorSep",
+            "when": "시니어급 9월 전반",
+            "title": "트레센섬의 권유",
+            "text": "편성/육성 링크 캐릭터에 맞는 선택지로 금스킬 획득 여부 확인.",
+            "kind": "event"
+          },
+          {
+            "id": "finishPt",
+            "when": "육성 종료 전",
+            "title": "발전 Pt 끝까지 확보",
+            "text": "총 발전 Pt가 본능의 가교 효과량에도 연결되므로 마지막까지 훈련·레이스에서 최대한 확보.",
+            "kind": "point"
+          }
+        ]
       }
     },
     "legends": {
