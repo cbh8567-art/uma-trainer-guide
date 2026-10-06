@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.73.0">
+<meta name="app-build" content="V7.74.0">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.73.0 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.74.0 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -509,7 +509,7 @@ body{font-size:14px;line-height:1.5}
 .islandCostGrid{display:grid;grid-template-columns:1.25fr repeat(5,minmax(54px,1fr));gap:4px;margin-top:7px;align-items:center}
 .islandCostCell{border:1px solid #2f3d50;background:#151c26;border-radius:7px;padding:6px 4px;font-size:9px;text-align:center}
 .islandCostCell.head{font-weight:900;color:#dce5f4}.islandCostCell.recommended{border-color:#47765d;color:#9fe3bd}.islandCostCell.current{outline:2px solid #d0a653;outline-offset:1px;background:#231f15;color:#ffe39a}
-.islandLiveGuide{margin-top:7px;border:1px solid #45566d;background:#121a25;border-radius:9px;padding:8px;font-size:9px;line-height:1.55}.islandLiveGuide.good{border-color:#47765d;background:#132019}.islandLiveGuide.warn{border-color:#8a6540;background:#241b13}.islandLiveGuide b{font-size:10px}.islandPriorityRow{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}.islandPriorityRow .tag{font-size:9px}.islandTicketGuide{margin-top:9px;border:1px solid #48546a;background:#121925;border-radius:10px;padding:8px}.islandTicketGuide b{font-size:10px}.islandTicketGuide .sub{font-size:9px;line-height:1.55}
+.islandLiveGuide{margin-top:7px;border:1px solid #45566d;background:#121a25;border-radius:9px;padding:8px;font-size:9px;line-height:1.55}.islandLiveGuide.good{border-color:#47765d;background:#132019}.islandLiveGuide.warn{border-color:#8a6540;background:#241b13}.islandLiveGuide b{font-size:10px}.islandPriorityRow{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}.islandPriorityRow .tag{font-size:9px}.islandTicketGuide{margin-top:9px;border:1px solid #48546a;background:#121925;border-radius:10px;padding:8px}.islandTicketGuide b{font-size:10px}.islandTicketGuide .sub{font-size:9px;line-height:1.55}.islandPlacement{margin-top:7px;border:1px solid #3c4d62;background:#111924;border-radius:9px;padding:7px}.islandPlacement b{font-size:10px}.islandPlacementRow{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:5px}.islandPlacementNode{border:1px solid #46586f;background:#17202d;border-radius:8px;padding:5px 7px;font-size:9px;font-weight:900}.islandPlacementArrow{font-size:10px;color:#8999ad}.islandTimeline{margin-top:9px;border:1px solid #42536a;background:#111823;border-radius:10px;padding:8px}.islandTimelineHead{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}.islandTimelineList{display:grid;gap:5px;margin-top:7px}.islandTimelineItem{display:grid;grid-template-columns:auto 105px 1fr;gap:7px;align-items:start;border:1px solid #303e50;background:#151c26;border-radius:8px;padding:7px}.islandTimelineItem.done{border-color:#47765d;background:#132019}.islandTimelineCheck{width:22px;height:22px;border:1px solid #53647a;background:#101722;color:#d7dfeb;border-radius:6px;cursor:pointer;font-weight:950}.islandTimelineItem.done .islandTimelineCheck{border-color:#4b8a66;color:#a8ecc4}.islandTimelineWhen{font-size:9px;color:#e5c882;font-weight:900}.islandTimelineText b{font-size:10px}.islandTimelineText .sub{font-size:9px;line-height:1.45}@media(max-width:720px){.islandTimelineItem{grid-template-columns:auto 1fr}.islandTimelineWhen{grid-column:2}.islandTimelineText{grid-column:2}}
 .islandFacilityGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:7px}
 .islandFacilityItem{border:1px solid #303e50;background:#151c26;border-radius:8px;padding:7px}
 .islandFacilityItem b{font-size:10px}.islandFacilityItem .sub{font-size:9px;line-height:1.45}
@@ -1947,7 +1947,7 @@ const SCENARIO_STAT_CAPS={
  none:{label:'기타',speed:1400,stamina:1400,power:1400,guts:1400,wit:1400}
 };
 const DEFAULT_TRESENKEN_STAT_CAPS={speed:2150,stamina:1800,power:1700,guts:1700,wit:1800};
-const SERVER_PROFILE_FIELDS=['owned','deck','acquired','eventChoice','eventDone','lb','scenario','tresenkenUltimateRamen','tresenkenRmj','ramenGuideMode','ground','distance','style','currentUmaId','currentUmaConfirmed','inheritanceParentIds','inheritanceConfirmed','deckConfirmed','scenarioPlanLinkChoice','scenarioPlanUltimateRamen','scenarioPlanConfirmed','trainingActive','guideRaceId','evolutionPlan','deckPresets','trainingHistory','targetStatOverrides','statCaps','statCapOverrides','paceCheckEnabled','trainingStatCheck','islandBuildStep','islandBuildDone'];
+const SERVER_PROFILE_FIELDS=['owned','deck','acquired','eventChoice','eventDone','lb','scenario','tresenkenUltimateRamen','tresenkenRmj','ramenGuideMode','ground','distance','style','currentUmaId','currentUmaConfirmed','inheritanceParentIds','inheritanceConfirmed','deckConfirmed','scenarioPlanLinkChoice','scenarioPlanUltimateRamen','scenarioPlanConfirmed','trainingActive','guideRaceId','evolutionPlan','deckPresets','trainingHistory','targetStatOverrides','statCaps','statCapOverrides','paceCheckEnabled','trainingStatCheck','islandBuildStep','islandBuildDone','islandGuideDone'];
 function cloneStateValue(v){return v===undefined?undefined:JSON.parse(JSON.stringify(v))}
 function serverDefaultProfile(server){
  const set=server==='kr'?KOREA_UPCOMING:UPCOMING,r=set.races?.[0]||null;
@@ -1958,7 +1958,7 @@ function serverDefaultProfile(server){
    ground:r?.ground||'turf',distance:r?.distance||'mid',style:'senko',currentUmaId:null,
    currentUmaConfirmed:false,inheritanceParentIds:[null,null],inheritanceConfirmed:false,deckConfirmed:false,
    scenarioPlanLinkChoice:null,scenarioPlanUltimateRamen:null,scenarioPlanConfirmed:false,trainingActive:false,
-   guideRaceId:r?.id||null,evolutionPlan:null,deckPresets:[],trainingHistory:[],targetStatOverrides:{},statCaps:null,statCapOverrides:{},paceCheckEnabled:false,trainingStatCheck:{scenario:null,grade:'junior',month:12,half:'second',stats:{}},islandBuildStep:1,islandBuildDone:{}
+   guideRaceId:r?.id||null,evolutionPlan:null,deckPresets:[],trainingHistory:[],targetStatOverrides:{},statCaps:null,statCapOverrides:{},paceCheckEnabled:false,trainingStatCheck:{scenario:null,grade:'junior',month:12,half:'second',stats:{}},islandBuildStep:1,islandBuildDone:{},islandGuideDone:{}
  }
 }
 function normalizeServerProfile(profile,server){
@@ -2020,6 +2020,8 @@ function normalizeServerProfile(profile,server){
  p.islandBuildStep=Math.max(1,Math.min(5,Math.floor(Number(p.islandBuildStep)||1)));
  p.islandBuildDone=(p.islandBuildDone&&typeof p.islandBuildDone==='object'&&!Array.isArray(p.islandBuildDone))?p.islandBuildDone:{};
  for(const k of Object.keys(p.islandBuildDone))p.islandBuildDone[k]=!!p.islandBuildDone[k];
+ p.islandGuideDone=(p.islandGuideDone&&typeof p.islandGuideDone==='object'&&!Array.isArray(p.islandGuideDone))?p.islandGuideDone:{};
+ for(const k of Object.keys(p.islandGuideDone))p.islandGuideDone[k]=!!p.islandGuideDone[k];
  return p
 }
 function profileFromFlat(src,server){
@@ -2378,7 +2380,7 @@ function islandTuckerConstructionTier(assess=islandDeckAssessment()){
  return rows.find(x=>x.id===id)||null
 }
 function islandStatPriority(){
- const cap=effectiveStatCaps?.('island')||SCENARIO_STAT_CAPS.island||{};
+ const cap=v7ResolvedStatCaps('island')||SCENARIO_STAT_CAPS.island||{};
  const raw=state.trainingStatCheck?.stats||{},names={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성'};
  const values=['speed','stamina','power','guts'].map(stat=>{
    const current=Number(raw[stat]),max=Number(cap[stat]);
@@ -2406,6 +2408,49 @@ function toggleIslandBuildDone(id){
 function islandBuildProgressSummary(){
  const plans=SCENARIOS.island?.constructionGuide?.plans||[],done=plans.filter(p=>state.islandBuildDone?.[p.id]).length;
  return {done,total:plans.length,next:plans.find(p=>!state.islandBuildDone?.[p.id])||null}
+}
+function islandBuildPlacementOrder(plan){
+ const fallback={
+   build1:['speed','stamina','guts','power'],
+   build2:['beach','speed','stamina','wit'],
+   build3:['speed','guts','stamina','power'],
+   build4:['speed','guts','stamina','power'],
+   build5:['speed','guts','stamina','power']
+ };
+ const base=[...(plan?.placementOrder||fallback[plan?.id]||[])];
+ if(!(plan?.dynamicOrder||['build4','build5'].includes(plan?.id)))return base;
+ const priority=islandStatPriority();
+ if(!priority.complete)return base;
+ const allowed=new Set(base),dynamic=priority.values.map(x=>x.stat).filter(x=>allowed.has(x));
+ for(const x of base)if(!dynamic.includes(x))dynamic.push(x);
+ return dynamic
+}
+function islandTimelineFallback(){
+ return [
+  {id:'build1',when:'육성 시작 3턴째',title:'1회차 건설',text:'스피드 → 스태미나 → 근성 → 파워',kind:'build',buildId:'build1'},
+  {id:'build2',when:'메이크 데뷔 직후',title:'2회차 건설',text:'해변의 집 → 스피드 → 스태미나 → 지능',kind:'build',buildId:'build2'},
+  {id:'build3',when:'주니어급 12월',title:'3회차 건설',text:'스피드 → 근성 → 스태미나 → 파워',kind:'build',buildId:'build3'},
+  {id:'classicTicket',when:'클래식급 여름합숙 전',title:'섬트레권 소멸 주의',text:'클래식 합숙 진입 전 남은 섬트레권 사용 · 기본 보유 상한 1장',kind:'ticket'},
+  {id:'build4',when:'클래식급 6월',title:'4회차 건설',text:'상한에서 더 먼 스탯을 왼쪽 우선',kind:'build',buildId:'build4'},
+  {id:'build5',when:'클래식급 12월',title:'5회차 건설',text:'최종 배치 · 상한에서 더 먼 스탯을 왼쪽 우선',kind:'build',buildId:'build5'},
+  {id:'seniorTickets',when:'시니어급 여름합숙',title:'섬트레권 저장 가능',text:'시니어 합숙에서는 소멸하지 않아 최대 3장까지 저장 가능',kind:'ticket'},
+  {id:'seniorSep',when:'시니어급 9월 전반',title:'트레센섬의 권유',text:'링크 캐릭터에 맞는 금스킬 선택 확인',kind:'event'},
+  {id:'finishPt',when:'육성 종료 전',title:'발전 Pt 끝까지 확보',text:'총 발전 Pt는 본능의 가교 효과량에도 연결',kind:'point'}
+ ]
+}
+function islandTimelineItems(){
+ return SCENARIOS.island?.operationTimeline?.checkpoints||islandTimelineFallback()
+}
+function islandTimelineDone(item){
+ if(item?.kind==='build'&&item.buildId)return !!state.islandBuildDone?.[item.buildId];
+ return !!state.islandGuideDone?.[item?.id]
+}
+function toggleIslandGuideDone(id){
+ const item=islandTimelineItems().find(x=>x.id===id);if(!item)return;
+ if(item.kind==='build'&&item.buildId)return toggleIslandBuildDone(item.buildId);
+ state.islandGuideDone=state.islandGuideDone||{};
+ state.islandGuideDone[id]=!state.islandGuideDone[id];
+ save();renderScenarioPlan()
 }
 function scenarioPlanReady(){
  if(!state.deckConfirmed)return false;
@@ -2475,7 +2520,7 @@ function renderScenarioPlan(){
      }
      html+='</div><div class="islandBuildRoute">'+esc(facilityGuide.routeNotes?.instinct||'')+'<br>'+esc(facilityGuide.routeNotes?.technique||'')+'</div><div class="islandVerifyNote">'+esc(facilityGuide.warning||'')+'</div></div>';
    }
-   html+='<div class="islandTicketGuide"><b>섬트레권 사용 체크</b><div class="sub">보유는 1장까지 · 다음 권을 받으면 기존 권이 덮어써져 사라질 수 있음 · 클래식/시니어 여름합숙 진입 때도 남은 권이 소멸하므로 합숙 전에 사용. 4~5명이 모인 훈련은 스킬Pt가 넘칠 수 있어 일반 훈련이 더 나을 수 있습니다.</div></div>';
+   html+='<div class="islandTicketGuide"><b>섬트레권 사용 체크</b><div class="sub">기본 보유 상한은 1장 · 2번째 권을 받기 전 기존 권을 사용. 클래식급 여름합숙 진입 전에는 남은 권을 소진해야 하지만, 시니어급 합숙에서는 소멸하지 않아 최대 3장까지 저장 가능합니다. 4~5명이 모인 훈련은 스킬Pt가 넘칠 수 있어 일반 훈련이 더 나을 수 있습니다.</div></div>';
    const construction=sc.constructionGuide,plans=construction?.plans||[];
    if(plans.length){
      const statNames={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성',wit:'지능',beach:'해변의 집'};
@@ -2484,15 +2529,18 @@ function renderScenarioPlan(){
      html+='<div class="islandBuildNav">'+plans.map(p=>'<button type="button" data-island-build-step="'+esc(p.order)+'" class="'+(Number(p.order)===activeOrder?'active ':'')+(state.islandBuildDone?.[p.id]?'done':'')+'">'+esc(p.order)+'회차'+(state.islandBuildDone?.[p.id]?' ✓':'')+'</button>').join('')+'</div>';
      html+='<div class="islandBuildProgress">진행 '+progress.done+' / '+progress.total+(progress.next?' · 다음: '+esc(progress.next.order+'회차 '+progress.next.when):' · 모든 건설 체크 완료 ✓')+'</div><div class="islandBuildFocus">';
      if(activePlan){
-       const p=activePlan,levels=Object.entries(p.levels||{}).map(([k,v])=>'<span class="tag">'+esc(statNames[k]||k)+' '+(Number(v)>0?'Lv'+Number(v):'—')+'</span>').join('');
+       const p=activePlan,levels=Object.entries(p.levels||{}).map(([k,v])=>'<span class="tag">'+esc(statNames[k]||k)+' '+(Number(v)>0?'Lv'+Number(v):'—')+'</span>').join(''),placement=islandBuildPlacementOrder(p);
        const routes=Object.entries(p.routes||{}).map(([k,v])=>esc(statNames[k]||k)+' '+esc(v)).join(' · ');
        const done=!!state.islandBuildDone?.[p.id],tier=currentTuckerTier,costIndex=Math.max(0,Math.min(4,Number(p.order)-1)),currentCost=tier?.costs?.[costIndex],currentSlots=tier?.slots?.[costIndex],priority=islandStatPriority();
        const costHelp=currentCost?'<div class="islandLiveGuide '+(tier?.id==='high'?'good':'warn')+'"><b>현재 터커 기준 '+esc(p.order)+'회차 한도</b> · '+esc(currentCost)+' cost / '+esc(currentSlots||Math.floor(currentCost/100))+'마스</div>':'';
+       const placementHelp=placement.length?'<div class="islandPlacement"><b>왼쪽부터 배치</b><div class="islandPlacementRow">'+placement.map((x,i)=>'<span class="islandPlacementNode">'+esc(statNames[x]||x)+'</span>'+(i<placement.length-1?'<span class="islandPlacementArrow">→</span>':'')).join('')+'</div>'+(Number(p.order)>=4?'<div class="sub">현재 스탯이 입력되어 있으면 상한에서 더 먼 스탯 순으로 자동 정렬합니다.</div>':'')+'</div>':'';
        const priorityHelp=Number(p.order)>=4?(priority.complete?'<div class="islandLiveGuide"><b>현재 스탯 기준 왼쪽 우선 배치</b><div class="islandPriorityRow">'+priority.values.map((x,i)=>'<span class="tag">'+(i+1)+'. '+esc(x.label)+' · 상한까지 '+esc(x.gap)+'</span>').join('')+'</div><div class="sub">상한에서 더 먼 스탯을 왼쪽에 두는 Game8 기준 보조입니다. 자동으로 건설 순서를 바꾸지는 않습니다.</div></div>':'<div class="islandLiveGuide warn"><b>4~5회차 배치 보조</b> · 육성 진행의 스탯 체크에 현재 수치를 입력하면 상한에서 먼 순서대로 왼쪽 우선 배치를 계산합니다.</div>'):'';
-       html+='<div class="islandBuildCard focus" data-island-build="'+esc(p.id)+'"><div class="islandBuildCardHead"><b>'+esc(p.order)+'회차 · '+esc(p.when)+'</b><span class="status">'+(done?'완료 ✓':esc(construction.version||''))+'</span></div><div class="islandBuildImageWrap"><img class="islandBuildImage" src="'+esc(p.image)+'" alt="'+esc(p.order+'회차 무인도 건설 계획 인게임 이미지')+'" loading="eager" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><div class="islandBuildImageMissing">건설 이미지 로드 실패 · 아래 레벨 표를 기준으로 확인해 주세요.</div></div><div class="islandBuildLevels">'+levels+'</div>'+costHelp+priorityHelp+(routes?'<div class="islandBuildRoute">분기: '+routes+'</div>':'')+'<div class="sub" style="margin-top:5px">'+esc(p.note||'')+'</div><div class="islandBuildActions"><button type="button" class="btn '+(done?'':'primary')+'" data-island-build-done="'+esc(p.id)+'">'+(done?'완료 취소':'이 건설 완료 ✓')+'</button>'+(activeOrder>1?'<button type="button" class="mini" data-island-build-step="'+(activeOrder-1)+'">← 이전</button>':'')+(activeOrder<plans.length?'<button type="button" class="mini" data-island-build-step="'+(activeOrder+1)+'">다음 →</button>':'')+'</div></div>';
+       html+='<div class="islandBuildCard focus" data-island-build="'+esc(p.id)+'"><div class="islandBuildCardHead"><b>'+esc(p.order)+'회차 · '+esc(p.when)+'</b><span class="status">'+(done?'완료 ✓':esc(construction.version||''))+'</span></div><div class="islandBuildImageWrap"><img class="islandBuildImage" src="'+esc(p.image)+'" alt="'+esc(p.order+'회차 무인도 건설 계획 인게임 이미지')+'" loading="eager" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><div class="islandBuildImageMissing">건설 이미지 로드 실패 · 아래 레벨 표를 기준으로 확인해 주세요.</div></div><div class="islandBuildLevels">'+levels+'</div>'+placementHelp+costHelp+priorityHelp+(routes?'<div class="islandBuildRoute">분기: '+routes+'</div>':'')+'<div class="sub" style="margin-top:5px">'+esc(p.note||'')+'</div><div class="islandBuildActions"><button type="button" class="btn '+(done?'':'primary')+'" data-island-build-done="'+esc(p.id)+'">'+(done?'완료 취소':'이 건설 완료 ✓')+'</button>'+(activeOrder>1?'<button type="button" class="mini" data-island-build-step="'+(activeOrder-1)+'">← 이전</button>':'')+(activeOrder<plans.length?'<button type="button" class="mini" data-island-build-step="'+(activeOrder+1)+'">다음 →</button>':'')+'</div></div>';
      }
      html+='</div></div>';
    }
+   const timeline=islandTimelineItems(),timelineDone=timeline.filter(islandTimelineDone).length;
+   if(timeline.length){html+='<div class="islandTimeline"><div class="islandTimelineHead"><div><b>무인도 턴 체크</b><div class="sub">건설 · 섬트레권 · 고정 이벤트 · 발전 Pt 마감</div></div><span class="status">'+timelineDone+' / '+timeline.length+' 완료</span></div><div class="islandTimelineList">'+timeline.map(x=>{const done=islandTimelineDone(x);return '<div class="islandTimelineItem '+(done?'done':'')+'"><button type="button" class="islandTimelineCheck" data-island-guide-done="'+esc(x.id)+'">'+(done?'✓':'')+'</button><div class="islandTimelineWhen">'+esc(x.when||'')+'</div><div class="islandTimelineText"><b>'+esc(x.title||'')+'</b><div class="sub">'+esc(x.text||'')+'</div></div></div>'}).join('')+'</div></div>'}
    html+='</div>';
  }
  const links=scenarioPlanLinkChoices();
@@ -2521,6 +2569,7 @@ function renderScenarioPlan(){
  body.querySelectorAll('[data-plan-ramen]').forEach(el=>el.onclick=e=>{e.preventDefault();if(!enabled)return;setScenarioPlanUltimateRamen(el.dataset.planRamen)});
  body.querySelectorAll('[data-island-build-step]').forEach(el=>el.onclick=e=>{e.preventDefault();setIslandBuildStep(el.dataset.islandBuildStep)});
  body.querySelectorAll('[data-island-build-done]').forEach(el=>el.onclick=e=>{e.preventDefault();toggleIslandBuildDone(el.dataset.islandBuildDone)});
+ body.querySelectorAll('[data-island-guide-done]').forEach(el=>el.onclick=e=>{e.preventDefault();toggleIslandGuideDone(el.dataset.islandGuideDone)});
  renderTrainingStartPanel()
 }
 function trainingSupportBreakdown(){
