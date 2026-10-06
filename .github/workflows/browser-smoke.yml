@@ -674,7 +674,7 @@ jobs:
                           lowHas:lowBody.includes('터커 2돌')&&lowBody.includes('700 cost / 7마스'),
                           highHas:highBody.includes('터커 풀돌')&&highBody.includes('800 cost / 8마스'),
                           priorityHas:lowBody.includes('1. 스태미나 · 상한까지 700')&&lowBody.includes('2. 파워 · 상한까지 400'),
-                          ticketHas:lowBody.includes('섬트레권 사용 체크')&&lowBody.includes('여름합숙')&&lowBody.includes('1장까지')
+                          ticketHas:lowBody.includes('섬트레권 사용 체크')&&lowBody.includes('클래식급 여름합숙')&&lowBody.includes('시니어급 합숙에서는 소멸하지 않아 최대 3장')
                         };
                       } finally {
                         state.scenario=oldScenario;state.guideServer=oldGuideServer;state.deck=oldDeck;state.deckConfirmed=oldConfirmed;
