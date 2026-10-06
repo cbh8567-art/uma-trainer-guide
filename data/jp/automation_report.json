@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-06T10:14:48.806Z",
+  "generatedAt": "2026-10-06T18:51:11.581Z",
   "status": "pass",
-  "gitSha": "42493ddf94af1881662513f91e5909c07b393100",
-  "event": "push",
+  "gitSha": "bda8286b1d06ad183cba77d9edb875253e8f6be4",
+  "event": "schedule",
   "sync": {
     "exitCode": 0,
     "status": "pass"
   },
   "tests": {
-    "integrity": "success",
-    "deploySmoke": "success"
+    "integrity": "skipped",
+    "deploySmoke": "skipped"
   },
   "impact": {
-    "level": "high",
+    "level": "low",
     "changedCount": 1,
-    "fullTest": true,
-    "deploySmoke": true
+    "fullTest": false,
+    "deploySmoke": false
   },
   "sourceHealth": "pass",
   "failures": [],

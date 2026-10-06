@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-06T10:14:46.337Z",
-  "event": "push",
-  "sha": "42493ddf94af1881662513f91e5909c07b393100",
+  "generatedAt": "2026-10-06T18:51:09.304Z",
+  "event": "schedule",
+  "sha": "bda8286b1d06ad183cba77d9edb875253e8f6be4",
   "changedFiles": [
-    "index.html"
+    "HANDOFF_V7.74.0.md"
   ],
   "categories": {
-    "app": [
-      "index.html"
-    ],
+    "app": [],
     "pipeline": [],
     "jpData": [],
     "krData": [],
     "commonData": [],
-    "other": []
+    "other": [
+      "HANDOFF_V7.74.0.md"
+    ]
   },
-  "impactLevel": "high",
-  "fullTest": true,
-  "deploySmoke": true
+  "impactLevel": "low",
+  "fullTest": false,
+  "deploySmoke": false
 }
