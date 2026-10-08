@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-07T18:52:36.917Z",
+  "generatedAt": "2026-10-08T18:52:35.333Z",
   "event": "schedule",
-  "sha": "3295f3352913e3c66354f15d94246f86475c73b9",
+  "sha": "f048191607fd47b80eb557f6413485b4c0cc1f63",
   "changedFiles": [
     "data/jp/automation_report.json",
     "data/jp/change_impact.json",
@@ -10,6 +10,7 @@
     "data/jp/entity_summary.json",
     "data/jp/manifest.json",
     "data/jp/review_queue.json",
+    "data/jp/source_config.json",
     "data/jp/source_health.json",
     "data/jp/sync_history.json",
     "data/jp/sync_state.json",
@@ -28,6 +29,7 @@
       "data/jp/entity_summary.json",
       "data/jp/manifest.json",
       "data/jp/review_queue.json",
+      "data/jp/source_config.json",
       "data/jp/source_health.json",
       "data/jp/sync_history.json",
       "data/jp/sync_state.json",
