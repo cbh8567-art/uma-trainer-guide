@@ -1,49 +1,49 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-11",
-  "checkedAt": "2026-10-11T18:50:40.205Z",
+  "updated": "2026-10-12",
+  "checkedAt": "2026-10-12T18:54:19.539Z",
   "status": "pass",
   "sources": {
     "catalog": {
       "url": "https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json",
       "ok": true,
       "httpStatus": 200,
-      "durationMs": 425,
+      "durationMs": 480,
       "contentType": "text/plain; charset=utf-8"
     },
     "supports": {
       "url": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
       "ok": true,
       "httpStatus": 200,
-      "durationMs": 268,
+      "durationMs": 156,
       "contentType": "text/plain; charset=utf-8"
     },
     "events": {
       "url": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/events.json",
       "ok": true,
       "httpStatus": 200,
-      "durationMs": 157,
+      "durationMs": 158,
       "contentType": "text/plain; charset=utf-8"
     },
     "skills": {
       "url": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/skills.json",
       "ok": true,
       "httpStatus": 200,
-      "durationMs": 275,
+      "durationMs": 350,
       "contentType": "text/plain; charset=utf-8"
     },
     "characters": {
       "url": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/characters.json",
       "ok": true,
       "httpStatus": 200,
-      "durationMs": 170,
+      "durationMs": 136,
       "contentType": "text/plain; charset=utf-8"
     },
     "courses": {
       "url": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/courses.json",
       "ok": true,
       "httpStatus": 200,
-      "durationMs": 148,
+      "durationMs": 121,
       "contentType": "text/plain; charset=utf-8"
     }
   }
