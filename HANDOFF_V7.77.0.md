@@ -67,8 +67,10 @@
 ## 5. 검증
 
 - JP validated data sync (앱 커밋 기준): SUCCESS
-- 현재 브라우저 smoke run: `38593356138`
-- 결과는 CI 종료 후 재조회·확정 필요. **이 문서 최초 작성 시점에는 완료 전**.
+- 최종 browser smoke run [38593356138](https://github.com/cbh8567-art/uma-trainer-guide/actions/runs/38593356138): **SUCCESS**
+  - P0 current-build startup and controls: SUCCESS
+  - Browser interaction smoke test: SUCCESS (GitHub Pages 및 Vercel)
+  - halfPt 미도달 차단, 50% 지급, 보유 1장일 때 100% 초과 실효, 마지막 기록 취소, 사용 후 100% 재획득, 다른 건설 회차로 이월, 정규화된 상태 저장, 8월 이월권 선택 불일치 경고 모두 PASS.
 - static 검사: app V7.77.0, script 2개, STATE_KEY 1개, serverProfiles JP/KR, 30305, friend_manual_, 캐시 키 v531/v530 유지, scenarioBase 0.
 - 건설 이미지 원본 다섯 개 URL 유지.
 
