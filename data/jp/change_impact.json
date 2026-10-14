@@ -1,46 +1,19 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T19:01:36.531Z",
-  "event": "schedule",
-  "sha": "ce2fd636895ca21c4af56ff6efd6249427cc1feb",
+  "generatedAt": "2026-10-14T09:17:47.929Z",
+  "event": "push",
+  "sha": "d0dbae86b97f0348eaf22a7d14e47b7b7ce2f2df",
   "changedFiles": [
-    "data/jp/automation_report.json",
-    "data/jp/change_impact.json",
-    "data/jp/change_report.json",
-    "data/jp/entity_summary.json",
-    "data/jp/manifest.json",
-    "data/jp/review_queue.json",
-    "data/jp/source_config.json",
-    "data/jp/source_health.json",
-    "data/jp/sync_history.json",
-    "data/jp/sync_state.json",
-    "data/jp/system_status.json",
-    "data/jp/update_meta.json",
-    "data/jp/validation_report.json",
-    "data/kr/import_candidates.json"
+    "data/common/scenarios.json"
   ],
   "categories": {
     "app": [],
     "pipeline": [],
-    "jpData": [
-      "data/jp/automation_report.json",
-      "data/jp/change_impact.json",
-      "data/jp/change_report.json",
-      "data/jp/entity_summary.json",
-      "data/jp/manifest.json",
-      "data/jp/review_queue.json",
-      "data/jp/source_config.json",
-      "data/jp/source_health.json",
-      "data/jp/sync_history.json",
-      "data/jp/sync_state.json",
-      "data/jp/system_status.json",
-      "data/jp/update_meta.json",
-      "data/jp/validation_report.json"
+    "jpData": [],
+    "krData": [],
+    "commonData": [
+      "data/common/scenarios.json"
     ],
-    "krData": [
-      "data/kr/import_candidates.json"
-    ],
-    "commonData": [],
     "other": []
   },
   "impactLevel": "medium",
