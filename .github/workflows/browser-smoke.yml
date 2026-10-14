@@ -674,7 +674,7 @@ jobs:
                           lowHas:lowBody.includes('터커 2돌')&&lowBody.includes('700 cost / 7마스'),
                           highHas:highBody.includes('터커 풀돌')&&highBody.includes('800 cost / 8마스'),
                           priorityHas:lowBody.includes('1. 스태미나 · 상한까지 700')&&lowBody.includes('2. 파워 · 상한까지 400'),
-                          ticketHas:lowBody.includes('섬트레권 사용 체크')&&lowBody.includes('클래식급 여름합숙')&&lowBody.includes('시니어급 합숙에서는 소멸하지 않아 최대 3장')
+                          ticketHas:lowBody.includes('섬트레권 · 공식 FAQ 검증')&&lowBody.includes('9월 전반부터 상한 3장')&&lowBody.includes('12월 후반 종료')
                         };
                       } finally {
                         state.scenario=oldScenario;state.guideServer=oldGuideServer;state.deck=oldDeck;state.deckConfirmed=oldConfirmed;
@@ -723,8 +723,8 @@ jobs:
                           fourthOrder,
                           firstHas:firstBody.includes('왼쪽부터 배치')&&firstBody.includes('스피드')&&firstBody.includes('스태미나')&&firstBody.includes('근성')&&firstBody.includes('파워'),
                           fourthHas:fourthBody.includes('현재 스탯 기준 왼쪽 우선 배치')&&fourthBody.includes('스태미나')&&fourthBody.includes('파워'),
-                          ticketFixed:firstBody.includes('시니어급 합숙에서는 소멸하지 않아 최대 3장')&&!firstBody.includes('클래식/시니어 여름합숙 진입 때도'),
-                          ticketDone:!!state.islandGuideDone?.classicTicket&&afterTicket.includes('1 / 9 완료'),
+                          ticketFixed:firstBody.includes('8월 후반까지 1장 상한')&&firstBody.includes('9월 전반부터 상한 3장'),
+                          ticketDone:!!state.islandGuideDone?.classicTicket&&afterTicket.includes('1 / 18 완료'),
                           afterBuild
                         };
                       } finally {
@@ -733,7 +733,7 @@ jobs:
                         renderScenarioPlan();
                       }
                   """)
-                  if island_v740.get("timelineCount") != 9:
+                  if island_v740.get("timelineCount") != 18:
                       raise RuntimeError("JP Island V7.74 timeline count mismatch: "+str(island_v740))
                   if island_v740.get("firstOrder") != ["speed","stamina","guts","power"]:
                       raise RuntimeError("JP Island V7.74 first placement order mismatch: "+str(island_v740))
@@ -747,6 +747,62 @@ jobs:
                   if not after_build.get("done") or int(after_build.get("step",0)) != 2:
                       raise RuntimeError("JP Island timeline build linkage failed: "+str(island_v740))
                   print("JP ISLAND V7.74 PLACEMENT / TURN CHECK PASS:", island_v740)
+
+                  island_v750 = d.execute_script("""
+                      const oldScenario=state.scenario,oldGuideServer=state.guideServer,oldConfirmed=state.deckConfirmed;
+                      const oldStep=state.islandBuildStep,oldPt=JSON.parse(JSON.stringify(state.islandPtEntries||{}));
+                      const oldCarry=state.islandSeniorCarry,oldGuideDone=JSON.parse(JSON.stringify(state.islandGuideDone||{}));
+                      try {
+                        state.scenario='island';state.guideServer='jp';state.deckConfirmed=true;
+                        state.islandBuildStep=3;state.islandPtEntries={};state.islandSeniorCarry=null;state.islandGuideDone={};
+                        renderScenarioPlan();
+                        const initial=document.getElementById('scenarioPlanBody')?.innerText||'';
+                        setIslandPtField('build3','target','900');
+                        setIslandPtField('build3','current','449');
+                        const below=islandPtSnapshot('build3');
+                        setIslandPtField('build3','current','450');
+                        const half=islandPtSnapshot('build3');
+                        setIslandPtField('build3','current','900');
+                        const full=islandPtSnapshot('build3');
+                        const ptView=document.getElementById('scenarioPlanBody')?.innerText||'';
+                        setIslandSeniorCarry('0');
+                        const noCarry={count:islandTimelineItems().length,third:islandTimelineItems().some(x=>x.id==='seniorTicketUse3'),label:(document.getElementById('scenarioPlanBody')?.innerText||'').includes('9월 전반 사용 가능 2장')};
+                        setIslandSeniorCarry('1');
+                        const carry={count:islandTimelineItems().length,third:islandTimelineItems().some(x=>x.id==='seniorTicketUse3'),label:(document.getElementById('scenarioPlanBody')?.innerText||'').includes('9월 전반 사용 가능 3장')};
+                        toggleIslandGuideDone('seniorTicketUse1');
+                        toggleIslandGuideDone('seniorTicketUse2');
+                        toggleIslandGuideDone('seniorTicketUse3');
+                        const used=!!state.islandGuideDone?.seniorTicketUse1&&!!state.islandGuideDone?.seniorTicketUse2&&!!state.islandGuideDone?.seniorTicketUse3;
+                        setIslandSeniorCarry('0');
+                        const thirdCleared=!state.islandGuideDone?.seniorTicketUse3;
+                        const entrySaved=state.islandPtEntries.build3?.current===900&&state.islandPtEntries.build3?.target===900;
+                        return {
+                          initialHas:initial.includes('평가회 대호평')&&initial.includes('목표 Pt'),
+                          below,half,full,
+                          ptViewHas:ptView.includes('현재 100%')&&ptView.includes('남은 0 Pt'),
+                          noCarry,carry,used,thirdCleared,entrySaved,
+                          officialRule:initial.includes('2장 자동 지급')&&initial.includes('12월 후반 종료')
+                        };
+                      } finally {
+                        state.scenario=oldScenario;state.guideServer=oldGuideServer;state.deckConfirmed=oldConfirmed;
+                        state.islandBuildStep=oldStep;state.islandPtEntries=oldPt;
+                        state.islandSeniorCarry=oldCarry;state.islandGuideDone=oldGuideDone;
+                        save();renderScenarioPlan();
+                      }
+                  """)
+                  if not island_v750.get("initialHas") or not island_v750.get("officialRule"):
+                      raise RuntimeError("JP Island V7.75 UI or official FAQ text missing: "+str(island_v750))
+                  if island_v750.get("below",{}).get("halfReached") or not island_v750.get("half",{}).get("halfReached"):
+                      raise RuntimeError("JP Island V7.75 half Pt threshold failed: "+str(island_v750))
+                  if not island_v750.get("full",{}).get("fullReached") or not island_v750.get("ptViewHas"):
+                      raise RuntimeError("JP Island V7.75 full Pt threshold UI failed: "+str(island_v750))
+                  if island_v750.get("noCarry",{}).get("count") != 18 or island_v750.get("noCarry",{}).get("third") or not island_v750.get("noCarry",{}).get("label"):
+                      raise RuntimeError("JP Island V7.75 0 carry branch failed: "+str(island_v750))
+                  if island_v750.get("carry",{}).get("count") != 19 or not island_v750.get("carry",{}).get("third") or not island_v750.get("carry",{}).get("label"):
+                      raise RuntimeError("JP Island V7.75 1 carry branch failed: "+str(island_v750))
+                  if not island_v750.get("used") or not island_v750.get("thirdCleared") or not island_v750.get("entrySaved"):
+                      raise RuntimeError("JP Island V7.75 use checks and saved state failed: "+str(island_v750))
+                  print("JP ISLAND V7.75 DEVELOPMENT PT / SENIOR 0-1 CARRY PASS:", island_v750)
 
                   tucker_card = d.execute_script("""
                       const c=cardById(30257);
