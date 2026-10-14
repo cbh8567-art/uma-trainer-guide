@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-06",
+  "updated": "2026-10-14",
   "scenarios": {
     "tresenken": {
       "name": "らっしゃい！トレセン軒！",
@@ -748,8 +748,8 @@
         }
       },
       "operationTimeline": {
-        "version": "jp-island-turn-check-v1",
-        "source": "Game8",
+        "version": "jp-island-turn-check-v2",
+        "source": "Cygames 공식 FAQ / 공식 시나리오 소개 / Game8 / GameWith",
         "sourceUrl": "https://game8.jp/umamusume/700415",
         "ticketSourceUrl": "https://game8.jp/umamusume/701660",
         "checkpoints": [
@@ -762,11 +762,27 @@
             "buildId": "build1"
           },
           {
+            "id": "evaluation1",
+            "when": "주니어급 6월 후반 · 데뷔 전후",
+            "title": "1회차 평가회",
+            "text": "해당 회차 발전 게이지 100% 달성 → '대호평' 목표. 목표 발전 Pt는 게임 내 게이지 표시값으로 입력하며 다음 회차로 이월되지 않음.",
+            "kind": "evaluation",
+            "buildId": "build1"
+          },
+          {
             "id": "build2",
             "when": "메이크 데뷔 직후",
             "title": "2회차 건설",
             "text": "해변의 집 → 스피드 → 스태미나 → 지능. 해변의 집은 이후 Lv1 유지.",
             "kind": "build",
+            "buildId": "build2"
+          },
+          {
+            "id": "evaluation2",
+            "when": "주니어급 12월 후반",
+            "title": "2회차 평가회",
+            "text": "해당 회차 발전 게이지 100% 달성 → '대호평' 목표. 목표 발전 Pt는 게임 내 게이지 표시값으로 입력하며 다음 회차로 이월되지 않음.",
+            "kind": "evaluation",
             "buildId": "build2"
           },
           {
@@ -778,11 +794,12 @@
             "buildId": "build3"
           },
           {
-            "id": "classicTicket",
-            "when": "클래식급 여름합숙 전",
-            "title": "섬트레권 소멸 주의",
-            "text": "클래식급 합숙 진입 전 남은 섬트레권은 사용. 기본 보유 상한은 1장.",
-            "kind": "ticket"
+            "id": "evaluation3",
+            "when": "클래식급 6월 후반",
+            "title": "3회차 평가회",
+            "text": "해당 회차 발전 게이지 100% 달성 → '대호평' 목표. 목표 발전 Pt는 게임 내 게이지 표시값으로 입력하며 다음 회차로 이월되지 않음.",
+            "kind": "evaluation",
+            "buildId": "build3"
           },
           {
             "id": "build4",
@@ -790,6 +807,21 @@
             "title": "4회차 건설",
             "text": "스피드·스태미나·파워·근성을 강화. 현재 상한에서 더 먼 스탯을 왼쪽 우선.",
             "kind": "build",
+            "buildId": "build4"
+          },
+          {
+            "id": "classicTicket",
+            "when": "클래식급 여름합숙 전",
+            "title": "섬트레권 소멸 주의",
+            "text": "클래식급 합숙 진입 전 남은 섬트레권은 사용. 기본 보유 상한은 1장.",
+            "kind": "ticket"
+          },
+          {
+            "id": "evaluation4",
+            "when": "클래식급 12월 후반",
+            "title": "4회차 평가회",
+            "text": "해당 회차 발전 게이지 100% 달성 → '대호평' 목표. 목표 발전 Pt는 게임 내 게이지 표시값으로 입력하며 다음 회차로 이월되지 않음.",
+            "kind": "evaluation",
             "buildId": "build4"
           },
           {
@@ -801,27 +833,92 @@
             "buildId": "build5"
           },
           {
+            "id": "evaluation5",
+            "when": "시니어급 6월 후반 · 최종 평가회",
+            "title": "5회차 평가회",
+            "text": "해당 회차 발전 게이지 100% 달성 → '대호평' 목표. 목표 발전 Pt는 게임 내 게이지 표시값으로 입력하며 다음 회차로 이월되지 않음.",
+            "kind": "evaluation",
+            "buildId": "build5"
+          },
+          {
             "id": "seniorTickets",
-            "when": "시니어급 여름합숙",
-            "title": "섬트레권 저장 가능",
-            "text": "시니어급 합숙 진입 때는 섬트레권이 소멸하지 않아 최대 3장까지 모아 연속 사용 가능.",
+            "when": "시니어급 8월 후반 → 9월 전반",
+            "title": "합숙 전 섬트레권 이월 확인",
+            "text": "9월 전반 전까지 보유 상한은 1장. 시니어 합숙 때 소멸하지 않으므로 8월 후반 잔여 0/1장 여부를 선택.",
+            "kind": "ticket"
+          },
+          {
+            "id": "seniorSepBonus",
+            "when": "시니어급 9월 전반",
+            "title": "섬트레권 2장 자동 지급",
+            "text": "9월 전반부터 상한 3장, 섬트레권 2장 자동 지급. 그 이후 별도 섬트레권 획득 없음.",
             "kind": "ticket"
           },
           {
             "id": "seniorSep",
             "when": "시니어급 9월 전반",
             "title": "트레센섬의 권유",
-            "text": "편성/육성 링크 캐릭터에 맞는 선택지로 금스킬 획득 여부 확인.",
+            "text": "육성 우마/서포트 링크 캐릭터에 따라 금·일반 스킬 선택지를 확인. 이벤트 날짜는 Game8 기준.",
             "kind": "event"
           },
           {
+            "id": "seniorTicketUse1",
+            "when": "시니어급 9월~12월",
+            "title": "후반 섬트레권 1회 사용",
+            "text": "첫 번째 섬트레권 사용 완료 체크. 보유 수는 게임 내 실제 표시와 대조.",
+            "kind": "seniorUse"
+          },
+          {
+            "id": "seniorTicketUse2",
+            "when": "시니어급 9월~12월",
+            "title": "후반 섬트레권 2회 사용",
+            "text": "두 번째 섬트레권 사용 완료 체크.",
+            "kind": "seniorUse"
+          },
+          {
+            "id": "seniorTicketUse3",
+            "when": "시니어급 9월~12월",
+            "title": "후반 섬트레권 3회 사용(이월 1장 한정)",
+            "text": "시니어 8월 후반 잔여 1장을 9월로 이월한 경우에만 세 번째 사용 가능.",
+            "kind": "seniorUse",
+            "requiresCarry": true
+          },
+          {
+            "id": "seniorExpiry",
+            "when": "시니어급 12월 후반 종료 전",
+            "title": "섬트레권 모두 소진",
+            "text": "시니어 12월 후반 종료 시 남은 섬트레권은 전부 소멸. URA에서는 섬트레권 사용 불가.",
+            "kind": "ticket"
+          },
+          {
             "id": "finishPt",
-            "when": "육성 종료 전",
-            "title": "발전 Pt 끝까지 확보",
-            "text": "총 발전 Pt가 본능의 가교 효과량에도 연결되므로 마지막까지 훈련·레이스에서 최대한 확보.",
+            "when": "최종 평가회·육성 종료",
+            "title": "누적 발전 Pt 및 종료 보상 확인",
+            "text": "최종 평가회까지 발전 게이지를 채우고 누적 발전 Pt로 '본능의 가교' 성능에 영향. 회차별 발전 Pt는 다음 회차로 이월되지 않음.",
             "kind": "point"
           }
-        ]
+        ],
+        "officialFaqUrl": "https://support.umamusume.jp/faq/",
+        "officialScenarioUrl": "https://umamusume.jp/contents/game/scenario/designyourisland/",
+        "evaluationSourceUrl": "https://gamewith.jp/uma-musume/article/show/499493",
+        "ticketRules": {
+          "preSeniorSeptemberMax": 1,
+          "postSeniorSeptemberMax": 3,
+          "seniorSeptemberBonus": 2,
+          "seniorSeptemberBonusWhen": "시니어급 9월 전반",
+          "lastUsableWhen": "시니어급 12월 후반 종료 전",
+          "classicCampNote": "클래식급 합숙 전 남은 섬트레권 사용 권장",
+          "seniorCampNote": "시니어급 합숙 진입 시 기존 1장 소멸하지 않음",
+          "description": "시니어급 9월 전반부터 최대 3장 보유. 9월 전반 2장 자동 지급 후 추가 획득 없음. 이월 1장에 따라 총 2~3장 사용 가능. 시니어 12월 후반 종료 시 전부 소멸."
+        },
+        "evaluationRules": {
+          "count": 5,
+          "targetGaugePercent": 100,
+          "ticketsPerPlan": 2,
+          "fixedPtTargetsVerified": false,
+          "description": "각 회차 발전 게이지가 가득 찼을 때 대호평. 회차별 고정 발전 Pt 수치를 공신력 있는 출처로 확정할 수 없으므로 목표 Pt는 게임 화면에서 직접 입력.",
+          "noCarryover": true
+        }
       }
     },
     "legends": {
