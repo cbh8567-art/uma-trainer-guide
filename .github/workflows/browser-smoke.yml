@@ -861,6 +861,81 @@ jobs:
                       raise RuntimeError("Island evaluation status and jump UI failed: "+str(island_v760))
                   print("JP ISLAND V7.76 TIMING / QUICK PT / EVALUATION JUMP PASS:", island_v760)
 
+                  island_v770 = d.execute_script("""
+                      const saved={
+                        scenario:state.scenario,guideServer:state.guideServer,deckConfirmed:state.deckConfirmed,
+                        islandBuildStep:state.islandBuildStep,
+                        islandPtEntries:JSON.parse(JSON.stringify(state.islandPtEntries||{})),
+                        islandTicketEvents:JSON.parse(JSON.stringify(state.islandTicketEvents||[])),
+                        islandSeniorCarry:state.islandSeniorCarry,
+                        islandGuideDone:JSON.parse(JSON.stringify(state.islandGuideDone||{}))
+                      };
+                      try {
+                        state.scenario='island';state.guideServer='jp';state.deckConfirmed=true;state.islandBuildStep=1;
+                        state.islandPtEntries={};state.islandTicketEvents=[];state.islandSeniorCarry=null;state.islandGuideDone={};
+                        setIslandPtField('build1','target','1000');
+                        setIslandPtField('build1','current','499');
+                        const initialDisabled=[...document.querySelectorAll('[data-island-ticket-earn]')].every(x=>x.disabled);
+                        recordIslandTicketEarn('build1','half');
+                        const premature=islandTicketLedgerSummary().eventsCount===0;
+                        setIslandPtField('build1','current','500');
+                        const halfBtn=document.querySelector('[data-island-ticket-earn][data-island-ticket-stage="half"]');
+                        const halfEnabled=halfBtn&&!halfBtn.disabled;
+                        halfBtn?.click();
+                        const first=islandTicketLedgerSummary();
+                        setIslandPtField('build1','current','1000');
+                        document.querySelector('[data-island-ticket-earn][data-island-ticket-stage="full"]')?.click();
+                        const forfeited=islandTicketLedgerSummary();
+                        undoIslandTicketEvent();
+                        const afterUndo=islandTicketLedgerSummary();
+                        document.querySelector('[data-island-ticket-use="build1"]')?.click();
+                        const afterUse=islandTicketLedgerSummary();
+                        document.querySelector('[data-island-ticket-earn][data-island-ticket-stage="full"]')?.click();
+                        const reearned=islandTicketLedgerSummary();
+                        setIslandBuildStep(2);
+                        setIslandPtField('build2','target','800');
+                        setIslandPtField('build2','current','400');
+                        recordIslandTicketEarn('build2','half');
+                        const crossOver=islandTicketLedgerSummary();
+                        undoIslandTicketEvent();
+                        recordIslandTicketUse('build2');
+                        recordIslandTicketEarn('build2','half');
+                        const nextPlan=islandTicketLedgerSummary();
+                        const savedEvents=JSON.parse(JSON.stringify(state.islandTicketEvents||[]));
+                        const restored=normalizeServerProfile({islandTicketEvents:savedEvents},'jp').islandTicketEvents;
+                        setIslandSeniorCarry('1');
+                        const carryMatched=!(document.getElementById('scenarioPlanBody')?.innerText||'').includes('기록상 잔여');
+                        setIslandSeniorCarry('0');
+                        const carryWarn=(document.getElementById('scenarioPlanBody')?.innerText||'').includes('기록상 잔여');
+                        return {
+                          initialDisabled,premature,halfEnabled,
+                          first,forfeited,afterUndo,afterUse,reearned,crossOver,nextPlan,
+                          restoredCount:restored.length,
+                          eventCount:savedEvents.length,
+                          carryMatched,carryWarn,
+                          ticketUi:(document.getElementById('scenarioPlanBody')?.innerText||'').includes('섬트레권 지급·사용 기록')
+                        }
+                      } finally {
+                        state.scenario=saved.scenario;state.guideServer=saved.guideServer;state.deckConfirmed=saved.deckConfirmed;
+                        state.islandBuildStep=saved.islandBuildStep;state.islandPtEntries=saved.islandPtEntries;
+                        state.islandTicketEvents=saved.islandTicketEvents;state.islandSeniorCarry=saved.islandSeniorCarry;
+                        state.islandGuideDone=saved.islandGuideDone;save();renderScenarioPlan();
+                      }
+                  """)
+                  def check_ticket(ok,label):
+                      if not ok: raise RuntimeError("JP V7.77 ticket "+label+": "+str(island_v770))
+                  check_ticket(island_v770.get("initialDisabled") and island_v770.get("premature") and island_v770.get("halfEnabled"),"threshold gate")
+                  check_ticket(island_v770.get("first",{}).get("held")==1 and island_v770.get("first",{}).get("earned")==1,"50% award")
+                  check_ticket(island_v770.get("forfeited",{}).get("held")==1 and island_v770.get("forfeited",{}).get("expired")==1,"full cap overflow")
+                  check_ticket(island_v770.get("afterUndo",{}).get("expired")==0 and island_v770.get("afterUndo",{}).get("eventsCount")==1,"undo")
+                  check_ticket(island_v770.get("afterUse",{}).get("held")==0 and island_v770.get("afterUse",{}).get("used")==1,"record use")
+                  check_ticket(island_v770.get("reearned",{}).get("held")==1 and island_v770.get("reearned",{}).get("expired")==0,"full after using half")
+                  check_ticket(island_v770.get("crossOver",{}).get("expired")==1,"cross-plan overflow")
+                  check_ticket(island_v770.get("nextPlan",{}).get("held")==1 and island_v770.get("nextPlan",{}).get("used")==2 and island_v770.get("nextPlan",{}).get("expired")==0,"carry across evaluation")
+                  check_ticket(island_v770.get("restoredCount")==island_v770.get("eventCount"),"normalized state")
+                  check_ticket(island_v770.get("carryMatched") and island_v770.get("carryWarn") and island_v770.get("ticketUi"),"late carry reconciliation UI")
+                  print("JP ISLAND V7.77 TICKET EARN / SPEND / CAP / UNDO / CARRY PASS:", island_v770)
+
                   tucker_card = d.execute_script("""
                       const c=cardById(30257);
                       if(!c)return {ok:false,reason:'card 30257 missing'};
