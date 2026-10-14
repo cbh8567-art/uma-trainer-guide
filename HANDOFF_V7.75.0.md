@@ -80,7 +80,7 @@ Game8: https://game8.jp/umamusume/700415
 - 이월 0장: 18 체크, 3번째 사용 숨김
 - 이월 1장: 19 체크, 3번째 사용 표시
 - 3번째 사용 후 이월값 0장으로 변경 시 상태 해제
-- 최신 코어 가이드 문구 수정본에 대해 새 smoke run `38542132480` 수행. 이 문서는 해당 run 종료 전에 작성될 수 있으므로 별도 최신 결과 확인 필요.
+- 최신 코어 가이드 문구 수정본 smoke run `38542132480`: **SUCCESS**, P0 + browser interaction 전체 통과.
 - JP validated data sync `38542132365`: SUCCESS
 - GitHub Pages mirror `38542132372`: SUCCESS
 
