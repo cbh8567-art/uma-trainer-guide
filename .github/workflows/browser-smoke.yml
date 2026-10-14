@@ -804,6 +804,63 @@ jobs:
                       raise RuntimeError("JP Island V7.75 use checks and saved state failed: "+str(island_v750))
                   print("JP ISLAND V7.75 DEVELOPMENT PT / SENIOR 0-1 CARRY PASS:", island_v750)
 
+                  island_v760 = d.execute_script("""
+                      const oldScenario=state.scenario,oldGuideServer=state.guideServer,oldConfirmed=state.deckConfirmed;
+                      const oldStep=state.islandBuildStep,oldPt=JSON.parse(JSON.stringify(state.islandPtEntries||{}));
+                      const planList=SCENARIOS.island?.constructionGuide?.plans||[];
+                      try {
+                        state.scenario='island';state.guideServer='jp';state.deckConfirmed=true;state.islandBuildStep=3;
+                        state.islandPtEntries={};
+                        setIslandPtField('build3','target','900');
+                        setIslandPtField('build3','current','400');
+                        const p=(id)=>planList.find(x=>x.id===id)?.when||'';
+                        const ids=islandTimelineItems().map(x=>x.id),pos=(id)=>ids.indexOf(id);
+                        const before=document.getElementById('scenarioPlanBody')?.textContent||'';
+                        const plus50=document.querySelector('[data-island-pt-step="build3"][data-island-pt-delta="50"]');
+                        const plus100=document.querySelector('[data-island-pt-step="build3"][data-island-pt-delta="100"]');
+                        const minus50=document.querySelector('[data-island-pt-step="build3"][data-island-pt-delta="-50"]');
+                        if(!plus50||!plus100||!minus50)return {ok:false,reason:'Quick buttons absent'};
+                        plus50.click();
+                        const n1=islandPtSnapshot('build3').current;
+                        document.querySelector('[data-island-pt-step="build3"][data-island-pt-delta="100"]').click();
+                        const n2=islandPtSnapshot('build3').current;
+                        document.querySelector('[data-island-pt-step="build3"][data-island-pt-delta="-50"]').click();
+                        const n3=islandPtSnapshot('build3').current;
+                        const marked=document.getElementById('scenarioPlanBody')?.textContent||'';
+                        setIslandBuildStep(2);
+                        const jump=document.querySelector('[data-island-jump-build="build3"]');
+                        if(!jump)return {ok:false,reason:'Evaluation jump absent'};
+                        jump.click();
+                        return {
+                          ok:true,
+                          plans:[p('build1'),p('build2'),p('build3'),p('build4'),p('build5')],
+                          order:pos('build1')<pos('evaluation1')&&pos('evaluation1')<pos('build2')&&
+                                pos('evaluation2')<pos('build3')&&pos('evaluation3')<pos('classicTicket')&&
+                                pos('classicTicket')<pos('build4')&&pos('evaluation4')<pos('build5'),
+                          stages:[n1,n2,n3],
+                          beforeHas:before.includes('해당 회차 Pt 열기'),
+                          badgeHas:marked.includes('현재 55%')&&marked.includes('400 Pt 부족'),
+                          jumped:state.islandBuildStep===3&&!!document.querySelector('[data-island-build="build3"]')
+                        };
+                      } finally {
+                        state.scenario=oldScenario;state.guideServer=oldGuideServer;state.deckConfirmed=oldConfirmed;
+                        state.islandBuildStep=oldStep;state.islandPtEntries=oldPt;save();renderScenarioPlan();
+                      }
+                  """)
+                  if not island_v760.get("ok"):
+                      raise RuntimeError("JP Island V7.76 test fixture error: "+str(island_v760))
+                  plans=island_v760.get("plans") or []
+                  for i, phrase in [(2,"클래식급 1월"),(3,"클래식급 7월"),(4,"시니어급 1월")]:
+                      if len(plans)<=i or phrase not in plans[i]:
+                          raise RuntimeError("Island corrected build schedule missing: "+str(island_v760))
+                  if not island_v760.get("order"):
+                      raise RuntimeError("Island evaluation -> construction chronology incorrect: "+str(island_v760))
+                  if island_v760.get("stages") != [450,550,500]:
+                      raise RuntimeError("Island quick Pt increment/decrement failed: "+str(island_v760))
+                  if not island_v760.get("beforeHas") or not island_v760.get("badgeHas") or not island_v760.get("jumped"):
+                      raise RuntimeError("Island evaluation status and jump UI failed: "+str(island_v760))
+                  print("JP ISLAND V7.76 TIMING / QUICK PT / EVALUATION JUMP PASS:", island_v760)
+
                   tucker_card = d.execute_script("""
                       const c=cardById(30257);
                       if(!c)return {ok:false,reason:'card 30257 missing'};
