@@ -526,7 +526,7 @@
           {
             "id": "build2",
             "order": 2,
-            "when": "메이크 데뷔 후 · 2회차",
+            "when": "주니어급 메이크 데뷔 직후 · 2회차",
             "image": "https://img.game8.jp/11514415/364a31ac2fc6628a87bc52740ca51925.jpeg/original",
             "levels": {
               "speed": 2,
@@ -547,7 +547,7 @@
           {
             "id": "build3",
             "order": 3,
-            "when": "주니어급 12월 · 3회차",
+            "when": "클래식급 1월 전반 · 3회차",
             "image": "https://img.game8.jp/11506266/adf3437e1abd08dd67bb783090c1235c.jpeg/original",
             "levels": {
               "speed": 3,
@@ -572,7 +572,7 @@
           {
             "id": "build4",
             "order": 4,
-            "when": "클래식급 6월 · 4회차",
+            "when": "클래식급 7월 전반 · 4회차",
             "image": "https://img.game8.jp/11506266/adf3437e1abd08dd67bb783090c1235c.jpeg/original",
             "levels": {
               "speed": 4,
@@ -600,7 +600,7 @@
           {
             "id": "build5",
             "order": 5,
-            "when": "클래식급 12월 · 5회차",
+            "when": "시니어급 1월 전반 · 5회차",
             "image": "https://img.game8.jp/11506306/f0ddf0e7d4c903d65c46cd41e35ff4b2.jpeg/original",
             "levels": {
               "speed": 5,
@@ -748,7 +748,7 @@
         }
       },
       "operationTimeline": {
-        "version": "jp-island-turn-check-v2",
+        "version": "jp-island-turn-check-v3",
         "source": "Cygames 공식 FAQ / 공식 시나리오 소개 / Game8 / GameWith",
         "sourceUrl": "https://game8.jp/umamusume/700415",
         "ticketSourceUrl": "https://game8.jp/umamusume/701660",
@@ -763,15 +763,15 @@
           },
           {
             "id": "evaluation1",
-            "when": "주니어급 6월 후반 · 데뷔 전후",
+            "when": "주니어급 메이크 데뷔 직후",
             "title": "1회차 평가회",
-            "text": "해당 회차 발전 게이지 100% 달성 → '대호평' 목표. 목표 발전 Pt는 게임 내 게이지 표시값으로 입력하며 다음 회차로 이월되지 않음.",
+            "text": "메이크 데뷔가 끝난 턴 종료 시 첫 평가회. 해당 회차 건설 진척도 100% → 대호평 목표.",
             "kind": "evaluation",
             "buildId": "build1"
           },
           {
             "id": "build2",
-            "when": "메이크 데뷔 직후",
+            "when": "주니어급 메이크 데뷔 직후 · 평가회 다음 계획",
             "title": "2회차 건설",
             "text": "해변의 집 → 스피드 → 스태미나 → 지능. 해변의 집은 이후 Lv1 유지.",
             "kind": "build",
@@ -779,7 +779,7 @@
           },
           {
             "id": "evaluation2",
-            "when": "주니어급 12월 후반",
+            "when": "주니어급 12월 후반 종료",
             "title": "2회차 평가회",
             "text": "해당 회차 발전 게이지 100% 달성 → '대호평' 목표. 목표 발전 Pt는 게임 내 게이지 표시값으로 입력하며 다음 회차로 이월되지 않음.",
             "kind": "evaluation",
@@ -787,7 +787,7 @@
           },
           {
             "id": "build3",
-            "when": "주니어급 12월",
+            "when": "클래식급 1월 전반 · 새 건설 계획",
             "title": "3회차 건설",
             "text": "스피드 → 근성 → 스태미나 → 파워. 스피드·스태미나는 본능전개 루트.",
             "kind": "build",
@@ -795,30 +795,30 @@
           },
           {
             "id": "evaluation3",
-            "when": "클래식급 6월 후반",
+            "when": "클래식급 6월 후반 종료",
             "title": "3회차 평가회",
             "text": "해당 회차 발전 게이지 100% 달성 → '대호평' 목표. 목표 발전 Pt는 게임 내 게이지 표시값으로 입력하며 다음 회차로 이월되지 않음.",
             "kind": "evaluation",
             "buildId": "build3"
           },
           {
+            "id": "classicTicket",
+            "when": "클래식급 6월 후반~7월 합숙 전",
+            "title": "합숙 전 섬트레권 점검",
+            "text": "클래식 여름합숙 진입 전 남은 섬트레권을 확인하고 적절한 훈련에서 사용하세요. 평가회와 합숙 사이에 보유 상황 점검.",
+            "kind": "ticket"
+          },
+          {
             "id": "build4",
-            "when": "클래식급 6월",
+            "when": "클래식급 7월 전반 · 합숙 시작",
             "title": "4회차 건설",
-            "text": "스피드·스태미나·파워·근성을 강화. 현재 상한에서 더 먼 스탯을 왼쪽 우선.",
+            "text": "스피드·스태미나·파워·근성을 강화. 상한까지 먼 스탯을 왼쪽 우선.",
             "kind": "build",
             "buildId": "build4"
           },
           {
-            "id": "classicTicket",
-            "when": "클래식급 여름합숙 전",
-            "title": "섬트레권 소멸 주의",
-            "text": "클래식급 합숙 진입 전 남은 섬트레권은 사용. 기본 보유 상한은 1장.",
-            "kind": "ticket"
-          },
-          {
             "id": "evaluation4",
-            "when": "클래식급 12월 후반",
+            "when": "클래식급 12월 후반 종료",
             "title": "4회차 평가회",
             "text": "해당 회차 발전 게이지 100% 달성 → '대호평' 목표. 목표 발전 Pt는 게임 내 게이지 표시값으로 입력하며 다음 회차로 이월되지 않음.",
             "kind": "evaluation",
@@ -826,7 +826,7 @@
           },
           {
             "id": "build5",
-            "when": "클래식급 12월",
+            "when": "시니어급 1월 전반 · 마지막 건설 계획",
             "title": "5회차 건설",
             "text": "최종 기본형. 상한에서 더 먼 스탯을 왼쪽부터 배치해 마감.",
             "kind": "build",
@@ -834,7 +834,7 @@
           },
           {
             "id": "evaluation5",
-            "when": "시니어급 6월 후반 · 최종 평가회",
+            "when": "시니어급 6월 후반 종료 · 최종 평가회",
             "title": "5회차 평가회",
             "text": "해당 회차 발전 게이지 100% 달성 → '대호평' 목표. 목표 발전 Pt는 게임 내 게이지 표시값으로 입력하며 다음 회차로 이월되지 않음.",
             "kind": "evaluation",
@@ -892,9 +892,9 @@
           },
           {
             "id": "finishPt",
-            "when": "최종 평가회·육성 종료",
-            "title": "누적 발전 Pt 및 종료 보상 확인",
-            "text": "최종 평가회까지 발전 게이지를 채우고 누적 발전 Pt로 '본능의 가교' 성능에 영향. 회차별 발전 Pt는 다음 회차로 이월되지 않음.",
+            "when": "시니어급 12월 후반~URA 종료",
+            "title": "최종 보상·스킬 확인",
+            "text": "평가회 5회 결과와 최종 스킬·획득 보상을 확인합니다. 시니어 6월 최종 평가회 후에는 신규 건설 계획이 없습니다.",
             "kind": "point"
           }
         ],
@@ -918,7 +918,13 @@
           "fixedPtTargetsVerified": false,
           "description": "각 회차 발전 게이지가 가득 찼을 때 대호평. 회차별 고정 발전 Pt 수치를 공신력 있는 출처로 확정할 수 없으므로 목표 Pt는 게임 화면에서 직접 입력.",
           "noCarryover": true
-        }
+        },
+        "scheduleSourceUrls": [
+          "https://www.famitsu.com/article/202506/44881",
+          "https://www.4gamer.net/games/414/G041434/20250610058/",
+          "https://wikiwiki.jp/vip_umamusu/無人島へようこそ -DESIGN YOUR ISLAND-"
+        ],
+        "scheduleNote": "건설은 앞선 평가회 종료 직후 다음 회차가 열림. 건설 회차와 평가회 날짜를 혼동하지 않도록 구분."
       }
     },
     "legends": {
