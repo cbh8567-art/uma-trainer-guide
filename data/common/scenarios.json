@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-14",
+  "updated": "2026-10-15",
   "scenarios": {
     "tresenken": {
       "name": "らっしゃい！トレセン軒！",
@@ -925,6 +925,42 @@
           "https://wikiwiki.jp/vip_umamusu/無人島へようこそ -DESIGN YOUR ISLAND-"
         ],
         "scheduleNote": "건설은 앞선 평가회 종료 직후 다음 회차가 열림. 건설 회차와 평가회 날짜를 혼동하지 않도록 구분."
+      },
+      "ticketLedgerGuide": {
+        "version": "jp-island-ticket-ledger-v1",
+        "source": "Cygames 공식 FAQ / Cygames 공식 시나리오 / GameWith / VIP wiki",
+        "urls": [
+          "https://support.umamusume.jp/faq/",
+          "https://umamusume.jp/contents/game/scenario/designyourisland/",
+          "https://gamewith.jp/uma-musume/article/show/499493",
+          "https://wikiwiki.jp/vip_umamusu/無人島へようこそ -DESIGN YOUR ISLAND-"
+        ],
+        "thresholds": [
+          {
+            "id": "half",
+            "fraction": 0.5,
+            "label": "건설 게이지 50%",
+            "tickets": 1
+          },
+          {
+            "id": "full",
+            "fraction": 1,
+            "label": "건설 게이지 100%",
+            "tickets": 1
+          }
+        ],
+        "beforeSeniorSeptemberLimit": 1,
+        "seniorSeptemberBonus": 2,
+        "seniorSeptemberLimit": 3,
+        "notes": [
+          "발전 게이지의 각 절반/완료 시점에 섬트레권 1장 획득. 실제 게임에서 받았을 때만 기록 버튼을 누른다.",
+          "시니어급 8월 후반까지 최대 1장. 소지 중 추가 획득 시 상한 초과분은 실효.",
+          "보유한 권은 평가회와 다음 건설 계획으로 이월 가능. 건설 계획 발전 Pt 자체는 이월되지 않음.",
+          "시니어급 7~8월 및 URA의 섬 합숙 기간에는 섬트레권을 사용하는 섬트레가 불가능.",
+          "클래식급 여름합숙 중 쌓인 발전 Pt에 따른 건설/권 지급은 합숙 종료 후 일괄 반영.",
+          "시니어급 9월 전반 2장 자동 지급, 이후 추가 섬트레권 지급 없음.",
+          "시니어급 12월 후반 종료 시 남은 섬트레권 전부 소멸."
+        ]
       }
     },
     "legends": {
