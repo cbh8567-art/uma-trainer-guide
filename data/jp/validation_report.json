@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-14",
+  "updated": "2026-10-15",
   "status": "pass",
-  "checkedAt": "2026-10-14T19:09:27.502Z",
+  "checkedAt": "2026-10-15T19:10:16.918Z",
   "fatal": [],
   "warnings": [],
   "collections": {
     "catalog": {
       "source": "https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json",
       "count": 563,
-      "contentSha256": "355054b688322bd036f46371da86ac4828601c922084ae426ecfa7d9e9123fe1",
+      "contentSha256": "4446b14acda09674fb0a174ee2c75a97d1307e3dc24183ee691acb895672b37b",
       "duplicateIds": [],
       "status": "pass",
       "previousCount": 563,
@@ -18,17 +18,34 @@
       "changes": {
         "addedCount": 0,
         "removedCount": 0,
-        "modifiedCount": 0,
+        "modifiedCount": 3,
         "addedIds": [],
         "removedIds": [],
-        "modifiedIds": []
+        "modifiedIds": [
+          "10086",
+          "20054",
+          "30126"
+        ]
       },
       "changeDetails": {
         "added": [],
         "removed": [],
-        "modified": []
+        "modified": [
+          {
+            "id": "10086",
+            "name": "ヤマニンゼファー (R)"
+          },
+          {
+            "id": "20054",
+            "name": "テイエムオペラオー (SR)"
+          },
+          {
+            "id": "30126",
+            "name": "ヤマニンゼファー (SSR)"
+          }
+        ]
       },
-      "changed": false
+      "changed": true
     },
     "supports": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
@@ -160,6 +177,6 @@
   "changeTotals": {
     "added": 0,
     "removed": 0,
-    "modified": 0
+    "modified": 3
   }
 }

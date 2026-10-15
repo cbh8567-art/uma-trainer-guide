@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-14",
-  "generatedAt": "2026-10-14T19:09:27.502Z",
-  "openCount": 39,
+  "updated": "2026-10-15",
+  "generatedAt": "2026-10-15T19:10:16.918Z",
+  "openCount": 42,
   "items": [
     {
       "key": "supports:removed:30321",
@@ -50,6 +50,42 @@
       "status": "open",
       "firstSeenAt": "2026-10-02T00:37:28.902Z",
       "lastSeenAt": "2026-10-02T00:37:28.902Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:modified:10086",
+      "collection": "catalog",
+      "changeType": "modified",
+      "id": "10086",
+      "name": "ヤマニンゼファー (R)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-10-15T19:10:16.918Z",
+      "lastSeenAt": "2026-10-15T19:10:16.918Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:modified:20054",
+      "collection": "catalog",
+      "changeType": "modified",
+      "id": "20054",
+      "name": "テイエムオペラオー (SR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-10-15T19:10:16.918Z",
+      "lastSeenAt": "2026-10-15T19:10:16.918Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:modified:30126",
+      "collection": "catalog",
+      "changeType": "modified",
+      "id": "30126",
+      "name": "ヤマニンゼファー (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-10-15T19:10:16.918Z",
+      "lastSeenAt": "2026-10-15T19:10:16.918Z",
       "note": ""
     },
     {
