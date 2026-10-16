@@ -97,6 +97,16 @@ jobs:
               WebDriverWait(d, 8).until(lambda x: not x.find_element(By.ID, "ssrDbBody").is_displayed())
               print("P0 SSR DB TOGGLE PASS")
 
+              kr_first = d.execute_script("""
+                  return {server:state.activeServer,scenario:state.scenario,krAllowed:KOREA_SCENARIO_IDS.has('island'),
+                    selected:document.getElementById('scenario')?.value,
+                    banner:!!document.getElementById('openKrIslandGuideBtn'),
+                    optionEnabled:![...document.getElementById('scenario').options].find(o=>o.value==='island')?.disabled};
+              """)
+              if kr_first.get("server") != "kr" or kr_first.get("scenario") != "island" or not kr_first.get("krAllowed") or not kr_first.get("banner") or not kr_first.get("optionEnabled"):
+                  raise RuntimeError("V7.79 KR island first-run default not ready: "+str(kr_first))
+              print("P0 KR ISLAND DEFAULT PASS:",kr_first)
+              d.execute_script("setAppServer('jp')")
               scenario = d.find_element(By.ID, "scenario")
               Select(scenario).select_by_value("tresenken")
               d.execute_script("arguments[0].dispatchEvent(new Event('change', {bubbles:true}));", scenario)
@@ -317,6 +327,45 @@ jobs:
                       raise RuntimeError("getDisplayMedia is unavailable on deployed HTTPS target")
                   print("WATCH PILOT DOM/API PASS")
 
+                  # V7.79: KR-first fresh profile, officially launched island and separate JP mode.
+                  WebDriverWait(d, 25).until(lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true"))
+                  kr_verify = d.execute_script("""
+                      const cold={active:state.activeServer,scenario:state.scenario,
+                        visible:!document.querySelector('#scenario option[value="island"]').disabled,
+                        title:SCENARIOS.island.kr,friend:isKoreanImplementedSupport(cardById(30257))};
+                      const initialKr=state.serverProfiles.kr,krDeckBefore=JSON.stringify(initialKr?.deck||[]);
+                      const modal=()=>document.querySelector('#scenarioPlanBody')?.innerText||'';
+                      renderScenarioPlan();
+                      const krText=modal(),card=cardById(30257);
+                      const oldKr=JSON.parse(JSON.stringify(state.serverProfiles.kr||{}));
+                      const oldJp=JSON.parse(JSON.stringify(state.serverProfiles.jp||{}));
+                      const jpHad=JSON.stringify(state.serverProfiles.jp);
+                      const baseline=tucker=card&&isSupportVisibleForServer(card);
+                      const jpBefore=state.serverProfiles.jp?.scenario;
+                      const panel=document.getElementById('scenarioPlanPanel');
+                      if(state.activeServer!=='kr')setAppServer('kr');
+                      const beforeButton=document.getElementById('openKrIslandGuideBtn');
+                      if(beforeButton)beforeButton.click();
+                      const bannerResult={active:state.activeServer,scenario:state.scenario,hasKrUi:modal().includes('한국 서버 · 무인도에 어서 오세요'),
+                        hasNotice:modal().includes('2026.10.16'),fullLabel:SCENARIOS.island.kr};
+                      setAppServer('jp');
+                      const persistedKr=state.serverProfiles.kr?.scenario;
+                      const jpNotClobbered=state.scenario===jpBefore;
+                      setAppServer('kr');
+                      const returnedKr=state.scenario==='island';
+                      setAppServer('jp');
+                      return {cold,hasKrUi:krText.includes('한국 서버 · 무인도에 어서 오세요'),
+                        hasKrRef:krText.includes('한국 공식 공지'),krTucker:!!baseline,
+                        bannerResult,persistedKr,jpNotClobbered,returnedKr};
+                  """)
+                  if kr_verify.get("cold",{}).get("active") != "kr" or kr_verify.get("cold",{}).get("scenario") != "island":
+                      raise RuntimeError("KR default inactive: "+str(kr_verify))
+                  if not kr_verify.get("cold",{}).get("visible") or not kr_verify.get("hasKrUi") or not kr_verify.get("hasKrRef") or not kr_verify.get("krTucker"):
+                      raise RuntimeError("KR island UI/support missing: "+str(kr_verify))
+                  if not kr_verify.get("jpNotClobbered") or not kr_verify.get("returnedKr") or kr_verify.get("bannerResult",{}).get("scenario") != "island":
+                      raise RuntimeError("KR/JP profile separation failed: "+str(kr_verify))
+                  print("KR ISLAND V7.79 LAUNCH / UI / TUCKER / SERVER ISOLATION PASS:",kr_verify)
+
                   # Current build: animated Agnes Digital mascot + favicon asset.
                   mascot = d.find_element(By.ID, "digitalMascotFloating")
                   mascot_img = mascot.find_element(By.TAG_NAME, "img")
@@ -518,7 +567,7 @@ jobs:
                           summary:assess.summary,
                           guideVersion:SCENARIOS.island?.guideVersion||null,
                           guideCount:(SCENARIOS.island?.coreGuide||[]).length,
-                          bodyHasGuide:body.includes('JP 무인도 초기 공략 V1')&&body.includes('111111')&&body.includes('터커 브라인')
+                          bodyHasGuide:body.includes('일본 서버 · 무인도 공략')&&body.includes('111111')&&body.includes('터커 브라인')
                         };
                       } finally {
                         state.scenario=oldScenario;
