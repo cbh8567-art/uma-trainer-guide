@@ -351,18 +351,24 @@ jobs:
                       setAppServer('jp');
                       const persistedKr=state.serverProfiles.kr?.scenario;
                       const jpNotClobbered=state.scenario===jpBefore;
+                      const beforeGuard=JSON.parse(JSON.stringify(state.serverProfiles.kr)),oldConfirm=window.confirm;
+                      state.serverProfiles.kr.trainingActive=true;state.serverProfiles.kr.scenario='legends';
+                      window.confirm=()=>false;
+                      beforeButton?.click();
+                      const protectedOtherRun=state.activeServer==='jp'&&state.serverProfiles.kr.scenario==='legends';
+                      window.confirm=oldConfirm;state.serverProfiles.kr=beforeGuard;
                       setAppServer('kr');
                       const returnedKr=state.scenario==='island';
                       setAppServer('jp');
                       return {cold,hasKrUi:krText.includes('한국 서버 · 무인도에 어서 오세요'),
                         hasKrRef:krText.includes('한국 공식 공지'),krTucker:!!baseline,
-                        bannerResult,persistedKr,jpNotClobbered,returnedKr,freshJpDefault};
+                        bannerResult,persistedKr,jpNotClobbered,returnedKr,freshJpDefault,protectedOtherRun};
                   """)
                   if kr_verify.get("cold",{}).get("active") != "kr" or kr_verify.get("cold",{}).get("scenario") != "island":
                       raise RuntimeError("KR default inactive: "+str(kr_verify))
                   if not kr_verify.get("cold",{}).get("visible") or not kr_verify.get("hasKrUi") or not kr_verify.get("hasKrRef") or not kr_verify.get("krTucker"):
                       raise RuntimeError("KR island UI/support missing: "+str(kr_verify))
-                  if not kr_verify.get("jpNotClobbered") or not kr_verify.get("returnedKr") or kr_verify.get("freshJpDefault") != "tresenken" or kr_verify.get("bannerResult",{}).get("scenario") != "island":
+                  if not kr_verify.get("jpNotClobbered") or not kr_verify.get("returnedKr") or not kr_verify.get("protectedOtherRun") or kr_verify.get("freshJpDefault") != "tresenken" or kr_verify.get("bannerResult",{}).get("scenario") != "island":
                       raise RuntimeError("KR/JP profile separation failed: "+str(kr_verify))
                   print("KR ISLAND V7.79 LAUNCH / UI / TUCKER / SERVER ISOLATION PASS:",kr_verify)
 
