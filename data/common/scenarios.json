@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-15",
+  "updated": "2026-10-16",
   "scenarios": {
     "tresenken": {
       "name": "らっしゃい！トレセン軒！",
@@ -337,7 +337,7 @@
     },
     "island": {
       "name": "無人島",
-      "kr": "무인도",
+      "kr": "무인도에 어서 오세요 -DESIGN YOUR ISLAND-",
       "maxEvolution": 2,
       "source": "Game8",
       "sourceUrl": "https://game8.jp/umamusume/701249",
@@ -450,7 +450,7 @@
         ],
         "friendCharacter": "タッカーブライン",
         "friendKr": "터커 브라인",
-        "note": "JP 현행 무인도 대인전 육성의 기본 권장형. 카드풀·거리·스킬 구성에 따라 일부 타입을 2장으로 바꾸는 변형은 허용."
+        "note": "무인도 시나리오 하이랜더 111111 기본 권장형. 카드풀·거리·스킬 구성에 따라 일부 타입을 2장으로 바꾸는 변형도 가능합니다. 실제 보유 카드와 한국 서버 메타에 맞춰 조정하세요."
       },
       "coreGuide": [
         {
@@ -961,6 +961,29 @@
           "시니어급 9월 전반 2장 자동 지급, 이후 추가 섬트레권 지급 없음.",
           "시니어급 12월 후반 종료 시 남은 섬트레권 전부 소멸."
         ]
+      },
+      "krLaunch": {
+        "server": "kr",
+        "date": "2026-10-16",
+        "condition": "점검 완료 후",
+        "status": "introduced",
+        "source": "우마무스메 프리티 더비 공식 카카오톡 채널",
+        "sourceUrl": "https://pf.kakao.com/_DzxjIb/posts",
+        "testEvent": {
+          "start": "2026-10-16",
+          "end": "2026-10-26",
+          "name": "트레이너 기능 시험",
+          "scenario": "island"
+        }
+      },
+      "krUi": {
+        "headline": "한국 서버 무인도 육성 공략",
+        "buildSteps": "건설 계획",
+        "points": "발전 Pt",
+        "ticketName": "섬트레권",
+        "ticketAlternate": "섬 특훈 이용권",
+        "sourceNote": "한국 서버 2026-10-16 도입 확인. 건설 배치·카드 추천은 일본 공략 기반 참고값으로서 한국 서버의 게임 내 수치와 비교해 사용하세요.",
+        "jpComparison": true
       }
     },
     "legends": {
