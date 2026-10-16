@@ -509,6 +509,7 @@ jobs:
                         setAppServer(originalServer);
                         state.serverProfiles.kr=savedKr;
                         state.serverProfiles.jp=savedJp;
+                        applyServerProfileToFlat(state,originalServer);
                         save();renderAll();
                       }
                   """)
