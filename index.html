@@ -2065,11 +2065,16 @@ function applyServerProfileToFlat(target,server){
 function initializeServerState(raw){
  const s=raw||{},legacyServer=(s.activeServer||s.guideServer)==='jp'?'jp':'kr';
  if(!s.serverProfiles){
-   // V5.13 이하 데이터는 양쪽에 복제해 유실을 막고, 이후부터 독립 저장한다.
-   const legacy=profileFromFlat(s,legacyServer);
-   s.serverProfiles={
-     jp:normalizeServerProfile(cloneStateValue(legacy),'jp'),
-     kr:normalizeServerProfile(cloneStateValue(legacy),'kr')
+   if(Object.keys(s).length===0){
+     // 신규 이용자는 KR 무인도, JP 기존 시나리오를 각각 별도의 초기 프로필로 생성한다.
+     s.serverProfiles={jp:serverDefaultProfile('jp'),kr:serverDefaultProfile('kr')};
+   }else{
+     // V5.13 이하 기존 저장 데이터는 절대 삭제하지 않고 기존 방식으로 양쪽에 복제한다.
+     const legacy=profileFromFlat(s,legacyServer);
+     s.serverProfiles={
+       jp:normalizeServerProfile(cloneStateValue(legacy),'jp'),
+       kr:normalizeServerProfile(cloneStateValue(legacy),'kr')
+     };
    }
  }
  s.serverProfiles.jp=normalizeServerProfile(s.serverProfiles.jp,'jp');
