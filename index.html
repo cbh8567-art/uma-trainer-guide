@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.79.0">
+<meta name="app-build" content="V7.79.1">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.79.0 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.79.1 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -461,6 +461,7 @@ body{font-size:14px;line-height:1.5}
 .slot.rentalSlot.empty{background:linear-gradient(180deg,#1c1926,#141823)}
 .rentalBadge{position:absolute;left:4px;bottom:4px;background:rgba(120,87,177,.92);color:#fff;padding:3px 6px;border-radius:99px;font-size:9px;font-weight:950}
 .deckConfirmBar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin:7px 0}
+.deckSkillResetBar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:7px 0 10px;padding:9px 10px;background:#1a2230;border:1px solid #39465b;border-radius:9px}.deckSkillResetBar .sub{font-size:10px;line-height:1.45;flex:1 1 225px}.deckSkillResetBar button{flex-shrink:0}
 .deckConfirmedNote{color:#9fe3bd;font-weight:850}
 [hidden]{display:none!important}
 @media(max-width:720px){.inheritanceGrid{grid-template-columns:1fr}.setupActions .btn{flex:1 1 140px}.deckConfirmBar .btn{flex:1 1 145px}}
@@ -1360,6 +1361,10 @@ body.trainingMode .trainingProgressHead .sub,
     <div class="deckPresetBar" id="deckPresetBar"><select id="deckPresetSelect"><option value="">덱 프리셋 선택</option></select><button type="button" class="mini" id="saveDeckPreset">현재 덱 저장</button><button type="button" class="mini" id="loadDeckPreset">불러오기</button><button type="button" class="mini red" id="deleteDeckPreset">삭제</button></div>
     <div class="note">새로 배치하는 카드는 기본 풀돌 · 기존 보유 SSR의 저장된 돌파 상태는 유지합니다.</div>
     <div class="deck" id="deck"></div><div class="typeSummary" id="typeSummary"></div>
+    <div class="deckSkillResetBar">
+      <span class="sub">현재 서버의 스킬 취득 체크만 초기화합니다. 덱 편성과 보유 SSR은 유지됩니다.</span>
+      <button type="button" class="mini red" id="deckSkillAcquisitionResetBtn">스킬 취득 정보 초기화</button>
+    </div>
     <div class="setupSummary" id="deckSetupSummary"></div>
     <div class="deckConfirmBar"><span class="status" id="deckConfirmStatus">육성 우마 → 계승 → 서포트 순서로 확정해 주세요.</span><button type="button" class="btn primary" id="confirmDeckBtn">이 덱 확정</button></div>
 
@@ -7101,6 +7106,7 @@ $('#trainingStartBtn').onclick=startTrainingSession;
 $('#toggleTrainingSetupEdit').onclick=toggleTrainingSetupEdit;
 $('#clearAllAcquiredSkills').onclick=clearAllDeckSkillAcquisition;
 $('#dashboardResetSkills').onclick=clearAllDeckSkillAcquisition;
+$('#deckSkillAcquisitionResetBtn').onclick=clearAllDeckSkillAcquisition;
 $('#dashboardOpenSkills').onclick=()=>{const d=$('#rareSkillDetails');if(d)d.open=true;d?.scrollIntoView({behavior:'smooth',block:'start'})};
 $('#dashboardFinishTraining').onclick=openTrainingFinishModal;
 $('#dashboardAbortTraining').onclick=abortTrainingSession;
