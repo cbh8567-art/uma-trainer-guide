@@ -7062,7 +7062,7 @@ function setSsrDbOpen(open,scroll=false){
 }
 function toggleSsrDb(){setSsrDbOpen($('#ssrDbBody')?.hidden!==false,true)}
 function renderAll(){renderJpSyncStatus();renderSkillIconAudit();renderAppServerTabs();applyScenarioServerOptions();populateConditionGuideRace();renderCatalog();renderOwned();renderDeck();renderGlobalSkills();renderUmaResults();fillConditionUmaList();renderConditionUmaSuitability();renderSelectedUma();renderInheritanceSetup();renderRaceCards();renderGuide();renderDbGuideRecommendations();renderV7Planner();renderTier();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderDeckConfirmationUi();renderScenarioPlan();renderTrainingStartPanel();renderDeckPresets();renderTrainingHistory();scheduleDigitalMascotGuidance()}
-applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;state.scenarioPlanLinkChoice=null;state.scenarioPlanUltimateRamen=null;state.scenarioPlanConfirmed=false;state.trainingActive=false;state.trainingStatCheck={scenario:state.scenario,grade:'junior',month:12,half:'second',stats:{}};save();renderScenarioRareSkillPanel();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderScenarioPlan();renderSetupProgress();renderTrainingStartPanel();toast(v7ScenarioStatCapMeta().label+' 기본 스탯 상한을 적용했습니다.')};
+applyScenarioServerOptions();$('#scenario').onchange=e=>{state.scenario=e.target.value;state.scenarioPlanLinkChoice=null;state.scenarioPlanUltimateRamen=null;state.scenarioPlanConfirmed=false;state.trainingActive=false;state.trainingStatCheck={scenario:state.scenario,grade:'junior',month:12,half:'second',stats:{}};save();renderScenarioRareSkillPanel();renderGuide();renderConditionUmaSuitability();renderTrainingFinishSummary();renderV7Planner();renderRamenScenarioGuide();renderLegendsScenarioGuide();renderScenarioPlan();renderAppServerTabs();renderSetupProgress();renderTrainingStartPanel();toast(v7ScenarioStatCapMeta().label+' 기본 스탯 상한을 적용했습니다.')};
 populateConditionGuideRace();
 $('#conditionGuideRace').value=getGuideRace()?.id||'';
 $('#conditionGuideRace').onchange=e=>{
@@ -7072,7 +7072,8 @@ $('#conditionGuideRace').onchange=e=>{
 document.querySelectorAll('[data-app-server]').forEach(b=>b.onclick=()=>setAppServer(b.dataset.appServer));
 const islandKrOpen=$('#openKrIslandGuideBtn');
 if(islandKrOpen)islandKrOpen.onclick=()=>{
- if(state.activeServer==='kr'&&state.trainingActive&&state.scenario!=='island'&&!confirm('진행 중인 한국 서버 육성을 중단하고 무인도 공략으로 전환할까요?'))return;
+ const targetKr=state.activeServer==='kr'?state:state.serverProfiles?.kr;
+ if(targetKr?.trainingActive&&targetKr.scenario!=='island'&&!confirm('진행 중인 한국 서버 육성을 중단하고 무인도 공략으로 전환할까요?'))return;
  if(state.activeServer!=='kr')setAppServer('kr');
  if(state.scenario!=='island'){
    const sel=$('#scenario');sel.value='island';sel.onchange({target:sel});
