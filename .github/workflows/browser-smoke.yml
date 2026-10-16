@@ -96,6 +96,10 @@ jobs:
               d.execute_script("arguments[0].click()", toggle)
               WebDriverWait(d, 8).until(lambda x: not x.find_element(By.ID, "ssrDbBody").is_displayed())
               print("P0 SSR DB TOGGLE PASS")
+              deck_reset = d.find_element(By.ID, "deckSkillAcquisitionResetBtn")
+              if deck_reset.text.strip() != "스킬 취득 정보 초기화" or not deck_reset.is_displayed():
+                  raise RuntimeError("Deck skill acquisition reset must be visible right below the deck")
+              print("P0 DECK SKILL RESET LOCATION PASS")
 
               kr_first = d.execute_script("""
                   return {server:state.activeServer,scenario:state.scenario,krAllowed:KOREA_SCENARIO_IDS.has('island'),
@@ -466,6 +470,54 @@ jobs:
                   if len(scopes) != 3:
                       raise RuntimeError(f"Expected 3 deck picker scopes, got {len(scopes)}")
                   print("SSR COMPACT UI PASS")
+
+                  skill_reset = d.execute_script("""
+                      const originalServer=state.activeServer;
+                      const savedKr=JSON.parse(JSON.stringify(state.serverProfiles.kr));
+                      const savedJp=JSON.parse(JSON.stringify(state.serverProfiles.jp));
+                      const originalConfirm=window.confirm;
+                      try {
+                        setAppServer('kr');
+                        state.acquired={'test:skill':true};
+                        state.eventDone={'test:progress:keep':true,'test:rare:clear':true};
+                        state.eventChoice={'test:normal':'choice1','tresenken:protected':'keep','test:scenarioLinkEvent':'keep'};
+                        state.evolutionPlan={test:'needs-reset'};
+                        const deck=[...(state.deck||[])],owned=[...(state.owned||[])];
+                        const reset=document.getElementById('deckSkillAcquisitionResetBtn');
+                        const deckNode=document.getElementById('deck'),typeSummary=document.getElementById('typeSummary'),confirmNode=document.querySelector('.deckConfirmBar');
+                        if(!reset||!deckNode||!typeSummary||!confirmNode)return {ok:false,reason:'missing button or deck'};
+                        const afterDeck=!!(deckNode.compareDocumentPosition(reset)&Node.DOCUMENT_POSITION_FOLLOWING);
+                        const beforeConfirm=!!(reset.compareDocumentPosition(confirmNode)&Node.DOCUMENT_POSITION_FOLLOWING);
+                        const visible=getComputedStyle(reset).display!=='none'&&getComputedStyle(reset).visibility!=='hidden';
+                        window.confirm=()=>false;reset.click();
+                        const declined=!!state.acquired['test:skill']&&!!state.eventDone['test:rare:clear'];
+                        window.confirm=()=>true;reset.click();
+                        const result={
+                          ok:true,afterDeck,beforeConfirm,visible,declined,
+                          cleared:Object.keys(state.acquired).length===0&&state.evolutionPlan===null,
+                          progressKept:!!state.eventDone['test:progress:keep'],
+                          rareCleared:!state.eventDone['test:rare:clear'],
+                          eventChoiceCleared:!state.eventChoice['test:normal'],
+                          specialChoicesKept:state.eventChoice['tresenken:protected']==='keep'&&state.eventChoice['test:scenarioLinkEvent']==='keep',
+                          deckKept:JSON.stringify(state.deck)===JSON.stringify(deck),
+                          ownedKept:JSON.stringify(state.owned)===JSON.stringify(owned),
+                          jpKept:JSON.stringify(state.serverProfiles.jp)===JSON.stringify(savedJp)
+                        };
+                        return result;
+                      } finally {
+                        window.confirm=originalConfirm;
+                        setAppServer(originalServer);
+                        state.serverProfiles.kr=savedKr;
+                        state.serverProfiles.jp=savedJp;
+                        save();renderAll();
+                      }
+                  """)
+                  if not skill_reset.get("ok") or not all(skill_reset.get(k) for k in [
+                      "afterDeck","beforeConfirm","visible","declined","cleared","progressKept",
+                      "rareCleared","eventChoiceCleared","specialChoicesKept","deckKept","ownedKept","jpKept"
+                  ]):
+                      raise RuntimeError("V7.79.1 deck skill acquisition reset failed: "+str(skill_reset))
+                  print("DECK SKILL ACQUISITION RESET V7.79.1 PASS:",skill_reset)
 
                   # Current build: Friend/Group supports keep card functionality but show no recommendation rating UI.
                   friend_group = d.execute_script("""
