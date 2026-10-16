@@ -333,7 +333,7 @@ jobs:
                       const cold={active:state.activeServer,scenario:state.scenario,
                         visible:!document.querySelector('#scenario option[value="island"]').disabled,
                         title:SCENARIOS.island.kr,friend:isKoreanImplementedSupport(cardById(30257))};
-                      const initialKr=state.serverProfiles.kr,krDeckBefore=JSON.stringify(initialKr?.deck||[]);
+                      const initialKr=state.serverProfiles.kr,krDeckBefore=JSON.stringify(initialKr?.deck||[]),freshJpDefault=state.serverProfiles.jp?.scenario;
                       const modal=()=>document.querySelector('#scenarioPlanBody')?.innerText||'';
                       renderScenarioPlan();
                       const krText=modal(),card=cardById(30257);
@@ -356,13 +356,13 @@ jobs:
                       setAppServer('jp');
                       return {cold,hasKrUi:krText.includes('한국 서버 · 무인도에 어서 오세요'),
                         hasKrRef:krText.includes('한국 공식 공지'),krTucker:!!baseline,
-                        bannerResult,persistedKr,jpNotClobbered,returnedKr};
+                        bannerResult,persistedKr,jpNotClobbered,returnedKr,freshJpDefault};
                   """)
                   if kr_verify.get("cold",{}).get("active") != "kr" or kr_verify.get("cold",{}).get("scenario") != "island":
                       raise RuntimeError("KR default inactive: "+str(kr_verify))
                   if not kr_verify.get("cold",{}).get("visible") or not kr_verify.get("hasKrUi") or not kr_verify.get("hasKrRef") or not kr_verify.get("krTucker"):
                       raise RuntimeError("KR island UI/support missing: "+str(kr_verify))
-                  if not kr_verify.get("jpNotClobbered") or not kr_verify.get("returnedKr") or kr_verify.get("bannerResult",{}).get("scenario") != "island":
+                  if not kr_verify.get("jpNotClobbered") or not kr_verify.get("returnedKr") or kr_verify.get("freshJpDefault") != "tresenken" or kr_verify.get("bannerResult",{}).get("scenario") != "island":
                       raise RuntimeError("KR/JP profile separation failed: "+str(kr_verify))
                   print("KR ISLAND V7.79 LAUNCH / UI / TUCKER / SERVER ISOLATION PASS:",kr_verify)
 
