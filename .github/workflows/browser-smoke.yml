@@ -904,9 +904,9 @@ jobs:
                         const savedEvents=JSON.parse(JSON.stringify(state.islandTicketEvents||[]));
                         const restored=normalizeServerProfile({islandTicketEvents:savedEvents},'jp').islandTicketEvents;
                         setIslandSeniorCarry('1');
-                        const carryMatched=!(document.getElementById('scenarioPlanBody')?.innerText||'').includes('기록상 잔여');
+                        const carryMatched=!(document.getElementById('scenarioPlanBody')?.innerText||'').includes('건설 원장의 보유');
                         setIslandSeniorCarry('0');
-                        const carryWarn=(document.getElementById('scenarioPlanBody')?.innerText||'').includes('기록상 잔여');
+                        const carryWarn=(document.getElementById('scenarioPlanBody')?.innerText||'').includes('건설 원장의 보유');
                         return {
                           initialDisabled,premature,halfEnabled,
                           first,forfeited,afterUndo,afterUse,reearned,crossOver,nextPlan,
@@ -935,6 +935,86 @@ jobs:
                   check_ticket(island_v770.get("restoredCount")==island_v770.get("eventCount"),"normalized state")
                   check_ticket(island_v770.get("carryMatched") and island_v770.get("carryWarn") and island_v770.get("ticketUi"),"late carry reconciliation UI")
                   print("JP ISLAND V7.77 TICKET EARN / SPEND / CAP / UNDO / CARRY PASS:", island_v770)
+
+                  island_v780 = d.execute_script("""
+                      const saved={
+                        scenario:state.scenario,guideServer:state.guideServer,deckConfirmed:state.deckConfirmed,
+                        deck:[...(state.deck||[])],buildStep:state.islandBuildStep,
+                        buildDone:JSON.parse(JSON.stringify(state.islandBuildDone||{})),
+                        guideDone:JSON.parse(JSON.stringify(state.islandGuideDone||{})),
+                        pt:JSON.parse(JSON.stringify(state.islandPtEntries||{})),
+                        carry:state.islandSeniorCarry,
+                        tickets:JSON.parse(JSON.stringify(state.islandTicketEvents||[]))
+                      };
+                      try {
+                        state.scenario='island';state.guideServer='jp';state.deckConfirmed=true;
+                        state.islandBuildStep=2;state.islandBuildDone={build1:true};
+                        state.islandGuideDone={};state.islandPtEntries={build1:{current:500,target:1000}};
+                        state.islandTicketEvents=[{kind:'earn',planId:'build1',stage:'half'}];
+                        state.islandSeniorCarry=1;
+                        renderScenarioPlan();
+                        const first=document.getElementById('scenarioPlanBody')?.innerText||'';
+                        const pre=islandUnifiedTicketSummary();
+                        toggleIslandGuideDone('seniorTicketUse2');
+                        const skippedBlocked=!state.islandGuideDone?.seniorTicketUse2;
+                        toggleIslandGuideDone('seniorTicketUse1');
+                        const unconfirmed=islandUnifiedTicketSummary().warnings.some(x=>x.includes('지급 확인'));
+                        toggleIslandGuideDone('seniorSepBonus');
+                        toggleIslandGuideDone('seniorTicketUse2');
+                        toggleIslandGuideDone('seniorTicketUse3');
+                        const lateFull=islandUnifiedTicketSummary();
+                        toggleIslandGuideDone('seniorTicketUse2');
+                        const cascade=islandUnifiedTicketSummary();
+                        toggleIslandGuideDone('seniorExpiry');
+                        const expiryWarn=islandUnifiedTicketSummary().warnings.some(x=>x.includes('실효'));
+                        setIslandSeniorCarry('0');
+                        const mismatch=islandUnifiedTicketSummary().warnings.some(x=>x.includes('건설 원장의 보유'));
+                        const resetButton=document.getElementById('islandResetRecordsBtn');
+                        const ready=!!resetButton;
+                        resetButton?.click();
+                        const armed=!!state.islandTicketEvents?.length&&resetButton?.dataset.armed==='yes';
+                        resetButton?.click();
+                        const reset={
+                          step:state.islandBuildStep,
+                          buildDone:Object.keys(state.islandBuildDone||{}).length,
+                          guideDone:Object.keys(state.islandGuideDone||{}).length,
+                          pt:Object.keys(state.islandPtEntries||{}).length,
+                          carry:state.islandSeniorCarry,
+                          events:(state.islandTicketEvents||[]).length,
+                          deckKept:JSON.stringify(state.deck)===JSON.stringify(saved.deck),
+                          deckConfirmed:state.deckConfirmed
+                        };
+                        return {
+                          dashboard:first.includes('무인도 육성 대시보드')&&first.includes('무인도 기록 초기화'),
+                          preCarry:pre.senior.carry,
+                          skippedBlocked,unconfirmed,
+                          fullUsed:lateFull.senior.used,fullRemain:lateFull.senior.remaining,
+                          cascadeUsed:cascade.senior.used,cascadeRemain:cascade.senior.remaining,
+                          cascadeThirdCleared:!state.islandGuideDone?.seniorTicketUse3||reset.events===0,
+                          expiryWarn,mismatch,ready,armed,reset
+                        };
+                      } finally {
+                        state.scenario=saved.scenario;state.guideServer=saved.guideServer;state.deckConfirmed=saved.deckConfirmed;
+                        state.deck=saved.deck;state.islandBuildStep=saved.buildStep;
+                        state.islandBuildDone=saved.buildDone;state.islandGuideDone=saved.guideDone;
+                        state.islandPtEntries=saved.pt;state.islandSeniorCarry=saved.carry;
+                        state.islandTicketEvents=saved.tickets;save();renderScenarioPlan();
+                      }
+                  """)
+                  def v78_assert(flag,label):
+                      if not flag: raise RuntimeError("JP Island V7.78 "+label+": "+str(island_v780))
+                  v78_assert(island_v780.get("dashboard") and island_v780.get("ready"),"dashboard controls")
+                  v78_assert(island_v780.get("preCarry")==1 and island_v780.get("skippedBlocked"),"sequential senior use")
+                  v78_assert(island_v780.get("unconfirmed"),"unconfirmed September grant warning")
+                  v78_assert(island_v780.get("fullUsed")==3 and island_v780.get("fullRemain")==0,"three ticket senior use")
+                  v78_assert(island_v780.get("cascadeUsed")==1 and island_v780.get("cascadeRemain")==2,"uncheck cascade")
+                  v78_assert(island_v780.get("expiryWarn") and island_v780.get("mismatch"),"unified warning rules")
+                  v78_assert(island_v780.get("armed"),"safe two-stage reset")
+                  restored=island_v780.get("reset") or {}
+                  v78_assert(restored.get("step")==1 and restored.get("buildDone")==0 and restored.get("guideDone")==0
+                    and restored.get("pt")==0 and restored.get("carry")==None and restored.get("events")==0
+                    and restored.get("deckKept") and restored.get("deckConfirmed"),"island-only reset")
+                  print("JP ISLAND V7.78 UNIFIED STATUS / SEQUENTIAL USE / SAFE RESET PASS:", island_v780)
 
                   tucker_card = d.execute_script("""
                       const c=cardById(30257);
