@@ -2746,7 +2746,11 @@ function renderScenarioPlan(){
    for(const x of links){
      const selected=state.scenarioPlanLinkChoice===x.id,result=scenarioLinkEventResult(x);
      const tier=x.alwaysGold?'항상 금스킬':result?.linked?'금스킬 예상':'백스킬 예상';
-     html+='<label class="planChoice'+(selected?' selected':'')+'" data-plan-link="'+esc(x.id)+'"><input type="radio" name="scenarioPlanLink" '+(selected?'checked':'')+'><span class="linkVisuals">'+linkCharacterIconsHtml(x.characters)+'</span><span><span class="planChoiceName">'+esc(x.kr||x.jp)+'</span><span class="planChoiceSub">'+esc(x.jp)+'<br>'+esc(result?.skillName||'스킬 없음')+' · 힌트 Lv+'+(x.hintLevel||1)+'</span></span><span class="planChoiceRight">'+esc(tier)+'</span></label>'
+     const krIsland=state.scenario==='island'&&state.guideServer==='kr';
+     const originalSkill=result?.skillName||'스킬 없음',translated=krIsland?koSkill(originalSkill):originalSkill;
+     const skillLabel=translated&&translated!=='한국어 번역 미등록'?translated:originalSkill;
+     const eventDetail=krIsland?(esc(skillLabel)+' · 힌트 Lv+'+(x.hintLevel||1)+(skillLabel!==originalSkill?'<br><span class="sub">원문: '+esc(originalSkill)+'</span>':'')):(esc(x.jp)+'<br>'+esc(originalSkill)+' · 힌트 Lv+'+(x.hintLevel||1));
+     html+='<label class="planChoice'+(selected?' selected':'')+'" data-plan-link="'+esc(x.id)+'"><input type="radio" name="scenarioPlanLink" '+(selected?'checked':'')+'><span class="linkVisuals">'+linkCharacterIconsHtml(x.characters)+'</span><span><span class="planChoiceName">'+esc(x.kr||x.jp)+'</span><span class="planChoiceSub">'+eventDetail+'</span></span><span class="planChoiceRight">'+esc(tier)+'</span></label>'
    }
    html+='</div></div>'
  }
