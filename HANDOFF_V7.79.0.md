@@ -62,8 +62,13 @@
 - GitHub Pages 배포: **SUCCESS** (핵심 코드 커밋)
 - JP validated data sync: **SUCCESS**
 - 기본 KR 시나리오·KR 무인도 안내·Tucker SSR·JP 모드 분리 브라우저 run 38860720028: **SUCCESS**
-- 최종 브라우저 smoke는 진행 중이므로 CI 종료 후 결과를 확인해 이 항목에 덧붙일 것:
-  https://github.com/cbh8567-art/uma-trainer-guide/actions/runs/38861264633
+- 최종 브라우저 smoke [38861264633](https://github.com/cbh8567-art/uma-trainer-guide/actions/runs/38861264633): **SUCCESS**
+  - P0 한국 기본 서버/무인도 초기 선택 및 일본 기존 라멘 시나리오: PASS
+  - KR 무인도 상세 공략/터커 SSR/한국 출시 안내/한국어 우선 선택지/JP 프로필 독립: PASS
+  - 일본 서버 전환 복귀·신규 JP 초기 라멘 프로필: PASS
+  - 다른 한국 시나리오 육성 중인 기록 보호(일본 모드에서 바로가기 클릭 취소): PASS
+  - 무인도 V7.78 기존 건설·Pt·섬트레권·초기화, 타즈나 및 기타 기능: PASS
+  - GitHub Pages 및 Vercel 브라우저 상호작용: PASS
 - 최신 main 정적 재조회: build V7.79.0, script 2, STATE_KEY 1, serverProfiles jp/kr 유지, `30305` 및 `friend_manual_` 유지, `scenarioBase` 0, DB 캐시 키 2개 유지, 기존 건설 이미지 5개 유지
 
 ## 7. 정확성/보존 범위
