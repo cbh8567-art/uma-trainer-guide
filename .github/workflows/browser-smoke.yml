@@ -340,7 +340,7 @@ jobs:
                       const oldKr=JSON.parse(JSON.stringify(state.serverProfiles.kr||{}));
                       const oldJp=JSON.parse(JSON.stringify(state.serverProfiles.jp||{}));
                       const jpHad=JSON.stringify(state.serverProfiles.jp);
-                      const baseline=tucker=card&&isSupportVisibleForServer(card);
+                      const baseline=!!card&&isSupportVisibleForServer(card);
                       const jpBefore=state.serverProfiles.jp?.scenario;
                       const panel=document.getElementById('scenarioPlanPanel');
                       if(state.activeServer!=='kr')setAppServer('kr');
