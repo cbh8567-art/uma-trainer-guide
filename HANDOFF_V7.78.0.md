@@ -70,11 +70,14 @@ JP 무인도 시나리오를 트레이너 가이드의 **육성용 기능 완성
 현재 최종 V7.78.0 browser smoke:
 https://github.com/cbh8567-art/uma-trainer-guide/actions/runs/38856195763
 
-**최종 결과는 CI 완료 후 반드시 재조회해서 확정해야 합니다.**
-- P0 초기 구동: 성공 확인
-- Browser interaction: CI 진행 중에 문서 초안 작성
-- GitHub Pages mirror: 성공
-- JP validated data sync: 성공
+**최종 결과: SUCCESS — GitHub Actions run 38856195763**
+- P0 current-build startup and controls smoke: SUCCESS
+- Browser interaction smoke test: SUCCESS (GitHub Pages/Vercel)
+- 신규 V7.78 검증: 대시보드, 시니어 1→2→3회 순차 체크, 건너뛰기 차단, 보너스 지급 확인 누락 경고, 3장 사용 시 잔여 0장, 중간 해제 시 이후 체크 일괄 해제, 12월 잔여 실효 경고, 건설권과 8월 이월권 불일치 경고, 2단계 초기화 확인 모두 PASS
+- 초기화 후 건설·Pt·턴 체크·이월권·권 지급 원장은 모두 비어 있고 **원래 덱 및 덱 확정 상태는 유지**됨을 자동 검증
+- 이전 V7.77 half/full, 초과 실효, 기록 취소, 다음 회차 이월 회귀시험도 SUCCESS
+- GitHub Pages mirror: SUCCESS
+- JP validated data sync: SUCCESS
 
 정적 무결성:
 - `index.html` main SHA `66592c59eac53d6d86a413c57e2d9d1b37ab3d04`
