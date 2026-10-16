@@ -1,48 +1,31 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-15",
-  "checkedAt": "2026-10-15T19:10:16.918Z",
+  "updated": "2026-10-16",
+  "checkedAt": "2026-10-16T05:30:08.261Z",
   "status": "pass",
   "summary": {
     "added": 0,
     "removed": 0,
-    "modified": 3
+    "modified": 0
   },
   "collections": {
     "catalog": {
       "count": 563,
       "previousCount": 563,
-      "changed": true,
+      "changed": false,
       "status": "pass",
       "changes": {
         "addedCount": 0,
         "removedCount": 0,
-        "modifiedCount": 3,
+        "modifiedCount": 0,
         "addedIds": [],
         "removedIds": [],
-        "modifiedIds": [
-          "10086",
-          "20054",
-          "30126"
-        ]
+        "modifiedIds": []
       },
       "details": {
         "added": [],
         "removed": [],
-        "modified": [
-          {
-            "id": "10086",
-            "name": "ヤマニンゼファー (R)"
-          },
-          {
-            "id": "20054",
-            "name": "テイエムオペラオー (SR)"
-          },
-          {
-            "id": "30126",
-            "name": "ヤマニンゼファー (SSR)"
-          }
-        ]
+        "modified": []
       }
     },
     "supports": {
