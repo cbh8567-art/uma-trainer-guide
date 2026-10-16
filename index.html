@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.78.0">
+<meta name="app-build" content="V7.79.0">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.78.0 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.79.0 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -33,7 +33,8 @@ button,input,select{font:inherit}
 .digitalReactionCaption{margin:8px 4px 2px;text-align:center;color:#ffe7f1;font-size:12px;font-weight:900;line-height:1.45}
 .digitalReactionClose{position:absolute;right:-8px;top:-8px;width:30px;height:30px;border:1px solid #8d6686;background:#241a25;color:#fff;border-radius:50%;cursor:pointer;font-weight:950}
 @media(max-width:720px){.digitalReactionCard{width:min(300px,88vw);padding:8px}.digitalReactionCaption{font-size:11px}}
-.app{max-width:1540px;margin:auto;padding:14px}.top{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.title{font-size:23px;font-weight:950}.sub,.note{font-size:11px;color:var(--muted);line-height:1.55}.toolbar{display:flex;gap:6px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;padding:8px 10px;cursor:pointer}.btn.primary{background:linear-gradient(#ff94b8,#ff72a0);color:#2b101a;border:0;font-weight:900}.btn:disabled{opacity:.45;cursor:default}.serverMode{margin:12px 0 4px;padding:10px 12px;border:1px solid #394158;border-radius:14px;background:linear-gradient(180deg,#1b2030,#151923)}.serverModeHead{display:flex;align-items:center;justify-content:space-between;gap:10px}.serverModeButtons{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:9px 0 7px}.serverTab{border:1px solid #47516a;background:#171c28;color:#d9dfeb;border-radius:11px;padding:10px 12px;font-weight:900;cursor:pointer}.serverTab.active{background:#eef1f6;color:#151822;border-color:#eef1f6}.tabs{display:flex;gap:6px;margin:8px 0 12px;position:sticky;top:0;z-index:15;background:#11141d;padding:7px 0}.tab{border:1px solid var(--line);background:#171b26;color:#cbd1df;border-radius:9px;padding:9px 13px;cursor:pointer}.tab.active{background:#f1f2f6;color:#171922;font-weight:900}.page{display:none}.page.active{display:block}.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;min-width:0}.panel{min-width:0;background:rgba(26,30,41,.98);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 12px 30px rgba(0,0,0,.18)}.panel h2{font-size:16px;margin:0 0 9px}.settings,.guide-settings{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.field{min-width:0}.field label{display:block;font-size:10px;color:var(--muted);margin-bottom:4px}.field input,.field select{width:100%;min-width:0;max-width:100%;background:#121620;border:1px solid var(--line);color:#fff;border-radius:8px;padding:8px}.filters{display:flex;gap:5px;flex-wrap:wrap;margin:7px 0}.filter{border:1px solid var(--line);background:#161a25;color:#c8cfdd;border-radius:999px;padding:6px 9px;font-size:10px;cursor:pointer}.filter.active{background:#eef0f4;color:#171922;font-weight:900}.search{display:grid;grid-template-columns:1fr auto;gap:6px}.search input{background:#121620;border:1px solid var(--line);color:#fff;border-radius:8px;padding:9px}
+.app{max-width:1540px;margin:auto;padding:14px}.top{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.title{font-size:23px;font-weight:950}.sub,.note{font-size:11px;color:var(--muted);line-height:1.55}.toolbar{display:flex;gap:6px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;padding:8px 10px;cursor:pointer}.btn.primary{background:linear-gradient(#ff94b8,#ff72a0);color:#2b101a;border:0;font-weight:900}.btn:disabled{opacity:.45;cursor:default}.serverMode{margin:12px 0 4px;padding:10px 12px;border:1px solid #394158;border-radius:14px;background:linear-gradient(180deg,#1b2030,#151923)}.serverModeHead{display:flex;align-items:center;justify-content:space-between;gap:10px}.krIslandLaunch{margin-top:8px;padding:9px 11px;border:1px solid #566a83;border-radius:10px;background:linear-gradient(125deg,#1d2e41,#24293d);display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.krIslandLaunchText{display:flex;flex-direction:column;gap:2px}.krIslandLaunchText b{font-size:12px}.krIslandLaunchText span{font-size:10px;color:#c4d3e3}.krIslandLaunch .btn{font-size:11px;padding:8px 12px}.krIslandLaunch.current{border-color:#587c70;background:linear-gradient(125deg,#172e2b,#212c36)}
+.serverModeButtons{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:9px 0 7px}.serverTab{border:1px solid #47516a;background:#171c28;color:#d9dfeb;border-radius:11px;padding:10px 12px;font-weight:900;cursor:pointer}.serverTab.active{background:#eef1f6;color:#151822;border-color:#eef1f6}.tabs{display:flex;gap:6px;margin:8px 0 12px;position:sticky;top:0;z-index:15;background:#11141d;padding:7px 0}.tab{border:1px solid var(--line);background:#171b26;color:#cbd1df;border-radius:9px;padding:9px 13px;cursor:pointer}.tab.active{background:#f1f2f6;color:#171922;font-weight:900}.page{display:none}.page.active{display:block}.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;min-width:0}.panel{min-width:0;background:rgba(26,30,41,.98);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 12px 30px rgba(0,0,0,.18)}.panel h2{font-size:16px;margin:0 0 9px}.settings,.guide-settings{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.field{min-width:0}.field label{display:block;font-size:10px;color:var(--muted);margin-bottom:4px}.field input,.field select{width:100%;min-width:0;max-width:100%;background:#121620;border:1px solid var(--line);color:#fff;border-radius:8px;padding:8px}.filters{display:flex;gap:5px;flex-wrap:wrap;margin:7px 0}.filter{border:1px solid var(--line);background:#161a25;color:#c8cfdd;border-radius:999px;padding:6px 9px;font-size:10px;cursor:pointer}.filter.active{background:#eef0f4;color:#171922;font-weight:900}.search{display:grid;grid-template-columns:1fr auto;gap:6px}.search input{background:#121620;border:1px solid var(--line);color:#fff;border-radius:8px;padding:9px}
 .deck{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.slot{min-width:0;border:1px dashed #4a5268;background:#141823;border-radius:11px;padding:5px;min-height:220px;position:relative}.slot.empty{display:flex;align-items:center;justify-content:center;color:#778097;font-size:11px;text-align:center;cursor:pointer}
 .slot.empty:hover{border-color:var(--pink);background:#211b29;color:#f5c8d8}
 .slot.empty::after{content:'＋ 클릭해서 추가';display:block;margin-top:5px;font-weight:850;color:#d5a2b7}
@@ -1254,6 +1255,10 @@ body.trainingMode .trainingProgressHead .sub,
    <button class="serverTab" data-app-server="jp">🇯🇵 일본 서버</button>
   </div>
   <div class="note" id="appServerNote"></div>
+  <div class="krIslandLaunch" id="krIslandLaunch">
+   <span class="krIslandLaunchText"><b>한국 서버 신규 시나리오</b><span>무인도에 어서 오세요 · 10월 16일 도입</span></span>
+   <button type="button" class="btn primary" id="openKrIslandGuideBtn">한국 무인도 육성 공략 열기 →</button>
+  </div>
  </div>
 
  <div class="tabs">
@@ -1311,7 +1316,7 @@ body.trainingMode .trainingProgressHead .sub,
 
     <h2 id="conditionSetupTitle">이번 육성 조건</h2>
     <div class="settings" id="conditionSetupBlock">
-     <div class="field"><label>시나리오</label><select id="scenario"><option value="tresenken">らっしゃい！トレセン軒！ · 트레센켄(라면)</option><option value="dreams">Dreams · 드림즈</option><option value="mecha">走れ！メカウマ娘 · 메카 우마무스메</option><option value="legends">The Twinkle Legends · 레전즈</option><option value="island">無人島 · 무인도</option><option value="onsen">温泉郷 · 온천향</option><option value="harvest">収穫ッ！満腹ッ！大豊食祭 · 대풍식제</option><option value="uaf">U.A.F. Ready GO!</option><option value="none">기타 / 시나리오 진화 미사용</option></select></div>
+     <div class="field"><label>시나리오</label><select id="scenario"><option value="island">무인도에 어서 오세요 -DESIGN YOUR ISLAND-</option><option value="legends">트윙클 레전즈 · The Twinkle Legends</option><option value="mecha">메카 우마무스메 · 走れ！メカウマ娘</option><option value="tresenken">트레센켄(라면) · らっしゃい！トレセン軒！</option><option value="dreams">드림즈 · Dreams</option><option value="onsen">温泉郷 · 온천향</option><option value="harvest">収穫ッ！満腹ッ！大豊食祭 · 대풍식제</option><option value="uaf">U.A.F. Ready GO!</option><option value="none">기타 / 시나리오 진화 미사용</option></select></div>
      <div class="field"><label>트레이너 가이드</label><select id="conditionGuideRace"></select></div>
      <div class="field"><label>바장</label><select id="ground"><option value="turf">芝 · 잔디</option><option value="dirt">ダート · 더트</option></select></div>
      <div class="field"><label>거리</label><select id="distance"><option value="short">短距離 · 단거리</option><option value="mile">マイル · 마일</option><option value="mid">中距離 · 중거리</option><option value="long">長距離 · 장거리</option></select></div>
@@ -1937,7 +1942,7 @@ let KR_SKILL_ALIASES={
  'お先に失礼っ！':'먼저 갑니다!','独占力':'독점력','快速':'쾌속'
 };
 const LB_MAX=[30,35,40,45,50], LB_INDEX=[6,7,8,9,10];
-const KOREA_SCENARIO_IDS=new Set(['uaf','harvest','mecha','legends','none']);
+const KOREA_SCENARIO_IDS=new Set(['uaf','harvest','mecha','legends','island','none']);
 const SCENARIO_STAT_CAPS={
  tresenken:{label:'트레센켄',speed:2150,stamina:1800,power:1700,guts:1700,wit:1800},
  dreams:{label:'Dreams',speed:2100,stamina:1700,power:1700,guts:1700,wit:1800},
@@ -1956,7 +1961,7 @@ function serverDefaultProfile(server){
  const set=server==='kr'?KOREA_UPCOMING:UPCOMING,r=set.races?.[0]||null;
  return {
    owned:[],deck:[null,null,null,null,null,null],acquired:{},eventChoice:{},eventDone:{},lb:{},
-   scenario:server==='kr'?'legends':'tresenken',tresenkenUltimateRamen:null,
+   scenario:server==='kr'?'island':'tresenken',tresenkenUltimateRamen:null,
    tresenkenRmj:{juniorBig:true,classicBig:true,seniorBig:true},ramenGuideMode:'balanced',
    ground:r?.ground||'turf',distance:r?.distance||'mid',style:'senko',currentUmaId:null,
    currentUmaConfirmed:false,inheritanceParentIds:[null,null],inheritanceConfirmed:false,deckConfirmed:false,
@@ -1981,8 +1986,8 @@ function normalizeServerProfile(profile,server){
  p.ramenGuideMode=['balanced','highroll'].includes(p.ramenGuideMode)?p.ramenGuideMode:'balanced';
  const set=server==='kr'?KOREA_UPCOMING:UPCOMING;
  if(!(set.races||[]).some(r=>r.id===p.guideRaceId))p.guideRaceId=set.races?.[0]?.id||null;
- if(server==='kr'&&!KOREA_SCENARIO_IDS.has(p.scenario))p.scenario='legends';
- if(!p.scenario)p.scenario=server==='kr'?'legends':'tresenken';
+ if(server==='kr'&&!KOREA_SCENARIO_IDS.has(p.scenario))p.scenario='island';
+ if(!p.scenario)p.scenario=server==='kr'?'island':'tresenken';
  p.evolutionPlan=p.evolutionPlan||null;
  p.deckPresets=Array.isArray(p.deckPresets)?p.deckPresets.slice(0,5):[];
  p.trainingHistory=Array.isArray(p.trainingHistory)?p.trainingHistory.slice(0,5):[];
@@ -2058,7 +2063,7 @@ function applyServerProfileToFlat(target,server){
  return target
 }
 function initializeServerState(raw){
- const s=raw||{},legacyServer=(s.activeServer||s.guideServer)==='kr'?'kr':'jp';
+ const s=raw||{},legacyServer=(s.activeServer||s.guideServer)==='jp'?'jp':'kr';
  if(!s.serverProfiles){
    // V5.13 이하 데이터는 양쪽에 복제해 유실을 막고, 이후부터 독립 저장한다.
    const legacy=profileFromFlat(s,legacyServer);
@@ -2389,7 +2394,7 @@ function islandDeckAssessment(){
  for(const card of cards){const t=normalizeType(card.type);counts.set(t,(counts.get(t)||0)+1)}
  const exact111111=cards.length===required.length&&required.every(t=>Number(counts.get(t)||0)===1);
  const friend=cards.find(card=>normalizeType(card.type)==='친구')||null,target=norm(guide.friendCharacter||'タッカーブライン');
- const tucker=!!(friend&&[friend.character,friend.jpName,friend.krName,friend.title].some(v=>norm(v||'').includes(target)));
+ const tucker=!!(friend&&(Number(friend.id)===30257||[friend.character,friend.jpName,friend.krName,friend.title].some(v=>norm(v||'').includes(target)||norm(v||'').includes(norm(guide.friendKr||'터커 브라인')))));
  const tuckerLb=tucker?Math.max(0,Math.min(4,Number(state.lb?.[String(friend.id)]??4))):null;
  const summary=required.map(t=>t+' '+Number(counts.get(t)||0)).join(' / ');
  return {cards,counts,exact111111,friend,tucker,tuckerLb,summary}
@@ -2401,7 +2406,7 @@ function islandTuckerConstructionTier(assess=islandDeckAssessment()){
 }
 function islandStatPriority(){
  const cap=v7ResolvedStatCaps('island')||SCENARIO_STAT_CAPS.island||{};
- const raw=state.trainingStatCheck?.stats||{},names={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성'};
+ const raw=state.trainingStatCheck?.scenario==='island'?(state.trainingStatCheck.stats||{}):{},names={speed:'스피드',stamina:'스태미나',power:'파워',guts:'근성'};
  const values=['speed','stamina','power','guts'].map(stat=>{
    const current=Number(raw[stat]),max=Number(cap[stat]);
    return {stat,label:names[stat],current:Number.isFinite(current)?current:null,max:Number.isFinite(max)?max:null,gap:Number.isFinite(current)&&Number.isFinite(max)?Math.max(0,max-current):null}
@@ -2656,9 +2661,9 @@ function renderScenarioPlan(){
  btn.disabled=!enabled;btn.textContent=state.scenarioPlanConfirmed?'계획 변경':'시나리오 플랜 확정';btn.classList.toggle('primary',!state.scenarioPlanConfirmed);
  status.textContent=!enabled?'서포트 덱 확정 필요':state.scenarioPlanConfirmed?'플랜 확정 ✓':scenarioPlanReady()?'확정 가능':'주요 선택 필요';
  let html='<div class="note" style="margin-top:7px"><b>'+esc(sc.kr||sc.name||'현재 시나리오')+'</b> · '+(state.trainingActive?'육성 진행 중에도 계획 변경 가능':'육성 시작 전 주요 선택을 미리 지정')+'</div>';
- if(state.scenario==='island'&&state.guideServer==='jp'){
-   const assess=islandDeckAssessment(),deckGuide=sc.recommendedDeck||{},checks=sc.coreGuide||[],currentTuckerTier=islandTuckerConstructionTier(assess);
-   html+='<div class="islandGuideBox"><div class="islandGuideHead"><div><b>JP 무인도 초기 공략 V1</b><div class="sub">기본 덱은 '+esc(deckGuide.name||'하이랜더 111111')+' · 스피드/스태미나/파워/근성/지능/친구 각 1장</div></div><span class="status">'+esc(sc.guideVersion||'jp-island-v1')+'</span></div>';
+ if(state.scenario==='island'&&(state.guideServer==='jp'||state.guideServer==='kr')){
+   const assess=islandDeckAssessment(),deckGuide=sc.recommendedDeck||{},checks=sc.coreGuide||[],currentTuckerTier=islandTuckerConstructionTier(assess),isKrIsland=state.guideServer==='kr';
+   html+='<div class="islandGuideBox"><div class="islandGuideHead"><div><b>'+(isKrIsland?'한국 서버 · 무인도에 어서 오세요':'일본 서버 · 무인도 공략')+'</b><div class="sub">'+(isKrIsland?'2026.10.16 한국 서버 도입 · ':'')+'기본 덱 '+esc(deckGuide.name||'하이랜더 111111')+' · 스피드/스태미나/파워/근성/지능/친구 각 1장</div></div><span class="status">'+(isKrIsland?'KR 정식 도입':'JP 참고 자료')+'</span></div>'+(isKrIsland?'<div class="islandVerifyNote">'+esc(sc.krUi?.sourceNote||'한국 서버 무인도 도입 확인 · 건설 추천은 일본 공략 참고값입니다.')+' <a href="'+esc(sc.krLaunch?.sourceUrl||'https://pf.kakao.com/_DzxjIb/posts')+'" target="_blank" rel="noopener">한국 공식 공지 ↗</a></div>':'');
    html+='<div class="islandGuideStatus"><span class="tag '+(assess.exact111111?'good':'warn')+'">'+(assess.exact111111?'111111 일치 ✓':'현재 덱 조정 필요')+'</span><span class="tag '+(assess.tucker?'good':'warn')+'">'+(assess.tucker?'터커 브라인 편성 ✓':'친구 슬롯: 터커 브라인 권장')+'</span><span class="tag">'+esc(assess.summary||'덱 미편성')+'</span></div>';
    const uni=islandUnifiedTicketSummary(),milestones=(sc.constructionGuide?.plans||[]).filter(x=>state.islandBuildDone?.[x.id]).length,allTimeline=islandTimelineItems(),
        completeChecks=allTimeline.filter(islandTimelineDone).length,allComplete=allTimeline.length>0&&completeChecks===allTimeline.length&&milestones===5;
@@ -3621,9 +3626,9 @@ let SCENARIOS={
     ]
   },
   island:{
-    name:'無人島',kr:'무인도',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/701249',
-    guideVersion:'jp-island-v1',
-    recommendedDeck:{name:'하이랜더 111111',types:['스피드','스태미나','파워','근성','지능','친구'],friendCharacter:'タッカーブライン',friendKr:'터커 브라인',note:'JP 현행 무인도 대인전 육성의 기본 권장형. 카드풀·거리·스킬 구성에 따라 일부 타입을 2장으로 바꾸는 변형은 허용.'},
+    name:'無人島',kr:'무인도에 어서 오세요 -DESIGN YOUR ISLAND-',maxEvolution:2,source:'Game8',sourceUrl:'https://game8.jp/umamusume/701249',
+    guideVersion:'jp-island-v1',krLaunch:{server:'kr',date:'2026-10-16',status:'introduced',sourceUrl:'https://pf.kakao.com/_DzxjIb/posts'},krUi:{headline:'한국 서버 무인도 육성 공략',sourceNote:'한국 서버 2026-10-16 도입 확인. 건설 배치와 추천 덱은 일본 공략 기반 참고값입니다. 실제 한국 서버 화면을 우선해 주세요.'},
+    recommendedDeck:{name:'하이랜더 111111',types:['스피드','스태미나','파워','근성','지능','친구'],friendCharacter:'タッカーブライン',friendKr:'터커 브라인',note:'무인도 시나리오의 하이랜더 111111 기본 권장형. 카드풀·거리·스킬 구성에 따라 일부 타입을 2장으로 바꾸는 변형도 가능합니다. 실제 보유 카드와 한국 서버 메타에 맞춰 조정하세요.'},
     coreGuide:[
       {id:'earlyBond',phase:'초반',title:'우정 게이지 우선',text:'우정 훈련이 열리기 전에는 인원이 많이 모인 훈련을 우선해 서포트 우정 게이지를 빠르게 올린다.'},
       {id:'islandTicket',phase:'섬트레',title:'섬트레권을 지나치게 아끼지 않기',text:'우정 훈련 2~3명 이상이 겹치면 사용 가치가 높다. 다음 섬트레권 지급 전에 기존 권이 남지 않도록 확인한다.'},
@@ -4922,7 +4927,7 @@ function applyScenarioServerOptions(){
    const allowed=state.guideServer!=='kr'||KOREA_SCENARIO_IDS.has(o.value);
    o.hidden=!allowed;o.disabled=!allowed
  }
- if(state.guideServer==='kr'&&!KOREA_SCENARIO_IDS.has(state.scenario))state.scenario='legends';
+ if(state.guideServer==='kr'&&!KOREA_SCENARIO_IDS.has(state.scenario))state.scenario='island';
  sel.value=state.scenario
 }
 function guideRaceLabel(r){
@@ -4940,7 +4945,7 @@ function guideRaceSet(server=state.guideServer){
 function renderAppServerTabs(){
  const server=state.activeServer==='kr'?'kr':'jp';
  document.querySelectorAll('[data-app-server]').forEach(b=>b.classList.toggle('active',b.dataset.appServer===server));
- const st=$('#appServerStatus');if(st)st.textContent=server==='kr'?'한국 서버 모드':'일본 서버 모드';
+ const st=$('#appServerStatus');if(st)st.textContent=server==='kr'?'한국 서버 모드 · 무인도 도입':'일본 서버 모드';const banner=$('#krIslandLaunch');if(banner)banner.classList.toggle('current',server==='kr'&&state.scenario==='island');
  const note=$('#appServerNote');
  if(note){
    if(server==='kr'){
@@ -7056,6 +7061,15 @@ $('#conditionGuideRace').onchange=e=>{
  toast(`${state.guideServer==='kr'?'한국':'일본'} 서버 가이드의 바장/거리를 현재 육성 조건에 적용했습니다.`)
 };
 document.querySelectorAll('[data-app-server]').forEach(b=>b.onclick=()=>setAppServer(b.dataset.appServer));
+const islandKrOpen=$('#openKrIslandGuideBtn');
+if(islandKrOpen)islandKrOpen.onclick=()=>{
+ if(state.activeServer==='kr'&&state.trainingActive&&state.scenario!=='island'&&!confirm('진행 중인 한국 서버 육성을 중단하고 무인도 공략으로 전환할까요?'))return;
+ if(state.activeServer!=='kr')setAppServer('kr');
+ if(state.scenario!=='island'){
+   const sel=$('#scenario');sel.value='island';sel.onchange({target:sel});
+ }else{renderScenarioPlan();renderAppServerTabs();}
+ $('#scenarioPlanPanel')?.scrollIntoView({behavior:'smooth',block:'start'});
+};
 for(const id of ['ground','distance','style']){$('#'+id).value=state[id];$('#'+id).onchange=e=>{state[id]=e.target.value;save();renderDeck();renderGlobalSkills();renderConditionUmaSuitability();renderGuide();renderSelectedUma();renderDbGuideRecommendations();renderCatalog();renderTrainingFinishSummary();renderV7Planner();renderTier()}}
 $('#conditionUmaButton').onclick=()=>openUmaPicker('current');
 $('#umaPickerSearch').oninput=renderUmaPicker;
