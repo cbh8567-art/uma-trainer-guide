@@ -34,7 +34,13 @@
 ## 자동 브라우저 검증
 GitHub Actions https://github.com/cbh8567-art/uma-trainer-guide/actions/runs/38862221101
 
-최종 성공 여부를 CI 종료 이후 확인해야 함. 사용자 결과에는 성공 검증 후에만 SUCCESS라고 명시.
+**최종 SUCCESS (38862221101)**
+- P0 초기 구동 및 덱 아래 초기화 버튼 위치 검사: PASS
+- Chrome Selenium 상호작용: 확인 취소 시 취득 기록 유지, 확인 시 현재 서버 스킬 취득 기록 초기화: PASS
+- 덱/보유 SSR/JP 서버 프로필 보존: PASS
+- 시나리오 진행 `:progress:` 및 지정 선택 기록 보존: PASS
+- GitHub Pages, Vercel 브라우저 테스트: PASS
+- 테스트 링크: https://github.com/cbh8567-art/uma-trainer-guide/actions/runs/38862221101
 
 ## 다음 단계
 기존 UI 기능은 그대로 보존하고 한국 무인도 공략 실사용 검수에 집중.
