@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-20",
-  "generatedAt": "2026-10-20T19:11:02.364Z",
-  "openCount": 42,
+  "updated": "2026-10-21",
+  "generatedAt": "2026-10-21T19:11:52.120Z",
+  "openCount": 45,
   "items": [
     {
       "key": "supports:removed:30321",
@@ -50,6 +50,42 @@
       "status": "open",
       "firstSeenAt": "2026-10-02T00:37:28.902Z",
       "lastSeenAt": "2026-10-02T00:37:28.902Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:modified:30127",
+      "collection": "catalog",
+      "changeType": "modified",
+      "id": "30127",
+      "name": "スペシャルウィーク (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-10-21T19:11:52.120Z",
+      "lastSeenAt": "2026-10-21T19:11:52.120Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:modified:30128",
+      "collection": "catalog",
+      "changeType": "modified",
+      "id": "30128",
+      "name": "スイープトウショウ (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-10-21T19:11:52.120Z",
+      "lastSeenAt": "2026-10-21T19:11:52.120Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:modified:30129",
+      "collection": "catalog",
+      "changeType": "modified",
+      "id": "30129",
+      "name": "グラスワンダー (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-10-21T19:11:52.120Z",
+      "lastSeenAt": "2026-10-21T19:11:52.120Z",
       "note": ""
     },
     {

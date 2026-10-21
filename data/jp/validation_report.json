@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-20",
+  "updated": "2026-10-21",
   "status": "pass",
-  "checkedAt": "2026-10-20T19:11:02.364Z",
+  "checkedAt": "2026-10-21T19:11:52.120Z",
   "fatal": [],
   "warnings": [],
   "collections": {
     "catalog": {
       "source": "https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json",
       "count": 563,
-      "contentSha256": "4446b14acda09674fb0a174ee2c75a97d1307e3dc24183ee691acb895672b37b",
+      "contentSha256": "095a33de1693de1e0082223d5d16035cb4dfa6a13fc7fa7124e0386021b2f5ef",
       "duplicateIds": [],
       "status": "pass",
       "previousCount": 563,
@@ -18,17 +18,34 @@
       "changes": {
         "addedCount": 0,
         "removedCount": 0,
-        "modifiedCount": 0,
+        "modifiedCount": 3,
         "addedIds": [],
         "removedIds": [],
-        "modifiedIds": []
+        "modifiedIds": [
+          "30127",
+          "30128",
+          "30129"
+        ]
       },
       "changeDetails": {
         "added": [],
         "removed": [],
-        "modified": []
+        "modified": [
+          {
+            "id": "30127",
+            "name": "スペシャルウィーク (SSR)"
+          },
+          {
+            "id": "30128",
+            "name": "スイープトウショウ (SSR)"
+          },
+          {
+            "id": "30129",
+            "name": "グラスワンダー (SSR)"
+          }
+        ]
       },
-      "changed": false
+      "changed": true
     },
     "supports": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
@@ -160,6 +177,6 @@
   "changeTotals": {
     "added": 0,
     "removed": 0,
-    "modified": 0
+    "modified": 3
   }
 }
