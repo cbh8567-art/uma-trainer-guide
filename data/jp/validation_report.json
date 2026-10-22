@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-21",
+  "updated": "2026-10-22",
   "status": "pass",
-  "checkedAt": "2026-10-21T19:11:52.120Z",
+  "checkedAt": "2026-10-22T19:11:22.799Z",
   "fatal": [],
   "warnings": [],
   "collections": {
@@ -18,34 +18,17 @@
       "changes": {
         "addedCount": 0,
         "removedCount": 0,
-        "modifiedCount": 3,
+        "modifiedCount": 0,
         "addedIds": [],
         "removedIds": [],
-        "modifiedIds": [
-          "30127",
-          "30128",
-          "30129"
-        ]
+        "modifiedIds": []
       },
       "changeDetails": {
         "added": [],
         "removed": [],
-        "modified": [
-          {
-            "id": "30127",
-            "name": "スペシャルウィーク (SSR)"
-          },
-          {
-            "id": "30128",
-            "name": "スイープトウショウ (SSR)"
-          },
-          {
-            "id": "30129",
-            "name": "グラスワンダー (SSR)"
-          }
-        ]
+        "modified": []
       },
-      "changed": true
+      "changed": false
     },
     "supports": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
@@ -177,6 +160,6 @@
   "changeTotals": {
     "added": 0,
     "removed": 0,
-    "modified": 3
+    "modified": 0
   }
 }

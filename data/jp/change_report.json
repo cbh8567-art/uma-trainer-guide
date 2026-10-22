@@ -1,48 +1,31 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-21",
-  "checkedAt": "2026-10-21T19:11:52.120Z",
+  "updated": "2026-10-22",
+  "checkedAt": "2026-10-22T19:11:22.799Z",
   "status": "pass",
   "summary": {
     "added": 0,
     "removed": 0,
-    "modified": 3
+    "modified": 0
   },
   "collections": {
     "catalog": {
       "count": 563,
       "previousCount": 563,
-      "changed": true,
+      "changed": false,
       "status": "pass",
       "changes": {
         "addedCount": 0,
         "removedCount": 0,
-        "modifiedCount": 3,
+        "modifiedCount": 0,
         "addedIds": [],
         "removedIds": [],
-        "modifiedIds": [
-          "30127",
-          "30128",
-          "30129"
-        ]
+        "modifiedIds": []
       },
       "details": {
         "added": [],
         "removed": [],
-        "modified": [
-          {
-            "id": "30127",
-            "name": "スペシャルウィーク (SSR)"
-          },
-          {
-            "id": "30128",
-            "name": "スイープトウショウ (SSR)"
-          },
-          {
-            "id": "30129",
-            "name": "グラスワンダー (SSR)"
-          }
-        ]
+        "modified": []
       }
     },
     "supports": {
