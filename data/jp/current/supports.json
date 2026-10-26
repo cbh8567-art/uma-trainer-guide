@@ -1180,6 +1180,7 @@
   {
     "id": 30322,
     "name": "[Time of Departure]マヤノトップガン",
+    "reviewStatus": "official_release_only",
     "title": "Time of Departure",
     "characterName": "マヤノトップガン",
     "rarity": "SSR",
@@ -1192,6 +1193,7 @@
   {
     "id": 30323,
     "name": "[いとどめでたき、まつりかな]吾妻",
+    "reviewStatus": "official_release_only",
     "title": "いとどめでたき、まつりかな",
     "characterName": "吾妻",
     "rarity": "SSR",

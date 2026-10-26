@@ -2145,7 +2145,7 @@ function katakanaToHangul(s){
  const dig={'キャ':'캬','キュ':'큐','キョ':'쿄','シャ':'샤','シュ':'슈','ショ':'쇼','チャ':'챠','チュ':'츄','チョ':'쵸','ニャ':'냐','ニュ':'뉴','ニョ':'뇨','ヒャ':'햐','ヒュ':'휴','ヒョ':'효','ミャ':'먀','ミュ':'뮤','ミョ':'묘','リャ':'랴','リュ':'류','リョ':'료','ギャ':'갸','ギュ':'규','ギョ':'교','ジャ':'쟈','ジュ':'쥬','ジョ':'죠','ビャ':'뱌','ビュ':'뷰','ビョ':'뵤','ピャ':'퍄','ピュ':'퓨','ピョ':'표','ティ':'티','ディ':'디','ファ':'파','フィ':'피','フェ':'페','フォ':'포','ウィ':'위','ウェ':'웨','ウォ':'워','チェ':'체','シェ':'셰','ジェ':'제'};
  let out='';for(let i=0;i<s.length;i++){const two=s.slice(i,i+2);if(dig[two]){out+=dig[two];i++;continue}out+=map[s[i]]??s[i]}return out.replace(/ㄴ(?=$|[^가-힣])/g,'ㄴ');
 }
-function koChar(jp){return INVEN_CHAR_ALIASES[jp]||CONFIG.charAliases[jp]||katakanaToHangul(jp)}
+function koChar(jp){return jp==='吾妻'?'아즈마':INVEN_CHAR_ALIASES[jp]||CONFIG.charAliases[jp]||katakanaToHangul(jp)}
 function koSkill(jp,id=null){
  if(KR_SKILL_ALIASES[jp])return KR_SKILL_ALIASES[jp];
  const invenById=id!==null&&id!==undefined?KR_SKILL_INVEN_ID_ALIASES[String(id)]:null;
@@ -5758,6 +5758,9 @@ for(const card of [
 ]){
  if(cards.some(c=>Number(c.id)===card.id))continue;
  cards.push({...card,jpName:`[${card.title}]${card.character}`,englishName:'',image:supportPrimaryImageUrl(card.id),imageFallbacks:supportImageFallbacks(card.id),supportEffects:[],supportUnique:null,hints:[],eventSkillsAll:[],rareEvents:[],catalogSource:'2026-10-26 공식 발표 · 상세 데이터 확인 중'});
+}
+for(const card of cards){
+ if(priMap.get(Number(card.id))?.reviewStatus==='official_release_only')card.catalogSource='2026-10-26 공식 발표 · 상세 데이터 확인 중';
 }
 applyFriendEventSupplements(applySupportRareSkillIndex(applyFriendSkillSupplements(applySupportOverrides(cards,skillMap),skillMap),skillMap),skillMap);cards.sort((a,b)=>b.id-a.id);const rareAudit=supportRareCoverageAudit(cards);runtime={catalog:cards,byId:new Map(cards.map(c=>[Number(c.id),c])),skills:skillMap,characters:characters.map(parseCharacter),courses,ready:true};const cache={version:6,generatedAt:new Date().toISOString(),catalog:cards,skills,characters,courses};const cacheResult=storeDbCacheSafely(cache);st.textContent=`SSR ${cards.length}장 · 이벤트 레어스킬 ${rareAudit.coveredCards}/${rareAudit.expectedCards}장 · SP 원가 ${costAudit.linked}스킬 · 카운터 누락 ${rareAudit.missingCards.length}장 · ${cacheResult.saved?'경량 캐시 저장':'캐시 저장 생략'}`;renderAll();setDbLoadState('ready','DB 준비 완료',`SSR ${cards.length}장 · SP 원가 ${costAudit.linked}스킬을 포함한 최신 데이터를 사용할 수 있습니다.`);if(!cacheResult.saved)toast('DB 동기화 성공 · 브라우저 저장공간 부족으로 캐시는 저장하지 않았습니다.')}catch(e){st.textContent='동기화 실패';setDbLoadState('error','온라인 DB를 불러오지 못했습니다.','인터넷 연결을 확인한 뒤 「다시 시도」를 눌러 주세요. 저장한 통합 DB JSON도 사용할 수 있습니다.');toast('온라인 DB 동기화 실패: '+e.message)}finally{btn.disabled=false}}
 function normalizeCachedCatalog(catalog,skillMap){

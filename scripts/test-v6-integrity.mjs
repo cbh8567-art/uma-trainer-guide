@@ -27,7 +27,7 @@ ok(Number(meta.supportMaxId)===30260,"KR supportMaxId must stay 30260");
 const jpSupports=await read("data/jp/current/supports.json");
 for(const [id,name,type] of [[30322,"マヤノトップガン","power"],[30323,"吾妻","friend"]]){
   const card=jpSupports.find(item=>Number(item.id)===id);
-  ok(Boolean(card)&&card.name.includes(name)&&card.type===type,`JP support ${id} is missing or mislabeled`);
+  ok(Boolean(card)&&card.name.includes(name)&&card.type===type&&card.reviewStatus==="official_release_only",`JP support ${id} is missing or mislabeled`);
   ok(id>Number(meta.supportMaxId),`JP support ${id} must not appear in KR`);
 }
 for(const id of [30256,30257])ok(index.includes(`${id}:`),`KR island support ${id} mapping missing`);
