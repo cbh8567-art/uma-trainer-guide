@@ -30,7 +30,7 @@ jobs:
           from selenium.webdriver.common.by import By
           from selenium.webdriver.support.ui import Select, WebDriverWait
           from selenium.webdriver.support import expected_conditions as EC
-          import os, re, urllib.request
+          import os, re, time, urllib.request
 
           sha = os.environ.get("GITHUB_SHA", "main")
           raw = urllib.request.urlopen(f"https://raw.githubusercontent.com/cbh8567-art/uma-trainer-guide/{sha}/index.html", timeout=20).read().decode("utf-8")
@@ -48,8 +48,19 @@ jobs:
           d = webdriver.Chrome(options=opts)
           d.set_window_size(1440, 1200)
           try:
-              d.get(url)
-              WebDriverWait(d, 25).until(lambda x: expected_build in x.title)
+              # GitHub Pages 배포가 워크플로보다 늦게 끝날 수 있으므로 새 빌드가 보일 때까지 새로 읽습니다.
+              deadline = time.monotonic() + 120
+              attempt = 0
+              while True:
+                  attempt += 1
+                  d.get(f"{url}&attempt={attempt}")
+                  WebDriverWait(d, 25).until(lambda x: "V7." in x.title)
+                  if expected_build in d.title:
+                      break
+                  if time.monotonic() >= deadline:
+                      raise RuntimeError(f"GitHub Pages stayed stale: expected {expected_build}, got {d.title}")
+                  print("WAITING FOR CURRENT PAGES BUILD:", expected_build, "got", d.title)
+                  time.sleep(5)
               WebDriverWait(d, 25).until(EC.presence_of_element_located((By.ID, "page-deck")))
 
               tabs = d.find_elements(By.CSS_SELECTOR, ".tab")
@@ -201,6 +212,25 @@ jobs:
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "scenarioRareSkillPanel")))
               WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.ID, "finishRamenLinkChoices")))
 
+          def load_target(driver, name, url, required):
+              # 필수 Pages는 충분히 기다리고, 선택 Vercel 주소는 짧게 확인한 뒤 다음 대상으로 넘어갑니다.
+              deadline = time.monotonic() + (120 if required else 30)
+              attempt = 0
+              while True:
+                  attempt += 1
+                  separator = "&" if "?" in url else "?"
+                  driver.get(f"{url}{separator}attempt={attempt}")
+                  wait_app(driver)
+                  if EXPECTED_BUILD in driver.title:
+                      return True
+                  if time.monotonic() >= deadline:
+                      if required:
+                          raise RuntimeError(f"Required browser target is stale: expected {EXPECTED_BUILD}, got {driver.title}")
+                      print("STALE DEPLOYMENT WARN:", name, "expected", EXPECTED_BUILD, "got", driver.title)
+                      return False
+                  print("WAITING FOR CURRENT BUILD:", name, EXPECTED_BUILD, "got", driver.title)
+                  time.sleep(5)
+
           def option_with_text(driver, section_id, text):
               rows = driver.find_elements(By.CSS_SELECTOR, f"#{section_id} .finishOption")
               for row in rows:
@@ -312,14 +342,9 @@ jobs:
               print("\n=== TARGET", name, url, "required=", required, "===")
               d = make_driver()
               try:
-                  d.get(url)
-                  wait_app(d)
+                  current_build = load_target(d, name, url, required)
                   print("TITLE:", d.title)
-                  current_build = EXPECTED_BUILD in d.title
-                  if required and not current_build:
-                      raise RuntimeError(f"Required browser target is stale: expected {EXPECTED_BUILD}, got {d.title}")
-                  if not required and not current_build:
-                      print("STALE DEPLOYMENT WARN:", name, "expected", EXPECTED_BUILD, "got", d.title)
+                  if not current_build:
                       continue
                   # V7.9 spectator mode: verify HTTPS screen-share UI/API without invoking the permission dialog.
                   watch_start = d.find_element(By.ID, "watchPilotStart")
