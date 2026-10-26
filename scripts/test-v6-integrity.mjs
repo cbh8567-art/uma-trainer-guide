@@ -5,12 +5,12 @@ const ok=(cond,msg)=>{if(!cond)errors.push(msg)};
 const read=async p=>JSON.parse(await fs.readFile(path.join(ROOT,p),"utf8"));
 const text=async p=>await fs.readFile(path.join(ROOT,p),"utf8");
 const index=await text("index.html");
-const inlineMatch=index.match(/<script>([\s\S]*?)<\/script>/);
-ok(Boolean(inlineMatch?.[1]),"inline app script missing");
-if(inlineMatch?.[1]){
-  try{ new Function(inlineMatch[1]); }
-  catch(e){ errors.push("index inline JavaScript syntax error: "+e.message); }
-}
+const inlineScripts=[...index.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(match=>match[1]);
+ok(inlineScripts.length===2,`index must contain exactly 2 inline scripts (found ${inlineScripts.length})`);
+inlineScripts.forEach((script,index)=>{
+  try{ new Function(script); }
+  catch(e){ errors.push(`index inline JavaScript ${index+1} syntax error: ${e.message}`); }
+});
 ok((index.match(/const STATE_KEY='uma_tracker_v4_state'/g)||[]).length===1,"STATE_KEY must exist exactly once");
 ok(index.includes("friend_manual_"),"friend_manual_ fallback missing");
 ok(!index.includes("scenarioBase"),"obsolete scenarioBase must remain absent");
@@ -27,7 +27,7 @@ const uma=await read("data/kr/uma_ids.json");
 ok(Array.isArray(uma.ids)&&uma.ids.length===212,"KR uma allowlist count must stay 212");
 for(const id of [103103,104003,113301])ok(!uma.ids.includes(id),`future KR uma id ${id} must remain excluded`);
 const scenarios=await read("data/common/scenarios.json");
-for(const key of ["tresenken","dreams","onsen","island","legends","mecha","harvest","uaf","none"])ok(Boolean(scenarios.scenarios?.[key]),`scenario ${key} missing`);
+for(const key of ["goshiki","tresenken","dreams","onsen","island","legends","mecha","harvest","uaf","none"])ok(Boolean(scenarios.scenarios?.[key]),`scenario ${key} missing`);
 const src=await read("data/jp/source_config.json");
 ok(src.snapshotReady===true,"JP snapshotReady must be true");
 for(const key of ["catalog","supports","events","skills","characters","courses"])ok(Boolean(src.snapshotSources?.[key]),`snapshot source ${key} missing`);
@@ -38,6 +38,7 @@ ok(Array.isArray(candidates.characters)&&Array.isArray(candidates.supports),"KR 
 const watch=await read("data/jp/scenario_watch.json");
 ok(watch.machineReadableSourceConfigured===false,"scenario source must not be falsely claimed configured");
 ok(watch.status==="verification_required","scenario watch must remain verification_required");
+ok(watch.knownScenarioKeys?.includes("goshiki"),"goshiki scenario watch key missing");
 const inheritance=await read("data/jp/inheritance_recommendations.json");
 const iconOverrides=await read("data/jp/skill_icon_overrides.json");
 await read("data/jp/system_status.json");
@@ -52,14 +53,6 @@ await read("data/jp/source_health.json");
 await read("data/jp/entity_summary.json");
 await read("data/jp/change_impact.json");
 await read("data/jp/automation_report.json");
-
-// Parse every inline script without executing browser code.
-const inlineScripts=[...index.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(m=>m[1]);
-ok(inlineScripts.length>=2,"Expected inline scripts missing");
-for(let i=0;i<inlineScripts.length;i++){
-  try{ new Function(inlineScripts[i]); }
-  catch(error){ errors.push(`Inline script ${i+1} syntax error: ${error.message}`); }
-}
 
 ok(index.includes('id="v7InheritanceRecommend"'),"V7 inheritance recommendation UI missing");
 ok(index.includes("function v7InheritancePlan"),"V7 inheritance recommendation logic missing");

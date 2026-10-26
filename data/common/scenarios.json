@@ -1,7 +1,74 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-16",
+  "updated": "2026-10-26",
   "scenarios": {
+    "goshiki": {
+      "name": "朋、史解き　―午式駿大祭―",
+      "kr": "벗, 역사를 풀다 ―오식 준대제―",
+      "maxEvolution": 0,
+      "source": "우마무스메 공식 · 2026-10-26",
+      "sourceUrl": "https://umamusume.jp/contents/game/scenario/goshikisyuntaisai/",
+      "officialNewsUrl": "https://umamusume.jp/news/detail?id=3509",
+      "releaseDate": "2026-10-26T12:00:00+09:00",
+      "servers": [
+        "jp"
+      ],
+      "status": "released",
+      "officialReading": "とも、ふみほどき　ごしきしゅんたいさい",
+      "skillDataPending": true,
+      "statCapsNote": "스탯 상한은 공개 직전 선행 체험판 수치를 초기값으로 넣었습니다. 공식 확정 수치가 아니며, 인게임 값이 다르면 스탯 상한 설정에서 직접 바꿀 수 있습니다.",
+      "statCapsSourceUrl": "https://dengekionline.com/article/202610/91936",
+      "linkCharacters": [
+        {
+          "jp": "吾妻",
+          "kr": "아즈마"
+        },
+        {
+          "jp": "ダイワスカーレット",
+          "kr": "다이와 스칼렛"
+        },
+        {
+          "jp": "ユキノビジン",
+          "kr": "유키노 비진"
+        },
+        {
+          "jp": "マヤノトップガン",
+          "kr": "마야노 탑건"
+        },
+        {
+          "jp": "ノーリーズン",
+          "kr": "노 리즌"
+        },
+        {
+          "jp": "ブラストワンピース",
+          "kr": "블라스트 원피스"
+        }
+      ],
+      "officialHighlights": [
+        {
+          "title": "가르침 전수(教え伝受)",
+          "text": "각 연목 담당 우마무스메가 「가르침」을 전수받아 훈련에 유리한 효과를 발휘합니다."
+        },
+        {
+          "title": "다섯 연목(演目)",
+          "text": "流鏑馬·神旗争奪戦·納舞·大曳神輿·飛駆, 다섯 연목을 선택해 축제 준비를 진행합니다."
+        },
+        {
+          "title": "연목 게이지와 연습",
+          "text": "훈련과 레이스로 연목 게이지를 채우면 「연목 연습」이 열리고 연목 Lv이 올라갑니다."
+        },
+        {
+          "title": "진척 발표회와 본제",
+          "text": "주니어·클래식 12월 후반에 진척 발표회, 시니어 10월 후반에 최종 축제 「오식 준대제」가 열립니다."
+        },
+        {
+          "title": "가르침 전성(教え転成)",
+          "text": "진척 발표회 뒤에는 모은 가르침을 전성해 다음 단계의 육성 효과로 이어갑니다."
+        }
+      ],
+      "scenarioAcquiredRareSkills": [],
+      "evolutions": []
+    },
     "tresenken": {
       "name": "らっしゃい！トレセン軒！",
       "kr": "트레센켄(라면)",

@@ -331,7 +331,7 @@ jobs:
                       raise RuntimeError("getDisplayMedia is unavailable on deployed HTTPS target")
                   print("WATCH PILOT DOM/API PASS")
 
-                  # V7.79: KR-first fresh profile, officially launched island and separate JP mode.
+                  # V7.80: KR-first fresh profile, launched island and separate JP latest-scenario mode.
                   WebDriverWait(d, 25).until(lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true"))
                   kr_verify = d.execute_script("""
                       const cold={active:state.activeServer,scenario:state.scenario,
@@ -372,9 +372,32 @@ jobs:
                       raise RuntimeError("KR default inactive: "+str(kr_verify))
                   if not kr_verify.get("cold",{}).get("visible") or not kr_verify.get("hasKrUi") or not kr_verify.get("hasKrRef") or not kr_verify.get("krTucker"):
                       raise RuntimeError("KR island UI/support missing: "+str(kr_verify))
-                  if not kr_verify.get("jpNotClobbered") or not kr_verify.get("returnedKr") or not kr_verify.get("protectedOtherRun") or kr_verify.get("freshJpDefault") != "tresenken" or kr_verify.get("bannerResult",{}).get("scenario") != "island":
+                  if not kr_verify.get("jpNotClobbered") or not kr_verify.get("returnedKr") or not kr_verify.get("protectedOtherRun") or kr_verify.get("freshJpDefault") != "goshiki" or kr_verify.get("bannerResult",{}).get("scenario") != "island":
                       raise RuntimeError("KR/JP profile separation failed: "+str(kr_verify))
-                  print("KR ISLAND V7.79 LAUNCH / UI / TUCKER / SERVER ISOLATION PASS:",kr_verify)
+                  print("KR ISLAND V7.80 LAUNCH / UI / TUCKER / SERVER ISOLATION PASS:",kr_verify)
+
+                  jp_verify = d.execute_script("""
+                      setAppServer('jp');
+                      const option=document.querySelector('#scenario option[value="goshiki"]');
+                      document.getElementById('openJpGoshikiGuideBtn')?.click();
+                      renderScenarioPlan();
+                      const text=document.querySelector('#scenarioPlanBody')?.innerText||'';
+                      const jpAllowed=!!option&&!option.disabled&&!option.hidden&&state.scenario==='goshiki';
+                      const jpSaved=state.serverProfiles.jp?.scenario==='goshiki';
+                      setAppServer('kr');
+                      const krBlocked=!!option&&option.disabled&&option.hidden&&state.scenario==='island';
+                      const panel=document.getElementById('scenarioPlanPanel');
+                      state.trainingActive=true;renderScenarioPlan();document.body.classList.add('trainingMode');
+                      const islandGuideVisible=getComputedStyle(panel).display!=='none';
+                      document.body.classList.remove('trainingMode');state.trainingActive=false;
+                      setAppServer('jp');
+                      return {jpAllowed,jpSaved,krBlocked,islandGuideVisible,scenario:state.scenario,
+                        hasOfficial:text.includes('공식 시나리오 페이지'),hasSystem:text.includes('연목 게이지와 연습'),
+                        hasPending:text.includes('추측값을 넣지 않습니다')};
+                  """)
+                  if not all(jp_verify.get(k) for k in ["jpAllowed","jpSaved","krBlocked","islandGuideVisible","hasOfficial","hasSystem","hasPending"]) or jp_verify.get("scenario") != "goshiki":
+                      raise RuntimeError("JP Goshiki / KR island guide smoke failed: "+str(jp_verify))
+                  print("JP GOSHIKI V7.80 SERVER / OFFICIAL GUIDE / KR ISLAND VISIBILITY PASS:",jp_verify)
 
                   # Current build: animated Agnes Digital mascot + favicon asset.
                   mascot = d.find_element(By.ID, "digitalMascotFloating")
