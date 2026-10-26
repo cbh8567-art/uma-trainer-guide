@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-10-27",
+  "sources": {
+    "cards": "https://gametora.com/ja/umamusume/supports/30322-mayano-top-gun",
+    "effects": "https://xn--gck1f423k.xn--1bvt37a.tools/supports/30322",
+    "mayanoEvents": "https://gamewith.jp/uma-musume/article/show/584253",
+    "azumaEvents": "https://game8.jp/umamusume/836270"
+  },
+  "extraSkills": [
+    {"id": 204731, "name": "機転", "rarity": 2, "iconId": 20012, "baseSp": 180, "lowerSkillId": 204732, "distances": ["mid"]},
+    {"id": 204741, "name": "希代の才覚", "rarity": 2, "iconId": 20012, "baseSp": 180, "lowerSkillId": 204742, "distances": ["long"]},
+    {"id": 204751, "name": "アドバンテージ", "rarity": 2, "iconId": 20012, "baseSp": 180, "lowerSkillId": 204752, "distances": []},
+    {"id": 204732, "name": "如才なし", "rarity": 1, "iconId": 20011, "baseSp": 180, "upperSkillId": 204731, "distances": ["mid"]},
+    {"id": 204742, "name": "直感力", "rarity": 1, "iconId": 20011, "baseSp": 180, "upperSkillId": 204741, "distances": ["long"]},
+    {"id": 204752, "name": "主導権", "rarity": 1, "iconId": 20011, "baseSp": 180, "upperSkillId": 204751, "distances": []},
+    {"id": 204762, "name": "死力を尽くして", "rarity": 1, "iconId": 20041, "baseSp": 180, "distances": ["long"]}
+  ],
+  "cards": {
+    "30322": {
+      "sourceUrl": "https://gamewith.jp/uma-musume/article/show/584253",
+      "catalogSource": "GameTora / U-tools · 2026-10-26 실장 데이터",
+      "uniqueBonus": "편성 서포트 카드 종류가 4종 이상이면 트레이닝 효과 +10%",
+      "hintSkillIds": [200062, 203242, 200362, 203502, 203652, 203852, 204072, 204182, 204512, 204732, 204742, 204752, 201601, 204762],
+      "eventSkillIds": [203501, 204731, 204741, 204751, 200362],
+      "supportEffects": [
+        {"name": "Friendship Bonus", "symbol": "percent", "values": [25, 27, 30, 32, 35]},
+        {"name": "Mood Effect", "symbol": "percent", "values": [40, 45, 50, 55, 60]},
+        {"name": "Stamina Bonus", "symbol": "none", "values": [1, 1, 1, 1, 1]},
+        {"name": "Training Effectiveness", "symbol": "percent", "values": [1, 5, 10, 10, 10]},
+        {"name": "Initial Stamina", "symbol": "none", "values": [25, 26, 27, 28, 30]},
+        {"name": "Initial Friendship Gauge", "symbol": "none", "values": [25, 27, 30, 32, 35]},
+        {"name": "Race Bonus", "symbol": "percent", "values": [5, 6, 7, 8, 10]},
+        {"name": "Fan Bonus", "symbol": "percent", "values": [10, 12, 15, 17, 20]},
+        {"name": "Hint Levels", "symbol": "level", "values": [2, 2, 3, 3, 4]},
+        {"name": "Hint Frequency", "symbol": "percent", "values": [60, 70, 80, 90, 100]},
+        {"name": "Specialty Priority", "symbol": "none", "values": [10, 10, 10, 60, 120]},
+        {"name": "Skill Point Bonus", "symbol": "none", "values": [1, 1, 1, 1, 2]},
+        {"name": "Initial Skill Points", "symbol": "none", "values": [30, 37, 45, 52, 60]}
+      ],
+      "rareEvents": [
+        {
+          "id": "verified_30322_final",
+          "labelJp": "マヤ、わかっちゃった！",
+          "labelKr": "마야, 알아버렸어!",
+          "selection": "result",
+          "note": "연속 이벤트 3회차. 선택지 3개 중 하나를 고르고, 성공/대성공 결과에 따라 힌트 Lv이 1/2로 달라집니다.",
+          "choices": [
+            {"id": "mid_success", "labelJp": "立派な\"大人\"だ……！ · 성공", "labelKr": "멋진 어른이야! · 성공", "skills": [{"skillId": 203501, "hintLevel": 1}, {"skillId": 204731, "hintLevel": 1}]},
+            {"id": "mid_great", "labelJp": "立派な\"大人\"だ……！ · 大成功", "labelKr": "멋진 어른이야! · 대성공", "skills": [{"skillId": 203501, "hintLevel": 2}, {"skillId": 204731, "hintLevel": 2}]},
+            {"id": "long_success", "labelJp": "本当の意味で\"わかった\"んだな · 성공", "labelKr": "진정한 의미로 알게 됐구나 · 성공", "skills": [{"skillId": 203501, "hintLevel": 1}, {"skillId": 204741, "hintLevel": 1}]},
+            {"id": "long_great", "labelJp": "本当の意味で\"わかった\"んだな · 大成功", "labelKr": "진정한 의미로 알게 됐구나 · 대성공", "skills": [{"skillId": 203501, "hintLevel": 2}, {"skillId": 204741, "hintLevel": 2}]},
+            {"id": "front_success", "labelJp": "マ……マヤノ様ぁ……！ · 성공", "labelKr": "마… 마야노 님! · 성공", "skills": [{"skillId": 203501, "hintLevel": 1}, {"skillId": 204751, "hintLevel": 1}]},
+            {"id": "front_great", "labelJp": "マ……マヤノ様ぁ……！ · 大成功", "labelKr": "마… 마야노 님! · 대성공", "skills": [{"skillId": 203501, "hintLevel": 2}, {"skillId": 204751, "hintLevel": 2}]}
+          ]
+        }
+      ]
+    },
+    "30323": {
+      "sourceUrl": "https://game8.jp/umamusume/836270",
+      "catalogSource": "GameTora / U-tools · 2026-10-26 실장 데이터",
+      "uniqueBonus": "인연 게이지 60 이상이면 스피드 보너스 +1, 스태미나 보너스 +1",
+      "hintSkillIds": [],
+      "eventSkillIds": [202551, 202552, 200512],
+      "supportEffects": [
+        {"name": "Mood Effect", "symbol": "percent", "values": [20, 20, 20, 20, 20]},
+        {"name": "Training Effectiveness", "symbol": "percent", "values": [1, 3, 5, 7, 10]},
+        {"name": "Initial Friendship Gauge", "symbol": "none", "values": [25, 26, 27, 28, 30]},
+        {"name": "Race Bonus", "symbol": "percent", "values": [1, 5, 5, 5, 5]},
+        {"name": "Fan Bonus", "symbol": "percent", "values": [1, 10, 15, 15, 15]},
+        {"name": "Event Recovery", "symbol": "percent", "values": [40, 45, 50, 55, 60]},
+        {"name": "Event Effectiveness", "symbol": "percent", "values": [20, 22, 25, 27, 30]},
+        {"name": "Failure Protection", "symbol": "percent", "values": [5, 5, 5, 10, 20]},
+        {"name": "Energy Cost Reduction", "symbol": "percent", "values": [15, 17, 20, 22, 25]},
+        {"name": "Skill Point Bonus", "symbol": "none", "values": [1, 1, 1, 1, 1]},
+        {"name": "Initial Skill Points", "symbol": "none", "values": [5, 5, 5, 30, 60]}
+      ],
+      "rareEvents": [
+        {
+          "id": "verified_30323_outing5",
+          "labelJp": "其は泡沫、されど――",
+          "labelKr": "그것은 물거품, 그러나… · 외출 5회차",
+          "selection": "auto",
+          "note": "외출 5회차 완료 시 神速 힌트 Lv+3, 가장 낮은 연목 Lv+1. 체력과 의욕도 회복합니다.",
+          "choices": [{"id": "done", "labelKr": "외출 완료", "skills": [{"skillId": 202551, "hintLevel": 3}]}]
+        }
+      ]
+    }
+  }
+}

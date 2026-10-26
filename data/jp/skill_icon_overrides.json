@@ -2,6 +2,11 @@
   "schemaVersion": 1,
   "updated": "2026-09-28",
   "overrides": {
+    "204512": {
+      "iconId": 20011,
+      "status": "verified",
+      "note": "存在感: U-tools in-game skill record verified 2026-10-27"
+    },
     "202711": {
       "iconId": 20042,
       "status": "verified",

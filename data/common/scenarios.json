@@ -5,7 +5,7 @@
     "goshiki": {
       "name": "朋、史解き　―午式駿大祭―",
       "kr": "벗, 역사를 풀다 ―오식 준대제―",
-      "maxEvolution": 0,
+      "maxEvolution": 2,
       "source": "우마무스메 공식 · 2026-10-26",
       "sourceUrl": "https://umamusume.jp/contents/game/scenario/goshikisyuntaisai/",
       "officialNewsUrl": "https://umamusume.jp/news/detail?id=3509",
@@ -16,8 +16,15 @@
       "status": "released",
       "officialReading": "とも、ふみほどき　ごしきしゅんたいさい",
       "skillDataPending": true,
-      "statCapsNote": "스탯 상한은 공개 직전 선행 체험판 수치를 초기값으로 넣었습니다. 공식 확정 수치가 아니며, 인게임 값이 다르면 스탯 상한 설정에서 직접 바꿀 수 있습니다.",
-      "statCapsSourceUrl": "https://dengekionline.com/article/202610/91936",
+      "statCapsNote": "스탯 상한은 출시 후 게임 자료와 대조했습니다. 실제 게임 화면과 다르면 스탯 상한 설정에서 직접 바꿀 수 있습니다.",
+      "statCapsSourceUrl": "https://gametora.com/umamusume/shuntaisai",
+      "performances": [
+        {"jp": "流鏑馬", "kr": "야부사메", "statKr": "스피드", "icon": "./assets/scenario/goshiki/utx_ico_festa_act_01.png"},
+        {"jp": "神旗争奪戦", "kr": "신기 쟁탈전", "statKr": "스태미나", "icon": "./assets/scenario/goshiki/utx_ico_festa_act_02.png"},
+        {"jp": "納舞", "kr": "봉납 춤", "statKr": "파워", "icon": "./assets/scenario/goshiki/utx_ico_festa_act_03.png"},
+        {"jp": "大曳神輿", "kr": "큰 가마 끌기", "statKr": "근성", "icon": "./assets/scenario/goshiki/utx_ico_festa_act_04.png"},
+        {"jp": "飛駆", "kr": "비구", "statKr": "지능", "icon": "./assets/scenario/goshiki/utx_ico_festa_act_05.png"}
+      ],
       "linkCharacters": [
         {
           "jp": "吾妻",
@@ -51,15 +58,15 @@
         },
         {
           "title": "다섯 연목(演目)",
-          "text": "流鏑馬·神旗争奪戦·納舞·大曳神輿·飛駆, 다섯 연목을 선택해 축제 준비를 진행합니다."
+          "text": "流鏑馬·神旗争奪戦·納舞·大曳神輿·飛駆, 다섯 연목은 각각 스피드·스태미나·파워·근성·지능 훈련에 대응합니다."
         },
         {
           "title": "연목 게이지와 연습",
-          "text": "훈련과 레이스로 연목 게이지를 채우면 「연목 연습」이 열리고 연목 Lv이 올라갑니다."
+          "text": "담당 카드와 함께 훈련해 게이지를 채운 뒤 「연목 연습」을 하면 해당 연목 Lv이 1 오릅니다. 아즈마 SSR을 편성하면 연목 Lv 상한이 6에서 10으로 늘어납니다."
         },
         {
           "title": "진척 발표회와 본제",
-          "text": "주니어·클래식 12월 후반에 진척 발표회, 시니어 10월 후반에 최종 축제 「오식 준대제」가 열립니다."
+          "text": "주니어 12월 후반에는 모든 연목 Lv 3, 클래식 12월 후반에는 Lv 5, 시니어 10월 후반 본제에는 Lv 6을 목표로 맞춥니다."
         },
         {
           "title": "가르침 전성(教え転成)",

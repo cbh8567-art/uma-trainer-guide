@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.80.0">
+<meta name="app-build" content="V7.80.1">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.80.0 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.80.1 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -481,9 +481,10 @@ body{font-size:14px;line-height:1.5}
 .scenarioOfficialReading{margin-top:4px;color:#bfc6d8;font-size:9.5px;line-height:1.5}
 .scenarioOfficialGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}
 .scenarioOfficialItem{border:1px solid #4b3e59;background:#171522;border-radius:9px;padding:8px;min-width:0}.scenarioOfficialItem b{display:block;font-size:10px;color:#ead7f5;margin-bottom:3px}.scenarioOfficialItem .sub{font-size:9px;line-height:1.5}
+.goshikiPerformanceGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:8px}.goshikiPerformance{display:flex;align-items:center;gap:6px;border:1px solid #574968;background:#1b1724;border-radius:9px;padding:7px;min-width:0}.goshikiPerformance img{width:38px;height:38px;object-fit:contain;flex:none}.goshikiPerformance b{display:block;color:#f1ddfa;font-size:10px}.goshikiPerformance span{color:#bfc6d8;font-size:9px}
 .scenarioOfficialCharacters{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.scenarioOfficialCharacters .tag{font-size:9.5px}
 .scenarioOfficialPending{margin-top:8px;padding:7px 8px;border:1px solid #735f3d;background:#211d16;border-radius:8px;color:#ebd09a;font-size:9.5px;line-height:1.5}
-@media(max-width:720px){.scenarioOfficialGrid{grid-template-columns:1fr}}
+@media(max-width:720px){.scenarioOfficialGrid{grid-template-columns:1fr}.goshikiPerformanceGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .islandGuideBox{margin-top:9px;border:1px solid #496274;background:#151e28;border-radius:10px;padding:9px}
 .islandGuideHead{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap}
 .islandGuideStatus{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
@@ -1248,7 +1249,7 @@ body.trainingMode .trainingProgressHead .sub,
 </div>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.80.0 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.80.1 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -1881,7 +1882,7 @@ let TIER_DATA={"version":1,"snapshotDate":"2026-09-23","sourceNote":"Game8 거�
 
 let SUPPORT_EVENT_RARE_SKILLS={"30001":[200511],"30002":[200551],"30003":[200371],"30004":[200341],"30005":[200381],"30006":[200701],"30007":[200721],"30008":[200541],"30009":[200591],"30010":[200581],"30011":[201281],"30012":[200601],"30013":[200731],"30014":[200691],"30015":[200651],"30016":[200351],"30017":[200451],"30018":[200361],"30019":[200481],"30020":[200991],"30021":[200431],"30022":[200741],"30023":[200761],"30024":[200701],"30025":[201351],"30026":[200531],"30027":[201191],"30028":[200331],"30029":[200441],"30030":[200481],"30031":[200491],"30032":[200461],"30033":[200511],"30034":[200351],"30036":[200371],"30037":[200351],"30038":[200581],"30039":[200451],"30040":[201261],"30041":[201431],"30042":[200611],"30043":[201701],"30044":[201361],"30045":[201501],"30046":[201401],"30047":[200571],"30048":[200731],"30052":[201662],"30053":[200681],"30054":[200601],"30055":[201191],"30056":[200671],"30057":[200751],"30058":[200761],"30059":[200551],"30060":[200721],"30061":[200741],"30062":[200431],"30063":[201431],"30064":[201411],"30065":[201691],"30066":[200531],"30067":[201113],"30068":[201001],"30069":[200361],"30070":[200341],"30071":[200541],"30072":[201281],"30073":[200621],"30074":[200591],"30075":[201221],"30076":[200711],"30077":[202021],"30078":[201561],"30079":[200721],"30080":[202031],"30081":[202061],"30082":[201341],"30083":[202041],"30084":[200381],"30085":[201681],"30086":[200154],"30087":[201211],"30088":[201691],"30089":[200761],"30090":[202091],"30091":[202081],"30092":[201491],"30093":[201901],"30094":[202111],"30095":[202121],"30096":[200731],"30097":[202021],"30098":[201401],"30099":[202151],"30100":[201361],"30101":[202371],"30102":[200581],"30103":[200461],"30104":[201121],"30105":[201211],"30106":[201691],"30107":[201271],"30108":[202031],"30109":[201061],"30110":[202071],"30111":[200331],"30112":[202391],"30113":[201201],"30114":[202401],"30115":[200531],"30116":[201652],"30117":[202341],"30118":[202421],"30119":[200571],"30120":[200721],"30121":[200711],"30122":[201383],"30123":[202471],"30124":[200591],"30125":[202121],"30126":[202411],"30127":[200491],"30128":[202491],"30129":[200741],"30130":[201901],"30131":[200471],"30132":[201393],"30133":[200991],"30134":[202531],"30135":[200731],"30136":[202091],"30137":[202551],"30138":[201652],"30139":[202581],"30140":[201131],"30141":[201602],"30142":[200601],"30143":[201401],"30145":[200631],"30146":[202431],"30147":[202661],"30148":[202461],"30149":[200431],"30150":[201411],"30151":[200491],"30152":[200361,202481],"30153":[200184,202671],"30154":[202681],"30155":[200981],"30156":[202301],"30157":[200741,202421],"30158":[202621],"30159":[200581],"30160":[202721],"30161":[200331,202711],"30162":[201491],"30163":[200014],"30164":[200641,201463],"30165":[202101],"30166":[200541,200551],"30167":[200561],"30168":[201592],"30169":[201103],"30170":[202541,202751],"30171":[200441],"30172":[202761],"30173":[200361,200381],"30174":[202111],"30175":[200204],"30176":[201401],"30177":[200591,201691],"30178":[202721],"30179":[202091,202151],"30180":[200511],"30181":[201271],"30182":[202831],"30183":[202451],"30184":[200973,202861],"30185":[201051],"30186":[200461],"30187":[202551],"30188":[202801],"30189":[200711],"30190":[200371],"30191":[200481],"30192":[201421],"30193":[202011],"30194":[202371],"30195":[200651],"30196":[202501],"30197":[201453],"30198":[202081],"30199":[202561],"30200":[202121],"30201":[200641,202901],"30202":[202401],"30203":[202101],"30204":[202691],"30205":[201033],"30206":[201612],"30207":[201592],"30208":[203031,203041],"30209":[203051],"30210":[200531],"30211":[202841,202951],"30212":[202281],"30213":[201141],"30214":[203111],"30215":[203141,203151],"30216":[200341],"30217":[201113],"30218":[203161],"30219":[202981],"30220":[200751],"30222":[202331,203181],"30223":[202021],"30224":[202481,203221],"30225":[201393],"30226":[203241,203251],"30227":[201271,202821],"30228":[202421,202641],"30229":[203351],"30230":[202621],"30231":[200581],"30232":[203411,203421],"30233":[201652,202711],"30234":[202741,203131],"30235":[202461],"30236":[202751],"30237":[200431,203491],"30238":[201071],"30239":[201421],"30241":[203501],"30242":[200331,200361,202701,203431],"30243":[201033],"30244":[202591],"30245":[201383,203571],"30246":[202881,202931],"30247":[201183],"30248":[200591,203591],"30249":[203091,203601],"30250":[202101,202871],"30251":[201671],"30252":[200541,203381],"30253":[201051,202671],"30254":[202501],"30255":[201411],"30256":[202551,203361,203661],"30257":[203651],"30258":[203681],"30259":[201323],"30260":[203301],"30261":[200751,203731],"30262":[202901,203751],"30263":[202111],"30264":[202721,203851,203861],"30265":[203831,203841],"30266":[200721],"30267":[202041,203881],"30268":[201453,202401,203761],"30269":[201701],"30270":[203911],"30271":[203961],"30272":[202641,203671],"30273":[202121],"30274":[200351,203991],"30275":[203421,203441,204001],"30276":[201662],"30277":[200531,203461],"30278":[200641,202891],"30279":[202011,202771],"30280":[201481],"30281":[202421,203331],"30282":[202711,204031,204041],"30283":[202761,204071],"30284":[201313],"30285":[202621,204131],"30286":[203701],"30287":[202601,203141],"30288":[201243],"30289":[201612,202831,204181,204191],"30290":[201652],"30291":[203651],"30292":[202301,203611],"30293":[203791,204051],"30294":[202531,202741],"30295":[201323],"30296":[204271,204311],"30297":[202151,204351],"30298":[200431,201271,203401],"30299":[200581],"30300":[203121,204331],"30301":[203541,204171],"30302":[203241,203561,204381],"30303":[202471],"30304":[200331,203641,203651,204391],"30305":[201662],"30306":[203571,203681],"30307":[202681,202821,204481],"30308":[200024,203631,204501],"30309":[201341],"30310":[202101],"30311":[203711,204531,204571,204701],"30312":[202021,202851,202871,204521],"30313":[201701],"30314":[201671,204661],"30315":[200194,202751,204671],"30316":[201253],"30317":[202621,204711]};
 let SUPPORT_NO_RARE_SKILL_IDS=new Set([30221,30240]);
-Object.assign(SUPPORT_EVENT_RARE_SKILLS,{30319:[202371,204151],30320:[203801,204721],30321:[201463]});
+Object.assign(SUPPORT_EVENT_RARE_SKILLS,{30319:[202371,204151],30320:[203801,204721],30321:[201463],30322:[203501,204731,204741,204751],30323:[202551]});
 let SUPPORT_RARE_INDEX_META={source:'UmaTools skills_all.json sup_e + 2026-09-30 verified supplements',updated:'2026-10-01',mappedCards:313,noRareCards:2};
 
 let FRIEND_SUPPORT_SKILLS={"updated":"2026-09-23","note":"친구 SSR은 Tsuyuchan supports/events 배포 대상에서 빠지는 카드가 있어 U-tools의 'イベントで取得'를 보조 표시 데이터로 사용. 이 목록은 카드 상세의 스킬 조회용이며 이벤트 선택지/획득 카운트는 임의 추정하지 않음.","cards":{"30021":{"name":"[ようこそ、トレセン学園へ！] 駿川たづな","skills":["コンセントレーション","集中力","展開窺い","尻尾上がり"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30021"},"30036":{"name":"[徹底管理主義] 樫本理子","skills":["一陣の風","ペースアップ","おひとり様○","一匹狼","シンパシー"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30036"},"30052":{"name":"[from the GROUND UP] ライトハロー","skills":["お先に失礼っ！","おひとり様○","逃げのコツ○","先行のコツ○"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30052"},"30160":{"name":"[L'aubeは迫りて] 佐岳メイ","skills":["ネバーギブアップ","一匹狼","直線巧者"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30160"},"30188":{"name":"[共に描くキラメキ] 都留岐涼花","skills":["機先の勝負","対抗意識○","末脚"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30188"},"30207":{"name":"[謹製ッ！特大夢にんじん！] 秋川理事長","skills":["ウママニア","直線巧者","中盤巧者"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30207"},"30257":{"name":"[本能は吼えているか！？] タッカーブライン","skills":["パスファインダー","活路を拓く！","直線回復","端緒"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30257"},"30276":{"name":"[ゆるり、ゆこま旅館] 保科健子","skills":["お先に失礼っ！","遊びはおしまいっ！","序盤巧者","中盤巧者"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30276"},"30290":{"name":"[American Dream] カジノドライヴ","skills":["いいとこ入った！","スリップストリーム","ウマ好み","末脚"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30290"},"30305":{"name":"[一杯のノスタルジア] 駿川たづな","skills":["心惹かれて","遊びはおしまいっ！","お先に失礼っ！","中盤巧者"],"sourceUrl":"https://xn--gck1f423k.xn--1bvt37a.tools/supports/30305"}}};
@@ -1964,7 +1965,7 @@ let KR_SKILL_ALIASES={
 const LB_MAX=[30,35,40,45,50], LB_INDEX=[6,7,8,9,10];
 const KOREA_SCENARIO_IDS=new Set(['uaf','harvest','mecha','legends','island','none']);
 const SCENARIO_STAT_CAPS={
- goshiki:{label:'오식 준대제(선행 체험값)',speed:2200,stamina:1850,power:1800,guts:1700,wit:1800,status:'preview',sourceUrl:'https://dengekionline.com/article/202610/91936'},
+ goshiki:{label:'오식 준대제(출시 후 확인값)',speed:2200,stamina:1850,power:1800,guts:1700,wit:1800,status:'verified',sourceUrl:'https://gametora.com/umamusume/shuntaisai'},
  tresenken:{label:'트레센켄',speed:2150,stamina:1800,power:1700,guts:1700,wit:1800},
  dreams:{label:'Dreams',speed:2100,stamina:1700,power:1700,guts:1700,wit:1800},
  onsen:{label:'온천향',speed:1900,stamina:1800,power:1700,guts:1700,wit:1400},
@@ -2175,7 +2176,7 @@ function skillIcon(s){
  if(!s?.iconId)return '<span class="skillFallback missingIcon" title="아이콘 미연결">?</span>';
  const sid=Number(s.id)||0,iconId=Number(s.iconId)||0;
  // 시나리오 전용 원본 아이콘은 앱과 함께 배포해 외부 저장소 누락을 방지합니다.
- const bundled=[10012,10032,20011,20012,20042,20226,20246,20256,20266,20276,20286,20296,20306,20316,20326,20336,20346,20366,20376];
+ const bundled=[10012,10032,20011,20012,20041,20042,20226,20246,20256,20266,20276,20286,20296,20306,20316,20326,20336,20346,20366,20376];
  if(bundled.includes(iconId))return `<img class="skillIcon" src="./assets/skill-icons/${iconId}.png" width="35" height="35" alt="${esc(s.jp||'시나리오 진화 스킬')} 아이콘" loading="lazy" onerror="recordSkillIconLoadFailure(${sid},${iconId},'bundled');this.outerHTML='<span class=&quot;skillFallback missingIcon&quot; title=&quot;아이콘 로드 실패&quot;>?</span>'">`;
  const primary=`${CONFIG.assetBases.skillIcon}${iconId}.webp`;
  const fallback=`https://gametora.com/images/umamusume/skill_icons/utx_ico_skill_${iconId}.png`;
@@ -2202,7 +2203,7 @@ function cardRareStats(card){let total=0,got=0,events=0;for(const e of card?.rar
 function acquiredSkillIdsForCard(card){const out=new Set();for(const e of card?.rareEvents||[]){if(isBranchEvent(e)){const ch=(e.choices||[]).find(c=>c.id===selectedChoiceId(card,e));for(const [id] of rareSkillMapFromList(ch?.skills))out.add(id)}else if(autoEventDone(card,e)){for(const sk of eventSkills(e))out.add(String(sk.id))}}return out}
 function isSkillAcquiredAnywhere(skillId){const sid=String(skillId);for(const c of activeDeckCards())if(acquiredSkillIdsForCard(c).has(sid))return true;return false}
 function allCardSkills(card){const m=new Map();for(const sk of card?.hints||[]){const x=canonicalSkill(sk);m.set(String(x.id),x)}for(const sk of card?.eventSkillsAll||[]){const x=canonicalSkill(sk);m.set(String(x.id),x)}for(const sk of uniqueRare(card)){const x=canonicalSkill(sk);m.set(String(x.id),x)}return [...m.values()]}
-function effectValue(effect,lb){const vals=effect?.values||[];const idx=LB_INDEX[Math.max(0,Math.min(4,lb))];return vals[idx]??vals[vals.length-1]??0}
+function effectValue(effect,lb){const vals=effect?.values||[],level=Math.max(0,Math.min(4,lb));const idx=vals.length===5?level:LB_INDEX[level];return vals[idx]??vals[vals.length-1]??0}
 function effectByName(card,needle,lb){const e=(card.supportEffects||[]).find(x=>String(x.name||'').toLowerCase().includes(needle.toLowerCase()));return Number(effectValue(e,lb)||0)}
 function cardSuitability(card,cond=state,lbOverride=null){
  const lb=lbOverride??Number(state.lb[String(card.id)]??0);const skills=allCardSkills(card);
@@ -2694,8 +2695,9 @@ function renderScenarioPlan(){
    const characters=Array.isArray(sc.linkCharacters)?sc.linkCharacters:[];
    html+='<div class="scenarioOfficialSummary"><div class="scenarioOfficialHead"><div><b>일본 서버 최신 시나리오 · '+esc(sc.name)+'</b><div class="scenarioOfficialReading">읽기: '+esc(sc.officialReading||'')+' · 2026.10.26 12:00 공개<br>한국어 이름은 이해를 돕는 사이트 보조 번역이며 한국 서버 정식 명칭이 아닙니다.</div></div><a href="'+esc(sc.sourceUrl||'#')+'" target="_blank" rel="noopener">공식 시나리오 페이지 ↗</a></div>';
    html+='<div class="scenarioOfficialGrid">'+sc.officialHighlights.map(x=>'<div class="scenarioOfficialItem"><b>'+esc(x.title)+'</b><div class="sub">'+esc(x.text)+'</div></div>').join('')+'</div>';
+   if(state.scenario==='goshiki'&&Array.isArray(sc.performances))html+='<div class="goshikiPerformanceGrid">'+sc.performances.map(x=>'<div class="goshikiPerformance"><img src="'+esc(x.icon)+'" alt="'+esc(x.jp)+' 아이콘" loading="lazy" onerror="this.hidden=true"><div><b>'+esc(x.kr)+'</b><span>'+esc(x.jp)+' · '+esc(x.statKr)+'</span></div></div>').join('')+'</div>';
    if(characters.length)html+='<div class="scenarioOfficialCharacters"><span class="tag">주요 등장</span>'+characters.map(x=>'<span class="tag">'+esc(x.kr||x.jp)+' · '+esc(x.jp)+'</span>').join('')+'</div>';
-   html+='<div class="scenarioOfficialPending">출시 당일 공식 정보 우선 반영판입니다. 획득 레어스킬·진화 조건은 공식 확인 전까지 추측값을 넣지 않습니다.<br>'+esc(sc.statCapsNote||'')+(sc.statCapsSourceUrl?' <a href="'+esc(sc.statCapsSourceUrl)+'" target="_blank" rel="noopener">선행 체험값 출처 ↗</a>':'')+' · <a href="'+esc(sc.officialNewsUrl||sc.sourceUrl||'#')+'" target="_blank" rel="noopener">공식 출시 공지 ↗</a></div></div>';
+   html+='<div class="scenarioOfficialPending">출시 후 확인된 공략을 반영했습니다. 시나리오 전용 획득 스킬과 진화 조건은 검증되는 대로 추가합니다.<br>'+esc(sc.statCapsNote||'')+(sc.statCapsSourceUrl?' <a href="'+esc(sc.statCapsSourceUrl)+'" target="_blank" rel="noopener">게임 자료 출처 ↗</a>':'')+' · <a href="'+esc(sc.officialNewsUrl||sc.sourceUrl||'#')+'" target="_blank" rel="noopener">공식 출시 공지 ↗</a></div></div>';
  }
  if(state.scenario==='island'&&(state.guideServer==='jp'||state.guideServer==='kr')){
    const assess=islandDeckAssessment(),deckGuide=sc.recommendedDeck||{},checks=sc.coreGuide||[],currentTuckerTier=islandTuckerConstructionTier(assess),isKrIsland=state.guideServer==='kr';
@@ -2951,6 +2953,8 @@ function setCardLb(cardId,next){
 
 function supportPrimaryImageUrl(id){
  const sid=encodeURIComponent(id);
+ // 새 카드의 원본 저장소가 늦게 갱신되어도 실제 게임 카드 그림을 바로 표시한다.
+ if(Number(id)===30322||Number(id)===30323)return './assets/supports/'+sid+'.png';
  return CONFIG.assetBases.support+sid+'.webp'
 }
 function supportBwikiImageUrl(id){
@@ -3571,21 +3575,28 @@ function renderSelectedUma(){
 
 let SCENARIOS={
   goshiki:{
-    name:'朋、史解き　―午式駿大祭―',kr:'벗, 역사를 풀다 ―오식 준대제―',maxEvolution:0,
+    name:'朋、史解き　―午式駿大祭―',kr:'벗, 역사를 풀다 ―오식 준대제―',maxEvolution:2,
     source:'우마무스메 공식 · 2026-10-26',sourceUrl:'https://umamusume.jp/contents/game/scenario/goshikisyuntaisai/',
     officialNewsUrl:'https://umamusume.jp/news/detail?id=3509',releaseDate:'2026-10-26T12:00:00+09:00',
     servers:['jp'],status:'released',officialReading:'とも、ふみほどき　ごしきしゅんたいさい',skillDataPending:true,
-    statCapsNote:'스탯 상한은 공개 직전 선행 체험판 수치를 초기값으로 넣었습니다. 공식 확정 수치가 아니며, 인게임 값이 다르면 스탯 상한 설정에서 직접 바꿀 수 있습니다.',
-    statCapsSourceUrl:'https://dengekionline.com/article/202610/91936',
+    statCapsNote:'스탯 상한은 출시 후 게임 자료와 대조했습니다. 실제 게임 화면과 다르면 스탯 상한 설정에서 직접 바꿀 수 있습니다.',
+    statCapsSourceUrl:'https://gametora.com/umamusume/shuntaisai',
+    performances:[
+      {jp:'流鏑馬',kr:'야부사메',statKr:'스피드',icon:'./assets/scenario/goshiki/utx_ico_festa_act_01.png'},
+      {jp:'神旗争奪戦',kr:'신기 쟁탈전',statKr:'스태미나',icon:'./assets/scenario/goshiki/utx_ico_festa_act_02.png'},
+      {jp:'納舞',kr:'봉납 춤',statKr:'파워',icon:'./assets/scenario/goshiki/utx_ico_festa_act_03.png'},
+      {jp:'大曳神輿',kr:'큰 가마 끌기',statKr:'근성',icon:'./assets/scenario/goshiki/utx_ico_festa_act_04.png'},
+      {jp:'飛駆',kr:'비구',statKr:'지능',icon:'./assets/scenario/goshiki/utx_ico_festa_act_05.png'}
+    ],
     linkCharacters:[
       {jp:'吾妻',kr:'아즈마'},{jp:'ダイワスカーレット',kr:'다이와 스칼렛'},{jp:'ユキノビジン',kr:'유키노 비진'},
       {jp:'マヤノトップガン',kr:'마야노 탑건'},{jp:'ノーリーズン',kr:'노 리즌'},{jp:'ブラストワンピース',kr:'블라스트 원피스'}
     ],
     officialHighlights:[
       {title:'가르침 전수(教え伝受)',text:'각 연목 담당 우마무스메가 「가르침」을 전수받아 훈련에 유리한 효과를 발휘합니다.'},
-      {title:'다섯 연목(演目)',text:'流鏑馬·神旗争奪戦·納舞·大曳神輿·飛駆, 다섯 연목을 선택해 축제 준비를 진행합니다.'},
-      {title:'연목 게이지와 연습',text:'훈련과 레이스로 연목 게이지를 채우면 「연목 연습」이 열리고 연목 Lv이 올라갑니다.'},
-      {title:'진척 발표회와 본제',text:'주니어·클래식 12월 후반에 진척 발표회, 시니어 10월 후반에 최종 축제 「오식 준대제」가 열립니다.'},
+      {title:'다섯 연목(演目)',text:'流鏑馬·神旗争奪戦·納舞·大曳神輿·飛駆, 다섯 연목은 각각 스피드·스태미나·파워·근성·지능 훈련에 대응합니다.'},
+      {title:'연목 게이지와 연습',text:'담당 카드와 함께 훈련해 게이지를 채운 뒤 「연목 연습」을 하면 해당 연목 Lv이 1 오릅니다. 아즈마 SSR을 편성하면 연목 Lv 상한이 6에서 10으로 늘어납니다.'},
+      {title:'진척 발표회와 본제',text:'주니어 12월 후반에는 모든 연목 Lv 3, 클래식 12월 후반에는 Lv 5, 시니어 10월 후반 본제에는 Lv 6을 목표로 맞춥니다.'},
       {title:'가르침 전성(教え転成)',text:'진척 발표회 뒤에는 모은 가르침을 전성해 다음 단계의 육성 효과로 이어갑니다.'}
     ],
     scenarioAcquiredRareSkills:[],evolutions:[]
@@ -5650,6 +5661,32 @@ let SUPPORT_OVERRIDES={
  30249:{title:'繋がれパレード・ノーツ♪',jpName:'[繋がれパレード・ノーツ♪]トランセンド',eventSource:'U-tools 이벤트 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30249/event',rareEvents:[{id:'verified_30249_final',label:'感謝困惑雨あられ',selection:'auto',note:'연속 이벤트 완료 시 레어스킬 2개 획득',choices:[{id:'done',label:'획득',skills:[{skillId:203091,hintLevel:1},{skillId:203601,hintLevel:1}]}]}]},
  30256:{title:'白き稲妻の如く',jpName:'[白き稲妻の如く]タマモクロス',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30256/event',rareEvents:[{id:'verified_30256_final',label:'遠くで光るその走り',selection:'single',note:'어느 선택지든 神速 + 추가 레어스킬 1개, 총 2개 획득',choices:[{id:'future',label:'将来が楽しみだ！',skills:[{skillId:202551,hintLevel:2},{skillId:203361,hintLevel:1}]},{id:'legacy',label:'君の想いは、継がれたみたいだな',skills:[{skillId:202551,hintLevel:2},{skillId:203661,hintLevel:1}]}]}]}
 };
+let JP_VERIFIED_SUPPORT_DETAILS={cards:{},extraSkills:[]};
+function applyVerifiedSupportDetails(cards,skillMap){
+ // 새 카드 원본이 비어 있거나 오래된 브라우저 저장본이어도 검증값으로 맞춘다.
+ for(const sk of JP_VERIFIED_SUPPORT_DETAILS.extraSkills||[]){
+   if(skillMap.has(Number(sk.id)))continue;
+   const distances=sk.distances||[];
+   skillMap.set(Number(sk.id),{id:Number(sk.id),name:sk.name,rarity:sk.rarity,iconId:sk.iconId,baseSp:sk.baseSp,spCost:sk.baseSp,
+     lowerSkillId:sk.lowerSkillId??null,upperSkillId:sk.upperSkillId??null,
+     activation:{tags:{grounds:[],distances,styles:[]}}});
+ }
+ for(const card of cards){
+   const detail=JP_VERIFIED_SUPPORT_DETAILS.cards?.[String(card.id)];
+   if(!detail)continue;
+   card.supportEffects=[{name:'고유 보너스',symbol:'text',values:Array(5).fill(detail.uniqueBonus||'')},...(detail.supportEffects||[])];
+   card.catalogSource=detail.catalogSource||card.catalogSource;
+   card.hints=(detail.hintSkillIds||[]).map(id=>makeSkill(skillMap.get(Number(id)))).filter(Boolean);
+   const eventSkills=new Map((card.eventSkillsAll||[]).map(skill=>[Number(skill.id),skill]));
+   for(const id of detail.eventSkillIds||[]){const skill=makeSkill(skillMap.get(Number(id)));if(skill)eventSkills.set(Number(id),skill)}
+   card.eventSkillsAll=[...eventSkills.values()];
+   card.rareEvents=(detail.rareEvents||[]).map(event=>({...event,choices:(event.choices||[]).map(choice=>({...choice,skills:(choice.skills||[]).map(x=>materializeOverrideSkill(skillMap,x))}))}));
+   card.supportUniqueText=detail.uniqueBonus||card.supportUniqueText||'';
+   card.eventSource='GameWith / Game8 검증';
+   card.eventSourceUrl=detail.sourceUrl||card.eventSourceUrl||'';
+ }
+ return cards
+}
 function materializeOverrideSkill(skillMap,x){const meta=skillMap.get(Number(x.skillId));if(meta)return makeSkill(meta,meta.name,x.hintLevel||0);return {id:Number(x.skillId),jp:x.skillName||`Skill ${x.skillId}`,kr:koSkill(x.skillName||''),rarity:2,iconId:null,hintLevel:x.hintLevel||0,tags:{grounds:[],distances:[],styles:[]}}}
 function applySupportOverrides(cards,skillMap){for(const c of cards){const o=SUPPORT_OVERRIDES[Number(c.id)];if(o){c.title=o.title||c.title;c.jpName=o.jpName||c.jpName;c.krName=o.krName||c.krName;c.eventSource=o.eventSource||'override';c.eventSourceUrl=o.eventSourceUrl||c.eventSourceUrl;c.rareEvents=(o.rareEvents||[]).map(e=>({...e,choices:(e.choices||[]).map(ch=>({...ch,skills:(ch.skills||[]).map(x=>materializeOverrideSkill(skillMap,x))}))}))}c.catalogSource=c.catalogSource||'unknown';if(!c.eventSource)c.eventSource=c.rareEvents?.length?'events.json':'미연결'}return cards}
 
@@ -5762,6 +5799,7 @@ for(const card of [
 for(const card of cards){
  if(priMap.get(Number(card.id))?.reviewStatus==='official_release_only')card.catalogSource='2026-10-26 공식 발표 · 상세 데이터 확인 중';
 }
+applyVerifiedSupportDetails(cards,skillMap);
 applyFriendEventSupplements(applySupportRareSkillIndex(applyFriendSkillSupplements(applySupportOverrides(cards,skillMap),skillMap),skillMap),skillMap);cards.sort((a,b)=>b.id-a.id);const rareAudit=supportRareCoverageAudit(cards);runtime={catalog:cards,byId:new Map(cards.map(c=>[Number(c.id),c])),skills:skillMap,characters:characters.map(parseCharacter),courses,ready:true};const cache={version:6,generatedAt:new Date().toISOString(),catalog:cards,skills,characters,courses};const cacheResult=storeDbCacheSafely(cache);st.textContent=`SSR ${cards.length}장 · 이벤트 레어스킬 ${rareAudit.coveredCards}/${rareAudit.expectedCards}장 · SP 원가 ${costAudit.linked}스킬 · 카운터 누락 ${rareAudit.missingCards.length}장 · ${cacheResult.saved?'경량 캐시 저장':'캐시 저장 생략'}`;renderAll();setDbLoadState('ready','DB 준비 완료',`SSR ${cards.length}장 · SP 원가 ${costAudit.linked}스킬을 포함한 최신 데이터를 사용할 수 있습니다.`);if(!cacheResult.saved)toast('DB 동기화 성공 · 브라우저 저장공간 부족으로 캐시는 저장하지 않았습니다.')}catch(e){st.textContent='동기화 실패';setDbLoadState('error','온라인 DB를 불러오지 못했습니다.','인터넷 연결을 확인한 뒤 「다시 시도」를 눌러 주세요. 저장한 통합 DB JSON도 사용할 수 있습니다.');toast('온라인 DB 동기화 실패: '+e.message)}finally{btn.disabled=false}}
 function normalizeCachedCatalog(catalog,skillMap){
  for(const card of catalog||[]){
@@ -5783,7 +5821,7 @@ function normalizeCachedCatalog(catalog,skillMap){
 function loadCache(o){
  if(!o?.catalog)throw new Error('catalog 필드 없음');
  const skills=o.skills||[];applySkillIconOverrides(skills);const skillMap=new Map(skills.map(s=>[Number(s.id),s]));
- const catalog=applyFriendEventSupplements(applySupportRareSkillIndex(applyFriendSkillSupplements(applySupportOverrides(normalizeCachedCatalog(o.catalog,skillMap),skillMap),skillMap),skillMap),skillMap);
+ const catalog=applyFriendEventSupplements(applySupportRareSkillIndex(applyFriendSkillSupplements(applySupportOverrides(applyVerifiedSupportDetails(normalizeCachedCatalog(o.catalog,skillMap),skillMap),skillMap),skillMap),skillMap),skillMap);
  const rareAudit=supportRareCoverageAudit(catalog),courses=normalizeCoursesPayload(o.courses);
  runtime={catalog,byId:new Map(catalog.map(c=>[Number(c.id),c])),skills:skillMap,characters:(o.characters||[]).map(c=>c.character?c:parseCharacter(c)),courses,ready:true};
  const cacheResult=storeDbCacheSafely({...o,catalog,skills,characters:o.characters||[],courses});
@@ -7209,6 +7247,12 @@ renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);
 renderTypeFilters($('#ownedFilters'),ownedType,setOwnedFilter);
 async function loadLocalAppData(){
  const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krMasters:false,krSkillNames:false,krTier:false,jpUpcoming:false,jpTier:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false,jpSyncState:false,jpValidationReport:false,jpSyncHistory:false,jpChangeReport:false,jpManifest:false,jpSourceHealth:false,jpReviewQueue:false,jpEntitySummary:false,krImportCandidates:false,jpScenarioWatch:false,jpSystemStatus:false,jpInheritanceRecommendations:false,jpInheritanceReview:false,jpInheritanceEffects:false};
+
+ try{
+   const detail=await fetchJson('./data/jp/verified_support_details.json');
+   if(!detail?.cards?.['30322']||!detail?.cards?.['30323']||!Array.isArray(detail.extraSkills))throw new Error('신카드 상세 데이터 형식 오류');
+   JP_VERIFIED_SUPPORT_DETAILS=detail;
+ }catch(e){console.warn('JP 신카드 상세 데이터 로드 실패. 기본 카드 목록을 유지합니다.',e)}
 
  try{
    const meta=await fetchJson('./data/kr/server_meta.json');

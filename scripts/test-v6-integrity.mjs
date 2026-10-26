@@ -25,11 +25,27 @@ ok(index.includes('id="dbLoadPanel"')&&index.includes('id="dbRetryBtn"'),"DB loa
 const meta=await read("data/kr/server_meta.json");
 ok(Number(meta.supportMaxId)===30260,"KR supportMaxId must stay 30260");
 const jpSupports=await read("data/jp/current/supports.json");
+const verifiedDetails=await read("data/jp/verified_support_details.json");
+ok(index.includes("applyVerifiedSupportDetails(cards,skillMap)"),"verified JP card details must be applied during sync");
+ok(index.includes("applyVerifiedSupportDetails(normalizeCachedCatalog"),"verified JP card details must be applied to saved data");
+ok(index.includes("goshikiPerformanceGrid"),"Goshiki in-game performance icons are missing from the guide");
+ok(Array.isArray(verifiedDetails.extraSkills)&&verifiedDetails.extraSkills.length>=7,"new JP skill metadata is incomplete");
 for(const [id,name,type] of [[30322,"マヤノトップガン","power"],[30323,"吾妻","friend"]]){
   const card=jpSupports.find(item=>Number(item.id)===id);
   ok(Boolean(card)&&card.name.includes(name)&&card.type===type&&card.reviewStatus==="official_release_only",`JP support ${id} is missing or mislabeled`);
   ok(id>Number(meta.supportMaxId),`JP support ${id} must not appear in KR`);
+  const detail=verifiedDetails.cards?.[String(id)];
+  ok(Boolean(detail)&&Array.isArray(detail.supportEffects)&&detail.supportEffects.length>=10,`JP support ${id} effects are incomplete`);
+  for(const effect of detail?.supportEffects||[])ok(effect.values?.length===5,`JP support ${id} ${effect.name} must have five limit break values`);
+  ok(Array.isArray(detail?.rareEvents)&&detail.rareEvents.length>0,`JP support ${id} event choices are missing`);
+  try{const image=await fs.readFile(path.join(ROOT,"assets","supports",`${id}.png`));ok(image.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),`JP support ${id} image is not PNG`)}
+  catch{errors.push(`JP support ${id} image is missing`)}
 }
+ok(verifiedDetails.cards?.["30322"]?.rareEvents?.[0]?.choices?.length===6,"Mayano success and great-success choices are incomplete");
+ok(verifiedDetails.cards?.["30323"]?.rareEvents?.[0]?.choices?.[0]?.skills?.some(skill=>skill.skillId===202551),"Azuma outing rare skill is missing");
+ok(index.includes("20011,20012,20041,20042"),"new JP skill icon is not bundled");
+const newSkillIcon=await fs.readFile(path.join(ROOT,"assets","skill-icons","20041.png"));
+ok(newSkillIcon.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),"new JP skill icon is not PNG");
 for(const id of [30256,30257])ok(index.includes(`${id}:`),`KR island support ${id} mapping missing`);
 ok(Number(meta.implementedUmaCards)===212,"KR implementedUmaCards must stay 212");
 const uma=await read("data/kr/uma_ids.json");
@@ -37,6 +53,13 @@ ok(Array.isArray(uma.ids)&&uma.ids.length===212,"KR uma allowlist count must sta
 for(const id of [103103,104003,113301])ok(!uma.ids.includes(id),`future KR uma id ${id} must remain excluded`);
 const scenarios=await read("data/common/scenarios.json");
 for(const key of ["goshiki","tresenken","dreams","onsen","island","legends","mecha","harvest","uaf","none"])ok(Boolean(scenarios.scenarios?.[key]),`scenario ${key} missing`);
+ok(scenarios.scenarios?.goshiki?.servers?.join(",")==="jp","Goshiki must remain JP only");
+ok(scenarios.scenarios?.goshiki?.performances?.length===5,"Goshiki needs all five in-game performance icons");
+for(const performance of scenarios.scenarios?.goshiki?.performances||[]){
+  ok(/^\.\/assets\/scenario\/goshiki\/utx_ico_festa_act_0[1-5]\.png$/.test(performance.icon),`invalid Goshiki icon path: ${performance.jp}`);
+  try{const icon=await fs.readFile(path.join(ROOT,performance.icon));ok(icon.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),`Goshiki icon is not PNG: ${performance.jp}`)}
+  catch{errors.push(`Goshiki icon file missing: ${performance.jp}`)}
+}
 const src=await read("data/jp/source_config.json");
 ok(src.snapshotReady===true,"JP snapshotReady must be true");
 for(const key of ["catalog","supports","events","skills","characters","courses"])ok(Boolean(src.snapshotSources?.[key]),`snapshot source ${key} missing`);
