@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-26T18:40:12.201Z",
+  "generatedAt": "2026-10-26T18:58:41.558Z",
   "event": "push",
-  "sha": "7114cc165ada3dada0ea833f8837dd407d8d1947",
+  "sha": "003aceffd3272e724418815aa3376a0701bb97d8",
   "changedFiles": [
-    ".github/workflows/browser-smoke.yml",
-    "data/common/scenarios.json",
-    "data/jp/scenario_watch.json",
+    ".github/workflows/sync-jp-data.yml",
+    "data/jp/current/supports.json",
+    "data/jp/sync_policy.json",
+    "data/kr/server_meta.json",
     "index.html",
     "scripts/test-v6-integrity.mjs"
   ],
@@ -15,18 +16,18 @@
       "index.html"
     ],
     "pipeline": [
+      ".github/workflows/sync-jp-data.yml",
       "scripts/test-v6-integrity.mjs"
     ],
     "jpData": [
-      "data/jp/scenario_watch.json"
+      "data/jp/current/supports.json",
+      "data/jp/sync_policy.json"
     ],
-    "krData": [],
-    "commonData": [
-      "data/common/scenarios.json"
+    "krData": [
+      "data/kr/server_meta.json"
     ],
-    "other": [
-      ".github/workflows/browser-smoke.yml"
-    ]
+    "commonData": [],
+    "other": []
   },
   "impactLevel": "high",
   "fullTest": true,
