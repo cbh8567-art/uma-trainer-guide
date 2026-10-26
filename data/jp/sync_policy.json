@@ -29,7 +29,9 @@
   },
   "preserveSnapshotRecords": {
     "supports": [
-      "30321"
+      "30321",
+      "30322",
+      "30323"
     ],
     "events": [
       "evt_30319_verified_final",

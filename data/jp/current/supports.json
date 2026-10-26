@@ -1176,5 +1176,29 @@
     ],
     "hintLevelUpMax": 0,
     "eventIds": []
+  },
+  {
+    "id": 30322,
+    "name": "[Time of Departure]マヤノトップガン",
+    "title": "Time of Departure",
+    "characterName": "マヤノトップガン",
+    "rarity": "SSR",
+    "commandId": 102,
+    "type": "power",
+    "hintSkillIds": [],
+    "hintLevelUpMax": 0,
+    "eventIds": []
+  },
+  {
+    "id": 30323,
+    "name": "[いとどめでたき、まつりかな]吾妻",
+    "title": "いとどめでたき、まつりかな",
+    "characterName": "吾妻",
+    "rarity": "SSR",
+    "commandId": 0,
+    "type": "friend",
+    "hintSkillIds": [],
+    "hintLevelUpMax": 0,
+    "eventIds": []
   }
 ]

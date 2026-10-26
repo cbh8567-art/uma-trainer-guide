@@ -12,6 +12,8 @@ inlineScripts.forEach((script,index)=>{
   catch(e){ errors.push(`index inline JavaScript ${index+1} syntax error: ${e.message}`); }
 });
 ok((index.match(/const STATE_KEY='uma_tracker_v4_state'/g)||[]).length===1,"STATE_KEY must exist exactly once");
+ok(index.includes("serverProfiles.jp=normalizeServerProfile")&&index.includes("serverProfiles.kr=normalizeServerProfile"),"JP/KR saved profiles must remain separate");
+ok(index.includes("cacheNeedsRefresh=!ids.has(30322)||!ids.has(30323)"),"old card caches must refresh for the new JP cards");
 ok(index.includes("friend_manual_"),"friend_manual_ fallback missing");
 ok(!index.includes("scenarioBase"),"obsolete scenarioBase must remain absent");
 ok(index.includes("gametora.com/images/umamusume/skill_icons/utx_ico_skill_"),"GameTora fallback missing");
@@ -22,6 +24,13 @@ ok(/<meta name="app-build" content="V7\.\d+(?:\.\d+)?">/.test(index),"V7.x app b
 ok(index.includes('id="dbLoadPanel"')&&index.includes('id="dbRetryBtn"'),"DB loading/retry UI missing");
 const meta=await read("data/kr/server_meta.json");
 ok(Number(meta.supportMaxId)===30260,"KR supportMaxId must stay 30260");
+const jpSupports=await read("data/jp/current/supports.json");
+for(const [id,name,type] of [[30322,"マヤノトップガン","power"],[30323,"吾妻","friend"]]){
+  const card=jpSupports.find(item=>Number(item.id)===id);
+  ok(Boolean(card)&&card.name.includes(name)&&card.type===type,`JP support ${id} is missing or mislabeled`);
+  ok(id>Number(meta.supportMaxId),`JP support ${id} must not appear in KR`);
+}
+for(const id of [30256,30257])ok(index.includes(`${id}:`),`KR island support ${id} mapping missing`);
 ok(Number(meta.implementedUmaCards)===212,"KR implementedUmaCards must stay 212");
 const uma=await read("data/kr/uma_ids.json");
 ok(Array.isArray(uma.ids)&&uma.ids.length===212,"KR uma allowlist count must stay 212");

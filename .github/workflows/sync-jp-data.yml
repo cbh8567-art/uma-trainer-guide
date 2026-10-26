@@ -13,7 +13,8 @@ on:
       - "data/kr/server_meta.json"
       - "data/kr/uma_ids.json"
   schedule:
-    - cron: "30 18 * * *"
+    # 화요일 00:00 UTC = 한국 시간 화요일 09:00
+    - cron: "0 0 * * 2"
 
 permissions:
   contents: write
