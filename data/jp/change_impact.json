@@ -1,10 +1,21 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-26T19:00:49.286Z",
+  "generatedAt": "2026-10-26T19:18:57.466Z",
   "event": "push",
-  "sha": "aa6e8f9fd10c860ebbe10283bb3f2886996e5065",
+  "sha": "fc795df9750a324e627a0bc1c7b7dfab97bb3a25",
   "changedFiles": [
-    "data/jp/current/supports.json",
+    "assets/scenario/goshiki/utx_ico_festa_act_01.png",
+    "assets/scenario/goshiki/utx_ico_festa_act_02.png",
+    "assets/scenario/goshiki/utx_ico_festa_act_03.png",
+    "assets/scenario/goshiki/utx_ico_festa_act_04.png",
+    "assets/scenario/goshiki/utx_ico_festa_act_05.png",
+    "assets/skill-icons/20041.png",
+    "assets/supports/30322.png",
+    "assets/supports/30323.png",
+    "data/common/effect_aliases.json",
+    "data/common/scenarios.json",
+    "data/jp/skill_icon_overrides.json",
+    "data/jp/verified_support_details.json",
     "index.html",
     "scripts/test-v6-integrity.mjs"
   ],
@@ -16,11 +27,24 @@
       "scripts/test-v6-integrity.mjs"
     ],
     "jpData": [
-      "data/jp/current/supports.json"
+      "data/jp/skill_icon_overrides.json",
+      "data/jp/verified_support_details.json"
     ],
     "krData": [],
-    "commonData": [],
-    "other": []
+    "commonData": [
+      "data/common/effect_aliases.json",
+      "data/common/scenarios.json"
+    ],
+    "other": [
+      "assets/scenario/goshiki/utx_ico_festa_act_01.png",
+      "assets/scenario/goshiki/utx_ico_festa_act_02.png",
+      "assets/scenario/goshiki/utx_ico_festa_act_03.png",
+      "assets/scenario/goshiki/utx_ico_festa_act_04.png",
+      "assets/scenario/goshiki/utx_ico_festa_act_05.png",
+      "assets/skill-icons/20041.png",
+      "assets/supports/30322.png",
+      "assets/supports/30323.png"
+    ]
   },
   "impactLevel": "high",
   "fullTest": true,
