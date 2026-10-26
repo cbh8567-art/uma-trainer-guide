@@ -25,6 +25,16 @@
         {"jp": "大曳神輿", "kr": "큰 가마 끌기", "statKr": "근성", "icon": "./assets/scenario/goshiki/utx_ico_festa_act_04.png"},
         {"jp": "飛駆", "kr": "비구", "statKr": "지능", "icon": "./assets/scenario/goshiki/utx_ico_festa_act_05.png"}
       ],
+      "runGuide": {
+        "sourceUrl": "https://gametora.com/umamusume/shuntaisai",
+        "deckNote": "서포트 종류를 5종 이상으로 맞추면 연목 연습의 스킬 Pt 추가 효과와 힌트 혜택을 받을 수 있습니다.",
+        "practiceNote": "담당 서포트와 함께 훈련해 연목 게이지를 채운 뒤, 게이지가 찬 연목의 연습을 실행하세요. 연습할 때 해당 연목 Lv이 1 오릅니다.",
+        "milestones": [
+          {"phase": "주니어 12월 후반", "level": 3, "goal": "첫 진척 발표회", "note": "다섯 연목 모두 Lv 3 이상이면 대성공"},
+          {"phase": "클래식 12월 후반", "level": 5, "goal": "두 번째 진척 발표회", "note": "다섯 연목 모두 Lv 5 이상이면 대성공"},
+          {"phase": "시니어 10월 후반", "level": 6, "goal": "오식 준대제 본제", "note": "다섯 연목 모두 Lv 6 이상이면 대성공"}
+        ]
+      },
       "linkCharacters": [
         {
           "jp": "吾妻",

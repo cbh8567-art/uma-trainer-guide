@@ -55,6 +55,8 @@ const scenarios=await read("data/common/scenarios.json");
 for(const key of ["goshiki","tresenken","dreams","onsen","island","legends","mecha","harvest","uaf","none"])ok(Boolean(scenarios.scenarios?.[key]),`scenario ${key} missing`);
 ok(scenarios.scenarios?.goshiki?.servers?.join(",")==="jp","Goshiki must remain JP only");
 ok(scenarios.scenarios?.goshiki?.performances?.length===5,"Goshiki needs all five in-game performance icons");
+ok(scenarios.scenarios?.goshiki?.runGuide?.milestones?.map(step=>step.level).join(",")==="3,5,6","Goshiki in-run guide milestones are missing");
+ok(index.includes("오식 준대제 · 육성 중 공략")&&index.includes("서포트 종류 "),"Goshiki in-run guide UI is missing");
 for(const performance of scenarios.scenarios?.goshiki?.performances||[]){
   ok(/^\.\/assets\/scenario\/goshiki\/utx_ico_festa_act_0[1-5]\.png$/.test(performance.icon),`invalid Goshiki icon path: ${performance.jp}`);
   try{const icon=await fs.readFile(path.join(ROOT,performance.icon));ok(icon.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),`Goshiki icon is not PNG: ${performance.jp}`)}

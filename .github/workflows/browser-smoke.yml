@@ -423,9 +423,9 @@ jobs:
                       setAppServer('jp');
                       return {jpAllowed,jpSaved,krBlocked,islandGuideVisible,scenario:state.scenario,newCardsReady,
                         hasOfficial:text.includes('공식 시나리오 페이지'),hasSystem:text.includes('연목 게이지와 연습'),
-                        hasUpdatedGuide:text.includes('출시 후 확인된 공략'),performanceIcons};
+                        hasUpdatedGuide:text.includes('출시 후 확인된 공략'),hasRunGuide:text.includes('육성 중 공략')&&text.includes('서포트 종류')&&text.includes('다섯 연목 모두 Lv 6+'),performanceIcons};
                   """)
-                  if not all(jp_verify.get(k) for k in ["jpAllowed","jpSaved","krBlocked","islandGuideVisible","hasOfficial","hasSystem","hasUpdatedGuide","newCardsReady"]) or jp_verify.get("scenario") != "goshiki" or jp_verify.get("performanceIcons") != 5:
+                  if not all(jp_verify.get(k) for k in ["jpAllowed","jpSaved","krBlocked","islandGuideVisible","hasOfficial","hasSystem","hasUpdatedGuide","hasRunGuide","newCardsReady"]) or jp_verify.get("scenario") != "goshiki" or jp_verify.get("performanceIcons") != 5:
                       raise RuntimeError("JP Goshiki / KR island guide smoke failed: "+str(jp_verify))
                   print("JP GOSHIKI V7.80 SERVER / OFFICIAL GUIDE / KR ISLAND VISIBILITY PASS:",jp_verify)
 

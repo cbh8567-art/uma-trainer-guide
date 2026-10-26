@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.80.1">
+<meta name="app-build" content="V7.80.2">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.80.1 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.80.2 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -482,9 +482,10 @@ body{font-size:14px;line-height:1.5}
 .scenarioOfficialGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}
 .scenarioOfficialItem{border:1px solid #4b3e59;background:#171522;border-radius:9px;padding:8px;min-width:0}.scenarioOfficialItem b{display:block;font-size:10px;color:#ead7f5;margin-bottom:3px}.scenarioOfficialItem .sub{font-size:9px;line-height:1.5}
 .goshikiPerformanceGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:8px}.goshikiPerformance{display:flex;align-items:center;gap:6px;border:1px solid #574968;background:#1b1724;border-radius:9px;padding:7px;min-width:0}.goshikiPerformance img{width:38px;height:38px;object-fit:contain;flex:none}.goshikiPerformance b{display:block;color:#f1ddfa;font-size:10px}.goshikiPerformance span{color:#bfc6d8;font-size:9px}
+.goshikiRunGuide{margin-top:9px;border:1px solid #6b5677;background:#191522;border-radius:10px;padding:10px}.goshikiRunGuide h4{margin:0 0 5px;color:#f5defa;font-size:12px}.goshikiRunGuide .sub{font-size:10px}.goshikiRunStatus{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.goshikiMilestones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.goshikiMilestone{border:1px solid #5c4d68;background:#241d2b;border-radius:8px;padding:8px}.goshikiMilestone b{display:block;color:#f3def8;font-size:10px}.goshikiMilestone strong{display:block;color:#ffe4a5;font-size:14px;margin:3px 0}
 .scenarioOfficialCharacters{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.scenarioOfficialCharacters .tag{font-size:9.5px}
 .scenarioOfficialPending{margin-top:8px;padding:7px 8px;border:1px solid #735f3d;background:#211d16;border-radius:8px;color:#ebd09a;font-size:9.5px;line-height:1.5}
-@media(max-width:720px){.scenarioOfficialGrid{grid-template-columns:1fr}.goshikiPerformanceGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.scenarioOfficialGrid{grid-template-columns:1fr}.goshikiPerformanceGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.goshikiMilestones{grid-template-columns:1fr}}
 .islandGuideBox{margin-top:9px;border:1px solid #496274;background:#151e28;border-radius:10px;padding:9px}
 .islandGuideHead{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap}
 .islandGuideStatus{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
@@ -1249,7 +1250,7 @@ body.trainingMode .trainingProgressHead .sub,
 </div>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.80.1 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.80.2 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -2696,6 +2697,13 @@ function renderScenarioPlan(){
    html+='<div class="scenarioOfficialSummary"><div class="scenarioOfficialHead"><div><b>일본 서버 최신 시나리오 · '+esc(sc.name)+'</b><div class="scenarioOfficialReading">읽기: '+esc(sc.officialReading||'')+' · 2026.10.26 12:00 공개<br>한국어 이름은 이해를 돕는 사이트 보조 번역이며 한국 서버 정식 명칭이 아닙니다.</div></div><a href="'+esc(sc.sourceUrl||'#')+'" target="_blank" rel="noopener">공식 시나리오 페이지 ↗</a></div>';
    html+='<div class="scenarioOfficialGrid">'+sc.officialHighlights.map(x=>'<div class="scenarioOfficialItem"><b>'+esc(x.title)+'</b><div class="sub">'+esc(x.text)+'</div></div>').join('')+'</div>';
    if(state.scenario==='goshiki'&&Array.isArray(sc.performances))html+='<div class="goshikiPerformanceGrid">'+sc.performances.map(x=>'<div class="goshikiPerformance"><img src="'+esc(x.icon)+'" alt="'+esc(x.jp)+' 아이콘" loading="lazy" onerror="this.hidden=true"><div><b>'+esc(x.kr)+'</b><span>'+esc(x.jp)+' · '+esc(x.statKr)+'</span></div></div>').join('')+'</div>';
+   if(state.scenario==='goshiki'&&sc.runGuide){
+     const guide=sc.runGuide,deck=activeDeckCards(),typeCount=new Set(deck.map(card=>card.type).filter(Boolean)).size,hasAzuma=deck.some(card=>Number(card.id)===30323);
+     html+='<div class="goshikiRunGuide"><h4>오식 준대제 · 육성 중 공략</h4><div class="sub">'+esc(guide.deckNote||'')+'</div>'+
+       '<div class="goshikiRunStatus"><span class="tag '+(typeCount>=5?'good':'warn')+'">서포트 종류 '+typeCount+'/5'+(typeCount>=5?' ✓':'')+'</span><span class="tag '+(hasAzuma?'good':'warn')+'">'+(hasAzuma?'아즈마 SSR 편성 · 연목 Lv 상한 10 ✓':'아즈마 SSR 미편성 · 연목 Lv 상한 6')+'</span></div>'+
+       '<div class="sub">'+esc(guide.practiceNote||'')+'</div><div class="goshikiMilestones">'+(guide.milestones||[]).map(step=>'<div class="goshikiMilestone"><b>'+esc(step.phase)+' · '+esc(step.goal)+'</b><strong>다섯 연목 모두 Lv '+esc(step.level)+'+</strong><div class="sub">'+esc(step.note)+'</div></div>').join('')+'</div>'+
+       (guide.sourceUrl?'<div class="sub" style="margin-top:7px"><a href="'+esc(guide.sourceUrl)+'" target="_blank" rel="noopener">게임 자료 확인 ↗</a></div>':'')+'</div>';
+   }
    if(characters.length)html+='<div class="scenarioOfficialCharacters"><span class="tag">주요 등장</span>'+characters.map(x=>'<span class="tag">'+esc(x.kr||x.jp)+' · '+esc(x.jp)+'</span>').join('')+'</div>';
    html+='<div class="scenarioOfficialPending">출시 후 확인된 공략을 반영했습니다. 시나리오 전용 획득 스킬과 진화 조건은 검증되는 대로 추가합니다.<br>'+esc(sc.statCapsNote||'')+(sc.statCapsSourceUrl?' <a href="'+esc(sc.statCapsSourceUrl)+'" target="_blank" rel="noopener">게임 자료 출처 ↗</a>':'')+' · <a href="'+esc(sc.officialNewsUrl||sc.sourceUrl||'#')+'" target="_blank" rel="noopener">공식 출시 공지 ↗</a></div></div>';
  }
@@ -3588,6 +3596,16 @@ let SCENARIOS={
       {jp:'大曳神輿',kr:'큰 가마 끌기',statKr:'근성',icon:'./assets/scenario/goshiki/utx_ico_festa_act_04.png'},
       {jp:'飛駆',kr:'비구',statKr:'지능',icon:'./assets/scenario/goshiki/utx_ico_festa_act_05.png'}
     ],
+    runGuide:{
+      sourceUrl:'https://gametora.com/umamusume/shuntaisai',
+      deckNote:'서포트 종류를 5종 이상으로 맞추면 연목 연습의 스킬 Pt 추가 효과와 힌트 혜택을 받을 수 있습니다.',
+      practiceNote:'담당 서포트와 함께 훈련해 연목 게이지를 채운 뒤, 게이지가 찬 연목의 연습을 실행하세요. 연습할 때 해당 연목 Lv이 1 오릅니다.',
+      milestones:[
+        {phase:'주니어 12월 후반',level:3,goal:'첫 진척 발표회',note:'다섯 연목 모두 Lv 3 이상이면 대성공'},
+        {phase:'클래식 12월 후반',level:5,goal:'두 번째 진척 발표회',note:'다섯 연목 모두 Lv 5 이상이면 대성공'},
+        {phase:'시니어 10월 후반',level:6,goal:'오식 준대제 본제',note:'다섯 연목 모두 Lv 6 이상이면 대성공'}
+      ]
+    },
     linkCharacters:[
       {jp:'吾妻',kr:'아즈마'},{jp:'ダイワスカーレット',kr:'다이와 스칼렛'},{jp:'ユキノビジン',kr:'유키노 비진'},
       {jp:'マヤノトップガン',kr:'마야노 탑건'},{jp:'ノーリーズン',kr:'노 리즌'},{jp:'ブラストワンピース',kr:'블라스트 원피스'}
