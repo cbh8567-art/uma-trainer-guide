@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T09:11:09.603Z",
+  "generatedAt": "2026-10-27T09:42:59.410Z",
   "event": "push",
-  "sha": "f95f4816ee464b7daee1203e20f0d873e3a53f9d",
+  "sha": "fe274a684b88351d9e08c9c821e5884fdc75ccd0",
   "changedFiles": [
-    ".github/workflows/browser-smoke.yml",
+    "data/common/scenarios.json",
     "index.html"
   ],
   "categories": {
@@ -14,10 +14,10 @@
     "pipeline": [],
     "jpData": [],
     "krData": [],
-    "commonData": [],
-    "other": [
-      ".github/workflows/browser-smoke.yml"
-    ]
+    "commonData": [
+      "data/common/scenarios.json"
+    ],
+    "other": []
   },
   "impactLevel": "high",
   "fullTest": true,
