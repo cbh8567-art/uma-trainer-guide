@@ -1,10 +1,23 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-26",
-  "generatedAt": "2026-10-26T19:27:33.420Z",
+  "updated": "2026-10-27",
+  "generatedAt": "2026-10-27T04:12:02.153Z",
   "status": "verification_required",
   "characters": [],
-  "supports": [],
+  "supports": [
+    {
+      "id": 30322,
+      "name": "マヤノトップガン (SSR)",
+      "status": "verification_required",
+      "reason": "ID is above current KR verified support boundary 30260; verify KR release before promotion."
+    },
+    {
+      "id": 30323,
+      "name": "吾妻 (SSR)",
+      "status": "verification_required",
+      "reason": "ID is above current KR verified support boundary 30260; verify KR release before promotion."
+    }
+  ],
   "supportMaxId": 30260,
   "notes": [
     "JP changes never auto-promote to KR.",

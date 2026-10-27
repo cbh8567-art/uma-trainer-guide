@@ -1,34 +1,51 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-26",
+  "updated": "2026-10-27",
   "status": "pass",
-  "checkedAt": "2026-10-26T19:27:33.420Z",
+  "checkedAt": "2026-10-27T04:12:02.153Z",
   "fatal": [],
   "warnings": [],
   "collections": {
     "catalog": {
       "source": "https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json",
-      "count": 563,
-      "contentSha256": "095a33de1693de1e0082223d5d16035cb4dfa6a13fc7fa7124e0386021b2f5ef",
+      "count": 566,
+      "contentSha256": "41983320be6dede195f76d42c50cba02e483b6c2baec6fa8a1ebbc17652ccc3b",
       "duplicateIds": [],
       "status": "pass",
       "previousCount": 563,
       "removedCount": 0,
       "removedRatio": 0,
       "changes": {
-        "addedCount": 0,
+        "addedCount": 3,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [],
+        "addedIds": [
+          "10149",
+          "30322",
+          "30323"
+        ],
         "removedIds": [],
         "modifiedIds": []
       },
       "changeDetails": {
-        "added": [],
+        "added": [
+          {
+            "id": "10149",
+            "name": "吾妻 (R)"
+          },
+          {
+            "id": "30322",
+            "name": "マヤノトップガン (SSR)"
+          },
+          {
+            "id": "30323",
+            "name": "吾妻 (SSR)"
+          }
+        ],
         "removed": [],
         "modified": []
       },
-      "changed": false
+      "changed": true
     },
     "supports": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
@@ -158,7 +175,7 @@
     "missingSupportHintSkillIds": []
   },
   "changeTotals": {
-    "added": 0,
+    "added": 3,
     "removed": 0,
     "modified": 0
   }

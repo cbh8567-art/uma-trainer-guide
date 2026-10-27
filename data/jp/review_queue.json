@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-26",
-  "generatedAt": "2026-10-26T19:27:33.420Z",
-  "openCount": 45,
+  "updated": "2026-10-27",
+  "generatedAt": "2026-10-27T04:12:02.153Z",
+  "openCount": 48,
   "items": [
     {
       "key": "supports:removed:30321",
@@ -50,6 +50,42 @@
       "status": "open",
       "firstSeenAt": "2026-10-02T00:37:28.902Z",
       "lastSeenAt": "2026-10-02T00:37:28.902Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:added:10149",
+      "collection": "catalog",
+      "changeType": "added",
+      "id": "10149",
+      "name": "吾妻 (R)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-10-27T04:12:02.153Z",
+      "lastSeenAt": "2026-10-27T04:12:02.153Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:added:30322",
+      "collection": "catalog",
+      "changeType": "added",
+      "id": "30322",
+      "name": "マヤノトップガン (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-10-27T04:12:02.153Z",
+      "lastSeenAt": "2026-10-27T04:12:02.153Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:added:30323",
+      "collection": "catalog",
+      "changeType": "added",
+      "id": "30323",
+      "name": "吾妻 (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-10-27T04:12:02.153Z",
+      "lastSeenAt": "2026-10-27T04:12:02.153Z",
       "note": ""
     },
     {
