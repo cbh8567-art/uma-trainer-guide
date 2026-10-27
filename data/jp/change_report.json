@@ -1,46 +1,29 @@
 {
   "schemaVersion": 1,
   "updated": "2026-10-27",
-  "checkedAt": "2026-10-27T04:12:02.153Z",
+  "checkedAt": "2026-10-27T07:56:16.447Z",
   "status": "pass",
   "summary": {
-    "added": 3,
+    "added": 0,
     "removed": 0,
     "modified": 0
   },
   "collections": {
     "catalog": {
       "count": 566,
-      "previousCount": 563,
-      "changed": true,
+      "previousCount": 566,
+      "changed": false,
       "status": "pass",
       "changes": {
-        "addedCount": 3,
+        "addedCount": 0,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [
-          "10149",
-          "30322",
-          "30323"
-        ],
+        "addedIds": [],
         "removedIds": [],
         "modifiedIds": []
       },
       "details": {
-        "added": [
-          {
-            "id": "10149",
-            "name": "吾妻 (R)"
-          },
-          {
-            "id": "30322",
-            "name": "マヤノトップガン (SSR)"
-          },
-          {
-            "id": "30323",
-            "name": "吾妻 (SSR)"
-          }
-        ],
+        "added": [],
         "removed": [],
         "modified": []
       }
