@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.80.3">
+<meta name="app-build" content="V7.80.4">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.80.3 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.80.4 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -1250,7 +1250,7 @@ body.trainingMode .trainingProgressHead .sub,
 </div>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.80.3 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.80.4 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -2702,6 +2702,9 @@ function renderScenarioPlan(){
      html+='<div class="goshikiRunGuide"><h4>오식 준대제 · 육성 중 공략</h4><div class="sub">'+esc(guide.deckNote||'')+'</div>'+
        '<div class="goshikiRunStatus"><span class="tag '+(typeCount>=5?'good':'warn')+'">서포트 종류 '+typeCount+'/5'+(typeCount>=5?' ✓':'')+'</span><span class="tag '+(hasAzuma?'good':'warn')+'">'+(hasAzuma?'아즈마 SSR 편성 · 연목 Lv 상한 10 ✓':'아즈마 SSR 미편성 · 연목 Lv 상한 6')+'</span></div>'+
        '<div class="sub">'+esc(guide.practiceNote||'')+'</div><div class="goshikiMilestones">'+(guide.milestones||[]).map(step=>'<div class="goshikiMilestone"><b>'+esc(step.phase)+' · '+esc(step.goal)+'</b><strong>다섯 연목 모두 Lv '+esc(step.level)+'+</strong><div class="sub">'+esc(step.note)+'</div></div>').join('')+'</div>'+
+       '<div class="goshikiGuideSkills"><h4>어떤 연목을 찍을까?</h4><div class="sub">아래 다섯 연목은 모두 발표회 목표에 필요합니다. 한 종류만 몰아서 올리지 말고 부족한 연목부터 채우세요.</div>'+
+       '<div class="goshikiPerformanceGrid">'+(sc.performances||[]).map(item=>'<div class="goshikiPerformance"><img src="'+esc(item.icon)+'" alt="'+esc(item.jp)+' 아이콘" loading="lazy" onerror="this.hidden=true"><div><b>'+esc(item.kr)+' · '+esc(item.statKr)+'</b><span>'+esc(item.jp)+' · 주니어 Lv 3 → 클래식 Lv 5 → 시니어 Lv 6</span></div></div>').join('')+'</div>'+
+       (guide.selectionRules||[]).map((rule,index)=>'<div class="goshikiMilestone"><b>'+esc(index+1)+'단계</b><div class="sub">'+esc(rule)+'</div></div>').join('')+'</div>'+
        '<div class="goshikiGuideSkills"><h4>보상 스킬 획득 시점</h4>'+
        (guide.rewards||[]).map(item=>'<div class="goshikiMilestone"><b>'+esc(item.phase)+' · '+esc(item.detail)+'</b><div class="sub">'+esc(item.skills)+'</div></div>').join('')+
        '<h4>시니어 10월 전반 선택지</h4><div class="sub">해당 캐릭터를 육성하거나 서포트로 편성하면 금색 스킬 힌트를 얻습니다. 아즈마 선택지는 편성과 관계없이 금색 힌트입니다.</div>'+
@@ -3616,7 +3619,8 @@ let SCENARIOS={
       linkSkillChoices:[{"character":"다이와 스칼렛","gold":"先手必勝","normal":"先駆け"},{"character":"마야노 탑건","gold":"順風満帆","normal":"気持ちを乗せて"},{"character":"유키노 비진","gold":"燃ゆる魂","normal":"灯を胸に"},{"character":"노 리즌","gold":"刹那の勝機","normal":"間隙を突いて"},{"character":"블라스트 원피스","gold":"ウママニア","normal":"ウマ好み"},{"character":"아즈마","gold":"螺旋のエキスパート","normal":"항상 금색 힌트"}],
       evolutionPairs:[["全身全霊","捧ぐる願い"],["神速","急之舞"],["ネバーギブアップ","満願成就"],["気骨稜稜","常磐なる誓い"],["英俊豪傑","吉兆の駆け手"],["燃ゆる魂","祈りの篝火"]],
       rewardSourceUrl:'https://gamewith.jp/uma-musume/article/show/578834',
-      evolutionSourceUrl:'https://game8.jp/umamusume/836272'
+      evolutionSourceUrl:'https://game8.jp/umamusume/836272',
+      selectionRules:["발표회가 가까우면 다섯 연목 중 현재 Lv가 가장 낮은 것을 먼저 올립니다. 같은 Lv라면 게이지가 찬 연목 연습 중 서포트가 많이 모인 쪽을 선택합니다.","주니어 12월 후반에는 다섯 연목 모두 Lv 3, 클래식 12월 후반에는 모두 Lv 5, 시니어 10월 후반에는 모두 Lv 6을 맞춥니다.","다섯 연목을 모두 목표 Lv까지 올린 뒤에는 부족한 능력치와 자주 밟는 훈련의 연목을 올립니다. 아즈마 SSR 편성으로 Lv 7 이상이 가능하면 주력 연목을 더 키울 수 있습니다."]
     },
     linkCharacters:[
       {jp:'吾妻',kr:'아즈마'},{jp:'ダイワスカーレット',kr:'다이와 스칼렛'},{jp:'ユキノビジン',kr:'유키노 비진'},
