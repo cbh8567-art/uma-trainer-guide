@@ -408,6 +408,15 @@ jobs:
                       renderScenarioPlan();
                       const text=document.querySelector('#scenarioPlanBody')?.innerText||'';
                       const performanceIcons=document.querySelectorAll('#scenarioPlanBody .goshikiPerformance img').length;
+                      const phaseTabs=document.querySelectorAll('#scenarioPlanBody [data-goshiki-phase]').length===4;
+                      document.querySelector('#scenarioPlanBody [data-goshiki-phase="classic"]')?.click();
+                      const classicPhase=document.querySelector('#scenarioPlanBody')?.innerText.includes('Lv 5 목표');
+                      document.querySelector('#scenarioPlanBody [data-goshiki-phase="senior"]')?.click();
+                      const seniorPhase=document.querySelector('#scenarioPlanBody')?.innerText.includes('Lv 6 목표');
+                      document.querySelector('#scenarioPlanBody [data-goshiki-phase="ura"]')?.click();
+                      const uraPhase=document.querySelector('#scenarioPlanBody')?.innerText.includes('본제 이후');
+                      document.querySelector('#scenarioPlanBody [data-goshiki-phase="junior"]')?.click();
+                      const phasesReady=phaseTabs&&classicPhase&&seniorPhase&&uraPhase;
                       const mayano=cardById(30322),azuma=cardById(30323);
                       const newCardsReady=!!mayano&&!!azuma&&mayano.supportEffects?.length>=14&&azuma.supportEffects?.length>=12&&
                         mayano.rareEvents?.[0]?.choices?.length===6&&azuma.rareEvents?.[0]?.choices?.[0]?.skills?.some(s=>s.id===202551)&&
@@ -423,9 +432,9 @@ jobs:
                       setAppServer('jp');
                       return {jpAllowed,jpSaved,krBlocked,islandGuideVisible,scenario:state.scenario,newCardsReady,
                         hasOfficial:text.includes('공식 시나리오 페이지'),hasSystem:text.includes('연목 게이지와 연습'),
-                        hasUpdatedGuide:text.includes('출시 후 확인된 공략'),hasRunGuide:text.includes('육성 중 공략')&&text.includes('서포트 종류')&&text.includes('다섯 연목 모두 Lv 6+'),performanceIcons};
+                        hasUpdatedGuide:text.includes('출시 후 확인된 공략'),hasRunGuide:text.includes('육성 중 공략')&&text.includes('서포트 종류')&&text.includes('다섯 연목 모두 Lv 6+'),phasesReady,performanceIcons};
                   """)
-                  if not all(jp_verify.get(k) for k in ["jpAllowed","jpSaved","krBlocked","islandGuideVisible","hasOfficial","hasSystem","hasUpdatedGuide","hasRunGuide","newCardsReady"]) or jp_verify.get("scenario") != "goshiki" or jp_verify.get("performanceIcons") != 5:
+                  if not all(jp_verify.get(k) for k in ["jpAllowed","jpSaved","krBlocked","islandGuideVisible","hasOfficial","hasSystem","hasUpdatedGuide","hasRunGuide","newCardsReady","phasesReady"]) or jp_verify.get("scenario") != "goshiki" or jp_verify.get("performanceIcons") != 5:
                       raise RuntimeError("JP Goshiki / KR island guide smoke failed: "+str(jp_verify))
                   print("JP GOSHIKI V7.80 SERVER / OFFICIAL GUIDE / KR ISLAND VISIBILITY PASS:",jp_verify)
 
