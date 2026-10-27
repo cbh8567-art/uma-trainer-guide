@@ -407,7 +407,9 @@ jobs:
                       document.getElementById('openJpGoshikiGuideBtn')?.click();
                       renderScenarioPlan();
                       const text=document.querySelector('#scenarioPlanBody')?.innerText||'';
-                      const performanceIcons=document.querySelectorAll('#scenarioPlanBody .goshikiPerformance img').length;
+                      const performanceIcons=document.querySelectorAll('#scenarioPlanBody .goshikiPerformance > img').length;
+                      const teachingIcons=[...document.querySelectorAll('#scenarioPlanBody .goshikiTeachingIconRow img')];
+                      const teachingIconsReady=teachingIcons.length===5&&teachingIcons.every(img=>img.getAttribute('src')?.includes('/goshiki/teachings/utx_ico_festa_advice_'));
                       const phaseTabs=document.querySelectorAll('#scenarioPlanBody [data-goshiki-phase]').length===4;
                       document.querySelector('#scenarioPlanBody [data-goshiki-phase="classic"]')?.click();
                       const classicPhase=document.querySelector('#scenarioPlanBody')?.innerText.includes('Lv 5 목표');
@@ -432,9 +434,9 @@ jobs:
                       setAppServer('jp');
                       return {jpAllowed,jpSaved,krBlocked,islandGuideVisible,scenario:state.scenario,newCardsReady,
                         hasOfficial:text.includes('공식 시나리오 페이지'),hasSystem:text.includes('연목 게이지와 연습'),
-                        hasUpdatedGuide:text.includes('출시 후 확인된 공략'),hasRunGuide:text.includes('육성 중 공략')&&text.includes('서포트 종류')&&text.includes('다섯 연목 모두 Lv 6+'),phasesReady,performanceIcons};
+                        hasUpdatedGuide:text.includes('출시 후 확인된 공략'),hasRunGuide:text.includes('육성 중 공략')&&text.includes('서포트 종류')&&text.includes('다섯 연목 모두 Lv 6+'),phasesReady,performanceIcons,teachingIconsReady};
                   """)
-                  if not all(jp_verify.get(k) for k in ["jpAllowed","jpSaved","krBlocked","islandGuideVisible","hasOfficial","hasSystem","hasUpdatedGuide","hasRunGuide","newCardsReady","phasesReady"]) or jp_verify.get("scenario") != "goshiki" or jp_verify.get("performanceIcons") != 5:
+                  if not all(jp_verify.get(k) for k in ["jpAllowed","jpSaved","krBlocked","islandGuideVisible","hasOfficial","hasSystem","hasUpdatedGuide","hasRunGuide","newCardsReady","phasesReady","teachingIconsReady"]) or jp_verify.get("scenario") != "goshiki" or jp_verify.get("performanceIcons") != 5:
                       raise RuntimeError("JP Goshiki / KR island guide smoke failed: "+str(jp_verify))
                   print("JP GOSHIKI V7.80 SERVER / OFFICIAL GUIDE / KR ISLAND VISIBILITY PASS:",jp_verify)
 
