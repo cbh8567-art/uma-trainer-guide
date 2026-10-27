@@ -1,9 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T07:58:05.242Z",
+  "generatedAt": "2026-10-27T08:59:21.440Z",
   "event": "push",
-  "sha": "1c6f98e80abd787bf11bfb290d4dc8d23805434a",
+  "sha": "e871c14f08ec66d679c32d435a754d3f35523d59",
   "changedFiles": [
+    "data/common/scenarios.json",
     "index.html"
   ],
   "categories": {
@@ -13,7 +14,9 @@
     "pipeline": [],
     "jpData": [],
     "krData": [],
-    "commonData": [],
+    "commonData": [
+      "data/common/scenarios.json"
+    ],
     "other": []
   },
   "impactLevel": "high",
