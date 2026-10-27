@@ -19,21 +19,143 @@
       "statCapsNote": "스탯 상한은 출시 후 게임 자료와 대조했습니다. 실제 게임 화면과 다르면 스탯 상한 설정에서 직접 바꿀 수 있습니다.",
       "statCapsSourceUrl": "https://gametora.com/umamusume/shuntaisai",
       "performances": [
-        {"jp": "流鏑馬", "kr": "야부사메", "statKr": "스피드", "icon": "./assets/scenario/goshiki/utx_ico_festa_act_01.png"},
-        {"jp": "神旗争奪戦", "kr": "신기 쟁탈전", "statKr": "스태미나", "icon": "./assets/scenario/goshiki/utx_ico_festa_act_02.png"},
-        {"jp": "納舞", "kr": "봉납 춤", "statKr": "파워", "icon": "./assets/scenario/goshiki/utx_ico_festa_act_03.png"},
-        {"jp": "大曳神輿", "kr": "큰 가마 끌기", "statKr": "근성", "icon": "./assets/scenario/goshiki/utx_ico_festa_act_04.png"},
-        {"jp": "飛駆", "kr": "비구", "statKr": "지능", "icon": "./assets/scenario/goshiki/utx_ico_festa_act_05.png"}
+        {
+          "jp": "流鏑馬",
+          "kr": "야부사메",
+          "statKr": "스피드",
+          "icon": "./assets/scenario/goshiki/utx_ico_festa_act_01.png"
+        },
+        {
+          "jp": "神旗争奪戦",
+          "kr": "신기 쟁탈전",
+          "statKr": "스태미나",
+          "icon": "./assets/scenario/goshiki/utx_ico_festa_act_02.png"
+        },
+        {
+          "jp": "納舞",
+          "kr": "봉납 춤",
+          "statKr": "파워",
+          "icon": "./assets/scenario/goshiki/utx_ico_festa_act_03.png"
+        },
+        {
+          "jp": "大曳神輿",
+          "kr": "큰 가마 끌기",
+          "statKr": "근성",
+          "icon": "./assets/scenario/goshiki/utx_ico_festa_act_04.png"
+        },
+        {
+          "jp": "飛駆",
+          "kr": "비구",
+          "statKr": "지능",
+          "icon": "./assets/scenario/goshiki/utx_ico_festa_act_05.png"
+        }
       ],
       "runGuide": {
         "sourceUrl": "https://gametora.com/umamusume/shuntaisai",
         "deckNote": "서포트 종류를 5종 이상으로 맞추면 연목 연습의 스킬 Pt 추가 효과와 힌트 혜택을 받을 수 있습니다.",
         "practiceNote": "담당 서포트와 함께 훈련해 연목 게이지를 채운 뒤, 게이지가 찬 연목의 연습을 실행하세요. 연습할 때 해당 연목 Lv이 1 오릅니다.",
         "milestones": [
-          {"phase": "주니어 12월 후반", "level": 3, "goal": "첫 진척 발표회", "note": "다섯 연목 모두 Lv 3 이상이면 대성공"},
-          {"phase": "클래식 12월 후반", "level": 5, "goal": "두 번째 진척 발표회", "note": "다섯 연목 모두 Lv 5 이상이면 대성공"},
-          {"phase": "시니어 10월 후반", "level": 6, "goal": "오식 준대제 본제", "note": "다섯 연목 모두 Lv 6 이상이면 대성공"}
-        ]
+          {
+            "phase": "주니어 12월 후반",
+            "level": 3,
+            "goal": "첫 진척 발표회",
+            "note": "다섯 연목 모두 Lv 3 이상이면 대성공"
+          },
+          {
+            "phase": "클래식 12월 후반",
+            "level": 5,
+            "goal": "두 번째 진척 발표회",
+            "note": "다섯 연목 모두 Lv 5 이상이면 대성공"
+          },
+          {
+            "phase": "시니어 10월 후반",
+            "level": 6,
+            "goal": "오식 준대제 본제",
+            "note": "다섯 연목 모두 Lv 6 이상이면 대성공"
+          }
+        ],
+        "rewards": [
+          {
+            "phase": "클래식 12월 후반",
+            "detail": "두 번째 진척 발표회 종료",
+            "skills": "全身全霊"
+          },
+          {
+            "phase": "시니어 10월 전반",
+            "detail": "본番前のひと時 선택지",
+            "skills": "링크 캐릭터에 따른 금색 또는 일반 스킬 힌트"
+          },
+          {
+            "phase": "시니어 10월 후반",
+            "detail": "다섯 연목 모두 대성공",
+            "skills": "ハヤテ一文字 · 機先の勝負"
+          },
+          {
+            "phase": "육성 종료",
+            "detail": "엔딩",
+            "skills": "名にし負う夢"
+          }
+        ],
+        "linkSkillChoices": [
+          {
+            "character": "다이와 스칼렛",
+            "gold": "先手必勝",
+            "normal": "先駆け"
+          },
+          {
+            "character": "마야노 탑건",
+            "gold": "順風満帆",
+            "normal": "気持ちを乗せて"
+          },
+          {
+            "character": "유키노 비진",
+            "gold": "燃ゆる魂",
+            "normal": "灯を胸に"
+          },
+          {
+            "character": "노 리즌",
+            "gold": "刹那の勝機",
+            "normal": "間隙を突いて"
+          },
+          {
+            "character": "블라스트 원피스",
+            "gold": "ウママニア",
+            "normal": "ウマ好み"
+          },
+          {
+            "character": "아즈마",
+            "gold": "螺旋のエキスパート",
+            "normal": "항상 금색 힌트"
+          }
+        ],
+        "evolutionPairs": [
+          [
+            "全身全霊",
+            "捧ぐる願い"
+          ],
+          [
+            "神速",
+            "急之舞"
+          ],
+          [
+            "ネバーギブアップ",
+            "満願成就"
+          ],
+          [
+            "気骨稜稜",
+            "常磐なる誓い"
+          ],
+          [
+            "英俊豪傑",
+            "吉兆の駆け手"
+          ],
+          [
+            "燃ゆる魂",
+            "祈りの篝火"
+          ]
+        ],
+        "rewardSourceUrl": "https://gamewith.jp/uma-musume/article/show/578834",
+        "evolutionSourceUrl": "https://game8.jp/umamusume/836272"
       },
       "linkCharacters": [
         {
