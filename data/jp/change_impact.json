@@ -1,9 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T09:01:21.187Z",
+  "generatedAt": "2026-10-27T09:11:09.603Z",
   "event": "push",
-  "sha": "4e4d70859765c6307d20d7ede65f0763059ffc9c",
+  "sha": "f95f4816ee464b7daee1203e20f0d873e3a53f9d",
   "changedFiles": [
+    ".github/workflows/browser-smoke.yml",
     "index.html"
   ],
   "categories": {
@@ -14,7 +15,9 @@
     "jpData": [],
     "krData": [],
     "commonData": [],
-    "other": []
+    "other": [
+      ".github/workflows/browser-smoke.yml"
+    ]
   },
   "impactLevel": "high",
   "fullTest": true,
