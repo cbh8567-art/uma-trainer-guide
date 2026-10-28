@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.80.8">
+<meta name="app-build" content="V7.80.9">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.80.8 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.80.9 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -1241,6 +1241,21 @@ body.trainingMode .trainingProgressHead .sub,
 .goshikiSectionLabel{margin:9px 0 4px;font-size:10px;font-weight:900;color:#d8c5e6}.goshikiTeachingSteps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:6px 0}.goshikiTeachingSteps button{text-align:left;min-width:0;line-height:1.3;padding:7px 8px}.goshikiTeachingSteps button b{display:block;color:#ffe49f;font-size:12px}.goshikiTeachingSteps button small{display:block;color:#c8b8d4;font-size:9px;white-space:normal}.goshikiTeachingSelection{display:flex;justify-content:space-between;gap:6px;align-items:center;margin:9px 0 3px}.goshikiTeachingSelection b{font-size:12px;color:#ffe49f}.goshikiTeachingSelection span{font-size:9px;color:#c8b8d4}@media(max-width:720px){.goshikiTeachingSteps{grid-template-columns:repeat(2,minmax(0,1fr))}.goshikiTeachingSelection{align-items:flex-start;flex-direction:column}}
 .goshikiTeachingLegend{font-size:9px;color:#c8b8d4;margin:2px 0 5px}
 .goshikiTeachingIconRow{display:flex!important;align-items:center;justify-content:center;gap:4px;min-height:34px;margin:4px 0 1px}.goshikiRunGuide .goshikiPerformance .goshikiTeachingIconRow img{width:31px;height:31px;object-fit:contain}.goshikiRunGuide .goshikiPerformance{min-height:158px}
+/* 오식 준대제: 가르침 선택지를 작은 화면에서도 읽기 쉬운 크기로 표시 */
+.goshikiRunGuide .goshikiPerformanceGrid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px}
+.goshikiRunGuide .goshikiPerformance{min-height:184px;padding:10px 8px;gap:5px}
+.goshikiRunGuide .goshikiPerformance > img{width:42px;height:42px}
+.goshikiRunGuide .goshikiPerformance b{font-size:12px}
+.goshikiRunGuide .goshikiPerformance .goshikiTeachingIconRow{min-height:54px;gap:6px;margin:5px 0 2px}
+.goshikiRunGuide .goshikiPerformance .goshikiTeachingIconRow img{width:50px;height:50px}
+.goshikiRunGuide .goshikiTeachingPick{font-size:14px!important;line-height:1.3;margin:3px 0}
+.goshikiRunGuide .goshikiTeachingOriginal{font-size:10px!important;line-height:1.35}
+.goshikiRunGuide .goshikiTeachingSteps button{min-height:52px;padding:8px 10px}
+.goshikiRunGuide .goshikiTeachingSteps button b{font-size:14px}
+.goshikiRunGuide .goshikiTeachingSteps button small{font-size:10px}
+.goshikiRunGuide .goshikiTeachingModes button{min-height:38px;padding:8px 11px;font-size:11px}
+.goshikiRunGuide .goshikiTeachingLegend{font-size:10px;line-height:1.4}
+@media(max-width:720px){.goshikiRunGuide .goshikiPerformanceGrid{grid-template-columns:repeat(auto-fit,minmax(154px,1fr))}}
 </style>
 </head>
 <body>
@@ -1254,7 +1269,7 @@ body.trainingMode .trainingProgressHead .sub,
 </div>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.80.8 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.80.9 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
