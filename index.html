@@ -1256,6 +1256,7 @@ body.trainingMode .trainingProgressHead .sub,
 .goshikiRunGuide .goshikiTeachingModes button{min-height:38px;padding:8px 11px;font-size:11px}
 .goshikiRunGuide .goshikiTeachingLegend{font-size:10px;line-height:1.4}
 @media(max-width:720px){.goshikiRunGuide .goshikiPerformanceGrid{grid-template-columns:repeat(auto-fit,minmax(154px,1fr))}}
+.goshikiEffectPicker{display:flex;align-items:center;gap:7px;margin:7px 0;color:#ffe4a5;font-size:11px;font-weight:800}.goshikiEffectPicker select{min-width:58px;border:1px solid #b8923e;border-radius:7px;background:#241d2e;color:#fff2cb;padding:5px;font-size:12px}.goshikiEffectText{margin-top:7px;padding:6px 7px;border:1px solid #715e43;border-radius:7px;background:#241f20;line-height:1.4}.goshikiEffectText summary{cursor:pointer;color:#ffe4a5;font-size:10px;font-weight:900}.goshikiEffectText span{display:block;margin-top:3px;color:#f1e8ef;font-size:10px}.goshikiEffectText em{color:#d9b6ef;font-style:normal;font-weight:800}.goshikiRunGuide .goshikiPerformance{min-height:145px}
 </style>
 </head>
 <body>
@@ -2717,6 +2718,7 @@ function renderScenarioPlan(){
    if(state.scenario==='goshiki'&&sc.runGuide){
      const guide=sc.runGuide,deck=activeDeckCards(),typeCount=new Set(deck.map(card=>card.type).filter(Boolean)).size,hasAzuma=deck.some(card=>Number(card.id)===30323);
      const phases=[['junior','주니어',3],['classic','클래식',5],['senior','시니어',6],['ura','URA',6]];
+     if(!hasAzuma&&goshikiCompareLevel>6)goshikiCompareLevel=6;
      const phase=phases.find(x=>x[0]===goshikiGuidePhase)||phases[0],step=guide.milestones?.[Math.min(phases.indexOf(phase),2)];
      const phaseHint={junior:'가장 낮은 Lv부터 · 게이지가 차면 연습',classic:'가장 낮은 Lv부터 · 다섯 연목 Lv 5',senior:'다섯 연목 Lv 6 후 주력 연목 강화',ura:'본제 보상 확인 · 부족한 능력치 훈련'}[phase[0]];
      const teaching=guide.teachingPlans||{},teachingStages=teaching.stages||[];
@@ -2733,9 +2735,9 @@ function renderScenarioPlan(){
        '<div class="goshikiPhaseTargets">'+(guide.milestones||[]).map((x,i)=>'<span class="'+(phase[0]===phases[i]?.[0]?'active':'')+'">'+esc(x.phase)+' · 다섯 연목 모두 Lv '+esc(x.level)+'+</span>').join('')+'</div>'+
        '<div class="goshikiTeachingHead"><b>가르침 선택 · 1~6회차</b><span>회차를 누르면 아래 선택지가 바뀝니다</span></div>'+
        '<div class="goshikiTeachingSteps">'+teachingStages.map((stage,i)=>'<button type="button" data-goshiki-step="'+i+'" class="'+(phase[0]!=='ura'&&activeStep===i?'active':'')+'" aria-pressed="'+(phase[0]!=='ura'&&activeStep===i?'true':'false')+'"><b>'+(i+1)+'회차</b><small>'+esc(({junior:'주니어',classic:'클래식',senior:'시니어'})[stage.phase]||'')+' · '+esc(stage.label)+'</small></button>').join('')+'</div>'+
-       (phase[0]==='ura'?'<div class="goshikiTeachingQuiet">URA에서는 새 가르침이 없습니다. 1~6회차에서 고른 효과를 유지하세요.</div>':'<div class="goshikiTeachingSelection"><b>'+(activeStep+1)+'회차 · '+esc(teachingStages[activeStep]?.label||'')+'</b><span>'+esc(distanceGroup==='short'?'단거리·마일':'중거리·장거리')+' · '+esc(profile==='wit'?'지능 2장':'스피드 2장')+' 기준</span></div><div class="goshikiTeachingLegend">아이콘은 연목 · 노란 글씨는 이번 회차에 고를 효과</div><div class="goshikiTeachingModes"><button type="button" data-goshiki-profile="speed" class="'+(profile==='speed'?'active':'')+'">스피드 2장</button><button type="button" data-goshiki-profile="wit" class="'+(profile==='wit'?'active':'')+'">지능 2장</button></div><div class="goshikiPerformanceGrid">'+(sc.performances||[]).map((x,i)=>{const choice=choices[i]||'',names=choice.split('+').filter(Boolean);return '<div class="goshikiPerformance"><img src="'+esc(x.icon)+'" alt="'+esc(x.jp)+' 인게임 아이콘" loading="lazy" onerror="this.hidden=true"><div><b>'+esc(x.kr)+'</b><span class="goshikiTeachingIconRow">'+names.map(n=>teachingIconIds[n]?'<img src="./assets/scenario/goshiki/teachings/utx_ico_festa_advice_'+teachingIconIds[n]+'.png" alt="'+esc(teachingLabels[n]||n)+' 가르침 인게임 아이콘" loading="lazy" onerror="this.hidden=true">':'').join('')+'</span><span class="goshikiTeachingPick">'+esc(names.map(n=>teachingLabels[n]||n).join(' + ')||'설정 유지')+'</span><span class="goshikiTeachingOriginal">'+esc(names.map(n=>n+'の教え').join(' + '))+'</span><span>'+esc(x.statKr)+' · Lv '+esc(phase[2])+' 목표</span></div></div>'}).join('')+'</div>')+
-       '<div class="goshikiTapOrder"><b>연목 Lv</b>낮은 연목부터 올리기 · 가르침 효과는 Lv에 따라 증가</div>'+
-       '<div class="goshikiTeachingSource">가르침 선택 예시 · <a href="'+esc(teaching.sourceUrl||guide.sourceUrl)+'" target="_blank" rel="noopener">거리·편성별 공략 ↗</a> · <a href="https://gametora.com/umamusume/shuntaisai" target="_blank" rel="noopener">인게임 아이콘 출처 ↗</a></div>'+
+       (phase[0]==='ura'?'<div class="goshikiTeachingQuiet">URA에서는 새 가르침이 없습니다. 1~6회차에서 고른 효과를 유지하세요.</div>':'<div class="goshikiTeachingSelection"><b>'+(activeStep+1)+'회차 · '+esc(teachingStages[activeStep]?.label||'')+'</b><span>'+esc(distanceGroup==='short'?'단거리·마일':'중거리·장거리')+' · '+esc(profile==='wit'?'지능 2장':'스피드 2장')+' 기준</span></div><div class="goshikiTeachingLegend">아이콘은 연목 · 노란 글씨는 이번 회차에 고를 효과</div><label class="goshikiEffectPicker">가르침 효과 비교 · 연목 Lv <select id="goshikiCompareLevel" aria-label="가르침 효과를 비교할 연목 레벨">'+Array.from({length:hasAzuma?10:6},(_,i)=>'<option value="'+(i+1)+'"'+(goshikiCompareLevel===i+1?' selected':'')+'>'+(i+1)+'</option>').join('')+'</select></label><div class="goshikiTeachingModes"><button type="button" data-goshiki-profile="speed" class="'+(profile==='speed'?'active':'')+'">스피드 2장</button><button type="button" data-goshiki-profile="wit" class="'+(profile==='wit'?'active':'')+'">지능 2장</button></div><div class="goshikiPerformanceGrid">'+(sc.performances||[]).map((x,i)=>{const choice=choices[i]||'',names=choice.split('+').filter(Boolean);return '<div class="goshikiPerformance"><img src="'+esc(x.icon)+'" alt="'+esc(x.jp)+' 인게임 아이콘" loading="lazy" onerror="this.hidden=true"><div><b>'+esc(x.kr)+'</b><span class="goshikiTeachingIconRow">'+names.map(n=>teachingIconIds[n]?'<img src="./assets/scenario/goshiki/teachings/utx_ico_festa_advice_'+teachingIconIds[n]+'.png" alt="'+esc(teachingLabels[n]||n)+' 가르침 인게임 아이콘" loading="lazy" onerror="this.hidden=true">':'').join('')+'</span><span class="goshikiTeachingPick">'+esc(names.map(n=>teachingLabels[n]||n).join(' + ')||'설정 유지')+'</span><span class="goshikiTeachingOriginal">'+esc(names.map(n=>n+'の教え').join(' + '))+'</span><span>'+esc(x.statKr)+' · Lv '+esc(phase[2])+' 목표</span>'+(names.length?'<details class="goshikiEffectText"><summary>Lv '+goshikiCompareLevel+' 효과 보기</summary><span>'+esc(goshikiTeachingEffect(names[names.length-1],goshikiCompareLevel))+'</span>'+(names.length>1?'<span><em>계승 · Lv 무관</em> '+esc(goshikiTeachingEffect(names[0],goshikiCompareLevel,true))+'</span>':'')+'</details>':'')+'</div></div>'}).join('')+'</div>')+
+       '<div class="goshikiTapOrder"><b>연목 Lv</b>낮은 연목부터 올리기 · 위 숫자는 선택한 비교 Lv의 효과이며 실제 육성 Lv는 자동으로 바뀌지 않습니다.</div>'+
+       '<div class="goshikiTeachingSource">가르침 선택 예시 · <a href="'+esc(teaching.sourceUrl||guide.sourceUrl)+'" target="_blank" rel="noopener">거리·편성별 공략 ↗</a> · <a href="https://github.com/mee1080/umasim/blob/main/core/src/commonMain/kotlin/io/github/mee1080/umasim/scenario/shuntaisai/ShuntaisaiStore.kt" target="_blank" rel="noopener">Lv 수치표 출처(비공식) ↗</a> · <a href="https://gametora.com/umamusume/shuntaisai" target="_blank" rel="noopener">인게임 아이콘 출처 ↗</a></div>'+
        '<details class="goshikiMore"><summary>연목 게이지와 연습 · 시나리오 설명</summary><div class="goshikiMoreBody"><div class="sub">'+esc(guide.practiceNote||'')+'</div><div class="scenarioOfficialGrid">'+sc.officialHighlights.map(x=>'<div class="scenarioOfficialItem"><b>'+esc(x.title)+'</b><div class="sub">'+esc(x.text)+'</div></div>').join('')+'</div>'+(characters.length?'<div class="scenarioOfficialCharacters"><span class="tag">주요 등장</span>'+characters.map(x=>'<span class="tag">'+esc(x.kr||x.jp)+' · '+esc(x.jp)+'</span>').join('')+'</div>':'')+'</div></details>'+
        '<details class="goshikiMore"><summary>보상 스킬 · 선택지 · 진화 보기</summary><div class="goshikiMoreBody"><h4>보상 스킬 획득 시점</h4>'+
        (guide.rewards||[]).map(item=>'<div class="goshikiMilestone"><b>'+esc(item.phase)+' · '+esc(item.detail)+'</b><div class="sub">'+esc(item.skills)+'</div></div>').join('')+
@@ -2853,6 +2855,7 @@ function renderScenarioPlan(){
  body.innerHTML=html;
  body.querySelectorAll('[data-goshiki-phase]').forEach(tab=>tab.onclick=()=>{goshikiGuidePhase=tab.dataset.goshikiPhase;const stages=SCENARIOS.goshiki?.runGuide?.teachingPlans?.stages||[];const firstRound=stages.findIndex(x=>x.phase===goshikiGuidePhase);if(firstRound>=0)goshikiTeachingStep=firstRound;renderScenarioPlan();body.querySelector('[data-goshiki-phase="'+goshikiGuidePhase+'"]')?.focus()});
  body.querySelectorAll('[data-goshiki-step]').forEach(tab=>tab.onclick=()=>{goshikiTeachingStep=Number(tab.dataset.goshikiStep);goshikiGuidePhase=SCENARIOS.goshiki?.runGuide?.teachingPlans?.stages?.[goshikiTeachingStep]?.phase||goshikiGuidePhase;renderScenarioPlan();body.querySelector('[data-goshiki-step="'+goshikiTeachingStep+'"]')?.focus()});
+ const goshikiLevelPicker=body.querySelector('#goshikiCompareLevel');if(goshikiLevelPicker)goshikiLevelPicker.onchange=()=>{goshikiCompareLevel=Number(goshikiLevelPicker.value)||1;renderScenarioPlan();body.querySelector('#goshikiCompareLevel')?.focus()};
  body.querySelectorAll('[data-goshiki-profile]').forEach(tab=>tab.onclick=()=>{goshikiTeachingProfile=tab.dataset.goshikiProfile;renderScenarioPlan();body.querySelector('[data-goshiki-profile="'+goshikiTeachingProfile+'"]')?.focus()});
  body.querySelectorAll('[data-plan-link]').forEach(el=>el.onclick=e=>{e.preventDefault();if(!enabled)return;setScenarioPlanLinkChoice(el.dataset.planLink)});
  body.querySelectorAll('[data-plan-ramen]').forEach(el=>el.onclick=e=>{e.preventDefault();if(!enabled)return;setScenarioPlanUltimateRamen(el.dataset.planRamen)});
@@ -6636,6 +6639,43 @@ let ramenGuidePhase='junior';
 let goshikiGuidePhase='junior';
 let goshikiTeachingStep=0;
 let goshikiTeachingProfile='auto';
+let goshikiCompareLevel=1;
+// 공개된 시뮬레이터의 가르침 Lv 1~10 표입니다. 앞 가르침의 계승 효과는 Lv와 무관합니다.
+const GOSHIKI_TEACHING_LEVELS={
+ '絆':[3,5,7,9,10,11,12,13,14,15],
+ '得意率':[10,13,16,20,25,30,35,40,45,50],
+ 'ヒント':[30,33,36,40,45,50,55,60,70,80],
+ '助力':[20,22,24,26,28,30,32,34,37,40],
+ '体力':[1,2,3,4,5,6,8,10,12,15],
+ '特化':[5,6,7,8,9,10,13,16,20,25],
+ '研鑽':[20,22,24,27,30,35,40,50,65,80],
+ '協力':[1,2,3,4,5,6,7,8,9,10],
+ '不屈':[45,40,35,30,25,20,15,10,5,0],
+ '両道':[1,2,3,4,5,8,11,15,20,25]
+};
+const GOSHIKI_RYODO_TRAINING=[1,2,3,4,5,7,9,11,13,15];
+const GOSHIKI_FUKUTSU_TRAINING=[0,0,0,0,0,0,0,1,3,5];
+function goshikiTeachingEffect(name,level,inherited=false){
+ const index=Math.max(0,Math.min(9,level-1)),value=GOSHIKI_TEACHING_LEVELS[name]?.[index];
+ if(inherited){
+  return {'絆':'연목 연습 주 능력치 +15% · 합숙 참여 +1명','得意率':'득의율 +50 · 연목 연습 우정 보너스 +10%','ヒント':'힌트 확률 +80% · 연목 연습 힌트 +1개','助力':'우정 훈련 미발생 시 훈련 효과 +20% · 조력의 버팀목 획득','体力':'연목 연습 체력 소비 -15%'}[name]||'';
+ }
+ if(value===undefined)return '';
+ switch(name){
+  case '絆':return '편성 서포트 인연 게이지 +3 · 연목 연습 주 능력치 +'+value+'%';
+  case '得意率':return '득의율 +'+value;
+  case 'ヒント':return '힌트 발생 확률 +'+value+'%';
+  case '助力':return '우정 훈련 미발생 시 훈련 효과 +'+value+'% · 조력의 버팀목 획득';
+  case '体力':return '체력 소비 -'+value+'%';
+  case '特化':return '주 능력치 획득량 +'+value+'% · 획득 상한 +'+value;
+  case '研鑽':return '담당 서포트가 훈련에 있으면 추가 연습 확률 '+value+'%';
+  case '協力':return '우정 보너스 +'+value+'% · 담당 서포트가 다른 훈련에도 +1명';
+  case '不屈':return '체력 '+value+' 이상이면 실패율 100% 감소'+(GOSHIKI_FUKUTSU_TRAINING[index]?' · 연목 연습 훈련 효과 +'+GOSHIKI_FUKUTSU_TRAINING[index]+'%':'');
+  case '両道':return '부 능력치 획득량 +'+value+'% · 연목 연습 훈련 효과 +'+GOSHIKI_RYODO_TRAINING[index]+'%';
+  default:return '';
+ }
+}
+
 
 const RAMEN_REGION_LABELS={
  '삿포로':{jp:'札幌',kr:'삿포로'},
