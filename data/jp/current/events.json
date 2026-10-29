@@ -46,7 +46,9 @@
     "[As if Guided] エフフォーリア",
     "[行き先はあたたかな場所] マチカネタンホイザ",
     "[晩餐] ナリタブライアン",
-    "[冷凜なるビスクドール] アドマイヤグルーヴ"
+    "[冷凜なるビスクドール] アドマイヤグルーヴ",
+    "[Time of Departure] マヤノトップガン",
+    "[いとどめでたき、まつりかな] 吾妻"
   ],
   "events": [
     {
@@ -2466,19 +2468,6 @@
       ]
     },
     {
-      "id": "evt_30320_830320002",
-      "supportNameMatch": "冷凜なるビスクドール",
-      "label": "賢さビスク 不器用コミュニケーション",
-      "selection": "auto",
-      "skills": [
-        {
-          "skillName": "スリップストリーム",
-          "hintLevel": 1,
-          "skillId": 201651
-        }
-      ]
-    },
-    {
       "id": "evt_30320_830320003",
       "supportNameMatch": "冷凜なるビスクドール",
       "label": "賢さビスク ひそやかな温もり",
@@ -2506,6 +2495,154 @@
           "skillName": "ワンチャンス",
           "hintLevel": 1,
           "skillId": 202082
+        }
+      ]
+    },
+    {
+      "id": "evt_30320_830320002",
+      "supportNameMatch": "冷凜なるビスクドール",
+      "label": "賢さビスク 不器用コミュニケーション",
+      "selection": "auto",
+      "skills": [
+        {
+          "skillName": "スリップストリーム",
+          "hintLevel": 1,
+          "skillId": 201651
+        }
+      ]
+    },
+    {
+      "id": "evt_30322_830322002",
+      "supportNameMatch": "Time of Departure",
+      "label": "パワマヤノ みんなに必要なもの",
+      "selection": "auto",
+      "skills": [
+        {
+          "skillName": "アオハル点火・賢",
+          "hintLevel": 1,
+          "skillId": 210052
+        }
+      ]
+    },
+    {
+      "id": "evt_30322_830322003",
+      "supportNameMatch": "Time of Departure",
+      "label": "パワマヤノ マヤ、わかっちゃった！",
+      "choices": [
+        {
+          "id": "c001_2035011+2047311",
+          "label": "① 英俊豪傑 Lv1 + 機転 Lv1",
+          "skills": [
+            {
+              "skillName": "英俊豪傑",
+              "hintLevel": 1,
+              "skillId": 203501
+            },
+            {
+              "skillName": "機転",
+              "hintLevel": 1,
+              "skillId": 204731
+            }
+          ]
+        },
+        {
+          "id": "c002_2035011+2047411",
+          "label": "② 英俊豪傑 Lv1 + 希代の才覚 Lv1",
+          "skills": [
+            {
+              "skillName": "英俊豪傑",
+              "hintLevel": 1,
+              "skillId": 203501
+            },
+            {
+              "skillName": "希代の才覚",
+              "hintLevel": 1,
+              "skillId": 204741
+            }
+          ]
+        },
+        {
+          "id": "c003_2035011+2047511",
+          "label": "③ 英俊豪傑 Lv1 + アドバンテージ Lv1",
+          "skills": [
+            {
+              "skillName": "英俊豪傑",
+              "hintLevel": 1,
+              "skillId": 203501
+            },
+            {
+              "skillName": "アドバンテージ",
+              "hintLevel": 1,
+              "skillId": 204751
+            }
+          ]
+        }
+      ],
+      "defaultChoiceId": "c001_2035011+2047311",
+      "selection": "single"
+    },
+    {
+      "id": "evt_30322_801024002",
+      "supportNameMatch": "Time of Departure",
+      "label": "パワマヤノ マヤノ的ファッション会議！",
+      "selection": "auto",
+      "skills": [
+        {
+          "skillName": "直線巧者",
+          "hintLevel": 1,
+          "skillId": 200362
+        }
+      ]
+    },
+    {
+      "id": "evt_30323_809052004",
+      "supportNameMatch": "いとどめでたき、まつりかな",
+      "label": "友人吾妻 求むるは、新たな書",
+      "selection": "auto",
+      "skills": [
+        {
+          "skillName": "弧を描いて",
+          "hintLevel": 5,
+          "skillId": 204812
+        }
+      ]
+    },
+    {
+      "id": "evt_30323_809052012",
+      "supportNameMatch": "いとどめでたき、まつりかな",
+      "label": "友人吾妻 流れ、追い難く",
+      "selection": "auto",
+      "skills": [
+        {
+          "skillName": "快速",
+          "hintLevel": 2,
+          "skillId": 202552
+        }
+      ]
+    },
+    {
+      "id": "evt_30323_809052015",
+      "supportNameMatch": "いとどめでたき、まつりかな",
+      "label": "友人吾妻 其は泡沫、されど――",
+      "selection": "auto",
+      "skills": [
+        {
+          "skillName": "神速",
+          "hintLevel": 3,
+          "skillId": 202551
+        }
+      ]
+    },
+    {
+      "id": "evt_30323_809052021",
+      "supportNameMatch": "いとどめでたき、まつりかな",
+      "label": "友人吾妻 吾妻との絆・新たなる年に",
+      "selection": "auto",
+      "skills": [
+        {
+          "skillName": "末脚",
+          "hintLevel": 3,
+          "skillId": 200512
         }
       ]
     },
@@ -2784,6 +2921,16 @@
       "id": 30320,
       "title": "冷凜なるビスクドール",
       "name": "[冷凜なるビスクドール]アドマイヤグルーヴ"
+    },
+    {
+      "id": 30322,
+      "title": "Time of Departure",
+      "name": "[Time of Departure]マヤノトップガン"
+    },
+    {
+      "id": 30323,
+      "title": "いとどめでたき、まつりかな",
+      "name": "[いとどめでたき、まつりかな]吾妻"
     }
   ],
   "prioritySupportIds": [
@@ -2831,6 +2978,8 @@
     30311,
     30317,
     30319,
-    30320
+    30320,
+    30322,
+    30323
   ]
 }

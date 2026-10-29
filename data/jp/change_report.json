@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-28",
-  "checkedAt": "2026-10-28T03:15:35.398Z",
+  "updated": "2026-10-29",
+  "checkedAt": "2026-10-29T17:09:12.844Z",
   "status": "pass",
   "summary": {
-    "added": 0,
+    "added": 38,
     "removed": 0,
-    "modified": 0
+    "modified": 2
   },
   "collections": {
     "catalog": {
@@ -29,77 +29,285 @@
       }
     },
     "supports": {
-      "count": 45,
+      "count": 47,
       "previousCount": 48,
-      "changed": false,
+      "changed": true,
       "status": "pass",
       "changes": {
         "addedCount": 0,
         "removedCount": 0,
-        "modifiedCount": 0,
+        "modifiedCount": 2,
         "addedIds": [],
         "removedIds": [],
-        "modifiedIds": []
+        "modifiedIds": [
+          "30322",
+          "30323"
+        ]
       },
       "details": {
         "added": [],
         "removed": [],
-        "modified": []
+        "modified": [
+          {
+            "id": "30322",
+            "name": "[Time of Departure]マヤノトップガン"
+          },
+          {
+            "id": "30323",
+            "name": "[いとどめでたき、まつりかな]吾妻"
+          }
+        ]
       }
     },
     "events": {
-      "count": 126,
+      "count": 133,
       "previousCount": 129,
-      "changed": false,
+      "changed": true,
       "status": "pass",
       "changes": {
-        "addedCount": 0,
+        "addedCount": 7,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [],
+        "addedIds": [
+          "evt_30322_830322002",
+          "evt_30322_830322003",
+          "evt_30322_801024002",
+          "evt_30323_809052004",
+          "evt_30323_809052012",
+          "evt_30323_809052015",
+          "evt_30323_809052021"
+        ],
         "removedIds": [],
         "modifiedIds": []
       },
       "details": {
-        "added": [],
+        "added": [
+          {
+            "id": "evt_30322_830322002",
+            "name": "パワマヤノ みんなに必要なもの"
+          },
+          {
+            "id": "evt_30322_830322003",
+            "name": "パワマヤノ マヤ、わかっちゃった！"
+          },
+          {
+            "id": "evt_30322_801024002",
+            "name": "パワマヤノ マヤノ的ファッション会議！"
+          },
+          {
+            "id": "evt_30323_809052004",
+            "name": "友人吾妻 求むるは、新たな書"
+          },
+          {
+            "id": "evt_30323_809052012",
+            "name": "友人吾妻 流れ、追い難く"
+          },
+          {
+            "id": "evt_30323_809052015",
+            "name": "友人吾妻 其は泡沫、されど――"
+          },
+          {
+            "id": "evt_30323_809052021",
+            "name": "友人吾妻 吾妻との絆・新たなる年に"
+          }
+        ],
         "removed": [],
         "modified": []
       }
     },
     "skills": {
-      "count": 2194,
+      "count": 2223,
       "previousCount": 2194,
-      "changed": false,
+      "changed": true,
       "status": "pass",
       "changes": {
-        "addedCount": 0,
+        "addedCount": 29,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [],
+        "addedIds": [
+          "111081",
+          "120091",
+          "204731",
+          "204732",
+          "204741",
+          "204742",
+          "204751",
+          "204752",
+          "204762",
+          "204801",
+          "204802",
+          "204811",
+          "204812",
+          "204892",
+          "210401",
+          "210402",
+          "415011",
+          "415021",
+          "415031",
+          "415041",
+          "415051",
+          "415061",
+          "911081",
+          "920091",
+          "100903111",
+          "100903211",
+          "104503121",
+          "110802111",
+          "110802211"
+        ],
         "removedIds": [],
         "modifiedIds": []
       },
       "details": {
-        "added": [],
+        "added": [
+          {
+            "id": "111081",
+            "name": "かくて宿りし血は目覚め"
+          },
+          {
+            "id": "120091",
+            "name": "究竟の弓勢"
+          },
+          {
+            "id": "204731",
+            "name": "機転"
+          },
+          {
+            "id": "204732",
+            "name": "如才なし"
+          },
+          {
+            "id": "204741",
+            "name": "希代の才覚"
+          },
+          {
+            "id": "204742",
+            "name": "直感力"
+          },
+          {
+            "id": "204751",
+            "name": "アドバンテージ"
+          },
+          {
+            "id": "204752",
+            "name": "主導権"
+          },
+          {
+            "id": "204762",
+            "name": "死力を尽くして"
+          },
+          {
+            "id": "204801",
+            "name": "抜山蓋世"
+          },
+          {
+            "id": "204802",
+            "name": "規格外"
+          },
+          {
+            "id": "204811",
+            "name": "螺旋のエキスパート"
+          },
+          {
+            "id": "204812",
+            "name": "弧を描いて"
+          },
+          {
+            "id": "204892",
+            "name": "直情"
+          },
+          {
+            "id": "210401",
+            "name": "名にし負う夢"
+          },
+          {
+            "id": "210402",
+            "name": "彼方の呼び声"
+          },
+          {
+            "id": "415011",
+            "name": "急之舞"
+          },
+          {
+            "id": "415021",
+            "name": "吉兆の駆け手"
+          },
+          {
+            "id": "415031",
+            "name": "満願成就"
+          },
+          {
+            "id": "415041",
+            "name": "捧ぐる願い"
+          },
+          {
+            "id": "415051",
+            "name": "祈りの篝火"
+          },
+          {
+            "id": "415061",
+            "name": "常磐なる誓い"
+          },
+          {
+            "id": "911081",
+            "name": "かくて宿りし血は目覚め"
+          },
+          {
+            "id": "920091",
+            "name": "究竟の弓勢"
+          },
+          {
+            "id": "100903111",
+            "name": "神代も聞かず、この御業"
+          },
+          {
+            "id": "100903211",
+            "name": "御覧じろ、緋色の疾風"
+          },
+          {
+            "id": "104503121",
+            "name": "淀にて大河となりて"
+          },
+          {
+            "id": "110802111",
+            "name": "魔の刻、来たれり"
+          },
+          {
+            "id": "110802211",
+            "name": "喰らえども、喰らえども"
+          }
+        ],
         "removed": [],
         "modified": []
       }
     },
     "characters": {
-      "count": 270,
+      "count": 272,
       "previousCount": 270,
-      "changed": false,
+      "changed": true,
       "status": "pass",
       "changes": {
-        "addedCount": 0,
+        "addedCount": 2,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [],
+        "addedIds": [
+          "100903",
+          "110802"
+        ],
         "removedIds": [],
         "modifiedIds": []
       },
       "details": {
-        "added": [],
+        "added": [
+          {
+            "id": "100903",
+            "name": "[陣風の花紺青]ダイワスカーレット"
+          },
+          {
+            "id": "110802",
+            "name": "[Claret Nosferatu]ドゥラメンテ"
+          }
+        ],
         "removed": [],
         "modified": []
       }

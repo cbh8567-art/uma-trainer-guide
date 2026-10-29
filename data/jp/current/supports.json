@@ -1156,6 +1156,47 @@
     "eventIds": []
   },
   {
+    "id": 30322,
+    "name": "[Time of Departure]マヤノトップガン",
+    "title": "Time of Departure",
+    "characterName": "マヤノトップガン",
+    "characterId": 1024,
+    "rarity": "SSR",
+    "commandId": 102,
+    "type": "power",
+    "hintSkillIds": [
+      200062,
+      200362,
+      201601,
+      203242,
+      203502,
+      203652,
+      203852,
+      204072,
+      204182,
+      204512,
+      204732,
+      204742,
+      204752,
+      204762
+    ],
+    "hintLevelUpMax": 0,
+    "eventIds": []
+  },
+  {
+    "id": 30323,
+    "name": "[いとどめでたき、まつりかな]吾妻",
+    "title": "いとどめでたき、まつりかな",
+    "characterName": "吾妻",
+    "characterId": 9052,
+    "rarity": "SSR",
+    "commandId": 0,
+    "type": "friend",
+    "hintSkillIds": [],
+    "hintLevelUpMax": 0,
+    "eventIds": []
+  },
+  {
     "id": 30321,
     "name": "[“最強”なる眷属]ドゥラメンテ",
     "title": "“最強”なる眷属",
@@ -1174,32 +1215,6 @@
       203752,
       204182
     ],
-    "hintLevelUpMax": 0,
-    "eventIds": []
-  },
-  {
-    "id": 30322,
-    "name": "[Time of Departure]マヤノトップガン",
-    "reviewStatus": "official_release_only",
-    "title": "Time of Departure",
-    "characterName": "マヤノトップガン",
-    "rarity": "SSR",
-    "commandId": 102,
-    "type": "power",
-    "hintSkillIds": [],
-    "hintLevelUpMax": 0,
-    "eventIds": []
-  },
-  {
-    "id": 30323,
-    "name": "[いとどめでたき、まつりかな]吾妻",
-    "reviewStatus": "official_release_only",
-    "title": "いとどめでたき、まつりかな",
-    "characterName": "吾妻",
-    "rarity": "SSR",
-    "commandId": 0,
-    "type": "friend",
-    "hintSkillIds": [],
     "hintLevelUpMax": 0,
     "eventIds": []
   }

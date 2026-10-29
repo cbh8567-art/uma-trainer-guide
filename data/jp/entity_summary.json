@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-28",
-  "generatedAt": "2026-10-28T03:15:35.398Z",
+  "updated": "2026-10-29",
+  "generatedAt": "2026-10-29T17:09:12.844Z",
   "collections": {
     "catalog": {
       "count": 566,
@@ -44,31 +44,31 @@
           "name": "[冷凜なるビスクドール]アドマイヤグルーヴ"
         },
         {
-          "id": "30321",
-          "name": "[“最強”なる眷属]ドゥラメンテ"
-        },
-        {
           "id": "30322",
           "name": "[Time of Departure]マヤノトップガン"
         },
         {
           "id": "30323",
           "name": "[いとどめでたき、まつりかな]吾妻"
+        },
+        {
+          "id": "30321",
+          "name": "[“最強”なる眷属]ドゥラメンテ"
         }
       ]
     },
     "events": {
-      "count": 129,
+      "count": 136,
       "minId": null,
       "maxId": null,
       "sampleLatest": [
         {
-          "id": "evt_30320_830320003",
-          "name": "賢さビスク ひそやかな温もり"
+          "id": "evt_30323_809052015",
+          "name": "友人吾妻 其は泡沫、されど――"
         },
         {
-          "id": "evt_30320_801118002",
-          "name": "賢さビスク ひとりが好きなクラスメイトさん"
+          "id": "evt_30323_809052021",
+          "name": "友人吾妻 吾妻との絆・新たなる年に"
         },
         {
           "id": "evt_30319_verified_final",
@@ -85,7 +85,7 @@
       ]
     },
     "skills": {
-      "count": 2194,
+      "count": 2223,
       "minId": 10071,
       "maxId": 114901211,
       "sampleLatest": [
@@ -112,7 +112,7 @@
       ]
     },
     "characters": {
-      "count": 270,
+      "count": 272,
       "minId": 100101,
       "maxId": 114901,
       "sampleLatest": [

@@ -7275,6 +7275,40 @@
     }
   },
   {
+    "id": 111081,
+    "name": "かくて宿りし血は目覚め",
+    "baseSp": 0,
+    "rarity": 5,
+    "groupId": 11108,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": []
+        },
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mid"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
     "id": 111091,
     "name": "ずっとずっと輝いて",
     "baseSp": 0,
@@ -7734,6 +7768,48 @@
           "long"
         ],
         "styles": []
+      }
+    }
+  },
+  {
+    "id": 120091,
+    "name": "究竟の弓勢",
+    "baseSp": 0,
+    "rarity": 5,
+    "groupId": 12009,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [
+            "turf"
+          ],
+          "distances": [],
+          "styles": [
+            "nige"
+          ]
+        },
+        {
+          "grounds": [],
+          "distances": [
+            "long"
+          ],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [
+          "turf"
+        ],
+        "distances": [
+          "long"
+        ],
+        "styles": [
+          "nige"
+        ]
       }
     }
   },
@@ -33543,6 +33619,201 @@
     }
   },
   {
+    "id": 204731,
+    "name": "機転",
+    "baseSp": 180,
+    "rarity": 2,
+    "groupId": 20473,
+    "groupRate": 2,
+    "iconId": 0,
+    "lowerSkillId": 204732,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mid"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 204732,
+    "name": "如才なし",
+    "baseSp": 180,
+    "rarity": 1,
+    "groupId": 20473,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": 204731,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mid"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 204741,
+    "name": "希代の才覚",
+    "baseSp": 180,
+    "rarity": 2,
+    "groupId": 20474,
+    "groupRate": 2,
+    "iconId": 0,
+    "lowerSkillId": 204742,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "long"
+          ],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "long"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 204742,
+    "name": "直感力",
+    "baseSp": 180,
+    "rarity": 1,
+    "groupId": 20474,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": 204741,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "long"
+          ],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "long"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 204751,
+    "name": "アドバンテージ",
+    "baseSp": 180,
+    "rarity": 2,
+    "groupId": 20475,
+    "groupRate": 2,
+    "iconId": 0,
+    "lowerSkillId": 204752,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 204752,
+    "name": "主導権",
+    "baseSp": 180,
+    "rarity": 1,
+    "groupId": 20475,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": 204751,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 204762,
+    "name": "死力を尽くして",
+    "baseSp": 180,
+    "rarity": 1,
+    "groupId": 20476,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "long"
+          ],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "long"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
     "id": 204792,
     "name": "遊び心",
     "baseSp": 180,
@@ -33576,6 +33847,143 @@
           "long"
         ],
         "styles": []
+      }
+    }
+  },
+  {
+    "id": 204801,
+    "name": "抜山蓋世",
+    "baseSp": 190,
+    "rarity": 2,
+    "groupId": 20480,
+    "groupRate": 2,
+    "iconId": 0,
+    "lowerSkillId": 204802,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "oikomi"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": [
+          "oikomi"
+        ]
+      }
+    }
+  },
+  {
+    "id": 204802,
+    "name": "規格外",
+    "baseSp": 190,
+    "rarity": 1,
+    "groupId": 20480,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": 204801,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "oikomi"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": [
+          "oikomi"
+        ]
+      }
+    }
+  },
+  {
+    "id": 204811,
+    "name": "螺旋のエキスパート",
+    "baseSp": 160,
+    "rarity": 2,
+    "groupId": 20481,
+    "groupRate": 2,
+    "iconId": 0,
+    "lowerSkillId": 204812,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 204812,
+    "name": "弧を描いて",
+    "baseSp": 160,
+    "rarity": 1,
+    "groupId": 20481,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": 204811,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 204892,
+    "name": "直情",
+    "baseSp": 190,
+    "rarity": 1,
+    "groupId": 20489,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "nige"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": [
+          "nige"
+        ]
       }
     }
   },
@@ -34884,6 +35292,56 @@
     "iconId": 20361,
     "lowerSkillId": null,
     "upperSkillId": 210391,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 210401,
+    "name": "名にし負う夢",
+    "baseSp": 200,
+    "rarity": 2,
+    "groupId": 21040,
+    "groupRate": 2,
+    "iconId": 20382,
+    "lowerSkillId": 210402,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 210402,
+    "name": "彼方の呼び声",
+    "baseSp": 200,
+    "rarity": 1,
+    "groupId": 21040,
+    "groupRate": 1,
+    "iconId": 20381,
+    "lowerSkillId": null,
+    "upperSkillId": 210401,
     "activation": {
       "branches": [
         {
@@ -36827,6 +37285,172 @@
         "grounds": [],
         "distances": [
           "mile"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 415011,
+    "name": "急之舞",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 41501,
+    "groupRate": 1,
+    "iconId": 20386,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 415021,
+    "name": "吉兆の駆け手",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 41502,
+    "groupRate": 1,
+    "iconId": 20386,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 415031,
+    "name": "満願成就",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 41503,
+    "groupRate": 1,
+    "iconId": 20386,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 415041,
+    "name": "捧ぐる願い",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 41504,
+    "groupRate": 1,
+    "iconId": 20386,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 415051,
+    "name": "祈りの篝火",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 41505,
+    "groupRate": 1,
+    "iconId": 20386,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mile"
+          ],
+          "styles": []
+        },
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mile",
+          "mid"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 415061,
+    "name": "常磐なる誓い",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 41506,
+    "groupRate": 1,
+    "iconId": 20386,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "short"
+          ],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "short"
         ],
         "styles": []
       }
@@ -43234,6 +43858,31 @@
     }
   },
   {
+    "id": 911081,
+    "name": "かくて宿りし血は目覚め",
+    "baseSp": 200,
+    "rarity": 1,
+    "groupId": 91108,
+    "groupRate": 2,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [],
+        "styles": []
+      }
+    }
+  },
+  {
     "id": 911091,
     "name": "ずっとずっと輝いて",
     "baseSp": 200,
@@ -43638,6 +44287,39 @@
           "long"
         ],
         "styles": []
+      }
+    }
+  },
+  {
+    "id": 920091,
+    "name": "究竟の弓勢",
+    "baseSp": 200,
+    "rarity": 1,
+    "groupId": 92009,
+    "groupRate": 2,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [
+            "turf"
+          ],
+          "distances": [],
+          "styles": [
+            "nige"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [
+          "turf"
+        ],
+        "distances": [],
+        "styles": [
+          "nige"
+        ]
       }
     }
   },
@@ -46997,6 +47679,81 @@
       ],
       "tags": {
         "grounds": [],
+        "distances": [],
+        "styles": [
+          "nige"
+        ]
+      }
+    }
+  },
+  {
+    "id": 100903111,
+    "name": "神代も聞かず、この御業",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 10090311,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": []
+        },
+        {
+          "grounds": [],
+          "distances": [
+            "long"
+          ],
+          "styles": []
+        },
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": []
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mid",
+          "long"
+        ],
+        "styles": []
+      }
+    }
+  },
+  {
+    "id": 100903211,
+    "name": "御覧じろ、緋色の疾風",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 10090321,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [
+            "turf"
+          ],
+          "distances": [],
+          "styles": [
+            "nige"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [
+          "turf"
+        ],
         "distances": [],
         "styles": [
           "nige"
@@ -53336,6 +54093,39 @@
       "tags": {
         "grounds": [],
         "distances": [],
+        "styles": [
+          "senko"
+        ]
+      }
+    }
+  },
+  {
+    "id": 104503121,
+    "name": "淀にて大河となりて",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 10450312,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "long"
+          ],
+          "styles": [
+            "senko"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "long"
+        ],
         "styles": [
           "senko"
         ]
@@ -62040,6 +62830,120 @@
           "mid"
         ],
         "styles": [
+          "oikomi"
+        ]
+      }
+    }
+  },
+  {
+    "id": 110802111,
+    "name": "魔の刻、来たれり",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 11080211,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": [
+            "sashi"
+          ]
+        },
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": [
+            "oikomi"
+          ]
+        },
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "sashi"
+          ]
+        },
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "oikomi"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mid"
+        ],
+        "styles": [
+          "sashi",
+          "oikomi"
+        ]
+      }
+    }
+  },
+  {
+    "id": 110802211,
+    "name": "喰らえども、喰らえども",
+    "baseSp": 0,
+    "rarity": 6,
+    "groupId": 11080221,
+    "groupRate": 1,
+    "iconId": 0,
+    "lowerSkillId": null,
+    "upperSkillId": null,
+    "activation": {
+      "branches": [
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": [
+            "sashi"
+          ]
+        },
+        {
+          "grounds": [],
+          "distances": [
+            "mid"
+          ],
+          "styles": [
+            "oikomi"
+          ]
+        },
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "sashi"
+          ]
+        },
+        {
+          "grounds": [],
+          "distances": [],
+          "styles": [
+            "oikomi"
+          ]
+        }
+      ],
+      "tags": {
+        "grounds": [],
+        "distances": [
+          "mid"
+        ],
+        "styles": [
+          "sashi",
           "oikomi"
         ]
       }
