@@ -1,13 +1,42 @@
 {
   "schemaVersion": 1,
-  "version": 2,
-  "updated": "2026-10-05",
+  "version": 3,
+  "updated": "2026-10-30",
   "source": "카카오게임즈 챔피언스 미팅 CLASSIC 개최 정보",
   "sourceUrl": "https://kakaogames.oqupie.com/portals/1576/articles/57861",
   "races": [
     {
-      "id": "kr_cm_2026_10_classic",
+      "id": "kr_cm_2026_11_classic",
       "status": "확정",
+      "date": "2026-11-13~11-19",
+      "event": "チャンピオンズミーティング CLASSIC",
+      "eventKr": "챔피언스 미팅 CLASSIC",
+      "place": "阪神",
+      "placeKr": "한신",
+      "ground": "turf",
+      "distance": "mid",
+      "meters": 2200,
+      "turn": "right",
+      "course": "inner",
+      "season": "summer",
+      "weather": "cloudy",
+      "condition": "slightly_heavy",
+      "time": "day",
+      "specialRules": [
+        "디버프 없음: 공지의 대상 스킬만 발동 불가 (고유·진화 스킬 제외)"
+      ],
+      "greenSkills": [
+        "阪神レース場○",
+        "右回り○",
+        "夏ウマ娘○",
+        "曇りの日○",
+        "道悪○",
+        "非根幹距離○"
+      ]
+    },
+    {
+      "id": "kr_cm_2026_10_classic",
+      "status": "종료",
       "date": "2026-10-10~10-16",
       "event": "チャンピオンズミーティング CLASSIC",
       "eventKr": "챔피언스 미팅 CLASSIC",
@@ -32,23 +61,23 @@
     }
   ],
   "nextChampionsMeeting": {
-    "id": "kr_cm_classic_202610",
+    "id": "kr_cm_2026_11_classic",
     "name": "챔피언스 미팅 CLASSIC",
-    "date": "2026-10-10 ~ 2026-10-16",
+    "date": "2026-11-13 ~ 2026-11-19",
     "ground": "turf",
     "distance": "mid",
-    "placeKr": "도쿄",
-    "meters": 2400,
-    "direction": "좌",
-    "season": "봄",
-    "weather": "맑음",
-    "condition": "양호",
+    "placeKr": "한신",
+    "meters": 2200,
+    "direction": "우·내",
+    "season": "여름",
+    "weather": "흐림",
+    "condition": "다습",
     "time": "낮",
     "officialSource": "카카오게임즈 개최 정보",
     "officialUrl": "https://kakaogames.oqupie.com/portals/1576/articles/57861",
-    "jpReference": "2025-06 CLASSIC",
-    "jpDate": "2025-06-21 ~ 2025-06-27",
-    "jpSource": "GameWith 2025년 6월 챔미 중거리 추천",
-    "jpUrl": "https://gamewith.jp/uma-musume/article/show/496404"
+    "jpReference": "2025-07 CLASSIC",
+    "jpDate": "2025-07-25~",
+    "jpSource": "GameWith 2025년 7월 동일 조건 공략",
+    "jpUrl": "https://gamewith.jp/uma-musume/article/show/501442"
   }
 }

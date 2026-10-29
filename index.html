@@ -287,42 +287,23 @@ button,input,select{font:inherit}
 .finishOption.disabled .skillIcon{opacity:.9}.finishOption.disabled .finishName{color:#e3e6ef}.finishOption.disabled .finishSub{color:#b7bfce}
 .finishOption.disabled .finishRight{color:#e4b2ba}.finishOption.disabled .finishLocked{background:#341f25}
 
-/* V7.9 · 디지탄 관전 모드 화면 공유 테스트 */
-.watchPilot{margin-top:10px;border:1px solid #4d607a;background:linear-gradient(180deg,#192333,#151a25);border-radius:14px;padding:11px}
-.watchPilotHead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.watchPilotActions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
-.watchPilotStatus{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.watchState{display:inline-flex;align-items:center;gap:5px;border:1px solid #465168;background:#1a2030;border-radius:999px;padding:4px 8px;font-size:9px;font-weight:900}
-.watchState.live{border-color:#3f7d60;background:#183025;color:#bdf2d3}
-.watchState.error{border-color:#844956;background:#2b1c22;color:#ffc2cc}
-.watchPreviewWrap{margin-top:9px;border:1px solid #343d51;border-radius:12px;background:#080a0f;overflow:hidden;position:relative;min-height:210px;display:flex;align-items:center;justify-content:center}
-.watchPreview{display:block;width:100%;height:auto;max-height:62vh;object-fit:contain;background:#000}
-.watchPreview[hidden]{display:none}
-.watchPlaceholder{padding:36px 16px;text-align:center;color:#8f9aaf;font-size:10px;line-height:1.6}
-.watchPlaceholder[hidden]{display:none}
-.watchPrivacy{margin-top:7px;padding:7px 8px;border:1px solid #3a465d;background:#141b28;border-radius:9px;font-size:9px;color:#b9c4d6;line-height:1.55}
-.watchMeta{font-size:9px;color:#b9c3d5}
-.watchAnalysis{margin-top:9px;border:1px solid #45536c;background:#111824;border-radius:11px;padding:9px}
-.watchAnalysisHead{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.watchSceneNow{font-size:18px;font-weight:950;line-height:1.2;color:#f3f6fb}.watchSceneNow.known{color:#bff2d4}.watchSceneNow.unknown{color:#ffd7a1}
-.watchConfidence{font-size:9px;color:#aeb8cb;margin-top:3px}
-.watchSampleButtons{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
-.watchSampleBtn{border:1px solid #49556d;background:#20283a;color:#e9edf5;border-radius:8px;padding:6px 8px;font-size:9px;font-weight:850;cursor:pointer}
-.watchSampleBtn:disabled{opacity:.45;cursor:default}
-.watchSampleBtn span{color:#8fd7b5;margin-left:3px}
-.watchAnalysisGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
-.watchAnalysisCard{border:1px solid #333d51;background:#171e2b;border-radius:9px;padding:8px;min-width:0}
-.watchAnalysisCard b{font-size:10px}.watchAnalysisCard .note{margin-top:4px}
-.watchMeter{height:7px;background:#0d1119;border:1px solid #30384b;border-radius:99px;overflow:hidden;margin-top:6px}
-.watchMeterFill{height:100%;width:0;background:linear-gradient(90deg,#69d5a1,#70c5f4);transition:width .2s ease}
-.watchDiag{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px;font-size:8px;color:#99a6bb}
-.watchDiag span{border:1px solid #354057;border-radius:99px;padding:3px 6px;background:#151c28}
-.watchCalibration{margin-top:7px;padding:7px 8px;border:1px solid #5a4b68;background:#211b2a;border-radius:8px;font-size:9px;line-height:1.5;color:#d6c7df}
-.watchClearSamples{border-color:#6a4348;color:#ffc2c8}
-@media(max-width:720px){.watchAnalysisGrid{grid-template-columns:1fr}.watchSampleButtons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.watchSampleBtn{width:100%}}
-
-@media(max-width:720px){.watchPreviewWrap{min-height:170px}.watchPilot{padding:9px}}
 .finishOption.disabled input{cursor:not-allowed}
+.raceCourseGuide{margin:9px 0 11px;padding:10px;border:1px solid #70613d;border-radius:11px;background:#242216}
+.raceCourseHead{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap;color:#ffe3a2;font-size:12px}
+.raceCourseHead a{color:#d9c8ff;font-size:10px}
+.raceCourseChips,.raceCourseGreens>div{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.raceCourseChips span,.raceCourseGreens span{border:1px solid #65553b;border-radius:99px;background:#181c23;padding:4px 7px;font-size:10px;color:#eee0be}
+.raceCourseTips{display:grid;gap:4px;margin-top:9px;color:#f3ebd6;font-size:11px;line-height:1.45}
+.raceCourseGreens{margin-top:8px;color:#b9e4b8;font-size:10px}
+.courseTierNotice{padding:7px 8px;border:1px solid #675831;border-radius:9px;background:#272317;font-size:10px;line-height:1.5;color:#e6d8b5}
+.courseTierNotice a{color:#d9c8ff}
+.inheritanceAffinity{margin-top:8px;padding:9px;border:1px solid #526481;border-radius:10px;background:#182131;color:#dce4f3;font-size:10px;line-height:1.5}
+.inheritanceAffinity b{color:#f3e3b3;font-size:11px}
+.inheritanceAffinity a{color:#d9c8ff}
+.inheritanceAffinityFields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:7px}
+.inheritanceAffinityFields label{display:grid;gap:4px}
+.inheritanceAffinityFields input{width:100%;border:1px solid #526481;border-radius:7px;background:#101827;color:#fff;padding:6px;font-size:12px}
+@media(max-width:720px){.inheritanceAffinityFields{grid-template-columns:1fr}}
 .finishLocked{font-size:8px;color:#e2a3ad;border:1px solid #73434b;border-radius:99px;padding:2px 5px;white-space:nowrap}
 .scenarioRareSkillPanel{margin-top:10px;padding:10px;border:1px solid #58617a;border-radius:12px;background:linear-gradient(180deg,#1a2230,#171b24)}
 .scenarioRareSkillPanel>.finishSection{margin-top:8px}
@@ -1345,10 +1326,11 @@ body.trainingMode .trainingProgressHead .sub,
 
     <div class="setupMovePanel" id="inheritanceSetupPanel">
       <div class="setupStepHead">
-       <div><h2 style="margin:0">② 계승 우마무스메 선택</h2><div class="sub">부모 2명을 고르고 간이 추천도만 확인합니다. 정교한 스킬 알고리즘은 아직 적용하지 않습니다.</div></div>
+      <div><h2 style="margin:0">② 계승 우마무스메 선택</h2><div class="sub">선택 레이스의 계승 고유기와 부모 간 상성을 따로 확인합니다.</div></div>
        <span class="status" id="inheritanceConfirmStatus">육성 우마 확정 필요</span>
       </div>
       <div class="inheritanceGrid" id="inheritanceGrid"></div>
+      <div id="inheritanceAffinityPanel"></div>
       <div class="setupActions"><button type="button" class="btn primary" id="confirmInheritanceBtn">계승 확정</button></div>
     </div>
 
@@ -1544,52 +1526,6 @@ body.trainingMode .trainingProgressHead .sub,
 
  <section class="page" id="page-guide">
   <div class="panel" style="margin-bottom:10px"><div class="note"><b>육성 준비 ①~③은 「덱 / 스킬」 탭에서 설정합니다.</b> 트레이너 가이드는 확정된 우마·계승·서포트 상태를 그대로 사용합니다.</div></div>
-  <div class="panel watchPilot" id="watchPilotPanel">
-   <div class="watchPilotHead">
-    <div>
-     <h2 style="margin:0">디지탄 관전 모드 테스트</h2>
-     <div class="sub">자동조작 없음 · 사용자가 직접 선택한 화면/창만 브라우저에서 미리보기합니다.</div>
-    </div>
-    <span class="watchState" id="watchPilotState">대기</span>
-   </div>
-   <div class="watchPilotActions">
-    <button type="button" class="btn primary" id="watchPilotStart">화면 공유 시작</button>
-    <button type="button" class="btn" id="watchPilotStop" disabled>공유 중지</button>
-   </div>
-   <div class="watchPilotStatus">
-    <span class="watchMeta" id="watchPilotMeta">Chrome/Edge의 화면 공유 선택창에서 우마무스메 창 또는 해당 모니터를 선택해 주세요.</span>
-   </div>
-   <div class="watchPreviewWrap">
-    <video class="watchPreview" id="watchPilotVideo" autoplay muted playsinline hidden></video>
-    <div class="watchPlaceholder" id="watchPilotPlaceholder">아직 공유된 화면이 없습니다.<br>첫 테스트에서는 AI 분석이나 외부 전송을 하지 않고, 캡처가 정상적으로 보이는지만 확인합니다.</div>
-   </div>
-   <div class="watchAnalysis" id="watchAnalysis">
-    <div class="watchAnalysisHead">
-     <div>
-      <div class="sub">로컬 화면 판별</div>
-      <div class="watchSceneNow unknown" id="watchSceneNow">학습 샘플 필요</div>
-      <div class="watchConfidence" id="watchSceneConfidence">아래 버튼으로 현재 화면을 한 번씩 학습시키면 자동 판별을 시작합니다.</div>
-     </div>
-     <button type="button" class="mini watchClearSamples" id="watchClearSamples">학습 초기화</button>
-    </div>
-    <div class="watchMeter"><div class="watchMeterFill" id="watchSimilarityMeter"></div></div>
-    <div class="watchSampleButtons" id="watchSampleButtons">
-     <button type="button" class="watchSampleBtn" data-watch-label="home" disabled>홈 <span data-watch-count="home">0</span></button>
-     <button type="button" class="watchSampleBtn" data-watch-label="trainingMain" disabled>육성 메인 <span data-watch-count="trainingMain">0</span></button>
-     <button type="button" class="watchSampleBtn" data-watch-label="training" disabled>훈련 선택 <span data-watch-count="training">0</span></button>
-     <button type="button" class="watchSampleBtn" data-watch-label="event" disabled>이벤트 <span data-watch-count="event">0</span></button>
-     <button type="button" class="watchSampleBtn" data-watch-label="race" disabled>레이스 <span data-watch-count="race">0</span></button>
-    </div>
-    <div class="watchAnalysisGrid">
-     <div class="watchAnalysisCard"><b>변화 감지</b><div class="note" id="watchMotionText">공유 시작 후 프레임 변화를 측정합니다.</div></div>
-     <div class="watchAnalysisCard"><b>다음 연결 단계</b><div class="note" id="watchNextStep">화면 종류 판별이 안정되면 훈련 화면 전용 수치 판독을 연결합니다.</div></div>
-    </div>
-    <div class="watchDiag"><span id="watchSampleTotal">학습 0개</span><span id="watchAnalysisRate">분석 대기</span><span>외부 전송 없음</span></div>
-    <div class="watchCalibration">빠른 캘리브레이션: 게임에서 각 화면을 열고 해당 버튼을 1~3회 눌러 주세요. 같은 종류라도 배경/캐릭터가 달라질 수 있으므로 샘플이 여러 개일수록 판별이 안정됩니다.</div>
-    <canvas id="watchFeatureCanvas" width="10" height="18" hidden></canvas>
-   </div>
-   <div class="watchPrivacy">영상 프레임과 학습 샘플은 서버나 AI로 전송하지 않습니다. 화면 종류 학습값은 이 브라우저의 LocalStorage에만 소량 저장됩니다. 자동조작 기능은 없습니다.</div>
-  </div>
   <div class="panel" style="margin-top:10px">
    <div class="sectionHead" style="margin-top:0"><div><h2 style="margin:0">트레이너 가이드 목표 레이스</h2><div class="sub">챔피언스 미팅과 마스터즈 챌린지를 같은 추천 엔진으로 비교합니다.</div></div><span class="status" id="guideRaceSourceStatus"></span></div>
    <div class="raceCards" id="raceCards"></div>
@@ -1597,6 +1533,7 @@ body.trainingMode .trainingProgressHead .sub,
   </div>
   <div class="panel" style="margin-top:10px">
    <div class="sectionHead" style="margin-top:0"><h2 style="margin:0">트레이너 가이드</h2><span class="status" id="guideCondition"></span></div>
+   <div id="raceCourseGuide"></div>
    <div class="guideGrid">
     <div class="guideBox"><h2>추천 스킬</h2><div id="guideSkills"></div></div>
 
@@ -1604,7 +1541,7 @@ body.trainingMode .trainingProgressHead .sub,
     <div class="guideBox" style="grid-column:1/-1">
       <div class="sectionHead" style="margin-top:0">
         <h2 style="margin:0">이 레이스 추천 육성 우마무스메</h2>
-        <span class="status">선택 레이스 + 현재 각질 기준</span>
+        <span class="status">경기장별 추천이 있으면 우선 표시</span>
       </div>
       <div id="guideUmaTier"></div>
     </div>
@@ -1841,8 +1778,9 @@ let JP_SYSTEM_STATUS=null;
 let JP_INHERITANCE_RECOMMENDATIONS=null;
 let JP_INHERITANCE_REVIEW=null;
 let JP_INHERITANCE_EFFECTS=null;
-let UPCOMING={"version":1,"updated":"2026-09-23","source":"Game8/GameWith 2026-09-23 snapshot","sourceUrl":"https://game8.jp/umamusume/811062","races":[{"id":"cm_2026_09_mile","status":"현재","date":"2026-09-18~","event":"チャンピオンズミーティング MILE","eventKr":"챔피언스 미팅 MILE","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mile","meters":1800,"turn":"left","season":"autumn","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","秋ウマ娘○","晴れの日○","良バ場○","非根幹距離○"]},{"id":"cm_2026_09_longchamp_classic","status":"예정","date":"2026-09-29~","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"ロンシャン","placeKr":"롱샹","ground":"turf","distance":"mid","meters":2400,"turn":"right","season":"autumn","weather":"sunny","condition":"heavy","time":"day","greenSkills":["ロンシャンレース場○","右回り○","秋ウマ娘○","晴れの日○","道悪○","根幹距離○"]},{"id":"cm_2026_10_classic","status":"예정","date":"2026-10 중순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"京都","placeKr":"교토","ground":"turf","distance":"mid","meters":2200,"turn":"right","season":"autumn","weather":"cloudy","condition":"good","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","曇りの日○","良バ場○","非根幹距離○"]},{"id":"loh_2026_11_long","status":"예정","date":"2026-11 하순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"京都","placeKr":"교토","ground":"turf","distance":"long","meters":3000,"turn":"right","season":"autumn","weather":"random","condition":"random","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","非根幹距離○"]},{"id":"cm_2026_12_long","status":"예정","date":"2026-12 하순","event":"チャンピオンズミーティング LONG","eventKr":"챔피언스 미팅 LONG","place":"","placeKr":"미정","ground":"turf","distance":"long","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"cm_2027_01_classic","status":"예정","date":"2027-01 하순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"","placeKr":"미정","ground":"turf","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"loh_2027_02_dirt","status":"예정","date":"2027-02 중순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"","placeKr":"미정","ground":"dirt","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]}]};
-let KOREA_UPCOMING={"version":1,"updated":"2026-09-23","source":"한국 서버 5회차 CLASSIC 일정 스냅샷","sourceUrl":"https://namu.moe/w/%EC%9A%B0%EB%A7%88%EB%AC%B4%EC%8A%A4%EB%A9%94%20%ED%94%84%EB%A6%AC%ED%8B%B0%20%EB%8D%94%EB%B9%84/%EC%9D%B4%EB%B2%A4%ED%8A%B8/%EC%B1%94%ED%94%BC%EC%96%B8%EC%8A%A4%20%EB%AF%B8%ED%8C%85/5%ED%9A%8C%EC%B0%A8","races":[{"id":"kr_cm_2026_10_classic","status":"예정(미래시)","date":"2026-10-10~10-16 예상","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mid","meters":2400,"turn":"left","season":"spring","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","春ウマ娘○","晴れの日○","良バ場○","根幹距離○"]}]};
+let JP_COURSE_GUIDES=null,KR_COURSE_GUIDES=null;
+let UPCOMING={"schemaVersion":1,"version":3,"updated":"2026-10-30","source":"Game8/GameWith 2026-09-23 snapshot","sourceUrl":"https://game8.jp/umamusume/811062","races":[{"id":"loh_2026_11_long","status":"예정","date":"2026-11-19~","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"京都","placeKr":"교토","ground":"turf","distance":"long","meters":3000,"turn":"right","season":"autumn","weather":"random","condition":"random","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","非根幹距離○"],"course":"outer","sourceUrl":"https://gamewith.jp/uma-musume/article/show/574934"},{"id":"cm_2026_09_mile","status":"종료","date":"2026-09-18~","event":"チャンピオンズミーティング MILE","eventKr":"챔피언스 미팅 MILE","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mile","meters":1800,"turn":"left","season":"autumn","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","秋ウマ娘○","晴れの日○","良バ場○","非根幹距離○"]},{"id":"cm_2026_09_longchamp_classic","status":"종료","date":"2026-09-29~","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"ロンシャン","placeKr":"롱샹","ground":"turf","distance":"mid","meters":2400,"turn":"right","season":"autumn","weather":"sunny","condition":"heavy","time":"day","greenSkills":["ロンシャンレース場○","右回り○","秋ウマ娘○","晴れの日○","道悪○","根幹距離○"]},{"id":"cm_2026_10_classic","status":"종료","date":"2026-10-20~","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"京都","placeKr":"교토","ground":"turf","distance":"mid","meters":2200,"turn":"right","season":"autumn","weather":"cloudy","condition":"good","time":"day","greenSkills":["京都レース場○","右回り○","秋ウマ娘○","曇りの日○","良バ場○","非根幹距離○"],"source":"Cygames official announcement, 2026-09-28","sourceUrl":"https://umamusume.jp/news/detail?id=3479"},{"id":"cm_2026_12_long","status":"예정","date":"2026-12 하순","event":"チャンピオンズミーティング LONG","eventKr":"챔피언스 미팅 LONG","place":"","placeKr":"미정","ground":"turf","distance":"long","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"cm_2027_01_classic","status":"예정","date":"2027-01 하순","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"","placeKr":"미정","ground":"turf","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]},{"id":"loh_2027_02_dirt","status":"예정","date":"2027-02 중순","event":"リーグ オブ ヒーローズ","eventKr":"리그 오브 히어로즈","place":"","placeKr":"미정","ground":"dirt","distance":"mid","meters":null,"turn":"","season":"","weather":"","condition":"","time":"","greenSkills":[]}]};
+let KOREA_UPCOMING={"schemaVersion":1,"version":3,"updated":"2026-10-30","source":"카카오게임즈 챔피언스 미팅 CLASSIC 개최 정보","sourceUrl":"https://kakaogames.oqupie.com/portals/1576/articles/57861","races":[{"id":"kr_cm_2026_11_classic","status":"확정","date":"2026-11-13~11-19","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"阪神","placeKr":"한신","ground":"turf","distance":"mid","meters":2200,"turn":"right","course":"inner","season":"summer","weather":"cloudy","condition":"slightly_heavy","time":"day","specialRules":["디버프 없음: 공지의 대상 스킬만 발동 불가 (고유·진화 스킬 제외)"],"greenSkills":["阪神レース場○","右回り○","夏ウマ娘○","曇りの日○","道悪○","非根幹距離○"]},{"id":"kr_cm_2026_10_classic","status":"종료","date":"2026-10-10~10-16","event":"チャンピオンズミーティング CLASSIC","eventKr":"챔피언스 미팅 CLASSIC","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mid","meters":2400,"turn":"left","season":"spring","weather":"sunny","condition":"good","time":"day","greenSkills":["東京レース場○","左回り○","春ウマ娘○","晴れの日○","良バ場○","根幹距離○"]}],"nextChampionsMeeting":{"id":"kr_cm_2026_11_classic","name":"챔피언스 미팅 CLASSIC","date":"2026-11-13 ~ 2026-11-19","ground":"turf","distance":"mid","placeKr":"한신","meters":2200,"direction":"우·내","season":"여름","weather":"흐림","condition":"다습","time":"낮","officialSource":"카카오게임즈 개최 정보","officialUrl":"https://kakaogames.oqupie.com/portals/1576/articles/57861","jpReference":"2025-07 CLASSIC","jpDate":"2025-07-25~","jpSource":"GameWith 2025년 7월 동일 조건 공략","jpUrl":"https://gamewith.jp/uma-musume/article/show/501442"}};
 let KOREA_MASTERS_CHALLENGE={"schemaVersion":1,"updated":"2026-09-28","server":"kr","event":{"id":"kr_masters_2026_07","nameKr":"마스터즈 챌린지","nameJp":"マスターズチャレンジ","period":"2026-07-20 ~ 2026-10-16 11:59","officialSource":"카카오게임즈 개최 정보","officialUrl":"https://kakaogames.oqupie.com/portals/1576/articles/76599","referenceSource":"일본 2025-03 제5회 마스터즈 챌린지 상세","referenceUrl":"https://wikiwiki.jp/sppenpen/%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%BA%E3%83%81%E3%83%A3%E3%83%AC%E3%83%B3%E3%82%B8","rules":["각 레이스 LEVEL 1~3. 1착 시 다음 LEVEL 해방","전당 입성 우마무스메 1명당 레이스별 각 LEVEL 3회까지 출전","5개 레이스 LEVEL 3 전부 클리어 시 LEVEL EX 3종 해방"]},"races":[{"id":"kr_masters_2026_fillies","kind":"masters","status":"개최 중","date":"~ 2026-10-16","event":"フィリーズレビュー","eventKr":"마스터즈 챌린지 · 필리스 레뷰","raceKr":"필리스 레뷰","place":"阪神","placeKr":"한신","ground":"turf","distance":"short","meters":1400,"turn":"right","course":"inner","season":"spring","weather":"cloudy","condition":"good","time":"day","levelGroup":"LEVEL 1~3","opponents":["라인 크라프트","데어링 하트","에어 메사이어"],"greenSkills":["阪神レース場○","右回り○","春ウマ娘○","曇りの日○","良バ場○","非根幹距離○"]},{"id":"kr_masters_2026_yasuda","kind":"masters","status":"개최 중","date":"~ 2026-10-16","event":"安田記念","eventKr":"마스터즈 챌린지 · 야스다 기념","raceKr":"야스다 기념","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mile","meters":1600,"turn":"left","season":"spring","weather":"sunny","condition":"good","time":"day","levelGroup":"LEVEL 1~3","opponents":["야마닌 제퍼","이쿠노 딕터스","니시노 플라워"],"greenSkills":["東京レース場○","左回り○","春ウマ娘○","晴れの日○","良バ場○","根幹距離○"]},{"id":"kr_masters_2026_shuka","kind":"masters","status":"개최 중","date":"~ 2026-10-16","event":"秋華賞","eventKr":"마스터즈 챌린지 · 추화상","raceKr":"추화상","place":"京都","placeKr":"교토","ground":"turf","distance":"mid","meters":2000,"turn":"right","course":"inner","season":"autumn","weather":"cloudy","condition":"good","time":"day","levelGroup":"LEVEL 1~3","opponents":["젠틸돈나","비르시나"],"greenSkills":["京都レース場○","右回り○","秋ウマ娘○","曇りの日○","良バ場○","根幹距離○"]},{"id":"kr_masters_2026_kikuka","kind":"masters","status":"개최 중","date":"~ 2026-10-16","event":"菊花賞","eventKr":"마스터즈 챌린지 · 국화상","raceKr":"국화상","place":"京都","placeKr":"교토","ground":"turf","distance":"long","meters":3000,"turn":"right","course":"outer","season":"autumn","weather":"cloudy","condition":"good","time":"day","levelGroup":"LEVEL 1~3","opponents":["오르페브르","윈 바리아시옹"],"greenSkills":["京都レース場○","右回り○","秋ウマ娘○","曇りの日○","良バ場○","非根幹距離○"]},{"id":"kr_masters_2026_kashiwa","kind":"masters","status":"개최 중","date":"~ 2026-10-16","event":"かしわ記念","eventKr":"마스터즈 챌린지 · 카시와 기념","raceKr":"카시와 기념","place":"船橋","placeKr":"후나바시","ground":"dirt","distance":"mile","meters":1600,"turn":"left","season":"spring","weather":"cloudy","condition":"slightly_heavy","time":"day","levelGroup":"LEVEL 1~3","opponents":["후리오소","에스포와르 시티"],"greenSkills":["左回り○","春ウマ娘○","曇りの日○","道悪○","根幹距離○"]},{"id":"kr_masters_2026_ex_derby","kind":"masters","status":"LEVEL EX","date":"5개 LEVEL3 클리어 후","event":"日本ダービー","eventKr":"마스터즈 챌린지 EX · 일본 더비","raceKr":"일본 더비","place":"東京","placeKr":"도쿄","ground":"turf","distance":"mid","meters":2400,"turn":"left","season":"spring","weather":"cloudy","condition":"heavy","time":"day","levelGroup":"LEVEL EX","opponents":["세인트 라이트"],"greenSkills":["東京レース場○","左回り○","春ウマ娘○","曇りの日○","道悪○","根幹距離○"]},{"id":"kr_masters_2026_ex_arima","kind":"masters","status":"LEVEL EX","date":"5개 LEVEL3 클리어 후","event":"有馬記念","eventKr":"마스터즈 챌린지 EX · 아리마 기념","raceKr":"아리마 기념","place":"中山","placeKr":"나카야마","ground":"turf","distance":"long","meters":2500,"turn":"right","course":"outer","season":"winter","weather":"cloudy","condition":"good","time":"day","levelGroup":"LEVEL EX","opponents":["스피드 심볼리"],"greenSkills":["中山レース場○","右回り○","冬ウマ娘○","曇りの日○","良バ場○","非根幹距離○"]},{"id":"kr_masters_2026_ex_tokyo_daishoten","kind":"masters","status":"LEVEL EX","date":"5개 LEVEL3 클리어 후","event":"東京大賞典","eventKr":"마스터즈 챌린지 EX · 도쿄 대상전","raceKr":"도쿄 대상전","place":"大井","placeKr":"오이","ground":"dirt","distance":"mid","meters":2000,"turn":"right","season":"winter","weather":"sunny","condition":"good","time":"evening","levelGroup":"LEVEL EX","opponents":["하이세이코"],"greenSkills":["右回り○","冬ウマ娘○","晴れの日○","良バ場○","根幹距離○"]}]};
 let JP_MASTERS_CHALLENGE={"schemaVersion":1,"updated":"2026-10-01","server":"jp","event":{"id":"jp_masters_2026_07_30","nameKr":"마스터즈 챌린지","nameJp":"マスターズチャレンジ","period":"2026-07-30 12:00 ~ 2026-10-26 11:59","rules":[]},"races":[]};
 let KOREA_SERVER_DATA={
@@ -1861,18 +1799,10 @@ let KOREA_SERVER_DATA={
 // 런타임의 일본 전체 characters DB는 유지하고, KR 화면에서만 이 목록으로 필터링한다.
 let KOREA_UMA_IDS=new Set([
  100101,100102,100103,100201,100202,100301,100302,100303,100401,100402,100403,100501,100502,100601,100602,100701,100702,100703,100801,100802,100901,100902,101001,101002,101101,101102,101103,101201,101202,101301,101302,101303,101401,101402,101501,101502,101601,101602,101701,101702,101801,101802,101901,101902,102001,102002,102101,102102,102201,102202,102301,102302,102303,102401,102402,102403,102501,102502,102601,102602,102701,102702,102801,102901,102902,103001,103002,103003,103101,103102,103201,103202,103203,103301,103302,103401,103402,103501,103502,103503,103601,103602,103701,103702,103703,103801,103802,103901,103902,104001,104002,104101,104102,104201,104202,104301,104401,104402,104501,104502,104503,104601,104602,104603,104701,104702,104801,104802,104901,105001,105002,105003,105101,105102,105201,105202,105301,105302,105401,105501,105601,105602,105701,105702,105801,105802,105901,105902,106001,106002,106003,106101,106102,106103,106201,106202,106301,106401,106402,106501,106502,106601,106701,106702,106703,106801,106802,106803,106901,106902,107001,107002,107101,107102,107201,107202,107301,107401,107402,107601,107701,107702,107801,107802,107901,108001,108201,108301,108302,108401,108402,108501,108502,108601,108602,108701,108702,108801,108901,109001,109101,109301,109401,109601,109801,109802,109901,109902,110001,110201,110401,110402,110501,110502,110601,110701,110702,110801,110901,111001,111002,111101,111501,111601,111701,111901,112001,112101,112401,112701,113101,113201,]);
-let KOREA_NEXT_CHAMPIONS_MEETING={
- id:'kr_cm_classic_202610',
- name:'챔피언스 미팅 CLASSIC',
- date:'2026-10-10 ~ 2026-10-16',
- ground:'turf',distance:'mid',placeKr:'도쿄',meters:2400,direction:'좌',season:'봄',weather:'맑음',condition:'양호',time:'낮',
- officialSource:'카카오게임즈 개최 정보',officialUrl:'https://kakaogames.oqupie.com/portals/1576/articles/57861',
- jpReference:'2025-06 CLASSIC',jpDate:'2025-06-21 ~ 2025-06-27',
- jpSource:'GameWith 2025년 6월 챔미 중거리 추천',jpUrl:'https://gamewith.jp/uma-musume/article/show/496404'
-};
+let KOREA_NEXT_CHAMPIONS_MEETING={"id":"kr_cm_2026_11_classic","name":"챔피언스 미팅 CLASSIC","date":"2026-11-13 ~ 2026-11-19","ground":"turf","distance":"mid","placeKr":"한신","meters":2200,"direction":"우·내","season":"여름","weather":"흐림","condition":"다습","time":"낮","officialSource":"카카오게임즈 개최 정보","officialUrl":"https://kakaogames.oqupie.com/portals/1576/articles/57861","jpReference":"2025-07 CLASSIC","jpDate":"2025-07-25~","jpSource":"GameWith 2025년 7월 동일 조건 공략","jpUrl":"https://gamewith.jp/uma-musume/article/show/501442"};
 let KOREA_TIER_DATA={
  version:1,snapshotDate:'JP 2025-06',mappedFor:'KR 2026-10 CLASSIC',
- sourceNote:'한국 공식 차기 챔미와 동일 조건의 일본 2025년 6월 CLASSIC GameWith 추천도 스냅샷. ★★★★★→SS+, ★★★★→SS, ★★★→S.',
+ sourceNote:'종료된 한국 2026년 10월 챔미와 동일 조건의 일본 2025년 6월 CLASSIC GameWith 추천도 스냅샷. ★★★★★→SS+, ★★★★→SS, ★★★→S.',
  rows:[
   {ground:'turf',distance:'mid',tier:'SS+',jp:'カツラギエース(正月)',kr:'카츠라기 에이스(신년)',styles:['nige']},
   {ground:'turf',distance:'mid',tier:'SS+',jp:'ジェンティルドンナ',kr:'젠틸돈나',styles:['senko']},
@@ -1998,7 +1928,7 @@ const SCENARIO_STAT_CAPS={
  none:{label:'기타',speed:1400,stamina:1400,power:1400,guts:1400,wit:1400}
 };
 const DEFAULT_TRESENKEN_STAT_CAPS={speed:2150,stamina:1800,power:1700,guts:1700,wit:1800};
-const SERVER_PROFILE_FIELDS=['owned','deck','acquired','eventChoice','eventDone','lb','scenario','tresenkenUltimateRamen','tresenkenRmj','ramenGuideMode','ground','distance','style','currentUmaId','currentUmaConfirmed','inheritanceParentIds','inheritanceConfirmed','deckConfirmed','scenarioPlanLinkChoice','scenarioPlanUltimateRamen','scenarioPlanConfirmed','trainingActive','guideRaceId','evolutionPlan','deckPresets','trainingHistory','targetStatOverrides','statCaps','statCapOverrides','paceCheckEnabled','trainingStatCheck','islandBuildStep','islandBuildDone','islandGuideDone','islandPtEntries','islandSeniorCarry','islandTicketEvents'];
+const SERVER_PROFILE_FIELDS=['owned','deck','acquired','eventChoice','eventDone','lb','scenario','tresenkenUltimateRamen','tresenkenRmj','ramenGuideMode','ground','distance','style','currentUmaId','currentUmaConfirmed','inheritanceParentIds','inheritanceAffinityValues','inheritanceConfirmed','deckConfirmed','scenarioPlanLinkChoice','scenarioPlanUltimateRamen','scenarioPlanConfirmed','trainingActive','guideRaceId','evolutionPlan','deckPresets','trainingHistory','targetStatOverrides','statCaps','statCapOverrides','paceCheckEnabled','trainingStatCheck','islandBuildStep','islandBuildDone','islandGuideDone','islandPtEntries','islandSeniorCarry','islandTicketEvents'];
 function cloneStateValue(v){return v===undefined?undefined:JSON.parse(JSON.stringify(v))}
 function serverDefaultProfile(server){
  const set=server==='kr'?KOREA_UPCOMING:UPCOMING,r=set.races?.[0]||null;
@@ -2007,7 +1937,7 @@ function serverDefaultProfile(server){
    scenario:server==='kr'?'island':'goshiki',tresenkenUltimateRamen:null,
    tresenkenRmj:{juniorBig:true,classicBig:true,seniorBig:true},ramenGuideMode:'balanced',
    ground:r?.ground||'turf',distance:r?.distance||'mid',style:'senko',currentUmaId:null,
-   currentUmaConfirmed:false,inheritanceParentIds:[null,null],inheritanceConfirmed:false,deckConfirmed:false,
+   currentUmaConfirmed:false,inheritanceParentIds:[null,null],inheritanceAffinityValues:{},inheritanceConfirmed:false,deckConfirmed:false,
    scenarioPlanLinkChoice:null,scenarioPlanUltimateRamen:null,scenarioPlanConfirmed:false,trainingActive:false,
    guideRaceId:r?.id||null,evolutionPlan:null,deckPresets:[],trainingHistory:[],targetStatOverrides:{},statCaps:null,statCapOverrides:{},paceCheckEnabled:false,trainingStatCheck:{scenario:null,grade:'junior',month:12,half:'second',stats:{}},islandBuildStep:1,islandBuildDone:{},islandGuideDone:{},islandPtEntries:{},islandSeniorCarry:null,islandTicketEvents:[]
  }
@@ -2018,6 +1948,7 @@ function normalizeServerProfile(profile,server){
  p.owned=p.owned||[];p.acquired=p.acquired||{};p.eventChoice=p.eventChoice||{};p.eventDone=p.eventDone||{};p.lb=p.lb||{};
  p.currentUmaConfirmed=!!p.currentUmaConfirmed;
  p.inheritanceParentIds=[...(p.inheritanceParentIds||[]).slice(0,2),null,null].slice(0,2);
+ p.inheritanceAffinityValues=p.inheritanceAffinityValues&&typeof p.inheritanceAffinityValues==='object'&&!Array.isArray(p.inheritanceAffinityValues)?p.inheritanceAffinityValues:{};
  p.inheritanceConfirmed=!!p.inheritanceConfirmed;
  p.deckConfirmed=!!p.deckConfirmed;
  p.scenarioPlanLinkChoice=p.scenarioPlanLinkChoice||null;
@@ -3572,19 +3503,45 @@ function inheritanceRowsForOwner(uma,cond){
  const map=new Map();
  for(const x of all)if(Number(x.ownerUmaId)===Number(uma.id))map.set(String(x.skillId),x);
  return [...map.values()].map(x=>({row:x,engine:inheritanceEngineAssessment(x,cond),external:inheritanceExternalKinds(x.skillId,cond)}))
+  .filter(x=>x.external.length>0)
   .sort((a,b)=>b.engine.score-a.engine.score||b.external.length-a.external.length)
 }
 function inheritanceRecommendation(uma){
  if(!uma)return {stars:'—',label:'미선택',reason:'부모 우마무스메를 선택해 주세요.',engine:null};
  const race=getGuideRace(),cond=race?raceCond(race):state,rows=inheritanceRowsForOwner(uma,cond),best=rows[0];
- if(!best)return {stars:'—',label:'검수 데이터 없음',reason:'현재 V1 후보 DB에서 이 의상의 계승 고유기를 찾지 못했습니다.',engine:null};
+ const courseParent=courseGuideForRace(race)?.parents?.find(x=>Number(x.ownerUmaId)===Number(uma.id));
+ if(!best&&courseParent)return {stars:'참고',label:'경기장 공략 부모 예시',reason:courseParent.note+' · 계승 고유기 세부 효과와 상성값은 별도 확인',engine:null};
+ if(!best)return {stars:'—',label:'현재 조건 추천 근거 없음',reason:'이 부모의 계승 고유기가 현재 거리·각질 추천 목록에 없습니다. 상성은 아래에서 별도 확인하세요.',engine:null};
  const ext=best.external.length?best.external.join('+')+' 외부 추천':'외부 추천 없음';
  const status=best.engine.review.status==='reviewed'?'검수 완료':best.engine.review.status==='comparing'?'비교 중':'미검수';
- return {stars:best.engine.stars,label:`${best.engine.score.toFixed(1)}/5 · ${status}`,reason:`${best.row.name} · ${ext} · 엔진 신뢰 ${best.engine.confidence}`,engine:best};
+ return {stars:best.engine.stars,label:`${best.engine.score.toFixed(1)}/5 · ${status}`,reason:`${best.row.name} · ${ext} · 엔진 신뢰 ${best.engine.confidence}${courseParent?' · 경기장 공략 부모 예시':''}`,engine:best};
 }
 function inheritanceParent(index){
  const id=state.inheritanceParentIds?.[index],u=runtime.characters.find(ch=>Number(ch.id)===Number(id));
  return isUmaVisibleForServer(u)?u:null
+}
+function inheritanceAffinityPairKey(a,b){
+ // 의상이 달라도 같은 캐릭터는 같은 기본 상성값을 사용합니다.
+ return JSON.stringify([a.character||String(a.id),b.character||String(b.id)].sort())
+}
+function renderInheritanceAffinityPanel(){
+ const box=$('#inheritanceAffinityPanel');if(!box)return;
+ const child=selectedUma(),first=inheritanceParent(0),second=inheritanceParent(1);
+ const pairs=[[child,first],[child,second],[first,second]].filter(([a,b])=>a&&b);
+ const values=state.inheritanceAffinityValues||{};
+ const known=pairs.map(([a,b])=>({a,b,key:inheritanceAffinityPairKey(a,b)}));
+ const numbers=known.map(x=>Number(values[x.key]));
+ const complete=known.length===3&&known.every((x,i)=>values[x.key]!==undefined&&Number.isInteger(numbers[i])&&numbers[i]>=0);
+ box.innerHTML='<div class="inheritanceAffinity"><b>부모 상성 · 별도 확인</b><div>상성표에서 확인한 두 캐릭터의 기본값을 입력하면 선택한 3쌍을 비교할 수 있습니다. <a href="https://gametora.com/umamusume/compatibility" target="_blank" rel="noopener">상성 계산기 ↗</a></div>'+
+  (known.length?'<div class="inheritanceAffinityFields">'+known.map(x=>'<label>'+esc(x.a.krName)+' ↔ '+esc(x.b.krName)+'<input type="number" min="0" max="999" step="1" inputmode="numeric" data-affinity-key="'+esc(x.key)+'" value="'+(values[x.key]??'')+'" placeholder="상성표 수치"></label>').join('')+'</div>':'<div class="sub">육성 우마와 부모를 고르면 입력칸이 나타납니다.</div>')+
+  '<div style="margin-top:6px">'+(complete?'입력한 세 쌍의 기본값 합계: <b>'+numbers.reduce((a,b)=>a+b,0)+'</b>':'세 쌍을 모두 입력하면 기본값 합계를 표시합니다.')+' · 조부모·공통 GⅠ 보너스는 포함되지 않습니다. 인게임 최종 상성 ◎ 판정과 동일한 수치로 보지 마세요.</div></div>';
+ box.querySelectorAll('[data-affinity-key]').forEach(input=>input.onchange=()=>{
+   const raw=input.value.trim(),n=Number(raw);state.inheritanceAffinityValues=state.inheritanceAffinityValues||{};
+   if(raw==='')delete state.inheritanceAffinityValues[input.dataset.affinityKey];
+   else if(!Number.isInteger(n)||n<0||n>999){toast('상성값은 0~999의 정수로 입력해 주세요.');input.value='';delete state.inheritanceAffinityValues[input.dataset.affinityKey]}
+   else state.inheritanceAffinityValues[input.dataset.affinityKey]=n;
+   save();renderInheritanceAffinityPanel()
+ })
 }
 function setInheritanceParent(index,u){
  if(!state.currentUmaConfirmed)return toast('먼저 육성 우마무스메를 확정해 주세요.');
@@ -3614,6 +3571,7 @@ function renderInheritanceSetup(){
  if(btn){btn.disabled=!enabled;btn.textContent=state.inheritanceConfirmed?'계승 변경':'계승 확정';btn.classList.toggle('primary',!state.inheritanceConfirmed)}
  if(status)status.textContent=!enabled?'육성 우마 확정 필요':state.inheritanceConfirmed?'부모 2명 확정 ✓':'부모 2명 선택 필요';
  const panel=$('#inheritanceSetupPanel');if(panel)panel.classList.toggle('confirmed',!!state.inheritanceConfirmed);
+ renderInheritanceAffinityPanel();
  renderSetupProgress()
 }
 function renderSelectedUma(){
@@ -5145,6 +5103,8 @@ function applyGuideRaceFromCondition(id){
  state.distance=r.distance;
  $('#ground').value=state.ground;
  $('#distance').value=state.distance;
+ $('#tierGround').value=state.ground;
+ $('#tierDistance').value=state.distance;
  save();
  renderDeck();
  renderGlobalSkills();
@@ -5152,6 +5112,7 @@ function applyGuideRaceFromCondition(id){
  renderCatalog();
  renderRaceCards();
  renderSelectedUma();
+ renderInheritanceSetup();
  renderGuide();
  renderDbGuideRecommendations();
  renderV7Planner();
@@ -5160,8 +5121,8 @@ function applyGuideRaceFromCondition(id){
 
 function getGuideRace(){const set=guideRaceSet();return (set.races||[]).find(r=>r.id===state.guideRaceId)||set.races?.[0]||null}
 function raceWeatherKr(r){
- const weather={sunny:'맑음',cloudy:'흐림',rain:'비',snow:'눈'}[r.weather]||r.weather||'';
- const cond={good:'양호',slightly_heavy:'다소 무거움',heavy:'무거움',bad:'불량'}[r.condition]||r.condition||'';
+ const weather={sunny:'맑음',cloudy:'흐림',rain:'비',snow:'눈',random:'무작위'}[r.weather]||r.weather||'';
+ const cond={good:'양호',slightly_heavy:'다습',heavy:'무거움',bad:'불량',random:'무작위'}[r.condition]||r.condition||'';
  return [weather,cond].filter(Boolean).join(' · ')
 }
 function renderMastersGuideDetail(race=getGuideRace()){
@@ -5262,6 +5223,8 @@ function tierBaseName(row){
 }
 function tierUmaForRow(row){
  if(!runtime.characters?.length)return null;
+ // 의상까지 지정된 추천은 정확한 캐릭터만 연결합니다.
+ if(row?.ownerUmaId)return runtime.characters.find(ch=>Number(ch.id)===Number(row.ownerUmaId)&&isUmaVisibleForServer(ch,state.guideServer))||null;
  const base=norm(tierBaseName(row)),krBase=norm(String(row?.kr||'').replace(/\(.+?\)/g,''));
  let arr=runtime.characters.filter(ch=>isUmaVisibleForServer(ch,state.guideServer)).filter(ch=>{
   const cb=norm(ch.character||''),ck=norm(ch.krName||''),cn=norm(ch.name||'');
@@ -5284,15 +5247,13 @@ function renderGuideUmaTier(){
   const box=$('#guideUmaTier');
   if(!box) return;
   box.innerHTML='';
-  if(state.guideServer==='kr'){
-    box.innerHTML='<div class="note"><b>한국 서버 모드</b><br>일본 Game8의 미래 캐릭터 티어를 한국 서버 티어처럼 섞어 표시하지 않습니다. 한국 서버 구현 여부와 스킬 한국어명은 Inven DB를 대조하며, 한국 서버용 티어 스냅샷은 별도 데이터가 검증된 항목부터 추가합니다.</div>';
-    return
-  }
   const race=getGuideRace();
   if(!race){box.innerHTML='<div class="note">가이드 레이스를 선택해 주세요.</div>';return}
   const cond=raceCond(race);
   const current=selectedUma();
-  const rows=TIER_DATA.rows.filter(x=>
+  const guide=courseGuideForRace(race),kr=state.guideServer==='kr';
+  const sourceRows=guide?.topRows?.length?guide.topRows.map(x=>({...x,ground:race.ground,distance:race.distance,tier:'SS+'})):kr?(race.id==='kr_cm_2026_10_classic'?KOREA_TIER_DATA.rows:[]):TIER_DATA.rows;
+  const rows=sourceRows.filter(x=>
     x.ground===cond.ground &&
     x.distance===cond.distance &&
     (x.styles||[]).includes(cond.style)
@@ -5300,6 +5261,11 @@ function renderGuideUmaTier(){
   if(!rows.length){
     box.innerHTML='<div class="note">현재 레이스/각질 조합에 등록된 티어 스냅샷이 없습니다. 각질을 바꾸거나 상세 티어 탭을 확인해 주세요.</div>';
     return;
+  }
+  if(guide){
+    const notice=document.createElement('div');notice.className='courseTierNotice';
+    notice.innerHTML='이 경기장 공략의 <b>5★ 강력 추천</b>만 표시합니다. SS+ 표시는 5★를 읽기 쉽게 묶은 것이며, 다른 우마를 낮은 티어로 판정한 뜻은 아닙니다. <a href="'+esc(guide.sourceUrl)+'" target="_blank" rel="noopener">추천 출처 ↗</a>';
+    box.appendChild(notice)
   }
   const wrap=document.createElement('div');wrap.className='guideTierWrap';
   for(const tier of ['SS+','SS','S']){
@@ -5321,21 +5287,42 @@ function renderGuideUmaTier(){
   }
   box.appendChild(wrap);
   const note=document.createElement('div');note.className='note';note.style.marginTop='7px';
-  note.textContent=`${race.eventKr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]} 기준. 선택 중인 육성 우마무스메가 목록에 있으면 금색 테두리로 표시됩니다.`;
+  note.textContent=`${race.eventKr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]} 기준. ${guide?guide.source:'거리별 기본 티어'} · 선택 중인 우마는 금색 테두리입니다.`;
   box.appendChild(note);
 }
 
-function renderGuide(){renderGuideServerTabs();const race=getGuideRace();renderMastersGuideDetail(race);if(!race){$('#guideCondition').textContent='등록된 레이스 없음';return}const cond=raceCond(race);renderGuideUmaTier();renderTrainingFinishSummary();$('#guideCondition').textContent=`${state.guideServer==='kr'?'한국':'일본'} · ${race.eventKr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;const gs=$('#guideSkills');gs.innerHTML='';const u=selectedUma();let items=[];if(u)items=awakeningSkills(u).filter(sk=>Number(sk.rarity)===2).map(sk=>({...sk,source:`${u.krName} 각성 Lv${sk.awakening}`}));for(const n of race.greenSkills||[]){const dbSkill=skillFromName(runtime.skills,n);items.push(dbSkill?{...dbSkill,source:'코스 대응 녹색 스킬',force:3}:{id:'green_'+n,jp:n,kr:koSkill(n),iconId:null,tags:{grounds:[],distances:[],styles:[]},source:'코스 대응 녹색 스킬 · DB 미연결',force:3})}items.sort((a,b)=>(b.force||skillConditionScore(b,cond))-(a.force||skillConditionScore(a,cond)));for(const s of items.slice(0,14)){const sc=s.force||skillConditionScore(s,cond),x=document.createElement('div');x.className='guideSkill';x.innerHTML=`${skillIcon(s)}<div><div class="jp">${skillDisplayNameHtml(s)}</div><div class="sub">${esc(s.source||'')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`;gs.appendChild(x)}if(!items.length)gs.innerHTML='<div class="note">육성 우마무스메를 선택하면 각성 스킬과 레이스 조건을 비교합니다.</div>';const ss=$('#guideSupports');ss.innerHTML='';if(!runtime.ready){ss.innerHTML='<div class="note">SSR DB 동기화가 필요합니다.</div>';return}const supportRows=supportRecommend(cond);if(state.guideServer==='kr'&&!supportRows.length){ss.innerHTML='<div class="note">현재 동기화 DB에 Inven 기준 한국 서버 구현 SSR이 없습니다. 온라인 DB를 다시 동기화해 주세요.</div>';return}for(const {c,score} of supportRows){const owned=state.owned.map(String).includes(String(c.id)),x=document.createElement('div');x.className='card'+supportRecommendationClass(c);x.innerHTML=`${c.image?`<img src="${esc(c.image)}" loading="lazy" data-card-type="${esc(c.type)}" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">`:''}<div><div class="cardName">${cardDisplayNameHtml(c)}</div><div class="cardJp">${esc(c.title||'')}</div><div class="stars">${scoreStars(score)} <span class="status">${state.guideServer==='kr'?'한국 구현 · ':''}${owned?'보유 '+(Number(state.lb[String(c.id)]??0)===4?'풀돌':(Number(state.lb[String(c.id)]??0)+'돌')):'미보유 · 풀돌 기준'}</span></div><div class="actions"><button class="mini" data-info>상세</button>${owned?'<button class="mini" data-slot>덱 슬롯</button>':''}</div></div>`;x.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);if(owned)x.querySelector('[data-slot]').onclick=()=>openSlotPicker(c.id);ss.appendChild(x)}}
+function courseGuideForRace(race=getGuideRace()){
+ if(!race)return null;
+ const guides=state.guideServer==='kr'?KR_COURSE_GUIDES:JP_COURSE_GUIDES;
+ return guides?.races?.[race.id]||null
+}
+function renderRaceCourseGuide(race=getGuideRace()){
+ const box=$('#raceCourseGuide');if(!box)return;
+ if(!race){box.innerHTML='';return}
+ const guide=courseGuideForRace(race),sourceUrl=guide?.sourceUrl||race.sourceUrl||(state.guideServer==='kr'?KOREA_UPCOMING.sourceUrl:UPCOMING.sourceUrl);
+ const season={spring:'봄',summer:'여름',autumn:'가을',winter:'겨울'}[race.season]||race.season||'미정';
+ const direction=race.turn==='left'?'좌회전':race.turn==='right'?'우회전':'방향 미정';
+ const course={inner:'내측',outer:'외측'}[race.course]||'';
+ const weather=raceWeatherKr(race),track=[race.placeKr||race.place||'경기장 미정',groundLabel[race.ground]||race.ground,race.meters?race.meters+'m':distLabel[race.distance],direction,course,season,weather].filter(Boolean);
+ // 확인된 개최 조건과 코스 공략만 표시하고, 없는 구간 수치는 만들어 내지 않습니다.
+ box.innerHTML='<div class="raceCourseGuide"><div class="raceCourseHead"><b>이번 레이스장 핵심</b>'+(sourceUrl?'<a href="'+esc(sourceUrl)+'" target="_blank" rel="noopener">조건·공략 출처 ↗</a>':'')+'</div><div class="raceCourseChips">'+track.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'+
+  (race.specialRules?.length?'<div class="courseTierNotice">'+race.specialRules.map(x=>esc(x)).join(' · ')+'</div>':'')+
+  (guide?.tips?.length?'<div class="raceCourseTips">'+guide.tips.map(x=>'<div>✓ '+esc(x)+'</div>').join('')+'</div>':'<div class="sub">이 레이스의 세부 구간 공략은 검증된 자료가 추가되면 표시합니다.</div>')+
+  (race.greenSkills?.length?'<div class="raceCourseGreens"><b>조건에 맞는 녹색 스킬</b><div>'+race.greenSkills.map(x=>'<span>'+esc(koSkill(x))+'</span>').join('')+'</div></div>':'')+'</div>'
+}
+function renderGuide(){renderGuideServerTabs();const race=getGuideRace();renderMastersGuideDetail(race);renderRaceCourseGuide(race);if(!race){$('#guideCondition').textContent='등록된 레이스 없음';return}const cond=raceCond(race);renderGuideUmaTier();renderTrainingFinishSummary();$('#guideCondition').textContent=`${state.guideServer==='kr'?'한국':'일본'} · ${race.eventKr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;const gs=$('#guideSkills');gs.innerHTML='';const u=selectedUma();let items=[];if(u)items=awakeningSkills(u).filter(sk=>Number(sk.rarity)===2).map(sk=>({...sk,source:`${u.krName} 각성 Lv${sk.awakening}`}));for(const n of race.greenSkills||[]){const dbSkill=skillFromName(runtime.skills,n);items.push(dbSkill?{...dbSkill,source:'코스 대응 녹색 스킬',force:3}:{id:'green_'+n,jp:n,kr:koSkill(n),iconId:null,tags:{grounds:[],distances:[],styles:[]},source:'코스 대응 녹색 스킬 · DB 미연결',force:3})}items.sort((a,b)=>(b.force||skillConditionScore(b,cond))-(a.force||skillConditionScore(a,cond)));for(const s of items.slice(0,14)){const sc=s.force||skillConditionScore(s,cond),x=document.createElement('div');x.className='guideSkill';x.innerHTML=`${skillIcon(s)}<div><div class="jp">${skillDisplayNameHtml(s)}</div><div class="sub">${esc(s.source||'')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`;gs.appendChild(x)}if(!items.length)gs.innerHTML='<div class="note">육성 우마무스메를 선택하면 각성 스킬과 레이스 조건을 비교합니다.</div>';const ss=$('#guideSupports');ss.innerHTML='';if(!runtime.ready){ss.innerHTML='<div class="note">SSR DB 동기화가 필요합니다.</div>';return}const supportRows=supportRecommend(cond);if(state.guideServer==='kr'&&!supportRows.length){ss.innerHTML='<div class="note">현재 동기화 DB에 Inven 기준 한국 서버 구현 SSR이 없습니다. 온라인 DB를 다시 동기화해 주세요.</div>';return}for(const {c,score} of supportRows){const owned=state.owned.map(String).includes(String(c.id)),x=document.createElement('div');x.className='card'+supportRecommendationClass(c);x.innerHTML=`${c.image?`<img src="${esc(c.image)}" loading="lazy" data-card-type="${esc(c.type)}" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">`:''}<div><div class="cardName">${cardDisplayNameHtml(c)}</div><div class="cardJp">${esc(c.title||'')}</div><div class="stars">${scoreStars(score)} <span class="status">${state.guideServer==='kr'?'한국 구현 · ':''}${owned?'보유 '+(Number(state.lb[String(c.id)]??0)===4?'풀돌':(Number(state.lb[String(c.id)]??0)+'돌')):'미보유 · 풀돌 기준'}</span></div><div class="actions"><button class="mini" data-info>상세</button>${owned?'<button class="mini" data-slot>덱 슬롯</button>':''}</div></div>`;x.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);if(owned)x.querySelector('[data-slot]').onclick=()=>openSlotPicker(c.id);ss.appendChild(x)}}
 function renderTier(){
  const g=$('#tierGround').value,d=$('#tierDistance').value,s=$('#tierStyle').value,q=norm($('#tierSearch').value),u=selectedUma(),b=$('#tierGrid');b.innerHTML='';
  const kr=state.guideServer==='kr';
- const data=kr?KOREA_TIER_DATA:TIER_DATA;
- if(kr&&(g!==KOREA_NEXT_CHAMPIONS_MEETING.ground||d!==KOREA_NEXT_CHAMPIONS_MEETING.distance)){
-   b.innerHTML='<div class="note">한국 서버 티어는 현재 공식 발표된 다음 챔피언스 미팅 CLASSIC 전용 스냅샷입니다. 바장을 잔디, 거리를 중거리로 선택해 주세요.</div>';
-   $('#tierSource').textContent=`한국 다음 챔미 · ${KOREA_NEXT_CHAMPIONS_MEETING.date} · 도쿄 잔디 2400m / 좌 / 봄 / 맑음 / 양호 / 낮`;
+ const race=getGuideRace(),guide=race?.ground===g&&race?.distance===d?courseGuideForRace(race):null;
+ const oldKrRace=kr&&race?.id==='kr_cm_2026_10_classic';
+ const data=guide?.topRows?.length?{rows:guide.topRows.map(x=>({...x,ground:g,distance:d,tier:'SS+'}))}:oldKrRace?KOREA_TIER_DATA:kr?{rows:[]}:TIER_DATA;
+ if(kr&&!guide&&!oldKrRace){
+   b.innerHTML='<div class="note">선택한 한국 레이스와 정확히 일치하는 티어 자료가 아직 없습니다. 다른 경기의 순위를 대신 표시하지 않습니다.</div>';
+   $('#tierSource').textContent='한국 레이스별 티어 · 확인된 자료 없음';
    return
  }
- for(const tier of ['SS+','SS','S']){
+ for(const tier of guide?['SS+']:['SS+','SS','S']){
    let arr=data.rows.filter(x=>x.ground===g&&x.distance===d&&x.tier===tier&&(s==='all'||(x.styles||[]).includes(s)));
    if(q)arr=arr.filter(x=>norm(`${x.jp} ${x.kr} ${katakanaToHangul(x.jp)}`).includes(q));
    const row=document.createElement('div');row.className='tierRow';row.innerHTML=`<div class="tierLabel ${tier==='SS+'?'ssp':tier.toLowerCase()}">${tier}</div><div class="tierChars"></div>`;
@@ -5343,11 +5330,11 @@ function renderTier(){
    for(const x of arr){const z=document.createElement('div');z.className='tierChar'+(u&&(x.jp.includes(u.character)||u.character.includes(x.jp.replace(/\(.+?\)/g,'')))?' highlight':'');z.innerHTML=`${tierPortraitHtml(x)}<div class="tierCharText"><div class="jp">${esc(x.jp)}</div><div class="kr">${esc(x.kr)} · ${(x.styles||[]).map(y=>styleLabel[y]).join('/')}</div></div>`;rb.appendChild(z)}
    b.appendChild(row)
  }
- if(kr){
-   $('#tierSource').textContent=`한국 다음 챔미 CLASSIC · 2026-10-10~16 · 도쿄 잔디 2400m / 좌 / 봄 / 맑음 / 양호 / 낮 · 일본 2025-06 동일 조건 GameWith 추천도 매핑 (5★→SS+, 4★→SS, 3★→S)`;
- }else{
-   $('#tierSource').textContent=`스냅샷 ${TIER_DATA.snapshotDate} · 출처: Game8 · 현재 선택 육성 우마무스메는 금색 테두리로 표시`
- }
+ if(guide){
+   $('#tierSource').innerHTML='선택 레이스 '+esc(race.eventKr)+' · '+esc(guide.source)+' <b>5★ 강력 추천만 표시</b> · SS+는 화면 표시용 묶음입니다. <a href="'+esc(guide.sourceUrl)+'" target="_blank" rel="noopener">원문 ↗</a>'
+ }else if(oldKrRace){
+   $('#tierSource').textContent='종료된 한국 2026년 10월 도쿄 2400m · 일본 2025년 6월 동일 조건 GameWith 추천도 매핑';
+ }else $('#tierSource').textContent=`스냅샷 ${TIER_DATA.snapshotDate} · 출처: Game8 · 경기장별 자료가 없는 경우의 거리별 기본 평가`
 }
 let racetrackInfoPlace=null,racetrackInfoCourseId=null,racetrackInfoLoading=false;
 function racetrackKr(place){return RACETRACK_META[place]?.kr||place||'미정'}
@@ -7048,232 +7035,6 @@ function initLegendsScenarioGuide(){
 }
 
 
-/* V7.10 · 디지탄 관전 모드
-   화면 공유 + 브라우저 로컬 장면 분류. 프레임 업로드/AI 전송/자동 입력 없음 */
-let watchPilotStream=null;
-let watchAnalysisTimer=null;
-let watchLastFeature=null;
-const WATCH_SCENE_KEY='uma_watch_scene_samples_v1';
-const WATCH_SCENE_LABELS={
- home:'홈',
- trainingMain:'육성 메인',
- training:'훈련 선택',
- event:'이벤트',
- race:'레이스'
-};
-const WATCH_FEATURE_W=10,WATCH_FEATURE_H=18,WATCH_MAX_SAMPLES=5;
-let watchSceneSamples=loadWatchSceneSamples();
-
-function loadWatchSceneSamples(){
- try{
-  const x=JSON.parse(localStorage.getItem(WATCH_SCENE_KEY)||'{}');
-  const out={};
-  for(const k of Object.keys(WATCH_SCENE_LABELS)){
-   out[k]=Array.isArray(x?.[k])?x[k].filter(a=>Array.isArray(a)&&a.length===WATCH_FEATURE_W*WATCH_FEATURE_H*3).slice(-WATCH_MAX_SAMPLES):[]
-  }
-  return out
- }catch(_){
-  return Object.fromEntries(Object.keys(WATCH_SCENE_LABELS).map(k=>[k,[]]))
- }
-}
-function saveWatchSceneSamples(){
- try{localStorage.setItem(WATCH_SCENE_KEY,JSON.stringify(watchSceneSamples))}catch(e){console.warn('[V7.10] watch scene samples save failed',e)}
-}
-
-
-function watchPilotEls(){
- return {
-  start:$('#watchPilotStart'),
-  stop:$('#watchPilotStop'),
-  state:$('#watchPilotState'),
-  meta:$('#watchPilotMeta'),
-  video:$('#watchPilotVideo'),
-  placeholder:$('#watchPilotPlaceholder'),
-  scene:$('#watchSceneNow'),
-  confidence:$('#watchSceneConfidence'),
-  meter:$('#watchSimilarityMeter'),
-  motion:$('#watchMotionText'),
-  total:$('#watchSampleTotal'),
-  rate:$('#watchAnalysisRate'),
-  canvas:$('#watchFeatureCanvas')
- }
-}
-function setWatchPilotUi(mode,message){
- const e=watchPilotEls();if(!e.state)return;
- e.state.className='watchState'+(mode==='live'?' live':mode==='error'?' error':'');
- e.state.textContent=mode==='live'?'공유 중':mode==='error'?'오류':mode==='unsupported'?'지원 안 됨':'대기';
- if(e.meta&&message)e.meta.textContent=message;
- if(e.start)e.start.disabled=mode==='live'||mode==='unsupported';
- if(e.stop)e.stop.disabled=mode!=='live'
-}
-function watchPilotTrackMeta(track){
- if(!track)return '영상 트랙 정보를 확인할 수 없습니다.';
- const s=track.getSettings?.()||{};
- const bits=[];
- if(s.displaySurface)bits.push('공유 대상 '+s.displaySurface);
- if(s.width&&s.height)bits.push(s.width+'×'+s.height);
- if(s.frameRate)bits.push(Math.round(s.frameRate)+'fps');
- return bits.length?bits.join(' · '):'화면 공유 연결됨'
-}
-function updateWatchSampleUi(){
- let total=0;
- for(const k of Object.keys(WATCH_SCENE_LABELS)){
-  const n=watchSceneSamples[k]?.length||0;total+=n;
-  const x=document.querySelector('[data-watch-count="'+k+'"]');if(x)x.textContent=String(n)
- }
- document.querySelectorAll('.watchSampleBtn').forEach(b=>b.disabled=!watchPilotStream);
- const e=watchPilotEls();if(e.total)e.total.textContent='학습 '+total+'개'
-}
-function watchFeatureFromVideo(){
- const e=watchPilotEls(),v=e.video,cv=e.canvas;
- if(!v||!cv||!watchPilotStream||v.readyState<2||!v.videoWidth||!v.videoHeight)return null;
- const ctx=cv.getContext('2d',{willReadFrequently:true});
- ctx.drawImage(v,0,0,WATCH_FEATURE_W,WATCH_FEATURE_H);
- const px=ctx.getImageData(0,0,WATCH_FEATURE_W,WATCH_FEATURE_H).data,out=[];
- for(let i=0;i<px.length;i+=4){out.push(px[i],px[i+1],px[i+2])}
- return out
-}
-function watchFeatureDistance(a,b){
- if(!a||!b||a.length!==b.length)return 1;
- let sum=0;
- for(let i=0;i<a.length;i++){const d=(a[i]-b[i])/255;sum+=d*d}
- return Math.sqrt(sum/a.length)
-}
-function classifyWatchFeature(feature){
- const candidates=[];
- for(const [label,samples] of Object.entries(watchSceneSamples)){
-  if(!samples?.length)continue;
-  let best=Infinity;
-  for(const s of samples)best=Math.min(best,watchFeatureDistance(feature,s));
-  candidates.push({label,distance:best})
- }
- candidates.sort((a,b)=>a.distance-b.distance);
- if(!candidates.length)return {label:null,distance:1,similarity:0,second:null};
- const best=candidates[0],second=candidates[1]||null;
- const similarity=Math.max(0,Math.min(1,1-best.distance/0.34));
- const margin=second?second.distance-best.distance:0.2;
- const known=best.distance<=0.235&&(second?margin>=0.012||best.distance<=0.12:true);
- return {label:known?best.label:null,nearest:best.label,distance:best.distance,similarity,second}
-}
-function renderWatchSceneResult(result,motion){
- const e=watchPilotEls();if(!e.scene)return;
- const pct=Math.round((result?.similarity||0)*100);
- if(result?.label){
-  e.scene.textContent=WATCH_SCENE_LABELS[result.label]||result.label;e.scene.className='watchSceneNow known';
-  e.confidence.textContent='로컬 유사도 '+pct+'% · 가장 가까운 학습 화면과 비교한 값입니다.'
- }else if(result?.nearest){
-  e.scene.textContent='판별 보류 · '+(WATCH_SCENE_LABELS[result.nearest]||result.nearest)+' 후보';e.scene.className='watchSceneNow unknown';
-  e.confidence.textContent='유사도 '+pct+'% · 확신이 낮아 자동 판정을 보류했습니다. 해당 화면 샘플을 추가해 주세요.'
- }else{
-  e.scene.textContent='학습 샘플 필요';e.scene.className='watchSceneNow unknown';
-  e.confidence.textContent='홈/육성 메인/훈련/이벤트/레이스 화면을 버튼으로 학습시켜 주세요.'
- }
- if(e.meter)e.meter.style.width=pct+'%';
- if(e.motion){
-  const mp=Math.round(Math.min(1,(motion||0)/0.22)*100);
-  e.motion.textContent=watchLastFeature?'직전 분석 대비 화면 변화 '+mp+'%'+(motion>0.09?' · 화면 전환/큰 애니메이션 가능성':' · 비교적 안정된 화면'):'첫 분석 프레임'
- }
-}
-function analyzeWatchScene(){
- if(!watchPilotStream)return;
- const f=watchFeatureFromVideo();if(!f)return;
- const motion=watchLastFeature?watchFeatureDistance(f,watchLastFeature):0;
- const result=classifyWatchFeature(f);
- renderWatchSceneResult(result,motion);
- watchLastFeature=f;
- const e=watchPilotEls();if(e.rate)e.rate.textContent='로컬 분석 1.25Hz'
-}
-function startWatchSceneAnalysis(){
- stopWatchSceneAnalysis();watchLastFeature=null;
- analyzeWatchScene();
- watchAnalysisTimer=setInterval(analyzeWatchScene,800);
- updateWatchSampleUi()
-}
-function stopWatchSceneAnalysis(){
- if(watchAnalysisTimer){clearInterval(watchAnalysisTimer);watchAnalysisTimer=null}
- watchLastFeature=null
-}
-function addWatchSceneSample(label){
- if(!WATCH_SCENE_LABELS[label]||!watchPilotStream)return;
- const f=watchFeatureFromVideo();if(!f)return toast('현재 영상 프레임을 아직 읽을 수 없습니다.');
- const arr=watchSceneSamples[label]||(watchSceneSamples[label]=[]);
- arr.push(f);while(arr.length>WATCH_MAX_SAMPLES)arr.shift();
- saveWatchSceneSamples();updateWatchSampleUi();analyzeWatchScene();
- toast(WATCH_SCENE_LABELS[label]+' 화면 샘플을 학습했습니다. ('+arr.length+'/'+WATCH_MAX_SAMPLES+')')
-}
-function clearWatchSceneSamples(){
- if(!confirm('관전 모드의 화면 종류 학습 샘플을 모두 지울까요?'))return;
- watchSceneSamples=Object.fromEntries(Object.keys(WATCH_SCENE_LABELS).map(k=>[k,[]]));
- saveWatchSceneSamples();watchLastFeature=null;updateWatchSampleUi();
- renderWatchSceneResult({label:null,distance:1,similarity:0},0);
- toast('관전 모드 학습 샘플을 초기화했습니다.')
-}
-
-function stopWatchPilot(reason='화면 공유가 종료되었습니다.'){
- const stream=watchPilotStream;watchPilotStream=null;
- stopWatchSceneAnalysis();
- if(stream)for(const t of stream.getTracks())try{t.stop()}catch(_){}
- const e=watchPilotEls();
- if(e.video){try{e.video.pause()}catch(_){} e.video.srcObject=null;e.video.hidden=true}
- if(e.placeholder)e.placeholder.hidden=false;
- setWatchPilotUi('idle',reason);
- updateWatchSampleUi();
- if(e.rate)e.rate.textContent='분석 대기'
-}
-async function startWatchPilot(){
- if(!navigator.mediaDevices?.getDisplayMedia){
-  setWatchPilotUi('unsupported','이 브라우저에서는 화면 공유 API를 사용할 수 없습니다. 최신 Chrome 또는 Edge의 HTTPS 페이지에서 다시 확인해 주세요.');
-  return
- }
- if(!window.isSecureContext){
-  setWatchPilotUi('unsupported','화면 공유는 HTTPS 보안 페이지에서만 사용할 수 있습니다.');
-  return
- }
- stopWatchPilot('공유 대상을 선택하는 중입니다…');
- const e=watchPilotEls();
- try{
-  const stream=await navigator.mediaDevices.getDisplayMedia({
-   video:{frameRate:{ideal:5,max:15}},
-   audio:false
-  });
-  watchPilotStream=stream;
-  const track=stream.getVideoTracks()[0];
-  if(!track)throw new Error('영상 트랙을 찾지 못했습니다.');
-  track.addEventListener('ended',()=>{if(watchPilotStream===stream)stopWatchPilot('브라우저에서 화면 공유가 종료되었습니다.')},{once:true});
-  if(e.video){
-   e.video.srcObject=stream;
-   e.video.hidden=false;
-   if(e.placeholder)e.placeholder.hidden=true;
-   await e.video.play().catch(()=>{});
-   const refresh=()=>{if(watchPilotStream===stream)setWatchPilotUi('live',watchPilotTrackMeta(track)+(e.video.videoWidth?' · 실제 영상 '+e.video.videoWidth+'×'+e.video.videoHeight:''))};
-   if(e.video.videoWidth)refresh();else e.video.addEventListener('loadedmetadata',refresh,{once:true});
-  }
-  setWatchPilotUi('live',watchPilotTrackMeta(track));
-  startWatchSceneAnalysis()
- }catch(err){
-  const name=err?.name||'Error';
-  let msg='화면 공유를 시작하지 못했습니다.';
-  if(name==='NotAllowedError')msg='공유가 취소되었거나 권한이 허용되지 않았습니다. 다시 눌러 원하는 창/화면을 직접 선택해 주세요.';
-  else if(name==='NotFoundError')msg='공유 가능한 화면을 찾지 못했습니다.';
-  else if(name==='InvalidStateError')msg='버튼을 직접 눌러 화면 공유를 시작해야 합니다.';
-  else if(err?.message)msg+=' '+err.message;
-  stopWatchPilot(msg);
-  setWatchPilotUi('error',msg)
- }
-}
-function initWatchPilot(){
- const e=watchPilotEls();if(!e.start||!e.stop)return;
- e.start.onclick=startWatchPilot;
- e.stop.onclick=()=>stopWatchPilot('사용자가 화면 공유를 중지했습니다.');
- document.querySelectorAll('[data-watch-label]').forEach(b=>b.onclick=()=>addWatchSceneSample(b.dataset.watchLabel));
- const clear=$('#watchClearSamples');if(clear)clear.onclick=clearWatchSceneSamples;
- updateWatchSampleUi();
- if(!navigator.mediaDevices?.getDisplayMedia)setWatchPilotUi('unsupported','현재 브라우저는 화면 공유 API를 지원하지 않습니다.');
- else if(!window.isSecureContext)setWatchPilotUi('unsupported','HTTPS 보안 페이지에서 열어야 화면 공유를 사용할 수 있습니다.');
- else setWatchPilotUi('idle','준비 완료 · 「화면 공유 시작」을 누른 뒤 우마무스메 창 또는 모니터를 선택하세요.');
- window.addEventListener('pagehide',()=>{if(watchPilotStream)stopWatchPilot('페이지를 벗어나 화면 공유가 종료되었습니다.')},{once:true})
-}
-
 function setSsrDbOpen(open,scroll=false){
  const panel=$('#ssrDbPanel'),body=$('#ssrDbBody'),btn=$('#toggleSsrDb');if(!panel||!body||!btn)return;
  body.hidden=!open;panel.classList.toggle('open',open);btn.textContent=open?'SSR DB 닫기':'전체 DB 열기';
@@ -7313,7 +7074,7 @@ if(goshikiJpOpen)goshikiJpOpen.onclick=()=>{
  }else{renderScenarioPlan();renderAppServerTabs();}
  $('#scenarioPlanPanel')?.scrollIntoView({behavior:'smooth',block:'start'});
 };
-for(const id of ['ground','distance','style']){$('#'+id).value=state[id];$('#'+id).onchange=e=>{state[id]=e.target.value;save();renderDeck();renderGlobalSkills();renderConditionUmaSuitability();renderGuide();renderSelectedUma();renderDbGuideRecommendations();renderCatalog();renderTrainingFinishSummary();renderV7Planner();renderTier()}}
+for(const id of ['ground','distance','style']){$('#'+id).value=state[id];$('#'+id).onchange=e=>{state[id]=e.target.value;save();renderDeck();renderGlobalSkills();renderConditionUmaSuitability();renderGuide();renderSelectedUma();renderInheritanceSetup();renderDbGuideRecommendations();renderCatalog();renderTrainingFinishSummary();renderV7Planner();renderTier()}}
 $('#conditionUmaButton').onclick=()=>openUmaPicker('current');
 $('#umaPickerSearch').oninput=renderUmaPicker;
 $('#umaPickerClear').onclick=()=>{$('#umaPickerSearch').value='';renderUmaPicker()};
@@ -7357,7 +7118,7 @@ function setOwnedFilter(t){ownedType=t;renderTypeFilters($('#ownedFilters'),owne
 renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);
 renderTypeFilters($('#ownedFilters'),ownedType,setOwnedFilter);
 async function loadLocalAppData(){
- const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krMasters:false,krSkillNames:false,krTier:false,jpUpcoming:false,jpTier:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false,jpSyncState:false,jpValidationReport:false,jpSyncHistory:false,jpChangeReport:false,jpManifest:false,jpSourceHealth:false,jpReviewQueue:false,jpEntitySummary:false,krImportCandidates:false,jpScenarioWatch:false,jpSystemStatus:false,jpInheritanceRecommendations:false,jpInheritanceReview:false,jpInheritanceEffects:false};
+ const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krMasters:false,krSkillNames:false,krTier:false,krCourseGuides:false,jpUpcoming:false,jpTier:false,jpCourseGuides:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false,jpSyncState:false,jpValidationReport:false,jpSyncHistory:false,jpChangeReport:false,jpManifest:false,jpSourceHealth:false,jpReviewQueue:false,jpEntitySummary:false,krImportCandidates:false,jpScenarioWatch:false,jpSystemStatus:false,jpInheritanceRecommendations:false,jpInheritanceReview:false,jpInheritanceEffects:false};
 
  try{
    const detail=await fetchJson('./data/jp/verified_support_details.json');
@@ -7603,6 +7364,29 @@ async function loadLocalAppData(){
  }catch(e){
    console.warn('[V5.4] JP tier.json load failed. Using embedded fallback.',e);
  }
+
+ try{
+   const data=await fetchJson('./data/jp/course_guides.json');
+   const races=data?.races;
+   if(data?.scope!=='jp'||!races||typeof races!=='object'||
+      !Object.values(races).every(x=>x&&Array.isArray(x.topRows)&&Array.isArray(x.tips)&&
+        x.topRows.every(row=>typeof row.jp==='string'&&typeof row.kr==='string'&&
+          row.rating===5&&Array.isArray(row.styles))))throw new Error('경기장별 추천 데이터 형식 오류');
+   JP_COURSE_GUIDES=data;
+   result.jpCourseGuides=true;
+ }catch(e){console.warn('[V7.82] 경기장별 추천 데이터를 불러오지 못했습니다.',e)}
+
+ try{
+   const data=await fetchJson('./data/kr/course_guides.json');
+   const races=data?.races;
+   if(data?.scope!=='kr'||!races||typeof races!=='object'||
+      !Object.values(races).every(x=>x&&Array.isArray(x.topRows)&&Array.isArray(x.tips)&&
+        x.topRows.every(row=>typeof row.jp==='string'&&typeof row.kr==='string'&&
+          row.rating===5&&Array.isArray(row.styles)&&Number.isFinite(Number(row.ownerUmaId)))))throw new Error('한국 경기장별 추천 데이터 형식 오류');
+   KR_COURSE_GUIDES=data;
+   result.krCourseGuides=true;
+ }catch(e){console.warn('[V7.82] 한국 경기장별 추천 데이터를 불러오지 못했습니다.',e)}
+
 
  try{
    const rare=await fetchJson('./data/common/support_rare_skills.json');
@@ -8174,7 +7958,7 @@ function initDigitalMascotDrag(){
 
 initRamenScenarioGuide();
 initLegendsScenarioGuide();
-initWatchPilot();
+
 initDigitalMascotDrag();
 bootstrapApp();
 

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-10-30",
+  "scope": "kr",
+  "note": "한국 공식 2026년 11월 조건과 동일한 일본 2025년 7월 공략의 5★ 추천만 표시한다. 한국 서버 구현 캐릭터만 포함한다.",
+  "races": {
+    "kr_cm_2026_11_classic": {
+      "course": "한신 잔디 2200m · 우회전(내) · 여름 · 흐림 · 다습 · 디버프 제한",
+      "source": "GameWith 2025년 7월 동일 조건 공략",
+      "sourceUrl": "https://gamewith.jp/uma-musume/article/show/501442",
+      "tips": [
+        "종반은 약 1470m부터, 마지막 직선은 약 1840m부터 시작",
+        "1400~1990m 내리막 구간과 종반 진입이 겹치므로 가속 발동 위치를 확인",
+        "디버프 발동 제한 규칙을 반영해 팀을 구성"
+      ],
+      "parents": [],
+      "topRows": [
+        {
+          "jp": "カツラギエース(正月)",
+          "kr": "카츠라기 에이스(신년)",
+          "styles": [
+            "nige"
+          ],
+          "rating": 5,
+          "ownerUmaId": 110402
+        },
+        {
+          "jp": "ジェンティルドンナ",
+          "kr": "젠틸돈나",
+          "styles": [
+            "senko"
+          ],
+          "rating": 5,
+          "ownerUmaId": 111601
+        },
+        {
+          "jp": "クロノジェネシス",
+          "kr": "크로노 제네시스",
+          "styles": [
+            "senko"
+          ],
+          "rating": 5,
+          "ownerUmaId": 113301
+        },
+        {
+          "jp": "ジャングルポケット",
+          "kr": "정글 포켓",
+          "styles": [
+            "sashi"
+          ],
+          "rating": 5,
+          "ownerUmaId": 109401
+        },
+        {
+          "jp": "ラヴズオンリーユー",
+          "kr": "러브즈 온리 유",
+          "styles": [
+            "sashi"
+          ],
+          "rating": 5,
+          "ownerUmaId": 113201
+        },
+        {
+          "jp": "オルフェーヴル",
+          "kr": "오르페브르",
+          "styles": [
+            "oikomi"
+          ],
+          "rating": 5,
+          "ownerUmaId": 111501
+        },
+        {
+          "jp": "スイープトウショウ(花嫁)",
+          "kr": "스윕 토쇼(웨딩)",
+          "styles": [
+            "oikomi"
+          ],
+          "rating": 5,
+          "ownerUmaId": 104402
+        }
+      ]
+    }
+  }
+}

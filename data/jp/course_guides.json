@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-10-30",
+  "scope": "jp",
+  "note": "레이스장별 공략의 확인된 추천만 기록한다. 5★는 출처의 추천도이며 앱 자체 확정 티어가 아니다.",
+  "races": {
+    "cm_2026_10_classic": {
+      "course": "교토 잔디 2200m · 우회전 · 가을 · 흐림 · 양호",
+      "source": "GameWith 2026년 10월 챔피언스 미팅 공략",
+      "sourceUrl": "https://gamewith.jp/uma-musume/article/show/572401",
+      "tips": [
+        "종반 진입과 내리막이 겹쳐 내리막 발동 가속·속도 스킬을 확인",
+        "중반 오르막에 대비해 스태미나와 파워 확보"
+      ],
+      "parents": [
+        {
+          "jp": "エピファネイア",
+          "kr": "에피파네이아",
+          "styles": [],
+          "note": "출처의 인자 주회 부모 예시",
+          "ownerUmaId": 114101
+        },
+        {
+          "jp": "ナリタトップロード(クリスマス)",
+          "kr": "나리타 탑 로드(크리스마스)",
+          "styles": [],
+          "note": "출처의 인자 주회 부모 예시",
+          "ownerUmaId": 107702
+        },
+        {
+          "jp": "ステイゴールド",
+          "kr": "스테이 골드",
+          "styles": [],
+          "note": "출처의 후방 각질 부모 예시",
+          "ownerUmaId": 113501
+        }
+      ],
+      "topRows": [
+        {
+          "jp": "セイウンスカイ(水着)",
+          "kr": "세이운 스카이(수영복)",
+          "styles": [
+            "nige"
+          ],
+          "rating": 5,
+          "ownerUmaId": 102003
+        },
+        {
+          "jp": "アーモンドアイ",
+          "kr": "아몬드 아이",
+          "styles": [
+            "senko"
+          ],
+          "rating": 5,
+          "ownerUmaId": 112901
+        },
+        {
+          "jp": "エピファネイア",
+          "kr": "에피파네이아",
+          "styles": [
+            "senko"
+          ],
+          "rating": 5,
+          "ownerUmaId": 114101
+        },
+        {
+          "jp": "シンボリルドルフ(ハロウィン)",
+          "kr": "심볼리 루돌프(할로윈)",
+          "styles": [
+            "senko",
+            "sashi"
+          ],
+          "rating": 5,
+          "ownerUmaId": 101703
+        },
+        {
+          "jp": "スティルインラブ",
+          "kr": "스틸 인 러브",
+          "styles": [
+            "sashi"
+          ],
+          "rating": 5,
+          "ownerUmaId": 109701
+        },
+        {
+          "jp": "レッドディザイア",
+          "kr": "레드 디자이어",
+          "styles": [
+            "sashi"
+          ],
+          "rating": 5,
+          "ownerUmaId": 113601
+        },
+        {
+          "jp": "アドマイヤグルーヴ",
+          "kr": "어드마이어 그루브",
+          "styles": [
+            "sashi"
+          ],
+          "rating": 5,
+          "ownerUmaId": 111801
+        },
+        {
+          "jp": "オルフェーヴル",
+          "kr": "오르페브르",
+          "styles": [
+            "oikomi"
+          ],
+          "rating": 5,
+          "ownerUmaId": 111501
+        }
+      ]
+    },
+    "loh_2026_11_long": {
+      "course": "교토 잔디 3000m · 우회전(외) · 가을 · 날씨/주로 랜덤",
+      "source": "GameWith 2026년 11월 리그 오브 히어로즈 공략",
+      "sourceUrl": "https://gamewith.jp/uma-musume/article/show/574934",
+      "tips": [
+        "긴 오르막이 두 곳에 있어 스태미나와 파워를 함께 확보",
+        "장거리 S 인자를 준비하고 회복 스킬을 확인",
+        "종반 시작 약 2000m · 마지막 직선 약 2600m부터"
+      ],
+      "parents": [
+        {
+          "jp": "エピファネイア",
+          "kr": "에피파네이아",
+          "styles": [],
+          "note": "출처의 인자 주회 부모 예시",
+          "ownerUmaId": 114101
+        },
+        {
+          "jp": "ステイゴールド",
+          "kr": "스테이 골드",
+          "styles": [],
+          "note": "출처의 후방 각질 부모 예시",
+          "ownerUmaId": 113501
+        },
+        {
+          "jp": "ナリタトップロード(クリスマス)",
+          "kr": "나리타 탑 로드(크리스마스)",
+          "styles": [],
+          "note": "출처의 인자 주회 부모 예시",
+          "ownerUmaId": 107702
+        }
+      ],
+      "topRows": [
+        {
+          "jp": "ダイワスカーレット(新衣装)",
+          "kr": "다이와 스칼렛(신의상)",
+          "styles": [
+            "nige"
+          ],
+          "rating": 5,
+          "ownerUmaId": 100902
+        },
+        {
+          "jp": "キタサンブラック(新衣装)",
+          "kr": "키타산 블랙(신의상)",
+          "styles": [
+            "nige"
+          ],
+          "rating": 5,
+          "ownerUmaId": 106803
+        },
+        {
+          "jp": "ナリタトップロード(ラーメン)",
+          "kr": "나리타 탑 로드(라멘)",
+          "styles": [
+            "senko"
+          ],
+          "rating": 5,
+          "ownerUmaId": 107703
+        },
+        {
+          "jp": "エピファネイア",
+          "kr": "에피파네이아",
+          "styles": [
+            "senko"
+          ],
+          "rating": 5,
+          "ownerUmaId": 114101
+        },
+        {
+          "jp": "シンボリルドルフ(ハロウィン)",
+          "kr": "심볼리 루돌프(할로윈)",
+          "styles": [
+            "senko",
+            "sashi"
+          ],
+          "rating": 5,
+          "ownerUmaId": 101703
+        },
+        {
+          "jp": "マンハッタンカフェ(花嫁)",
+          "kr": "맨해튼 카페(웨딩)",
+          "styles": [
+            "sashi"
+          ],
+          "rating": 5,
+          "ownerUmaId": 102503
+        },
+        {
+          "jp": "オルフェーヴル",
+          "kr": "오르페브르",
+          "styles": [
+            "oikomi"
+          ],
+          "rating": 5,
+          "ownerUmaId": 111501
+        }
+      ]
+    }
+  }
+}
