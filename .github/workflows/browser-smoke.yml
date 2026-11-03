@@ -346,18 +346,19 @@ jobs:
                   print("TITLE:", d.title)
                   if not current_build:
                       continue
-                  # V7.9 spectator mode: verify HTTPS screen-share UI/API without invoking the permission dialog.
-                  watch_start = d.find_element(By.ID, "watchPilotStart")
-                  watch_video = d.find_element(By.ID, "watchPilotVideo")
-                  capture_api = d.execute_script("return !!window.isSecureContext && !!navigator.mediaDevices && typeof navigator.mediaDevices.getDisplayMedia === 'function'")
-                  if not watch_start or not watch_video:
-                      raise RuntimeError("Spectator screen-share UI is missing")
-                  if not capture_api:
-                      raise RuntimeError("getDisplayMedia is unavailable on deployed HTTPS target")
-                  print("WATCH PILOT DOM/API PASS")
+                  # 폐기한 화면 공유 대신 레이스장 공략과 계승 상성 화면을 확인합니다.
+                  if not d.find_element(By.ID, "raceCourseGuide") or not d.find_element(By.ID, "inheritanceAffinityPanel"):
+                      raise RuntimeError("Race guide or inheritance affinity UI is missing")
+                  if d.find_elements(By.ID, "watchPilotStart"):
+                      raise RuntimeError("Retired spectator screen-share UI is still present")
+                  print("RACE GUIDE AND INHERITANCE DOM PASS")
 
                   # V7.80: KR-first fresh profile, launched island and separate JP latest-scenario mode.
                   WebDriverWait(d, 25).until(lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true"))
+                  kr_releases = d.execute_script("return {ryan:isKoreanImplementedSupport({id:30258}),future:isKoreanImplementedSupport({id:30259}),aines:KOREA_UMA_IDS.has(103103),city:KOREA_UMA_IDS.has(104003),chrono:KOREA_UMA_IDS.has(113301)}")
+                  if kr_releases != {"ryan":True,"future":False,"aines":True,"city":True,"chrono":True}:
+                      raise RuntimeError("KR release separation failed: "+str(kr_releases))
+                  print("KR RELEASE SEPARATION PASS:", kr_releases)
                   kr_verify = d.execute_script("""
                       const cold={active:state.activeServer,scenario:state.scenario,
                         visible:!document.querySelector('#scenario option[value="island"]').disabled,
@@ -1321,9 +1322,10 @@ jobs:
                   print("ACTIVE PAGE:", before, "->", after)
                   if before == after:
                       raise RuntimeError("Navigation tab click did not change active page")
-                  if not d.find_element(By.ID, "watchPilotStart").is_displayed():
-                      raise RuntimeError("Spectator screen-share start button is not visible in Trainer Guide")
-                  print("WATCH PILOT UI PASS")
+                  course_guide = d.find_element(By.ID, "raceCourseGuide")
+                  if not course_guide.is_displayed() or "이번 레이스장 핵심" not in course_guide.text:
+                      raise RuntimeError("Trainer Guide race course details are not visible")
+                  print("RACE COURSE GUIDE UI PASS")
                   tabs[0].click()
                   time.sleep(0.3)
 
