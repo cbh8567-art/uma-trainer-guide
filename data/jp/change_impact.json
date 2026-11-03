@@ -1,27 +1,30 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-29T17:09:12.800Z",
+  "generatedAt": "2026-11-03T02:13:37.835Z",
   "event": "push",
-  "sha": "106dcf5ac244409e3420f9c19e2dfda603ea56a6",
+  "sha": "be704018f6f65710bf9cc70f70074ec805cec991",
   "changedFiles": [
-    "data/jp/course_guides.json",
-    "data/jp/upcoming.json",
-    "data/kr/course_guides.json",
-    "data/kr/upcoming.json",
-    "index.html"
+    "data/jp/current/supports.json",
+    "data/kr/server_meta.json",
+    "data/kr/uma_ids.json",
+    "index.html",
+    "scripts/sync-jp-data.mjs",
+    "scripts/test-v6-integrity.mjs"
   ],
   "categories": {
     "app": [
       "index.html"
     ],
-    "pipeline": [],
+    "pipeline": [
+      "scripts/sync-jp-data.mjs",
+      "scripts/test-v6-integrity.mjs"
+    ],
     "jpData": [
-      "data/jp/course_guides.json",
-      "data/jp/upcoming.json"
+      "data/jp/current/supports.json"
     ],
     "krData": [
-      "data/kr/course_guides.json",
-      "data/kr/upcoming.json"
+      "data/kr/server_meta.json",
+      "data/kr/uma_ids.json"
     ],
     "commonData": [],
     "other": []

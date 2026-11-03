@@ -1,22 +1,9 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-29",
-  "generatedAt": "2026-10-29T17:09:12.844Z",
+  "updated": "2026-11-03",
+  "generatedAt": "2026-11-03T02:13:37.888Z",
   "status": "verification_required",
-  "characters": [
-    {
-      "id": 100903,
-      "name": "[陣風の花紺青]ダイワスカーレット",
-      "status": "verification_required",
-      "reason": "New JP character card is not in KR uma allowlist."
-    },
-    {
-      "id": 110802,
-      "name": "[Claret Nosferatu]ドゥラメンテ",
-      "status": "verification_required",
-      "reason": "New JP character card is not in KR uma allowlist."
-    }
-  ],
+  "characters": [],
   "supports": [],
   "supportMaxId": 30260,
   "notes": [
