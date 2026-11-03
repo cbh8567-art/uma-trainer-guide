@@ -1,35 +1,22 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-03T02:13:37.835Z",
-  "event": "push",
-  "sha": "be704018f6f65710bf9cc70f70074ec805cec991",
+  "generatedAt": "2026-11-03T05:48:45.356Z",
+  "event": "schedule",
+  "sha": "5d654a73ca6ee280549c21bd78462e345eb236ff",
   "changedFiles": [
-    "data/jp/current/supports.json",
-    "data/kr/server_meta.json",
-    "data/kr/uma_ids.json",
-    "index.html",
-    "scripts/sync-jp-data.mjs",
-    "scripts/test-v6-integrity.mjs"
+    ".github/workflows/browser-smoke.yml"
   ],
   "categories": {
-    "app": [
-      "index.html"
-    ],
-    "pipeline": [
-      "scripts/sync-jp-data.mjs",
-      "scripts/test-v6-integrity.mjs"
-    ],
-    "jpData": [
-      "data/jp/current/supports.json"
-    ],
-    "krData": [
-      "data/kr/server_meta.json",
-      "data/kr/uma_ids.json"
-    ],
+    "app": [],
+    "pipeline": [],
+    "jpData": [],
+    "krData": [],
     "commonData": [],
-    "other": []
+    "other": [
+      ".github/workflows/browser-smoke.yml"
+    ]
   },
-  "impactLevel": "high",
-  "fullTest": true,
-  "deploySmoke": true
+  "impactLevel": "low",
+  "fullTest": false,
+  "deploySmoke": false
 }
