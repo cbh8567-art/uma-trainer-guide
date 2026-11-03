@@ -24,6 +24,12 @@ ok(/<meta name="app-build" content="V7\.\d+(?:\.\d+)?">/.test(index),"V7.x app b
 ok(index.includes('id="dbLoadPanel"')&&index.includes('id="dbRetryBtn"'),"DB loading/retry UI missing");
 const meta=await read("data/kr/server_meta.json");
 ok(Number(meta.supportMaxId)===30260,"KR supportMaxId must stay 30260");
+ok(meta.recentSupportIdFloor===30256&&[30256,30257,30258,30260].every(id=>meta.verifiedRecentSupportIds?.includes(id)),"KR recent support allowlist is incomplete");
+const supportFilterSource=index.match(/function isKoreanImplementedSupport\(card\)\{[\s\S]*?\n\}/)?.[0];
+if(supportFilterSource){
+  const isKoreanImplementedSupport=new Function("KOREA_SERVER_DATA",`${supportFilterSource};return isKoreanImplementedSupport`)(meta);
+  ok(isKoreanImplementedSupport({id:30258})&&!isKoreanImplementedSupport({id:30259})&&isKoreanImplementedSupport({id:30260}),"KR cards must include released Ryan and exclude unreleased 30259");
+}else errors.push("KR support filter is missing");
 const jpSupports=await read("data/jp/current/supports.json");
 const verifiedDetails=await read("data/jp/verified_support_details.json");
 ok(index.includes("applyVerifiedSupportDetails(cards,skillMap)"),"verified JP card details must be applied during sync");
@@ -47,10 +53,11 @@ ok(index.includes("20011,20012,20041,20042"),"new JP skill icon is not bundled")
 const newSkillIcon=await fs.readFile(path.join(ROOT,"assets","skill-icons","20041.png"));
 ok(newSkillIcon.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),"new JP skill icon is not PNG");
 for(const id of [30256,30257])ok(index.includes(`${id}:`),`KR island support ${id} mapping missing`);
-ok(Number(meta.implementedUmaCards)===212,"KR implementedUmaCards must stay 212");
+ok(Number(meta.implementedUmaCards)===215,"KR implementedUmaCards must include the three recent releases");
 const uma=await read("data/kr/uma_ids.json");
-ok(Array.isArray(uma.ids)&&uma.ids.length===212,"KR uma allowlist count must stay 212");
-for(const id of [103103,104003,113301])ok(!uma.ids.includes(id),`future KR uma id ${id} must remain excluded`);
+ok(Array.isArray(uma.ids)&&uma.ids.length===215,"KR uma allowlist count must be 215");
+for(const id of [103103,104003,113301])ok(uma.ids.includes(id),`released KR uma id ${id} is missing`);
+for(const id of [100903,110802])ok(!uma.ids.includes(id),`future KR uma id ${id} must remain excluded`);
 const scenarios=await read("data/common/scenarios.json");
 for(const key of ["goshiki","tresenken","dreams","onsen","island","legends","mecha","harvest","uaf","none"])ok(Boolean(scenarios.scenarios?.[key]),`scenario ${key} missing`);
 ok(scenarios.scenarios?.goshiki?.servers?.join(",")==="jp","Goshiki must remain JP only");

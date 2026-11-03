@@ -1181,7 +1181,8 @@
       204762
     ],
     "hintLevelUpMax": 0,
-    "eventIds": []
+    "eventIds": [],
+    "reviewStatus": "official_release_only"
   },
   {
     "id": 30323,
@@ -1194,7 +1195,8 @@
     "type": "friend",
     "hintSkillIds": [],
     "hintLevelUpMax": 0,
-    "eventIds": []
+    "eventIds": [],
+    "reviewStatus": "official_release_only"
   },
   {
     "id": 30321,

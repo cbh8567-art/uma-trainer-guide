@@ -21,6 +21,17 @@ function mergePreservedSnapshotRecords(name, nextData, previousData, preserveIds
   const previousRecords = extractRecords(name, previousData);
   const nextRecords = extractRecords(name, nextData);
   const nextIds = new Set(nextRecords.map((r, i) => canonicalId(name, r, i)));
+  if (name === "supports" && Array.isArray(nextData)) {
+    const previousById = new Map(previousRecords.map((r, i) => [canonicalId(name, r, i), r]));
+    // 확인을 마친 카드의 검수 상태는 원본 DB에 없는 사이트 전용 정보입니다.
+    nextData = nextData.map((record, index) => {
+      const id = canonicalId(name, record, index);
+      const reviewStatus = previousById.get(id)?.reviewStatus;
+      return wanted.has(id) && reviewStatus && !record.reviewStatus
+        ? { ...record, reviewStatus }
+        : record;
+    });
+  }
   const preserved = previousRecords.filter((r, i) => {
     const id = canonicalId(name, r, i);
     return wanted.has(id) && !nextIds.has(id);

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-27",
+  "updated": "2026-11-03",
   "supportMaxId": 30260,
-  "supportSource": "카카오게임즈 공식 2026-10-16 무인도 시나리오 공지와 우마무스메 인벤 서포트 카드 DB",
+  "supportSource": "카카오게임즈 공식 2026-10-16 무인도 공지, 10-30 카드 영상, GameTora 한국 픽업 대조",
   "supportSourceUrl": "https://pf.kakao.com/_DzxjIb/posts",
   "latestVerifiedSupport": {
     "id": 30260,
@@ -14,9 +14,22 @@
   },
   "umaSource": "우마무스메 인벤 캐릭터 DB",
   "umaSourceUrl": "https://uma.inven.co.kr/db/chara",
-  "implementedUmaCards": 212,
+  "implementedUmaCards": 215,
   "latestVerifiedUma": {
-    "id": 111002,
-    "name": "[Twinbell Queen] 세자리오"
+    "id": 103103,
+    "name": "[Hello Hello Island] 아이네스 후진"
+  },
+  "recentSupportIdFloor": 30256,
+  "verifiedRecentSupportIds": [
+    30256,
+    30257,
+    30258,
+    30260
+  ],
+  "recentSupportSourceUrl": "https://www.youtube.com/watch?v=LkxtZoJRuuI",
+  "latestReleasedSupport": {
+    "id": 30258,
+    "name": "[눈동자에 투지를 가슴에 승리의 갈망을] 메지로 라이언",
+    "released": "2026-10-30"
   }
 }
