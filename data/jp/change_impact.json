@@ -1,25 +1,19 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T00:22:34.618Z",
+  "generatedAt": "2026-11-04T00:27:25.424Z",
   "event": "push",
-  "sha": "57cfceb6dfec172a7b146918984683dc1bc0d27d",
+  "sha": "bf190ff61f9dbf06992cfb789bbb89c67da49a21",
   "changedFiles": [
-    "data/common/scenarios.json",
-    "index.html",
-    "scripts/test-v6-integrity.mjs"
+    "index.html"
   ],
   "categories": {
     "app": [
       "index.html"
     ],
-    "pipeline": [
-      "scripts/test-v6-integrity.mjs"
-    ],
+    "pipeline": [],
     "jpData": [],
     "krData": [],
-    "commonData": [
-      "data/common/scenarios.json"
-    ],
+    "commonData": [],
     "other": []
   },
   "impactLevel": "high",
