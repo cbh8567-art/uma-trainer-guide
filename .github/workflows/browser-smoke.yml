@@ -402,6 +402,7 @@ jobs:
                       raise RuntimeError("KR/JP profile separation failed: "+str(kr_verify))
                   print("KR ISLAND V7.80 LAUNCH / UI / TUCKER / SERVER ISOLATION PASS:",kr_verify)
 
+                  WebDriverWait(d, 30).until(lambda x: x.execute_script("return runtime.ready && runtime.skills.size > 0"))
                   jp_verify = d.execute_script("""
                       setAppServer('jp');
                       const option=document.querySelector('#scenario option[value="goshiki"]');

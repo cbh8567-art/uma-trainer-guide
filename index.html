@@ -1536,7 +1536,11 @@ body.trainingMode .trainingProgressHead .sub,
    <div class="sectionHead" style="margin-top:0"><h2 style="margin:0">트레이너 가이드</h2><span class="status" id="guideCondition"></span></div>
    <div id="raceCourseGuide"></div>
    <div class="guideGrid">
-    <div class="guideBox"><h2>추천 스킬</h2><div id="guideSkills"></div></div>
+     <div class="guideBox"><h2>추천 스킬</h2><div id="guideSkills"></div></div>
+     <div class="guideBox" style="grid-column:1/-1">
+       <div class="sectionHead" style="margin-top:0"><h2 style="margin:0">시나리오 핑딱 진화스킬</h2><span class="status" id="scenarioEvolutionLimit"></span></div>
+       <div id="scenarioEvolutionSkills" class="scenarioEvoGrid"></div>
+     </div>
 
     <div class="guideBox" id="guideSupportsBox" style="grid-column:1/-1"><h2>추천 SSR</h2><div id="guideSupports"></div></div>
     <div class="guideBox" style="grid-column:1/-1">
@@ -4325,7 +4329,7 @@ function renderScenarioEvolution(cond){
     b.appendChild(help)
   }
   const arr=sc.evolutions.map(x=>{
-    const sk=findSkillByJp(x.to),status=evolutionBaseStatus(x.from),req=scenarioEvolutionRequirementStatus(x);
+    const sk=findSkillByJp(x.to),baseStatus=evolutionBaseStatus(x.from),status=state.scenario==='goshiki'?{...baseStatus,available:baseStatus.fromScenario,fromDeck:false,fromUma:false}:baseStatus,req=scenarioEvolutionRequirementStatus(x);
     return v769ScenarioEvidence({...x,sk,...status,scenarioConditionMet:req.met,scenarioConditionLabel:req.label,available:status.available&&req.met,score:scenarioEvolutionScore(x,cond)},cond)
   }).sort((a,b)=>b.decisionScore-a.decisionScore||String(a.to).localeCompare(String(b.to)));
   const recommended=arr.filter(x=>x.available&&x.score>=2.5).slice(0,sc.maxEvolution);
@@ -4343,7 +4347,7 @@ function renderScenarioEvolution(cond){
       :x.fromUma
         ?'<span class="availYes">육성 우마 레어 스킬 확인 ✓</span>'
         :x.fromScenario
-          ?'<span class="availScenario">시나리오 진행 획득 가능 ✓</span>'
+          ?'<span class="availScenario">원본 금스킬 습득 확인 ✓</span>'
           :'<span class="availNo">원본 레어 스킬 없음</span>';
     const star=Math.max(1,Math.round(x.score));
     const rankBadge=rankNo===1?'<span class="v769PickBadge">1순위</span>':rankNo===2?'<span class="v769PickBadge second">2순위</span>':'';
@@ -4352,7 +4356,7 @@ function renderScenarioEvolution(cond){
         <div class="jp">${esc(x.to)} <span class="pinkBadge">시나리오 핑크</span></div>
         <div class="kr">${x.sk?esc(x.sk.kr||koSkill(x.to)):esc(koSkill(x.to))}</div>
         <div class="evoTags">${x.sk?evolutionTagHtml(x.sk):evolutionTagHtml({tags:{grounds:x.grounds||[],distances:x.distances||[],styles:x.styles||[]}})}</div>
-        <div class="scenarioFrom">${esc(x.from)} → 진화 · ${avail}${x.requirementText?` · 조건: ${esc(x.requirementText)}`:''}${x.note?` · ${esc(x.note)}`:''}</div>
+        <div class="scenarioFrom">${esc(x.from)} → 진화 · ${avail}${x.requirementText?` · 조건: ${esc(x.requirementText)}`:''}${!x.scenarioConditionMet?` · 현재: ${esc(x.scenarioConditionLabel)}`:''}${x.note?` · ${esc(x.note)}`:''}</div>
         <div class="v769Reason">${esc(x.decisionReasons.join(' · '))}</div>
       </div>
       <div class="evoScore"><div class="evoStars">${'★'.repeat(star)}${'☆'.repeat(5-star)}</div>${rankBadge}</div>`;
@@ -4630,7 +4634,7 @@ function evolutionContextKey(){
 function scenarioEvolutionCandidates(cond){
  const sc=SCENARIOS[state.scenario]||SCENARIOS.none;
  const arr=(sc.evolutions||[]).map(x=>{
-   const sk=findSkillByJp(x.to),status=evolutionBaseStatus(x.from),req=scenarioEvolutionRequirementStatus(x);
+    const sk=findSkillByJp(x.to),baseStatus=evolutionBaseStatus(x.from),status=state.scenario==='goshiki'?{...baseStatus,available:baseStatus.fromScenario,fromDeck:false,fromUma:false}:baseStatus,req=scenarioEvolutionRequirementStatus(x);
    return {...x,sk,...status,scenarioConditionMet:req.met,scenarioConditionLabel:req.label,available:status.available&&req.met,score:scenarioEvolutionScore(x,cond)}
  }).sort((a,b)=>(b.score+(b.available?.25:0))-(a.score+(a.available?.25:0)));
  return {sc,arr}
@@ -4725,7 +4729,7 @@ function renderTrainingFinishModal(){
  for(const x of scArr){
    const selected=finishDraft.scenario.includes(x.to),recommended=x.score>=2.5&&x.available;
    const row=document.createElement('label');row.className='finishOption'+(selected?' selected':'')+(recommended?' recommended':'')+(!x.available?' disabled':'');
-   const star=Math.max(1,Math.round(x.score)),baseAvail=x.fromDeck?'현재 선택한 레어 스킬 확인 ✓':x.fromUma?'육성 우마 레어 스킬 확인 ✓':x.fromScenario?'시나리오 진행 획득 가능 ✓':'원본 레어 스킬 없음';
+    const star=Math.max(1,Math.round(x.score)),baseAvail=x.fromDeck?'현재 선택한 레어 스킬 확인 ✓':x.fromUma?'육성 우마 레어 스킬 확인 ✓':x.fromScenario?'원본 금스킬 습득 확인 ✓':'원본 레어 스킬 없음';
    const avail=!x.scenarioConditionMet?x.scenarioConditionLabel:baseAvail;
    const lockDetail=scenarioEvolutionLockDetail(x);
    row.innerHTML=`<input type="checkbox" ${selected?'checked':''} ${x.available?'':'disabled'}>${x.sk?skillIcon(x.sk):'<span class="skillFallback">進</span>'}<div><div class="finishName">${esc(x.to)} <span class="pinkBadge">시나리오 핑크</span>${recommended?' <span class="scenarioRec">추천</span>':''}${!x.available?' <span class="finishLocked">선택 불가</span>':''}</div><div class="finishSub">${esc(x.from)} → 진화 · ${avail}</div><div class="evoTags">${x.sk?evolutionTagHtml(x.sk):evolutionTagHtml({tags:{grounds:x.grounds||[],distances:x.distances||[],styles:x.styles||[]}})}${x.requirementText?`<span class="tag">진화 조건: ${esc(x.requirementText)}</span>`:''}</div>${finishLockDetailHtml(lockDetail)}</div><div class="finishRight"><div class="evoStars">${'★'.repeat(star)}${'☆'.repeat(5-star)}</div>${x.available?(x.score>=4?'추천':'현재 조건 검토'):'조건 확인'}</div>`;
@@ -5338,7 +5342,7 @@ function renderRaceCourseGuide(race=getGuideRace()){
   (guide?.tips?.length?'<div class="raceCourseTips">'+guide.tips.map(x=>'<div>✓ '+esc(x)+'</div>').join('')+'</div>':'<div class="sub">이 레이스의 세부 구간 공략은 검증된 자료가 추가되면 표시합니다.</div>')+
   (race.greenSkills?.length?'<div class="raceCourseGreens"><b>조건에 맞는 녹색 스킬</b><div>'+race.greenSkills.map(x=>'<span>'+esc(koSkill(x))+'</span>').join('')+'</div></div>':'')+'</div>'
 }
-function renderGuide(){renderGuideServerTabs();const race=getGuideRace();renderMastersGuideDetail(race);renderRaceCourseGuide(race);if(!race){$('#guideCondition').textContent='등록된 레이스 없음';return}const cond=raceCond(race);renderGuideUmaTier();renderTrainingFinishSummary();$('#guideCondition').textContent=`${state.guideServer==='kr'?'한국':'일본'} · ${race.eventKr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;const gs=$('#guideSkills');gs.innerHTML='';const u=selectedUma();let items=[];if(u)items=awakeningSkills(u).filter(sk=>Number(sk.rarity)===2).map(sk=>({...sk,source:`${u.krName} 각성 Lv${sk.awakening}`}));for(const n of race.greenSkills||[]){const dbSkill=skillFromName(runtime.skills,n);items.push(dbSkill?{...dbSkill,source:'코스 대응 녹색 스킬',force:3}:{id:'green_'+n,jp:n,kr:koSkill(n),iconId:null,tags:{grounds:[],distances:[],styles:[]},source:'코스 대응 녹색 스킬 · DB 미연결',force:3})}items.sort((a,b)=>(b.force||skillConditionScore(b,cond))-(a.force||skillConditionScore(a,cond)));for(const s of items.slice(0,14)){const sc=s.force||skillConditionScore(s,cond),x=document.createElement('div');x.className='guideSkill';x.innerHTML=`${skillIcon(s)}<div><div class="jp">${skillDisplayNameHtml(s)}</div><div class="sub">${esc(s.source||'')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`;gs.appendChild(x)}if(!items.length)gs.innerHTML='<div class="note">육성 우마무스메를 선택하면 각성 스킬과 레이스 조건을 비교합니다.</div>';const ss=$('#guideSupports');ss.innerHTML='';if(!runtime.ready){ss.innerHTML='<div class="note">SSR DB 동기화가 필요합니다.</div>';return}const supportRows=supportRecommend(cond);if(state.guideServer==='kr'&&!supportRows.length){ss.innerHTML='<div class="note">현재 동기화 DB에 Inven 기준 한국 서버 구현 SSR이 없습니다. 온라인 DB를 다시 동기화해 주세요.</div>';return}for(const {c,score} of supportRows){const owned=state.owned.map(String).includes(String(c.id)),x=document.createElement('div');x.className='card'+supportRecommendationClass(c);x.innerHTML=`${c.image?`<img src="${esc(c.image)}" loading="lazy" data-card-type="${esc(c.type)}" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">`:''}<div><div class="cardName">${cardDisplayNameHtml(c)}</div><div class="cardJp">${esc(c.title||'')}</div><div class="stars">${scoreStars(score)} <span class="status">${state.guideServer==='kr'?'한국 구현 · ':''}${owned?'보유 '+(Number(state.lb[String(c.id)]??0)===4?'풀돌':(Number(state.lb[String(c.id)]??0)+'돌')):'미보유 · 풀돌 기준'}</span></div><div class="actions"><button class="mini" data-info>상세</button>${owned?'<button class="mini" data-slot>덱 슬롯</button>':''}</div></div>`;x.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);if(owned)x.querySelector('[data-slot]').onclick=()=>openSlotPicker(c.id);ss.appendChild(x)}}
+function renderGuide(){renderGuideServerTabs();const race=getGuideRace();renderMastersGuideDetail(race);renderRaceCourseGuide(race);if(!race){$('#guideCondition').textContent='등록된 레이스 없음';return}const cond=raceCond(race);renderGuideUmaTier();renderTrainingFinishSummary();renderScenarioEvolution(cond);$('#guideCondition').textContent=`${state.guideServer==='kr'?'한국':'일본'} · ${race.eventKr} · ${groundLabel[cond.ground]} / ${distLabel[cond.distance]} / ${styleLabel[cond.style]}`;const gs=$('#guideSkills');gs.innerHTML='';const u=selectedUma();let items=[];if(u)items=awakeningSkills(u).filter(sk=>Number(sk.rarity)===2).map(sk=>({...sk,source:`${u.krName} 각성 Lv${sk.awakening}`}));for(const n of race.greenSkills||[]){const dbSkill=skillFromName(runtime.skills,n);items.push(dbSkill?{...dbSkill,source:'코스 대응 녹색 스킬',force:3}:{id:'green_'+n,jp:n,kr:koSkill(n),iconId:null,tags:{grounds:[],distances:[],styles:[]},source:'코스 대응 녹색 스킬 · DB 미연결',force:3})}items.sort((a,b)=>(b.force||skillConditionScore(b,cond))-(a.force||skillConditionScore(a,cond)));for(const s of items.slice(0,14)){const sc=s.force||skillConditionScore(s,cond),x=document.createElement('div');x.className='guideSkill';x.innerHTML=`${skillIcon(s)}<div><div class="jp">${skillDisplayNameHtml(s)}</div><div class="sub">${esc(s.source||'')}</div></div><span class="${sc?'stars':'dim'}">${sc===3?'★★★':sc===2?'★★':'—'}</span>`;gs.appendChild(x)}if(!items.length)gs.innerHTML='<div class="note">육성 우마무스메를 선택하면 각성 스킬과 레이스 조건을 비교합니다.</div>';const ss=$('#guideSupports');ss.innerHTML='';if(!runtime.ready){ss.innerHTML='<div class="note">SSR DB 동기화가 필요합니다.</div>';return}const supportRows=supportRecommend(cond);if(state.guideServer==='kr'&&!supportRows.length){ss.innerHTML='<div class="note">현재 동기화 DB에 Inven 기준 한국 서버 구현 SSR이 없습니다. 온라인 DB를 다시 동기화해 주세요.</div>';return}for(const {c,score} of supportRows){const owned=state.owned.map(String).includes(String(c.id)),x=document.createElement('div');x.className='card'+supportRecommendationClass(c);x.innerHTML=`${c.image?`<img src="${esc(c.image)}" loading="lazy" data-card-type="${esc(c.type)}" data-fallbacks="${esc(supportImageFallbackAttr(c))}" onerror="cycleSupportImage(this)">`:''}<div><div class="cardName">${cardDisplayNameHtml(c)}</div><div class="cardJp">${esc(c.title||'')}</div><div class="stars">${scoreStars(score)} <span class="status">${state.guideServer==='kr'?'한국 구현 · ':''}${owned?'보유 '+(Number(state.lb[String(c.id)]??0)===4?'풀돌':(Number(state.lb[String(c.id)]??0)+'돌')):'미보유 · 풀돌 기준'}</span></div><div class="actions"><button class="mini" data-info>상세</button>${owned?'<button class="mini" data-slot>덱 슬롯</button>':''}</div></div>`;x.querySelector('[data-info]').onclick=()=>openCardInfo(c.id);if(owned)x.querySelector('[data-slot]').onclick=()=>openSlotPicker(c.id);ss.appendChild(x)}}
 function renderTier(){
  const g=$('#tierGround').value,d=$('#tierDistance').value,s=$('#tierStyle').value,q=norm($('#tierSearch').value),u=selectedUma(),b=$('#tierGrid');b.innerHTML='';
  const kr=state.guideServer==='kr';
