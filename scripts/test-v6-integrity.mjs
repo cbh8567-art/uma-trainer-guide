@@ -64,6 +64,19 @@ ok(scenarios.scenarios?.goshiki?.servers?.join(",")==="jp","Goshiki must remain 
 ok(scenarios.scenarios?.goshiki?.performances?.length===5,"Goshiki needs all five in-game performance icons");
 ok(scenarios.scenarios?.goshiki?.runGuide?.milestones?.map(step=>step.level).join(",")==="3,5,6","Goshiki in-run guide milestones are missing");
 ok(index.includes("오식 준대제 · 육성 중 공략")&&index.includes("서포트 종류 "),"Goshiki in-run guide UI is missing");
+const guidePlans=scenarios.scenarios?.goshiki?.runGuide?.teachingPlans;
+const inlinePlansMatch=index.match(/teachingPlans:(\{[^\r\n]+\})/);
+const inlinePlans=inlinePlansMatch?JSON.parse(inlinePlansMatch[1]):null;
+ok(Boolean(guidePlans&&inlinePlans)&&JSON.stringify(guidePlans?.profiles)===JSON.stringify(inlinePlans?.profiles),"Goshiki main and fallback teaching plans differ");
+for(const profile of ["speed_short","speed_long","wit_short","wit_long"]){
+  const stages=guidePlans?.profiles?.[profile];
+  ok(stages?.length===6&&stages.every(choices=>choices.length===5&&choices.every(Boolean)),`Goshiki ${profile} must cover six choices for all five performances`);
+  const validTeachings=new Set(["絆","助力","得意率","体力","ヒント","特化","研鑽","協力","不屈","両道"]);
+  for(const choice of stages?.flat(1)||[])for(const teaching of choice.split("+"))ok(validTeachings.has(teaching),`Goshiki ${profile} has an unknown teaching: ${teaching}`);
+}
+ok(guidePlans?.profiles?.speed_short?.[2]?.join("|")==="絆+研鑽|助力|ヒント|体力|得意率+特化","Goshiki speed short third teaching stage differs from checked source");
+ok(guidePlans?.profiles?.speed_long?.[5]?.join("|")==="体力+協力|ヒント+両道|絆+研鑽|助力+不屈|得意率+特化","Goshiki speed long sixth teaching stage differs from checked source");
+ok(index.includes("합숙 중에는 연목 Lv이 오르지")&&index.includes("추가 연습")&&index.includes("단거리·마일은 같은 추천표"),"Goshiki practical guidance is missing");
 for(const performance of scenarios.scenarios?.goshiki?.performances||[]){
   ok(/^\.\/assets\/scenario\/goshiki\/utx_ico_festa_act_0[1-5]\.png$/.test(performance.icon),`invalid Goshiki icon path: ${performance.jp}`);
   try{const icon=await fs.readFile(path.join(ROOT,performance.icon));ok(icon.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),`Goshiki icon is not PNG: ${performance.jp}`)}
