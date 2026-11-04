@@ -64,6 +64,13 @@ ok(scenarios.scenarios?.goshiki?.servers?.join(",")==="jp","Goshiki must remain 
 ok(scenarios.scenarios?.goshiki?.performances?.length===5,"Goshiki needs all five in-game performance icons");
 ok(scenarios.scenarios?.goshiki?.runGuide?.milestones?.map(step=>step.level).join(",")==="3,5,6","Goshiki in-run guide milestones are missing");
 ok(index.includes("오식 준대제 · 육성 중 공략")&&index.includes("서포트 종류 "),"Goshiki in-run guide UI is missing");
+const goshiki=scenarios.scenarios?.goshiki;
+const goshikiPairs=goshiki?.evolutions?.map(x=>`${x.from}>${x.to}`)||[];
+ok(goshiki?.skillDataPending===false&&goshikiPairs.length===6,"Goshiki scenario pink skills must be active");
+ok(goshiki?.progressChecks?.length===12&&goshiki.progressChecks.every(x=>x.default===false),"Goshiki result checks must start unconfirmed");
+ok(goshikiPairs.includes("全身全霊>捧ぐる願い")&&goshikiPairs.includes("気骨稜稜>常磐なる誓い")&&goshikiPairs.includes("燃ゆる魂>祈りの篝火"),"Goshiki skill pairs are incomplete");
+ok(goshiki?.evolutions?.filter(x=>x.scenarioRequirement==="goshikiAllBig").length===4&&goshiki?.evolutions?.filter(x=>["goshikiShort2","goshikiMileOrMid2"].includes(x.scenarioRequirement)).length===2,"Goshiki evolution requirements are incomplete");
+ok(index.includes("function scenarioEvolutionRequirementStatus(x)")&&index.includes("goshikiMileOrMid2"),"Goshiki condition checker is missing");
 const guidePlans=scenarios.scenarios?.goshiki?.runGuide?.teachingPlans;
 const inlinePlansMatch=index.match(/teachingPlans:(\{[^\r\n]+\})/);
 const inlinePlans=inlinePlansMatch?JSON.parse(inlinePlansMatch[1]):null;

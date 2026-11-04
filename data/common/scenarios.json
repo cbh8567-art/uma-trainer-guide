@@ -15,7 +15,7 @@
       ],
       "status": "released",
       "officialReading": "とも、ふみほどき　ごしきしゅんたいさい",
-      "skillDataPending": true,
+      "skillDataPending": false,
       "statCapsNote": "스탯 상한은 출시 후 게임 자료와 대조했습니다. 실제 게임 화면과 다르면 스탯 상한 설정에서 직접 바꿀 수 있습니다.",
       "statCapsSourceUrl": "https://gametora.com/umamusume/shuntaisai",
       "performances": [
@@ -418,8 +418,170 @@
           "text": "진척 발표회 뒤에는 모은 가르침을 전성해 다음 단계의 육성 효과로 이어갑니다."
         }
       ],
-      "scenarioAcquiredRareSkills": [],
-      "evolutions": []
+      "scenarioAcquiredRareSkills": [
+        {
+          "name": "全身全霊",
+          "source": "GameWith 2026-11-03",
+          "acquisition": "육성 중 원본 금스킬 실제 습득 확인",
+          "verified": true,
+          "progressKey": "base1"
+        },
+        {
+          "name": "神速",
+          "source": "GameWith 2026-11-03",
+          "acquisition": "육성 중 원본 금스킬 실제 습득 확인",
+          "verified": true,
+          "progressKey": "base2"
+        },
+        {
+          "name": "ネバーギブアップ",
+          "source": "GameWith 2026-11-03",
+          "acquisition": "육성 중 원본 금스킬 실제 습득 확인",
+          "verified": true,
+          "progressKey": "base3"
+        },
+        {
+          "name": "気骨稜稜",
+          "source": "GameWith 2026-11-03",
+          "acquisition": "육성 중 원본 금스킬 실제 습득 확인",
+          "verified": true,
+          "progressKey": "base4"
+        },
+        {
+          "name": "英俊豪傑",
+          "source": "GameWith 2026-11-03",
+          "acquisition": "육성 중 원본 금스킬 실제 습득 확인",
+          "verified": true,
+          "progressKey": "base5"
+        },
+        {
+          "name": "燃ゆる魂",
+          "source": "GameWith 2026-11-03",
+          "acquisition": "육성 중 원본 금스킬 실제 습득 확인",
+          "verified": true,
+          "progressKey": "base6"
+        }
+      ],
+      "evolutions": [
+        {
+          "from": "全身全霊",
+          "to": "捧ぐる願い",
+          "scenarioRequirement": "goshikiAllBig",
+          "requirementText": "두 발표회 + 본제 모두 대성공"
+        },
+        {
+          "from": "神速",
+          "to": "急之舞",
+          "scenarioRequirement": "goshikiAllBig",
+          "requirementText": "두 발표회 + 본제 모두 대성공"
+        },
+        {
+          "from": "ネバーギブアップ",
+          "to": "満願成就",
+          "scenarioRequirement": "goshikiAllBig",
+          "requirementText": "두 발표회 + 본제 모두 대성공"
+        },
+        {
+          "from": "気骨稜稜",
+          "to": "常磐なる誓い",
+          "distances": [
+            "short"
+          ],
+          "scenarioRequirement": "goshikiShort2",
+          "requirementText": "본제 대성공 + 단거리 스킬 2개 실제 습득"
+        },
+        {
+          "from": "英俊豪傑",
+          "to": "吉兆の駆け手",
+          "scenarioRequirement": "goshikiAllBig",
+          "requirementText": "두 발표회 + 본제 모두 대성공"
+        },
+        {
+          "from": "燃ゆる魂",
+          "to": "祈りの篝火",
+          "distances": [
+            "mile",
+            "mid"
+          ],
+          "scenarioRequirement": "goshikiMileOrMid2",
+          "requirementText": "본제 대성공 + 마일 또는 중거리 스킬 2개 실제 습득"
+        }
+      ],
+      "evolutionSourceUrl": "https://gamewith.jp/uma-musume/article/show/437872",
+      "progressChecks": [
+        {
+          "id": "juniorBig",
+          "label": "주니어 12월 발표회 · 대성공",
+          "sub": "인게임 결과를 확인한 뒤 체크",
+          "default": false
+        },
+        {
+          "id": "classicBig",
+          "label": "클래식 12월 발표회 · 대성공",
+          "sub": "인게임 결과를 확인한 뒤 체크",
+          "default": false
+        },
+        {
+          "id": "festivalBig",
+          "label": "시니어 10월 본제 · 대성공",
+          "sub": "인게임 결과를 확인한 뒤 체크",
+          "default": false
+        },
+        {
+          "id": "shortSkills2",
+          "label": "단거리 스킬 2개 이상 실제 습득",
+          "sub": "常磐なる誓い 조건 · 힌트만 받은 경우 체크하지 않음",
+          "default": false
+        },
+        {
+          "id": "mileSkills2",
+          "label": "마일 스킬 2개 이상 실제 습득",
+          "sub": "祈りの篝火 조건 · 마일 또는 중거리 중 한쪽 2개",
+          "default": false
+        },
+        {
+          "id": "midSkills2",
+          "label": "중거리 스킬 2개 이상 실제 습득",
+          "sub": "祈りの篝火 조건 · 마일 또는 중거리 중 한쪽 2개",
+          "default": false
+        },
+        {
+          "id": "base1",
+          "label": "원본 금스킬 실제 습득 · 全身全霊",
+          "sub": "각성·서포트·시나리오 힌트만 받은 경우 체크하지 않음",
+          "default": false
+        },
+        {
+          "id": "base2",
+          "label": "원본 금스킬 실제 습득 · 神速",
+          "sub": "각성·서포트·시나리오 힌트만 받은 경우 체크하지 않음",
+          "default": false
+        },
+        {
+          "id": "base3",
+          "label": "원본 금스킬 실제 습득 · ネバーギブアップ",
+          "sub": "각성·서포트·시나리오 힌트만 받은 경우 체크하지 않음",
+          "default": false
+        },
+        {
+          "id": "base4",
+          "label": "원본 금스킬 실제 습득 · 気骨稜稜",
+          "sub": "각성·서포트·시나리오 힌트만 받은 경우 체크하지 않음",
+          "default": false
+        },
+        {
+          "id": "base5",
+          "label": "원본 금스킬 실제 습득 · 英俊豪傑",
+          "sub": "각성·서포트·시나리오 힌트만 받은 경우 체크하지 않음",
+          "default": false
+        },
+        {
+          "id": "base6",
+          "label": "원본 금스킬 실제 습득 · 燃ゆる魂",
+          "sub": "각성·서포트·시나리오 힌트만 받은 경우 체크하지 않음",
+          "default": false
+        }
+      ]
     },
     "tresenken": {
       "name": "らっしゃい！トレセン軒！",
