@@ -7,7 +7,7 @@
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/characters.json",
       "sourceSha": "dd6b0ecc964e10ffd8dbf31d9032cbdff0f07162",
       "status": "auto",
-      "fetchedAt": "2026-11-04T00:55:47.635Z",
+      "fetchedAt": "2026-11-04T01:05:18.074Z",
       "recordCount": 272,
       "contentSha256": "06e42227d037e88ba3f7dbdbcd5723426959f6401889290edfb668f4c17d37e7"
     },
@@ -15,7 +15,7 @@
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
       "sourceSha": "55209d01aec57646f07831c0a130e94ae44ba96f",
       "status": "auto",
-      "fetchedAt": "2026-11-04T00:55:47.635Z",
+      "fetchedAt": "2026-11-04T01:05:18.074Z",
       "recordCount": 47,
       "contentSha256": "0b27bf1ca88ca90d598313352e55cad8333111a047a09ee44bf47ca7325a672e"
     },
@@ -23,7 +23,7 @@
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/skills.json",
       "sourceSha": "451d7fbd83f18e4517706c6da748d42c6f788536",
       "status": "auto",
-      "fetchedAt": "2026-11-04T00:55:47.635Z",
+      "fetchedAt": "2026-11-04T01:05:18.074Z",
       "recordCount": 2223,
       "contentSha256": "ae5666b9bddc2879a3e070e1c5d930ccc26d7be1e247d3b96baaa2263e5947db"
     },
@@ -36,7 +36,7 @@
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/courses.json",
       "sourceSha": "c0cb761d102a0642b0e42c2e13e40ba6ae09e0e1",
       "status": "auto",
-      "fetchedAt": "2026-11-04T00:55:47.635Z",
+      "fetchedAt": "2026-11-04T01:05:18.074Z",
       "recordCount": 140,
       "contentSha256": "ce827fc0e1ce864615de06ee026fcd23ba521d98011ba41cca993450ff308082"
     },
@@ -52,17 +52,17 @@
     "catalog": {
       "source": "https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json",
       "status": "auto",
-      "fetchedAt": "2026-11-04T00:55:47.635Z",
+      "fetchedAt": "2026-11-04T01:05:18.074Z",
       "recordCount": 566,
       "contentSha256": "41983320be6dede195f76d42c50cba02e483b6c2baec6fa8a1ebbc17652ccc3b"
     },
     "events": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/events.json",
       "status": "auto",
-      "fetchedAt": "2026-11-04T00:55:47.635Z",
+      "fetchedAt": "2026-11-04T01:05:18.074Z",
       "recordCount": 133,
       "contentSha256": "ac1ca7409b41d318a985dfd684183a17615b2987dcbd56d8debf9b785c8c7187"
     }
   },
-  "lastSuccessfulSync": "2026-11-04T00:55:47.635Z"
+  "lastSuccessfulSync": "2026-11-04T01:05:18.074Z"
 }
