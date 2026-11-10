@@ -1,31 +1,63 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-11-04",
-  "checkedAt": "2026-11-04T01:05:18.074Z",
+  "updated": "2026-11-10",
+  "checkedAt": "2026-11-10T06:28:46.670Z",
   "status": "pass",
   "summary": {
     "added": 0,
     "removed": 0,
-    "modified": 0
+    "modified": 6
   },
   "collections": {
     "catalog": {
       "count": 566,
       "previousCount": 566,
-      "changed": false,
+      "changed": true,
       "status": "pass",
       "changes": {
         "addedCount": 0,
         "removedCount": 0,
-        "modifiedCount": 0,
+        "modifiedCount": 6,
         "addedIds": [],
         "removedIds": [],
-        "modifiedIds": []
+        "modifiedIds": [
+          "10087",
+          "20055",
+          "30130",
+          "30131",
+          "30132",
+          "30133"
+        ]
       },
       "details": {
         "added": [],
         "removed": [],
-        "modified": []
+        "modified": [
+          {
+            "id": "10087",
+            "name": "アストンマーチャン (R)"
+          },
+          {
+            "id": "20055",
+            "name": "アストンマーチャン (SR)"
+          },
+          {
+            "id": "30130",
+            "name": "ケイエスミラクル (SSR)"
+          },
+          {
+            "id": "30131",
+            "name": "マーベラスサンデー (SSR)"
+          },
+          {
+            "id": "30132",
+            "name": "ビコーペガサス (SSR)"
+          },
+          {
+            "id": "30133",
+            "name": "ヒシアケボノ (SSR)"
+          }
+        ]
       }
     },
     "supports": {
