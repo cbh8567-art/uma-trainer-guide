@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-11-10",
-  "generatedAt": "2026-11-10T06:28:46.670Z",
-  "openCount": 94,
+  "updated": "2026-11-16",
+  "generatedAt": "2026-11-16T10:04:38.225Z",
+  "openCount": 96,
   "items": [
     {
       "key": "supports:removed:30321",
@@ -50,6 +50,30 @@
       "status": "open",
       "firstSeenAt": "2026-10-02T00:37:28.902Z",
       "lastSeenAt": "2026-10-02T00:37:28.902Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:added:20102",
+      "collection": "catalog",
+      "changeType": "added",
+      "id": "20102",
+      "name": "ステイゴールド (SR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-11-16T10:04:38.225Z",
+      "lastSeenAt": "2026-11-16T10:04:38.225Z",
+      "note": ""
+    },
+    {
+      "key": "catalog:added:30324",
+      "collection": "catalog",
+      "changeType": "added",
+      "id": "30324",
+      "name": "ノーリーズン (SSR)",
+      "priority": "high",
+      "status": "open",
+      "firstSeenAt": "2026-11-16T10:04:38.225Z",
+      "lastSeenAt": "2026-11-16T10:04:38.225Z",
       "note": ""
     },
     {

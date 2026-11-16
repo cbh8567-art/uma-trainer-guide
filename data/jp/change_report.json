@@ -1,63 +1,43 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-11-10",
-  "checkedAt": "2026-11-10T06:28:46.670Z",
+  "updated": "2026-11-16",
+  "checkedAt": "2026-11-16T10:04:38.225Z",
   "status": "pass",
   "summary": {
-    "added": 0,
+    "added": 2,
     "removed": 0,
-    "modified": 6
+    "modified": 0
   },
   "collections": {
     "catalog": {
-      "count": 566,
+      "count": 568,
       "previousCount": 566,
       "changed": true,
       "status": "pass",
       "changes": {
-        "addedCount": 0,
+        "addedCount": 2,
         "removedCount": 0,
-        "modifiedCount": 6,
-        "addedIds": [],
+        "modifiedCount": 0,
+        "addedIds": [
+          "20102",
+          "30324"
+        ],
         "removedIds": [],
-        "modifiedIds": [
-          "10087",
-          "20055",
-          "30130",
-          "30131",
-          "30132",
-          "30133"
-        ]
+        "modifiedIds": []
       },
       "details": {
-        "added": [],
-        "removed": [],
-        "modified": [
+        "added": [
           {
-            "id": "10087",
-            "name": "アストンマーチャン (R)"
+            "id": "20102",
+            "name": "ステイゴールド (SR)"
           },
           {
-            "id": "20055",
-            "name": "アストンマーチャン (SR)"
-          },
-          {
-            "id": "30130",
-            "name": "ケイエスミラクル (SSR)"
-          },
-          {
-            "id": "30131",
-            "name": "マーベラスサンデー (SSR)"
-          },
-          {
-            "id": "30132",
-            "name": "ビコーペガサス (SSR)"
-          },
-          {
-            "id": "30133",
-            "name": "ヒシアケボノ (SSR)"
+            "id": "30324",
+            "name": "ノーリーズン (SSR)"
           }
-        ]
+        ],
+        "removed": [],
+        "modified": []
       }
     },
     "supports": {

@@ -1,17 +1,13 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-11-10",
-  "generatedAt": "2026-11-10T06:28:46.670Z",
+  "updated": "2026-11-16",
+  "generatedAt": "2026-11-16T10:04:38.225Z",
   "collections": {
     "catalog": {
-      "count": 566,
+      "count": 568,
       "minId": 10001,
-      "maxId": 30323,
+      "maxId": 30324,
       "sampleLatest": [
-        {
-          "id": "30319",
-          "name": "ナリタブライアン (SSR)"
-        },
         {
           "id": "30320",
           "name": "アドマイヤグルーヴ (SSR)"
@@ -27,6 +23,10 @@
         {
           "id": "30323",
           "name": "吾妻 (SSR)"
+        },
+        {
+          "id": "30324",
+          "name": "ノーリーズン (SSR)"
         }
       ]
     },

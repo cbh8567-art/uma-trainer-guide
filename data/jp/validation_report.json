@@ -1,64 +1,44 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-11-10",
+  "updated": "2026-11-16",
   "status": "pass",
-  "checkedAt": "2026-11-10T06:28:46.670Z",
+  "checkedAt": "2026-11-16T10:04:38.225Z",
   "fatal": [],
   "warnings": [],
   "collections": {
     "catalog": {
       "source": "https://raw.githubusercontent.com/daftuyda/UmaTools/main/public/assets/support_hints.json",
-      "count": 566,
-      "contentSha256": "d5727adfd2331bdcd5a3eb5e33a568f5042acfb2985ea35736b2684f3add3d88",
+      "count": 568,
+      "contentSha256": "415452450c39dd469636cf3dbfafa0c60ff7296756eb7f931027105e1b9714ac",
       "duplicateIds": [],
       "status": "pass",
       "previousCount": 566,
       "removedCount": 0,
       "removedRatio": 0,
       "changes": {
-        "addedCount": 0,
+        "addedCount": 2,
         "removedCount": 0,
-        "modifiedCount": 6,
-        "addedIds": [],
+        "modifiedCount": 0,
+        "addedIds": [
+          "20102",
+          "30324"
+        ],
         "removedIds": [],
-        "modifiedIds": [
-          "10087",
-          "20055",
-          "30130",
-          "30131",
-          "30132",
-          "30133"
-        ]
+        "modifiedIds": []
       },
       "changeDetails": {
-        "added": [],
-        "removed": [],
-        "modified": [
+        "added": [
           {
-            "id": "10087",
-            "name": "アストンマーチャン (R)"
+            "id": "20102",
+            "name": "ステイゴールド (SR)"
           },
           {
-            "id": "20055",
-            "name": "アストンマーチャン (SR)"
-          },
-          {
-            "id": "30130",
-            "name": "ケイエスミラクル (SSR)"
-          },
-          {
-            "id": "30131",
-            "name": "マーベラスサンデー (SSR)"
-          },
-          {
-            "id": "30132",
-            "name": "ビコーペガサス (SSR)"
-          },
-          {
-            "id": "30133",
-            "name": "ヒシアケボノ (SSR)"
+            "id": "30324",
+            "name": "ノーリーズン (SSR)"
           }
-        ]
+        ],
+        "removed": [],
+        "modified": []
       },
       "changed": true
     },
@@ -190,8 +170,8 @@
     "missingSupportHintSkillIds": []
   },
   "changeTotals": {
-    "added": 0,
+    "added": 2,
     "removed": 0,
-    "modified": 6
+    "modified": 0
   }
 }
