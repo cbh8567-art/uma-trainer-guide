@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "version": 3,
-  "updated": "2026-10-30",
-  "source": "Game8/GameWith 2026-09-23 snapshot",
-  "sourceUrl": "https://game8.jp/umamusume/811062",
+  "version": 4,
+  "updated": "2026-11-16",
+  "source": "Cygames 2026-09-30 / Game8 2026-10-24 / GameWith 2026-11-16",
+  "sourceUrl": "https://umamusume.jp/news/detail?id=3483",
   "races": [
     {
       "id": "loh_2026_11_long",
       "status": "예정",
-      "date": "2026-11-19~",
+      "date": "2026-11-22~",
       "event": "リーグ オブ ヒーローズ",
       "eventKr": "리그 오브 히어로즈",
       "place": "京都",
@@ -28,7 +28,9 @@
         "非根幹距離○"
       ],
       "course": "outer",
-      "sourceUrl": "https://gamewith.jp/uma-musume/article/show/574934"
+      "sourceUrl": "https://game8.jp/umamusume/836271",
+      "teamFormationStart": "2026-11-19T12:00:00+09:00",
+      "source": "2026-10-24 ぱかライブTV' #8 / GameWith"
     },
     {
       "id": "cm_2026_09_mile",
@@ -113,17 +115,27 @@
       "date": "2026-12 하순",
       "event": "チャンピオンズミーティング LONG",
       "eventKr": "챔피언스 미팅 LONG",
-      "place": "",
-      "placeKr": "미정",
+      "place": "中山",
+      "placeKr": "나카야마",
       "ground": "turf",
       "distance": "long",
-      "meters": null,
-      "turn": "",
-      "season": "",
-      "weather": "",
-      "condition": "",
-      "time": "",
-      "greenSkills": []
+      "meters": 2500,
+      "turn": "right",
+      "season": "winter",
+      "weather": "sunny",
+      "condition": "good",
+      "time": "day",
+      "greenSkills": [
+        "中山レース場○",
+        "右回り○",
+        "冬ウマ娘○",
+        "晴れの日○",
+        "良バ場○",
+        "非根幹距離○"
+      ],
+      "course": "inner",
+      "source": "Cygames 2026-09-30 / GameWith 2026-11-15",
+      "sourceUrl": "https://gamewith.jp/uma-musume/article/show/578925"
     },
     {
       "id": "cm_2027_01_classic",
@@ -131,17 +143,26 @@
       "date": "2027-01 하순",
       "event": "チャンピオンズミーティング CLASSIC",
       "eventKr": "챔피언스 미팅 CLASSIC",
-      "place": "",
-      "placeKr": "미정",
+      "place": "東京",
+      "placeKr": "도쿄",
       "ground": "turf",
       "distance": "mid",
-      "meters": null,
-      "turn": "",
-      "season": "",
-      "weather": "",
-      "condition": "",
-      "time": "",
-      "greenSkills": []
+      "meters": 2400,
+      "turn": "left",
+      "season": "winter",
+      "weather": "sunny",
+      "condition": "good",
+      "time": "day",
+      "greenSkills": [
+        "東京レース場○",
+        "左回り○",
+        "冬ウマ娘○",
+        "晴れの日○",
+        "良バ場○",
+        "根幹距離○"
+      ],
+      "source": "Game8 ぱかライブTV' #8 / GameWith 2026-11-16",
+      "sourceUrl": "https://gamewith.jp/uma-musume/article/show/586061"
     },
     {
       "id": "loh_2027_02_dirt",
@@ -160,6 +181,47 @@
       "condition": "",
       "time": "",
       "greenSkills": []
+    },
+    {
+      "id": "cm_2027_03_mile",
+      "status": "예정",
+      "date": "2027-03 하순",
+      "event": "チャンピオンズミーティング MILE",
+      "eventKr": "챔피언스 미팅 MILE · 디버프 없음",
+      "place": "",
+      "placeKr": "미정",
+      "ground": "turf",
+      "distance": "mile",
+      "meters": null,
+      "turn": "",
+      "season": "",
+      "weather": "",
+      "condition": "",
+      "time": "",
+      "greenSkills": [],
+      "specialRule": "디버프 스킬 발동 불가(공식 규칙의 예외 스킬 존재)",
+      "source": "Cygames 2026-09-30",
+      "sourceUrl": "https://umamusume.jp/news/detail?id=3483"
+    },
+    {
+      "id": "cm_2027_04_classic",
+      "status": "예정",
+      "date": "2027-04 하순",
+      "event": "チャンピオンズミーティング CLASSIC",
+      "eventKr": "챔피언스 미팅 CLASSIC",
+      "place": "",
+      "placeKr": "미정",
+      "ground": "turf",
+      "distance": "mid",
+      "meters": null,
+      "turn": "",
+      "season": "",
+      "weather": "",
+      "condition": "",
+      "time": "",
+      "greenSkills": [],
+      "source": "Game8 ぱかライブTV' #8 2026-10-24",
+      "sourceUrl": "https://game8.jp/umamusume/836271"
     }
   ]
 }
