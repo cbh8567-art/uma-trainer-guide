@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "updated": "2026-11-16",
   "status": "pass",
-  "checkedAt": "2026-11-16T10:04:38.225Z",
+  "checkedAt": "2026-11-16T10:06:42.293Z",
   "fatal": [],
   "warnings": [],
   "collections": {
@@ -12,35 +12,23 @@
       "contentSha256": "415452450c39dd469636cf3dbfafa0c60ff7296756eb7f931027105e1b9714ac",
       "duplicateIds": [],
       "status": "pass",
-      "previousCount": 566,
+      "previousCount": 568,
       "removedCount": 0,
       "removedRatio": 0,
       "changes": {
-        "addedCount": 2,
+        "addedCount": 0,
         "removedCount": 0,
         "modifiedCount": 0,
-        "addedIds": [
-          "20102",
-          "30324"
-        ],
+        "addedIds": [],
         "removedIds": [],
         "modifiedIds": []
       },
       "changeDetails": {
-        "added": [
-          {
-            "id": "20102",
-            "name": "ステイゴールド (SR)"
-          },
-          {
-            "id": "30324",
-            "name": "ノーリーズン (SSR)"
-          }
-        ],
+        "added": [],
         "removed": [],
         "modified": []
       },
-      "changed": true
+      "changed": false
     },
     "supports": {
       "source": "https://raw.githubusercontent.com/Tsuyuchan-jp/umamusume-data/main/data/supports.json",
@@ -170,7 +158,7 @@
     "missingSupportHintSkillIds": []
   },
   "changeTotals": {
-    "added": 2,
+    "added": 0,
     "removed": 0,
     "modified": 0
   }

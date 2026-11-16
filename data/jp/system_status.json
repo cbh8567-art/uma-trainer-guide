@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "updated": "2026-11-16",
-  "generatedAt": "2026-11-16T10:04:38.225Z",
+  "generatedAt": "2026-11-16T10:06:42.293Z",
   "status": "pass",
   "snapshotReady": true,
   "sourceHealth": "pass",
   "validation": "pass",
   "openReviewItems": 96,
   "krCandidateCharacters": 0,
-  "krCandidateSupports": 1,
+  "krCandidateSupports": 0,
   "scenarioWatch": "verification_required",
   "changeTotals": {
-    "added": 2,
+    "added": 0,
     "removed": 0,
     "modified": 0
   }
