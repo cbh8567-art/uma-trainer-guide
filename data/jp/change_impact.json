@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T18:09:23.218Z",
+  "generatedAt": "2026-11-25T18:19:48.346Z",
   "event": "push",
-  "sha": "020f4d1224db3ec92dbf6d818db0e3273e26c392",
+  "sha": "9769a64a678144607a190f9947709311c90c526e",
   "changedFiles": [
-    "index.html"
+    "data/kr/uma_ids.json"
   ],
   "categories": {
-    "app": [
-      "index.html"
-    ],
+    "app": [],
     "pipeline": [],
     "jpData": [],
-    "krData": [],
+    "krData": [
+      "data/kr/uma_ids.json"
+    ],
     "commonData": [],
     "other": []
   },
-  "impactLevel": "high",
+  "impactLevel": "medium",
   "fullTest": true,
-  "deploySmoke": true
+  "deploySmoke": false
 }
