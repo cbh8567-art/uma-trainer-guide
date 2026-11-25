@@ -1,0 +1,94 @@
+name: Fold and split-screen viewport smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - ".github/workflows/fold-viewport-smoke.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  fold-responsive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install Selenium
+        run: python -m pip install --quiet selenium
+      - name: Check cover, half-window, unfolded and desktop layouts locally
+        shell: bash
+        run: |
+          python - <<'PY'
+          from functools import partial
+          from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+          from threading import Thread
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          import os
+
+          class QuietHandler(SimpleHTTPRequestHandler):
+              def log_message(self, *args):
+                  pass
+
+          server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=os.getcwd()))
+          Thread(target=server.serve_forever, daemon=True).start()
+          opts = Options()
+          opts.add_argument("--headless=new")
+          opts.add_argument("--no-sandbox")
+          opts.add_argument("--disable-gpu")
+          opts.add_argument("--window-size=1280,900")
+          driver = webdriver.Chrome(options=opts)
+          try:
+              for width, expected_deck, expected_guide in [(330, 1, 1), (390, 2, 1), (760, 3, 3), (900, 3, 3), (1280, 6, None)]:
+                  driver.execute_cdp_cmd("Emulation.setDeviceMetricsOverride", {
+                      "width": width, "height": 900, "deviceScaleFactor": 1, "mobile": width <= 1023
+                  })
+                  driver.get(f"http://127.0.0.1:{server.server_port}/index.html?fold_width={width}")
+                  WebDriverWait(driver, 30).until(lambda x: x.execute_script("return !!document.querySelector('#deck')"))
+                  result = driver.execute_script("""
+                    const width=window.innerWidth;
+                    const deck=document.querySelector('#deck');
+                    const styles=getComputedStyle(deck);
+                    const count=styles.gridTemplateColumns.split(' ').filter(Boolean).length;
+                    const dock=document.querySelector('#mobileDock');
+                    const scroll=document.documentElement.scrollWidth;
+                    const pane=document.createElement('div');
+                    pane.className='goshikiRunGuide';
+                    pane.innerHTML='<div class="goshikiPerformanceGrid">'+Array(5).fill('<div class="goshikiPerformance">test</div>').join('')+'</div>';
+                    document.body.appendChild(pane);
+                    const guideCount=getComputedStyle(pane.firstElementChild).gridTemplateColumns.split(' ').filter(Boolean).length;
+                    pane.remove();
+                    const dashboard=document.querySelector('#trainingProgressDashboard');
+                    const prevBody=document.body.className,prevDash=dashboard.className;
+                    document.body.classList.add('trainingMode');
+                    dashboard.classList.add('active');
+                    const dashboardDisplay=getComputedStyle(dashboard).display;
+                    document.body.className=prevBody;
+                    dashboard.className=prevDash;
+                    return {width,scroll,deckCount:count,guideCount,
+                            dashboardDisplay,dockDisplay:getComputedStyle(dock).display};
+                  """)
+                  print("FOLD VIEWPORT", result, flush=True)
+                  if abs(result["width"]-width) > 2:
+                      raise AssertionError(f"Viewport emulation mismatch: {width} -> {result['width']}")
+                  if result["deckCount"] != expected_deck:
+                      raise AssertionError(f"Deck columns wrong at {width}: {result}")
+                  if expected_guide and result["guideCount"] != expected_guide:
+                      raise AssertionError(f"Goshiki card columns wrong at {width}: {result}")
+                  if result["scroll"] > result["width"]+2:
+                      raise AssertionError(f"Global horizontal overflow at {width}: {result}")
+                  if result["dashboardDisplay"] == "none":
+                      raise AssertionError(f"Training dashboard hidden at {width}: {result}")
+                  if width <= 720 and result["dockDisplay"] == "none":
+                      raise AssertionError(f"Mobile deck dock hidden at {width}: {result}")
+                  if width > 720 and result["dockDisplay"] != "none":
+                      raise AssertionError(f"Desktop/tablet showing mobile dock at {width}: {result}")
+          finally:
+              driver.quit()
+              server.shutdown()
+          PY
