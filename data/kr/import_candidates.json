@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "updated": "2026-11-25",
-  "generatedAt": "2026-11-25T18:19:48.397Z",
+  "generatedAt": "2026-11-25T18:23:36.801Z",
   "status": "verification_required",
   "characters": [],
   "supports": [],
-  "supportMaxId": 30260,
+  "supportMaxId": 30263,
   "notes": [
     "JP changes never auto-promote to KR.",
     "Character candidates are checked against KR uma allowlist.",
