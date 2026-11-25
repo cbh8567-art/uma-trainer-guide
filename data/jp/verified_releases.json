@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "updated": "2026-11-26",
   "scope": "jp",
-  "note": "공식 출시와 카드 ID만 검증한 누락 보완 기록. 미검증 스킬/효과를 채우지 않는다. 원본 동기화에 신규 카드가 포함되면 오버레이보다 원본을 우선.",
+  "note": "출시와 카드 ID/타입이 검증된 누락 보완 목록. JP 동기화 데이터에 빠진 KR 신규 30259/30263도 포함. 원본에 같은 ID가 들어오면 원본을 우선하고, 미검증 스킬/효과는 작성하지 않는다.",
   "characters": [
     {
       "id": 102903,
@@ -39,6 +39,37 @@
       "reviewStatus": "official_release_only",
       "sourceUrl": "https://umamusume.jp/news/detail?id=3535",
       "cardUrl": "https://gametora.com/ja/umamusume/supports/30324-no-reason"
+    },
+    {
+      "id": 30259,
+      "name": "[ゼッタイ☆天才伝説]フサイチパンドラ",
+      "title": "ゼッタイ☆天才伝説",
+      "characterName": "フサイチパンドラ",
+      "characterId": 1113,
+      "type": "speed",
+      "rarity": "SSR",
+      "commandId": 101,
+      "hintSkillIds": [],
+      "eventIds": [],
+      "releasedOnKr": "2026-11-10",
+      "reviewStatus": "official_release_only",
+      "sourceUrl": "https://gamewith.jp/uma-musume/article/show/510855",
+      "cardUrl": "https://gametora.com/umamusume/supports/30259-fusaichi-pandora"
+    },
+    {
+      "id": 30263,
+      "name": "[極上スマイルはっし～ん♪]ヴィブロス",
+      "title": "極上スマイルはっし～ん♪",
+      "characterName": "ヴィブロス",
+      "type": "power",
+      "rarity": "SSR",
+      "commandId": 102,
+      "hintSkillIds": [],
+      "eventIds": [],
+      "releasedOnKr": "2026-11-19",
+      "reviewStatus": "official_release_only",
+      "sourceUrl": "https://gametora.com/umamusume/supports/30263-vivlos",
+      "cardUrl": "https://gametora.com/umamusume/supports/30263-vivlos"
     }
   ],
   "otherSupports": [
