@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": 4,
+  "version": 5,
   "updated": "2026-11-26",
   "source": "카카오게임즈 2026-12 리그 오브 히어로스 개최 정보",
   "sourceUrl": "https://kakaogames.oqupie.com/portals/1576/articles/65213",
@@ -33,6 +33,34 @@
       "extraStage": "2026-12-12 12:00~2026-12-13 11:59",
       "source": "카카오게임즈 리그 오브 히어로스 개최 정보",
       "sourceUrl": "https://kakaogames.oqupie.com/portals/1576/articles/65213"
+    },
+    {
+      "id": "kr_cm_2027_01_classic",
+      "status": "예정",
+      "date": "2027-01-11~ (종료일 추후 확인)",
+      "event": "チャンピオンズミーティング CLASSIC",
+      "eventKr": "챔피언스 미팅 CLASSIC",
+      "place": "京都",
+      "placeKr": "교토",
+      "ground": "turf",
+      "distance": "mid",
+      "meters": 2000,
+      "turn": "right",
+      "course": "inner",
+      "season": "autumn",
+      "weather": "sunny",
+      "condition": "good",
+      "time": "day",
+      "greenSkills": [
+        "京都レース場○",
+        "右回り○",
+        "秋ウマ娘○",
+        "晴れの日○",
+        "良バ場○",
+        "根幹距離○"
+      ],
+      "source": "카카오게임즈 2026-11 레이스 일정 예고",
+      "sourceUrl": "https://m.ruliweb.com/news/board/320108/read/2296372"
     },
     {
       "id": "kr_cm_2026_11_classic",
