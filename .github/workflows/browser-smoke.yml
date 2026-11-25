@@ -355,8 +355,8 @@ jobs:
 
                   # V7.80: KR-first fresh profile, launched island and separate JP latest-scenario mode.
                   WebDriverWait(d, 25).until(lambda x: x.execute_script("return typeof runtime !== 'undefined' && runtime.ready === true"))
-                  kr_releases = d.execute_script("return {ryan:isKoreanImplementedSupport({id:30258}),future:isKoreanImplementedSupport({id:30259}),aines:KOREA_UMA_IDS.has(103103),city:KOREA_UMA_IDS.has(104003),chrono:KOREA_UMA_IDS.has(113301)}")
-                  if kr_releases != {"ryan":True,"future":False,"aines":True,"city":True,"chrono":True}:
+                  kr_releases = d.execute_script("return {ryan:isKoreanImplementedSupport({id:30258}),pandoraSupport:isKoreanImplementedSupport({id:30259}),vivlos:isKoreanImplementedSupport({id:30263}),futureNoReason:isKoreanImplementedSupport({id:30324}),aines:KOREA_UMA_IDS.has(103103),city:KOREA_UMA_IDS.has(104003),chrono:KOREA_UMA_IDS.has(113301),pandora:KOREA_UMA_IDS.has(111301),summerCrown:KOREA_UMA_IDS.has(108802),summerCheval:KOREA_UMA_IDS.has(108902),jpTact:KOREA_UMA_IDS.has(107501)}")
+                  if kr_releases != {"ryan":True,"pandoraSupport":True,"vivlos":True,"futureNoReason":False,"aines":True,"city":True,"chrono":True,"pandora":True,"summerCrown":True,"summerCheval":True,"jpTact":False}:
                       raise RuntimeError("KR release separation failed: "+str(kr_releases))
                   print("KR RELEASE SEPARATION PASS:", kr_releases)
                   kr_verify = d.execute_script("""
