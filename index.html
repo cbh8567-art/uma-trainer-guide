@@ -1239,6 +1239,140 @@ body.trainingMode .trainingProgressHead .sub,
 @media(max-width:720px){.goshikiRunGuide .goshikiPerformanceGrid{grid-template-columns:repeat(auto-fit,minmax(154px,1fr))}}
 .goshikiEffectPicker{display:flex;align-items:center;gap:7px;margin:7px 0;color:#ffe4a5;font-size:11px;font-weight:800}.goshikiEffectPicker select{min-width:58px;border:1px solid #b8923e;border-radius:7px;background:#241d2e;color:#fff2cb;padding:5px;font-size:12px}.goshikiEffectText{margin-top:7px;padding:6px 7px;border:1px solid #715e43;border-radius:7px;background:#241f20;line-height:1.4}.goshikiEffectText summary{cursor:pointer;color:#ffe4a5;font-size:10px;font-weight:900}.goshikiEffectText span{display:block;margin-top:3px;color:#f1e8ef;font-size:10px}.goshikiEffectText em{color:#d9b6ef;font-style:normal;font-weight:800}.goshikiRunGuide .goshikiPerformance{min-height:145px}
 .goshikiQuickGuide{margin:8px 0;padding:9px;border:1px solid #66543e;border-radius:9px;background:#241f1c;color:#f4e6c8;font-size:10px;line-height:1.5}.goshikiQuickGuide b{display:block;color:#ffe49f;margin-bottom:4px}.goshikiQuickGuide ol{margin:0;padding-left:20px}.goshikiQuickGuide li{margin:2px 0}.goshikiQuickGuide small{display:block;color:#cfc4b0;margin-top:5px}
+
+/* V7.80.10 · Galaxy Fold / Android multi-window: CSS viewport-based adaptive layout.
+   Breakpoints follow the actual browser window width; no device sniffing or resize polling.
+   Keep the desktop site and the JP/KR/training state machine unchanged. */
+@media (max-width:1023px){
+  .app,.page,.layout,.panel,.setupMovePanel,.setupStepPanel,.scenarioPlanPanel,
+  .trainingProgressDashboard,.goshikiRunGuide,.islandGuideBox,.guideBox{
+    min-width:0;max-width:100%
+  }
+  .app{width:100%}
+  .top,.serverModeHead,.sectionHead,.trainingProgressHead{flex-wrap:wrap}
+  .serverModeHead>*{min-width:0}
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .panel,.setupMovePanel,.scenarioPlanPanel{overflow-wrap:break-word}
+  .panel img,.dialog img{max-width:100%}
+  .tabs{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:thin}
+  .tab{flex:0 0 auto;white-space:nowrap;scroll-snap-align:start}
+  .goshikiRunGuide,.islandGuideBox{min-width:0}
+  .islandCostBox{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  .islandBuildCard,.islandBuildFocus,.trainingQuickChoice,.trainingQuickChoiceBtn,.guideSkill{min-width:0}
+  .trainingProgressItem.visual{min-width:0}
+  .modal{padding:10px max(10px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
+  .dialog{max-width:100%;max-height:calc(100dvh - 20px);overflow-y:auto;overflow-x:auto;overscroll-behavior:contain}
+}
+@media (min-width:721px) and (max-width:1023px){
+  .app{padding:12px}
+  .deck{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .slot{min-height:0}
+  .raceCards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .guideGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .trainingProgressGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .goshikiRunGuide .goshikiPerformanceGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+  .goshikiRunGuide .goshikiPerformance{min-height:0}
+  .setupSummary{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .toolbar .btn,.toolbar label.btn,.tab,.serverTab{min-height:42px}
+  .goshikiTeachingSteps button,.goshikiTeachingModes button{min-height:44px}
+  .serverMode{padding:11px}
+}
+@media (max-width:720px){
+  body{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+  .app{padding:9px max(9px,env(safe-area-inset-right)) 9px max(9px,env(safe-area-inset-left))}
+  .panel{padding:10px;border-radius:12px}
+  .top{gap:8px}
+  .title{font-size:19px;line-height:1.3}
+  .toolbar{gap:5px}
+  .toolbar .btn,.toolbar label.btn,.tab,.serverTab,.setupActions .btn,
+  .deckConfirmBar .btn,.trainingStartMain .btn,.trainingSessionActions .btn{
+    min-height:44px
+  }
+  .toolbar .btn,.toolbar label.btn{flex:1 1 45%;min-width:0}
+  .tabs{margin:7px 0 10px;padding:5px 0;gap:5px;scroll-padding-inline:7px}
+  .tab{padding:8px 11px;font-size:12px}
+  .serverMode{padding:9px}
+  .serverModeButtons{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .serverTab{font-size:13px;padding:9px 6px}
+  .krIslandLaunch,.jpGoshikiLaunch{padding:9px;align-items:stretch}
+  .krIslandLaunch .btn,.jpGoshikiLaunch .btn{min-height:42px}
+  .deck{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .slot{min-height:0;padding:5px}
+  .slot .thumb{width:100%}
+  .slot .thumb img{display:block;width:100%;height:auto;object-fit:contain}
+  .deckname,.deckjp{overflow-wrap:anywhere}
+  .counts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .countbox{min-width:0;padding:8px}
+  .countbox .big{font-size:23px}
+  .guideGrid,.raceCards{grid-template-columns:minmax(0,1fr)}
+  .setupSummary{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .setupProgress{scrollbar-width:thin}
+  .setupProgressStep{flex-basis:126px}
+  .goshikiRunGuide,.islandGuideBox{padding:8px}
+  .goshikiRunGuide .goshikiPerformanceGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .goshikiRunGuide .goshikiPerformance{min-height:0;padding:8px;align-items:start}
+  .goshikiRunGuide .goshikiPerformance > img{width:35px;height:35px}
+  .goshikiRunGuide .goshikiPerformance .goshikiTeachingIconRow img{width:42px;height:42px}
+  .goshikiRunGuide .goshikiTeachingPick{font-size:13px!important}
+  .goshikiTeachingSteps button,.goshikiTeachingModes button{min-height:44px}
+  .islandGuideGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  /* Previously display:none!important at <=720px hid the entire in-run guide dashboard. */
+  body.trainingMode .trainingProgressDashboard.active{display:block!important}
+  .trainingProgressDashboard.active{padding:8px}
+  .trainingProgressGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .trainingProgressGrid .trainingPhaseSync,.trainingQuickChoice{grid-column:1/-1}
+  .trainingProgressItem.visual{min-height:64px;padding:7px;gap:7px}
+  .trainingMetricIcon{width:39px;height:39px}
+  .trainingMetricText strong{font-size:14px;overflow-wrap:anywhere}
+  .trainingMetricText small{white-space:normal;line-height:1.3}
+  .trainingQuickChoiceGrid{grid-template-columns:minmax(0,1fr)}
+  .activeTrainingSetupBar.active{align-items:stretch}
+  .activeTrainingSetupInfo{min-width:0;max-width:100%;flex-wrap:wrap}
+  .trainingHeaderGuide{min-width:0}
+  .trainingHeaderGuideChip{max-width:100%;white-space:normal}
+  .mobileDock{gap:4px}
+  .dockSlot{min-width:0;height:72px}
+  .digitalMascotFloating{width:54px;bottom:calc(96px + env(safe-area-inset-bottom));left:4px}
+  .digitalMascotBubble{max-width:min(180px,60vw)}
+  .globalSkillCountRail.bottomDock{bottom:calc(7px + env(safe-area-inset-bottom))}
+  .globalSkillCountRail.bottomDock.mobileCollapsed .skillRailMobileToggle{min-height:44px}
+  .dialog{border-radius:12px;padding:10px}
+  .field,.field input,.field select,.search input{min-width:0;max-width:100%}
+  .field input,.field select,.search input,.dialog input,.dialog select{font-size:max(16px,1em)}
+}
+@media (max-width:480px){
+  .goshikiRunGuide .goshikiPerformanceGrid{grid-template-columns:minmax(0,1fr)}
+  .goshikiRunGuide .goshikiPerformance{display:flex;min-height:0;padding:10px;gap:10px}
+  .goshikiRunGuide .goshikiPerformance > img{width:40px;height:40px;flex:none}
+  .goshikiRunGuide .goshikiPerformance .goshikiTeachingIconRow{justify-content:flex-start;min-height:38px}
+  .goshikiRunGuide .goshikiPerformance .goshikiTeachingIconRow img{width:38px;height:38px}
+  .goshikiTeachingSteps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .goshikiTeachingSelection{flex-direction:column;align-items:flex-start}
+  .goshikiRunGuide .goshikiTeachingPick{font-size:14px!important}
+  .islandGuideGrid{grid-template-columns:minmax(0,1fr)}
+  .islandCostGrid{min-width:425px}
+  .trainingProgressGrid{grid-template-columns:minmax(0,1fr)}
+  .trainingMetricText strong{font-size:15px}
+  .trainingPhaseButtons{display:flex;overflow-x:auto;max-width:100%;overscroll-behavior-x:contain}
+  .trainingPhaseButtons button{flex:0 0 auto;min-height:40px}
+  .serverModeButtons{gap:5px}
+  .trainingSessionActions .btn,.trainingSessionActions .mini{white-space:normal}
+  .trainingResultGrid,.ramenUltimateGuideGrid{grid-template-columns:minmax(0,1fr)}
+  .globalSkillCountRail.bottomDock:not(.mobileCollapsed) .skillCountRailList{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:350px){
+  .deck{grid-template-columns:minmax(0,1fr)}
+  .setupSummary,.counts{grid-template-columns:minmax(0,1fr)}
+  .toolbar .btn,.toolbar label.btn{flex-basis:100%}
+  .serverModeButtons{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-height:540px) and (max-width:720px) and (orientation:landscape){
+  .dockSlot{height:48px}
+  .digitalMascotFloating{width:42px;bottom:calc(67px + env(safe-area-inset-bottom))}
+  .globalSkillCountRail.bottomDock{max-height:55dvh}
+  .dialog{max-height:calc(100dvh - 12px)}
+}
+
 </style>
 </head>
 <body>
