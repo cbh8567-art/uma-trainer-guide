@@ -1460,7 +1460,7 @@ jobs:
                   print("LEGENDS GUIDE PASS")
 
                   # V7.8: Korean Trainer Guide includes Masters Challenge races in its existing selector.
-                  d.find_element(By.CSS_SELECTOR, '[data-app-server="kr"]').click()
+                  d.execute_script("arguments[0].click()", d.find_element(By.CSS_SELECTOR, '[data-app-server="kr"]'))
                   WebDriverWait(d, 15).until(
                       lambda x: any(
                           o.get_attribute("value") == "kr_masters_2026_shuka"
