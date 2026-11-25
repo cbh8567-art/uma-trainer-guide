@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-11-26",
+  "scope": "jp",
+  "note": "공식 출시와 카드 ID만 검증한 누락 보완 기록. 미검증 스킬/효과를 채우지 않는다. 원본 동기화에 신규 카드가 포함되면 오버레이보다 원본을 우선.",
+  "characters": [
+    {
+      "id": 102903,
+      "name": "[熟れしめでたし実り姫]ユキノビジン",
+      "skillsByAwakening": {},
+      "releaseDate": "2026-11-10",
+      "reviewStatus": "official_release_only",
+      "sourceUrl": "https://umamusume.jp/news/detail?id=3535",
+      "cardUrl": "https://gametora.com/ja/umamusume/characters/102903-yukino-bijin"
+    },
+    {
+      "id": 107501,
+      "name": "[白光のレガリア]デアリングタクト",
+      "skillsByAwakening": {},
+      "releaseDate": "2026-11-16",
+      "reviewStatus": "official_release_only",
+      "sourceUrl": "https://umamusume.jp/news/detail?id=3547",
+      "cardUrl": "https://gametora.com/ja/umamusume/characters/107501-daring-tact"
+    }
+  ],
+  "supports": [
+    {
+      "id": 30324,
+      "name": "[馳せて奪うは映山紅]ノーリーズン",
+      "title": "馳せて奪うは映山紅",
+      "characterName": "ノーリーズン",
+      "characterId": 1096,
+      "type": "stamina",
+      "rarity": "SSR",
+      "commandId": 105,
+      "hintSkillIds": [],
+      "eventIds": [],
+      "releaseDate": "2026-11-10",
+      "reviewStatus": "official_release_only",
+      "sourceUrl": "https://umamusume.jp/news/detail?id=3535",
+      "cardUrl": "https://gametora.com/ja/umamusume/supports/30324-no-reason"
+    }
+  ],
+  "otherSupports": [
+    {
+      "id": 20102,
+      "name": "[黄昏に馳せる追憶]ステイゴールド",
+      "title": "黄昏に馳せる追憶",
+      "characterName": "ステイゴールド",
+      "type": "power",
+      "rarity": "SR",
+      "releaseDate": "2026-11-10",
+      "reviewStatus": "official_release_only",
+      "sourceUrl": "https://umamusume.jp/news/detail?id=3535",
+      "cardUrl": "https://umamusumedb.com/ja/cards/stay_gold_20102_sr/"
+    }
+  ]
+}
