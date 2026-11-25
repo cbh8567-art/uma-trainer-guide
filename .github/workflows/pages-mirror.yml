@@ -61,6 +61,10 @@ jobs:
         with:
           path: _site
 
+      # Artifact indexing can lag behind a successful upload; avoid immediate metadata 404.
+      - name: Give Pages artifact metadata time to propagate
+        run: sleep 20
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
