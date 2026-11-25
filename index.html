@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.80.10">
+<meta name="app-build" content="V7.80.11">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.80.10 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.80.11 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -1240,7 +1240,7 @@ body.trainingMode .trainingProgressHead .sub,
 .goshikiEffectPicker{display:flex;align-items:center;gap:7px;margin:7px 0;color:#ffe4a5;font-size:11px;font-weight:800}.goshikiEffectPicker select{min-width:58px;border:1px solid #b8923e;border-radius:7px;background:#241d2e;color:#fff2cb;padding:5px;font-size:12px}.goshikiEffectText{margin-top:7px;padding:6px 7px;border:1px solid #715e43;border-radius:7px;background:#241f20;line-height:1.4}.goshikiEffectText summary{cursor:pointer;color:#ffe4a5;font-size:10px;font-weight:900}.goshikiEffectText span{display:block;margin-top:3px;color:#f1e8ef;font-size:10px}.goshikiEffectText em{color:#d9b6ef;font-style:normal;font-weight:800}.goshikiRunGuide .goshikiPerformance{min-height:145px}
 .goshikiQuickGuide{margin:8px 0;padding:9px;border:1px solid #66543e;border-radius:9px;background:#241f1c;color:#f4e6c8;font-size:10px;line-height:1.5}.goshikiQuickGuide b{display:block;color:#ffe49f;margin-bottom:4px}.goshikiQuickGuide ol{margin:0;padding-left:20px}.goshikiQuickGuide li{margin:2px 0}.goshikiQuickGuide small{display:block;color:#cfc4b0;margin-top:5px}
 
-/* V7.80.10 · Galaxy Fold / Android multi-window: CSS viewport-based adaptive layout.
+/* V7.80.11 · Galaxy Fold / Android multi-window: CSS viewport-based adaptive layout.
    Breakpoints follow the actual browser window width; no device sniffing or resize polling.
    Keep the desktop site and the JP/KR/training state machine unchanged. */
 @media (max-width:1023px){
@@ -1386,7 +1386,7 @@ body.trainingMode .trainingProgressHead .sub,
 </div>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.80.10 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.80.11 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -3504,6 +3504,29 @@ function openSkillModal(id){const c=cardById(id);if(!c)return;const lb=Number(st
     :'<div class="note">이 카드의 이벤트 스킬/선택지 데이터가 아직 연결되지 않았습니다.</div>';
 }
 $('#skillModal').classList.add('open')}
+
+function mergeVerifiedReleaseCharacters(source){
+ const records=new Map((Array.isArray(source)?source:[]).filter(x=>Number.isInteger(Number(x?.id))&&Number(x.id)>0).map(x=>[Number(x.id),x]));
+ for(const x of JP_VERIFIED_RELEASES.characters||[]){
+  const id=Number(x?.id);if(!Number.isInteger(id)||records.has(id)||!x?.name)continue;
+  records.set(id,{...x,skillsByAwakening:x.skillsByAwakening||{}});
+ }
+ return [...records.values()];
+}
+function addVerifiedReleaseSupports(cards,skillMap){
+ const ids=new Set(cards.map(x=>Number(x.id)));
+ for(const p of JP_VERIFIED_RELEASES.supports||[]){
+  const id=Number(p?.id);if(!Number.isInteger(id)||ids.has(id)||p?.rarity!=='SSR'||!p?.name||!p?.characterName)continue;
+  cards.push({id,title:p.title||parseName(p.name).title,character:p.characterName,jpName:p.name,
+   englishName:'',krName:koChar(p.characterName),type:normalizeType(p.type),
+   image:supportPrimaryImageUrl(id),imageFallbacks:supportImageFallbacks(id),
+   supportEffects:[],supportUnique:null,hints:(p.hintSkillIds||[]).map(sid=>makeSkill(skillMap.get(Number(sid)))).filter(Boolean),
+   eventSkillsAll:[],rareEvents:[],catalogSource:'공식 출시 확인 · 상세 스킬/효과 검증 대기',
+   reviewStatus:'official_release_only',releaseDate:p.releaseDate||p.releasedOnKr||null});
+  ids.add(id);
+ }
+ return cards;
+}
 function parseCharacter(c){const p=parseName(c.name);return {...c,title:p.title,character:p.character,krName:koChar(p.character),image:`${CONFIG.assetBases.character}${c.id}.webp`}}
 function isUmaVisibleForServer(uma,server=state.activeServer){
  if(!uma)return false;
@@ -5224,7 +5247,7 @@ function renderAppServerTabs(){
      const supportCount=runtime.ready?supportCatalogForServer().length:0;
      const umaCount=runtime.ready?umaCharactersForServer(server).length:KOREA_SERVER_DATA.implementedUmaCards;
      note.innerHTML=`한국 서버 프로필 · 덱/보유/스킬 체크가 일본 서버와 독립 저장됩니다. 확인된 한국 SSR (ID 상한 ${KOREA_SERVER_DATA.supportMaxId}) · 육성 우마 카드 ${umaCount}종만 표시.${runtime.ready?` 현재 SSR ${supportCount}장 확인.`:''}`;
-  }else note.textContent='일본 서버 프로필 · 10월 26일 최신 시나리오 「朋、史解き ―午式駿大祭―」 반영 · 한국 서버 프로필의 덱/스킬 체크에는 영향을 주지 않습니다.';
+  }else note.textContent='일본 서버 프로필 · 오식 준대제 + 11월 26일 신규 출시 확인(데어링 택트·유키노 비진·노 리즌) · 미확인 상세 스킬은 표시하지 않습니다. 한국 서버 기록은 독립 보존.';
  }
 }
 function renderGuideServerTabs(){renderAppServerTabs()}
@@ -5887,6 +5910,7 @@ let SUPPORT_OVERRIDES={
  30256:{title:'白き稲妻の如く',jpName:'[白き稲妻の如く]タマモクロス',eventSource:'U-tools 이벤트 분기 검증',eventSourceUrl:'https://xn--gck1f423k.xn--1bvt37a.tools/supports/30256/event',rareEvents:[{id:'verified_30256_final',label:'遠くで光るその走り',selection:'single',note:'어느 선택지든 神速 + 추가 레어스킬 1개, 총 2개 획득',choices:[{id:'future',label:'将来が楽しみだ！',skills:[{skillId:202551,hintLevel:2},{skillId:203361,hintLevel:1}]},{id:'legacy',label:'君の想いは、継がれたみたいだな',skills:[{skillId:202551,hintLevel:2},{skillId:203661,hintLevel:1}]}]}]}
 };
 let JP_VERIFIED_SUPPORT_DETAILS={cards:{},extraSkills:[]};
+let JP_VERIFIED_RELEASES={schemaVersion:1,updated:null,characters:[],supports:[],otherSupports:[]};
 function applyVerifiedSupportDetails(cards,skillMap){
  // 새 카드 원본이 비어 있거나 오래된 브라우저 저장본이어도 검증값으로 맞춘다.
  for(const sk of JP_VERIFIED_SUPPORT_DETAILS.extraSkills||[]){
@@ -6024,8 +6048,9 @@ for(const card of [
 for(const card of cards){
  if(priMap.get(Number(card.id))?.reviewStatus==='official_release_only')card.catalogSource='2026-10-26 공식 발표 · 상세 데이터 확인 중';
 }
+addVerifiedReleaseSupports(cards,skillMap);
 applyVerifiedSupportDetails(cards,skillMap);
-applyFriendEventSupplements(applySupportRareSkillIndex(applyFriendSkillSupplements(applySupportOverrides(cards,skillMap),skillMap),skillMap),skillMap);cards.sort((a,b)=>b.id-a.id);const rareAudit=supportRareCoverageAudit(cards);runtime={catalog:cards,byId:new Map(cards.map(c=>[Number(c.id),c])),skills:skillMap,characters:characters.map(parseCharacter),courses,ready:true};const cache={version:6,generatedAt:new Date().toISOString(),catalog:cards,skills,characters,courses};const cacheResult=storeDbCacheSafely(cache);st.textContent=`SSR ${cards.length}장 · 이벤트 레어스킬 ${rareAudit.coveredCards}/${rareAudit.expectedCards}장 · SP 원가 ${costAudit.linked}스킬 · 카운터 누락 ${rareAudit.missingCards.length}장 · ${cacheResult.saved?'경량 캐시 저장':'캐시 저장 생략'}`;renderAll();setDbLoadState('ready','DB 준비 완료',`SSR ${cards.length}장 · SP 원가 ${costAudit.linked}스킬을 포함한 최신 데이터를 사용할 수 있습니다.`);if(!cacheResult.saved)toast('DB 동기화 성공 · 브라우저 저장공간 부족으로 캐시는 저장하지 않았습니다.')}catch(e){st.textContent='동기화 실패';setDbLoadState('error','온라인 DB를 불러오지 못했습니다.','인터넷 연결을 확인한 뒤 「다시 시도」를 눌러 주세요. 저장한 통합 DB JSON도 사용할 수 있습니다.');toast('온라인 DB 동기화 실패: '+e.message)}finally{btn.disabled=false}}
+applyFriendEventSupplements(applySupportRareSkillIndex(applyFriendSkillSupplements(applySupportOverrides(cards,skillMap),skillMap),skillMap),skillMap);cards.sort((a,b)=>b.id-a.id);const rareAudit=supportRareCoverageAudit(cards);runtime={catalog:cards,byId:new Map(cards.map(c=>[Number(c.id),c])),skills:skillMap,characters:mergeVerifiedReleaseCharacters(characters).map(parseCharacter),courses,ready:true};const cache={version:6,generatedAt:new Date().toISOString(),catalog:cards,skills,characters:mergeVerifiedReleaseCharacters(characters),courses};const cacheResult=storeDbCacheSafely(cache);st.textContent=`SSR ${cards.length}장 · 이벤트 레어스킬 ${rareAudit.coveredCards}/${rareAudit.expectedCards}장 · SP 원가 ${costAudit.linked}스킬 · 카운터 누락 ${rareAudit.missingCards.length}장 · ${cacheResult.saved?'경량 캐시 저장':'캐시 저장 생략'}`;renderAll();setDbLoadState('ready','DB 준비 완료',`SSR ${cards.length}장 · SP 원가 ${costAudit.linked}스킬을 포함한 최신 데이터를 사용할 수 있습니다.`);if(!cacheResult.saved)toast('DB 동기화 성공 · 브라우저 저장공간 부족으로 캐시는 저장하지 않았습니다.')}catch(e){st.textContent='동기화 실패';setDbLoadState('error','온라인 DB를 불러오지 못했습니다.','인터넷 연결을 확인한 뒤 「다시 시도」를 눌러 주세요. 저장한 통합 DB JSON도 사용할 수 있습니다.');toast('온라인 DB 동기화 실패: '+e.message)}finally{btn.disabled=false}}
 function normalizeCachedCatalog(catalog,skillMap){
  for(const card of catalog||[]){
    if(card.id){card.image=supportPrimaryImageUrl(card.id);card.imageFallbacks=supportImageFallbacks(card.id)}
@@ -6047,8 +6072,9 @@ function loadCache(o){
  if(!o?.catalog)throw new Error('catalog 필드 없음');
  const skills=o.skills||[];applySkillIconOverrides(skills);const skillMap=new Map(skills.map(s=>[Number(s.id),s]));
  const catalog=applyFriendEventSupplements(applySupportRareSkillIndex(applyFriendSkillSupplements(applySupportOverrides(applyVerifiedSupportDetails(normalizeCachedCatalog(o.catalog,skillMap),skillMap),skillMap),skillMap),skillMap),skillMap);
+ addVerifiedReleaseSupports(catalog,skillMap);catalog.sort((a,b)=>Number(b.id)-Number(a.id));
  const rareAudit=supportRareCoverageAudit(catalog),courses=normalizeCoursesPayload(o.courses);
- runtime={catalog,byId:new Map(catalog.map(c=>[Number(c.id),c])),skills:skillMap,characters:(o.characters||[]).map(c=>c.character?c:parseCharacter(c)),courses,ready:true};
+ runtime={catalog,byId:new Map(catalog.map(c=>[Number(c.id),c])),skills:skillMap,characters:mergeVerifiedReleaseCharacters(o.characters||[]).map(c=>c.character?c:parseCharacter(c)),courses,ready:true};
  const cacheResult=storeDbCacheSafely({...o,catalog,skills,characters:o.characters||[],courses});
  $('#dbStatus').textContent=`저장 DB ${runtime.catalog.length}장 · 이벤트 레어스킬 ${rareAudit.coveredCards}/${rareAudit.expectedCards}장 · 카운터 누락 ${rareAudit.missingCards.length}장 · ${cacheResult.saved?'경량 캐시':'메모리 모드'}`;
  setDbLoadState('ready','저장된 DB 준비 완료',`SSR ${runtime.catalog.length}장을 바로 사용할 수 있습니다.`);
@@ -7285,6 +7311,15 @@ function setOwnedFilter(t){ownedType=t;renderTypeFilters($('#ownedFilters'),owne
 renderTypeFilters($('#catalogFilters'),catType,setCatalogFilter);
 renderTypeFilters($('#ownedFilters'),ownedType,setOwnedFilter);
 async function loadLocalAppData(){
+ try{
+  const info=await fetchJson('./data/jp/verified_releases.json');
+  const all=[...(info?.characters||[]),...(info?.supports||[]),...(info?.otherSupports||[])];
+  if(info?.schemaVersion!==1||!Array.isArray(info.characters)||!Array.isArray(info.supports)||!Array.isArray(info.otherSupports)||
+     all.some(x=>!Number.isInteger(Number(x?.id))||!x?.name)||new Set(all.map(x=>Number(x.id))).size!==all.length){
+   throw new Error('verified release data invalid');
+  }
+  JP_VERIFIED_RELEASES=info;
+ }catch(e){console.warn('[V7.80.11] Verified release overlay not loaded. Keeping source data.',e)}
  const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krMasters:false,krSkillNames:false,krTier:false,krCourseGuides:false,jpUpcoming:false,jpTier:false,jpCourseGuides:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false,jpSyncState:false,jpValidationReport:false,jpSyncHistory:false,jpChangeReport:false,jpManifest:false,jpSourceHealth:false,jpReviewQueue:false,jpEntitySummary:false,krImportCandidates:false,jpScenarioWatch:false,jpSystemStatus:false,jpInheritanceRecommendations:false,jpInheritanceReview:false,jpInheritanceEffects:false};
 
  try{
@@ -7988,7 +8023,8 @@ async function bootstrapApp(){
      // 새 카드가 빠졌거나 하루가 지난 저장 DB는 화면을 먼저 보여 준 뒤 다시 확인한다.
      const ids=new Set(cache.catalog.map(card=>Number(card.id)));
      const age=Date.now()-Date.parse(cache.generatedAt||'');
-     cacheNeedsRefresh=!ids.has(30322)||!ids.has(30323)||!Number.isFinite(age)||age<0||age>24*60*60*1000;
+     const characterIds=new Set((cache.characters||[]).map(c=>Number(c.id)));
+     cacheNeedsRefresh=!ids.has(30322)||!ids.has(30323)||!ids.has(30324)||!ids.has(30259)||!ids.has(30263)||!characterIds.has(102903)||!characterIds.has(107501)||!Number.isFinite(age)||age<0||age>24*60*60*1000;
      loadCache(cache)
    }else{renderAll();setDbLoadState('loading','온라인 DB 연결 준비 중…','곧 카드·스킬 데이터를 자동으로 불러옵니다.')}
  }catch(_){renderAll()}
