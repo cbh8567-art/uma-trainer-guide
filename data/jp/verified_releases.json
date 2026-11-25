@@ -11,7 +11,8 @@
       "releaseDate": "2026-11-10",
       "reviewStatus": "official_release_only",
       "sourceUrl": "https://umamusume.jp/news/detail?id=3535",
-      "cardUrl": "https://gametora.com/ja/umamusume/characters/102903-yukino-bijin"
+      "cardUrl": "https://gametora.com/ja/umamusume/characters/102903-yukino-bijin",
+      "portraitUrl": "https://gametora.com/images/umamusume/characters/chara_stand_1029_102903.png"
     },
     {
       "id": 107501,
@@ -20,7 +21,8 @@
       "releaseDate": "2026-11-16",
       "reviewStatus": "official_release_only",
       "sourceUrl": "https://umamusume.jp/news/detail?id=3547",
-      "cardUrl": "https://gametora.com/ja/umamusume/characters/107501-daring-tact"
+      "cardUrl": "https://gametora.com/ja/umamusume/characters/107501-daring-tact",
+      "portraitUrl": "https://gametora.com/images/umamusume/characters/chara_stand_1075_107501.png"
     }
   ],
   "supports": [
