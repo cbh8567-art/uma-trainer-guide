@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#151823">
 <meta name="description" content="우마무스메 SSR 덱, 스킬, 트레이너 가이드, 핑크스킬 진화 선택을 한 곳에서 관리하는 웹앱">
-<meta name="app-build" content="V7.80.11">
+<meta name="app-build" content="V7.80.12">
 <link rel="icon" type="image/gif" href="./assets/digital-mascot.gif">
 <link rel="shortcut icon" type="image/gif" href="./assets/digital-mascot.gif">
-<title>우마무스메 트레이너 가이드 V7.80.11 WEB</title>
+<title>우마무스메 트레이너 가이드 V7.80.12 WEB</title>
 <style>
 :root{--bg:#10131b;--panel:#1a1e29;--panel2:#232837;--line:#363d52;--text:#f5f6fa;--muted:#aeb6c9;--pink:#ff7ba7;--gold:#ffd45d;--green:#69d5a1;--blue:#70c5f4;--red:#ff7583}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0f1219,#191d2a);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",sans-serif;padding-bottom:12px}
@@ -1240,7 +1240,7 @@ body.trainingMode .trainingProgressHead .sub,
 .goshikiEffectPicker{display:flex;align-items:center;gap:7px;margin:7px 0;color:#ffe4a5;font-size:11px;font-weight:800}.goshikiEffectPicker select{min-width:58px;border:1px solid #b8923e;border-radius:7px;background:#241d2e;color:#fff2cb;padding:5px;font-size:12px}.goshikiEffectText{margin-top:7px;padding:6px 7px;border:1px solid #715e43;border-radius:7px;background:#241f20;line-height:1.4}.goshikiEffectText summary{cursor:pointer;color:#ffe4a5;font-size:10px;font-weight:900}.goshikiEffectText span{display:block;margin-top:3px;color:#f1e8ef;font-size:10px}.goshikiEffectText em{color:#d9b6ef;font-style:normal;font-weight:800}.goshikiRunGuide .goshikiPerformance{min-height:145px}
 .goshikiQuickGuide{margin:8px 0;padding:9px;border:1px solid #66543e;border-radius:9px;background:#241f1c;color:#f4e6c8;font-size:10px;line-height:1.5}.goshikiQuickGuide b{display:block;color:#ffe49f;margin-bottom:4px}.goshikiQuickGuide ol{margin:0;padding-left:20px}.goshikiQuickGuide li{margin:2px 0}.goshikiQuickGuide small{display:block;color:#cfc4b0;margin-top:5px}
 
-/* V7.80.11 · Galaxy Fold / Android multi-window: CSS viewport-based adaptive layout.
+/* V7.80.12 · Galaxy Fold / Android multi-window: CSS viewport-based adaptive layout.
    Breakpoints follow the actual browser window width; no device sniffing or resize polling.
    Keep the desktop site and the JP/KR/training state machine unchanged. */
 @media (max-width:1023px){
@@ -1386,7 +1386,7 @@ body.trainingMode .trainingProgressHead .sub,
 </div>
 <div class="app">
  <div class="top">
-  <div><div class="title">우마무스메 트레이너 가이드 V7.80.11 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
+  <div><div class="title">우마무스메 트레이너 가이드 V7.80.12 WEB</div><div class="sub">한국/일본 서버 분리 · 육성 우마별 진화 · SSR/스킬 추천 · 이벤트 획득 카운터</div></div>
   <div class="toolbar">
    <button class="btn primary" id="syncBtn">온라인 DB 동기화</button>
    <button class="btn" id="exportBtn">통합 DB JSON 저장</button>
@@ -3527,7 +3527,7 @@ function addVerifiedReleaseSupports(cards,skillMap){
  }
  return cards;
 }
-function parseCharacter(c){const p=parseName(c.name);return {...c,title:p.title,character:p.character,krName:koChar(p.character),image:`${CONFIG.assetBases.character}${c.id}.webp`}}
+function parseCharacter(c){const p=parseName(c.name);return {...c,title:p.title,character:p.character,krName:koChar(p.character),image:c.portraitUrl||`${CONFIG.assetBases.character}${c.id}.webp`}}
 function isUmaVisibleForServer(uma,server=state.activeServer){
  if(!uma)return false;
  return server!=='kr'||KOREA_UMA_IDS.has(Number(uma.id))
@@ -7319,7 +7319,7 @@ async function loadLocalAppData(){
    throw new Error('verified release data invalid');
   }
   JP_VERIFIED_RELEASES=info;
- }catch(e){console.warn('[V7.80.11] Verified release overlay not loaded. Keeping source data.',e)}
+ }catch(e){console.warn('[V7.80.12] Verified release overlay not loaded. Keeping source data.',e)}
  const result={krServerMeta:false,krUmaIds:false,krUpcoming:false,krMasters:false,krSkillNames:false,krTier:false,krCourseGuides:false,jpUpcoming:false,jpTier:false,jpCourseGuides:false,commonSupportRare:false,commonFriendSkills:false,commonFriendEvents:false,commonScenarios:false,commonSupportOverrides:false,krCharacterAliases:false,krSkillAliases:false,jpSourceConfig:false,jpUpdateMeta:false,jpIconOverrides:false,jpDataContract:false,commonEffectAliases:false,jpSyncState:false,jpValidationReport:false,jpSyncHistory:false,jpChangeReport:false,jpManifest:false,jpSourceHealth:false,jpReviewQueue:false,jpEntitySummary:false,krImportCandidates:false,jpScenarioWatch:false,jpSystemStatus:false,jpInheritanceRecommendations:false,jpInheritanceReview:false,jpInheritanceEffects:false};
 
  try{
