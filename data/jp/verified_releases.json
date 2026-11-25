@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "updated": "2026-11-26",
   "scope": "jp",
-  "note": "출시와 카드 ID/타입이 검증된 누락 보완 목록. JP 동기화 데이터에 빠진 KR 신규 30259/30263도 포함. 원본에 같은 ID가 들어오면 원본을 우선하고, 미검증 스킬/효과는 작성하지 않는다.",
+  "note": "원본 스냅샷에 없는 출시검증 캐릭터·SSR 보완. 한국 서버에서 사용 중인 30257/30259/30260/30263 카드도 누락 대비. 원본 우선, 스킬·이벤트 미확인 수치 미기재.",
   "characters": [
     {
       "id": 102903,
@@ -70,6 +70,32 @@
       "reviewStatus": "official_release_only",
       "sourceUrl": "https://gametora.com/umamusume/supports/30263-vivlos",
       "cardUrl": "https://gametora.com/umamusume/supports/30263-vivlos"
+    },
+    {
+      "id": 30257,
+      "name": "[本能は吼えているか！？]タッカーブライン",
+      "title": "本能は吼えているか！？",
+      "characterName": "タッカーブライン",
+      "type": "friend",
+      "rarity": "SSR",
+      "commandId": 0,
+      "hintSkillIds": [],
+      "eventIds": [],
+      "reviewStatus": "reference_fallback_only",
+      "sourceUrl": "https://gametora.com/ja/umamusume/supports/30257-tucker-bryne"
+    },
+    {
+      "id": 30260,
+      "name": "[グレイッシュPARTY☆]メジロマックイーン",
+      "title": "グレイッシュPARTY☆",
+      "characterName": "メジロマックイーン",
+      "type": "speed",
+      "rarity": "SSR",
+      "commandId": 101,
+      "hintSkillIds": [],
+      "eventIds": [],
+      "reviewStatus": "reference_fallback_only",
+      "sourceUrl": "https://gametora.com/ja/umamusume/supports/30260-mejiro-mcqueen"
     }
   ],
   "otherSupports": [
