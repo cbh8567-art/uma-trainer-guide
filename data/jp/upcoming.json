@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "version": 4,
-  "updated": "2026-11-16",
-  "source": "Cygames 2026-09-30 / Game8 2026-10-24 / GameWith 2026-11-16",
-  "sourceUrl": "https://umamusume.jp/news/detail?id=3483",
+  "updated": "2026-11-26",
+  "source": "Cygames 2026-11-22 official LOH and verified race announcements",
+  "sourceUrl": "https://umamusume.jp/news/detail?id=3545",
   "races": [
     {
       "id": "loh_2026_11_long",
-      "status": "예정",
-      "date": "2026-11-22~",
+      "status": "진행 중",
+      "date": "2026-11-22 12:00~2026-12-01 11:59",
       "event": "リーグ オブ ヒーローズ",
       "eventKr": "리그 오브 히어로즈",
       "place": "京都",
@@ -28,9 +28,9 @@
         "非根幹距離○"
       ],
       "course": "outer",
-      "sourceUrl": "https://game8.jp/umamusume/836271",
+      "sourceUrl": "https://umamusume.jp/news/detail?id=3545",
       "teamFormationStart": "2026-11-19T12:00:00+09:00",
-      "source": "2026-10-24 ぱかライブTV' #8 / GameWith"
+      "source": "Cygames 2026-11-22 LOH official"
     },
     {
       "id": "cm_2026_09_mile",
