@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-11-03",
-  "supportMaxId": 30260,
-  "supportSource": "카카오게임즈 공식 2026-10-16 무인도 공지, 10-30 카드 영상, GameTora 한국 픽업 대조",
-  "supportSourceUrl": "https://pf.kakao.com/_DzxjIb/posts",
+  "updated": "2026-11-26",
+  "supportMaxId": 30263,
+  "supportSource": "카카오게임즈 2026-11-10/19 공지: 메인 스토리 SSR 판도라, 11/19 윈 바리아시옹·두라멘테, 이벤트 배포 SSR 비블로스",
+  "supportSourceUrl": "https://m.ruliweb.com/news/board/320108/read/2296372",
   "latestVerifiedSupport": {
-    "id": 30260,
-    "name": "[그레이시 PARTY☆] 메지로 맥퀸"
+    "id": 30263,
+    "name": "[극상의 미소 발사~♪] 비블로스",
+    "released": "2026-11-19"
   },
   "legendsGroupSupport": {
     "id": 30241,
@@ -14,22 +15,79 @@
   },
   "umaSource": "우마무스메 인벤 캐릭터 DB",
   "umaSourceUrl": "https://uma.inven.co.kr/db/chara",
-  "implementedUmaCards": 215,
+  "implementedUmaCards": 218,
   "latestVerifiedUma": {
-    "id": 103103,
-    "name": "[Hello Hello Island] 아이네스 후진"
+    "id": 108902,
+    "name": "[잔잔한 여름의 네이비 드롭] 슈발 그랑",
+    "released": "2026-11-19"
   },
   "recentSupportIdFloor": 30256,
   "verifiedRecentSupportIds": [
     30256,
     30257,
     30258,
-    30260
+    30259,
+    30260,
+    30261,
+    30262,
+    30263
   ],
-  "recentSupportSourceUrl": "https://www.youtube.com/watch?v=LkxtZoJRuuI",
+  "recentSupportSourceUrl": "https://gametora.com/umamusume/gacha/history?server=ko&type=all&year=2026",
   "latestReleasedSupport": {
-    "id": 30258,
-    "name": "[눈동자에 투지를 가슴에 승리의 갈망을] 메지로 라이언",
-    "released": "2026-10-30"
-  }
+    "id": 30263,
+    "name": "[극상의 미소 발사~♪] 비블로스",
+    "released": "2026-11-19",
+    "method": "스토리 이벤트 보상"
+  },
+  "recentReleases": [
+    {
+      "kind": "character",
+      "id": 111301,
+      "name": "[Assorted Cuteness♡] 후사이치 판도라",
+      "releaseDate": "2026-11-10",
+      "sourceUrl": "https://m.ruliweb.com/news/board/320108/read/2296372"
+    },
+    {
+      "kind": "character",
+      "id": 108802,
+      "name": "[맑은 섬에 핀 아름다운 꽃] 사토노 크라운",
+      "releaseDate": "2026-11-19"
+    },
+    {
+      "kind": "character",
+      "id": 108902,
+      "name": "[잔잔한 여름의 네이비 드롭] 슈발 그랑",
+      "releaseDate": "2026-11-19"
+    },
+    {
+      "kind": "support",
+      "id": 30259,
+      "name": "[절대☆천재 전설] 후사이치 판도라",
+      "releaseDate": "2026-11-10",
+      "method": "메인 스토리 2부 후편",
+      "sourceUrl": "https://gametora.com/umamusume/supports/30259-fusaichi-pandora"
+    },
+    {
+      "kind": "support",
+      "id": 30261,
+      "name": "[수면의 프린시펄] 윈 바리아시옹",
+      "releaseDate": "2026-11-19",
+      "sourceUrl": "https://gametora.com/umamusume/supports/30261-win-variation"
+    },
+    {
+      "kind": "support",
+      "id": 30262,
+      "name": "[Tranquillo] 두라멘테",
+      "releaseDate": "2026-11-19",
+      "sourceUrl": "https://gametora.com/umamusume/supports/30262-duramente"
+    },
+    {
+      "kind": "support",
+      "id": 30263,
+      "name": "[극상의 미소 발사~♪] 비블로스",
+      "releaseDate": "2026-11-19",
+      "method": "스토리 이벤트",
+      "sourceUrl": "https://gametora.com/umamusume/supports/30263-vivlos"
+    }
+  ]
 }
